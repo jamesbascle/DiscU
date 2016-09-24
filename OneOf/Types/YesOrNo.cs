@@ -7,7 +7,7 @@
 
         public static implicit operator YesOrNo(bool value)
         {
-            return value ? (YesOrNo)new YesOrNo.Yes() : new YesOrNo.No();
+            return value ? (YesOrNo)new Yes() : new No();
         }
     }
 }

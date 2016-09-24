@@ -8,9 +8,7 @@
 
         public static implicit operator YesNoOrMaybe(bool? value)
         {
-            return value == null ? new Maybe()
-                : value.Value ? (YesNoOrMaybe) new Yes()
-                    : new No();
+            return value == null ? new Maybe() : value.Value ? (YesNoOrMaybe) new Yes() : new No();
         }
     }
 }
