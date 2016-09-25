@@ -56,11 +56,27 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 				WriteLine("this.value = this;");
 				WriteLine("");
 
-				for (var j = 0; j < countOfgenericParams; j++)
+				for (var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex++)
 				{
-					WriteLine($"if (this is T{j}) this.index = {j};");
+					WriteLine($"if (this is T{parmIndex}) this.index = {parmIndex};");
 				}
 			}
+		}
+
+		WriteLine("");
+		WriteLine($"internal static {typeName}<{genericArg}> Create(object value)"); 
+		using(var indent2 = new Indent(this))
+		{
+			WriteLine($"if (value != null)");
+			using(var indent3 = new Indent(this))
+			{
+				WriteLine("var valueType = value.GetType();");
+				for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
+				{
+					WriteLine($"if (valueType == typeof(T{parmIndex})) return (T{parmIndex})value;");
+				}
+			}
+	    	WriteLine("throw new InvalidOperationException();");
 		}
 
 		// =============== IOneOf implementation
@@ -108,31 +124,22 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 			WriteLine("throw new InvalidOperationException();");
 		}
 
+		// =============== ToOneOf
+
+		WriteLine("");
+		for(var newIndex = 0; newIndex < 9; newIndex ++)
+		{
+			var otherGenericArgs = string.Join(", ", Enumerable.Range(0, newIndex+1).Select(e => "N" + e));
+
+			WriteLine($"public {typeName}<{otherGenericArgs}> ToOneOf<{otherGenericArgs}>() => {typeName}<{otherGenericArgs}>.Create(value);");
+		}
+
 		// =============== implicit conversion to T
 
 		WriteLine("");
 		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
 		{
-			WriteLine($"public static implicit operator {typeName}<{genericArg}>(T{parmIndex} t) => new {typeName}<{genericArg}>(t, {parmIndex});"); 
-		}
-
-		for(var newIndex = 0; newIndex < 9; newIndex ++)
-		{
-			var otherGenericArgs = string.Join(", ", Enumerable.Range(0, newIndex+1).Select(e => "N" + e));
-
-			WriteLine("");
-			WriteLine($"public {typeName}<{otherGenericArgs}> ToOneOf<{otherGenericArgs}>()"); 
-			using(var indent2 = new Indent(this))
-			{
-				WriteLine("var valueType = value.GetType();");
-				WriteLine("");
-				for(var parmIndex = 0; parmIndex < Math.Min(countOfgenericParams, newIndex); parmIndex ++)
-				{
-					WriteLine($"if (valueType == typeof(N{parmIndex})) return (N{parmIndex})value;");
-				}
-				WriteLine("");
-	    		WriteLine("throw new InvalidOperationException();");
-			}
+			WriteLine($"public static implicit operator {typeName}<{genericArg}>(T{parmIndex} value) => new {typeName}<{genericArg}>(value, {parmIndex});"); 
 		}
 
 		// =============== Switch

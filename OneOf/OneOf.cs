@@ -15,6 +15,16 @@ namespace OneOf
 
         OneOf(object value, int index) { this.value = value; this.index = index; }
 
+        internal static OneOf<T0> Create(object value)
+        {
+            if (value != null)
+            {
+                var valueType = value.GetType();
+                if (valueType == typeof(T0)) return (T0)value;
+            }
+            throw new InvalidOperationException();
+        }
+
         object IOneOf.Value => value;
 
         public bool Is<T>()
@@ -39,87 +49,17 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public static implicit operator OneOf<T0>(T0 t) => new OneOf<T0>(t, 0);
+        public OneOf<N0> ToOneOf<N0>() => OneOf<N0>.Create(value);
+        public OneOf<N0, N1> ToOneOf<N0, N1>() => OneOf<N0, N1>.Create(value);
+        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOf<N0, N1, N2>.Create(value);
+        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
-        public OneOf<N0> ToOneOf<N0>()
-        {
-            var valueType = value.GetType();
-
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1> ToOneOf<N0, N1>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-
-            throw new InvalidOperationException();
-        }
+        public static implicit operator OneOf<T0>(T0 value) => new OneOf<T0>(value, 0);
 
         public void Switch(Action<T0> f0 = null, Action otherwise = null)
         {
@@ -161,6 +101,17 @@ namespace OneOf
 
         OneOf(object value, int index) { this.value = value; this.index = index; }
 
+        internal static OneOf<T0, T1> Create(object value)
+        {
+            if (value != null)
+            {
+                var valueType = value.GetType();
+                if (valueType == typeof(T0)) return (T0)value;
+                if (valueType == typeof(T1)) return (T1)value;
+            }
+            throw new InvalidOperationException();
+        }
+
         object IOneOf.Value => value;
 
         public bool Is<T>()
@@ -187,95 +138,18 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public static implicit operator OneOf<T0, T1>(T0 t) => new OneOf<T0, T1>(t, 0);
-        public static implicit operator OneOf<T0, T1>(T1 t) => new OneOf<T0, T1>(t, 1);
+        public OneOf<N0> ToOneOf<N0>() => OneOf<N0>.Create(value);
+        public OneOf<N0, N1> ToOneOf<N0, N1>() => OneOf<N0, N1>.Create(value);
+        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOf<N0, N1, N2>.Create(value);
+        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
-        public OneOf<N0> ToOneOf<N0>()
-        {
-            var valueType = value.GetType();
-
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1> ToOneOf<N0, N1>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-
-            throw new InvalidOperationException();
-        }
+        public static implicit operator OneOf<T0, T1>(T0 value) => new OneOf<T0, T1>(value, 0);
+        public static implicit operator OneOf<T0, T1>(T1 value) => new OneOf<T0, T1>(value, 1);
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action otherwise = null)
         {
@@ -319,6 +193,18 @@ namespace OneOf
 
         OneOf(object value, int index) { this.value = value; this.index = index; }
 
+        internal static OneOf<T0, T1, T2> Create(object value)
+        {
+            if (value != null)
+            {
+                var valueType = value.GetType();
+                if (valueType == typeof(T0)) return (T0)value;
+                if (valueType == typeof(T1)) return (T1)value;
+                if (valueType == typeof(T2)) return (T2)value;
+            }
+            throw new InvalidOperationException();
+        }
+
         object IOneOf.Value => value;
 
         public bool Is<T>()
@@ -347,102 +233,19 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public static implicit operator OneOf<T0, T1, T2>(T0 t) => new OneOf<T0, T1, T2>(t, 0);
-        public static implicit operator OneOf<T0, T1, T2>(T1 t) => new OneOf<T0, T1, T2>(t, 1);
-        public static implicit operator OneOf<T0, T1, T2>(T2 t) => new OneOf<T0, T1, T2>(t, 2);
+        public OneOf<N0> ToOneOf<N0>() => OneOf<N0>.Create(value);
+        public OneOf<N0, N1> ToOneOf<N0, N1>() => OneOf<N0, N1>.Create(value);
+        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOf<N0, N1, N2>.Create(value);
+        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
-        public OneOf<N0> ToOneOf<N0>()
-        {
-            var valueType = value.GetType();
-
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1> ToOneOf<N0, N1>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-
-            throw new InvalidOperationException();
-        }
+        public static implicit operator OneOf<T0, T1, T2>(T0 value) => new OneOf<T0, T1, T2>(value, 0);
+        public static implicit operator OneOf<T0, T1, T2>(T1 value) => new OneOf<T0, T1, T2>(value, 1);
+        public static implicit operator OneOf<T0, T1, T2>(T2 value) => new OneOf<T0, T1, T2>(value, 2);
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action otherwise = null)
         {
@@ -488,6 +291,19 @@ namespace OneOf
 
         OneOf(object value, int index) { this.value = value; this.index = index; }
 
+        internal static OneOf<T0, T1, T2, T3> Create(object value)
+        {
+            if (value != null)
+            {
+                var valueType = value.GetType();
+                if (valueType == typeof(T0)) return (T0)value;
+                if (valueType == typeof(T1)) return (T1)value;
+                if (valueType == typeof(T2)) return (T2)value;
+                if (valueType == typeof(T3)) return (T3)value;
+            }
+            throw new InvalidOperationException();
+        }
+
         object IOneOf.Value => value;
 
         public bool Is<T>()
@@ -518,108 +334,20 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public static implicit operator OneOf<T0, T1, T2, T3>(T0 t) => new OneOf<T0, T1, T2, T3>(t, 0);
-        public static implicit operator OneOf<T0, T1, T2, T3>(T1 t) => new OneOf<T0, T1, T2, T3>(t, 1);
-        public static implicit operator OneOf<T0, T1, T2, T3>(T2 t) => new OneOf<T0, T1, T2, T3>(t, 2);
-        public static implicit operator OneOf<T0, T1, T2, T3>(T3 t) => new OneOf<T0, T1, T2, T3>(t, 3);
+        public OneOf<N0> ToOneOf<N0>() => OneOf<N0>.Create(value);
+        public OneOf<N0, N1> ToOneOf<N0, N1>() => OneOf<N0, N1>.Create(value);
+        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOf<N0, N1, N2>.Create(value);
+        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
-        public OneOf<N0> ToOneOf<N0>()
-        {
-            var valueType = value.GetType();
-
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1> ToOneOf<N0, N1>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-
-            throw new InvalidOperationException();
-        }
+        public static implicit operator OneOf<T0, T1, T2, T3>(T0 value) => new OneOf<T0, T1, T2, T3>(value, 0);
+        public static implicit operator OneOf<T0, T1, T2, T3>(T1 value) => new OneOf<T0, T1, T2, T3>(value, 1);
+        public static implicit operator OneOf<T0, T1, T2, T3>(T2 value) => new OneOf<T0, T1, T2, T3>(value, 2);
+        public static implicit operator OneOf<T0, T1, T2, T3>(T3 value) => new OneOf<T0, T1, T2, T3>(value, 3);
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action otherwise = null)
         {
@@ -667,6 +395,20 @@ namespace OneOf
 
         OneOf(object value, int index) { this.value = value; this.index = index; }
 
+        internal static OneOf<T0, T1, T2, T3, T4> Create(object value)
+        {
+            if (value != null)
+            {
+                var valueType = value.GetType();
+                if (valueType == typeof(T0)) return (T0)value;
+                if (valueType == typeof(T1)) return (T1)value;
+                if (valueType == typeof(T2)) return (T2)value;
+                if (valueType == typeof(T3)) return (T3)value;
+                if (valueType == typeof(T4)) return (T4)value;
+            }
+            throw new InvalidOperationException();
+        }
+
         object IOneOf.Value => value;
 
         public bool Is<T>()
@@ -699,113 +441,21 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public static implicit operator OneOf<T0, T1, T2, T3, T4>(T0 t) => new OneOf<T0, T1, T2, T3, T4>(t, 0);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4>(T1 t) => new OneOf<T0, T1, T2, T3, T4>(t, 1);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4>(T2 t) => new OneOf<T0, T1, T2, T3, T4>(t, 2);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4>(T3 t) => new OneOf<T0, T1, T2, T3, T4>(t, 3);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4>(T4 t) => new OneOf<T0, T1, T2, T3, T4>(t, 4);
+        public OneOf<N0> ToOneOf<N0>() => OneOf<N0>.Create(value);
+        public OneOf<N0, N1> ToOneOf<N0, N1>() => OneOf<N0, N1>.Create(value);
+        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOf<N0, N1, N2>.Create(value);
+        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
-        public OneOf<N0> ToOneOf<N0>()
-        {
-            var valueType = value.GetType();
-
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1> ToOneOf<N0, N1>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-
-            throw new InvalidOperationException();
-        }
+        public static implicit operator OneOf<T0, T1, T2, T3, T4>(T0 value) => new OneOf<T0, T1, T2, T3, T4>(value, 0);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4>(T1 value) => new OneOf<T0, T1, T2, T3, T4>(value, 1);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4>(T2 value) => new OneOf<T0, T1, T2, T3, T4>(value, 2);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4>(T3 value) => new OneOf<T0, T1, T2, T3, T4>(value, 3);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4>(T4 value) => new OneOf<T0, T1, T2, T3, T4>(value, 4);
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action otherwise = null)
         {
@@ -855,6 +505,21 @@ namespace OneOf
 
         OneOf(object value, int index) { this.value = value; this.index = index; }
 
+        internal static OneOf<T0, T1, T2, T3, T4, T5> Create(object value)
+        {
+            if (value != null)
+            {
+                var valueType = value.GetType();
+                if (valueType == typeof(T0)) return (T0)value;
+                if (valueType == typeof(T1)) return (T1)value;
+                if (valueType == typeof(T2)) return (T2)value;
+                if (valueType == typeof(T3)) return (T3)value;
+                if (valueType == typeof(T4)) return (T4)value;
+                if (valueType == typeof(T5)) return (T5)value;
+            }
+            throw new InvalidOperationException();
+        }
+
         object IOneOf.Value => value;
 
         public bool Is<T>()
@@ -889,117 +554,22 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T0 t) => new OneOf<T0, T1, T2, T3, T4, T5>(t, 0);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T1 t) => new OneOf<T0, T1, T2, T3, T4, T5>(t, 1);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T2 t) => new OneOf<T0, T1, T2, T3, T4, T5>(t, 2);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T3 t) => new OneOf<T0, T1, T2, T3, T4, T5>(t, 3);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T4 t) => new OneOf<T0, T1, T2, T3, T4, T5>(t, 4);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T5 t) => new OneOf<T0, T1, T2, T3, T4, T5>(t, 5);
+        public OneOf<N0> ToOneOf<N0>() => OneOf<N0>.Create(value);
+        public OneOf<N0, N1> ToOneOf<N0, N1>() => OneOf<N0, N1>.Create(value);
+        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOf<N0, N1, N2>.Create(value);
+        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
-        public OneOf<N0> ToOneOf<N0>()
-        {
-            var valueType = value.GetType();
-
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1> ToOneOf<N0, N1>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-            if (valueType == typeof(N5)) return (N5)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-            if (valueType == typeof(N5)) return (N5)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-            if (valueType == typeof(N5)) return (N5)value;
-
-            throw new InvalidOperationException();
-        }
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T0 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value, 0);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T1 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value, 1);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T2 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value, 2);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T3 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value, 3);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T4 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value, 4);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T5 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value, 5);
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action<T5> f5 = null, Action otherwise = null)
         {
@@ -1051,6 +621,22 @@ namespace OneOf
 
         OneOf(object value, int index) { this.value = value; this.index = index; }
 
+        internal static OneOf<T0, T1, T2, T3, T4, T5, T6> Create(object value)
+        {
+            if (value != null)
+            {
+                var valueType = value.GetType();
+                if (valueType == typeof(T0)) return (T0)value;
+                if (valueType == typeof(T1)) return (T1)value;
+                if (valueType == typeof(T2)) return (T2)value;
+                if (valueType == typeof(T3)) return (T3)value;
+                if (valueType == typeof(T4)) return (T4)value;
+                if (valueType == typeof(T5)) return (T5)value;
+                if (valueType == typeof(T6)) return (T6)value;
+            }
+            throw new InvalidOperationException();
+        }
+
         object IOneOf.Value => value;
 
         public bool Is<T>()
@@ -1087,120 +673,23 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T0 t) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(t, 0);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T1 t) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(t, 1);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T2 t) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(t, 2);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T3 t) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(t, 3);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T4 t) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(t, 4);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T5 t) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(t, 5);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T6 t) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(t, 6);
+        public OneOf<N0> ToOneOf<N0>() => OneOf<N0>.Create(value);
+        public OneOf<N0, N1> ToOneOf<N0, N1>() => OneOf<N0, N1>.Create(value);
+        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOf<N0, N1, N2>.Create(value);
+        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
-        public OneOf<N0> ToOneOf<N0>()
-        {
-            var valueType = value.GetType();
-
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1> ToOneOf<N0, N1>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-            if (valueType == typeof(N5)) return (N5)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-            if (valueType == typeof(N5)) return (N5)value;
-            if (valueType == typeof(N6)) return (N6)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-            if (valueType == typeof(N5)) return (N5)value;
-            if (valueType == typeof(N6)) return (N6)value;
-
-            throw new InvalidOperationException();
-        }
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T0 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value, 0);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T1 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value, 1);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T2 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value, 2);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T3 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value, 3);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T4 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value, 4);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T5 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value, 5);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T6 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value, 6);
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action<T5> f5 = null, Action<T6> f6 = null, Action otherwise = null)
         {
@@ -1254,6 +743,23 @@ namespace OneOf
 
         OneOf(object value, int index) { this.value = value; this.index = index; }
 
+        internal static OneOf<T0, T1, T2, T3, T4, T5, T6, T7> Create(object value)
+        {
+            if (value != null)
+            {
+                var valueType = value.GetType();
+                if (valueType == typeof(T0)) return (T0)value;
+                if (valueType == typeof(T1)) return (T1)value;
+                if (valueType == typeof(T2)) return (T2)value;
+                if (valueType == typeof(T3)) return (T3)value;
+                if (valueType == typeof(T4)) return (T4)value;
+                if (valueType == typeof(T5)) return (T5)value;
+                if (valueType == typeof(T6)) return (T6)value;
+                if (valueType == typeof(T7)) return (T7)value;
+            }
+            throw new InvalidOperationException();
+        }
+
         object IOneOf.Value => value;
 
         public bool Is<T>()
@@ -1292,122 +798,24 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T0 t) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(t, 0);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T1 t) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(t, 1);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T2 t) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(t, 2);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T3 t) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(t, 3);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T4 t) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(t, 4);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T5 t) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(t, 5);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T6 t) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(t, 6);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T7 t) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(t, 7);
+        public OneOf<N0> ToOneOf<N0>() => OneOf<N0>.Create(value);
+        public OneOf<N0, N1> ToOneOf<N0, N1>() => OneOf<N0, N1>.Create(value);
+        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOf<N0, N1, N2>.Create(value);
+        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
-        public OneOf<N0> ToOneOf<N0>()
-        {
-            var valueType = value.GetType();
-
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1> ToOneOf<N0, N1>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-            if (valueType == typeof(N5)) return (N5)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-            if (valueType == typeof(N5)) return (N5)value;
-            if (valueType == typeof(N6)) return (N6)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-            if (valueType == typeof(N5)) return (N5)value;
-            if (valueType == typeof(N6)) return (N6)value;
-            if (valueType == typeof(N7)) return (N7)value;
-
-            throw new InvalidOperationException();
-        }
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T0 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value, 0);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T1 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value, 1);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T2 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value, 2);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T3 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value, 3);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T4 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value, 4);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T5 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value, 5);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T6 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value, 6);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T7 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value, 7);
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action<T5> f5 = null, Action<T6> f6 = null, Action<T7> f7 = null, Action otherwise = null)
         {
@@ -1463,6 +871,24 @@ namespace OneOf
 
         OneOf(object value, int index) { this.value = value; this.index = index; }
 
+        internal static OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(object value)
+        {
+            if (value != null)
+            {
+                var valueType = value.GetType();
+                if (valueType == typeof(T0)) return (T0)value;
+                if (valueType == typeof(T1)) return (T1)value;
+                if (valueType == typeof(T2)) return (T2)value;
+                if (valueType == typeof(T3)) return (T3)value;
+                if (valueType == typeof(T4)) return (T4)value;
+                if (valueType == typeof(T5)) return (T5)value;
+                if (valueType == typeof(T6)) return (T6)value;
+                if (valueType == typeof(T7)) return (T7)value;
+                if (valueType == typeof(T8)) return (T8)value;
+            }
+            throw new InvalidOperationException();
+        }
+
         object IOneOf.Value => value;
 
         public bool Is<T>()
@@ -1503,123 +929,25 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T0 t) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(t, 0);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T1 t) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(t, 1);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T2 t) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(t, 2);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T3 t) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(t, 3);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T4 t) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(t, 4);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T5 t) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(t, 5);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T6 t) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(t, 6);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T7 t) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(t, 7);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T8 t) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(t, 8);
+        public OneOf<N0> ToOneOf<N0>() => OneOf<N0>.Create(value);
+        public OneOf<N0, N1> ToOneOf<N0, N1>() => OneOf<N0, N1>.Create(value);
+        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOf<N0, N1, N2>.Create(value);
+        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
-        public OneOf<N0> ToOneOf<N0>()
-        {
-            var valueType = value.GetType();
-
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1> ToOneOf<N0, N1>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-            if (valueType == typeof(N5)) return (N5)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-            if (valueType == typeof(N5)) return (N5)value;
-            if (valueType == typeof(N6)) return (N6)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-            if (valueType == typeof(N5)) return (N5)value;
-            if (valueType == typeof(N6)) return (N6)value;
-            if (valueType == typeof(N7)) return (N7)value;
-
-            throw new InvalidOperationException();
-        }
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T0 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 0);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T1 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 1);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T2 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 2);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T3 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 3);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T4 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 4);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T5 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 5);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T6 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 6);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T7 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 7);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T8 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 8);
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action<T5> f5 = null, Action<T6> f6 = null, Action<T7> f7 = null, Action<T8> f8 = null, Action otherwise = null)
         {
@@ -1684,6 +1012,16 @@ namespace OneOf
             if (this is T0) this.index = 0;
         }
 
+        internal static OneOfBase<T0> Create(object value)
+        {
+            if (value != null)
+            {
+                var valueType = value.GetType();
+                if (valueType == typeof(T0)) return (T0)value;
+            }
+            throw new InvalidOperationException();
+        }
+
         object IOneOf.Value => value;
 
         public bool Is<T>()
@@ -1708,87 +1046,17 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public static implicit operator OneOfBase<T0>(T0 t) => new OneOfBase<T0>(t, 0);
+        public OneOfBase<N0> ToOneOf<N0>() => OneOfBase<N0>.Create(value);
+        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => OneOfBase<N0, N1>.Create(value);
+        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfBase<N0, N1, N2>.Create(value);
+        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
-        public OneOfBase<N0> ToOneOf<N0>()
-        {
-            var valueType = value.GetType();
-
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1> ToOneOf<N0, N1>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-
-            throw new InvalidOperationException();
-        }
+        public static implicit operator OneOfBase<T0>(T0 value) => new OneOfBase<T0>(value, 0);
 
         public void Switch(Action<T0> f0 = null, Action otherwise = null)
         {
@@ -1838,6 +1106,17 @@ namespace OneOf
             if (this is T1) this.index = 1;
         }
 
+        internal static OneOfBase<T0, T1> Create(object value)
+        {
+            if (value != null)
+            {
+                var valueType = value.GetType();
+                if (valueType == typeof(T0)) return (T0)value;
+                if (valueType == typeof(T1)) return (T1)value;
+            }
+            throw new InvalidOperationException();
+        }
+
         object IOneOf.Value => value;
 
         public bool Is<T>()
@@ -1864,95 +1143,18 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public static implicit operator OneOfBase<T0, T1>(T0 t) => new OneOfBase<T0, T1>(t, 0);
-        public static implicit operator OneOfBase<T0, T1>(T1 t) => new OneOfBase<T0, T1>(t, 1);
+        public OneOfBase<N0> ToOneOf<N0>() => OneOfBase<N0>.Create(value);
+        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => OneOfBase<N0, N1>.Create(value);
+        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfBase<N0, N1, N2>.Create(value);
+        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
-        public OneOfBase<N0> ToOneOf<N0>()
-        {
-            var valueType = value.GetType();
-
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1> ToOneOf<N0, N1>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-
-            throw new InvalidOperationException();
-        }
+        public static implicit operator OneOfBase<T0, T1>(T0 value) => new OneOfBase<T0, T1>(value, 0);
+        public static implicit operator OneOfBase<T0, T1>(T1 value) => new OneOfBase<T0, T1>(value, 1);
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action otherwise = null)
         {
@@ -2005,6 +1207,18 @@ namespace OneOf
             if (this is T2) this.index = 2;
         }
 
+        internal static OneOfBase<T0, T1, T2> Create(object value)
+        {
+            if (value != null)
+            {
+                var valueType = value.GetType();
+                if (valueType == typeof(T0)) return (T0)value;
+                if (valueType == typeof(T1)) return (T1)value;
+                if (valueType == typeof(T2)) return (T2)value;
+            }
+            throw new InvalidOperationException();
+        }
+
         object IOneOf.Value => value;
 
         public bool Is<T>()
@@ -2033,102 +1247,19 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public static implicit operator OneOfBase<T0, T1, T2>(T0 t) => new OneOfBase<T0, T1, T2>(t, 0);
-        public static implicit operator OneOfBase<T0, T1, T2>(T1 t) => new OneOfBase<T0, T1, T2>(t, 1);
-        public static implicit operator OneOfBase<T0, T1, T2>(T2 t) => new OneOfBase<T0, T1, T2>(t, 2);
+        public OneOfBase<N0> ToOneOf<N0>() => OneOfBase<N0>.Create(value);
+        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => OneOfBase<N0, N1>.Create(value);
+        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfBase<N0, N1, N2>.Create(value);
+        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
-        public OneOfBase<N0> ToOneOf<N0>()
-        {
-            var valueType = value.GetType();
-
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1> ToOneOf<N0, N1>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-
-            throw new InvalidOperationException();
-        }
+        public static implicit operator OneOfBase<T0, T1, T2>(T0 value) => new OneOfBase<T0, T1, T2>(value, 0);
+        public static implicit operator OneOfBase<T0, T1, T2>(T1 value) => new OneOfBase<T0, T1, T2>(value, 1);
+        public static implicit operator OneOfBase<T0, T1, T2>(T2 value) => new OneOfBase<T0, T1, T2>(value, 2);
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action otherwise = null)
         {
@@ -2184,6 +1315,19 @@ namespace OneOf
             if (this is T3) this.index = 3;
         }
 
+        internal static OneOfBase<T0, T1, T2, T3> Create(object value)
+        {
+            if (value != null)
+            {
+                var valueType = value.GetType();
+                if (valueType == typeof(T0)) return (T0)value;
+                if (valueType == typeof(T1)) return (T1)value;
+                if (valueType == typeof(T2)) return (T2)value;
+                if (valueType == typeof(T3)) return (T3)value;
+            }
+            throw new InvalidOperationException();
+        }
+
         object IOneOf.Value => value;
 
         public bool Is<T>()
@@ -2214,108 +1358,20 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public static implicit operator OneOfBase<T0, T1, T2, T3>(T0 t) => new OneOfBase<T0, T1, T2, T3>(t, 0);
-        public static implicit operator OneOfBase<T0, T1, T2, T3>(T1 t) => new OneOfBase<T0, T1, T2, T3>(t, 1);
-        public static implicit operator OneOfBase<T0, T1, T2, T3>(T2 t) => new OneOfBase<T0, T1, T2, T3>(t, 2);
-        public static implicit operator OneOfBase<T0, T1, T2, T3>(T3 t) => new OneOfBase<T0, T1, T2, T3>(t, 3);
+        public OneOfBase<N0> ToOneOf<N0>() => OneOfBase<N0>.Create(value);
+        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => OneOfBase<N0, N1>.Create(value);
+        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfBase<N0, N1, N2>.Create(value);
+        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
-        public OneOfBase<N0> ToOneOf<N0>()
-        {
-            var valueType = value.GetType();
-
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1> ToOneOf<N0, N1>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-
-            throw new InvalidOperationException();
-        }
+        public static implicit operator OneOfBase<T0, T1, T2, T3>(T0 value) => new OneOfBase<T0, T1, T2, T3>(value, 0);
+        public static implicit operator OneOfBase<T0, T1, T2, T3>(T1 value) => new OneOfBase<T0, T1, T2, T3>(value, 1);
+        public static implicit operator OneOfBase<T0, T1, T2, T3>(T2 value) => new OneOfBase<T0, T1, T2, T3>(value, 2);
+        public static implicit operator OneOfBase<T0, T1, T2, T3>(T3 value) => new OneOfBase<T0, T1, T2, T3>(value, 3);
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action otherwise = null)
         {
@@ -2374,6 +1430,20 @@ namespace OneOf
             if (this is T4) this.index = 4;
         }
 
+        internal static OneOfBase<T0, T1, T2, T3, T4> Create(object value)
+        {
+            if (value != null)
+            {
+                var valueType = value.GetType();
+                if (valueType == typeof(T0)) return (T0)value;
+                if (valueType == typeof(T1)) return (T1)value;
+                if (valueType == typeof(T2)) return (T2)value;
+                if (valueType == typeof(T3)) return (T3)value;
+                if (valueType == typeof(T4)) return (T4)value;
+            }
+            throw new InvalidOperationException();
+        }
+
         object IOneOf.Value => value;
 
         public bool Is<T>()
@@ -2406,113 +1476,21 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T0 t) => new OneOfBase<T0, T1, T2, T3, T4>(t, 0);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T1 t) => new OneOfBase<T0, T1, T2, T3, T4>(t, 1);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T2 t) => new OneOfBase<T0, T1, T2, T3, T4>(t, 2);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T3 t) => new OneOfBase<T0, T1, T2, T3, T4>(t, 3);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T4 t) => new OneOfBase<T0, T1, T2, T3, T4>(t, 4);
+        public OneOfBase<N0> ToOneOf<N0>() => OneOfBase<N0>.Create(value);
+        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => OneOfBase<N0, N1>.Create(value);
+        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfBase<N0, N1, N2>.Create(value);
+        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
-        public OneOfBase<N0> ToOneOf<N0>()
-        {
-            var valueType = value.GetType();
-
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1> ToOneOf<N0, N1>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-
-            throw new InvalidOperationException();
-        }
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T0 value) => new OneOfBase<T0, T1, T2, T3, T4>(value, 0);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T1 value) => new OneOfBase<T0, T1, T2, T3, T4>(value, 1);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T2 value) => new OneOfBase<T0, T1, T2, T3, T4>(value, 2);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T3 value) => new OneOfBase<T0, T1, T2, T3, T4>(value, 3);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T4 value) => new OneOfBase<T0, T1, T2, T3, T4>(value, 4);
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action otherwise = null)
         {
@@ -2574,6 +1552,21 @@ namespace OneOf
             if (this is T5) this.index = 5;
         }
 
+        internal static OneOfBase<T0, T1, T2, T3, T4, T5> Create(object value)
+        {
+            if (value != null)
+            {
+                var valueType = value.GetType();
+                if (valueType == typeof(T0)) return (T0)value;
+                if (valueType == typeof(T1)) return (T1)value;
+                if (valueType == typeof(T2)) return (T2)value;
+                if (valueType == typeof(T3)) return (T3)value;
+                if (valueType == typeof(T4)) return (T4)value;
+                if (valueType == typeof(T5)) return (T5)value;
+            }
+            throw new InvalidOperationException();
+        }
+
         object IOneOf.Value => value;
 
         public bool Is<T>()
@@ -2608,117 +1601,22 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T0 t) => new OneOfBase<T0, T1, T2, T3, T4, T5>(t, 0);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T1 t) => new OneOfBase<T0, T1, T2, T3, T4, T5>(t, 1);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T2 t) => new OneOfBase<T0, T1, T2, T3, T4, T5>(t, 2);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T3 t) => new OneOfBase<T0, T1, T2, T3, T4, T5>(t, 3);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T4 t) => new OneOfBase<T0, T1, T2, T3, T4, T5>(t, 4);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T5 t) => new OneOfBase<T0, T1, T2, T3, T4, T5>(t, 5);
+        public OneOfBase<N0> ToOneOf<N0>() => OneOfBase<N0>.Create(value);
+        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => OneOfBase<N0, N1>.Create(value);
+        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfBase<N0, N1, N2>.Create(value);
+        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
-        public OneOfBase<N0> ToOneOf<N0>()
-        {
-            var valueType = value.GetType();
-
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1> ToOneOf<N0, N1>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-            if (valueType == typeof(N5)) return (N5)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-            if (valueType == typeof(N5)) return (N5)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-            if (valueType == typeof(N5)) return (N5)value;
-
-            throw new InvalidOperationException();
-        }
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T0 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value, 0);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T1 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value, 1);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T2 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value, 2);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T3 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value, 3);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T4 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value, 4);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T5 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value, 5);
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action<T5> f5 = null, Action otherwise = null)
         {
@@ -2783,6 +1681,22 @@ namespace OneOf
             if (this is T6) this.index = 6;
         }
 
+        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6> Create(object value)
+        {
+            if (value != null)
+            {
+                var valueType = value.GetType();
+                if (valueType == typeof(T0)) return (T0)value;
+                if (valueType == typeof(T1)) return (T1)value;
+                if (valueType == typeof(T2)) return (T2)value;
+                if (valueType == typeof(T3)) return (T3)value;
+                if (valueType == typeof(T4)) return (T4)value;
+                if (valueType == typeof(T5)) return (T5)value;
+                if (valueType == typeof(T6)) return (T6)value;
+            }
+            throw new InvalidOperationException();
+        }
+
         object IOneOf.Value => value;
 
         public bool Is<T>()
@@ -2819,120 +1733,23 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T0 t) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(t, 0);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T1 t) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(t, 1);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T2 t) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(t, 2);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T3 t) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(t, 3);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T4 t) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(t, 4);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T5 t) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(t, 5);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T6 t) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(t, 6);
+        public OneOfBase<N0> ToOneOf<N0>() => OneOfBase<N0>.Create(value);
+        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => OneOfBase<N0, N1>.Create(value);
+        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfBase<N0, N1, N2>.Create(value);
+        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
-        public OneOfBase<N0> ToOneOf<N0>()
-        {
-            var valueType = value.GetType();
-
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1> ToOneOf<N0, N1>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-            if (valueType == typeof(N5)) return (N5)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-            if (valueType == typeof(N5)) return (N5)value;
-            if (valueType == typeof(N6)) return (N6)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-            if (valueType == typeof(N5)) return (N5)value;
-            if (valueType == typeof(N6)) return (N6)value;
-
-            throw new InvalidOperationException();
-        }
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T0 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value, 0);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T1 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value, 1);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T2 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value, 2);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T3 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value, 3);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T4 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value, 4);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T5 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value, 5);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T6 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value, 6);
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action<T5> f5 = null, Action<T6> f6 = null, Action otherwise = null)
         {
@@ -3000,6 +1817,23 @@ namespace OneOf
             if (this is T7) this.index = 7;
         }
 
+        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> Create(object value)
+        {
+            if (value != null)
+            {
+                var valueType = value.GetType();
+                if (valueType == typeof(T0)) return (T0)value;
+                if (valueType == typeof(T1)) return (T1)value;
+                if (valueType == typeof(T2)) return (T2)value;
+                if (valueType == typeof(T3)) return (T3)value;
+                if (valueType == typeof(T4)) return (T4)value;
+                if (valueType == typeof(T5)) return (T5)value;
+                if (valueType == typeof(T6)) return (T6)value;
+                if (valueType == typeof(T7)) return (T7)value;
+            }
+            throw new InvalidOperationException();
+        }
+
         object IOneOf.Value => value;
 
         public bool Is<T>()
@@ -3038,122 +1872,24 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T0 t) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(t, 0);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T1 t) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(t, 1);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T2 t) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(t, 2);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T3 t) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(t, 3);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T4 t) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(t, 4);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T5 t) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(t, 5);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T6 t) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(t, 6);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T7 t) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(t, 7);
+        public OneOfBase<N0> ToOneOf<N0>() => OneOfBase<N0>.Create(value);
+        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => OneOfBase<N0, N1>.Create(value);
+        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfBase<N0, N1, N2>.Create(value);
+        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
-        public OneOfBase<N0> ToOneOf<N0>()
-        {
-            var valueType = value.GetType();
-
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1> ToOneOf<N0, N1>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-            if (valueType == typeof(N5)) return (N5)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-            if (valueType == typeof(N5)) return (N5)value;
-            if (valueType == typeof(N6)) return (N6)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-            if (valueType == typeof(N5)) return (N5)value;
-            if (valueType == typeof(N6)) return (N6)value;
-            if (valueType == typeof(N7)) return (N7)value;
-
-            throw new InvalidOperationException();
-        }
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T0 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value, 0);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T1 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value, 1);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T2 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value, 2);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T3 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value, 3);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T4 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value, 4);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T5 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value, 5);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T6 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value, 6);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T7 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value, 7);
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action<T5> f5 = null, Action<T6> f6 = null, Action<T7> f7 = null, Action otherwise = null)
         {
@@ -3224,6 +1960,24 @@ namespace OneOf
             if (this is T8) this.index = 8;
         }
 
+        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(object value)
+        {
+            if (value != null)
+            {
+                var valueType = value.GetType();
+                if (valueType == typeof(T0)) return (T0)value;
+                if (valueType == typeof(T1)) return (T1)value;
+                if (valueType == typeof(T2)) return (T2)value;
+                if (valueType == typeof(T3)) return (T3)value;
+                if (valueType == typeof(T4)) return (T4)value;
+                if (valueType == typeof(T5)) return (T5)value;
+                if (valueType == typeof(T6)) return (T6)value;
+                if (valueType == typeof(T7)) return (T7)value;
+                if (valueType == typeof(T8)) return (T8)value;
+            }
+            throw new InvalidOperationException();
+        }
+
         object IOneOf.Value => value;
 
         public bool Is<T>()
@@ -3264,123 +2018,25 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T0 t) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(t, 0);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T1 t) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(t, 1);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T2 t) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(t, 2);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T3 t) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(t, 3);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T4 t) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(t, 4);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T5 t) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(t, 5);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T6 t) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(t, 6);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T7 t) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(t, 7);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T8 t) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(t, 8);
+        public OneOfBase<N0> ToOneOf<N0>() => OneOfBase<N0>.Create(value);
+        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => OneOfBase<N0, N1>.Create(value);
+        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfBase<N0, N1, N2>.Create(value);
+        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
-        public OneOfBase<N0> ToOneOf<N0>()
-        {
-            var valueType = value.GetType();
-
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1> ToOneOf<N0, N1>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-            if (valueType == typeof(N5)) return (N5)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-            if (valueType == typeof(N5)) return (N5)value;
-            if (valueType == typeof(N6)) return (N6)value;
-
-            throw new InvalidOperationException();
-        }
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>()
-        {
-            var valueType = value.GetType();
-
-            if (valueType == typeof(N0)) return (N0)value;
-            if (valueType == typeof(N1)) return (N1)value;
-            if (valueType == typeof(N2)) return (N2)value;
-            if (valueType == typeof(N3)) return (N3)value;
-            if (valueType == typeof(N4)) return (N4)value;
-            if (valueType == typeof(N5)) return (N5)value;
-            if (valueType == typeof(N6)) return (N6)value;
-            if (valueType == typeof(N7)) return (N7)value;
-
-            throw new InvalidOperationException();
-        }
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T0 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 0);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T1 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 1);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T2 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 2);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T3 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 3);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T4 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 4);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T5 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 5);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T6 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 6);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T7 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 7);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T8 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 8);
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action<T5> f5 = null, Action<T6> f6 = null, Action<T7> f7 = null, Action<T8> f8 = null, Action otherwise = null)
         {
