@@ -40,12 +40,16 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 	using(var indent1 = new Indent(this))
 	{
 		WriteLine("readonly object value;");
-		WriteLine("readonly int index;");
 
 		// =============== Constructors
 	    
 		WriteLine("");
-		WriteLine($"{typeName}(object value, int index) {{ this.value = value; this.index = index; }}");
+		WriteLine($"internal {typeName}(object value)");
+		using(var indent2 = new Indent(this))
+		{
+			WriteLine("EnsureValueIsValid(value);");
+			WriteLine($"this.value = value;");
+		}
 
 		if (!isStruct)
 		{
@@ -53,30 +57,37 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 			WriteLine($"protected {typeName}()");
 			using(var indent2 = new Indent(this))
 			{
+				WriteLine("EnsureValueIsValid(this);");
 				WriteLine("this.value = this;");
-				WriteLine("");
-
-				for (var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex++)
-				{
-					WriteLine($"if (this is T{parmIndex}) this.index = {parmIndex};");
-				}
 			}
 		}
 
+		// =============== EnsureValueIsValid
+	    
 		WriteLine("");
-		WriteLine($"internal static {typeName}<{genericArg}> Create(object value)"); 
+		WriteLine($"static void EnsureValueIsValid(object value)");
 		using(var indent2 = new Indent(this))
 		{
-			WriteLine($"if (value != null)");
-			using(var indent3 = new Indent(this))
+			WriteLine($"if (value == null) throw new ArgumentNullException(\"value\");");
+			WriteLine("");
+
+			WriteLine("var valueType = value.GetType();");
+			for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
 			{
-				WriteLine("var valueType = value.GetType();");
-				for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
-				{
-					WriteLine($"if (valueType == typeof(T{parmIndex})) return (T{parmIndex})value;");
-				}
+				WriteLine($"if (valueType == typeof(T{parmIndex})) return;");
 			}
-	    	WriteLine("throw new InvalidOperationException();");
+
+			WriteLine("");
+	    	WriteLine($"throw new ArgumentException(\"value\");");
+		}
+
+		// =============== EnsureValueNotNull
+
+		WriteLine("");
+		WriteLine($"void EnsureValueNotNull()");
+		using(var indent2 = new Indent(this))
+		{
+			WriteLine($"if (value == null) throw new InvalidOperationException(\"Value has not been set\");");
 		}
 
 		// =============== IOneOf implementation
@@ -90,16 +101,8 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 		WriteLine($"public bool Is<T>()");
 		using(var indent2 = new Indent(this))
 		{
-			WriteLine("// quick path for when value non-null and correct type");
-			WriteLine($"if (this.value != null && this.value.GetType() == typeof(T)) return true;");
-			WriteLine("");
-
-			WriteLine("// slower path for when value null, or wrong type");
-			for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
-			{
-				WriteLine($"if (this.index == {parmIndex} && typeof(T) == typeof(T{parmIndex})) return true;");
-			}
-
+			WriteLine("EnsureValueNotNull();");
+			WriteLine($"if (this.value.GetType() == typeof(T)) return true;");
 			WriteLine("");
 			WriteLine("return false;");
 		}
@@ -110,16 +113,8 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 		WriteLine($"public T As<T>()");
 		using(var indent2 = new Indent(this))
 		{
-			WriteLine("// quick path for when value non-null and correct type");
-			WriteLine($"if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;");
-			WriteLine("");
-
-			WriteLine("// slower path for when value null, or wrong type");
-			for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
-			{
-				WriteLine($"if (this.index == {parmIndex} && typeof(T) == typeof(T{parmIndex})) return (T)value;");
-			}
-
+			WriteLine("EnsureValueNotNull();");
+			WriteLine($"if (this.value.GetType() == typeof(T)) return (T)this.value;");
 			WriteLine("");
 			WriteLine("throw new InvalidOperationException();");
 		}
@@ -131,7 +126,7 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 		{
 			var otherGenericArgs = string.Join(", ", Enumerable.Range(0, newIndex+1).Select(e => "N" + e));
 
-			WriteLine($"public {typeName}<{otherGenericArgs}> ToOneOf<{otherGenericArgs}>() => {typeName}<{otherGenericArgs}>.Create(value);");
+			WriteLine($"public {typeName}<{otherGenericArgs}> ToOneOf<{otherGenericArgs}>() => new {typeName}<{otherGenericArgs}>(value);");
 		}
 
 		// =============== implicit conversion to T
@@ -139,7 +134,7 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 		WriteLine("");
 		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
 		{
-			WriteLine($"public static implicit operator {typeName}<{genericArg}>(T{parmIndex} value) => new {typeName}<{genericArg}>(value, {parmIndex});"); 
+			WriteLine($"public static implicit operator {typeName}<{genericArg}>(T{parmIndex} value) => new {typeName}<{genericArg}>(value);"); 
 		}
 
 		// =============== Switch
@@ -150,9 +145,11 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 	    WriteLine($"public void Switch({switchArgList}, Action otherwise = null)");
 		using(var indent2 = new Indent(this))
 		{
+			WriteLine("EnsureValueNotNull();");
+			WriteLine("var valueType = value.GetType();");
 			for (var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex++)
 			{
-				WriteLine($"if (this.index == {parmIndex} && f{parmIndex} != null) {{ f{parmIndex}((T{parmIndex})this.value); return; }}");
+				WriteLine($"if (f{parmIndex} != null && valueType == typeof(T{parmIndex})) {{ f{parmIndex}((T{parmIndex})this.value); return; }}");
 			}
 
 			WriteLine("");
@@ -170,9 +167,11 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 	    WriteLine($"public TResult Match<TResult>({matchArgList}, Func<TResult> otherwise = null)");
 		using(var indent2 = new Indent(this))
 		{
+			WriteLine("EnsureValueNotNull();");
+			WriteLine("var valueType = value.GetType();");
 			for (var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex++)
 			{
-				WriteLine($"if (this.index == {parmIndex} && f{parmIndex} != null) return f{parmIndex}((T{parmIndex})this.value);");
+				WriteLine($"if (f{parmIndex} != null && valueType == typeof(T{parmIndex})) return f{parmIndex}((T{parmIndex})this.value);");
 			}
 
 			WriteLine("");
@@ -192,15 +191,14 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
             WriteLine($"if (!(obj is {typeName}<{genericArg}>)) return false;");
 			WriteLine("");
             WriteLine($"var other = ({typeName}<{genericArg}>)obj;");
-            WriteLine("return index == other.index && Equals(value, other.value);");
+            WriteLine("return Equals(value, other.value);");
 		}
 
 		WriteLine("");
-		WriteLine("public override int GetHashCode() => unchecked((value?.GetHashCode() ?? 0) * 397 ^ index);");
+		WriteLine("public override int GetHashCode() => (value?.GetHashCode() ?? 0);");
 
 		WriteLine("");
 		WriteLine("public override string ToString() => (value?.ToString() ?? \"\");");
-
 	}
 
 	WriteLine("");

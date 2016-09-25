@@ -11,59 +11,63 @@ namespace OneOf
     public struct OneOf<T0> : IOneOf
     {
         readonly object value;
-        readonly int index;
 
-        OneOf(object value, int index) { this.value = value; this.index = index; }
-
-        internal static OneOf<T0> Create(object value)
+        internal OneOf(object value)
         {
-            if (value != null)
-            {
-                var valueType = value.GetType();
-                if (valueType == typeof(T0)) return (T0)value;
-            }
-            throw new InvalidOperationException();
+            EnsureValueIsValid(value);
+            this.value = value;
+        }
+
+        static void EnsureValueIsValid(object value)
+        {
+            if (value == null) throw new ArgumentNullException("value");
+
+            var valueType = value.GetType();
+            if (valueType == typeof(T0)) return;
+
+            throw new ArgumentException("value");
+        }
+
+        void EnsureValueNotNull()
+        {
+            if (value == null) throw new InvalidOperationException("Value has not been set");
         }
 
         object IOneOf.Value => value;
 
         public bool Is<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return true;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return true;
 
             return false;
         }
 
         public T As<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return (T)this.value;
 
             throw new InvalidOperationException();
         }
 
-        public OneOf<N0> ToOneOf<N0>() => OneOf<N0>.Create(value);
-        public OneOf<N0, N1> ToOneOf<N0, N1>() => OneOf<N0, N1>.Create(value);
-        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOf<N0, N1, N2>.Create(value);
-        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
+        public OneOf<N0> ToOneOf<N0>() => new OneOf<N0>(value);
+        public OneOf<N0, N1> ToOneOf<N0, N1>() => new OneOf<N0, N1>(value);
+        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOf<N0, N1, N2>(value);
+        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOf<N0, N1, N2, N3>(value);
+        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOf<N0, N1, N2, N3, N4>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOf<N0, N1, N2, N3, N4, N5>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOf<N0, N1, N2, N3, N4, N5, N6>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
 
-        public static implicit operator OneOf<T0>(T0 value) => new OneOf<T0>(value, 0);
+        public static implicit operator OneOf<T0>(T0 value) => new OneOf<T0>(value);
 
         public void Switch(Action<T0> f0 = null, Action otherwise = null)
         {
-            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -72,7 +76,9 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<TResult> otherwise = null)
         {
-            if (this.index == 0 && f0 != null) return f0((T0)this.value);
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -85,10 +91,10 @@ namespace OneOf
             if (!(obj is OneOf<T0>)) return false;
 
             var other = (OneOf<T0>)obj;
-            return index == other.index && Equals(value, other.value);
+            return Equals(value, other.value);
         }
 
-        public override int GetHashCode() => unchecked((value?.GetHashCode() ?? 0) * 397 ^ index);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
 
         public override string ToString() => (value?.ToString() ?? "");
     }
@@ -97,64 +103,66 @@ namespace OneOf
     public struct OneOf<T0, T1> : IOneOf
     {
         readonly object value;
-        readonly int index;
 
-        OneOf(object value, int index) { this.value = value; this.index = index; }
-
-        internal static OneOf<T0, T1> Create(object value)
+        internal OneOf(object value)
         {
-            if (value != null)
-            {
-                var valueType = value.GetType();
-                if (valueType == typeof(T0)) return (T0)value;
-                if (valueType == typeof(T1)) return (T1)value;
-            }
-            throw new InvalidOperationException();
+            EnsureValueIsValid(value);
+            this.value = value;
+        }
+
+        static void EnsureValueIsValid(object value)
+        {
+            if (value == null) throw new ArgumentNullException("value");
+
+            var valueType = value.GetType();
+            if (valueType == typeof(T0)) return;
+            if (valueType == typeof(T1)) return;
+
+            throw new ArgumentException("value");
+        }
+
+        void EnsureValueNotNull()
+        {
+            if (value == null) throw new InvalidOperationException("Value has not been set");
         }
 
         object IOneOf.Value => value;
 
         public bool Is<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return true;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
-            if (this.index == 1 && typeof(T) == typeof(T1)) return true;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return true;
 
             return false;
         }
 
         public T As<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
-            if (this.index == 1 && typeof(T) == typeof(T1)) return (T)value;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return (T)this.value;
 
             throw new InvalidOperationException();
         }
 
-        public OneOf<N0> ToOneOf<N0>() => OneOf<N0>.Create(value);
-        public OneOf<N0, N1> ToOneOf<N0, N1>() => OneOf<N0, N1>.Create(value);
-        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOf<N0, N1, N2>.Create(value);
-        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
+        public OneOf<N0> ToOneOf<N0>() => new OneOf<N0>(value);
+        public OneOf<N0, N1> ToOneOf<N0, N1>() => new OneOf<N0, N1>(value);
+        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOf<N0, N1, N2>(value);
+        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOf<N0, N1, N2, N3>(value);
+        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOf<N0, N1, N2, N3, N4>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOf<N0, N1, N2, N3, N4, N5>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOf<N0, N1, N2, N3, N4, N5, N6>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
 
-        public static implicit operator OneOf<T0, T1>(T0 value) => new OneOf<T0, T1>(value, 0);
-        public static implicit operator OneOf<T0, T1>(T1 value) => new OneOf<T0, T1>(value, 1);
+        public static implicit operator OneOf<T0, T1>(T0 value) => new OneOf<T0, T1>(value);
+        public static implicit operator OneOf<T0, T1>(T1 value) => new OneOf<T0, T1>(value);
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action otherwise = null)
         {
-            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
-            if (this.index == 1 && f1 != null) { f1((T1)this.value); return; }
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
+            if (f1 != null && valueType == typeof(T1)) { f1((T1)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -163,8 +171,10 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<T1, TResult> f1 = null, Func<TResult> otherwise = null)
         {
-            if (this.index == 0 && f0 != null) return f0((T0)this.value);
-            if (this.index == 1 && f1 != null) return f1((T1)this.value);
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
+            if (f1 != null && valueType == typeof(T1)) return f1((T1)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -177,10 +187,10 @@ namespace OneOf
             if (!(obj is OneOf<T0, T1>)) return false;
 
             var other = (OneOf<T0, T1>)obj;
-            return index == other.index && Equals(value, other.value);
+            return Equals(value, other.value);
         }
 
-        public override int GetHashCode() => unchecked((value?.GetHashCode() ?? 0) * 397 ^ index);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
 
         public override string ToString() => (value?.ToString() ?? "");
     }
@@ -189,69 +199,69 @@ namespace OneOf
     public struct OneOf<T0, T1, T2> : IOneOf
     {
         readonly object value;
-        readonly int index;
 
-        OneOf(object value, int index) { this.value = value; this.index = index; }
-
-        internal static OneOf<T0, T1, T2> Create(object value)
+        internal OneOf(object value)
         {
-            if (value != null)
-            {
-                var valueType = value.GetType();
-                if (valueType == typeof(T0)) return (T0)value;
-                if (valueType == typeof(T1)) return (T1)value;
-                if (valueType == typeof(T2)) return (T2)value;
-            }
-            throw new InvalidOperationException();
+            EnsureValueIsValid(value);
+            this.value = value;
+        }
+
+        static void EnsureValueIsValid(object value)
+        {
+            if (value == null) throw new ArgumentNullException("value");
+
+            var valueType = value.GetType();
+            if (valueType == typeof(T0)) return;
+            if (valueType == typeof(T1)) return;
+            if (valueType == typeof(T2)) return;
+
+            throw new ArgumentException("value");
+        }
+
+        void EnsureValueNotNull()
+        {
+            if (value == null) throw new InvalidOperationException("Value has not been set");
         }
 
         object IOneOf.Value => value;
 
         public bool Is<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return true;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
-            if (this.index == 1 && typeof(T) == typeof(T1)) return true;
-            if (this.index == 2 && typeof(T) == typeof(T2)) return true;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return true;
 
             return false;
         }
 
         public T As<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
-            if (this.index == 1 && typeof(T) == typeof(T1)) return (T)value;
-            if (this.index == 2 && typeof(T) == typeof(T2)) return (T)value;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return (T)this.value;
 
             throw new InvalidOperationException();
         }
 
-        public OneOf<N0> ToOneOf<N0>() => OneOf<N0>.Create(value);
-        public OneOf<N0, N1> ToOneOf<N0, N1>() => OneOf<N0, N1>.Create(value);
-        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOf<N0, N1, N2>.Create(value);
-        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
+        public OneOf<N0> ToOneOf<N0>() => new OneOf<N0>(value);
+        public OneOf<N0, N1> ToOneOf<N0, N1>() => new OneOf<N0, N1>(value);
+        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOf<N0, N1, N2>(value);
+        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOf<N0, N1, N2, N3>(value);
+        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOf<N0, N1, N2, N3, N4>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOf<N0, N1, N2, N3, N4, N5>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOf<N0, N1, N2, N3, N4, N5, N6>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
 
-        public static implicit operator OneOf<T0, T1, T2>(T0 value) => new OneOf<T0, T1, T2>(value, 0);
-        public static implicit operator OneOf<T0, T1, T2>(T1 value) => new OneOf<T0, T1, T2>(value, 1);
-        public static implicit operator OneOf<T0, T1, T2>(T2 value) => new OneOf<T0, T1, T2>(value, 2);
+        public static implicit operator OneOf<T0, T1, T2>(T0 value) => new OneOf<T0, T1, T2>(value);
+        public static implicit operator OneOf<T0, T1, T2>(T1 value) => new OneOf<T0, T1, T2>(value);
+        public static implicit operator OneOf<T0, T1, T2>(T2 value) => new OneOf<T0, T1, T2>(value);
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action otherwise = null)
         {
-            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
-            if (this.index == 1 && f1 != null) { f1((T1)this.value); return; }
-            if (this.index == 2 && f2 != null) { f2((T2)this.value); return; }
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
+            if (f1 != null && valueType == typeof(T1)) { f1((T1)this.value); return; }
+            if (f2 != null && valueType == typeof(T2)) { f2((T2)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -260,9 +270,11 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<T1, TResult> f1 = null, Func<T2, TResult> f2 = null, Func<TResult> otherwise = null)
         {
-            if (this.index == 0 && f0 != null) return f0((T0)this.value);
-            if (this.index == 1 && f1 != null) return f1((T1)this.value);
-            if (this.index == 2 && f2 != null) return f2((T2)this.value);
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
+            if (f1 != null && valueType == typeof(T1)) return f1((T1)this.value);
+            if (f2 != null && valueType == typeof(T2)) return f2((T2)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -275,10 +287,10 @@ namespace OneOf
             if (!(obj is OneOf<T0, T1, T2>)) return false;
 
             var other = (OneOf<T0, T1, T2>)obj;
-            return index == other.index && Equals(value, other.value);
+            return Equals(value, other.value);
         }
 
-        public override int GetHashCode() => unchecked((value?.GetHashCode() ?? 0) * 397 ^ index);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
 
         public override string ToString() => (value?.ToString() ?? "");
     }
@@ -287,74 +299,72 @@ namespace OneOf
     public struct OneOf<T0, T1, T2, T3> : IOneOf
     {
         readonly object value;
-        readonly int index;
 
-        OneOf(object value, int index) { this.value = value; this.index = index; }
-
-        internal static OneOf<T0, T1, T2, T3> Create(object value)
+        internal OneOf(object value)
         {
-            if (value != null)
-            {
-                var valueType = value.GetType();
-                if (valueType == typeof(T0)) return (T0)value;
-                if (valueType == typeof(T1)) return (T1)value;
-                if (valueType == typeof(T2)) return (T2)value;
-                if (valueType == typeof(T3)) return (T3)value;
-            }
-            throw new InvalidOperationException();
+            EnsureValueIsValid(value);
+            this.value = value;
+        }
+
+        static void EnsureValueIsValid(object value)
+        {
+            if (value == null) throw new ArgumentNullException("value");
+
+            var valueType = value.GetType();
+            if (valueType == typeof(T0)) return;
+            if (valueType == typeof(T1)) return;
+            if (valueType == typeof(T2)) return;
+            if (valueType == typeof(T3)) return;
+
+            throw new ArgumentException("value");
+        }
+
+        void EnsureValueNotNull()
+        {
+            if (value == null) throw new InvalidOperationException("Value has not been set");
         }
 
         object IOneOf.Value => value;
 
         public bool Is<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return true;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
-            if (this.index == 1 && typeof(T) == typeof(T1)) return true;
-            if (this.index == 2 && typeof(T) == typeof(T2)) return true;
-            if (this.index == 3 && typeof(T) == typeof(T3)) return true;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return true;
 
             return false;
         }
 
         public T As<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
-            if (this.index == 1 && typeof(T) == typeof(T1)) return (T)value;
-            if (this.index == 2 && typeof(T) == typeof(T2)) return (T)value;
-            if (this.index == 3 && typeof(T) == typeof(T3)) return (T)value;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return (T)this.value;
 
             throw new InvalidOperationException();
         }
 
-        public OneOf<N0> ToOneOf<N0>() => OneOf<N0>.Create(value);
-        public OneOf<N0, N1> ToOneOf<N0, N1>() => OneOf<N0, N1>.Create(value);
-        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOf<N0, N1, N2>.Create(value);
-        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
+        public OneOf<N0> ToOneOf<N0>() => new OneOf<N0>(value);
+        public OneOf<N0, N1> ToOneOf<N0, N1>() => new OneOf<N0, N1>(value);
+        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOf<N0, N1, N2>(value);
+        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOf<N0, N1, N2, N3>(value);
+        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOf<N0, N1, N2, N3, N4>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOf<N0, N1, N2, N3, N4, N5>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOf<N0, N1, N2, N3, N4, N5, N6>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
 
-        public static implicit operator OneOf<T0, T1, T2, T3>(T0 value) => new OneOf<T0, T1, T2, T3>(value, 0);
-        public static implicit operator OneOf<T0, T1, T2, T3>(T1 value) => new OneOf<T0, T1, T2, T3>(value, 1);
-        public static implicit operator OneOf<T0, T1, T2, T3>(T2 value) => new OneOf<T0, T1, T2, T3>(value, 2);
-        public static implicit operator OneOf<T0, T1, T2, T3>(T3 value) => new OneOf<T0, T1, T2, T3>(value, 3);
+        public static implicit operator OneOf<T0, T1, T2, T3>(T0 value) => new OneOf<T0, T1, T2, T3>(value);
+        public static implicit operator OneOf<T0, T1, T2, T3>(T1 value) => new OneOf<T0, T1, T2, T3>(value);
+        public static implicit operator OneOf<T0, T1, T2, T3>(T2 value) => new OneOf<T0, T1, T2, T3>(value);
+        public static implicit operator OneOf<T0, T1, T2, T3>(T3 value) => new OneOf<T0, T1, T2, T3>(value);
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action otherwise = null)
         {
-            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
-            if (this.index == 1 && f1 != null) { f1((T1)this.value); return; }
-            if (this.index == 2 && f2 != null) { f2((T2)this.value); return; }
-            if (this.index == 3 && f3 != null) { f3((T3)this.value); return; }
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
+            if (f1 != null && valueType == typeof(T1)) { f1((T1)this.value); return; }
+            if (f2 != null && valueType == typeof(T2)) { f2((T2)this.value); return; }
+            if (f3 != null && valueType == typeof(T3)) { f3((T3)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -363,10 +373,12 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<T1, TResult> f1 = null, Func<T2, TResult> f2 = null, Func<T3, TResult> f3 = null, Func<TResult> otherwise = null)
         {
-            if (this.index == 0 && f0 != null) return f0((T0)this.value);
-            if (this.index == 1 && f1 != null) return f1((T1)this.value);
-            if (this.index == 2 && f2 != null) return f2((T2)this.value);
-            if (this.index == 3 && f3 != null) return f3((T3)this.value);
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
+            if (f1 != null && valueType == typeof(T1)) return f1((T1)this.value);
+            if (f2 != null && valueType == typeof(T2)) return f2((T2)this.value);
+            if (f3 != null && valueType == typeof(T3)) return f3((T3)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -379,10 +391,10 @@ namespace OneOf
             if (!(obj is OneOf<T0, T1, T2, T3>)) return false;
 
             var other = (OneOf<T0, T1, T2, T3>)obj;
-            return index == other.index && Equals(value, other.value);
+            return Equals(value, other.value);
         }
 
-        public override int GetHashCode() => unchecked((value?.GetHashCode() ?? 0) * 397 ^ index);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
 
         public override string ToString() => (value?.ToString() ?? "");
     }
@@ -391,79 +403,75 @@ namespace OneOf
     public struct OneOf<T0, T1, T2, T3, T4> : IOneOf
     {
         readonly object value;
-        readonly int index;
 
-        OneOf(object value, int index) { this.value = value; this.index = index; }
-
-        internal static OneOf<T0, T1, T2, T3, T4> Create(object value)
+        internal OneOf(object value)
         {
-            if (value != null)
-            {
-                var valueType = value.GetType();
-                if (valueType == typeof(T0)) return (T0)value;
-                if (valueType == typeof(T1)) return (T1)value;
-                if (valueType == typeof(T2)) return (T2)value;
-                if (valueType == typeof(T3)) return (T3)value;
-                if (valueType == typeof(T4)) return (T4)value;
-            }
-            throw new InvalidOperationException();
+            EnsureValueIsValid(value);
+            this.value = value;
+        }
+
+        static void EnsureValueIsValid(object value)
+        {
+            if (value == null) throw new ArgumentNullException("value");
+
+            var valueType = value.GetType();
+            if (valueType == typeof(T0)) return;
+            if (valueType == typeof(T1)) return;
+            if (valueType == typeof(T2)) return;
+            if (valueType == typeof(T3)) return;
+            if (valueType == typeof(T4)) return;
+
+            throw new ArgumentException("value");
+        }
+
+        void EnsureValueNotNull()
+        {
+            if (value == null) throw new InvalidOperationException("Value has not been set");
         }
 
         object IOneOf.Value => value;
 
         public bool Is<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return true;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
-            if (this.index == 1 && typeof(T) == typeof(T1)) return true;
-            if (this.index == 2 && typeof(T) == typeof(T2)) return true;
-            if (this.index == 3 && typeof(T) == typeof(T3)) return true;
-            if (this.index == 4 && typeof(T) == typeof(T4)) return true;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return true;
 
             return false;
         }
 
         public T As<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
-            if (this.index == 1 && typeof(T) == typeof(T1)) return (T)value;
-            if (this.index == 2 && typeof(T) == typeof(T2)) return (T)value;
-            if (this.index == 3 && typeof(T) == typeof(T3)) return (T)value;
-            if (this.index == 4 && typeof(T) == typeof(T4)) return (T)value;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return (T)this.value;
 
             throw new InvalidOperationException();
         }
 
-        public OneOf<N0> ToOneOf<N0>() => OneOf<N0>.Create(value);
-        public OneOf<N0, N1> ToOneOf<N0, N1>() => OneOf<N0, N1>.Create(value);
-        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOf<N0, N1, N2>.Create(value);
-        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
+        public OneOf<N0> ToOneOf<N0>() => new OneOf<N0>(value);
+        public OneOf<N0, N1> ToOneOf<N0, N1>() => new OneOf<N0, N1>(value);
+        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOf<N0, N1, N2>(value);
+        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOf<N0, N1, N2, N3>(value);
+        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOf<N0, N1, N2, N3, N4>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOf<N0, N1, N2, N3, N4, N5>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOf<N0, N1, N2, N3, N4, N5, N6>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
 
-        public static implicit operator OneOf<T0, T1, T2, T3, T4>(T0 value) => new OneOf<T0, T1, T2, T3, T4>(value, 0);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4>(T1 value) => new OneOf<T0, T1, T2, T3, T4>(value, 1);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4>(T2 value) => new OneOf<T0, T1, T2, T3, T4>(value, 2);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4>(T3 value) => new OneOf<T0, T1, T2, T3, T4>(value, 3);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4>(T4 value) => new OneOf<T0, T1, T2, T3, T4>(value, 4);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4>(T0 value) => new OneOf<T0, T1, T2, T3, T4>(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4>(T1 value) => new OneOf<T0, T1, T2, T3, T4>(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4>(T2 value) => new OneOf<T0, T1, T2, T3, T4>(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4>(T3 value) => new OneOf<T0, T1, T2, T3, T4>(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4>(T4 value) => new OneOf<T0, T1, T2, T3, T4>(value);
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action otherwise = null)
         {
-            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
-            if (this.index == 1 && f1 != null) { f1((T1)this.value); return; }
-            if (this.index == 2 && f2 != null) { f2((T2)this.value); return; }
-            if (this.index == 3 && f3 != null) { f3((T3)this.value); return; }
-            if (this.index == 4 && f4 != null) { f4((T4)this.value); return; }
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
+            if (f1 != null && valueType == typeof(T1)) { f1((T1)this.value); return; }
+            if (f2 != null && valueType == typeof(T2)) { f2((T2)this.value); return; }
+            if (f3 != null && valueType == typeof(T3)) { f3((T3)this.value); return; }
+            if (f4 != null && valueType == typeof(T4)) { f4((T4)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -472,11 +480,13 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<T1, TResult> f1 = null, Func<T2, TResult> f2 = null, Func<T3, TResult> f3 = null, Func<T4, TResult> f4 = null, Func<TResult> otherwise = null)
         {
-            if (this.index == 0 && f0 != null) return f0((T0)this.value);
-            if (this.index == 1 && f1 != null) return f1((T1)this.value);
-            if (this.index == 2 && f2 != null) return f2((T2)this.value);
-            if (this.index == 3 && f3 != null) return f3((T3)this.value);
-            if (this.index == 4 && f4 != null) return f4((T4)this.value);
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
+            if (f1 != null && valueType == typeof(T1)) return f1((T1)this.value);
+            if (f2 != null && valueType == typeof(T2)) return f2((T2)this.value);
+            if (f3 != null && valueType == typeof(T3)) return f3((T3)this.value);
+            if (f4 != null && valueType == typeof(T4)) return f4((T4)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -489,10 +499,10 @@ namespace OneOf
             if (!(obj is OneOf<T0, T1, T2, T3, T4>)) return false;
 
             var other = (OneOf<T0, T1, T2, T3, T4>)obj;
-            return index == other.index && Equals(value, other.value);
+            return Equals(value, other.value);
         }
 
-        public override int GetHashCode() => unchecked((value?.GetHashCode() ?? 0) * 397 ^ index);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
 
         public override string ToString() => (value?.ToString() ?? "");
     }
@@ -501,84 +511,78 @@ namespace OneOf
     public struct OneOf<T0, T1, T2, T3, T4, T5> : IOneOf
     {
         readonly object value;
-        readonly int index;
 
-        OneOf(object value, int index) { this.value = value; this.index = index; }
-
-        internal static OneOf<T0, T1, T2, T3, T4, T5> Create(object value)
+        internal OneOf(object value)
         {
-            if (value != null)
-            {
-                var valueType = value.GetType();
-                if (valueType == typeof(T0)) return (T0)value;
-                if (valueType == typeof(T1)) return (T1)value;
-                if (valueType == typeof(T2)) return (T2)value;
-                if (valueType == typeof(T3)) return (T3)value;
-                if (valueType == typeof(T4)) return (T4)value;
-                if (valueType == typeof(T5)) return (T5)value;
-            }
-            throw new InvalidOperationException();
+            EnsureValueIsValid(value);
+            this.value = value;
+        }
+
+        static void EnsureValueIsValid(object value)
+        {
+            if (value == null) throw new ArgumentNullException("value");
+
+            var valueType = value.GetType();
+            if (valueType == typeof(T0)) return;
+            if (valueType == typeof(T1)) return;
+            if (valueType == typeof(T2)) return;
+            if (valueType == typeof(T3)) return;
+            if (valueType == typeof(T4)) return;
+            if (valueType == typeof(T5)) return;
+
+            throw new ArgumentException("value");
+        }
+
+        void EnsureValueNotNull()
+        {
+            if (value == null) throw new InvalidOperationException("Value has not been set");
         }
 
         object IOneOf.Value => value;
 
         public bool Is<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return true;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
-            if (this.index == 1 && typeof(T) == typeof(T1)) return true;
-            if (this.index == 2 && typeof(T) == typeof(T2)) return true;
-            if (this.index == 3 && typeof(T) == typeof(T3)) return true;
-            if (this.index == 4 && typeof(T) == typeof(T4)) return true;
-            if (this.index == 5 && typeof(T) == typeof(T5)) return true;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return true;
 
             return false;
         }
 
         public T As<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
-            if (this.index == 1 && typeof(T) == typeof(T1)) return (T)value;
-            if (this.index == 2 && typeof(T) == typeof(T2)) return (T)value;
-            if (this.index == 3 && typeof(T) == typeof(T3)) return (T)value;
-            if (this.index == 4 && typeof(T) == typeof(T4)) return (T)value;
-            if (this.index == 5 && typeof(T) == typeof(T5)) return (T)value;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return (T)this.value;
 
             throw new InvalidOperationException();
         }
 
-        public OneOf<N0> ToOneOf<N0>() => OneOf<N0>.Create(value);
-        public OneOf<N0, N1> ToOneOf<N0, N1>() => OneOf<N0, N1>.Create(value);
-        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOf<N0, N1, N2>.Create(value);
-        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
+        public OneOf<N0> ToOneOf<N0>() => new OneOf<N0>(value);
+        public OneOf<N0, N1> ToOneOf<N0, N1>() => new OneOf<N0, N1>(value);
+        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOf<N0, N1, N2>(value);
+        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOf<N0, N1, N2, N3>(value);
+        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOf<N0, N1, N2, N3, N4>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOf<N0, N1, N2, N3, N4, N5>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOf<N0, N1, N2, N3, N4, N5, N6>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
 
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T0 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value, 0);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T1 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value, 1);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T2 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value, 2);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T3 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value, 3);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T4 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value, 4);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T5 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value, 5);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T0 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T1 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T2 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T3 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T4 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T5 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value);
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action<T5> f5 = null, Action otherwise = null)
         {
-            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
-            if (this.index == 1 && f1 != null) { f1((T1)this.value); return; }
-            if (this.index == 2 && f2 != null) { f2((T2)this.value); return; }
-            if (this.index == 3 && f3 != null) { f3((T3)this.value); return; }
-            if (this.index == 4 && f4 != null) { f4((T4)this.value); return; }
-            if (this.index == 5 && f5 != null) { f5((T5)this.value); return; }
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
+            if (f1 != null && valueType == typeof(T1)) { f1((T1)this.value); return; }
+            if (f2 != null && valueType == typeof(T2)) { f2((T2)this.value); return; }
+            if (f3 != null && valueType == typeof(T3)) { f3((T3)this.value); return; }
+            if (f4 != null && valueType == typeof(T4)) { f4((T4)this.value); return; }
+            if (f5 != null && valueType == typeof(T5)) { f5((T5)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -587,12 +591,14 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<T1, TResult> f1 = null, Func<T2, TResult> f2 = null, Func<T3, TResult> f3 = null, Func<T4, TResult> f4 = null, Func<T5, TResult> f5 = null, Func<TResult> otherwise = null)
         {
-            if (this.index == 0 && f0 != null) return f0((T0)this.value);
-            if (this.index == 1 && f1 != null) return f1((T1)this.value);
-            if (this.index == 2 && f2 != null) return f2((T2)this.value);
-            if (this.index == 3 && f3 != null) return f3((T3)this.value);
-            if (this.index == 4 && f4 != null) return f4((T4)this.value);
-            if (this.index == 5 && f5 != null) return f5((T5)this.value);
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
+            if (f1 != null && valueType == typeof(T1)) return f1((T1)this.value);
+            if (f2 != null && valueType == typeof(T2)) return f2((T2)this.value);
+            if (f3 != null && valueType == typeof(T3)) return f3((T3)this.value);
+            if (f4 != null && valueType == typeof(T4)) return f4((T4)this.value);
+            if (f5 != null && valueType == typeof(T5)) return f5((T5)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -605,10 +611,10 @@ namespace OneOf
             if (!(obj is OneOf<T0, T1, T2, T3, T4, T5>)) return false;
 
             var other = (OneOf<T0, T1, T2, T3, T4, T5>)obj;
-            return index == other.index && Equals(value, other.value);
+            return Equals(value, other.value);
         }
 
-        public override int GetHashCode() => unchecked((value?.GetHashCode() ?? 0) * 397 ^ index);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
 
         public override string ToString() => (value?.ToString() ?? "");
     }
@@ -617,89 +623,81 @@ namespace OneOf
     public struct OneOf<T0, T1, T2, T3, T4, T5, T6> : IOneOf
     {
         readonly object value;
-        readonly int index;
 
-        OneOf(object value, int index) { this.value = value; this.index = index; }
-
-        internal static OneOf<T0, T1, T2, T3, T4, T5, T6> Create(object value)
+        internal OneOf(object value)
         {
-            if (value != null)
-            {
-                var valueType = value.GetType();
-                if (valueType == typeof(T0)) return (T0)value;
-                if (valueType == typeof(T1)) return (T1)value;
-                if (valueType == typeof(T2)) return (T2)value;
-                if (valueType == typeof(T3)) return (T3)value;
-                if (valueType == typeof(T4)) return (T4)value;
-                if (valueType == typeof(T5)) return (T5)value;
-                if (valueType == typeof(T6)) return (T6)value;
-            }
-            throw new InvalidOperationException();
+            EnsureValueIsValid(value);
+            this.value = value;
+        }
+
+        static void EnsureValueIsValid(object value)
+        {
+            if (value == null) throw new ArgumentNullException("value");
+
+            var valueType = value.GetType();
+            if (valueType == typeof(T0)) return;
+            if (valueType == typeof(T1)) return;
+            if (valueType == typeof(T2)) return;
+            if (valueType == typeof(T3)) return;
+            if (valueType == typeof(T4)) return;
+            if (valueType == typeof(T5)) return;
+            if (valueType == typeof(T6)) return;
+
+            throw new ArgumentException("value");
+        }
+
+        void EnsureValueNotNull()
+        {
+            if (value == null) throw new InvalidOperationException("Value has not been set");
         }
 
         object IOneOf.Value => value;
 
         public bool Is<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return true;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
-            if (this.index == 1 && typeof(T) == typeof(T1)) return true;
-            if (this.index == 2 && typeof(T) == typeof(T2)) return true;
-            if (this.index == 3 && typeof(T) == typeof(T3)) return true;
-            if (this.index == 4 && typeof(T) == typeof(T4)) return true;
-            if (this.index == 5 && typeof(T) == typeof(T5)) return true;
-            if (this.index == 6 && typeof(T) == typeof(T6)) return true;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return true;
 
             return false;
         }
 
         public T As<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
-            if (this.index == 1 && typeof(T) == typeof(T1)) return (T)value;
-            if (this.index == 2 && typeof(T) == typeof(T2)) return (T)value;
-            if (this.index == 3 && typeof(T) == typeof(T3)) return (T)value;
-            if (this.index == 4 && typeof(T) == typeof(T4)) return (T)value;
-            if (this.index == 5 && typeof(T) == typeof(T5)) return (T)value;
-            if (this.index == 6 && typeof(T) == typeof(T6)) return (T)value;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return (T)this.value;
 
             throw new InvalidOperationException();
         }
 
-        public OneOf<N0> ToOneOf<N0>() => OneOf<N0>.Create(value);
-        public OneOf<N0, N1> ToOneOf<N0, N1>() => OneOf<N0, N1>.Create(value);
-        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOf<N0, N1, N2>.Create(value);
-        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
+        public OneOf<N0> ToOneOf<N0>() => new OneOf<N0>(value);
+        public OneOf<N0, N1> ToOneOf<N0, N1>() => new OneOf<N0, N1>(value);
+        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOf<N0, N1, N2>(value);
+        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOf<N0, N1, N2, N3>(value);
+        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOf<N0, N1, N2, N3, N4>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOf<N0, N1, N2, N3, N4, N5>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOf<N0, N1, N2, N3, N4, N5, N6>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
 
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T0 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value, 0);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T1 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value, 1);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T2 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value, 2);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T3 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value, 3);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T4 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value, 4);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T5 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value, 5);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T6 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value, 6);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T0 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T1 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T2 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T3 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T4 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T5 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T6 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value);
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action<T5> f5 = null, Action<T6> f6 = null, Action otherwise = null)
         {
-            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
-            if (this.index == 1 && f1 != null) { f1((T1)this.value); return; }
-            if (this.index == 2 && f2 != null) { f2((T2)this.value); return; }
-            if (this.index == 3 && f3 != null) { f3((T3)this.value); return; }
-            if (this.index == 4 && f4 != null) { f4((T4)this.value); return; }
-            if (this.index == 5 && f5 != null) { f5((T5)this.value); return; }
-            if (this.index == 6 && f6 != null) { f6((T6)this.value); return; }
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
+            if (f1 != null && valueType == typeof(T1)) { f1((T1)this.value); return; }
+            if (f2 != null && valueType == typeof(T2)) { f2((T2)this.value); return; }
+            if (f3 != null && valueType == typeof(T3)) { f3((T3)this.value); return; }
+            if (f4 != null && valueType == typeof(T4)) { f4((T4)this.value); return; }
+            if (f5 != null && valueType == typeof(T5)) { f5((T5)this.value); return; }
+            if (f6 != null && valueType == typeof(T6)) { f6((T6)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -708,13 +706,15 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<T1, TResult> f1 = null, Func<T2, TResult> f2 = null, Func<T3, TResult> f3 = null, Func<T4, TResult> f4 = null, Func<T5, TResult> f5 = null, Func<T6, TResult> f6 = null, Func<TResult> otherwise = null)
         {
-            if (this.index == 0 && f0 != null) return f0((T0)this.value);
-            if (this.index == 1 && f1 != null) return f1((T1)this.value);
-            if (this.index == 2 && f2 != null) return f2((T2)this.value);
-            if (this.index == 3 && f3 != null) return f3((T3)this.value);
-            if (this.index == 4 && f4 != null) return f4((T4)this.value);
-            if (this.index == 5 && f5 != null) return f5((T5)this.value);
-            if (this.index == 6 && f6 != null) return f6((T6)this.value);
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
+            if (f1 != null && valueType == typeof(T1)) return f1((T1)this.value);
+            if (f2 != null && valueType == typeof(T2)) return f2((T2)this.value);
+            if (f3 != null && valueType == typeof(T3)) return f3((T3)this.value);
+            if (f4 != null && valueType == typeof(T4)) return f4((T4)this.value);
+            if (f5 != null && valueType == typeof(T5)) return f5((T5)this.value);
+            if (f6 != null && valueType == typeof(T6)) return f6((T6)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -727,10 +727,10 @@ namespace OneOf
             if (!(obj is OneOf<T0, T1, T2, T3, T4, T5, T6>)) return false;
 
             var other = (OneOf<T0, T1, T2, T3, T4, T5, T6>)obj;
-            return index == other.index && Equals(value, other.value);
+            return Equals(value, other.value);
         }
 
-        public override int GetHashCode() => unchecked((value?.GetHashCode() ?? 0) * 397 ^ index);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
 
         public override string ToString() => (value?.ToString() ?? "");
     }
@@ -739,94 +739,84 @@ namespace OneOf
     public struct OneOf<T0, T1, T2, T3, T4, T5, T6, T7> : IOneOf
     {
         readonly object value;
-        readonly int index;
 
-        OneOf(object value, int index) { this.value = value; this.index = index; }
-
-        internal static OneOf<T0, T1, T2, T3, T4, T5, T6, T7> Create(object value)
+        internal OneOf(object value)
         {
-            if (value != null)
-            {
-                var valueType = value.GetType();
-                if (valueType == typeof(T0)) return (T0)value;
-                if (valueType == typeof(T1)) return (T1)value;
-                if (valueType == typeof(T2)) return (T2)value;
-                if (valueType == typeof(T3)) return (T3)value;
-                if (valueType == typeof(T4)) return (T4)value;
-                if (valueType == typeof(T5)) return (T5)value;
-                if (valueType == typeof(T6)) return (T6)value;
-                if (valueType == typeof(T7)) return (T7)value;
-            }
-            throw new InvalidOperationException();
+            EnsureValueIsValid(value);
+            this.value = value;
+        }
+
+        static void EnsureValueIsValid(object value)
+        {
+            if (value == null) throw new ArgumentNullException("value");
+
+            var valueType = value.GetType();
+            if (valueType == typeof(T0)) return;
+            if (valueType == typeof(T1)) return;
+            if (valueType == typeof(T2)) return;
+            if (valueType == typeof(T3)) return;
+            if (valueType == typeof(T4)) return;
+            if (valueType == typeof(T5)) return;
+            if (valueType == typeof(T6)) return;
+            if (valueType == typeof(T7)) return;
+
+            throw new ArgumentException("value");
+        }
+
+        void EnsureValueNotNull()
+        {
+            if (value == null) throw new InvalidOperationException("Value has not been set");
         }
 
         object IOneOf.Value => value;
 
         public bool Is<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return true;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
-            if (this.index == 1 && typeof(T) == typeof(T1)) return true;
-            if (this.index == 2 && typeof(T) == typeof(T2)) return true;
-            if (this.index == 3 && typeof(T) == typeof(T3)) return true;
-            if (this.index == 4 && typeof(T) == typeof(T4)) return true;
-            if (this.index == 5 && typeof(T) == typeof(T5)) return true;
-            if (this.index == 6 && typeof(T) == typeof(T6)) return true;
-            if (this.index == 7 && typeof(T) == typeof(T7)) return true;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return true;
 
             return false;
         }
 
         public T As<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
-            if (this.index == 1 && typeof(T) == typeof(T1)) return (T)value;
-            if (this.index == 2 && typeof(T) == typeof(T2)) return (T)value;
-            if (this.index == 3 && typeof(T) == typeof(T3)) return (T)value;
-            if (this.index == 4 && typeof(T) == typeof(T4)) return (T)value;
-            if (this.index == 5 && typeof(T) == typeof(T5)) return (T)value;
-            if (this.index == 6 && typeof(T) == typeof(T6)) return (T)value;
-            if (this.index == 7 && typeof(T) == typeof(T7)) return (T)value;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return (T)this.value;
 
             throw new InvalidOperationException();
         }
 
-        public OneOf<N0> ToOneOf<N0>() => OneOf<N0>.Create(value);
-        public OneOf<N0, N1> ToOneOf<N0, N1>() => OneOf<N0, N1>.Create(value);
-        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOf<N0, N1, N2>.Create(value);
-        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
+        public OneOf<N0> ToOneOf<N0>() => new OneOf<N0>(value);
+        public OneOf<N0, N1> ToOneOf<N0, N1>() => new OneOf<N0, N1>(value);
+        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOf<N0, N1, N2>(value);
+        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOf<N0, N1, N2, N3>(value);
+        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOf<N0, N1, N2, N3, N4>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOf<N0, N1, N2, N3, N4, N5>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOf<N0, N1, N2, N3, N4, N5, N6>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
 
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T0 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value, 0);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T1 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value, 1);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T2 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value, 2);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T3 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value, 3);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T4 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value, 4);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T5 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value, 5);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T6 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value, 6);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T7 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value, 7);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T0 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T1 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T2 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T3 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T4 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T5 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T6 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T7 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value);
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action<T5> f5 = null, Action<T6> f6 = null, Action<T7> f7 = null, Action otherwise = null)
         {
-            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
-            if (this.index == 1 && f1 != null) { f1((T1)this.value); return; }
-            if (this.index == 2 && f2 != null) { f2((T2)this.value); return; }
-            if (this.index == 3 && f3 != null) { f3((T3)this.value); return; }
-            if (this.index == 4 && f4 != null) { f4((T4)this.value); return; }
-            if (this.index == 5 && f5 != null) { f5((T5)this.value); return; }
-            if (this.index == 6 && f6 != null) { f6((T6)this.value); return; }
-            if (this.index == 7 && f7 != null) { f7((T7)this.value); return; }
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
+            if (f1 != null && valueType == typeof(T1)) { f1((T1)this.value); return; }
+            if (f2 != null && valueType == typeof(T2)) { f2((T2)this.value); return; }
+            if (f3 != null && valueType == typeof(T3)) { f3((T3)this.value); return; }
+            if (f4 != null && valueType == typeof(T4)) { f4((T4)this.value); return; }
+            if (f5 != null && valueType == typeof(T5)) { f5((T5)this.value); return; }
+            if (f6 != null && valueType == typeof(T6)) { f6((T6)this.value); return; }
+            if (f7 != null && valueType == typeof(T7)) { f7((T7)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -835,14 +825,16 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<T1, TResult> f1 = null, Func<T2, TResult> f2 = null, Func<T3, TResult> f3 = null, Func<T4, TResult> f4 = null, Func<T5, TResult> f5 = null, Func<T6, TResult> f6 = null, Func<T7, TResult> f7 = null, Func<TResult> otherwise = null)
         {
-            if (this.index == 0 && f0 != null) return f0((T0)this.value);
-            if (this.index == 1 && f1 != null) return f1((T1)this.value);
-            if (this.index == 2 && f2 != null) return f2((T2)this.value);
-            if (this.index == 3 && f3 != null) return f3((T3)this.value);
-            if (this.index == 4 && f4 != null) return f4((T4)this.value);
-            if (this.index == 5 && f5 != null) return f5((T5)this.value);
-            if (this.index == 6 && f6 != null) return f6((T6)this.value);
-            if (this.index == 7 && f7 != null) return f7((T7)this.value);
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
+            if (f1 != null && valueType == typeof(T1)) return f1((T1)this.value);
+            if (f2 != null && valueType == typeof(T2)) return f2((T2)this.value);
+            if (f3 != null && valueType == typeof(T3)) return f3((T3)this.value);
+            if (f4 != null && valueType == typeof(T4)) return f4((T4)this.value);
+            if (f5 != null && valueType == typeof(T5)) return f5((T5)this.value);
+            if (f6 != null && valueType == typeof(T6)) return f6((T6)this.value);
+            if (f7 != null && valueType == typeof(T7)) return f7((T7)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -855,10 +847,10 @@ namespace OneOf
             if (!(obj is OneOf<T0, T1, T2, T3, T4, T5, T6, T7>)) return false;
 
             var other = (OneOf<T0, T1, T2, T3, T4, T5, T6, T7>)obj;
-            return index == other.index && Equals(value, other.value);
+            return Equals(value, other.value);
         }
 
-        public override int GetHashCode() => unchecked((value?.GetHashCode() ?? 0) * 397 ^ index);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
 
         public override string ToString() => (value?.ToString() ?? "");
     }
@@ -867,99 +859,87 @@ namespace OneOf
     public struct OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> : IOneOf
     {
         readonly object value;
-        readonly int index;
 
-        OneOf(object value, int index) { this.value = value; this.index = index; }
-
-        internal static OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(object value)
+        internal OneOf(object value)
         {
-            if (value != null)
-            {
-                var valueType = value.GetType();
-                if (valueType == typeof(T0)) return (T0)value;
-                if (valueType == typeof(T1)) return (T1)value;
-                if (valueType == typeof(T2)) return (T2)value;
-                if (valueType == typeof(T3)) return (T3)value;
-                if (valueType == typeof(T4)) return (T4)value;
-                if (valueType == typeof(T5)) return (T5)value;
-                if (valueType == typeof(T6)) return (T6)value;
-                if (valueType == typeof(T7)) return (T7)value;
-                if (valueType == typeof(T8)) return (T8)value;
-            }
-            throw new InvalidOperationException();
+            EnsureValueIsValid(value);
+            this.value = value;
+        }
+
+        static void EnsureValueIsValid(object value)
+        {
+            if (value == null) throw new ArgumentNullException("value");
+
+            var valueType = value.GetType();
+            if (valueType == typeof(T0)) return;
+            if (valueType == typeof(T1)) return;
+            if (valueType == typeof(T2)) return;
+            if (valueType == typeof(T3)) return;
+            if (valueType == typeof(T4)) return;
+            if (valueType == typeof(T5)) return;
+            if (valueType == typeof(T6)) return;
+            if (valueType == typeof(T7)) return;
+            if (valueType == typeof(T8)) return;
+
+            throw new ArgumentException("value");
+        }
+
+        void EnsureValueNotNull()
+        {
+            if (value == null) throw new InvalidOperationException("Value has not been set");
         }
 
         object IOneOf.Value => value;
 
         public bool Is<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return true;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
-            if (this.index == 1 && typeof(T) == typeof(T1)) return true;
-            if (this.index == 2 && typeof(T) == typeof(T2)) return true;
-            if (this.index == 3 && typeof(T) == typeof(T3)) return true;
-            if (this.index == 4 && typeof(T) == typeof(T4)) return true;
-            if (this.index == 5 && typeof(T) == typeof(T5)) return true;
-            if (this.index == 6 && typeof(T) == typeof(T6)) return true;
-            if (this.index == 7 && typeof(T) == typeof(T7)) return true;
-            if (this.index == 8 && typeof(T) == typeof(T8)) return true;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return true;
 
             return false;
         }
 
         public T As<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
-            if (this.index == 1 && typeof(T) == typeof(T1)) return (T)value;
-            if (this.index == 2 && typeof(T) == typeof(T2)) return (T)value;
-            if (this.index == 3 && typeof(T) == typeof(T3)) return (T)value;
-            if (this.index == 4 && typeof(T) == typeof(T4)) return (T)value;
-            if (this.index == 5 && typeof(T) == typeof(T5)) return (T)value;
-            if (this.index == 6 && typeof(T) == typeof(T6)) return (T)value;
-            if (this.index == 7 && typeof(T) == typeof(T7)) return (T)value;
-            if (this.index == 8 && typeof(T) == typeof(T8)) return (T)value;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return (T)this.value;
 
             throw new InvalidOperationException();
         }
 
-        public OneOf<N0> ToOneOf<N0>() => OneOf<N0>.Create(value);
-        public OneOf<N0, N1> ToOneOf<N0, N1>() => OneOf<N0, N1>.Create(value);
-        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOf<N0, N1, N2>.Create(value);
-        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
+        public OneOf<N0> ToOneOf<N0>() => new OneOf<N0>(value);
+        public OneOf<N0, N1> ToOneOf<N0, N1>() => new OneOf<N0, N1>(value);
+        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOf<N0, N1, N2>(value);
+        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOf<N0, N1, N2, N3>(value);
+        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOf<N0, N1, N2, N3, N4>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOf<N0, N1, N2, N3, N4, N5>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOf<N0, N1, N2, N3, N4, N5, N6>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7>(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
 
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T0 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 0);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T1 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 1);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T2 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 2);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T3 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 3);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T4 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 4);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T5 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 5);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T6 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 6);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T7 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 7);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T8 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 8);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T0 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T1 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T2 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T3 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T4 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T5 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T6 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T7 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T8 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action<T5> f5 = null, Action<T6> f6 = null, Action<T7> f7 = null, Action<T8> f8 = null, Action otherwise = null)
         {
-            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
-            if (this.index == 1 && f1 != null) { f1((T1)this.value); return; }
-            if (this.index == 2 && f2 != null) { f2((T2)this.value); return; }
-            if (this.index == 3 && f3 != null) { f3((T3)this.value); return; }
-            if (this.index == 4 && f4 != null) { f4((T4)this.value); return; }
-            if (this.index == 5 && f5 != null) { f5((T5)this.value); return; }
-            if (this.index == 6 && f6 != null) { f6((T6)this.value); return; }
-            if (this.index == 7 && f7 != null) { f7((T7)this.value); return; }
-            if (this.index == 8 && f8 != null) { f8((T8)this.value); return; }
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
+            if (f1 != null && valueType == typeof(T1)) { f1((T1)this.value); return; }
+            if (f2 != null && valueType == typeof(T2)) { f2((T2)this.value); return; }
+            if (f3 != null && valueType == typeof(T3)) { f3((T3)this.value); return; }
+            if (f4 != null && valueType == typeof(T4)) { f4((T4)this.value); return; }
+            if (f5 != null && valueType == typeof(T5)) { f5((T5)this.value); return; }
+            if (f6 != null && valueType == typeof(T6)) { f6((T6)this.value); return; }
+            if (f7 != null && valueType == typeof(T7)) { f7((T7)this.value); return; }
+            if (f8 != null && valueType == typeof(T8)) { f8((T8)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -968,15 +948,17 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<T1, TResult> f1 = null, Func<T2, TResult> f2 = null, Func<T3, TResult> f3 = null, Func<T4, TResult> f4 = null, Func<T5, TResult> f5 = null, Func<T6, TResult> f6 = null, Func<T7, TResult> f7 = null, Func<T8, TResult> f8 = null, Func<TResult> otherwise = null)
         {
-            if (this.index == 0 && f0 != null) return f0((T0)this.value);
-            if (this.index == 1 && f1 != null) return f1((T1)this.value);
-            if (this.index == 2 && f2 != null) return f2((T2)this.value);
-            if (this.index == 3 && f3 != null) return f3((T3)this.value);
-            if (this.index == 4 && f4 != null) return f4((T4)this.value);
-            if (this.index == 5 && f5 != null) return f5((T5)this.value);
-            if (this.index == 6 && f6 != null) return f6((T6)this.value);
-            if (this.index == 7 && f7 != null) return f7((T7)this.value);
-            if (this.index == 8 && f8 != null) return f8((T8)this.value);
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
+            if (f1 != null && valueType == typeof(T1)) return f1((T1)this.value);
+            if (f2 != null && valueType == typeof(T2)) return f2((T2)this.value);
+            if (f3 != null && valueType == typeof(T3)) return f3((T3)this.value);
+            if (f4 != null && valueType == typeof(T4)) return f4((T4)this.value);
+            if (f5 != null && valueType == typeof(T5)) return f5((T5)this.value);
+            if (f6 != null && valueType == typeof(T6)) return f6((T6)this.value);
+            if (f7 != null && valueType == typeof(T7)) return f7((T7)this.value);
+            if (f8 != null && valueType == typeof(T8)) return f8((T8)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -989,10 +971,10 @@ namespace OneOf
             if (!(obj is OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>)) return false;
 
             var other = (OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>)obj;
-            return index == other.index && Equals(value, other.value);
+            return Equals(value, other.value);
         }
 
-        public override int GetHashCode() => unchecked((value?.GetHashCode() ?? 0) * 397 ^ index);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
 
         public override string ToString() => (value?.ToString() ?? "");
     }
@@ -1001,66 +983,69 @@ namespace OneOf
     public class OneOfBase<T0> : IOneOf
     {
         readonly object value;
-        readonly int index;
 
-        OneOfBase(object value, int index) { this.value = value; this.index = index; }
+        internal OneOfBase(object value)
+        {
+            EnsureValueIsValid(value);
+            this.value = value;
+        }
 
         protected OneOfBase()
         {
+            EnsureValueIsValid(this);
             this.value = this;
-
-            if (this is T0) this.index = 0;
         }
 
-        internal static OneOfBase<T0> Create(object value)
+        static void EnsureValueIsValid(object value)
         {
-            if (value != null)
-            {
-                var valueType = value.GetType();
-                if (valueType == typeof(T0)) return (T0)value;
-            }
-            throw new InvalidOperationException();
+            if (value == null) throw new ArgumentNullException("value");
+
+            var valueType = value.GetType();
+            if (valueType == typeof(T0)) return;
+
+            throw new ArgumentException("value");
+        }
+
+        void EnsureValueNotNull()
+        {
+            if (value == null) throw new InvalidOperationException("Value has not been set");
         }
 
         object IOneOf.Value => value;
 
         public bool Is<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return true;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return true;
 
             return false;
         }
 
         public T As<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return (T)this.value;
 
             throw new InvalidOperationException();
         }
 
-        public OneOfBase<N0> ToOneOf<N0>() => OneOfBase<N0>.Create(value);
-        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => OneOfBase<N0, N1>.Create(value);
-        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfBase<N0, N1, N2>.Create(value);
-        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
+        public OneOfBase<N0> ToOneOf<N0>() => new OneOfBase<N0>(value);
+        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => new OneOfBase<N0, N1>(value);
+        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOfBase<N0, N1, N2>(value);
+        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOfBase<N0, N1, N2, N3>(value);
+        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOfBase<N0, N1, N2, N3, N4>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOfBase<N0, N1, N2, N3, N4, N5>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
 
-        public static implicit operator OneOfBase<T0>(T0 value) => new OneOfBase<T0>(value, 0);
+        public static implicit operator OneOfBase<T0>(T0 value) => new OneOfBase<T0>(value);
 
         public void Switch(Action<T0> f0 = null, Action otherwise = null)
         {
-            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -1069,7 +1054,9 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<TResult> otherwise = null)
         {
-            if (this.index == 0 && f0 != null) return f0((T0)this.value);
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -1082,10 +1069,10 @@ namespace OneOf
             if (!(obj is OneOfBase<T0>)) return false;
 
             var other = (OneOfBase<T0>)obj;
-            return index == other.index && Equals(value, other.value);
+            return Equals(value, other.value);
         }
 
-        public override int GetHashCode() => unchecked((value?.GetHashCode() ?? 0) * 397 ^ index);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
 
         public override string ToString() => (value?.ToString() ?? "");
     }
@@ -1094,72 +1081,72 @@ namespace OneOf
     public class OneOfBase<T0, T1> : IOneOf
     {
         readonly object value;
-        readonly int index;
 
-        OneOfBase(object value, int index) { this.value = value; this.index = index; }
+        internal OneOfBase(object value)
+        {
+            EnsureValueIsValid(value);
+            this.value = value;
+        }
 
         protected OneOfBase()
         {
+            EnsureValueIsValid(this);
             this.value = this;
-
-            if (this is T0) this.index = 0;
-            if (this is T1) this.index = 1;
         }
 
-        internal static OneOfBase<T0, T1> Create(object value)
+        static void EnsureValueIsValid(object value)
         {
-            if (value != null)
-            {
-                var valueType = value.GetType();
-                if (valueType == typeof(T0)) return (T0)value;
-                if (valueType == typeof(T1)) return (T1)value;
-            }
-            throw new InvalidOperationException();
+            if (value == null) throw new ArgumentNullException("value");
+
+            var valueType = value.GetType();
+            if (valueType == typeof(T0)) return;
+            if (valueType == typeof(T1)) return;
+
+            throw new ArgumentException("value");
+        }
+
+        void EnsureValueNotNull()
+        {
+            if (value == null) throw new InvalidOperationException("Value has not been set");
         }
 
         object IOneOf.Value => value;
 
         public bool Is<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return true;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
-            if (this.index == 1 && typeof(T) == typeof(T1)) return true;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return true;
 
             return false;
         }
 
         public T As<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
-            if (this.index == 1 && typeof(T) == typeof(T1)) return (T)value;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return (T)this.value;
 
             throw new InvalidOperationException();
         }
 
-        public OneOfBase<N0> ToOneOf<N0>() => OneOfBase<N0>.Create(value);
-        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => OneOfBase<N0, N1>.Create(value);
-        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfBase<N0, N1, N2>.Create(value);
-        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
+        public OneOfBase<N0> ToOneOf<N0>() => new OneOfBase<N0>(value);
+        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => new OneOfBase<N0, N1>(value);
+        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOfBase<N0, N1, N2>(value);
+        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOfBase<N0, N1, N2, N3>(value);
+        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOfBase<N0, N1, N2, N3, N4>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOfBase<N0, N1, N2, N3, N4, N5>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
 
-        public static implicit operator OneOfBase<T0, T1>(T0 value) => new OneOfBase<T0, T1>(value, 0);
-        public static implicit operator OneOfBase<T0, T1>(T1 value) => new OneOfBase<T0, T1>(value, 1);
+        public static implicit operator OneOfBase<T0, T1>(T0 value) => new OneOfBase<T0, T1>(value);
+        public static implicit operator OneOfBase<T0, T1>(T1 value) => new OneOfBase<T0, T1>(value);
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action otherwise = null)
         {
-            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
-            if (this.index == 1 && f1 != null) { f1((T1)this.value); return; }
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
+            if (f1 != null && valueType == typeof(T1)) { f1((T1)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -1168,8 +1155,10 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<T1, TResult> f1 = null, Func<TResult> otherwise = null)
         {
-            if (this.index == 0 && f0 != null) return f0((T0)this.value);
-            if (this.index == 1 && f1 != null) return f1((T1)this.value);
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
+            if (f1 != null && valueType == typeof(T1)) return f1((T1)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -1182,10 +1171,10 @@ namespace OneOf
             if (!(obj is OneOfBase<T0, T1>)) return false;
 
             var other = (OneOfBase<T0, T1>)obj;
-            return index == other.index && Equals(value, other.value);
+            return Equals(value, other.value);
         }
 
-        public override int GetHashCode() => unchecked((value?.GetHashCode() ?? 0) * 397 ^ index);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
 
         public override string ToString() => (value?.ToString() ?? "");
     }
@@ -1194,78 +1183,75 @@ namespace OneOf
     public class OneOfBase<T0, T1, T2> : IOneOf
     {
         readonly object value;
-        readonly int index;
 
-        OneOfBase(object value, int index) { this.value = value; this.index = index; }
+        internal OneOfBase(object value)
+        {
+            EnsureValueIsValid(value);
+            this.value = value;
+        }
 
         protected OneOfBase()
         {
+            EnsureValueIsValid(this);
             this.value = this;
-
-            if (this is T0) this.index = 0;
-            if (this is T1) this.index = 1;
-            if (this is T2) this.index = 2;
         }
 
-        internal static OneOfBase<T0, T1, T2> Create(object value)
+        static void EnsureValueIsValid(object value)
         {
-            if (value != null)
-            {
-                var valueType = value.GetType();
-                if (valueType == typeof(T0)) return (T0)value;
-                if (valueType == typeof(T1)) return (T1)value;
-                if (valueType == typeof(T2)) return (T2)value;
-            }
-            throw new InvalidOperationException();
+            if (value == null) throw new ArgumentNullException("value");
+
+            var valueType = value.GetType();
+            if (valueType == typeof(T0)) return;
+            if (valueType == typeof(T1)) return;
+            if (valueType == typeof(T2)) return;
+
+            throw new ArgumentException("value");
+        }
+
+        void EnsureValueNotNull()
+        {
+            if (value == null) throw new InvalidOperationException("Value has not been set");
         }
 
         object IOneOf.Value => value;
 
         public bool Is<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return true;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
-            if (this.index == 1 && typeof(T) == typeof(T1)) return true;
-            if (this.index == 2 && typeof(T) == typeof(T2)) return true;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return true;
 
             return false;
         }
 
         public T As<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
-            if (this.index == 1 && typeof(T) == typeof(T1)) return (T)value;
-            if (this.index == 2 && typeof(T) == typeof(T2)) return (T)value;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return (T)this.value;
 
             throw new InvalidOperationException();
         }
 
-        public OneOfBase<N0> ToOneOf<N0>() => OneOfBase<N0>.Create(value);
-        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => OneOfBase<N0, N1>.Create(value);
-        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfBase<N0, N1, N2>.Create(value);
-        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
+        public OneOfBase<N0> ToOneOf<N0>() => new OneOfBase<N0>(value);
+        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => new OneOfBase<N0, N1>(value);
+        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOfBase<N0, N1, N2>(value);
+        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOfBase<N0, N1, N2, N3>(value);
+        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOfBase<N0, N1, N2, N3, N4>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOfBase<N0, N1, N2, N3, N4, N5>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
 
-        public static implicit operator OneOfBase<T0, T1, T2>(T0 value) => new OneOfBase<T0, T1, T2>(value, 0);
-        public static implicit operator OneOfBase<T0, T1, T2>(T1 value) => new OneOfBase<T0, T1, T2>(value, 1);
-        public static implicit operator OneOfBase<T0, T1, T2>(T2 value) => new OneOfBase<T0, T1, T2>(value, 2);
+        public static implicit operator OneOfBase<T0, T1, T2>(T0 value) => new OneOfBase<T0, T1, T2>(value);
+        public static implicit operator OneOfBase<T0, T1, T2>(T1 value) => new OneOfBase<T0, T1, T2>(value);
+        public static implicit operator OneOfBase<T0, T1, T2>(T2 value) => new OneOfBase<T0, T1, T2>(value);
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action otherwise = null)
         {
-            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
-            if (this.index == 1 && f1 != null) { f1((T1)this.value); return; }
-            if (this.index == 2 && f2 != null) { f2((T2)this.value); return; }
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
+            if (f1 != null && valueType == typeof(T1)) { f1((T1)this.value); return; }
+            if (f2 != null && valueType == typeof(T2)) { f2((T2)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -1274,9 +1260,11 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<T1, TResult> f1 = null, Func<T2, TResult> f2 = null, Func<TResult> otherwise = null)
         {
-            if (this.index == 0 && f0 != null) return f0((T0)this.value);
-            if (this.index == 1 && f1 != null) return f1((T1)this.value);
-            if (this.index == 2 && f2 != null) return f2((T2)this.value);
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
+            if (f1 != null && valueType == typeof(T1)) return f1((T1)this.value);
+            if (f2 != null && valueType == typeof(T2)) return f2((T2)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -1289,10 +1277,10 @@ namespace OneOf
             if (!(obj is OneOfBase<T0, T1, T2>)) return false;
 
             var other = (OneOfBase<T0, T1, T2>)obj;
-            return index == other.index && Equals(value, other.value);
+            return Equals(value, other.value);
         }
 
-        public override int GetHashCode() => unchecked((value?.GetHashCode() ?? 0) * 397 ^ index);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
 
         public override string ToString() => (value?.ToString() ?? "");
     }
@@ -1301,84 +1289,78 @@ namespace OneOf
     public class OneOfBase<T0, T1, T2, T3> : IOneOf
     {
         readonly object value;
-        readonly int index;
 
-        OneOfBase(object value, int index) { this.value = value; this.index = index; }
+        internal OneOfBase(object value)
+        {
+            EnsureValueIsValid(value);
+            this.value = value;
+        }
 
         protected OneOfBase()
         {
+            EnsureValueIsValid(this);
             this.value = this;
-
-            if (this is T0) this.index = 0;
-            if (this is T1) this.index = 1;
-            if (this is T2) this.index = 2;
-            if (this is T3) this.index = 3;
         }
 
-        internal static OneOfBase<T0, T1, T2, T3> Create(object value)
+        static void EnsureValueIsValid(object value)
         {
-            if (value != null)
-            {
-                var valueType = value.GetType();
-                if (valueType == typeof(T0)) return (T0)value;
-                if (valueType == typeof(T1)) return (T1)value;
-                if (valueType == typeof(T2)) return (T2)value;
-                if (valueType == typeof(T3)) return (T3)value;
-            }
-            throw new InvalidOperationException();
+            if (value == null) throw new ArgumentNullException("value");
+
+            var valueType = value.GetType();
+            if (valueType == typeof(T0)) return;
+            if (valueType == typeof(T1)) return;
+            if (valueType == typeof(T2)) return;
+            if (valueType == typeof(T3)) return;
+
+            throw new ArgumentException("value");
+        }
+
+        void EnsureValueNotNull()
+        {
+            if (value == null) throw new InvalidOperationException("Value has not been set");
         }
 
         object IOneOf.Value => value;
 
         public bool Is<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return true;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
-            if (this.index == 1 && typeof(T) == typeof(T1)) return true;
-            if (this.index == 2 && typeof(T) == typeof(T2)) return true;
-            if (this.index == 3 && typeof(T) == typeof(T3)) return true;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return true;
 
             return false;
         }
 
         public T As<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
-            if (this.index == 1 && typeof(T) == typeof(T1)) return (T)value;
-            if (this.index == 2 && typeof(T) == typeof(T2)) return (T)value;
-            if (this.index == 3 && typeof(T) == typeof(T3)) return (T)value;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return (T)this.value;
 
             throw new InvalidOperationException();
         }
 
-        public OneOfBase<N0> ToOneOf<N0>() => OneOfBase<N0>.Create(value);
-        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => OneOfBase<N0, N1>.Create(value);
-        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfBase<N0, N1, N2>.Create(value);
-        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
+        public OneOfBase<N0> ToOneOf<N0>() => new OneOfBase<N0>(value);
+        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => new OneOfBase<N0, N1>(value);
+        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOfBase<N0, N1, N2>(value);
+        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOfBase<N0, N1, N2, N3>(value);
+        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOfBase<N0, N1, N2, N3, N4>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOfBase<N0, N1, N2, N3, N4, N5>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
 
-        public static implicit operator OneOfBase<T0, T1, T2, T3>(T0 value) => new OneOfBase<T0, T1, T2, T3>(value, 0);
-        public static implicit operator OneOfBase<T0, T1, T2, T3>(T1 value) => new OneOfBase<T0, T1, T2, T3>(value, 1);
-        public static implicit operator OneOfBase<T0, T1, T2, T3>(T2 value) => new OneOfBase<T0, T1, T2, T3>(value, 2);
-        public static implicit operator OneOfBase<T0, T1, T2, T3>(T3 value) => new OneOfBase<T0, T1, T2, T3>(value, 3);
+        public static implicit operator OneOfBase<T0, T1, T2, T3>(T0 value) => new OneOfBase<T0, T1, T2, T3>(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3>(T1 value) => new OneOfBase<T0, T1, T2, T3>(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3>(T2 value) => new OneOfBase<T0, T1, T2, T3>(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3>(T3 value) => new OneOfBase<T0, T1, T2, T3>(value);
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action otherwise = null)
         {
-            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
-            if (this.index == 1 && f1 != null) { f1((T1)this.value); return; }
-            if (this.index == 2 && f2 != null) { f2((T2)this.value); return; }
-            if (this.index == 3 && f3 != null) { f3((T3)this.value); return; }
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
+            if (f1 != null && valueType == typeof(T1)) { f1((T1)this.value); return; }
+            if (f2 != null && valueType == typeof(T2)) { f2((T2)this.value); return; }
+            if (f3 != null && valueType == typeof(T3)) { f3((T3)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -1387,10 +1369,12 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<T1, TResult> f1 = null, Func<T2, TResult> f2 = null, Func<T3, TResult> f3 = null, Func<TResult> otherwise = null)
         {
-            if (this.index == 0 && f0 != null) return f0((T0)this.value);
-            if (this.index == 1 && f1 != null) return f1((T1)this.value);
-            if (this.index == 2 && f2 != null) return f2((T2)this.value);
-            if (this.index == 3 && f3 != null) return f3((T3)this.value);
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
+            if (f1 != null && valueType == typeof(T1)) return f1((T1)this.value);
+            if (f2 != null && valueType == typeof(T2)) return f2((T2)this.value);
+            if (f3 != null && valueType == typeof(T3)) return f3((T3)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -1403,10 +1387,10 @@ namespace OneOf
             if (!(obj is OneOfBase<T0, T1, T2, T3>)) return false;
 
             var other = (OneOfBase<T0, T1, T2, T3>)obj;
-            return index == other.index && Equals(value, other.value);
+            return Equals(value, other.value);
         }
 
-        public override int GetHashCode() => unchecked((value?.GetHashCode() ?? 0) * 397 ^ index);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
 
         public override string ToString() => (value?.ToString() ?? "");
     }
@@ -1415,90 +1399,81 @@ namespace OneOf
     public class OneOfBase<T0, T1, T2, T3, T4> : IOneOf
     {
         readonly object value;
-        readonly int index;
 
-        OneOfBase(object value, int index) { this.value = value; this.index = index; }
+        internal OneOfBase(object value)
+        {
+            EnsureValueIsValid(value);
+            this.value = value;
+        }
 
         protected OneOfBase()
         {
+            EnsureValueIsValid(this);
             this.value = this;
-
-            if (this is T0) this.index = 0;
-            if (this is T1) this.index = 1;
-            if (this is T2) this.index = 2;
-            if (this is T3) this.index = 3;
-            if (this is T4) this.index = 4;
         }
 
-        internal static OneOfBase<T0, T1, T2, T3, T4> Create(object value)
+        static void EnsureValueIsValid(object value)
         {
-            if (value != null)
-            {
-                var valueType = value.GetType();
-                if (valueType == typeof(T0)) return (T0)value;
-                if (valueType == typeof(T1)) return (T1)value;
-                if (valueType == typeof(T2)) return (T2)value;
-                if (valueType == typeof(T3)) return (T3)value;
-                if (valueType == typeof(T4)) return (T4)value;
-            }
-            throw new InvalidOperationException();
+            if (value == null) throw new ArgumentNullException("value");
+
+            var valueType = value.GetType();
+            if (valueType == typeof(T0)) return;
+            if (valueType == typeof(T1)) return;
+            if (valueType == typeof(T2)) return;
+            if (valueType == typeof(T3)) return;
+            if (valueType == typeof(T4)) return;
+
+            throw new ArgumentException("value");
+        }
+
+        void EnsureValueNotNull()
+        {
+            if (value == null) throw new InvalidOperationException("Value has not been set");
         }
 
         object IOneOf.Value => value;
 
         public bool Is<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return true;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
-            if (this.index == 1 && typeof(T) == typeof(T1)) return true;
-            if (this.index == 2 && typeof(T) == typeof(T2)) return true;
-            if (this.index == 3 && typeof(T) == typeof(T3)) return true;
-            if (this.index == 4 && typeof(T) == typeof(T4)) return true;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return true;
 
             return false;
         }
 
         public T As<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
-            if (this.index == 1 && typeof(T) == typeof(T1)) return (T)value;
-            if (this.index == 2 && typeof(T) == typeof(T2)) return (T)value;
-            if (this.index == 3 && typeof(T) == typeof(T3)) return (T)value;
-            if (this.index == 4 && typeof(T) == typeof(T4)) return (T)value;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return (T)this.value;
 
             throw new InvalidOperationException();
         }
 
-        public OneOfBase<N0> ToOneOf<N0>() => OneOfBase<N0>.Create(value);
-        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => OneOfBase<N0, N1>.Create(value);
-        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfBase<N0, N1, N2>.Create(value);
-        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
+        public OneOfBase<N0> ToOneOf<N0>() => new OneOfBase<N0>(value);
+        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => new OneOfBase<N0, N1>(value);
+        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOfBase<N0, N1, N2>(value);
+        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOfBase<N0, N1, N2, N3>(value);
+        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOfBase<N0, N1, N2, N3, N4>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOfBase<N0, N1, N2, N3, N4, N5>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
 
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T0 value) => new OneOfBase<T0, T1, T2, T3, T4>(value, 0);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T1 value) => new OneOfBase<T0, T1, T2, T3, T4>(value, 1);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T2 value) => new OneOfBase<T0, T1, T2, T3, T4>(value, 2);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T3 value) => new OneOfBase<T0, T1, T2, T3, T4>(value, 3);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T4 value) => new OneOfBase<T0, T1, T2, T3, T4>(value, 4);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T0 value) => new OneOfBase<T0, T1, T2, T3, T4>(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T1 value) => new OneOfBase<T0, T1, T2, T3, T4>(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T2 value) => new OneOfBase<T0, T1, T2, T3, T4>(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T3 value) => new OneOfBase<T0, T1, T2, T3, T4>(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T4 value) => new OneOfBase<T0, T1, T2, T3, T4>(value);
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action otherwise = null)
         {
-            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
-            if (this.index == 1 && f1 != null) { f1((T1)this.value); return; }
-            if (this.index == 2 && f2 != null) { f2((T2)this.value); return; }
-            if (this.index == 3 && f3 != null) { f3((T3)this.value); return; }
-            if (this.index == 4 && f4 != null) { f4((T4)this.value); return; }
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
+            if (f1 != null && valueType == typeof(T1)) { f1((T1)this.value); return; }
+            if (f2 != null && valueType == typeof(T2)) { f2((T2)this.value); return; }
+            if (f3 != null && valueType == typeof(T3)) { f3((T3)this.value); return; }
+            if (f4 != null && valueType == typeof(T4)) { f4((T4)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -1507,11 +1482,13 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<T1, TResult> f1 = null, Func<T2, TResult> f2 = null, Func<T3, TResult> f3 = null, Func<T4, TResult> f4 = null, Func<TResult> otherwise = null)
         {
-            if (this.index == 0 && f0 != null) return f0((T0)this.value);
-            if (this.index == 1 && f1 != null) return f1((T1)this.value);
-            if (this.index == 2 && f2 != null) return f2((T2)this.value);
-            if (this.index == 3 && f3 != null) return f3((T3)this.value);
-            if (this.index == 4 && f4 != null) return f4((T4)this.value);
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
+            if (f1 != null && valueType == typeof(T1)) return f1((T1)this.value);
+            if (f2 != null && valueType == typeof(T2)) return f2((T2)this.value);
+            if (f3 != null && valueType == typeof(T3)) return f3((T3)this.value);
+            if (f4 != null && valueType == typeof(T4)) return f4((T4)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -1524,10 +1501,10 @@ namespace OneOf
             if (!(obj is OneOfBase<T0, T1, T2, T3, T4>)) return false;
 
             var other = (OneOfBase<T0, T1, T2, T3, T4>)obj;
-            return index == other.index && Equals(value, other.value);
+            return Equals(value, other.value);
         }
 
-        public override int GetHashCode() => unchecked((value?.GetHashCode() ?? 0) * 397 ^ index);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
 
         public override string ToString() => (value?.ToString() ?? "");
     }
@@ -1536,96 +1513,84 @@ namespace OneOf
     public class OneOfBase<T0, T1, T2, T3, T4, T5> : IOneOf
     {
         readonly object value;
-        readonly int index;
 
-        OneOfBase(object value, int index) { this.value = value; this.index = index; }
+        internal OneOfBase(object value)
+        {
+            EnsureValueIsValid(value);
+            this.value = value;
+        }
 
         protected OneOfBase()
         {
+            EnsureValueIsValid(this);
             this.value = this;
-
-            if (this is T0) this.index = 0;
-            if (this is T1) this.index = 1;
-            if (this is T2) this.index = 2;
-            if (this is T3) this.index = 3;
-            if (this is T4) this.index = 4;
-            if (this is T5) this.index = 5;
         }
 
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5> Create(object value)
+        static void EnsureValueIsValid(object value)
         {
-            if (value != null)
-            {
-                var valueType = value.GetType();
-                if (valueType == typeof(T0)) return (T0)value;
-                if (valueType == typeof(T1)) return (T1)value;
-                if (valueType == typeof(T2)) return (T2)value;
-                if (valueType == typeof(T3)) return (T3)value;
-                if (valueType == typeof(T4)) return (T4)value;
-                if (valueType == typeof(T5)) return (T5)value;
-            }
-            throw new InvalidOperationException();
+            if (value == null) throw new ArgumentNullException("value");
+
+            var valueType = value.GetType();
+            if (valueType == typeof(T0)) return;
+            if (valueType == typeof(T1)) return;
+            if (valueType == typeof(T2)) return;
+            if (valueType == typeof(T3)) return;
+            if (valueType == typeof(T4)) return;
+            if (valueType == typeof(T5)) return;
+
+            throw new ArgumentException("value");
+        }
+
+        void EnsureValueNotNull()
+        {
+            if (value == null) throw new InvalidOperationException("Value has not been set");
         }
 
         object IOneOf.Value => value;
 
         public bool Is<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return true;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
-            if (this.index == 1 && typeof(T) == typeof(T1)) return true;
-            if (this.index == 2 && typeof(T) == typeof(T2)) return true;
-            if (this.index == 3 && typeof(T) == typeof(T3)) return true;
-            if (this.index == 4 && typeof(T) == typeof(T4)) return true;
-            if (this.index == 5 && typeof(T) == typeof(T5)) return true;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return true;
 
             return false;
         }
 
         public T As<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
-            if (this.index == 1 && typeof(T) == typeof(T1)) return (T)value;
-            if (this.index == 2 && typeof(T) == typeof(T2)) return (T)value;
-            if (this.index == 3 && typeof(T) == typeof(T3)) return (T)value;
-            if (this.index == 4 && typeof(T) == typeof(T4)) return (T)value;
-            if (this.index == 5 && typeof(T) == typeof(T5)) return (T)value;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return (T)this.value;
 
             throw new InvalidOperationException();
         }
 
-        public OneOfBase<N0> ToOneOf<N0>() => OneOfBase<N0>.Create(value);
-        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => OneOfBase<N0, N1>.Create(value);
-        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfBase<N0, N1, N2>.Create(value);
-        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
+        public OneOfBase<N0> ToOneOf<N0>() => new OneOfBase<N0>(value);
+        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => new OneOfBase<N0, N1>(value);
+        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOfBase<N0, N1, N2>(value);
+        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOfBase<N0, N1, N2, N3>(value);
+        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOfBase<N0, N1, N2, N3, N4>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOfBase<N0, N1, N2, N3, N4, N5>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
 
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T0 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value, 0);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T1 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value, 1);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T2 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value, 2);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T3 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value, 3);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T4 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value, 4);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T5 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value, 5);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T0 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T1 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T2 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T3 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T4 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T5 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value);
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action<T5> f5 = null, Action otherwise = null)
         {
-            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
-            if (this.index == 1 && f1 != null) { f1((T1)this.value); return; }
-            if (this.index == 2 && f2 != null) { f2((T2)this.value); return; }
-            if (this.index == 3 && f3 != null) { f3((T3)this.value); return; }
-            if (this.index == 4 && f4 != null) { f4((T4)this.value); return; }
-            if (this.index == 5 && f5 != null) { f5((T5)this.value); return; }
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
+            if (f1 != null && valueType == typeof(T1)) { f1((T1)this.value); return; }
+            if (f2 != null && valueType == typeof(T2)) { f2((T2)this.value); return; }
+            if (f3 != null && valueType == typeof(T3)) { f3((T3)this.value); return; }
+            if (f4 != null && valueType == typeof(T4)) { f4((T4)this.value); return; }
+            if (f5 != null && valueType == typeof(T5)) { f5((T5)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -1634,12 +1599,14 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<T1, TResult> f1 = null, Func<T2, TResult> f2 = null, Func<T3, TResult> f3 = null, Func<T4, TResult> f4 = null, Func<T5, TResult> f5 = null, Func<TResult> otherwise = null)
         {
-            if (this.index == 0 && f0 != null) return f0((T0)this.value);
-            if (this.index == 1 && f1 != null) return f1((T1)this.value);
-            if (this.index == 2 && f2 != null) return f2((T2)this.value);
-            if (this.index == 3 && f3 != null) return f3((T3)this.value);
-            if (this.index == 4 && f4 != null) return f4((T4)this.value);
-            if (this.index == 5 && f5 != null) return f5((T5)this.value);
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
+            if (f1 != null && valueType == typeof(T1)) return f1((T1)this.value);
+            if (f2 != null && valueType == typeof(T2)) return f2((T2)this.value);
+            if (f3 != null && valueType == typeof(T3)) return f3((T3)this.value);
+            if (f4 != null && valueType == typeof(T4)) return f4((T4)this.value);
+            if (f5 != null && valueType == typeof(T5)) return f5((T5)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -1652,10 +1619,10 @@ namespace OneOf
             if (!(obj is OneOfBase<T0, T1, T2, T3, T4, T5>)) return false;
 
             var other = (OneOfBase<T0, T1, T2, T3, T4, T5>)obj;
-            return index == other.index && Equals(value, other.value);
+            return Equals(value, other.value);
         }
 
-        public override int GetHashCode() => unchecked((value?.GetHashCode() ?? 0) * 397 ^ index);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
 
         public override string ToString() => (value?.ToString() ?? "");
     }
@@ -1664,102 +1631,87 @@ namespace OneOf
     public class OneOfBase<T0, T1, T2, T3, T4, T5, T6> : IOneOf
     {
         readonly object value;
-        readonly int index;
 
-        OneOfBase(object value, int index) { this.value = value; this.index = index; }
+        internal OneOfBase(object value)
+        {
+            EnsureValueIsValid(value);
+            this.value = value;
+        }
 
         protected OneOfBase()
         {
+            EnsureValueIsValid(this);
             this.value = this;
-
-            if (this is T0) this.index = 0;
-            if (this is T1) this.index = 1;
-            if (this is T2) this.index = 2;
-            if (this is T3) this.index = 3;
-            if (this is T4) this.index = 4;
-            if (this is T5) this.index = 5;
-            if (this is T6) this.index = 6;
         }
 
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6> Create(object value)
+        static void EnsureValueIsValid(object value)
         {
-            if (value != null)
-            {
-                var valueType = value.GetType();
-                if (valueType == typeof(T0)) return (T0)value;
-                if (valueType == typeof(T1)) return (T1)value;
-                if (valueType == typeof(T2)) return (T2)value;
-                if (valueType == typeof(T3)) return (T3)value;
-                if (valueType == typeof(T4)) return (T4)value;
-                if (valueType == typeof(T5)) return (T5)value;
-                if (valueType == typeof(T6)) return (T6)value;
-            }
-            throw new InvalidOperationException();
+            if (value == null) throw new ArgumentNullException("value");
+
+            var valueType = value.GetType();
+            if (valueType == typeof(T0)) return;
+            if (valueType == typeof(T1)) return;
+            if (valueType == typeof(T2)) return;
+            if (valueType == typeof(T3)) return;
+            if (valueType == typeof(T4)) return;
+            if (valueType == typeof(T5)) return;
+            if (valueType == typeof(T6)) return;
+
+            throw new ArgumentException("value");
+        }
+
+        void EnsureValueNotNull()
+        {
+            if (value == null) throw new InvalidOperationException("Value has not been set");
         }
 
         object IOneOf.Value => value;
 
         public bool Is<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return true;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
-            if (this.index == 1 && typeof(T) == typeof(T1)) return true;
-            if (this.index == 2 && typeof(T) == typeof(T2)) return true;
-            if (this.index == 3 && typeof(T) == typeof(T3)) return true;
-            if (this.index == 4 && typeof(T) == typeof(T4)) return true;
-            if (this.index == 5 && typeof(T) == typeof(T5)) return true;
-            if (this.index == 6 && typeof(T) == typeof(T6)) return true;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return true;
 
             return false;
         }
 
         public T As<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
-            if (this.index == 1 && typeof(T) == typeof(T1)) return (T)value;
-            if (this.index == 2 && typeof(T) == typeof(T2)) return (T)value;
-            if (this.index == 3 && typeof(T) == typeof(T3)) return (T)value;
-            if (this.index == 4 && typeof(T) == typeof(T4)) return (T)value;
-            if (this.index == 5 && typeof(T) == typeof(T5)) return (T)value;
-            if (this.index == 6 && typeof(T) == typeof(T6)) return (T)value;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return (T)this.value;
 
             throw new InvalidOperationException();
         }
 
-        public OneOfBase<N0> ToOneOf<N0>() => OneOfBase<N0>.Create(value);
-        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => OneOfBase<N0, N1>.Create(value);
-        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfBase<N0, N1, N2>.Create(value);
-        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
+        public OneOfBase<N0> ToOneOf<N0>() => new OneOfBase<N0>(value);
+        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => new OneOfBase<N0, N1>(value);
+        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOfBase<N0, N1, N2>(value);
+        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOfBase<N0, N1, N2, N3>(value);
+        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOfBase<N0, N1, N2, N3, N4>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOfBase<N0, N1, N2, N3, N4, N5>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
 
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T0 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value, 0);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T1 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value, 1);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T2 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value, 2);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T3 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value, 3);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T4 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value, 4);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T5 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value, 5);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T6 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value, 6);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T0 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T1 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T2 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T3 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T4 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T5 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T6 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value);
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action<T5> f5 = null, Action<T6> f6 = null, Action otherwise = null)
         {
-            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
-            if (this.index == 1 && f1 != null) { f1((T1)this.value); return; }
-            if (this.index == 2 && f2 != null) { f2((T2)this.value); return; }
-            if (this.index == 3 && f3 != null) { f3((T3)this.value); return; }
-            if (this.index == 4 && f4 != null) { f4((T4)this.value); return; }
-            if (this.index == 5 && f5 != null) { f5((T5)this.value); return; }
-            if (this.index == 6 && f6 != null) { f6((T6)this.value); return; }
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
+            if (f1 != null && valueType == typeof(T1)) { f1((T1)this.value); return; }
+            if (f2 != null && valueType == typeof(T2)) { f2((T2)this.value); return; }
+            if (f3 != null && valueType == typeof(T3)) { f3((T3)this.value); return; }
+            if (f4 != null && valueType == typeof(T4)) { f4((T4)this.value); return; }
+            if (f5 != null && valueType == typeof(T5)) { f5((T5)this.value); return; }
+            if (f6 != null && valueType == typeof(T6)) { f6((T6)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -1768,13 +1720,15 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<T1, TResult> f1 = null, Func<T2, TResult> f2 = null, Func<T3, TResult> f3 = null, Func<T4, TResult> f4 = null, Func<T5, TResult> f5 = null, Func<T6, TResult> f6 = null, Func<TResult> otherwise = null)
         {
-            if (this.index == 0 && f0 != null) return f0((T0)this.value);
-            if (this.index == 1 && f1 != null) return f1((T1)this.value);
-            if (this.index == 2 && f2 != null) return f2((T2)this.value);
-            if (this.index == 3 && f3 != null) return f3((T3)this.value);
-            if (this.index == 4 && f4 != null) return f4((T4)this.value);
-            if (this.index == 5 && f5 != null) return f5((T5)this.value);
-            if (this.index == 6 && f6 != null) return f6((T6)this.value);
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
+            if (f1 != null && valueType == typeof(T1)) return f1((T1)this.value);
+            if (f2 != null && valueType == typeof(T2)) return f2((T2)this.value);
+            if (f3 != null && valueType == typeof(T3)) return f3((T3)this.value);
+            if (f4 != null && valueType == typeof(T4)) return f4((T4)this.value);
+            if (f5 != null && valueType == typeof(T5)) return f5((T5)this.value);
+            if (f6 != null && valueType == typeof(T6)) return f6((T6)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -1787,10 +1741,10 @@ namespace OneOf
             if (!(obj is OneOfBase<T0, T1, T2, T3, T4, T5, T6>)) return false;
 
             var other = (OneOfBase<T0, T1, T2, T3, T4, T5, T6>)obj;
-            return index == other.index && Equals(value, other.value);
+            return Equals(value, other.value);
         }
 
-        public override int GetHashCode() => unchecked((value?.GetHashCode() ?? 0) * 397 ^ index);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
 
         public override string ToString() => (value?.ToString() ?? "");
     }
@@ -1799,108 +1753,90 @@ namespace OneOf
     public class OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> : IOneOf
     {
         readonly object value;
-        readonly int index;
 
-        OneOfBase(object value, int index) { this.value = value; this.index = index; }
+        internal OneOfBase(object value)
+        {
+            EnsureValueIsValid(value);
+            this.value = value;
+        }
 
         protected OneOfBase()
         {
+            EnsureValueIsValid(this);
             this.value = this;
-
-            if (this is T0) this.index = 0;
-            if (this is T1) this.index = 1;
-            if (this is T2) this.index = 2;
-            if (this is T3) this.index = 3;
-            if (this is T4) this.index = 4;
-            if (this is T5) this.index = 5;
-            if (this is T6) this.index = 6;
-            if (this is T7) this.index = 7;
         }
 
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> Create(object value)
+        static void EnsureValueIsValid(object value)
         {
-            if (value != null)
-            {
-                var valueType = value.GetType();
-                if (valueType == typeof(T0)) return (T0)value;
-                if (valueType == typeof(T1)) return (T1)value;
-                if (valueType == typeof(T2)) return (T2)value;
-                if (valueType == typeof(T3)) return (T3)value;
-                if (valueType == typeof(T4)) return (T4)value;
-                if (valueType == typeof(T5)) return (T5)value;
-                if (valueType == typeof(T6)) return (T6)value;
-                if (valueType == typeof(T7)) return (T7)value;
-            }
-            throw new InvalidOperationException();
+            if (value == null) throw new ArgumentNullException("value");
+
+            var valueType = value.GetType();
+            if (valueType == typeof(T0)) return;
+            if (valueType == typeof(T1)) return;
+            if (valueType == typeof(T2)) return;
+            if (valueType == typeof(T3)) return;
+            if (valueType == typeof(T4)) return;
+            if (valueType == typeof(T5)) return;
+            if (valueType == typeof(T6)) return;
+            if (valueType == typeof(T7)) return;
+
+            throw new ArgumentException("value");
+        }
+
+        void EnsureValueNotNull()
+        {
+            if (value == null) throw new InvalidOperationException("Value has not been set");
         }
 
         object IOneOf.Value => value;
 
         public bool Is<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return true;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
-            if (this.index == 1 && typeof(T) == typeof(T1)) return true;
-            if (this.index == 2 && typeof(T) == typeof(T2)) return true;
-            if (this.index == 3 && typeof(T) == typeof(T3)) return true;
-            if (this.index == 4 && typeof(T) == typeof(T4)) return true;
-            if (this.index == 5 && typeof(T) == typeof(T5)) return true;
-            if (this.index == 6 && typeof(T) == typeof(T6)) return true;
-            if (this.index == 7 && typeof(T) == typeof(T7)) return true;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return true;
 
             return false;
         }
 
         public T As<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
-            if (this.index == 1 && typeof(T) == typeof(T1)) return (T)value;
-            if (this.index == 2 && typeof(T) == typeof(T2)) return (T)value;
-            if (this.index == 3 && typeof(T) == typeof(T3)) return (T)value;
-            if (this.index == 4 && typeof(T) == typeof(T4)) return (T)value;
-            if (this.index == 5 && typeof(T) == typeof(T5)) return (T)value;
-            if (this.index == 6 && typeof(T) == typeof(T6)) return (T)value;
-            if (this.index == 7 && typeof(T) == typeof(T7)) return (T)value;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return (T)this.value;
 
             throw new InvalidOperationException();
         }
 
-        public OneOfBase<N0> ToOneOf<N0>() => OneOfBase<N0>.Create(value);
-        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => OneOfBase<N0, N1>.Create(value);
-        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfBase<N0, N1, N2>.Create(value);
-        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
+        public OneOfBase<N0> ToOneOf<N0>() => new OneOfBase<N0>(value);
+        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => new OneOfBase<N0, N1>(value);
+        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOfBase<N0, N1, N2>(value);
+        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOfBase<N0, N1, N2, N3>(value);
+        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOfBase<N0, N1, N2, N3, N4>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOfBase<N0, N1, N2, N3, N4, N5>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
 
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T0 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value, 0);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T1 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value, 1);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T2 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value, 2);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T3 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value, 3);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T4 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value, 4);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T5 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value, 5);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T6 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value, 6);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T7 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value, 7);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T0 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T1 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T2 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T3 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T4 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T5 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T6 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T7 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value);
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action<T5> f5 = null, Action<T6> f6 = null, Action<T7> f7 = null, Action otherwise = null)
         {
-            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
-            if (this.index == 1 && f1 != null) { f1((T1)this.value); return; }
-            if (this.index == 2 && f2 != null) { f2((T2)this.value); return; }
-            if (this.index == 3 && f3 != null) { f3((T3)this.value); return; }
-            if (this.index == 4 && f4 != null) { f4((T4)this.value); return; }
-            if (this.index == 5 && f5 != null) { f5((T5)this.value); return; }
-            if (this.index == 6 && f6 != null) { f6((T6)this.value); return; }
-            if (this.index == 7 && f7 != null) { f7((T7)this.value); return; }
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
+            if (f1 != null && valueType == typeof(T1)) { f1((T1)this.value); return; }
+            if (f2 != null && valueType == typeof(T2)) { f2((T2)this.value); return; }
+            if (f3 != null && valueType == typeof(T3)) { f3((T3)this.value); return; }
+            if (f4 != null && valueType == typeof(T4)) { f4((T4)this.value); return; }
+            if (f5 != null && valueType == typeof(T5)) { f5((T5)this.value); return; }
+            if (f6 != null && valueType == typeof(T6)) { f6((T6)this.value); return; }
+            if (f7 != null && valueType == typeof(T7)) { f7((T7)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -1909,14 +1845,16 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<T1, TResult> f1 = null, Func<T2, TResult> f2 = null, Func<T3, TResult> f3 = null, Func<T4, TResult> f4 = null, Func<T5, TResult> f5 = null, Func<T6, TResult> f6 = null, Func<T7, TResult> f7 = null, Func<TResult> otherwise = null)
         {
-            if (this.index == 0 && f0 != null) return f0((T0)this.value);
-            if (this.index == 1 && f1 != null) return f1((T1)this.value);
-            if (this.index == 2 && f2 != null) return f2((T2)this.value);
-            if (this.index == 3 && f3 != null) return f3((T3)this.value);
-            if (this.index == 4 && f4 != null) return f4((T4)this.value);
-            if (this.index == 5 && f5 != null) return f5((T5)this.value);
-            if (this.index == 6 && f6 != null) return f6((T6)this.value);
-            if (this.index == 7 && f7 != null) return f7((T7)this.value);
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
+            if (f1 != null && valueType == typeof(T1)) return f1((T1)this.value);
+            if (f2 != null && valueType == typeof(T2)) return f2((T2)this.value);
+            if (f3 != null && valueType == typeof(T3)) return f3((T3)this.value);
+            if (f4 != null && valueType == typeof(T4)) return f4((T4)this.value);
+            if (f5 != null && valueType == typeof(T5)) return f5((T5)this.value);
+            if (f6 != null && valueType == typeof(T6)) return f6((T6)this.value);
+            if (f7 != null && valueType == typeof(T7)) return f7((T7)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -1929,10 +1867,10 @@ namespace OneOf
             if (!(obj is OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>)) return false;
 
             var other = (OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>)obj;
-            return index == other.index && Equals(value, other.value);
+            return Equals(value, other.value);
         }
 
-        public override int GetHashCode() => unchecked((value?.GetHashCode() ?? 0) * 397 ^ index);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
 
         public override string ToString() => (value?.ToString() ?? "");
     }
@@ -1941,114 +1879,93 @@ namespace OneOf
     public class OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> : IOneOf
     {
         readonly object value;
-        readonly int index;
 
-        OneOfBase(object value, int index) { this.value = value; this.index = index; }
+        internal OneOfBase(object value)
+        {
+            EnsureValueIsValid(value);
+            this.value = value;
+        }
 
         protected OneOfBase()
         {
+            EnsureValueIsValid(this);
             this.value = this;
-
-            if (this is T0) this.index = 0;
-            if (this is T1) this.index = 1;
-            if (this is T2) this.index = 2;
-            if (this is T3) this.index = 3;
-            if (this is T4) this.index = 4;
-            if (this is T5) this.index = 5;
-            if (this is T6) this.index = 6;
-            if (this is T7) this.index = 7;
-            if (this is T8) this.index = 8;
         }
 
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(object value)
+        static void EnsureValueIsValid(object value)
         {
-            if (value != null)
-            {
-                var valueType = value.GetType();
-                if (valueType == typeof(T0)) return (T0)value;
-                if (valueType == typeof(T1)) return (T1)value;
-                if (valueType == typeof(T2)) return (T2)value;
-                if (valueType == typeof(T3)) return (T3)value;
-                if (valueType == typeof(T4)) return (T4)value;
-                if (valueType == typeof(T5)) return (T5)value;
-                if (valueType == typeof(T6)) return (T6)value;
-                if (valueType == typeof(T7)) return (T7)value;
-                if (valueType == typeof(T8)) return (T8)value;
-            }
-            throw new InvalidOperationException();
+            if (value == null) throw new ArgumentNullException("value");
+
+            var valueType = value.GetType();
+            if (valueType == typeof(T0)) return;
+            if (valueType == typeof(T1)) return;
+            if (valueType == typeof(T2)) return;
+            if (valueType == typeof(T3)) return;
+            if (valueType == typeof(T4)) return;
+            if (valueType == typeof(T5)) return;
+            if (valueType == typeof(T6)) return;
+            if (valueType == typeof(T7)) return;
+            if (valueType == typeof(T8)) return;
+
+            throw new ArgumentException("value");
+        }
+
+        void EnsureValueNotNull()
+        {
+            if (value == null) throw new InvalidOperationException("Value has not been set");
         }
 
         object IOneOf.Value => value;
 
         public bool Is<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return true;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
-            if (this.index == 1 && typeof(T) == typeof(T1)) return true;
-            if (this.index == 2 && typeof(T) == typeof(T2)) return true;
-            if (this.index == 3 && typeof(T) == typeof(T3)) return true;
-            if (this.index == 4 && typeof(T) == typeof(T4)) return true;
-            if (this.index == 5 && typeof(T) == typeof(T5)) return true;
-            if (this.index == 6 && typeof(T) == typeof(T6)) return true;
-            if (this.index == 7 && typeof(T) == typeof(T7)) return true;
-            if (this.index == 8 && typeof(T) == typeof(T8)) return true;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return true;
 
             return false;
         }
 
         public T As<T>()
         {
-            // quick path for when value non-null and correct type
-            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
-
-            // slower path for when value null, or wrong type
-            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
-            if (this.index == 1 && typeof(T) == typeof(T1)) return (T)value;
-            if (this.index == 2 && typeof(T) == typeof(T2)) return (T)value;
-            if (this.index == 3 && typeof(T) == typeof(T3)) return (T)value;
-            if (this.index == 4 && typeof(T) == typeof(T4)) return (T)value;
-            if (this.index == 5 && typeof(T) == typeof(T5)) return (T)value;
-            if (this.index == 6 && typeof(T) == typeof(T6)) return (T)value;
-            if (this.index == 7 && typeof(T) == typeof(T7)) return (T)value;
-            if (this.index == 8 && typeof(T) == typeof(T8)) return (T)value;
+            EnsureValueNotNull();
+            if (this.value.GetType() == typeof(T)) return (T)this.value;
 
             throw new InvalidOperationException();
         }
 
-        public OneOfBase<N0> ToOneOf<N0>() => OneOfBase<N0>.Create(value);
-        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => OneOfBase<N0, N1>.Create(value);
-        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfBase<N0, N1, N2>.Create(value);
-        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
+        public OneOfBase<N0> ToOneOf<N0>() => new OneOfBase<N0>(value);
+        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => new OneOfBase<N0, N1>(value);
+        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOfBase<N0, N1, N2>(value);
+        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOfBase<N0, N1, N2, N3>(value);
+        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOfBase<N0, N1, N2, N3, N4>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOfBase<N0, N1, N2, N3, N4, N5>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
 
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T0 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 0);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T1 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 1);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T2 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 2);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T3 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 3);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T4 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 4);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T5 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 5);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T6 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 6);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T7 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 7);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T8 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, 8);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T0 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T1 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T2 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T3 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T4 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T5 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T6 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T7 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T8 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action<T5> f5 = null, Action<T6> f6 = null, Action<T7> f7 = null, Action<T8> f8 = null, Action otherwise = null)
         {
-            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
-            if (this.index == 1 && f1 != null) { f1((T1)this.value); return; }
-            if (this.index == 2 && f2 != null) { f2((T2)this.value); return; }
-            if (this.index == 3 && f3 != null) { f3((T3)this.value); return; }
-            if (this.index == 4 && f4 != null) { f4((T4)this.value); return; }
-            if (this.index == 5 && f5 != null) { f5((T5)this.value); return; }
-            if (this.index == 6 && f6 != null) { f6((T6)this.value); return; }
-            if (this.index == 7 && f7 != null) { f7((T7)this.value); return; }
-            if (this.index == 8 && f8 != null) { f8((T8)this.value); return; }
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
+            if (f1 != null && valueType == typeof(T1)) { f1((T1)this.value); return; }
+            if (f2 != null && valueType == typeof(T2)) { f2((T2)this.value); return; }
+            if (f3 != null && valueType == typeof(T3)) { f3((T3)this.value); return; }
+            if (f4 != null && valueType == typeof(T4)) { f4((T4)this.value); return; }
+            if (f5 != null && valueType == typeof(T5)) { f5((T5)this.value); return; }
+            if (f6 != null && valueType == typeof(T6)) { f6((T6)this.value); return; }
+            if (f7 != null && valueType == typeof(T7)) { f7((T7)this.value); return; }
+            if (f8 != null && valueType == typeof(T8)) { f8((T8)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -2057,15 +1974,17 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<T1, TResult> f1 = null, Func<T2, TResult> f2 = null, Func<T3, TResult> f3 = null, Func<T4, TResult> f4 = null, Func<T5, TResult> f5 = null, Func<T6, TResult> f6 = null, Func<T7, TResult> f7 = null, Func<T8, TResult> f8 = null, Func<TResult> otherwise = null)
         {
-            if (this.index == 0 && f0 != null) return f0((T0)this.value);
-            if (this.index == 1 && f1 != null) return f1((T1)this.value);
-            if (this.index == 2 && f2 != null) return f2((T2)this.value);
-            if (this.index == 3 && f3 != null) return f3((T3)this.value);
-            if (this.index == 4 && f4 != null) return f4((T4)this.value);
-            if (this.index == 5 && f5 != null) return f5((T5)this.value);
-            if (this.index == 6 && f6 != null) return f6((T6)this.value);
-            if (this.index == 7 && f7 != null) return f7((T7)this.value);
-            if (this.index == 8 && f8 != null) return f8((T8)this.value);
+            EnsureValueNotNull();
+            var valueType = value.GetType();
+            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
+            if (f1 != null && valueType == typeof(T1)) return f1((T1)this.value);
+            if (f2 != null && valueType == typeof(T2)) return f2((T2)this.value);
+            if (f3 != null && valueType == typeof(T3)) return f3((T3)this.value);
+            if (f4 != null && valueType == typeof(T4)) return f4((T4)this.value);
+            if (f5 != null && valueType == typeof(T5)) return f5((T5)this.value);
+            if (f6 != null && valueType == typeof(T6)) return f6((T6)this.value);
+            if (f7 != null && valueType == typeof(T7)) return f7((T7)this.value);
+            if (f8 != null && valueType == typeof(T8)) return f8((T8)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -2078,10 +1997,10 @@ namespace OneOf
             if (!(obj is OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>)) return false;
 
             var other = (OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>)obj;
-            return index == other.index && Equals(value, other.value);
+            return Equals(value, other.value);
         }
 
-        public override int GetHashCode() => unchecked((value?.GetHashCode() ?? 0) * 397 ^ index);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
 
         public override string ToString() => (value?.ToString() ?? "");
     }
