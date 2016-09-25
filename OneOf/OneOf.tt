@@ -68,40 +68,20 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 		WriteLine("");
 		WriteLine("object IOneOf.Value => value;");
 
-		// =============== GetT
-
-		WriteLine("");
-		WriteLine("T Get<T>(int index)");
-		using(var indent2 = new Indent(this))
-		{
-			WriteLine("if (index != this.index)");
-			using(var indent3 = new Indent(this))
-			{
-				WriteLine("throw new InvalidOperationException($\"Cannot return as T{index} as result is T{this.index}\");");
-			}
-			WriteLine("return (T)value;");
-		}
-
 		// =============== Is
-
-		WriteLine("");
-		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
-		{
-			WriteLine($"public bool IsT{parmIndex} => index == {parmIndex};");
-		}
 
 		WriteLine("");
 		WriteLine($"public bool Is<T>()");
 		using(var indent2 = new Indent(this))
 		{
 			WriteLine("// quick path for when value non-null and correct type");
-			WriteLine($"if (this.value is T) return true;");
+			WriteLine($"if (this.value != null && this.value.GetType() == typeof(T)) return true;");
 			WriteLine("");
 
 			WriteLine("// slower path for when value null, or wrong type");
 			for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
 			{
-				WriteLine($"if (IsT{parmIndex} && typeof(T) == typeof(T{parmIndex})) return true;");
+				WriteLine($"if (this.index == {parmIndex} && typeof(T) == typeof(T{parmIndex})) return true;");
 			}
 
 			WriteLine("");
@@ -111,23 +91,17 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 		// =============== As
 
 		WriteLine("");
-		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
-		{
-			WriteLine($"public T{parmIndex} AsT{parmIndex} => Get<T{parmIndex}>({parmIndex});"); 
-		}
-
-		WriteLine("");
 		WriteLine($"public T As<T>()");
 		using(var indent2 = new Indent(this))
 		{
 			WriteLine("// quick path for when value non-null and correct type");
-			WriteLine($"if (this.value is T) return (T)this.value;");
+			WriteLine($"if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;");
 			WriteLine("");
 
 			WriteLine("// slower path for when value null, or wrong type");
 			for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
 			{
-				WriteLine($"if (IsT{parmIndex} && typeof(T) == typeof(T{parmIndex})) return (T)value;");
+				WriteLine($"if (this.index == {parmIndex} && typeof(T) == typeof(T{parmIndex})) return (T)value;");
 			}
 
 			WriteLine("");
@@ -150,9 +124,9 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 	    WriteLine($"public void Switch({switchArgList}, Action otherwise = null)");
 		using(var indent2 = new Indent(this))
 		{
-			for (var j = 0; j < countOfgenericParams; j++)
+			for (var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex++)
 			{
-				WriteLine("if (this.IsT{0} && f{0} != null) {{ f{0}(this.AsT{0}); return; }}", j);
+				WriteLine($"if (this.index == {parmIndex} && f{parmIndex} != null) {{ f{parmIndex}((T{parmIndex})this.value); return; }}");
 			}
 
 			WriteLine("");
@@ -170,9 +144,9 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 	    WriteLine($"public TResult Match<TResult>({matchArgList}, Func<TResult> otherwise = null)");
 		using(var indent2 = new Indent(this))
 		{
-			for (var j = 0; j < countOfgenericParams; j++)
+			for (var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex++)
 			{
-				WriteLine($"if (this.IsT{j} && f{j} != null) return f{j}(this.AsT{j});");
+				WriteLine($"if (this.index == {parmIndex} && f{parmIndex} != null) return f{parmIndex}((T{parmIndex})this.value);");
 			}
 
 			WriteLine("");

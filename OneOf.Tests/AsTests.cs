@@ -14,11 +14,9 @@ namespace OneOf.Tests
         {
             var trueValue = (OneOf<string, bool>)true;
             Assert.AreEqual(true, trueValue.As<bool>());
-            Assert.AreEqual(true, trueValue.AsT1);
 
             var falseValue = (OneOf<string, bool>)false;
             Assert.AreEqual(false, falseValue.As<bool>());
-            Assert.AreEqual(false, falseValue.AsT1);
         }
 
         [Test]
@@ -26,7 +24,6 @@ namespace OneOf.Tests
         {
             var x = (OneOf<string, bool>)"xyz";
             Assert.AreEqual("xyz", x.As<string>());
-            Assert.AreEqual("xyz", x.AsT0);
         }
 
         [Test]
@@ -34,11 +31,13 @@ namespace OneOf.Tests
         {
             var str = (OneOf<string, bool>)"xyz";
             Assert.Throws<InvalidOperationException>(() => str.As<bool>());
-            Assert.Throws<InvalidOperationException>(() => { var x = str.AsT1; return; });
+            Assert.Throws<InvalidOperationException>(() => str.As<double>());
+
+            // while string is an object, As should only exactly match the generic types in the declaration
+            Assert.Throws<InvalidOperationException>(() => str.As<object>()); 
 
             var bln = (OneOf<string, bool>)true;
             Assert.Throws<InvalidOperationException>(() => bln.As<string>());
-            Assert.Throws<InvalidOperationException>(() => { var x = bln.AsT0; return; });
         }
     }
 

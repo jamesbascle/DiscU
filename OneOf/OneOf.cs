@@ -17,37 +17,24 @@ namespace OneOf
 
         object IOneOf.Value => value;
 
-        T Get<T>(int index)
-        {
-            if (index != this.index)
-            {
-                throw new InvalidOperationException($"Cannot return as T{index} as result is T{this.index}");
-            }
-            return (T)value;
-        }
-
-        public bool IsT0 => index == 0;
-
         public bool Is<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return true;
+            if (this.value != null && this.value.GetType() == typeof(T)) return true;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return true;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
 
             return false;
         }
 
-        public T0 AsT0 => Get<T0>(0);
-
         public T As<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return (T)this.value;
+            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return (T)value;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
 
             throw new InvalidOperationException();
         }
@@ -56,7 +43,7 @@ namespace OneOf
 
         public void Switch(Action<T0> f0 = null, Action otherwise = null)
         {
-            if (this.IsT0 && f0 != null) { f0(this.AsT0); return; }
+            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -65,7 +52,7 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<TResult> otherwise = null)
         {
-            if (this.IsT0 && f0 != null) return f0(this.AsT0);
+            if (this.index == 0 && f0 != null) return f0((T0)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -96,41 +83,26 @@ namespace OneOf
 
         object IOneOf.Value => value;
 
-        T Get<T>(int index)
-        {
-            if (index != this.index)
-            {
-                throw new InvalidOperationException($"Cannot return as T{index} as result is T{this.index}");
-            }
-            return (T)value;
-        }
-
-        public bool IsT0 => index == 0;
-        public bool IsT1 => index == 1;
-
         public bool Is<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return true;
+            if (this.value != null && this.value.GetType() == typeof(T)) return true;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return true;
-            if (IsT1 && typeof(T) == typeof(T1)) return true;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
+            if (this.index == 1 && typeof(T) == typeof(T1)) return true;
 
             return false;
         }
 
-        public T0 AsT0 => Get<T0>(0);
-        public T1 AsT1 => Get<T1>(1);
-
         public T As<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return (T)this.value;
+            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return (T)value;
-            if (IsT1 && typeof(T) == typeof(T1)) return (T)value;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
+            if (this.index == 1 && typeof(T) == typeof(T1)) return (T)value;
 
             throw new InvalidOperationException();
         }
@@ -140,8 +112,8 @@ namespace OneOf
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action otherwise = null)
         {
-            if (this.IsT0 && f0 != null) { f0(this.AsT0); return; }
-            if (this.IsT1 && f1 != null) { f1(this.AsT1); return; }
+            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
+            if (this.index == 1 && f1 != null) { f1((T1)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -150,8 +122,8 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<T1, TResult> f1 = null, Func<TResult> otherwise = null)
         {
-            if (this.IsT0 && f0 != null) return f0(this.AsT0);
-            if (this.IsT1 && f1 != null) return f1(this.AsT1);
+            if (this.index == 0 && f0 != null) return f0((T0)this.value);
+            if (this.index == 1 && f1 != null) return f1((T1)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -182,45 +154,28 @@ namespace OneOf
 
         object IOneOf.Value => value;
 
-        T Get<T>(int index)
-        {
-            if (index != this.index)
-            {
-                throw new InvalidOperationException($"Cannot return as T{index} as result is T{this.index}");
-            }
-            return (T)value;
-        }
-
-        public bool IsT0 => index == 0;
-        public bool IsT1 => index == 1;
-        public bool IsT2 => index == 2;
-
         public bool Is<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return true;
+            if (this.value != null && this.value.GetType() == typeof(T)) return true;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return true;
-            if (IsT1 && typeof(T) == typeof(T1)) return true;
-            if (IsT2 && typeof(T) == typeof(T2)) return true;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
+            if (this.index == 1 && typeof(T) == typeof(T1)) return true;
+            if (this.index == 2 && typeof(T) == typeof(T2)) return true;
 
             return false;
         }
 
-        public T0 AsT0 => Get<T0>(0);
-        public T1 AsT1 => Get<T1>(1);
-        public T2 AsT2 => Get<T2>(2);
-
         public T As<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return (T)this.value;
+            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return (T)value;
-            if (IsT1 && typeof(T) == typeof(T1)) return (T)value;
-            if (IsT2 && typeof(T) == typeof(T2)) return (T)value;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
+            if (this.index == 1 && typeof(T) == typeof(T1)) return (T)value;
+            if (this.index == 2 && typeof(T) == typeof(T2)) return (T)value;
 
             throw new InvalidOperationException();
         }
@@ -231,9 +186,9 @@ namespace OneOf
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action otherwise = null)
         {
-            if (this.IsT0 && f0 != null) { f0(this.AsT0); return; }
-            if (this.IsT1 && f1 != null) { f1(this.AsT1); return; }
-            if (this.IsT2 && f2 != null) { f2(this.AsT2); return; }
+            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
+            if (this.index == 1 && f1 != null) { f1((T1)this.value); return; }
+            if (this.index == 2 && f2 != null) { f2((T2)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -242,9 +197,9 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<T1, TResult> f1 = null, Func<T2, TResult> f2 = null, Func<TResult> otherwise = null)
         {
-            if (this.IsT0 && f0 != null) return f0(this.AsT0);
-            if (this.IsT1 && f1 != null) return f1(this.AsT1);
-            if (this.IsT2 && f2 != null) return f2(this.AsT2);
+            if (this.index == 0 && f0 != null) return f0((T0)this.value);
+            if (this.index == 1 && f1 != null) return f1((T1)this.value);
+            if (this.index == 2 && f2 != null) return f2((T2)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -275,49 +230,30 @@ namespace OneOf
 
         object IOneOf.Value => value;
 
-        T Get<T>(int index)
-        {
-            if (index != this.index)
-            {
-                throw new InvalidOperationException($"Cannot return as T{index} as result is T{this.index}");
-            }
-            return (T)value;
-        }
-
-        public bool IsT0 => index == 0;
-        public bool IsT1 => index == 1;
-        public bool IsT2 => index == 2;
-        public bool IsT3 => index == 3;
-
         public bool Is<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return true;
+            if (this.value != null && this.value.GetType() == typeof(T)) return true;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return true;
-            if (IsT1 && typeof(T) == typeof(T1)) return true;
-            if (IsT2 && typeof(T) == typeof(T2)) return true;
-            if (IsT3 && typeof(T) == typeof(T3)) return true;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
+            if (this.index == 1 && typeof(T) == typeof(T1)) return true;
+            if (this.index == 2 && typeof(T) == typeof(T2)) return true;
+            if (this.index == 3 && typeof(T) == typeof(T3)) return true;
 
             return false;
         }
 
-        public T0 AsT0 => Get<T0>(0);
-        public T1 AsT1 => Get<T1>(1);
-        public T2 AsT2 => Get<T2>(2);
-        public T3 AsT3 => Get<T3>(3);
-
         public T As<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return (T)this.value;
+            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return (T)value;
-            if (IsT1 && typeof(T) == typeof(T1)) return (T)value;
-            if (IsT2 && typeof(T) == typeof(T2)) return (T)value;
-            if (IsT3 && typeof(T) == typeof(T3)) return (T)value;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
+            if (this.index == 1 && typeof(T) == typeof(T1)) return (T)value;
+            if (this.index == 2 && typeof(T) == typeof(T2)) return (T)value;
+            if (this.index == 3 && typeof(T) == typeof(T3)) return (T)value;
 
             throw new InvalidOperationException();
         }
@@ -329,10 +265,10 @@ namespace OneOf
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action otherwise = null)
         {
-            if (this.IsT0 && f0 != null) { f0(this.AsT0); return; }
-            if (this.IsT1 && f1 != null) { f1(this.AsT1); return; }
-            if (this.IsT2 && f2 != null) { f2(this.AsT2); return; }
-            if (this.IsT3 && f3 != null) { f3(this.AsT3); return; }
+            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
+            if (this.index == 1 && f1 != null) { f1((T1)this.value); return; }
+            if (this.index == 2 && f2 != null) { f2((T2)this.value); return; }
+            if (this.index == 3 && f3 != null) { f3((T3)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -341,10 +277,10 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<T1, TResult> f1 = null, Func<T2, TResult> f2 = null, Func<T3, TResult> f3 = null, Func<TResult> otherwise = null)
         {
-            if (this.IsT0 && f0 != null) return f0(this.AsT0);
-            if (this.IsT1 && f1 != null) return f1(this.AsT1);
-            if (this.IsT2 && f2 != null) return f2(this.AsT2);
-            if (this.IsT3 && f3 != null) return f3(this.AsT3);
+            if (this.index == 0 && f0 != null) return f0((T0)this.value);
+            if (this.index == 1 && f1 != null) return f1((T1)this.value);
+            if (this.index == 2 && f2 != null) return f2((T2)this.value);
+            if (this.index == 3 && f3 != null) return f3((T3)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -375,53 +311,32 @@ namespace OneOf
 
         object IOneOf.Value => value;
 
-        T Get<T>(int index)
-        {
-            if (index != this.index)
-            {
-                throw new InvalidOperationException($"Cannot return as T{index} as result is T{this.index}");
-            }
-            return (T)value;
-        }
-
-        public bool IsT0 => index == 0;
-        public bool IsT1 => index == 1;
-        public bool IsT2 => index == 2;
-        public bool IsT3 => index == 3;
-        public bool IsT4 => index == 4;
-
         public bool Is<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return true;
+            if (this.value != null && this.value.GetType() == typeof(T)) return true;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return true;
-            if (IsT1 && typeof(T) == typeof(T1)) return true;
-            if (IsT2 && typeof(T) == typeof(T2)) return true;
-            if (IsT3 && typeof(T) == typeof(T3)) return true;
-            if (IsT4 && typeof(T) == typeof(T4)) return true;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
+            if (this.index == 1 && typeof(T) == typeof(T1)) return true;
+            if (this.index == 2 && typeof(T) == typeof(T2)) return true;
+            if (this.index == 3 && typeof(T) == typeof(T3)) return true;
+            if (this.index == 4 && typeof(T) == typeof(T4)) return true;
 
             return false;
         }
 
-        public T0 AsT0 => Get<T0>(0);
-        public T1 AsT1 => Get<T1>(1);
-        public T2 AsT2 => Get<T2>(2);
-        public T3 AsT3 => Get<T3>(3);
-        public T4 AsT4 => Get<T4>(4);
-
         public T As<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return (T)this.value;
+            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return (T)value;
-            if (IsT1 && typeof(T) == typeof(T1)) return (T)value;
-            if (IsT2 && typeof(T) == typeof(T2)) return (T)value;
-            if (IsT3 && typeof(T) == typeof(T3)) return (T)value;
-            if (IsT4 && typeof(T) == typeof(T4)) return (T)value;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
+            if (this.index == 1 && typeof(T) == typeof(T1)) return (T)value;
+            if (this.index == 2 && typeof(T) == typeof(T2)) return (T)value;
+            if (this.index == 3 && typeof(T) == typeof(T3)) return (T)value;
+            if (this.index == 4 && typeof(T) == typeof(T4)) return (T)value;
 
             throw new InvalidOperationException();
         }
@@ -434,11 +349,11 @@ namespace OneOf
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action otherwise = null)
         {
-            if (this.IsT0 && f0 != null) { f0(this.AsT0); return; }
-            if (this.IsT1 && f1 != null) { f1(this.AsT1); return; }
-            if (this.IsT2 && f2 != null) { f2(this.AsT2); return; }
-            if (this.IsT3 && f3 != null) { f3(this.AsT3); return; }
-            if (this.IsT4 && f4 != null) { f4(this.AsT4); return; }
+            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
+            if (this.index == 1 && f1 != null) { f1((T1)this.value); return; }
+            if (this.index == 2 && f2 != null) { f2((T2)this.value); return; }
+            if (this.index == 3 && f3 != null) { f3((T3)this.value); return; }
+            if (this.index == 4 && f4 != null) { f4((T4)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -447,11 +362,11 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<T1, TResult> f1 = null, Func<T2, TResult> f2 = null, Func<T3, TResult> f3 = null, Func<T4, TResult> f4 = null, Func<TResult> otherwise = null)
         {
-            if (this.IsT0 && f0 != null) return f0(this.AsT0);
-            if (this.IsT1 && f1 != null) return f1(this.AsT1);
-            if (this.IsT2 && f2 != null) return f2(this.AsT2);
-            if (this.IsT3 && f3 != null) return f3(this.AsT3);
-            if (this.IsT4 && f4 != null) return f4(this.AsT4);
+            if (this.index == 0 && f0 != null) return f0((T0)this.value);
+            if (this.index == 1 && f1 != null) return f1((T1)this.value);
+            if (this.index == 2 && f2 != null) return f2((T2)this.value);
+            if (this.index == 3 && f3 != null) return f3((T3)this.value);
+            if (this.index == 4 && f4 != null) return f4((T4)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -482,57 +397,34 @@ namespace OneOf
 
         object IOneOf.Value => value;
 
-        T Get<T>(int index)
-        {
-            if (index != this.index)
-            {
-                throw new InvalidOperationException($"Cannot return as T{index} as result is T{this.index}");
-            }
-            return (T)value;
-        }
-
-        public bool IsT0 => index == 0;
-        public bool IsT1 => index == 1;
-        public bool IsT2 => index == 2;
-        public bool IsT3 => index == 3;
-        public bool IsT4 => index == 4;
-        public bool IsT5 => index == 5;
-
         public bool Is<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return true;
+            if (this.value != null && this.value.GetType() == typeof(T)) return true;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return true;
-            if (IsT1 && typeof(T) == typeof(T1)) return true;
-            if (IsT2 && typeof(T) == typeof(T2)) return true;
-            if (IsT3 && typeof(T) == typeof(T3)) return true;
-            if (IsT4 && typeof(T) == typeof(T4)) return true;
-            if (IsT5 && typeof(T) == typeof(T5)) return true;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
+            if (this.index == 1 && typeof(T) == typeof(T1)) return true;
+            if (this.index == 2 && typeof(T) == typeof(T2)) return true;
+            if (this.index == 3 && typeof(T) == typeof(T3)) return true;
+            if (this.index == 4 && typeof(T) == typeof(T4)) return true;
+            if (this.index == 5 && typeof(T) == typeof(T5)) return true;
 
             return false;
         }
 
-        public T0 AsT0 => Get<T0>(0);
-        public T1 AsT1 => Get<T1>(1);
-        public T2 AsT2 => Get<T2>(2);
-        public T3 AsT3 => Get<T3>(3);
-        public T4 AsT4 => Get<T4>(4);
-        public T5 AsT5 => Get<T5>(5);
-
         public T As<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return (T)this.value;
+            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return (T)value;
-            if (IsT1 && typeof(T) == typeof(T1)) return (T)value;
-            if (IsT2 && typeof(T) == typeof(T2)) return (T)value;
-            if (IsT3 && typeof(T) == typeof(T3)) return (T)value;
-            if (IsT4 && typeof(T) == typeof(T4)) return (T)value;
-            if (IsT5 && typeof(T) == typeof(T5)) return (T)value;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
+            if (this.index == 1 && typeof(T) == typeof(T1)) return (T)value;
+            if (this.index == 2 && typeof(T) == typeof(T2)) return (T)value;
+            if (this.index == 3 && typeof(T) == typeof(T3)) return (T)value;
+            if (this.index == 4 && typeof(T) == typeof(T4)) return (T)value;
+            if (this.index == 5 && typeof(T) == typeof(T5)) return (T)value;
 
             throw new InvalidOperationException();
         }
@@ -546,12 +438,12 @@ namespace OneOf
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action<T5> f5 = null, Action otherwise = null)
         {
-            if (this.IsT0 && f0 != null) { f0(this.AsT0); return; }
-            if (this.IsT1 && f1 != null) { f1(this.AsT1); return; }
-            if (this.IsT2 && f2 != null) { f2(this.AsT2); return; }
-            if (this.IsT3 && f3 != null) { f3(this.AsT3); return; }
-            if (this.IsT4 && f4 != null) { f4(this.AsT4); return; }
-            if (this.IsT5 && f5 != null) { f5(this.AsT5); return; }
+            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
+            if (this.index == 1 && f1 != null) { f1((T1)this.value); return; }
+            if (this.index == 2 && f2 != null) { f2((T2)this.value); return; }
+            if (this.index == 3 && f3 != null) { f3((T3)this.value); return; }
+            if (this.index == 4 && f4 != null) { f4((T4)this.value); return; }
+            if (this.index == 5 && f5 != null) { f5((T5)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -560,12 +452,12 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<T1, TResult> f1 = null, Func<T2, TResult> f2 = null, Func<T3, TResult> f3 = null, Func<T4, TResult> f4 = null, Func<T5, TResult> f5 = null, Func<TResult> otherwise = null)
         {
-            if (this.IsT0 && f0 != null) return f0(this.AsT0);
-            if (this.IsT1 && f1 != null) return f1(this.AsT1);
-            if (this.IsT2 && f2 != null) return f2(this.AsT2);
-            if (this.IsT3 && f3 != null) return f3(this.AsT3);
-            if (this.IsT4 && f4 != null) return f4(this.AsT4);
-            if (this.IsT5 && f5 != null) return f5(this.AsT5);
+            if (this.index == 0 && f0 != null) return f0((T0)this.value);
+            if (this.index == 1 && f1 != null) return f1((T1)this.value);
+            if (this.index == 2 && f2 != null) return f2((T2)this.value);
+            if (this.index == 3 && f3 != null) return f3((T3)this.value);
+            if (this.index == 4 && f4 != null) return f4((T4)this.value);
+            if (this.index == 5 && f5 != null) return f5((T5)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -596,61 +488,36 @@ namespace OneOf
 
         object IOneOf.Value => value;
 
-        T Get<T>(int index)
-        {
-            if (index != this.index)
-            {
-                throw new InvalidOperationException($"Cannot return as T{index} as result is T{this.index}");
-            }
-            return (T)value;
-        }
-
-        public bool IsT0 => index == 0;
-        public bool IsT1 => index == 1;
-        public bool IsT2 => index == 2;
-        public bool IsT3 => index == 3;
-        public bool IsT4 => index == 4;
-        public bool IsT5 => index == 5;
-        public bool IsT6 => index == 6;
-
         public bool Is<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return true;
+            if (this.value != null && this.value.GetType() == typeof(T)) return true;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return true;
-            if (IsT1 && typeof(T) == typeof(T1)) return true;
-            if (IsT2 && typeof(T) == typeof(T2)) return true;
-            if (IsT3 && typeof(T) == typeof(T3)) return true;
-            if (IsT4 && typeof(T) == typeof(T4)) return true;
-            if (IsT5 && typeof(T) == typeof(T5)) return true;
-            if (IsT6 && typeof(T) == typeof(T6)) return true;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
+            if (this.index == 1 && typeof(T) == typeof(T1)) return true;
+            if (this.index == 2 && typeof(T) == typeof(T2)) return true;
+            if (this.index == 3 && typeof(T) == typeof(T3)) return true;
+            if (this.index == 4 && typeof(T) == typeof(T4)) return true;
+            if (this.index == 5 && typeof(T) == typeof(T5)) return true;
+            if (this.index == 6 && typeof(T) == typeof(T6)) return true;
 
             return false;
         }
 
-        public T0 AsT0 => Get<T0>(0);
-        public T1 AsT1 => Get<T1>(1);
-        public T2 AsT2 => Get<T2>(2);
-        public T3 AsT3 => Get<T3>(3);
-        public T4 AsT4 => Get<T4>(4);
-        public T5 AsT5 => Get<T5>(5);
-        public T6 AsT6 => Get<T6>(6);
-
         public T As<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return (T)this.value;
+            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return (T)value;
-            if (IsT1 && typeof(T) == typeof(T1)) return (T)value;
-            if (IsT2 && typeof(T) == typeof(T2)) return (T)value;
-            if (IsT3 && typeof(T) == typeof(T3)) return (T)value;
-            if (IsT4 && typeof(T) == typeof(T4)) return (T)value;
-            if (IsT5 && typeof(T) == typeof(T5)) return (T)value;
-            if (IsT6 && typeof(T) == typeof(T6)) return (T)value;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
+            if (this.index == 1 && typeof(T) == typeof(T1)) return (T)value;
+            if (this.index == 2 && typeof(T) == typeof(T2)) return (T)value;
+            if (this.index == 3 && typeof(T) == typeof(T3)) return (T)value;
+            if (this.index == 4 && typeof(T) == typeof(T4)) return (T)value;
+            if (this.index == 5 && typeof(T) == typeof(T5)) return (T)value;
+            if (this.index == 6 && typeof(T) == typeof(T6)) return (T)value;
 
             throw new InvalidOperationException();
         }
@@ -665,13 +532,13 @@ namespace OneOf
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action<T5> f5 = null, Action<T6> f6 = null, Action otherwise = null)
         {
-            if (this.IsT0 && f0 != null) { f0(this.AsT0); return; }
-            if (this.IsT1 && f1 != null) { f1(this.AsT1); return; }
-            if (this.IsT2 && f2 != null) { f2(this.AsT2); return; }
-            if (this.IsT3 && f3 != null) { f3(this.AsT3); return; }
-            if (this.IsT4 && f4 != null) { f4(this.AsT4); return; }
-            if (this.IsT5 && f5 != null) { f5(this.AsT5); return; }
-            if (this.IsT6 && f6 != null) { f6(this.AsT6); return; }
+            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
+            if (this.index == 1 && f1 != null) { f1((T1)this.value); return; }
+            if (this.index == 2 && f2 != null) { f2((T2)this.value); return; }
+            if (this.index == 3 && f3 != null) { f3((T3)this.value); return; }
+            if (this.index == 4 && f4 != null) { f4((T4)this.value); return; }
+            if (this.index == 5 && f5 != null) { f5((T5)this.value); return; }
+            if (this.index == 6 && f6 != null) { f6((T6)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -680,13 +547,13 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<T1, TResult> f1 = null, Func<T2, TResult> f2 = null, Func<T3, TResult> f3 = null, Func<T4, TResult> f4 = null, Func<T5, TResult> f5 = null, Func<T6, TResult> f6 = null, Func<TResult> otherwise = null)
         {
-            if (this.IsT0 && f0 != null) return f0(this.AsT0);
-            if (this.IsT1 && f1 != null) return f1(this.AsT1);
-            if (this.IsT2 && f2 != null) return f2(this.AsT2);
-            if (this.IsT3 && f3 != null) return f3(this.AsT3);
-            if (this.IsT4 && f4 != null) return f4(this.AsT4);
-            if (this.IsT5 && f5 != null) return f5(this.AsT5);
-            if (this.IsT6 && f6 != null) return f6(this.AsT6);
+            if (this.index == 0 && f0 != null) return f0((T0)this.value);
+            if (this.index == 1 && f1 != null) return f1((T1)this.value);
+            if (this.index == 2 && f2 != null) return f2((T2)this.value);
+            if (this.index == 3 && f3 != null) return f3((T3)this.value);
+            if (this.index == 4 && f4 != null) return f4((T4)this.value);
+            if (this.index == 5 && f5 != null) return f5((T5)this.value);
+            if (this.index == 6 && f6 != null) return f6((T6)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -717,65 +584,38 @@ namespace OneOf
 
         object IOneOf.Value => value;
 
-        T Get<T>(int index)
-        {
-            if (index != this.index)
-            {
-                throw new InvalidOperationException($"Cannot return as T{index} as result is T{this.index}");
-            }
-            return (T)value;
-        }
-
-        public bool IsT0 => index == 0;
-        public bool IsT1 => index == 1;
-        public bool IsT2 => index == 2;
-        public bool IsT3 => index == 3;
-        public bool IsT4 => index == 4;
-        public bool IsT5 => index == 5;
-        public bool IsT6 => index == 6;
-        public bool IsT7 => index == 7;
-
         public bool Is<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return true;
+            if (this.value != null && this.value.GetType() == typeof(T)) return true;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return true;
-            if (IsT1 && typeof(T) == typeof(T1)) return true;
-            if (IsT2 && typeof(T) == typeof(T2)) return true;
-            if (IsT3 && typeof(T) == typeof(T3)) return true;
-            if (IsT4 && typeof(T) == typeof(T4)) return true;
-            if (IsT5 && typeof(T) == typeof(T5)) return true;
-            if (IsT6 && typeof(T) == typeof(T6)) return true;
-            if (IsT7 && typeof(T) == typeof(T7)) return true;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
+            if (this.index == 1 && typeof(T) == typeof(T1)) return true;
+            if (this.index == 2 && typeof(T) == typeof(T2)) return true;
+            if (this.index == 3 && typeof(T) == typeof(T3)) return true;
+            if (this.index == 4 && typeof(T) == typeof(T4)) return true;
+            if (this.index == 5 && typeof(T) == typeof(T5)) return true;
+            if (this.index == 6 && typeof(T) == typeof(T6)) return true;
+            if (this.index == 7 && typeof(T) == typeof(T7)) return true;
 
             return false;
         }
 
-        public T0 AsT0 => Get<T0>(0);
-        public T1 AsT1 => Get<T1>(1);
-        public T2 AsT2 => Get<T2>(2);
-        public T3 AsT3 => Get<T3>(3);
-        public T4 AsT4 => Get<T4>(4);
-        public T5 AsT5 => Get<T5>(5);
-        public T6 AsT6 => Get<T6>(6);
-        public T7 AsT7 => Get<T7>(7);
-
         public T As<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return (T)this.value;
+            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return (T)value;
-            if (IsT1 && typeof(T) == typeof(T1)) return (T)value;
-            if (IsT2 && typeof(T) == typeof(T2)) return (T)value;
-            if (IsT3 && typeof(T) == typeof(T3)) return (T)value;
-            if (IsT4 && typeof(T) == typeof(T4)) return (T)value;
-            if (IsT5 && typeof(T) == typeof(T5)) return (T)value;
-            if (IsT6 && typeof(T) == typeof(T6)) return (T)value;
-            if (IsT7 && typeof(T) == typeof(T7)) return (T)value;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
+            if (this.index == 1 && typeof(T) == typeof(T1)) return (T)value;
+            if (this.index == 2 && typeof(T) == typeof(T2)) return (T)value;
+            if (this.index == 3 && typeof(T) == typeof(T3)) return (T)value;
+            if (this.index == 4 && typeof(T) == typeof(T4)) return (T)value;
+            if (this.index == 5 && typeof(T) == typeof(T5)) return (T)value;
+            if (this.index == 6 && typeof(T) == typeof(T6)) return (T)value;
+            if (this.index == 7 && typeof(T) == typeof(T7)) return (T)value;
 
             throw new InvalidOperationException();
         }
@@ -791,14 +631,14 @@ namespace OneOf
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action<T5> f5 = null, Action<T6> f6 = null, Action<T7> f7 = null, Action otherwise = null)
         {
-            if (this.IsT0 && f0 != null) { f0(this.AsT0); return; }
-            if (this.IsT1 && f1 != null) { f1(this.AsT1); return; }
-            if (this.IsT2 && f2 != null) { f2(this.AsT2); return; }
-            if (this.IsT3 && f3 != null) { f3(this.AsT3); return; }
-            if (this.IsT4 && f4 != null) { f4(this.AsT4); return; }
-            if (this.IsT5 && f5 != null) { f5(this.AsT5); return; }
-            if (this.IsT6 && f6 != null) { f6(this.AsT6); return; }
-            if (this.IsT7 && f7 != null) { f7(this.AsT7); return; }
+            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
+            if (this.index == 1 && f1 != null) { f1((T1)this.value); return; }
+            if (this.index == 2 && f2 != null) { f2((T2)this.value); return; }
+            if (this.index == 3 && f3 != null) { f3((T3)this.value); return; }
+            if (this.index == 4 && f4 != null) { f4((T4)this.value); return; }
+            if (this.index == 5 && f5 != null) { f5((T5)this.value); return; }
+            if (this.index == 6 && f6 != null) { f6((T6)this.value); return; }
+            if (this.index == 7 && f7 != null) { f7((T7)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -807,14 +647,14 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<T1, TResult> f1 = null, Func<T2, TResult> f2 = null, Func<T3, TResult> f3 = null, Func<T4, TResult> f4 = null, Func<T5, TResult> f5 = null, Func<T6, TResult> f6 = null, Func<T7, TResult> f7 = null, Func<TResult> otherwise = null)
         {
-            if (this.IsT0 && f0 != null) return f0(this.AsT0);
-            if (this.IsT1 && f1 != null) return f1(this.AsT1);
-            if (this.IsT2 && f2 != null) return f2(this.AsT2);
-            if (this.IsT3 && f3 != null) return f3(this.AsT3);
-            if (this.IsT4 && f4 != null) return f4(this.AsT4);
-            if (this.IsT5 && f5 != null) return f5(this.AsT5);
-            if (this.IsT6 && f6 != null) return f6(this.AsT6);
-            if (this.IsT7 && f7 != null) return f7(this.AsT7);
+            if (this.index == 0 && f0 != null) return f0((T0)this.value);
+            if (this.index == 1 && f1 != null) return f1((T1)this.value);
+            if (this.index == 2 && f2 != null) return f2((T2)this.value);
+            if (this.index == 3 && f3 != null) return f3((T3)this.value);
+            if (this.index == 4 && f4 != null) return f4((T4)this.value);
+            if (this.index == 5 && f5 != null) return f5((T5)this.value);
+            if (this.index == 6 && f6 != null) return f6((T6)this.value);
+            if (this.index == 7 && f7 != null) return f7((T7)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -845,69 +685,40 @@ namespace OneOf
 
         object IOneOf.Value => value;
 
-        T Get<T>(int index)
-        {
-            if (index != this.index)
-            {
-                throw new InvalidOperationException($"Cannot return as T{index} as result is T{this.index}");
-            }
-            return (T)value;
-        }
-
-        public bool IsT0 => index == 0;
-        public bool IsT1 => index == 1;
-        public bool IsT2 => index == 2;
-        public bool IsT3 => index == 3;
-        public bool IsT4 => index == 4;
-        public bool IsT5 => index == 5;
-        public bool IsT6 => index == 6;
-        public bool IsT7 => index == 7;
-        public bool IsT8 => index == 8;
-
         public bool Is<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return true;
+            if (this.value != null && this.value.GetType() == typeof(T)) return true;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return true;
-            if (IsT1 && typeof(T) == typeof(T1)) return true;
-            if (IsT2 && typeof(T) == typeof(T2)) return true;
-            if (IsT3 && typeof(T) == typeof(T3)) return true;
-            if (IsT4 && typeof(T) == typeof(T4)) return true;
-            if (IsT5 && typeof(T) == typeof(T5)) return true;
-            if (IsT6 && typeof(T) == typeof(T6)) return true;
-            if (IsT7 && typeof(T) == typeof(T7)) return true;
-            if (IsT8 && typeof(T) == typeof(T8)) return true;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
+            if (this.index == 1 && typeof(T) == typeof(T1)) return true;
+            if (this.index == 2 && typeof(T) == typeof(T2)) return true;
+            if (this.index == 3 && typeof(T) == typeof(T3)) return true;
+            if (this.index == 4 && typeof(T) == typeof(T4)) return true;
+            if (this.index == 5 && typeof(T) == typeof(T5)) return true;
+            if (this.index == 6 && typeof(T) == typeof(T6)) return true;
+            if (this.index == 7 && typeof(T) == typeof(T7)) return true;
+            if (this.index == 8 && typeof(T) == typeof(T8)) return true;
 
             return false;
         }
 
-        public T0 AsT0 => Get<T0>(0);
-        public T1 AsT1 => Get<T1>(1);
-        public T2 AsT2 => Get<T2>(2);
-        public T3 AsT3 => Get<T3>(3);
-        public T4 AsT4 => Get<T4>(4);
-        public T5 AsT5 => Get<T5>(5);
-        public T6 AsT6 => Get<T6>(6);
-        public T7 AsT7 => Get<T7>(7);
-        public T8 AsT8 => Get<T8>(8);
-
         public T As<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return (T)this.value;
+            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return (T)value;
-            if (IsT1 && typeof(T) == typeof(T1)) return (T)value;
-            if (IsT2 && typeof(T) == typeof(T2)) return (T)value;
-            if (IsT3 && typeof(T) == typeof(T3)) return (T)value;
-            if (IsT4 && typeof(T) == typeof(T4)) return (T)value;
-            if (IsT5 && typeof(T) == typeof(T5)) return (T)value;
-            if (IsT6 && typeof(T) == typeof(T6)) return (T)value;
-            if (IsT7 && typeof(T) == typeof(T7)) return (T)value;
-            if (IsT8 && typeof(T) == typeof(T8)) return (T)value;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
+            if (this.index == 1 && typeof(T) == typeof(T1)) return (T)value;
+            if (this.index == 2 && typeof(T) == typeof(T2)) return (T)value;
+            if (this.index == 3 && typeof(T) == typeof(T3)) return (T)value;
+            if (this.index == 4 && typeof(T) == typeof(T4)) return (T)value;
+            if (this.index == 5 && typeof(T) == typeof(T5)) return (T)value;
+            if (this.index == 6 && typeof(T) == typeof(T6)) return (T)value;
+            if (this.index == 7 && typeof(T) == typeof(T7)) return (T)value;
+            if (this.index == 8 && typeof(T) == typeof(T8)) return (T)value;
 
             throw new InvalidOperationException();
         }
@@ -924,15 +735,15 @@ namespace OneOf
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action<T5> f5 = null, Action<T6> f6 = null, Action<T7> f7 = null, Action<T8> f8 = null, Action otherwise = null)
         {
-            if (this.IsT0 && f0 != null) { f0(this.AsT0); return; }
-            if (this.IsT1 && f1 != null) { f1(this.AsT1); return; }
-            if (this.IsT2 && f2 != null) { f2(this.AsT2); return; }
-            if (this.IsT3 && f3 != null) { f3(this.AsT3); return; }
-            if (this.IsT4 && f4 != null) { f4(this.AsT4); return; }
-            if (this.IsT5 && f5 != null) { f5(this.AsT5); return; }
-            if (this.IsT6 && f6 != null) { f6(this.AsT6); return; }
-            if (this.IsT7 && f7 != null) { f7(this.AsT7); return; }
-            if (this.IsT8 && f8 != null) { f8(this.AsT8); return; }
+            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
+            if (this.index == 1 && f1 != null) { f1((T1)this.value); return; }
+            if (this.index == 2 && f2 != null) { f2((T2)this.value); return; }
+            if (this.index == 3 && f3 != null) { f3((T3)this.value); return; }
+            if (this.index == 4 && f4 != null) { f4((T4)this.value); return; }
+            if (this.index == 5 && f5 != null) { f5((T5)this.value); return; }
+            if (this.index == 6 && f6 != null) { f6((T6)this.value); return; }
+            if (this.index == 7 && f7 != null) { f7((T7)this.value); return; }
+            if (this.index == 8 && f8 != null) { f8((T8)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -941,15 +752,15 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<T1, TResult> f1 = null, Func<T2, TResult> f2 = null, Func<T3, TResult> f3 = null, Func<T4, TResult> f4 = null, Func<T5, TResult> f5 = null, Func<T6, TResult> f6 = null, Func<T7, TResult> f7 = null, Func<T8, TResult> f8 = null, Func<TResult> otherwise = null)
         {
-            if (this.IsT0 && f0 != null) return f0(this.AsT0);
-            if (this.IsT1 && f1 != null) return f1(this.AsT1);
-            if (this.IsT2 && f2 != null) return f2(this.AsT2);
-            if (this.IsT3 && f3 != null) return f3(this.AsT3);
-            if (this.IsT4 && f4 != null) return f4(this.AsT4);
-            if (this.IsT5 && f5 != null) return f5(this.AsT5);
-            if (this.IsT6 && f6 != null) return f6(this.AsT6);
-            if (this.IsT7 && f7 != null) return f7(this.AsT7);
-            if (this.IsT8 && f8 != null) return f8(this.AsT8);
+            if (this.index == 0 && f0 != null) return f0((T0)this.value);
+            if (this.index == 1 && f1 != null) return f1((T1)this.value);
+            if (this.index == 2 && f2 != null) return f2((T2)this.value);
+            if (this.index == 3 && f3 != null) return f3((T3)this.value);
+            if (this.index == 4 && f4 != null) return f4((T4)this.value);
+            if (this.index == 5 && f5 != null) return f5((T5)this.value);
+            if (this.index == 6 && f6 != null) return f6((T6)this.value);
+            if (this.index == 7 && f7 != null) return f7((T7)this.value);
+            if (this.index == 8 && f8 != null) return f8((T8)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -987,37 +798,24 @@ namespace OneOf
 
         object IOneOf.Value => value;
 
-        T Get<T>(int index)
-        {
-            if (index != this.index)
-            {
-                throw new InvalidOperationException($"Cannot return as T{index} as result is T{this.index}");
-            }
-            return (T)value;
-        }
-
-        public bool IsT0 => index == 0;
-
         public bool Is<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return true;
+            if (this.value != null && this.value.GetType() == typeof(T)) return true;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return true;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
 
             return false;
         }
 
-        public T0 AsT0 => Get<T0>(0);
-
         public T As<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return (T)this.value;
+            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return (T)value;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
 
             throw new InvalidOperationException();
         }
@@ -1026,7 +824,7 @@ namespace OneOf
 
         public void Switch(Action<T0> f0 = null, Action otherwise = null)
         {
-            if (this.IsT0 && f0 != null) { f0(this.AsT0); return; }
+            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -1035,7 +833,7 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<TResult> otherwise = null)
         {
-            if (this.IsT0 && f0 != null) return f0(this.AsT0);
+            if (this.index == 0 && f0 != null) return f0((T0)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -1074,41 +872,26 @@ namespace OneOf
 
         object IOneOf.Value => value;
 
-        T Get<T>(int index)
-        {
-            if (index != this.index)
-            {
-                throw new InvalidOperationException($"Cannot return as T{index} as result is T{this.index}");
-            }
-            return (T)value;
-        }
-
-        public bool IsT0 => index == 0;
-        public bool IsT1 => index == 1;
-
         public bool Is<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return true;
+            if (this.value != null && this.value.GetType() == typeof(T)) return true;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return true;
-            if (IsT1 && typeof(T) == typeof(T1)) return true;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
+            if (this.index == 1 && typeof(T) == typeof(T1)) return true;
 
             return false;
         }
 
-        public T0 AsT0 => Get<T0>(0);
-        public T1 AsT1 => Get<T1>(1);
-
         public T As<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return (T)this.value;
+            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return (T)value;
-            if (IsT1 && typeof(T) == typeof(T1)) return (T)value;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
+            if (this.index == 1 && typeof(T) == typeof(T1)) return (T)value;
 
             throw new InvalidOperationException();
         }
@@ -1118,8 +901,8 @@ namespace OneOf
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action otherwise = null)
         {
-            if (this.IsT0 && f0 != null) { f0(this.AsT0); return; }
-            if (this.IsT1 && f1 != null) { f1(this.AsT1); return; }
+            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
+            if (this.index == 1 && f1 != null) { f1((T1)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -1128,8 +911,8 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<T1, TResult> f1 = null, Func<TResult> otherwise = null)
         {
-            if (this.IsT0 && f0 != null) return f0(this.AsT0);
-            if (this.IsT1 && f1 != null) return f1(this.AsT1);
+            if (this.index == 0 && f0 != null) return f0((T0)this.value);
+            if (this.index == 1 && f1 != null) return f1((T1)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -1169,45 +952,28 @@ namespace OneOf
 
         object IOneOf.Value => value;
 
-        T Get<T>(int index)
-        {
-            if (index != this.index)
-            {
-                throw new InvalidOperationException($"Cannot return as T{index} as result is T{this.index}");
-            }
-            return (T)value;
-        }
-
-        public bool IsT0 => index == 0;
-        public bool IsT1 => index == 1;
-        public bool IsT2 => index == 2;
-
         public bool Is<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return true;
+            if (this.value != null && this.value.GetType() == typeof(T)) return true;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return true;
-            if (IsT1 && typeof(T) == typeof(T1)) return true;
-            if (IsT2 && typeof(T) == typeof(T2)) return true;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
+            if (this.index == 1 && typeof(T) == typeof(T1)) return true;
+            if (this.index == 2 && typeof(T) == typeof(T2)) return true;
 
             return false;
         }
 
-        public T0 AsT0 => Get<T0>(0);
-        public T1 AsT1 => Get<T1>(1);
-        public T2 AsT2 => Get<T2>(2);
-
         public T As<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return (T)this.value;
+            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return (T)value;
-            if (IsT1 && typeof(T) == typeof(T1)) return (T)value;
-            if (IsT2 && typeof(T) == typeof(T2)) return (T)value;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
+            if (this.index == 1 && typeof(T) == typeof(T1)) return (T)value;
+            if (this.index == 2 && typeof(T) == typeof(T2)) return (T)value;
 
             throw new InvalidOperationException();
         }
@@ -1218,9 +984,9 @@ namespace OneOf
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action otherwise = null)
         {
-            if (this.IsT0 && f0 != null) { f0(this.AsT0); return; }
-            if (this.IsT1 && f1 != null) { f1(this.AsT1); return; }
-            if (this.IsT2 && f2 != null) { f2(this.AsT2); return; }
+            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
+            if (this.index == 1 && f1 != null) { f1((T1)this.value); return; }
+            if (this.index == 2 && f2 != null) { f2((T2)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -1229,9 +995,9 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<T1, TResult> f1 = null, Func<T2, TResult> f2 = null, Func<TResult> otherwise = null)
         {
-            if (this.IsT0 && f0 != null) return f0(this.AsT0);
-            if (this.IsT1 && f1 != null) return f1(this.AsT1);
-            if (this.IsT2 && f2 != null) return f2(this.AsT2);
+            if (this.index == 0 && f0 != null) return f0((T0)this.value);
+            if (this.index == 1 && f1 != null) return f1((T1)this.value);
+            if (this.index == 2 && f2 != null) return f2((T2)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -1272,49 +1038,30 @@ namespace OneOf
 
         object IOneOf.Value => value;
 
-        T Get<T>(int index)
-        {
-            if (index != this.index)
-            {
-                throw new InvalidOperationException($"Cannot return as T{index} as result is T{this.index}");
-            }
-            return (T)value;
-        }
-
-        public bool IsT0 => index == 0;
-        public bool IsT1 => index == 1;
-        public bool IsT2 => index == 2;
-        public bool IsT3 => index == 3;
-
         public bool Is<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return true;
+            if (this.value != null && this.value.GetType() == typeof(T)) return true;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return true;
-            if (IsT1 && typeof(T) == typeof(T1)) return true;
-            if (IsT2 && typeof(T) == typeof(T2)) return true;
-            if (IsT3 && typeof(T) == typeof(T3)) return true;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
+            if (this.index == 1 && typeof(T) == typeof(T1)) return true;
+            if (this.index == 2 && typeof(T) == typeof(T2)) return true;
+            if (this.index == 3 && typeof(T) == typeof(T3)) return true;
 
             return false;
         }
 
-        public T0 AsT0 => Get<T0>(0);
-        public T1 AsT1 => Get<T1>(1);
-        public T2 AsT2 => Get<T2>(2);
-        public T3 AsT3 => Get<T3>(3);
-
         public T As<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return (T)this.value;
+            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return (T)value;
-            if (IsT1 && typeof(T) == typeof(T1)) return (T)value;
-            if (IsT2 && typeof(T) == typeof(T2)) return (T)value;
-            if (IsT3 && typeof(T) == typeof(T3)) return (T)value;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
+            if (this.index == 1 && typeof(T) == typeof(T1)) return (T)value;
+            if (this.index == 2 && typeof(T) == typeof(T2)) return (T)value;
+            if (this.index == 3 && typeof(T) == typeof(T3)) return (T)value;
 
             throw new InvalidOperationException();
         }
@@ -1326,10 +1073,10 @@ namespace OneOf
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action otherwise = null)
         {
-            if (this.IsT0 && f0 != null) { f0(this.AsT0); return; }
-            if (this.IsT1 && f1 != null) { f1(this.AsT1); return; }
-            if (this.IsT2 && f2 != null) { f2(this.AsT2); return; }
-            if (this.IsT3 && f3 != null) { f3(this.AsT3); return; }
+            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
+            if (this.index == 1 && f1 != null) { f1((T1)this.value); return; }
+            if (this.index == 2 && f2 != null) { f2((T2)this.value); return; }
+            if (this.index == 3 && f3 != null) { f3((T3)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -1338,10 +1085,10 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<T1, TResult> f1 = null, Func<T2, TResult> f2 = null, Func<T3, TResult> f3 = null, Func<TResult> otherwise = null)
         {
-            if (this.IsT0 && f0 != null) return f0(this.AsT0);
-            if (this.IsT1 && f1 != null) return f1(this.AsT1);
-            if (this.IsT2 && f2 != null) return f2(this.AsT2);
-            if (this.IsT3 && f3 != null) return f3(this.AsT3);
+            if (this.index == 0 && f0 != null) return f0((T0)this.value);
+            if (this.index == 1 && f1 != null) return f1((T1)this.value);
+            if (this.index == 2 && f2 != null) return f2((T2)this.value);
+            if (this.index == 3 && f3 != null) return f3((T3)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -1383,53 +1130,32 @@ namespace OneOf
 
         object IOneOf.Value => value;
 
-        T Get<T>(int index)
-        {
-            if (index != this.index)
-            {
-                throw new InvalidOperationException($"Cannot return as T{index} as result is T{this.index}");
-            }
-            return (T)value;
-        }
-
-        public bool IsT0 => index == 0;
-        public bool IsT1 => index == 1;
-        public bool IsT2 => index == 2;
-        public bool IsT3 => index == 3;
-        public bool IsT4 => index == 4;
-
         public bool Is<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return true;
+            if (this.value != null && this.value.GetType() == typeof(T)) return true;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return true;
-            if (IsT1 && typeof(T) == typeof(T1)) return true;
-            if (IsT2 && typeof(T) == typeof(T2)) return true;
-            if (IsT3 && typeof(T) == typeof(T3)) return true;
-            if (IsT4 && typeof(T) == typeof(T4)) return true;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
+            if (this.index == 1 && typeof(T) == typeof(T1)) return true;
+            if (this.index == 2 && typeof(T) == typeof(T2)) return true;
+            if (this.index == 3 && typeof(T) == typeof(T3)) return true;
+            if (this.index == 4 && typeof(T) == typeof(T4)) return true;
 
             return false;
         }
 
-        public T0 AsT0 => Get<T0>(0);
-        public T1 AsT1 => Get<T1>(1);
-        public T2 AsT2 => Get<T2>(2);
-        public T3 AsT3 => Get<T3>(3);
-        public T4 AsT4 => Get<T4>(4);
-
         public T As<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return (T)this.value;
+            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return (T)value;
-            if (IsT1 && typeof(T) == typeof(T1)) return (T)value;
-            if (IsT2 && typeof(T) == typeof(T2)) return (T)value;
-            if (IsT3 && typeof(T) == typeof(T3)) return (T)value;
-            if (IsT4 && typeof(T) == typeof(T4)) return (T)value;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
+            if (this.index == 1 && typeof(T) == typeof(T1)) return (T)value;
+            if (this.index == 2 && typeof(T) == typeof(T2)) return (T)value;
+            if (this.index == 3 && typeof(T) == typeof(T3)) return (T)value;
+            if (this.index == 4 && typeof(T) == typeof(T4)) return (T)value;
 
             throw new InvalidOperationException();
         }
@@ -1442,11 +1168,11 @@ namespace OneOf
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action otherwise = null)
         {
-            if (this.IsT0 && f0 != null) { f0(this.AsT0); return; }
-            if (this.IsT1 && f1 != null) { f1(this.AsT1); return; }
-            if (this.IsT2 && f2 != null) { f2(this.AsT2); return; }
-            if (this.IsT3 && f3 != null) { f3(this.AsT3); return; }
-            if (this.IsT4 && f4 != null) { f4(this.AsT4); return; }
+            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
+            if (this.index == 1 && f1 != null) { f1((T1)this.value); return; }
+            if (this.index == 2 && f2 != null) { f2((T2)this.value); return; }
+            if (this.index == 3 && f3 != null) { f3((T3)this.value); return; }
+            if (this.index == 4 && f4 != null) { f4((T4)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -1455,11 +1181,11 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<T1, TResult> f1 = null, Func<T2, TResult> f2 = null, Func<T3, TResult> f3 = null, Func<T4, TResult> f4 = null, Func<TResult> otherwise = null)
         {
-            if (this.IsT0 && f0 != null) return f0(this.AsT0);
-            if (this.IsT1 && f1 != null) return f1(this.AsT1);
-            if (this.IsT2 && f2 != null) return f2(this.AsT2);
-            if (this.IsT3 && f3 != null) return f3(this.AsT3);
-            if (this.IsT4 && f4 != null) return f4(this.AsT4);
+            if (this.index == 0 && f0 != null) return f0((T0)this.value);
+            if (this.index == 1 && f1 != null) return f1((T1)this.value);
+            if (this.index == 2 && f2 != null) return f2((T2)this.value);
+            if (this.index == 3 && f3 != null) return f3((T3)this.value);
+            if (this.index == 4 && f4 != null) return f4((T4)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -1502,57 +1228,34 @@ namespace OneOf
 
         object IOneOf.Value => value;
 
-        T Get<T>(int index)
-        {
-            if (index != this.index)
-            {
-                throw new InvalidOperationException($"Cannot return as T{index} as result is T{this.index}");
-            }
-            return (T)value;
-        }
-
-        public bool IsT0 => index == 0;
-        public bool IsT1 => index == 1;
-        public bool IsT2 => index == 2;
-        public bool IsT3 => index == 3;
-        public bool IsT4 => index == 4;
-        public bool IsT5 => index == 5;
-
         public bool Is<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return true;
+            if (this.value != null && this.value.GetType() == typeof(T)) return true;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return true;
-            if (IsT1 && typeof(T) == typeof(T1)) return true;
-            if (IsT2 && typeof(T) == typeof(T2)) return true;
-            if (IsT3 && typeof(T) == typeof(T3)) return true;
-            if (IsT4 && typeof(T) == typeof(T4)) return true;
-            if (IsT5 && typeof(T) == typeof(T5)) return true;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
+            if (this.index == 1 && typeof(T) == typeof(T1)) return true;
+            if (this.index == 2 && typeof(T) == typeof(T2)) return true;
+            if (this.index == 3 && typeof(T) == typeof(T3)) return true;
+            if (this.index == 4 && typeof(T) == typeof(T4)) return true;
+            if (this.index == 5 && typeof(T) == typeof(T5)) return true;
 
             return false;
         }
 
-        public T0 AsT0 => Get<T0>(0);
-        public T1 AsT1 => Get<T1>(1);
-        public T2 AsT2 => Get<T2>(2);
-        public T3 AsT3 => Get<T3>(3);
-        public T4 AsT4 => Get<T4>(4);
-        public T5 AsT5 => Get<T5>(5);
-
         public T As<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return (T)this.value;
+            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return (T)value;
-            if (IsT1 && typeof(T) == typeof(T1)) return (T)value;
-            if (IsT2 && typeof(T) == typeof(T2)) return (T)value;
-            if (IsT3 && typeof(T) == typeof(T3)) return (T)value;
-            if (IsT4 && typeof(T) == typeof(T4)) return (T)value;
-            if (IsT5 && typeof(T) == typeof(T5)) return (T)value;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
+            if (this.index == 1 && typeof(T) == typeof(T1)) return (T)value;
+            if (this.index == 2 && typeof(T) == typeof(T2)) return (T)value;
+            if (this.index == 3 && typeof(T) == typeof(T3)) return (T)value;
+            if (this.index == 4 && typeof(T) == typeof(T4)) return (T)value;
+            if (this.index == 5 && typeof(T) == typeof(T5)) return (T)value;
 
             throw new InvalidOperationException();
         }
@@ -1566,12 +1269,12 @@ namespace OneOf
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action<T5> f5 = null, Action otherwise = null)
         {
-            if (this.IsT0 && f0 != null) { f0(this.AsT0); return; }
-            if (this.IsT1 && f1 != null) { f1(this.AsT1); return; }
-            if (this.IsT2 && f2 != null) { f2(this.AsT2); return; }
-            if (this.IsT3 && f3 != null) { f3(this.AsT3); return; }
-            if (this.IsT4 && f4 != null) { f4(this.AsT4); return; }
-            if (this.IsT5 && f5 != null) { f5(this.AsT5); return; }
+            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
+            if (this.index == 1 && f1 != null) { f1((T1)this.value); return; }
+            if (this.index == 2 && f2 != null) { f2((T2)this.value); return; }
+            if (this.index == 3 && f3 != null) { f3((T3)this.value); return; }
+            if (this.index == 4 && f4 != null) { f4((T4)this.value); return; }
+            if (this.index == 5 && f5 != null) { f5((T5)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -1580,12 +1283,12 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<T1, TResult> f1 = null, Func<T2, TResult> f2 = null, Func<T3, TResult> f3 = null, Func<T4, TResult> f4 = null, Func<T5, TResult> f5 = null, Func<TResult> otherwise = null)
         {
-            if (this.IsT0 && f0 != null) return f0(this.AsT0);
-            if (this.IsT1 && f1 != null) return f1(this.AsT1);
-            if (this.IsT2 && f2 != null) return f2(this.AsT2);
-            if (this.IsT3 && f3 != null) return f3(this.AsT3);
-            if (this.IsT4 && f4 != null) return f4(this.AsT4);
-            if (this.IsT5 && f5 != null) return f5(this.AsT5);
+            if (this.index == 0 && f0 != null) return f0((T0)this.value);
+            if (this.index == 1 && f1 != null) return f1((T1)this.value);
+            if (this.index == 2 && f2 != null) return f2((T2)this.value);
+            if (this.index == 3 && f3 != null) return f3((T3)this.value);
+            if (this.index == 4 && f4 != null) return f4((T4)this.value);
+            if (this.index == 5 && f5 != null) return f5((T5)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -1629,61 +1332,36 @@ namespace OneOf
 
         object IOneOf.Value => value;
 
-        T Get<T>(int index)
-        {
-            if (index != this.index)
-            {
-                throw new InvalidOperationException($"Cannot return as T{index} as result is T{this.index}");
-            }
-            return (T)value;
-        }
-
-        public bool IsT0 => index == 0;
-        public bool IsT1 => index == 1;
-        public bool IsT2 => index == 2;
-        public bool IsT3 => index == 3;
-        public bool IsT4 => index == 4;
-        public bool IsT5 => index == 5;
-        public bool IsT6 => index == 6;
-
         public bool Is<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return true;
+            if (this.value != null && this.value.GetType() == typeof(T)) return true;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return true;
-            if (IsT1 && typeof(T) == typeof(T1)) return true;
-            if (IsT2 && typeof(T) == typeof(T2)) return true;
-            if (IsT3 && typeof(T) == typeof(T3)) return true;
-            if (IsT4 && typeof(T) == typeof(T4)) return true;
-            if (IsT5 && typeof(T) == typeof(T5)) return true;
-            if (IsT6 && typeof(T) == typeof(T6)) return true;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
+            if (this.index == 1 && typeof(T) == typeof(T1)) return true;
+            if (this.index == 2 && typeof(T) == typeof(T2)) return true;
+            if (this.index == 3 && typeof(T) == typeof(T3)) return true;
+            if (this.index == 4 && typeof(T) == typeof(T4)) return true;
+            if (this.index == 5 && typeof(T) == typeof(T5)) return true;
+            if (this.index == 6 && typeof(T) == typeof(T6)) return true;
 
             return false;
         }
 
-        public T0 AsT0 => Get<T0>(0);
-        public T1 AsT1 => Get<T1>(1);
-        public T2 AsT2 => Get<T2>(2);
-        public T3 AsT3 => Get<T3>(3);
-        public T4 AsT4 => Get<T4>(4);
-        public T5 AsT5 => Get<T5>(5);
-        public T6 AsT6 => Get<T6>(6);
-
         public T As<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return (T)this.value;
+            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return (T)value;
-            if (IsT1 && typeof(T) == typeof(T1)) return (T)value;
-            if (IsT2 && typeof(T) == typeof(T2)) return (T)value;
-            if (IsT3 && typeof(T) == typeof(T3)) return (T)value;
-            if (IsT4 && typeof(T) == typeof(T4)) return (T)value;
-            if (IsT5 && typeof(T) == typeof(T5)) return (T)value;
-            if (IsT6 && typeof(T) == typeof(T6)) return (T)value;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
+            if (this.index == 1 && typeof(T) == typeof(T1)) return (T)value;
+            if (this.index == 2 && typeof(T) == typeof(T2)) return (T)value;
+            if (this.index == 3 && typeof(T) == typeof(T3)) return (T)value;
+            if (this.index == 4 && typeof(T) == typeof(T4)) return (T)value;
+            if (this.index == 5 && typeof(T) == typeof(T5)) return (T)value;
+            if (this.index == 6 && typeof(T) == typeof(T6)) return (T)value;
 
             throw new InvalidOperationException();
         }
@@ -1698,13 +1376,13 @@ namespace OneOf
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action<T5> f5 = null, Action<T6> f6 = null, Action otherwise = null)
         {
-            if (this.IsT0 && f0 != null) { f0(this.AsT0); return; }
-            if (this.IsT1 && f1 != null) { f1(this.AsT1); return; }
-            if (this.IsT2 && f2 != null) { f2(this.AsT2); return; }
-            if (this.IsT3 && f3 != null) { f3(this.AsT3); return; }
-            if (this.IsT4 && f4 != null) { f4(this.AsT4); return; }
-            if (this.IsT5 && f5 != null) { f5(this.AsT5); return; }
-            if (this.IsT6 && f6 != null) { f6(this.AsT6); return; }
+            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
+            if (this.index == 1 && f1 != null) { f1((T1)this.value); return; }
+            if (this.index == 2 && f2 != null) { f2((T2)this.value); return; }
+            if (this.index == 3 && f3 != null) { f3((T3)this.value); return; }
+            if (this.index == 4 && f4 != null) { f4((T4)this.value); return; }
+            if (this.index == 5 && f5 != null) { f5((T5)this.value); return; }
+            if (this.index == 6 && f6 != null) { f6((T6)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -1713,13 +1391,13 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<T1, TResult> f1 = null, Func<T2, TResult> f2 = null, Func<T3, TResult> f3 = null, Func<T4, TResult> f4 = null, Func<T5, TResult> f5 = null, Func<T6, TResult> f6 = null, Func<TResult> otherwise = null)
         {
-            if (this.IsT0 && f0 != null) return f0(this.AsT0);
-            if (this.IsT1 && f1 != null) return f1(this.AsT1);
-            if (this.IsT2 && f2 != null) return f2(this.AsT2);
-            if (this.IsT3 && f3 != null) return f3(this.AsT3);
-            if (this.IsT4 && f4 != null) return f4(this.AsT4);
-            if (this.IsT5 && f5 != null) return f5(this.AsT5);
-            if (this.IsT6 && f6 != null) return f6(this.AsT6);
+            if (this.index == 0 && f0 != null) return f0((T0)this.value);
+            if (this.index == 1 && f1 != null) return f1((T1)this.value);
+            if (this.index == 2 && f2 != null) return f2((T2)this.value);
+            if (this.index == 3 && f3 != null) return f3((T3)this.value);
+            if (this.index == 4 && f4 != null) return f4((T4)this.value);
+            if (this.index == 5 && f5 != null) return f5((T5)this.value);
+            if (this.index == 6 && f6 != null) return f6((T6)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -1764,65 +1442,38 @@ namespace OneOf
 
         object IOneOf.Value => value;
 
-        T Get<T>(int index)
-        {
-            if (index != this.index)
-            {
-                throw new InvalidOperationException($"Cannot return as T{index} as result is T{this.index}");
-            }
-            return (T)value;
-        }
-
-        public bool IsT0 => index == 0;
-        public bool IsT1 => index == 1;
-        public bool IsT2 => index == 2;
-        public bool IsT3 => index == 3;
-        public bool IsT4 => index == 4;
-        public bool IsT5 => index == 5;
-        public bool IsT6 => index == 6;
-        public bool IsT7 => index == 7;
-
         public bool Is<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return true;
+            if (this.value != null && this.value.GetType() == typeof(T)) return true;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return true;
-            if (IsT1 && typeof(T) == typeof(T1)) return true;
-            if (IsT2 && typeof(T) == typeof(T2)) return true;
-            if (IsT3 && typeof(T) == typeof(T3)) return true;
-            if (IsT4 && typeof(T) == typeof(T4)) return true;
-            if (IsT5 && typeof(T) == typeof(T5)) return true;
-            if (IsT6 && typeof(T) == typeof(T6)) return true;
-            if (IsT7 && typeof(T) == typeof(T7)) return true;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
+            if (this.index == 1 && typeof(T) == typeof(T1)) return true;
+            if (this.index == 2 && typeof(T) == typeof(T2)) return true;
+            if (this.index == 3 && typeof(T) == typeof(T3)) return true;
+            if (this.index == 4 && typeof(T) == typeof(T4)) return true;
+            if (this.index == 5 && typeof(T) == typeof(T5)) return true;
+            if (this.index == 6 && typeof(T) == typeof(T6)) return true;
+            if (this.index == 7 && typeof(T) == typeof(T7)) return true;
 
             return false;
         }
 
-        public T0 AsT0 => Get<T0>(0);
-        public T1 AsT1 => Get<T1>(1);
-        public T2 AsT2 => Get<T2>(2);
-        public T3 AsT3 => Get<T3>(3);
-        public T4 AsT4 => Get<T4>(4);
-        public T5 AsT5 => Get<T5>(5);
-        public T6 AsT6 => Get<T6>(6);
-        public T7 AsT7 => Get<T7>(7);
-
         public T As<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return (T)this.value;
+            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return (T)value;
-            if (IsT1 && typeof(T) == typeof(T1)) return (T)value;
-            if (IsT2 && typeof(T) == typeof(T2)) return (T)value;
-            if (IsT3 && typeof(T) == typeof(T3)) return (T)value;
-            if (IsT4 && typeof(T) == typeof(T4)) return (T)value;
-            if (IsT5 && typeof(T) == typeof(T5)) return (T)value;
-            if (IsT6 && typeof(T) == typeof(T6)) return (T)value;
-            if (IsT7 && typeof(T) == typeof(T7)) return (T)value;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
+            if (this.index == 1 && typeof(T) == typeof(T1)) return (T)value;
+            if (this.index == 2 && typeof(T) == typeof(T2)) return (T)value;
+            if (this.index == 3 && typeof(T) == typeof(T3)) return (T)value;
+            if (this.index == 4 && typeof(T) == typeof(T4)) return (T)value;
+            if (this.index == 5 && typeof(T) == typeof(T5)) return (T)value;
+            if (this.index == 6 && typeof(T) == typeof(T6)) return (T)value;
+            if (this.index == 7 && typeof(T) == typeof(T7)) return (T)value;
 
             throw new InvalidOperationException();
         }
@@ -1838,14 +1489,14 @@ namespace OneOf
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action<T5> f5 = null, Action<T6> f6 = null, Action<T7> f7 = null, Action otherwise = null)
         {
-            if (this.IsT0 && f0 != null) { f0(this.AsT0); return; }
-            if (this.IsT1 && f1 != null) { f1(this.AsT1); return; }
-            if (this.IsT2 && f2 != null) { f2(this.AsT2); return; }
-            if (this.IsT3 && f3 != null) { f3(this.AsT3); return; }
-            if (this.IsT4 && f4 != null) { f4(this.AsT4); return; }
-            if (this.IsT5 && f5 != null) { f5(this.AsT5); return; }
-            if (this.IsT6 && f6 != null) { f6(this.AsT6); return; }
-            if (this.IsT7 && f7 != null) { f7(this.AsT7); return; }
+            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
+            if (this.index == 1 && f1 != null) { f1((T1)this.value); return; }
+            if (this.index == 2 && f2 != null) { f2((T2)this.value); return; }
+            if (this.index == 3 && f3 != null) { f3((T3)this.value); return; }
+            if (this.index == 4 && f4 != null) { f4((T4)this.value); return; }
+            if (this.index == 5 && f5 != null) { f5((T5)this.value); return; }
+            if (this.index == 6 && f6 != null) { f6((T6)this.value); return; }
+            if (this.index == 7 && f7 != null) { f7((T7)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -1854,14 +1505,14 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<T1, TResult> f1 = null, Func<T2, TResult> f2 = null, Func<T3, TResult> f3 = null, Func<T4, TResult> f4 = null, Func<T5, TResult> f5 = null, Func<T6, TResult> f6 = null, Func<T7, TResult> f7 = null, Func<TResult> otherwise = null)
         {
-            if (this.IsT0 && f0 != null) return f0(this.AsT0);
-            if (this.IsT1 && f1 != null) return f1(this.AsT1);
-            if (this.IsT2 && f2 != null) return f2(this.AsT2);
-            if (this.IsT3 && f3 != null) return f3(this.AsT3);
-            if (this.IsT4 && f4 != null) return f4(this.AsT4);
-            if (this.IsT5 && f5 != null) return f5(this.AsT5);
-            if (this.IsT6 && f6 != null) return f6(this.AsT6);
-            if (this.IsT7 && f7 != null) return f7(this.AsT7);
+            if (this.index == 0 && f0 != null) return f0((T0)this.value);
+            if (this.index == 1 && f1 != null) return f1((T1)this.value);
+            if (this.index == 2 && f2 != null) return f2((T2)this.value);
+            if (this.index == 3 && f3 != null) return f3((T3)this.value);
+            if (this.index == 4 && f4 != null) return f4((T4)this.value);
+            if (this.index == 5 && f5 != null) return f5((T5)this.value);
+            if (this.index == 6 && f6 != null) return f6((T6)this.value);
+            if (this.index == 7 && f7 != null) return f7((T7)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -1907,69 +1558,40 @@ namespace OneOf
 
         object IOneOf.Value => value;
 
-        T Get<T>(int index)
-        {
-            if (index != this.index)
-            {
-                throw new InvalidOperationException($"Cannot return as T{index} as result is T{this.index}");
-            }
-            return (T)value;
-        }
-
-        public bool IsT0 => index == 0;
-        public bool IsT1 => index == 1;
-        public bool IsT2 => index == 2;
-        public bool IsT3 => index == 3;
-        public bool IsT4 => index == 4;
-        public bool IsT5 => index == 5;
-        public bool IsT6 => index == 6;
-        public bool IsT7 => index == 7;
-        public bool IsT8 => index == 8;
-
         public bool Is<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return true;
+            if (this.value != null && this.value.GetType() == typeof(T)) return true;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return true;
-            if (IsT1 && typeof(T) == typeof(T1)) return true;
-            if (IsT2 && typeof(T) == typeof(T2)) return true;
-            if (IsT3 && typeof(T) == typeof(T3)) return true;
-            if (IsT4 && typeof(T) == typeof(T4)) return true;
-            if (IsT5 && typeof(T) == typeof(T5)) return true;
-            if (IsT6 && typeof(T) == typeof(T6)) return true;
-            if (IsT7 && typeof(T) == typeof(T7)) return true;
-            if (IsT8 && typeof(T) == typeof(T8)) return true;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return true;
+            if (this.index == 1 && typeof(T) == typeof(T1)) return true;
+            if (this.index == 2 && typeof(T) == typeof(T2)) return true;
+            if (this.index == 3 && typeof(T) == typeof(T3)) return true;
+            if (this.index == 4 && typeof(T) == typeof(T4)) return true;
+            if (this.index == 5 && typeof(T) == typeof(T5)) return true;
+            if (this.index == 6 && typeof(T) == typeof(T6)) return true;
+            if (this.index == 7 && typeof(T) == typeof(T7)) return true;
+            if (this.index == 8 && typeof(T) == typeof(T8)) return true;
 
             return false;
         }
 
-        public T0 AsT0 => Get<T0>(0);
-        public T1 AsT1 => Get<T1>(1);
-        public T2 AsT2 => Get<T2>(2);
-        public T3 AsT3 => Get<T3>(3);
-        public T4 AsT4 => Get<T4>(4);
-        public T5 AsT5 => Get<T5>(5);
-        public T6 AsT6 => Get<T6>(6);
-        public T7 AsT7 => Get<T7>(7);
-        public T8 AsT8 => Get<T8>(8);
-
         public T As<T>()
         {
             // quick path for when value non-null and correct type
-            if (this.value is T) return (T)this.value;
+            if (this.value != null && this.value.GetType() == typeof(T)) return (T)this.value;
 
             // slower path for when value null, or wrong type
-            if (IsT0 && typeof(T) == typeof(T0)) return (T)value;
-            if (IsT1 && typeof(T) == typeof(T1)) return (T)value;
-            if (IsT2 && typeof(T) == typeof(T2)) return (T)value;
-            if (IsT3 && typeof(T) == typeof(T3)) return (T)value;
-            if (IsT4 && typeof(T) == typeof(T4)) return (T)value;
-            if (IsT5 && typeof(T) == typeof(T5)) return (T)value;
-            if (IsT6 && typeof(T) == typeof(T6)) return (T)value;
-            if (IsT7 && typeof(T) == typeof(T7)) return (T)value;
-            if (IsT8 && typeof(T) == typeof(T8)) return (T)value;
+            if (this.index == 0 && typeof(T) == typeof(T0)) return (T)value;
+            if (this.index == 1 && typeof(T) == typeof(T1)) return (T)value;
+            if (this.index == 2 && typeof(T) == typeof(T2)) return (T)value;
+            if (this.index == 3 && typeof(T) == typeof(T3)) return (T)value;
+            if (this.index == 4 && typeof(T) == typeof(T4)) return (T)value;
+            if (this.index == 5 && typeof(T) == typeof(T5)) return (T)value;
+            if (this.index == 6 && typeof(T) == typeof(T6)) return (T)value;
+            if (this.index == 7 && typeof(T) == typeof(T7)) return (T)value;
+            if (this.index == 8 && typeof(T) == typeof(T8)) return (T)value;
 
             throw new InvalidOperationException();
         }
@@ -1986,15 +1608,15 @@ namespace OneOf
 
         public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action<T5> f5 = null, Action<T6> f6 = null, Action<T7> f7 = null, Action<T8> f8 = null, Action otherwise = null)
         {
-            if (this.IsT0 && f0 != null) { f0(this.AsT0); return; }
-            if (this.IsT1 && f1 != null) { f1(this.AsT1); return; }
-            if (this.IsT2 && f2 != null) { f2(this.AsT2); return; }
-            if (this.IsT3 && f3 != null) { f3(this.AsT3); return; }
-            if (this.IsT4 && f4 != null) { f4(this.AsT4); return; }
-            if (this.IsT5 && f5 != null) { f5(this.AsT5); return; }
-            if (this.IsT6 && f6 != null) { f6(this.AsT6); return; }
-            if (this.IsT7 && f7 != null) { f7(this.AsT7); return; }
-            if (this.IsT8 && f8 != null) { f8(this.AsT8); return; }
+            if (this.index == 0 && f0 != null) { f0((T0)this.value); return; }
+            if (this.index == 1 && f1 != null) { f1((T1)this.value); return; }
+            if (this.index == 2 && f2 != null) { f2((T2)this.value); return; }
+            if (this.index == 3 && f3 != null) { f3((T3)this.value); return; }
+            if (this.index == 4 && f4 != null) { f4((T4)this.value); return; }
+            if (this.index == 5 && f5 != null) { f5((T5)this.value); return; }
+            if (this.index == 6 && f6 != null) { f6((T6)this.value); return; }
+            if (this.index == 7 && f7 != null) { f7((T7)this.value); return; }
+            if (this.index == 8 && f8 != null) { f8((T8)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -2003,15 +1625,15 @@ namespace OneOf
 
         public TResult Match<TResult>(Func<T0, TResult> f0 = null, Func<T1, TResult> f1 = null, Func<T2, TResult> f2 = null, Func<T3, TResult> f3 = null, Func<T4, TResult> f4 = null, Func<T5, TResult> f5 = null, Func<T6, TResult> f6 = null, Func<T7, TResult> f7 = null, Func<T8, TResult> f8 = null, Func<TResult> otherwise = null)
         {
-            if (this.IsT0 && f0 != null) return f0(this.AsT0);
-            if (this.IsT1 && f1 != null) return f1(this.AsT1);
-            if (this.IsT2 && f2 != null) return f2(this.AsT2);
-            if (this.IsT3 && f3 != null) return f3(this.AsT3);
-            if (this.IsT4 && f4 != null) return f4(this.AsT4);
-            if (this.IsT5 && f5 != null) return f5(this.AsT5);
-            if (this.IsT6 && f6 != null) return f6(this.AsT6);
-            if (this.IsT7 && f7 != null) return f7(this.AsT7);
-            if (this.IsT8 && f8 != null) return f8(this.AsT8);
+            if (this.index == 0 && f0 != null) return f0((T0)this.value);
+            if (this.index == 1 && f1 != null) return f1((T1)this.value);
+            if (this.index == 2 && f2 != null) return f2((T2)this.value);
+            if (this.index == 3 && f3 != null) return f3((T3)this.value);
+            if (this.index == 4 && f4 != null) return f4((T4)this.value);
+            if (this.index == 5 && f5 != null) return f5((T5)this.value);
+            if (this.index == 6 && f6 != null) return f6((T6)this.value);
+            if (this.index == 7 && f7 != null) return f7((T7)this.value);
+            if (this.index == 8 && f8 != null) return f8((T8)this.value);
 
             if (otherwise != null) return otherwise();
 

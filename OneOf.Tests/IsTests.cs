@@ -15,8 +15,6 @@ namespace OneOf.Tests
             var x = (OneOf<string, bool>)true;
             Assert.AreEqual(false, x.Is<string>());
             Assert.AreEqual(true, x.Is<bool>());
-            Assert.AreEqual(false, x.IsT0);
-            Assert.AreEqual(true, x.IsT1);
         }
 
         [Test]
@@ -25,8 +23,6 @@ namespace OneOf.Tests
             var x = (OneOf<string, bool>)"xyz";
             Assert.AreEqual(true, x.Is<string>());
             Assert.AreEqual(false, x.Is<bool>());
-            Assert.AreEqual(true, x.IsT0);
-            Assert.AreEqual(false, x.IsT1);
         }
     }
 
