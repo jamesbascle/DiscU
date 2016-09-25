@@ -49,10 +49,10 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 		// =============== Constructors
 	    
 		WriteLine("");
-		WriteLine($"internal {typeName}(object value)");
+		WriteLine($"{typeName}(object value)");
 		using(var indent2 = new Indent(this))
 		{
-			WriteLine("EnsureValueIsValid(value);");
+			WriteLine("// assumes will only be called after being validated in some way");
 			WriteLine($"this.value = value;");
 		}
 
@@ -62,15 +62,15 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 			WriteLine($"protected {typeName}()");
 			using(var indent2 = new Indent(this))
 			{
-				WriteLine("EnsureValueIsValid(this);");
+				WriteLine("// assumes will only be called after being validated in some way");
 				WriteLine("this.value = this;");
 			}
 		}
 
-		// =============== EnsureValueIsValid
+		// =============== Create
 	    
 		WriteLine("");
-		WriteLine($"static void EnsureValueIsValid(object value)");
+		WriteLine($"internal static {typeName}<{genericArg}> Create(object value)");
 		using(var indent2 = new Indent(this))
 		{
 			WriteLine($"if (value == null) throw new ArgumentNullException(\"value\");");
@@ -79,7 +79,7 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 			WriteLine("var valueType = value.GetType();");
 			for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
 			{
-				WriteLine($"if (valueType == typeT{parmIndex}) return;");
+				WriteLine($"if (valueType == typeT{parmIndex}) return new {typeName}<{genericArg}>((T{parmIndex})value);");
 			}
 
 			WriteLine("");
@@ -127,16 +127,18 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 		// =============== ToOneOf
 
 		WriteLine("");
+		WriteLine("// Use slower Create method which does full type checks at runtime as compiler couldn't do them for us.");
 		for(var newIndex = 0; newIndex < 9; newIndex ++)
 		{
 			var otherGenericArgs = string.Join(", ", Enumerable.Range(0, newIndex+1).Select(e => "N" + e));
 
-			WriteLine($"public {typeName}<{otherGenericArgs}> ToOneOf<{otherGenericArgs}>() => new {typeName}<{otherGenericArgs}>(value);");
+			WriteLine($"public {typeName}<{otherGenericArgs}> ToOneOf<{otherGenericArgs}>() => {typeName}<{otherGenericArgs}>.Create(value);");
 		}
 
 		// =============== implicit conversion to T
 
 		WriteLine("");
+		WriteLine("// Can use fast Ctor as compiler can check types for us.");
 		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
 		{
 			WriteLine($"public static implicit operator {typeName}<{genericArg}>(T{parmIndex} value) => new {typeName}<{genericArg}>(value);"); 

@@ -13,18 +13,18 @@ namespace OneOf
         readonly object value;
         static readonly Type typeT0 = typeof(T0);
 
-        internal OneOf(object value)
+        OneOf(object value)
         {
-            EnsureValueIsValid(value);
+            // assumes will only be called after being validated in some way
             this.value = value;
         }
 
-        static void EnsureValueIsValid(object value)
+        internal static OneOf<T0> Create(object value)
         {
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeT0) return;
+            if (valueType == typeT0) return new OneOf<T0>((T0)value);
 
             throw new ArgumentException("value");
         }
@@ -52,16 +52,18 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public OneOf<N0> ToOneOf<N0>() => new OneOf<N0>(value);
-        public OneOf<N0, N1> ToOneOf<N0, N1>() => new OneOf<N0, N1>(value);
-        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOf<N0, N1, N2>(value);
-        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOf<N0, N1, N2, N3>(value);
-        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOf<N0, N1, N2, N3, N4>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOf<N0, N1, N2, N3, N4, N5>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOf<N0, N1, N2, N3, N4, N5, N6>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
+        // Use slower Create method which does full type checks at runtime as compiler couldn't do them for us.
+        public OneOf<N0> ToOneOf<N0>() => OneOf<N0>.Create(value);
+        public OneOf<N0, N1> ToOneOf<N0, N1>() => OneOf<N0, N1>.Create(value);
+        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOf<N0, N1, N2>.Create(value);
+        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
+        // Can use fast Ctor as compiler can check types for us.
         public static implicit operator OneOf<T0>(T0 value) => new OneOf<T0>(value);
 
         public void Switch(Action<T0> f0 = null, Action otherwise = null)
@@ -107,19 +109,19 @@ namespace OneOf
         static readonly Type typeT0 = typeof(T0);
         static readonly Type typeT1 = typeof(T1);
 
-        internal OneOf(object value)
+        OneOf(object value)
         {
-            EnsureValueIsValid(value);
+            // assumes will only be called after being validated in some way
             this.value = value;
         }
 
-        static void EnsureValueIsValid(object value)
+        internal static OneOf<T0, T1> Create(object value)
         {
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeT0) return;
-            if (valueType == typeT1) return;
+            if (valueType == typeT0) return new OneOf<T0, T1>((T0)value);
+            if (valueType == typeT1) return new OneOf<T0, T1>((T1)value);
 
             throw new ArgumentException("value");
         }
@@ -147,16 +149,18 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public OneOf<N0> ToOneOf<N0>() => new OneOf<N0>(value);
-        public OneOf<N0, N1> ToOneOf<N0, N1>() => new OneOf<N0, N1>(value);
-        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOf<N0, N1, N2>(value);
-        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOf<N0, N1, N2, N3>(value);
-        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOf<N0, N1, N2, N3, N4>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOf<N0, N1, N2, N3, N4, N5>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOf<N0, N1, N2, N3, N4, N5, N6>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
+        // Use slower Create method which does full type checks at runtime as compiler couldn't do them for us.
+        public OneOf<N0> ToOneOf<N0>() => OneOf<N0>.Create(value);
+        public OneOf<N0, N1> ToOneOf<N0, N1>() => OneOf<N0, N1>.Create(value);
+        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOf<N0, N1, N2>.Create(value);
+        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
+        // Can use fast Ctor as compiler can check types for us.
         public static implicit operator OneOf<T0, T1>(T0 value) => new OneOf<T0, T1>(value);
         public static implicit operator OneOf<T0, T1>(T1 value) => new OneOf<T0, T1>(value);
 
@@ -206,20 +210,20 @@ namespace OneOf
         static readonly Type typeT1 = typeof(T1);
         static readonly Type typeT2 = typeof(T2);
 
-        internal OneOf(object value)
+        OneOf(object value)
         {
-            EnsureValueIsValid(value);
+            // assumes will only be called after being validated in some way
             this.value = value;
         }
 
-        static void EnsureValueIsValid(object value)
+        internal static OneOf<T0, T1, T2> Create(object value)
         {
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeT0) return;
-            if (valueType == typeT1) return;
-            if (valueType == typeT2) return;
+            if (valueType == typeT0) return new OneOf<T0, T1, T2>((T0)value);
+            if (valueType == typeT1) return new OneOf<T0, T1, T2>((T1)value);
+            if (valueType == typeT2) return new OneOf<T0, T1, T2>((T2)value);
 
             throw new ArgumentException("value");
         }
@@ -247,16 +251,18 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public OneOf<N0> ToOneOf<N0>() => new OneOf<N0>(value);
-        public OneOf<N0, N1> ToOneOf<N0, N1>() => new OneOf<N0, N1>(value);
-        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOf<N0, N1, N2>(value);
-        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOf<N0, N1, N2, N3>(value);
-        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOf<N0, N1, N2, N3, N4>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOf<N0, N1, N2, N3, N4, N5>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOf<N0, N1, N2, N3, N4, N5, N6>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
+        // Use slower Create method which does full type checks at runtime as compiler couldn't do them for us.
+        public OneOf<N0> ToOneOf<N0>() => OneOf<N0>.Create(value);
+        public OneOf<N0, N1> ToOneOf<N0, N1>() => OneOf<N0, N1>.Create(value);
+        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOf<N0, N1, N2>.Create(value);
+        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
+        // Can use fast Ctor as compiler can check types for us.
         public static implicit operator OneOf<T0, T1, T2>(T0 value) => new OneOf<T0, T1, T2>(value);
         public static implicit operator OneOf<T0, T1, T2>(T1 value) => new OneOf<T0, T1, T2>(value);
         public static implicit operator OneOf<T0, T1, T2>(T2 value) => new OneOf<T0, T1, T2>(value);
@@ -310,21 +316,21 @@ namespace OneOf
         static readonly Type typeT2 = typeof(T2);
         static readonly Type typeT3 = typeof(T3);
 
-        internal OneOf(object value)
+        OneOf(object value)
         {
-            EnsureValueIsValid(value);
+            // assumes will only be called after being validated in some way
             this.value = value;
         }
 
-        static void EnsureValueIsValid(object value)
+        internal static OneOf<T0, T1, T2, T3> Create(object value)
         {
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeT0) return;
-            if (valueType == typeT1) return;
-            if (valueType == typeT2) return;
-            if (valueType == typeT3) return;
+            if (valueType == typeT0) return new OneOf<T0, T1, T2, T3>((T0)value);
+            if (valueType == typeT1) return new OneOf<T0, T1, T2, T3>((T1)value);
+            if (valueType == typeT2) return new OneOf<T0, T1, T2, T3>((T2)value);
+            if (valueType == typeT3) return new OneOf<T0, T1, T2, T3>((T3)value);
 
             throw new ArgumentException("value");
         }
@@ -352,16 +358,18 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public OneOf<N0> ToOneOf<N0>() => new OneOf<N0>(value);
-        public OneOf<N0, N1> ToOneOf<N0, N1>() => new OneOf<N0, N1>(value);
-        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOf<N0, N1, N2>(value);
-        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOf<N0, N1, N2, N3>(value);
-        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOf<N0, N1, N2, N3, N4>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOf<N0, N1, N2, N3, N4, N5>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOf<N0, N1, N2, N3, N4, N5, N6>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
+        // Use slower Create method which does full type checks at runtime as compiler couldn't do them for us.
+        public OneOf<N0> ToOneOf<N0>() => OneOf<N0>.Create(value);
+        public OneOf<N0, N1> ToOneOf<N0, N1>() => OneOf<N0, N1>.Create(value);
+        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOf<N0, N1, N2>.Create(value);
+        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
+        // Can use fast Ctor as compiler can check types for us.
         public static implicit operator OneOf<T0, T1, T2, T3>(T0 value) => new OneOf<T0, T1, T2, T3>(value);
         public static implicit operator OneOf<T0, T1, T2, T3>(T1 value) => new OneOf<T0, T1, T2, T3>(value);
         public static implicit operator OneOf<T0, T1, T2, T3>(T2 value) => new OneOf<T0, T1, T2, T3>(value);
@@ -419,22 +427,22 @@ namespace OneOf
         static readonly Type typeT3 = typeof(T3);
         static readonly Type typeT4 = typeof(T4);
 
-        internal OneOf(object value)
+        OneOf(object value)
         {
-            EnsureValueIsValid(value);
+            // assumes will only be called after being validated in some way
             this.value = value;
         }
 
-        static void EnsureValueIsValid(object value)
+        internal static OneOf<T0, T1, T2, T3, T4> Create(object value)
         {
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeT0) return;
-            if (valueType == typeT1) return;
-            if (valueType == typeT2) return;
-            if (valueType == typeT3) return;
-            if (valueType == typeT4) return;
+            if (valueType == typeT0) return new OneOf<T0, T1, T2, T3, T4>((T0)value);
+            if (valueType == typeT1) return new OneOf<T0, T1, T2, T3, T4>((T1)value);
+            if (valueType == typeT2) return new OneOf<T0, T1, T2, T3, T4>((T2)value);
+            if (valueType == typeT3) return new OneOf<T0, T1, T2, T3, T4>((T3)value);
+            if (valueType == typeT4) return new OneOf<T0, T1, T2, T3, T4>((T4)value);
 
             throw new ArgumentException("value");
         }
@@ -462,16 +470,18 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public OneOf<N0> ToOneOf<N0>() => new OneOf<N0>(value);
-        public OneOf<N0, N1> ToOneOf<N0, N1>() => new OneOf<N0, N1>(value);
-        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOf<N0, N1, N2>(value);
-        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOf<N0, N1, N2, N3>(value);
-        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOf<N0, N1, N2, N3, N4>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOf<N0, N1, N2, N3, N4, N5>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOf<N0, N1, N2, N3, N4, N5, N6>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
+        // Use slower Create method which does full type checks at runtime as compiler couldn't do them for us.
+        public OneOf<N0> ToOneOf<N0>() => OneOf<N0>.Create(value);
+        public OneOf<N0, N1> ToOneOf<N0, N1>() => OneOf<N0, N1>.Create(value);
+        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOf<N0, N1, N2>.Create(value);
+        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
+        // Can use fast Ctor as compiler can check types for us.
         public static implicit operator OneOf<T0, T1, T2, T3, T4>(T0 value) => new OneOf<T0, T1, T2, T3, T4>(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4>(T1 value) => new OneOf<T0, T1, T2, T3, T4>(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4>(T2 value) => new OneOf<T0, T1, T2, T3, T4>(value);
@@ -533,23 +543,23 @@ namespace OneOf
         static readonly Type typeT4 = typeof(T4);
         static readonly Type typeT5 = typeof(T5);
 
-        internal OneOf(object value)
+        OneOf(object value)
         {
-            EnsureValueIsValid(value);
+            // assumes will only be called after being validated in some way
             this.value = value;
         }
 
-        static void EnsureValueIsValid(object value)
+        internal static OneOf<T0, T1, T2, T3, T4, T5> Create(object value)
         {
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeT0) return;
-            if (valueType == typeT1) return;
-            if (valueType == typeT2) return;
-            if (valueType == typeT3) return;
-            if (valueType == typeT4) return;
-            if (valueType == typeT5) return;
+            if (valueType == typeT0) return new OneOf<T0, T1, T2, T3, T4, T5>((T0)value);
+            if (valueType == typeT1) return new OneOf<T0, T1, T2, T3, T4, T5>((T1)value);
+            if (valueType == typeT2) return new OneOf<T0, T1, T2, T3, T4, T5>((T2)value);
+            if (valueType == typeT3) return new OneOf<T0, T1, T2, T3, T4, T5>((T3)value);
+            if (valueType == typeT4) return new OneOf<T0, T1, T2, T3, T4, T5>((T4)value);
+            if (valueType == typeT5) return new OneOf<T0, T1, T2, T3, T4, T5>((T5)value);
 
             throw new ArgumentException("value");
         }
@@ -577,16 +587,18 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public OneOf<N0> ToOneOf<N0>() => new OneOf<N0>(value);
-        public OneOf<N0, N1> ToOneOf<N0, N1>() => new OneOf<N0, N1>(value);
-        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOf<N0, N1, N2>(value);
-        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOf<N0, N1, N2, N3>(value);
-        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOf<N0, N1, N2, N3, N4>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOf<N0, N1, N2, N3, N4, N5>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOf<N0, N1, N2, N3, N4, N5, N6>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
+        // Use slower Create method which does full type checks at runtime as compiler couldn't do them for us.
+        public OneOf<N0> ToOneOf<N0>() => OneOf<N0>.Create(value);
+        public OneOf<N0, N1> ToOneOf<N0, N1>() => OneOf<N0, N1>.Create(value);
+        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOf<N0, N1, N2>.Create(value);
+        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
+        // Can use fast Ctor as compiler can check types for us.
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T0 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T1 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T2 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value);
@@ -652,24 +664,24 @@ namespace OneOf
         static readonly Type typeT5 = typeof(T5);
         static readonly Type typeT6 = typeof(T6);
 
-        internal OneOf(object value)
+        OneOf(object value)
         {
-            EnsureValueIsValid(value);
+            // assumes will only be called after being validated in some way
             this.value = value;
         }
 
-        static void EnsureValueIsValid(object value)
+        internal static OneOf<T0, T1, T2, T3, T4, T5, T6> Create(object value)
         {
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeT0) return;
-            if (valueType == typeT1) return;
-            if (valueType == typeT2) return;
-            if (valueType == typeT3) return;
-            if (valueType == typeT4) return;
-            if (valueType == typeT5) return;
-            if (valueType == typeT6) return;
+            if (valueType == typeT0) return new OneOf<T0, T1, T2, T3, T4, T5, T6>((T0)value);
+            if (valueType == typeT1) return new OneOf<T0, T1, T2, T3, T4, T5, T6>((T1)value);
+            if (valueType == typeT2) return new OneOf<T0, T1, T2, T3, T4, T5, T6>((T2)value);
+            if (valueType == typeT3) return new OneOf<T0, T1, T2, T3, T4, T5, T6>((T3)value);
+            if (valueType == typeT4) return new OneOf<T0, T1, T2, T3, T4, T5, T6>((T4)value);
+            if (valueType == typeT5) return new OneOf<T0, T1, T2, T3, T4, T5, T6>((T5)value);
+            if (valueType == typeT6) return new OneOf<T0, T1, T2, T3, T4, T5, T6>((T6)value);
 
             throw new ArgumentException("value");
         }
@@ -697,16 +709,18 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public OneOf<N0> ToOneOf<N0>() => new OneOf<N0>(value);
-        public OneOf<N0, N1> ToOneOf<N0, N1>() => new OneOf<N0, N1>(value);
-        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOf<N0, N1, N2>(value);
-        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOf<N0, N1, N2, N3>(value);
-        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOf<N0, N1, N2, N3, N4>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOf<N0, N1, N2, N3, N4, N5>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOf<N0, N1, N2, N3, N4, N5, N6>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
+        // Use slower Create method which does full type checks at runtime as compiler couldn't do them for us.
+        public OneOf<N0> ToOneOf<N0>() => OneOf<N0>.Create(value);
+        public OneOf<N0, N1> ToOneOf<N0, N1>() => OneOf<N0, N1>.Create(value);
+        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOf<N0, N1, N2>.Create(value);
+        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
+        // Can use fast Ctor as compiler can check types for us.
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T0 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T1 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T2 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value);
@@ -776,25 +790,25 @@ namespace OneOf
         static readonly Type typeT6 = typeof(T6);
         static readonly Type typeT7 = typeof(T7);
 
-        internal OneOf(object value)
+        OneOf(object value)
         {
-            EnsureValueIsValid(value);
+            // assumes will only be called after being validated in some way
             this.value = value;
         }
 
-        static void EnsureValueIsValid(object value)
+        internal static OneOf<T0, T1, T2, T3, T4, T5, T6, T7> Create(object value)
         {
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeT0) return;
-            if (valueType == typeT1) return;
-            if (valueType == typeT2) return;
-            if (valueType == typeT3) return;
-            if (valueType == typeT4) return;
-            if (valueType == typeT5) return;
-            if (valueType == typeT6) return;
-            if (valueType == typeT7) return;
+            if (valueType == typeT0) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T0)value);
+            if (valueType == typeT1) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T1)value);
+            if (valueType == typeT2) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T2)value);
+            if (valueType == typeT3) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T3)value);
+            if (valueType == typeT4) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T4)value);
+            if (valueType == typeT5) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T5)value);
+            if (valueType == typeT6) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T6)value);
+            if (valueType == typeT7) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T7)value);
 
             throw new ArgumentException("value");
         }
@@ -822,16 +836,18 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public OneOf<N0> ToOneOf<N0>() => new OneOf<N0>(value);
-        public OneOf<N0, N1> ToOneOf<N0, N1>() => new OneOf<N0, N1>(value);
-        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOf<N0, N1, N2>(value);
-        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOf<N0, N1, N2, N3>(value);
-        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOf<N0, N1, N2, N3, N4>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOf<N0, N1, N2, N3, N4, N5>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOf<N0, N1, N2, N3, N4, N5, N6>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
+        // Use slower Create method which does full type checks at runtime as compiler couldn't do them for us.
+        public OneOf<N0> ToOneOf<N0>() => OneOf<N0>.Create(value);
+        public OneOf<N0, N1> ToOneOf<N0, N1>() => OneOf<N0, N1>.Create(value);
+        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOf<N0, N1, N2>.Create(value);
+        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
+        // Can use fast Ctor as compiler can check types for us.
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T0 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T1 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T2 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value);
@@ -905,26 +921,26 @@ namespace OneOf
         static readonly Type typeT7 = typeof(T7);
         static readonly Type typeT8 = typeof(T8);
 
-        internal OneOf(object value)
+        OneOf(object value)
         {
-            EnsureValueIsValid(value);
+            // assumes will only be called after being validated in some way
             this.value = value;
         }
 
-        static void EnsureValueIsValid(object value)
+        internal static OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(object value)
         {
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeT0) return;
-            if (valueType == typeT1) return;
-            if (valueType == typeT2) return;
-            if (valueType == typeT3) return;
-            if (valueType == typeT4) return;
-            if (valueType == typeT5) return;
-            if (valueType == typeT6) return;
-            if (valueType == typeT7) return;
-            if (valueType == typeT8) return;
+            if (valueType == typeT0) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T0)value);
+            if (valueType == typeT1) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T1)value);
+            if (valueType == typeT2) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T2)value);
+            if (valueType == typeT3) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T3)value);
+            if (valueType == typeT4) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T4)value);
+            if (valueType == typeT5) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T5)value);
+            if (valueType == typeT6) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T6)value);
+            if (valueType == typeT7) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T7)value);
+            if (valueType == typeT8) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T8)value);
 
             throw new ArgumentException("value");
         }
@@ -952,16 +968,18 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public OneOf<N0> ToOneOf<N0>() => new OneOf<N0>(value);
-        public OneOf<N0, N1> ToOneOf<N0, N1>() => new OneOf<N0, N1>(value);
-        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOf<N0, N1, N2>(value);
-        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOf<N0, N1, N2, N3>(value);
-        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOf<N0, N1, N2, N3, N4>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOf<N0, N1, N2, N3, N4, N5>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOf<N0, N1, N2, N3, N4, N5, N6>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7>(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
+        // Use slower Create method which does full type checks at runtime as compiler couldn't do them for us.
+        public OneOf<N0> ToOneOf<N0>() => OneOf<N0>.Create(value);
+        public OneOf<N0, N1> ToOneOf<N0, N1>() => OneOf<N0, N1>.Create(value);
+        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOf<N0, N1, N2>.Create(value);
+        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
+        // Can use fast Ctor as compiler can check types for us.
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T0 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T1 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T2 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
@@ -1030,24 +1048,24 @@ namespace OneOf
         readonly object value;
         static readonly Type typeT0 = typeof(T0);
 
-        internal OneOfBase(object value)
+        OneOfBase(object value)
         {
-            EnsureValueIsValid(value);
+            // assumes will only be called after being validated in some way
             this.value = value;
         }
 
         protected OneOfBase()
         {
-            EnsureValueIsValid(this);
+            // assumes will only be called after being validated in some way
             this.value = this;
         }
 
-        static void EnsureValueIsValid(object value)
+        internal static OneOfBase<T0> Create(object value)
         {
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeT0) return;
+            if (valueType == typeT0) return new OneOfBase<T0>((T0)value);
 
             throw new ArgumentException("value");
         }
@@ -1075,16 +1093,18 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public OneOfBase<N0> ToOneOf<N0>() => new OneOfBase<N0>(value);
-        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => new OneOfBase<N0, N1>(value);
-        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOfBase<N0, N1, N2>(value);
-        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOfBase<N0, N1, N2, N3>(value);
-        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOfBase<N0, N1, N2, N3, N4>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOfBase<N0, N1, N2, N3, N4, N5>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
+        // Use slower Create method which does full type checks at runtime as compiler couldn't do them for us.
+        public OneOfBase<N0> ToOneOf<N0>() => OneOfBase<N0>.Create(value);
+        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => OneOfBase<N0, N1>.Create(value);
+        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfBase<N0, N1, N2>.Create(value);
+        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
+        // Can use fast Ctor as compiler can check types for us.
         public static implicit operator OneOfBase<T0>(T0 value) => new OneOfBase<T0>(value);
 
         public void Switch(Action<T0> f0 = null, Action otherwise = null)
@@ -1130,25 +1150,25 @@ namespace OneOf
         static readonly Type typeT0 = typeof(T0);
         static readonly Type typeT1 = typeof(T1);
 
-        internal OneOfBase(object value)
+        OneOfBase(object value)
         {
-            EnsureValueIsValid(value);
+            // assumes will only be called after being validated in some way
             this.value = value;
         }
 
         protected OneOfBase()
         {
-            EnsureValueIsValid(this);
+            // assumes will only be called after being validated in some way
             this.value = this;
         }
 
-        static void EnsureValueIsValid(object value)
+        internal static OneOfBase<T0, T1> Create(object value)
         {
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeT0) return;
-            if (valueType == typeT1) return;
+            if (valueType == typeT0) return new OneOfBase<T0, T1>((T0)value);
+            if (valueType == typeT1) return new OneOfBase<T0, T1>((T1)value);
 
             throw new ArgumentException("value");
         }
@@ -1176,16 +1196,18 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public OneOfBase<N0> ToOneOf<N0>() => new OneOfBase<N0>(value);
-        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => new OneOfBase<N0, N1>(value);
-        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOfBase<N0, N1, N2>(value);
-        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOfBase<N0, N1, N2, N3>(value);
-        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOfBase<N0, N1, N2, N3, N4>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOfBase<N0, N1, N2, N3, N4, N5>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
+        // Use slower Create method which does full type checks at runtime as compiler couldn't do them for us.
+        public OneOfBase<N0> ToOneOf<N0>() => OneOfBase<N0>.Create(value);
+        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => OneOfBase<N0, N1>.Create(value);
+        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfBase<N0, N1, N2>.Create(value);
+        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
+        // Can use fast Ctor as compiler can check types for us.
         public static implicit operator OneOfBase<T0, T1>(T0 value) => new OneOfBase<T0, T1>(value);
         public static implicit operator OneOfBase<T0, T1>(T1 value) => new OneOfBase<T0, T1>(value);
 
@@ -1235,26 +1257,26 @@ namespace OneOf
         static readonly Type typeT1 = typeof(T1);
         static readonly Type typeT2 = typeof(T2);
 
-        internal OneOfBase(object value)
+        OneOfBase(object value)
         {
-            EnsureValueIsValid(value);
+            // assumes will only be called after being validated in some way
             this.value = value;
         }
 
         protected OneOfBase()
         {
-            EnsureValueIsValid(this);
+            // assumes will only be called after being validated in some way
             this.value = this;
         }
 
-        static void EnsureValueIsValid(object value)
+        internal static OneOfBase<T0, T1, T2> Create(object value)
         {
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeT0) return;
-            if (valueType == typeT1) return;
-            if (valueType == typeT2) return;
+            if (valueType == typeT0) return new OneOfBase<T0, T1, T2>((T0)value);
+            if (valueType == typeT1) return new OneOfBase<T0, T1, T2>((T1)value);
+            if (valueType == typeT2) return new OneOfBase<T0, T1, T2>((T2)value);
 
             throw new ArgumentException("value");
         }
@@ -1282,16 +1304,18 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public OneOfBase<N0> ToOneOf<N0>() => new OneOfBase<N0>(value);
-        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => new OneOfBase<N0, N1>(value);
-        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOfBase<N0, N1, N2>(value);
-        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOfBase<N0, N1, N2, N3>(value);
-        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOfBase<N0, N1, N2, N3, N4>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOfBase<N0, N1, N2, N3, N4, N5>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
+        // Use slower Create method which does full type checks at runtime as compiler couldn't do them for us.
+        public OneOfBase<N0> ToOneOf<N0>() => OneOfBase<N0>.Create(value);
+        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => OneOfBase<N0, N1>.Create(value);
+        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfBase<N0, N1, N2>.Create(value);
+        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
+        // Can use fast Ctor as compiler can check types for us.
         public static implicit operator OneOfBase<T0, T1, T2>(T0 value) => new OneOfBase<T0, T1, T2>(value);
         public static implicit operator OneOfBase<T0, T1, T2>(T1 value) => new OneOfBase<T0, T1, T2>(value);
         public static implicit operator OneOfBase<T0, T1, T2>(T2 value) => new OneOfBase<T0, T1, T2>(value);
@@ -1345,27 +1369,27 @@ namespace OneOf
         static readonly Type typeT2 = typeof(T2);
         static readonly Type typeT3 = typeof(T3);
 
-        internal OneOfBase(object value)
+        OneOfBase(object value)
         {
-            EnsureValueIsValid(value);
+            // assumes will only be called after being validated in some way
             this.value = value;
         }
 
         protected OneOfBase()
         {
-            EnsureValueIsValid(this);
+            // assumes will only be called after being validated in some way
             this.value = this;
         }
 
-        static void EnsureValueIsValid(object value)
+        internal static OneOfBase<T0, T1, T2, T3> Create(object value)
         {
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeT0) return;
-            if (valueType == typeT1) return;
-            if (valueType == typeT2) return;
-            if (valueType == typeT3) return;
+            if (valueType == typeT0) return new OneOfBase<T0, T1, T2, T3>((T0)value);
+            if (valueType == typeT1) return new OneOfBase<T0, T1, T2, T3>((T1)value);
+            if (valueType == typeT2) return new OneOfBase<T0, T1, T2, T3>((T2)value);
+            if (valueType == typeT3) return new OneOfBase<T0, T1, T2, T3>((T3)value);
 
             throw new ArgumentException("value");
         }
@@ -1393,16 +1417,18 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public OneOfBase<N0> ToOneOf<N0>() => new OneOfBase<N0>(value);
-        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => new OneOfBase<N0, N1>(value);
-        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOfBase<N0, N1, N2>(value);
-        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOfBase<N0, N1, N2, N3>(value);
-        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOfBase<N0, N1, N2, N3, N4>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOfBase<N0, N1, N2, N3, N4, N5>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
+        // Use slower Create method which does full type checks at runtime as compiler couldn't do them for us.
+        public OneOfBase<N0> ToOneOf<N0>() => OneOfBase<N0>.Create(value);
+        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => OneOfBase<N0, N1>.Create(value);
+        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfBase<N0, N1, N2>.Create(value);
+        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
+        // Can use fast Ctor as compiler can check types for us.
         public static implicit operator OneOfBase<T0, T1, T2, T3>(T0 value) => new OneOfBase<T0, T1, T2, T3>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3>(T1 value) => new OneOfBase<T0, T1, T2, T3>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3>(T2 value) => new OneOfBase<T0, T1, T2, T3>(value);
@@ -1460,28 +1486,28 @@ namespace OneOf
         static readonly Type typeT3 = typeof(T3);
         static readonly Type typeT4 = typeof(T4);
 
-        internal OneOfBase(object value)
+        OneOfBase(object value)
         {
-            EnsureValueIsValid(value);
+            // assumes will only be called after being validated in some way
             this.value = value;
         }
 
         protected OneOfBase()
         {
-            EnsureValueIsValid(this);
+            // assumes will only be called after being validated in some way
             this.value = this;
         }
 
-        static void EnsureValueIsValid(object value)
+        internal static OneOfBase<T0, T1, T2, T3, T4> Create(object value)
         {
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeT0) return;
-            if (valueType == typeT1) return;
-            if (valueType == typeT2) return;
-            if (valueType == typeT3) return;
-            if (valueType == typeT4) return;
+            if (valueType == typeT0) return new OneOfBase<T0, T1, T2, T3, T4>((T0)value);
+            if (valueType == typeT1) return new OneOfBase<T0, T1, T2, T3, T4>((T1)value);
+            if (valueType == typeT2) return new OneOfBase<T0, T1, T2, T3, T4>((T2)value);
+            if (valueType == typeT3) return new OneOfBase<T0, T1, T2, T3, T4>((T3)value);
+            if (valueType == typeT4) return new OneOfBase<T0, T1, T2, T3, T4>((T4)value);
 
             throw new ArgumentException("value");
         }
@@ -1509,16 +1535,18 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public OneOfBase<N0> ToOneOf<N0>() => new OneOfBase<N0>(value);
-        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => new OneOfBase<N0, N1>(value);
-        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOfBase<N0, N1, N2>(value);
-        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOfBase<N0, N1, N2, N3>(value);
-        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOfBase<N0, N1, N2, N3, N4>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOfBase<N0, N1, N2, N3, N4, N5>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
+        // Use slower Create method which does full type checks at runtime as compiler couldn't do them for us.
+        public OneOfBase<N0> ToOneOf<N0>() => OneOfBase<N0>.Create(value);
+        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => OneOfBase<N0, N1>.Create(value);
+        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfBase<N0, N1, N2>.Create(value);
+        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
+        // Can use fast Ctor as compiler can check types for us.
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T0 value) => new OneOfBase<T0, T1, T2, T3, T4>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T1 value) => new OneOfBase<T0, T1, T2, T3, T4>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T2 value) => new OneOfBase<T0, T1, T2, T3, T4>(value);
@@ -1580,29 +1608,29 @@ namespace OneOf
         static readonly Type typeT4 = typeof(T4);
         static readonly Type typeT5 = typeof(T5);
 
-        internal OneOfBase(object value)
+        OneOfBase(object value)
         {
-            EnsureValueIsValid(value);
+            // assumes will only be called after being validated in some way
             this.value = value;
         }
 
         protected OneOfBase()
         {
-            EnsureValueIsValid(this);
+            // assumes will only be called after being validated in some way
             this.value = this;
         }
 
-        static void EnsureValueIsValid(object value)
+        internal static OneOfBase<T0, T1, T2, T3, T4, T5> Create(object value)
         {
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeT0) return;
-            if (valueType == typeT1) return;
-            if (valueType == typeT2) return;
-            if (valueType == typeT3) return;
-            if (valueType == typeT4) return;
-            if (valueType == typeT5) return;
+            if (valueType == typeT0) return new OneOfBase<T0, T1, T2, T3, T4, T5>((T0)value);
+            if (valueType == typeT1) return new OneOfBase<T0, T1, T2, T3, T4, T5>((T1)value);
+            if (valueType == typeT2) return new OneOfBase<T0, T1, T2, T3, T4, T5>((T2)value);
+            if (valueType == typeT3) return new OneOfBase<T0, T1, T2, T3, T4, T5>((T3)value);
+            if (valueType == typeT4) return new OneOfBase<T0, T1, T2, T3, T4, T5>((T4)value);
+            if (valueType == typeT5) return new OneOfBase<T0, T1, T2, T3, T4, T5>((T5)value);
 
             throw new ArgumentException("value");
         }
@@ -1630,16 +1658,18 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public OneOfBase<N0> ToOneOf<N0>() => new OneOfBase<N0>(value);
-        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => new OneOfBase<N0, N1>(value);
-        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOfBase<N0, N1, N2>(value);
-        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOfBase<N0, N1, N2, N3>(value);
-        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOfBase<N0, N1, N2, N3, N4>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOfBase<N0, N1, N2, N3, N4, N5>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
+        // Use slower Create method which does full type checks at runtime as compiler couldn't do them for us.
+        public OneOfBase<N0> ToOneOf<N0>() => OneOfBase<N0>.Create(value);
+        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => OneOfBase<N0, N1>.Create(value);
+        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfBase<N0, N1, N2>.Create(value);
+        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
+        // Can use fast Ctor as compiler can check types for us.
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T0 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T1 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T2 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value);
@@ -1705,30 +1735,30 @@ namespace OneOf
         static readonly Type typeT5 = typeof(T5);
         static readonly Type typeT6 = typeof(T6);
 
-        internal OneOfBase(object value)
+        OneOfBase(object value)
         {
-            EnsureValueIsValid(value);
+            // assumes will only be called after being validated in some way
             this.value = value;
         }
 
         protected OneOfBase()
         {
-            EnsureValueIsValid(this);
+            // assumes will only be called after being validated in some way
             this.value = this;
         }
 
-        static void EnsureValueIsValid(object value)
+        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6> Create(object value)
         {
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeT0) return;
-            if (valueType == typeT1) return;
-            if (valueType == typeT2) return;
-            if (valueType == typeT3) return;
-            if (valueType == typeT4) return;
-            if (valueType == typeT5) return;
-            if (valueType == typeT6) return;
+            if (valueType == typeT0) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6>((T0)value);
+            if (valueType == typeT1) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6>((T1)value);
+            if (valueType == typeT2) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6>((T2)value);
+            if (valueType == typeT3) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6>((T3)value);
+            if (valueType == typeT4) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6>((T4)value);
+            if (valueType == typeT5) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6>((T5)value);
+            if (valueType == typeT6) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6>((T6)value);
 
             throw new ArgumentException("value");
         }
@@ -1756,16 +1786,18 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public OneOfBase<N0> ToOneOf<N0>() => new OneOfBase<N0>(value);
-        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => new OneOfBase<N0, N1>(value);
-        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOfBase<N0, N1, N2>(value);
-        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOfBase<N0, N1, N2, N3>(value);
-        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOfBase<N0, N1, N2, N3, N4>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOfBase<N0, N1, N2, N3, N4, N5>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
+        // Use slower Create method which does full type checks at runtime as compiler couldn't do them for us.
+        public OneOfBase<N0> ToOneOf<N0>() => OneOfBase<N0>.Create(value);
+        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => OneOfBase<N0, N1>.Create(value);
+        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfBase<N0, N1, N2>.Create(value);
+        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
+        // Can use fast Ctor as compiler can check types for us.
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T0 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T1 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T2 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value);
@@ -1835,31 +1867,31 @@ namespace OneOf
         static readonly Type typeT6 = typeof(T6);
         static readonly Type typeT7 = typeof(T7);
 
-        internal OneOfBase(object value)
+        OneOfBase(object value)
         {
-            EnsureValueIsValid(value);
+            // assumes will only be called after being validated in some way
             this.value = value;
         }
 
         protected OneOfBase()
         {
-            EnsureValueIsValid(this);
+            // assumes will only be called after being validated in some way
             this.value = this;
         }
 
-        static void EnsureValueIsValid(object value)
+        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> Create(object value)
         {
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeT0) return;
-            if (valueType == typeT1) return;
-            if (valueType == typeT2) return;
-            if (valueType == typeT3) return;
-            if (valueType == typeT4) return;
-            if (valueType == typeT5) return;
-            if (valueType == typeT6) return;
-            if (valueType == typeT7) return;
+            if (valueType == typeT0) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T0)value);
+            if (valueType == typeT1) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T1)value);
+            if (valueType == typeT2) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T2)value);
+            if (valueType == typeT3) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T3)value);
+            if (valueType == typeT4) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T4)value);
+            if (valueType == typeT5) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T5)value);
+            if (valueType == typeT6) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T6)value);
+            if (valueType == typeT7) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T7)value);
 
             throw new ArgumentException("value");
         }
@@ -1887,16 +1919,18 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public OneOfBase<N0> ToOneOf<N0>() => new OneOfBase<N0>(value);
-        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => new OneOfBase<N0, N1>(value);
-        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOfBase<N0, N1, N2>(value);
-        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOfBase<N0, N1, N2, N3>(value);
-        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOfBase<N0, N1, N2, N3, N4>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOfBase<N0, N1, N2, N3, N4, N5>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
+        // Use slower Create method which does full type checks at runtime as compiler couldn't do them for us.
+        public OneOfBase<N0> ToOneOf<N0>() => OneOfBase<N0>.Create(value);
+        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => OneOfBase<N0, N1>.Create(value);
+        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfBase<N0, N1, N2>.Create(value);
+        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
+        // Can use fast Ctor as compiler can check types for us.
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T0 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T1 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T2 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value);
@@ -1970,32 +2004,32 @@ namespace OneOf
         static readonly Type typeT7 = typeof(T7);
         static readonly Type typeT8 = typeof(T8);
 
-        internal OneOfBase(object value)
+        OneOfBase(object value)
         {
-            EnsureValueIsValid(value);
+            // assumes will only be called after being validated in some way
             this.value = value;
         }
 
         protected OneOfBase()
         {
-            EnsureValueIsValid(this);
+            // assumes will only be called after being validated in some way
             this.value = this;
         }
 
-        static void EnsureValueIsValid(object value)
+        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(object value)
         {
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeT0) return;
-            if (valueType == typeT1) return;
-            if (valueType == typeT2) return;
-            if (valueType == typeT3) return;
-            if (valueType == typeT4) return;
-            if (valueType == typeT5) return;
-            if (valueType == typeT6) return;
-            if (valueType == typeT7) return;
-            if (valueType == typeT8) return;
+            if (valueType == typeT0) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T0)value);
+            if (valueType == typeT1) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T1)value);
+            if (valueType == typeT2) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T2)value);
+            if (valueType == typeT3) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T3)value);
+            if (valueType == typeT4) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T4)value);
+            if (valueType == typeT5) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T5)value);
+            if (valueType == typeT6) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T6)value);
+            if (valueType == typeT7) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T7)value);
+            if (valueType == typeT8) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T8)value);
 
             throw new ArgumentException("value");
         }
@@ -2023,16 +2057,18 @@ namespace OneOf
             throw new InvalidOperationException();
         }
 
-        public OneOfBase<N0> ToOneOf<N0>() => new OneOfBase<N0>(value);
-        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => new OneOfBase<N0, N1>(value);
-        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => new OneOfBase<N0, N1, N2>(value);
-        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => new OneOfBase<N0, N1, N2, N3>(value);
-        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => new OneOfBase<N0, N1, N2, N3, N4>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => new OneOfBase<N0, N1, N2, N3, N4, N5>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => new OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>(value);
+        // Use slower Create method which does full type checks at runtime as compiler couldn't do them for us.
+        public OneOfBase<N0> ToOneOf<N0>() => OneOfBase<N0>.Create(value);
+        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => OneOfBase<N0, N1>.Create(value);
+        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfBase<N0, N1, N2>.Create(value);
+        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.Create(value);
 
+        // Can use fast Ctor as compiler can check types for us.
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T0 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T1 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T2 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
