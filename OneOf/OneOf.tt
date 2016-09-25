@@ -82,7 +82,7 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 			WriteLine("return (T)value;");
 		}
 
-		// =============== IsT
+		// =============== Is
 
 		WriteLine("");
 		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
@@ -91,7 +91,7 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 		}
 
 		WriteLine("");
-		WriteLine($"public bool IsT<T>()");
+		WriteLine($"public bool Is<T>()");
 		using(var indent2 = new Indent(this))
 		{
 			WriteLine("// quick path for when value non-null and correct type");
@@ -108,7 +108,7 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 			WriteLine("return false;");
 		}
 
-		// =============== AsT
+		// =============== As
 
 		WriteLine("");
 		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
@@ -117,7 +117,7 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 		}
 
 		WriteLine("");
-		WriteLine($"public T AsT<T>()");
+		WriteLine($"public T As<T>()");
 		using(var indent2 = new Indent(this))
 		{
 			WriteLine("// quick path for when value non-null and correct type");

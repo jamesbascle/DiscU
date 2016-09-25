@@ -28,7 +28,7 @@ namespace OneOf
 
         public bool IsT0 => index == 0;
 
-        public bool IsT<T>()
+        public bool Is<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return true;
@@ -41,7 +41,7 @@ namespace OneOf
 
         public T0 AsT0 => Get<T0>(0);
 
-        public T AsT<T>()
+        public T As<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return (T)this.value;
@@ -108,7 +108,7 @@ namespace OneOf
         public bool IsT0 => index == 0;
         public bool IsT1 => index == 1;
 
-        public bool IsT<T>()
+        public bool Is<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return true;
@@ -123,7 +123,7 @@ namespace OneOf
         public T0 AsT0 => Get<T0>(0);
         public T1 AsT1 => Get<T1>(1);
 
-        public T AsT<T>()
+        public T As<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return (T)this.value;
@@ -195,7 +195,7 @@ namespace OneOf
         public bool IsT1 => index == 1;
         public bool IsT2 => index == 2;
 
-        public bool IsT<T>()
+        public bool Is<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return true;
@@ -212,7 +212,7 @@ namespace OneOf
         public T1 AsT1 => Get<T1>(1);
         public T2 AsT2 => Get<T2>(2);
 
-        public T AsT<T>()
+        public T As<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return (T)this.value;
@@ -289,7 +289,7 @@ namespace OneOf
         public bool IsT2 => index == 2;
         public bool IsT3 => index == 3;
 
-        public bool IsT<T>()
+        public bool Is<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return true;
@@ -308,7 +308,7 @@ namespace OneOf
         public T2 AsT2 => Get<T2>(2);
         public T3 AsT3 => Get<T3>(3);
 
-        public T AsT<T>()
+        public T As<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return (T)this.value;
@@ -390,7 +390,7 @@ namespace OneOf
         public bool IsT3 => index == 3;
         public bool IsT4 => index == 4;
 
-        public bool IsT<T>()
+        public bool Is<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return true;
@@ -411,7 +411,7 @@ namespace OneOf
         public T3 AsT3 => Get<T3>(3);
         public T4 AsT4 => Get<T4>(4);
 
-        public T AsT<T>()
+        public T As<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return (T)this.value;
@@ -498,7 +498,7 @@ namespace OneOf
         public bool IsT4 => index == 4;
         public bool IsT5 => index == 5;
 
-        public bool IsT<T>()
+        public bool Is<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return true;
@@ -521,7 +521,7 @@ namespace OneOf
         public T4 AsT4 => Get<T4>(4);
         public T5 AsT5 => Get<T5>(5);
 
-        public T AsT<T>()
+        public T As<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return (T)this.value;
@@ -613,7 +613,7 @@ namespace OneOf
         public bool IsT5 => index == 5;
         public bool IsT6 => index == 6;
 
-        public bool IsT<T>()
+        public bool Is<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return true;
@@ -638,7 +638,7 @@ namespace OneOf
         public T5 AsT5 => Get<T5>(5);
         public T6 AsT6 => Get<T6>(6);
 
-        public T AsT<T>()
+        public T As<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return (T)this.value;
@@ -735,7 +735,7 @@ namespace OneOf
         public bool IsT6 => index == 6;
         public bool IsT7 => index == 7;
 
-        public bool IsT<T>()
+        public bool Is<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return true;
@@ -762,7 +762,7 @@ namespace OneOf
         public T6 AsT6 => Get<T6>(6);
         public T7 AsT7 => Get<T7>(7);
 
-        public T AsT<T>()
+        public T As<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return (T)this.value;
@@ -864,7 +864,7 @@ namespace OneOf
         public bool IsT7 => index == 7;
         public bool IsT8 => index == 8;
 
-        public bool IsT<T>()
+        public bool Is<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return true;
@@ -893,7 +893,7 @@ namespace OneOf
         public T7 AsT7 => Get<T7>(7);
         public T8 AsT8 => Get<T8>(8);
 
-        public T AsT<T>()
+        public T As<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return (T)this.value;
@@ -998,7 +998,7 @@ namespace OneOf
 
         public bool IsT0 => index == 0;
 
-        public bool IsT<T>()
+        public bool Is<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return true;
@@ -1011,7 +1011,7 @@ namespace OneOf
 
         public T0 AsT0 => Get<T0>(0);
 
-        public T AsT<T>()
+        public T As<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return (T)this.value;
@@ -1086,7 +1086,7 @@ namespace OneOf
         public bool IsT0 => index == 0;
         public bool IsT1 => index == 1;
 
-        public bool IsT<T>()
+        public bool Is<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return true;
@@ -1101,7 +1101,7 @@ namespace OneOf
         public T0 AsT0 => Get<T0>(0);
         public T1 AsT1 => Get<T1>(1);
 
-        public T AsT<T>()
+        public T As<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return (T)this.value;
@@ -1182,7 +1182,7 @@ namespace OneOf
         public bool IsT1 => index == 1;
         public bool IsT2 => index == 2;
 
-        public bool IsT<T>()
+        public bool Is<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return true;
@@ -1199,7 +1199,7 @@ namespace OneOf
         public T1 AsT1 => Get<T1>(1);
         public T2 AsT2 => Get<T2>(2);
 
-        public T AsT<T>()
+        public T As<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return (T)this.value;
@@ -1286,7 +1286,7 @@ namespace OneOf
         public bool IsT2 => index == 2;
         public bool IsT3 => index == 3;
 
-        public bool IsT<T>()
+        public bool Is<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return true;
@@ -1305,7 +1305,7 @@ namespace OneOf
         public T2 AsT2 => Get<T2>(2);
         public T3 AsT3 => Get<T3>(3);
 
-        public T AsT<T>()
+        public T As<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return (T)this.value;
@@ -1398,7 +1398,7 @@ namespace OneOf
         public bool IsT3 => index == 3;
         public bool IsT4 => index == 4;
 
-        public bool IsT<T>()
+        public bool Is<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return true;
@@ -1419,7 +1419,7 @@ namespace OneOf
         public T3 AsT3 => Get<T3>(3);
         public T4 AsT4 => Get<T4>(4);
 
-        public T AsT<T>()
+        public T As<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return (T)this.value;
@@ -1518,7 +1518,7 @@ namespace OneOf
         public bool IsT4 => index == 4;
         public bool IsT5 => index == 5;
 
-        public bool IsT<T>()
+        public bool Is<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return true;
@@ -1541,7 +1541,7 @@ namespace OneOf
         public T4 AsT4 => Get<T4>(4);
         public T5 AsT5 => Get<T5>(5);
 
-        public T AsT<T>()
+        public T As<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return (T)this.value;
@@ -1646,7 +1646,7 @@ namespace OneOf
         public bool IsT5 => index == 5;
         public bool IsT6 => index == 6;
 
-        public bool IsT<T>()
+        public bool Is<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return true;
@@ -1671,7 +1671,7 @@ namespace OneOf
         public T5 AsT5 => Get<T5>(5);
         public T6 AsT6 => Get<T6>(6);
 
-        public T AsT<T>()
+        public T As<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return (T)this.value;
@@ -1782,7 +1782,7 @@ namespace OneOf
         public bool IsT6 => index == 6;
         public bool IsT7 => index == 7;
 
-        public bool IsT<T>()
+        public bool Is<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return true;
@@ -1809,7 +1809,7 @@ namespace OneOf
         public T6 AsT6 => Get<T6>(6);
         public T7 AsT7 => Get<T7>(7);
 
-        public T AsT<T>()
+        public T As<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return (T)this.value;
@@ -1926,7 +1926,7 @@ namespace OneOf
         public bool IsT7 => index == 7;
         public bool IsT8 => index == 8;
 
-        public bool IsT<T>()
+        public bool Is<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return true;
@@ -1955,7 +1955,7 @@ namespace OneOf
         public T7 AsT7 => Get<T7>(7);
         public T8 AsT8 => Get<T8>(8);
 
-        public T AsT<T>()
+        public T As<T>()
         {
             // quick path for when value non-null and correct type
             if (this.value is T) return (T)this.value;
