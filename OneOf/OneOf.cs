@@ -28,7 +28,29 @@ namespace OneOf
 
         public bool IsT0 => index == 0;
 
+        public bool IsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return true;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return true;
+
+            return false;
+        }
+
         public T0 AsT0 => Get<T0>(0);
+
+        public T AsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return (T)this.value;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return (T)value;
+
+            throw new InvalidOperationException();
+        }
 
         public static implicit operator OneOf<T0>(T0 t) => new OneOf<T0>(t, 0);
 
@@ -86,8 +108,32 @@ namespace OneOf
         public bool IsT0 => index == 0;
         public bool IsT1 => index == 1;
 
+        public bool IsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return true;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return true;
+            if (typeof(T) == typeof(T1) && this.index == 1) return true;
+
+            return false;
+        }
+
         public T0 AsT0 => Get<T0>(0);
         public T1 AsT1 => Get<T1>(1);
+
+        public T AsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return (T)this.value;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return (T)value;
+            if (typeof(T) == typeof(T1) && this.index == 1) return (T)value;
+
+            throw new InvalidOperationException();
+        }
 
         public static implicit operator OneOf<T0, T1>(T0 t) => new OneOf<T0, T1>(t, 0);
         public static implicit operator OneOf<T0, T1>(T1 t) => new OneOf<T0, T1>(t, 1);
@@ -149,9 +195,35 @@ namespace OneOf
         public bool IsT1 => index == 1;
         public bool IsT2 => index == 2;
 
+        public bool IsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return true;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return true;
+            if (typeof(T) == typeof(T1) && this.index == 1) return true;
+            if (typeof(T) == typeof(T2) && this.index == 2) return true;
+
+            return false;
+        }
+
         public T0 AsT0 => Get<T0>(0);
         public T1 AsT1 => Get<T1>(1);
         public T2 AsT2 => Get<T2>(2);
+
+        public T AsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return (T)this.value;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return (T)value;
+            if (typeof(T) == typeof(T1) && this.index == 1) return (T)value;
+            if (typeof(T) == typeof(T2) && this.index == 2) return (T)value;
+
+            throw new InvalidOperationException();
+        }
 
         public static implicit operator OneOf<T0, T1, T2>(T0 t) => new OneOf<T0, T1, T2>(t, 0);
         public static implicit operator OneOf<T0, T1, T2>(T1 t) => new OneOf<T0, T1, T2>(t, 1);
@@ -217,10 +289,38 @@ namespace OneOf
         public bool IsT2 => index == 2;
         public bool IsT3 => index == 3;
 
+        public bool IsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return true;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return true;
+            if (typeof(T) == typeof(T1) && this.index == 1) return true;
+            if (typeof(T) == typeof(T2) && this.index == 2) return true;
+            if (typeof(T) == typeof(T3) && this.index == 3) return true;
+
+            return false;
+        }
+
         public T0 AsT0 => Get<T0>(0);
         public T1 AsT1 => Get<T1>(1);
         public T2 AsT2 => Get<T2>(2);
         public T3 AsT3 => Get<T3>(3);
+
+        public T AsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return (T)this.value;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return (T)value;
+            if (typeof(T) == typeof(T1) && this.index == 1) return (T)value;
+            if (typeof(T) == typeof(T2) && this.index == 2) return (T)value;
+            if (typeof(T) == typeof(T3) && this.index == 3) return (T)value;
+
+            throw new InvalidOperationException();
+        }
 
         public static implicit operator OneOf<T0, T1, T2, T3>(T0 t) => new OneOf<T0, T1, T2, T3>(t, 0);
         public static implicit operator OneOf<T0, T1, T2, T3>(T1 t) => new OneOf<T0, T1, T2, T3>(t, 1);
@@ -290,11 +390,41 @@ namespace OneOf
         public bool IsT3 => index == 3;
         public bool IsT4 => index == 4;
 
+        public bool IsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return true;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return true;
+            if (typeof(T) == typeof(T1) && this.index == 1) return true;
+            if (typeof(T) == typeof(T2) && this.index == 2) return true;
+            if (typeof(T) == typeof(T3) && this.index == 3) return true;
+            if (typeof(T) == typeof(T4) && this.index == 4) return true;
+
+            return false;
+        }
+
         public T0 AsT0 => Get<T0>(0);
         public T1 AsT1 => Get<T1>(1);
         public T2 AsT2 => Get<T2>(2);
         public T3 AsT3 => Get<T3>(3);
         public T4 AsT4 => Get<T4>(4);
+
+        public T AsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return (T)this.value;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return (T)value;
+            if (typeof(T) == typeof(T1) && this.index == 1) return (T)value;
+            if (typeof(T) == typeof(T2) && this.index == 2) return (T)value;
+            if (typeof(T) == typeof(T3) && this.index == 3) return (T)value;
+            if (typeof(T) == typeof(T4) && this.index == 4) return (T)value;
+
+            throw new InvalidOperationException();
+        }
 
         public static implicit operator OneOf<T0, T1, T2, T3, T4>(T0 t) => new OneOf<T0, T1, T2, T3, T4>(t, 0);
         public static implicit operator OneOf<T0, T1, T2, T3, T4>(T1 t) => new OneOf<T0, T1, T2, T3, T4>(t, 1);
@@ -368,12 +498,44 @@ namespace OneOf
         public bool IsT4 => index == 4;
         public bool IsT5 => index == 5;
 
+        public bool IsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return true;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return true;
+            if (typeof(T) == typeof(T1) && this.index == 1) return true;
+            if (typeof(T) == typeof(T2) && this.index == 2) return true;
+            if (typeof(T) == typeof(T3) && this.index == 3) return true;
+            if (typeof(T) == typeof(T4) && this.index == 4) return true;
+            if (typeof(T) == typeof(T5) && this.index == 5) return true;
+
+            return false;
+        }
+
         public T0 AsT0 => Get<T0>(0);
         public T1 AsT1 => Get<T1>(1);
         public T2 AsT2 => Get<T2>(2);
         public T3 AsT3 => Get<T3>(3);
         public T4 AsT4 => Get<T4>(4);
         public T5 AsT5 => Get<T5>(5);
+
+        public T AsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return (T)this.value;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return (T)value;
+            if (typeof(T) == typeof(T1) && this.index == 1) return (T)value;
+            if (typeof(T) == typeof(T2) && this.index == 2) return (T)value;
+            if (typeof(T) == typeof(T3) && this.index == 3) return (T)value;
+            if (typeof(T) == typeof(T4) && this.index == 4) return (T)value;
+            if (typeof(T) == typeof(T5) && this.index == 5) return (T)value;
+
+            throw new InvalidOperationException();
+        }
 
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T0 t) => new OneOf<T0, T1, T2, T3, T4, T5>(t, 0);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T1 t) => new OneOf<T0, T1, T2, T3, T4, T5>(t, 1);
@@ -451,6 +613,23 @@ namespace OneOf
         public bool IsT5 => index == 5;
         public bool IsT6 => index == 6;
 
+        public bool IsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return true;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return true;
+            if (typeof(T) == typeof(T1) && this.index == 1) return true;
+            if (typeof(T) == typeof(T2) && this.index == 2) return true;
+            if (typeof(T) == typeof(T3) && this.index == 3) return true;
+            if (typeof(T) == typeof(T4) && this.index == 4) return true;
+            if (typeof(T) == typeof(T5) && this.index == 5) return true;
+            if (typeof(T) == typeof(T6) && this.index == 6) return true;
+
+            return false;
+        }
+
         public T0 AsT0 => Get<T0>(0);
         public T1 AsT1 => Get<T1>(1);
         public T2 AsT2 => Get<T2>(2);
@@ -458,6 +637,23 @@ namespace OneOf
         public T4 AsT4 => Get<T4>(4);
         public T5 AsT5 => Get<T5>(5);
         public T6 AsT6 => Get<T6>(6);
+
+        public T AsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return (T)this.value;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return (T)value;
+            if (typeof(T) == typeof(T1) && this.index == 1) return (T)value;
+            if (typeof(T) == typeof(T2) && this.index == 2) return (T)value;
+            if (typeof(T) == typeof(T3) && this.index == 3) return (T)value;
+            if (typeof(T) == typeof(T4) && this.index == 4) return (T)value;
+            if (typeof(T) == typeof(T5) && this.index == 5) return (T)value;
+            if (typeof(T) == typeof(T6) && this.index == 6) return (T)value;
+
+            throw new InvalidOperationException();
+        }
 
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T0 t) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(t, 0);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T1 t) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(t, 1);
@@ -539,6 +735,24 @@ namespace OneOf
         public bool IsT6 => index == 6;
         public bool IsT7 => index == 7;
 
+        public bool IsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return true;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return true;
+            if (typeof(T) == typeof(T1) && this.index == 1) return true;
+            if (typeof(T) == typeof(T2) && this.index == 2) return true;
+            if (typeof(T) == typeof(T3) && this.index == 3) return true;
+            if (typeof(T) == typeof(T4) && this.index == 4) return true;
+            if (typeof(T) == typeof(T5) && this.index == 5) return true;
+            if (typeof(T) == typeof(T6) && this.index == 6) return true;
+            if (typeof(T) == typeof(T7) && this.index == 7) return true;
+
+            return false;
+        }
+
         public T0 AsT0 => Get<T0>(0);
         public T1 AsT1 => Get<T1>(1);
         public T2 AsT2 => Get<T2>(2);
@@ -547,6 +761,24 @@ namespace OneOf
         public T5 AsT5 => Get<T5>(5);
         public T6 AsT6 => Get<T6>(6);
         public T7 AsT7 => Get<T7>(7);
+
+        public T AsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return (T)this.value;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return (T)value;
+            if (typeof(T) == typeof(T1) && this.index == 1) return (T)value;
+            if (typeof(T) == typeof(T2) && this.index == 2) return (T)value;
+            if (typeof(T) == typeof(T3) && this.index == 3) return (T)value;
+            if (typeof(T) == typeof(T4) && this.index == 4) return (T)value;
+            if (typeof(T) == typeof(T5) && this.index == 5) return (T)value;
+            if (typeof(T) == typeof(T6) && this.index == 6) return (T)value;
+            if (typeof(T) == typeof(T7) && this.index == 7) return (T)value;
+
+            throw new InvalidOperationException();
+        }
 
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T0 t) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(t, 0);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T1 t) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(t, 1);
@@ -632,6 +864,25 @@ namespace OneOf
         public bool IsT7 => index == 7;
         public bool IsT8 => index == 8;
 
+        public bool IsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return true;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return true;
+            if (typeof(T) == typeof(T1) && this.index == 1) return true;
+            if (typeof(T) == typeof(T2) && this.index == 2) return true;
+            if (typeof(T) == typeof(T3) && this.index == 3) return true;
+            if (typeof(T) == typeof(T4) && this.index == 4) return true;
+            if (typeof(T) == typeof(T5) && this.index == 5) return true;
+            if (typeof(T) == typeof(T6) && this.index == 6) return true;
+            if (typeof(T) == typeof(T7) && this.index == 7) return true;
+            if (typeof(T) == typeof(T8) && this.index == 8) return true;
+
+            return false;
+        }
+
         public T0 AsT0 => Get<T0>(0);
         public T1 AsT1 => Get<T1>(1);
         public T2 AsT2 => Get<T2>(2);
@@ -641,6 +892,25 @@ namespace OneOf
         public T6 AsT6 => Get<T6>(6);
         public T7 AsT7 => Get<T7>(7);
         public T8 AsT8 => Get<T8>(8);
+
+        public T AsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return (T)this.value;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return (T)value;
+            if (typeof(T) == typeof(T1) && this.index == 1) return (T)value;
+            if (typeof(T) == typeof(T2) && this.index == 2) return (T)value;
+            if (typeof(T) == typeof(T3) && this.index == 3) return (T)value;
+            if (typeof(T) == typeof(T4) && this.index == 4) return (T)value;
+            if (typeof(T) == typeof(T5) && this.index == 5) return (T)value;
+            if (typeof(T) == typeof(T6) && this.index == 6) return (T)value;
+            if (typeof(T) == typeof(T7) && this.index == 7) return (T)value;
+            if (typeof(T) == typeof(T8) && this.index == 8) return (T)value;
+
+            throw new InvalidOperationException();
+        }
 
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T0 t) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(t, 0);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T1 t) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(t, 1);
@@ -728,7 +998,29 @@ namespace OneOf
 
         public bool IsT0 => index == 0;
 
+        public bool IsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return true;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return true;
+
+            return false;
+        }
+
         public T0 AsT0 => Get<T0>(0);
+
+        public T AsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return (T)this.value;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return (T)value;
+
+            throw new InvalidOperationException();
+        }
 
         public static implicit operator OneOfBase<T0>(T0 t) => new OneOfBase<T0>(t, 0);
 
@@ -794,8 +1086,32 @@ namespace OneOf
         public bool IsT0 => index == 0;
         public bool IsT1 => index == 1;
 
+        public bool IsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return true;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return true;
+            if (typeof(T) == typeof(T1) && this.index == 1) return true;
+
+            return false;
+        }
+
         public T0 AsT0 => Get<T0>(0);
         public T1 AsT1 => Get<T1>(1);
+
+        public T AsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return (T)this.value;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return (T)value;
+            if (typeof(T) == typeof(T1) && this.index == 1) return (T)value;
+
+            throw new InvalidOperationException();
+        }
 
         public static implicit operator OneOfBase<T0, T1>(T0 t) => new OneOfBase<T0, T1>(t, 0);
         public static implicit operator OneOfBase<T0, T1>(T1 t) => new OneOfBase<T0, T1>(t, 1);
@@ -866,9 +1182,35 @@ namespace OneOf
         public bool IsT1 => index == 1;
         public bool IsT2 => index == 2;
 
+        public bool IsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return true;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return true;
+            if (typeof(T) == typeof(T1) && this.index == 1) return true;
+            if (typeof(T) == typeof(T2) && this.index == 2) return true;
+
+            return false;
+        }
+
         public T0 AsT0 => Get<T0>(0);
         public T1 AsT1 => Get<T1>(1);
         public T2 AsT2 => Get<T2>(2);
+
+        public T AsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return (T)this.value;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return (T)value;
+            if (typeof(T) == typeof(T1) && this.index == 1) return (T)value;
+            if (typeof(T) == typeof(T2) && this.index == 2) return (T)value;
+
+            throw new InvalidOperationException();
+        }
 
         public static implicit operator OneOfBase<T0, T1, T2>(T0 t) => new OneOfBase<T0, T1, T2>(t, 0);
         public static implicit operator OneOfBase<T0, T1, T2>(T1 t) => new OneOfBase<T0, T1, T2>(t, 1);
@@ -944,10 +1286,38 @@ namespace OneOf
         public bool IsT2 => index == 2;
         public bool IsT3 => index == 3;
 
+        public bool IsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return true;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return true;
+            if (typeof(T) == typeof(T1) && this.index == 1) return true;
+            if (typeof(T) == typeof(T2) && this.index == 2) return true;
+            if (typeof(T) == typeof(T3) && this.index == 3) return true;
+
+            return false;
+        }
+
         public T0 AsT0 => Get<T0>(0);
         public T1 AsT1 => Get<T1>(1);
         public T2 AsT2 => Get<T2>(2);
         public T3 AsT3 => Get<T3>(3);
+
+        public T AsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return (T)this.value;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return (T)value;
+            if (typeof(T) == typeof(T1) && this.index == 1) return (T)value;
+            if (typeof(T) == typeof(T2) && this.index == 2) return (T)value;
+            if (typeof(T) == typeof(T3) && this.index == 3) return (T)value;
+
+            throw new InvalidOperationException();
+        }
 
         public static implicit operator OneOfBase<T0, T1, T2, T3>(T0 t) => new OneOfBase<T0, T1, T2, T3>(t, 0);
         public static implicit operator OneOfBase<T0, T1, T2, T3>(T1 t) => new OneOfBase<T0, T1, T2, T3>(t, 1);
@@ -1028,11 +1398,41 @@ namespace OneOf
         public bool IsT3 => index == 3;
         public bool IsT4 => index == 4;
 
+        public bool IsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return true;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return true;
+            if (typeof(T) == typeof(T1) && this.index == 1) return true;
+            if (typeof(T) == typeof(T2) && this.index == 2) return true;
+            if (typeof(T) == typeof(T3) && this.index == 3) return true;
+            if (typeof(T) == typeof(T4) && this.index == 4) return true;
+
+            return false;
+        }
+
         public T0 AsT0 => Get<T0>(0);
         public T1 AsT1 => Get<T1>(1);
         public T2 AsT2 => Get<T2>(2);
         public T3 AsT3 => Get<T3>(3);
         public T4 AsT4 => Get<T4>(4);
+
+        public T AsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return (T)this.value;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return (T)value;
+            if (typeof(T) == typeof(T1) && this.index == 1) return (T)value;
+            if (typeof(T) == typeof(T2) && this.index == 2) return (T)value;
+            if (typeof(T) == typeof(T3) && this.index == 3) return (T)value;
+            if (typeof(T) == typeof(T4) && this.index == 4) return (T)value;
+
+            throw new InvalidOperationException();
+        }
 
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T0 t) => new OneOfBase<T0, T1, T2, T3, T4>(t, 0);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T1 t) => new OneOfBase<T0, T1, T2, T3, T4>(t, 1);
@@ -1118,12 +1518,44 @@ namespace OneOf
         public bool IsT4 => index == 4;
         public bool IsT5 => index == 5;
 
+        public bool IsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return true;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return true;
+            if (typeof(T) == typeof(T1) && this.index == 1) return true;
+            if (typeof(T) == typeof(T2) && this.index == 2) return true;
+            if (typeof(T) == typeof(T3) && this.index == 3) return true;
+            if (typeof(T) == typeof(T4) && this.index == 4) return true;
+            if (typeof(T) == typeof(T5) && this.index == 5) return true;
+
+            return false;
+        }
+
         public T0 AsT0 => Get<T0>(0);
         public T1 AsT1 => Get<T1>(1);
         public T2 AsT2 => Get<T2>(2);
         public T3 AsT3 => Get<T3>(3);
         public T4 AsT4 => Get<T4>(4);
         public T5 AsT5 => Get<T5>(5);
+
+        public T AsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return (T)this.value;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return (T)value;
+            if (typeof(T) == typeof(T1) && this.index == 1) return (T)value;
+            if (typeof(T) == typeof(T2) && this.index == 2) return (T)value;
+            if (typeof(T) == typeof(T3) && this.index == 3) return (T)value;
+            if (typeof(T) == typeof(T4) && this.index == 4) return (T)value;
+            if (typeof(T) == typeof(T5) && this.index == 5) return (T)value;
+
+            throw new InvalidOperationException();
+        }
 
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T0 t) => new OneOfBase<T0, T1, T2, T3, T4, T5>(t, 0);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T1 t) => new OneOfBase<T0, T1, T2, T3, T4, T5>(t, 1);
@@ -1214,6 +1646,23 @@ namespace OneOf
         public bool IsT5 => index == 5;
         public bool IsT6 => index == 6;
 
+        public bool IsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return true;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return true;
+            if (typeof(T) == typeof(T1) && this.index == 1) return true;
+            if (typeof(T) == typeof(T2) && this.index == 2) return true;
+            if (typeof(T) == typeof(T3) && this.index == 3) return true;
+            if (typeof(T) == typeof(T4) && this.index == 4) return true;
+            if (typeof(T) == typeof(T5) && this.index == 5) return true;
+            if (typeof(T) == typeof(T6) && this.index == 6) return true;
+
+            return false;
+        }
+
         public T0 AsT0 => Get<T0>(0);
         public T1 AsT1 => Get<T1>(1);
         public T2 AsT2 => Get<T2>(2);
@@ -1221,6 +1670,23 @@ namespace OneOf
         public T4 AsT4 => Get<T4>(4);
         public T5 AsT5 => Get<T5>(5);
         public T6 AsT6 => Get<T6>(6);
+
+        public T AsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return (T)this.value;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return (T)value;
+            if (typeof(T) == typeof(T1) && this.index == 1) return (T)value;
+            if (typeof(T) == typeof(T2) && this.index == 2) return (T)value;
+            if (typeof(T) == typeof(T3) && this.index == 3) return (T)value;
+            if (typeof(T) == typeof(T4) && this.index == 4) return (T)value;
+            if (typeof(T) == typeof(T5) && this.index == 5) return (T)value;
+            if (typeof(T) == typeof(T6) && this.index == 6) return (T)value;
+
+            throw new InvalidOperationException();
+        }
 
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T0 t) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(t, 0);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T1 t) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(t, 1);
@@ -1316,6 +1782,24 @@ namespace OneOf
         public bool IsT6 => index == 6;
         public bool IsT7 => index == 7;
 
+        public bool IsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return true;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return true;
+            if (typeof(T) == typeof(T1) && this.index == 1) return true;
+            if (typeof(T) == typeof(T2) && this.index == 2) return true;
+            if (typeof(T) == typeof(T3) && this.index == 3) return true;
+            if (typeof(T) == typeof(T4) && this.index == 4) return true;
+            if (typeof(T) == typeof(T5) && this.index == 5) return true;
+            if (typeof(T) == typeof(T6) && this.index == 6) return true;
+            if (typeof(T) == typeof(T7) && this.index == 7) return true;
+
+            return false;
+        }
+
         public T0 AsT0 => Get<T0>(0);
         public T1 AsT1 => Get<T1>(1);
         public T2 AsT2 => Get<T2>(2);
@@ -1324,6 +1808,24 @@ namespace OneOf
         public T5 AsT5 => Get<T5>(5);
         public T6 AsT6 => Get<T6>(6);
         public T7 AsT7 => Get<T7>(7);
+
+        public T AsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return (T)this.value;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return (T)value;
+            if (typeof(T) == typeof(T1) && this.index == 1) return (T)value;
+            if (typeof(T) == typeof(T2) && this.index == 2) return (T)value;
+            if (typeof(T) == typeof(T3) && this.index == 3) return (T)value;
+            if (typeof(T) == typeof(T4) && this.index == 4) return (T)value;
+            if (typeof(T) == typeof(T5) && this.index == 5) return (T)value;
+            if (typeof(T) == typeof(T6) && this.index == 6) return (T)value;
+            if (typeof(T) == typeof(T7) && this.index == 7) return (T)value;
+
+            throw new InvalidOperationException();
+        }
 
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T0 t) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(t, 0);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T1 t) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(t, 1);
@@ -1424,6 +1926,25 @@ namespace OneOf
         public bool IsT7 => index == 7;
         public bool IsT8 => index == 8;
 
+        public bool IsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return true;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return true;
+            if (typeof(T) == typeof(T1) && this.index == 1) return true;
+            if (typeof(T) == typeof(T2) && this.index == 2) return true;
+            if (typeof(T) == typeof(T3) && this.index == 3) return true;
+            if (typeof(T) == typeof(T4) && this.index == 4) return true;
+            if (typeof(T) == typeof(T5) && this.index == 5) return true;
+            if (typeof(T) == typeof(T6) && this.index == 6) return true;
+            if (typeof(T) == typeof(T7) && this.index == 7) return true;
+            if (typeof(T) == typeof(T8) && this.index == 8) return true;
+
+            return false;
+        }
+
         public T0 AsT0 => Get<T0>(0);
         public T1 AsT1 => Get<T1>(1);
         public T2 AsT2 => Get<T2>(2);
@@ -1433,6 +1954,25 @@ namespace OneOf
         public T6 AsT6 => Get<T6>(6);
         public T7 AsT7 => Get<T7>(7);
         public T8 AsT8 => Get<T8>(8);
+
+        public T AsT<T>()
+        {
+            // quick path for when value non-null
+            if (this.value != null && typeof(T) == this.value.GetType()) return (T)this.value;
+
+            // slower path for when value null
+            if (typeof(T) == typeof(T0) && this.index == 0) return (T)value;
+            if (typeof(T) == typeof(T1) && this.index == 1) return (T)value;
+            if (typeof(T) == typeof(T2) && this.index == 2) return (T)value;
+            if (typeof(T) == typeof(T3) && this.index == 3) return (T)value;
+            if (typeof(T) == typeof(T4) && this.index == 4) return (T)value;
+            if (typeof(T) == typeof(T5) && this.index == 5) return (T)value;
+            if (typeof(T) == typeof(T6) && this.index == 6) return (T)value;
+            if (typeof(T) == typeof(T7) && this.index == 7) return (T)value;
+            if (typeof(T) == typeof(T8) && this.index == 8) return (T)value;
+
+            throw new InvalidOperationException();
+        }
 
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T0 t) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(t, 0);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T1 t) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(t, 1);

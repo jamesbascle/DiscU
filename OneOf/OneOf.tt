@@ -90,12 +90,48 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 			WriteLine($"public bool IsT{parmIndex} => index == {parmIndex};");
 		}
 
+		WriteLine("");
+		WriteLine($"public bool IsT<T>()");
+		using(var indent2 = new Indent(this))
+		{
+			WriteLine("// quick path for when value non-null");
+			WriteLine($"if (this.value != null && typeof(T) == this.value.GetType()) return true;");
+			WriteLine("");
+
+			WriteLine("// slower path for when value null");
+			for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
+			{
+				WriteLine($"if (typeof(T) == typeof(T{parmIndex}) && this.index == {parmIndex}) return true;");
+			}
+
+			WriteLine("");
+			WriteLine("return false;");
+		}
+
 		// =============== AsT
 
 		WriteLine("");
 		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
 		{
 			WriteLine($"public T{parmIndex} AsT{parmIndex} => Get<T{parmIndex}>({parmIndex});"); 
+		}
+
+		WriteLine("");
+		WriteLine($"public T AsT<T>()");
+		using(var indent2 = new Indent(this))
+		{
+			WriteLine("// quick path for when value non-null");
+			WriteLine($"if (this.value != null && typeof(T) == this.value.GetType()) return (T)this.value;");
+			WriteLine("");
+
+			WriteLine("// slower path for when value null");
+			for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
+			{
+				WriteLine($"if (typeof(T) == typeof(T{parmIndex}) && this.index == {parmIndex}) return (T)value;");
+			}
+
+			WriteLine("");
+			WriteLine("throw new InvalidOperationException();");
 		}
 
 		// =============== implicit conversion to T
