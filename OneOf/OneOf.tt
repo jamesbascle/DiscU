@@ -116,6 +116,25 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 			WriteLine($"public static implicit operator {typeName}<{genericArg}>(T{parmIndex} t) => new {typeName}<{genericArg}>(t, {parmIndex});"); 
 		}
 
+		for(var newIndex = 0; newIndex < 9; newIndex ++)
+		{
+			var otherGenericArgs = string.Join(", ", Enumerable.Range(0, newIndex+1).Select(e => "N" + e));
+
+			WriteLine("");
+			WriteLine($"public {typeName}<{otherGenericArgs}> ToOneOf<{otherGenericArgs}>()"); 
+			using(var indent2 = new Indent(this))
+			{
+				WriteLine("var valueType = value.GetType();");
+				WriteLine("");
+				for(var parmIndex = 0; parmIndex < Math.Min(countOfgenericParams, newIndex); parmIndex ++)
+				{
+					WriteLine($"if (valueType == typeof(N{parmIndex})) return (N{parmIndex})value;");
+				}
+				WriteLine("");
+	    		WriteLine("throw new InvalidOperationException();");
+			}
+		}
+
 		// =============== Switch
 
 		var switchArgList = string.Join(", ", Enumerable.Range(0, countOfgenericParams).Select(e => "Action<T" + e + "> f" + e + " = null"));
