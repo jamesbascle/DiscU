@@ -50,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AsTests.cs" />
+    <Compile Include="MatchTests.cs" />
+    <Compile Include="SwitchTests.cs" />
     <Compile Include="IsTests.cs" />
     <Compile Include="BaseClassTests.cs" />
     <Compile Include="Serialization.cs" />
