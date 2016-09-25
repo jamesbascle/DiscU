@@ -11,6 +11,7 @@ namespace OneOf
     public struct OneOf<T0> : IOneOf
     {
         readonly object value;
+        static readonly Type typeT0 = typeof(T0);
 
         internal OneOf(object value)
         {
@@ -23,7 +24,7 @@ namespace OneOf
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeof(T0)) return;
+            if (valueType == typeT0) return;
 
             throw new ArgumentException("value");
         }
@@ -67,7 +68,7 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
+            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -78,7 +79,7 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
+            if (f0 != null && valueType == typeT0) return f0((T0)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -103,6 +104,8 @@ namespace OneOf
     public struct OneOf<T0, T1> : IOneOf
     {
         readonly object value;
+        static readonly Type typeT0 = typeof(T0);
+        static readonly Type typeT1 = typeof(T1);
 
         internal OneOf(object value)
         {
@@ -115,8 +118,8 @@ namespace OneOf
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeof(T0)) return;
-            if (valueType == typeof(T1)) return;
+            if (valueType == typeT0) return;
+            if (valueType == typeT1) return;
 
             throw new ArgumentException("value");
         }
@@ -161,8 +164,8 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
-            if (f1 != null && valueType == typeof(T1)) { f1((T1)this.value); return; }
+            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
+            if (f1 != null && valueType == typeT1) { f1((T1)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -173,8 +176,8 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
-            if (f1 != null && valueType == typeof(T1)) return f1((T1)this.value);
+            if (f0 != null && valueType == typeT0) return f0((T0)this.value);
+            if (f1 != null && valueType == typeT1) return f1((T1)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -199,6 +202,9 @@ namespace OneOf
     public struct OneOf<T0, T1, T2> : IOneOf
     {
         readonly object value;
+        static readonly Type typeT0 = typeof(T0);
+        static readonly Type typeT1 = typeof(T1);
+        static readonly Type typeT2 = typeof(T2);
 
         internal OneOf(object value)
         {
@@ -211,9 +217,9 @@ namespace OneOf
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeof(T0)) return;
-            if (valueType == typeof(T1)) return;
-            if (valueType == typeof(T2)) return;
+            if (valueType == typeT0) return;
+            if (valueType == typeT1) return;
+            if (valueType == typeT2) return;
 
             throw new ArgumentException("value");
         }
@@ -259,9 +265,9 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
-            if (f1 != null && valueType == typeof(T1)) { f1((T1)this.value); return; }
-            if (f2 != null && valueType == typeof(T2)) { f2((T2)this.value); return; }
+            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
+            if (f1 != null && valueType == typeT1) { f1((T1)this.value); return; }
+            if (f2 != null && valueType == typeT2) { f2((T2)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -272,9 +278,9 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
-            if (f1 != null && valueType == typeof(T1)) return f1((T1)this.value);
-            if (f2 != null && valueType == typeof(T2)) return f2((T2)this.value);
+            if (f0 != null && valueType == typeT0) return f0((T0)this.value);
+            if (f1 != null && valueType == typeT1) return f1((T1)this.value);
+            if (f2 != null && valueType == typeT2) return f2((T2)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -299,6 +305,10 @@ namespace OneOf
     public struct OneOf<T0, T1, T2, T3> : IOneOf
     {
         readonly object value;
+        static readonly Type typeT0 = typeof(T0);
+        static readonly Type typeT1 = typeof(T1);
+        static readonly Type typeT2 = typeof(T2);
+        static readonly Type typeT3 = typeof(T3);
 
         internal OneOf(object value)
         {
@@ -311,10 +321,10 @@ namespace OneOf
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeof(T0)) return;
-            if (valueType == typeof(T1)) return;
-            if (valueType == typeof(T2)) return;
-            if (valueType == typeof(T3)) return;
+            if (valueType == typeT0) return;
+            if (valueType == typeT1) return;
+            if (valueType == typeT2) return;
+            if (valueType == typeT3) return;
 
             throw new ArgumentException("value");
         }
@@ -361,10 +371,10 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
-            if (f1 != null && valueType == typeof(T1)) { f1((T1)this.value); return; }
-            if (f2 != null && valueType == typeof(T2)) { f2((T2)this.value); return; }
-            if (f3 != null && valueType == typeof(T3)) { f3((T3)this.value); return; }
+            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
+            if (f1 != null && valueType == typeT1) { f1((T1)this.value); return; }
+            if (f2 != null && valueType == typeT2) { f2((T2)this.value); return; }
+            if (f3 != null && valueType == typeT3) { f3((T3)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -375,10 +385,10 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
-            if (f1 != null && valueType == typeof(T1)) return f1((T1)this.value);
-            if (f2 != null && valueType == typeof(T2)) return f2((T2)this.value);
-            if (f3 != null && valueType == typeof(T3)) return f3((T3)this.value);
+            if (f0 != null && valueType == typeT0) return f0((T0)this.value);
+            if (f1 != null && valueType == typeT1) return f1((T1)this.value);
+            if (f2 != null && valueType == typeT2) return f2((T2)this.value);
+            if (f3 != null && valueType == typeT3) return f3((T3)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -403,6 +413,11 @@ namespace OneOf
     public struct OneOf<T0, T1, T2, T3, T4> : IOneOf
     {
         readonly object value;
+        static readonly Type typeT0 = typeof(T0);
+        static readonly Type typeT1 = typeof(T1);
+        static readonly Type typeT2 = typeof(T2);
+        static readonly Type typeT3 = typeof(T3);
+        static readonly Type typeT4 = typeof(T4);
 
         internal OneOf(object value)
         {
@@ -415,11 +430,11 @@ namespace OneOf
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeof(T0)) return;
-            if (valueType == typeof(T1)) return;
-            if (valueType == typeof(T2)) return;
-            if (valueType == typeof(T3)) return;
-            if (valueType == typeof(T4)) return;
+            if (valueType == typeT0) return;
+            if (valueType == typeT1) return;
+            if (valueType == typeT2) return;
+            if (valueType == typeT3) return;
+            if (valueType == typeT4) return;
 
             throw new ArgumentException("value");
         }
@@ -467,11 +482,11 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
-            if (f1 != null && valueType == typeof(T1)) { f1((T1)this.value); return; }
-            if (f2 != null && valueType == typeof(T2)) { f2((T2)this.value); return; }
-            if (f3 != null && valueType == typeof(T3)) { f3((T3)this.value); return; }
-            if (f4 != null && valueType == typeof(T4)) { f4((T4)this.value); return; }
+            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
+            if (f1 != null && valueType == typeT1) { f1((T1)this.value); return; }
+            if (f2 != null && valueType == typeT2) { f2((T2)this.value); return; }
+            if (f3 != null && valueType == typeT3) { f3((T3)this.value); return; }
+            if (f4 != null && valueType == typeT4) { f4((T4)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -482,11 +497,11 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
-            if (f1 != null && valueType == typeof(T1)) return f1((T1)this.value);
-            if (f2 != null && valueType == typeof(T2)) return f2((T2)this.value);
-            if (f3 != null && valueType == typeof(T3)) return f3((T3)this.value);
-            if (f4 != null && valueType == typeof(T4)) return f4((T4)this.value);
+            if (f0 != null && valueType == typeT0) return f0((T0)this.value);
+            if (f1 != null && valueType == typeT1) return f1((T1)this.value);
+            if (f2 != null && valueType == typeT2) return f2((T2)this.value);
+            if (f3 != null && valueType == typeT3) return f3((T3)this.value);
+            if (f4 != null && valueType == typeT4) return f4((T4)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -511,6 +526,12 @@ namespace OneOf
     public struct OneOf<T0, T1, T2, T3, T4, T5> : IOneOf
     {
         readonly object value;
+        static readonly Type typeT0 = typeof(T0);
+        static readonly Type typeT1 = typeof(T1);
+        static readonly Type typeT2 = typeof(T2);
+        static readonly Type typeT3 = typeof(T3);
+        static readonly Type typeT4 = typeof(T4);
+        static readonly Type typeT5 = typeof(T5);
 
         internal OneOf(object value)
         {
@@ -523,12 +544,12 @@ namespace OneOf
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeof(T0)) return;
-            if (valueType == typeof(T1)) return;
-            if (valueType == typeof(T2)) return;
-            if (valueType == typeof(T3)) return;
-            if (valueType == typeof(T4)) return;
-            if (valueType == typeof(T5)) return;
+            if (valueType == typeT0) return;
+            if (valueType == typeT1) return;
+            if (valueType == typeT2) return;
+            if (valueType == typeT3) return;
+            if (valueType == typeT4) return;
+            if (valueType == typeT5) return;
 
             throw new ArgumentException("value");
         }
@@ -577,12 +598,12 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
-            if (f1 != null && valueType == typeof(T1)) { f1((T1)this.value); return; }
-            if (f2 != null && valueType == typeof(T2)) { f2((T2)this.value); return; }
-            if (f3 != null && valueType == typeof(T3)) { f3((T3)this.value); return; }
-            if (f4 != null && valueType == typeof(T4)) { f4((T4)this.value); return; }
-            if (f5 != null && valueType == typeof(T5)) { f5((T5)this.value); return; }
+            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
+            if (f1 != null && valueType == typeT1) { f1((T1)this.value); return; }
+            if (f2 != null && valueType == typeT2) { f2((T2)this.value); return; }
+            if (f3 != null && valueType == typeT3) { f3((T3)this.value); return; }
+            if (f4 != null && valueType == typeT4) { f4((T4)this.value); return; }
+            if (f5 != null && valueType == typeT5) { f5((T5)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -593,12 +614,12 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
-            if (f1 != null && valueType == typeof(T1)) return f1((T1)this.value);
-            if (f2 != null && valueType == typeof(T2)) return f2((T2)this.value);
-            if (f3 != null && valueType == typeof(T3)) return f3((T3)this.value);
-            if (f4 != null && valueType == typeof(T4)) return f4((T4)this.value);
-            if (f5 != null && valueType == typeof(T5)) return f5((T5)this.value);
+            if (f0 != null && valueType == typeT0) return f0((T0)this.value);
+            if (f1 != null && valueType == typeT1) return f1((T1)this.value);
+            if (f2 != null && valueType == typeT2) return f2((T2)this.value);
+            if (f3 != null && valueType == typeT3) return f3((T3)this.value);
+            if (f4 != null && valueType == typeT4) return f4((T4)this.value);
+            if (f5 != null && valueType == typeT5) return f5((T5)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -623,6 +644,13 @@ namespace OneOf
     public struct OneOf<T0, T1, T2, T3, T4, T5, T6> : IOneOf
     {
         readonly object value;
+        static readonly Type typeT0 = typeof(T0);
+        static readonly Type typeT1 = typeof(T1);
+        static readonly Type typeT2 = typeof(T2);
+        static readonly Type typeT3 = typeof(T3);
+        static readonly Type typeT4 = typeof(T4);
+        static readonly Type typeT5 = typeof(T5);
+        static readonly Type typeT6 = typeof(T6);
 
         internal OneOf(object value)
         {
@@ -635,13 +663,13 @@ namespace OneOf
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeof(T0)) return;
-            if (valueType == typeof(T1)) return;
-            if (valueType == typeof(T2)) return;
-            if (valueType == typeof(T3)) return;
-            if (valueType == typeof(T4)) return;
-            if (valueType == typeof(T5)) return;
-            if (valueType == typeof(T6)) return;
+            if (valueType == typeT0) return;
+            if (valueType == typeT1) return;
+            if (valueType == typeT2) return;
+            if (valueType == typeT3) return;
+            if (valueType == typeT4) return;
+            if (valueType == typeT5) return;
+            if (valueType == typeT6) return;
 
             throw new ArgumentException("value");
         }
@@ -691,13 +719,13 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
-            if (f1 != null && valueType == typeof(T1)) { f1((T1)this.value); return; }
-            if (f2 != null && valueType == typeof(T2)) { f2((T2)this.value); return; }
-            if (f3 != null && valueType == typeof(T3)) { f3((T3)this.value); return; }
-            if (f4 != null && valueType == typeof(T4)) { f4((T4)this.value); return; }
-            if (f5 != null && valueType == typeof(T5)) { f5((T5)this.value); return; }
-            if (f6 != null && valueType == typeof(T6)) { f6((T6)this.value); return; }
+            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
+            if (f1 != null && valueType == typeT1) { f1((T1)this.value); return; }
+            if (f2 != null && valueType == typeT2) { f2((T2)this.value); return; }
+            if (f3 != null && valueType == typeT3) { f3((T3)this.value); return; }
+            if (f4 != null && valueType == typeT4) { f4((T4)this.value); return; }
+            if (f5 != null && valueType == typeT5) { f5((T5)this.value); return; }
+            if (f6 != null && valueType == typeT6) { f6((T6)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -708,13 +736,13 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
-            if (f1 != null && valueType == typeof(T1)) return f1((T1)this.value);
-            if (f2 != null && valueType == typeof(T2)) return f2((T2)this.value);
-            if (f3 != null && valueType == typeof(T3)) return f3((T3)this.value);
-            if (f4 != null && valueType == typeof(T4)) return f4((T4)this.value);
-            if (f5 != null && valueType == typeof(T5)) return f5((T5)this.value);
-            if (f6 != null && valueType == typeof(T6)) return f6((T6)this.value);
+            if (f0 != null && valueType == typeT0) return f0((T0)this.value);
+            if (f1 != null && valueType == typeT1) return f1((T1)this.value);
+            if (f2 != null && valueType == typeT2) return f2((T2)this.value);
+            if (f3 != null && valueType == typeT3) return f3((T3)this.value);
+            if (f4 != null && valueType == typeT4) return f4((T4)this.value);
+            if (f5 != null && valueType == typeT5) return f5((T5)this.value);
+            if (f6 != null && valueType == typeT6) return f6((T6)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -739,6 +767,14 @@ namespace OneOf
     public struct OneOf<T0, T1, T2, T3, T4, T5, T6, T7> : IOneOf
     {
         readonly object value;
+        static readonly Type typeT0 = typeof(T0);
+        static readonly Type typeT1 = typeof(T1);
+        static readonly Type typeT2 = typeof(T2);
+        static readonly Type typeT3 = typeof(T3);
+        static readonly Type typeT4 = typeof(T4);
+        static readonly Type typeT5 = typeof(T5);
+        static readonly Type typeT6 = typeof(T6);
+        static readonly Type typeT7 = typeof(T7);
 
         internal OneOf(object value)
         {
@@ -751,14 +787,14 @@ namespace OneOf
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeof(T0)) return;
-            if (valueType == typeof(T1)) return;
-            if (valueType == typeof(T2)) return;
-            if (valueType == typeof(T3)) return;
-            if (valueType == typeof(T4)) return;
-            if (valueType == typeof(T5)) return;
-            if (valueType == typeof(T6)) return;
-            if (valueType == typeof(T7)) return;
+            if (valueType == typeT0) return;
+            if (valueType == typeT1) return;
+            if (valueType == typeT2) return;
+            if (valueType == typeT3) return;
+            if (valueType == typeT4) return;
+            if (valueType == typeT5) return;
+            if (valueType == typeT6) return;
+            if (valueType == typeT7) return;
 
             throw new ArgumentException("value");
         }
@@ -809,14 +845,14 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
-            if (f1 != null && valueType == typeof(T1)) { f1((T1)this.value); return; }
-            if (f2 != null && valueType == typeof(T2)) { f2((T2)this.value); return; }
-            if (f3 != null && valueType == typeof(T3)) { f3((T3)this.value); return; }
-            if (f4 != null && valueType == typeof(T4)) { f4((T4)this.value); return; }
-            if (f5 != null && valueType == typeof(T5)) { f5((T5)this.value); return; }
-            if (f6 != null && valueType == typeof(T6)) { f6((T6)this.value); return; }
-            if (f7 != null && valueType == typeof(T7)) { f7((T7)this.value); return; }
+            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
+            if (f1 != null && valueType == typeT1) { f1((T1)this.value); return; }
+            if (f2 != null && valueType == typeT2) { f2((T2)this.value); return; }
+            if (f3 != null && valueType == typeT3) { f3((T3)this.value); return; }
+            if (f4 != null && valueType == typeT4) { f4((T4)this.value); return; }
+            if (f5 != null && valueType == typeT5) { f5((T5)this.value); return; }
+            if (f6 != null && valueType == typeT6) { f6((T6)this.value); return; }
+            if (f7 != null && valueType == typeT7) { f7((T7)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -827,14 +863,14 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
-            if (f1 != null && valueType == typeof(T1)) return f1((T1)this.value);
-            if (f2 != null && valueType == typeof(T2)) return f2((T2)this.value);
-            if (f3 != null && valueType == typeof(T3)) return f3((T3)this.value);
-            if (f4 != null && valueType == typeof(T4)) return f4((T4)this.value);
-            if (f5 != null && valueType == typeof(T5)) return f5((T5)this.value);
-            if (f6 != null && valueType == typeof(T6)) return f6((T6)this.value);
-            if (f7 != null && valueType == typeof(T7)) return f7((T7)this.value);
+            if (f0 != null && valueType == typeT0) return f0((T0)this.value);
+            if (f1 != null && valueType == typeT1) return f1((T1)this.value);
+            if (f2 != null && valueType == typeT2) return f2((T2)this.value);
+            if (f3 != null && valueType == typeT3) return f3((T3)this.value);
+            if (f4 != null && valueType == typeT4) return f4((T4)this.value);
+            if (f5 != null && valueType == typeT5) return f5((T5)this.value);
+            if (f6 != null && valueType == typeT6) return f6((T6)this.value);
+            if (f7 != null && valueType == typeT7) return f7((T7)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -859,6 +895,15 @@ namespace OneOf
     public struct OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> : IOneOf
     {
         readonly object value;
+        static readonly Type typeT0 = typeof(T0);
+        static readonly Type typeT1 = typeof(T1);
+        static readonly Type typeT2 = typeof(T2);
+        static readonly Type typeT3 = typeof(T3);
+        static readonly Type typeT4 = typeof(T4);
+        static readonly Type typeT5 = typeof(T5);
+        static readonly Type typeT6 = typeof(T6);
+        static readonly Type typeT7 = typeof(T7);
+        static readonly Type typeT8 = typeof(T8);
 
         internal OneOf(object value)
         {
@@ -871,15 +916,15 @@ namespace OneOf
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeof(T0)) return;
-            if (valueType == typeof(T1)) return;
-            if (valueType == typeof(T2)) return;
-            if (valueType == typeof(T3)) return;
-            if (valueType == typeof(T4)) return;
-            if (valueType == typeof(T5)) return;
-            if (valueType == typeof(T6)) return;
-            if (valueType == typeof(T7)) return;
-            if (valueType == typeof(T8)) return;
+            if (valueType == typeT0) return;
+            if (valueType == typeT1) return;
+            if (valueType == typeT2) return;
+            if (valueType == typeT3) return;
+            if (valueType == typeT4) return;
+            if (valueType == typeT5) return;
+            if (valueType == typeT6) return;
+            if (valueType == typeT7) return;
+            if (valueType == typeT8) return;
 
             throw new ArgumentException("value");
         }
@@ -931,15 +976,15 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
-            if (f1 != null && valueType == typeof(T1)) { f1((T1)this.value); return; }
-            if (f2 != null && valueType == typeof(T2)) { f2((T2)this.value); return; }
-            if (f3 != null && valueType == typeof(T3)) { f3((T3)this.value); return; }
-            if (f4 != null && valueType == typeof(T4)) { f4((T4)this.value); return; }
-            if (f5 != null && valueType == typeof(T5)) { f5((T5)this.value); return; }
-            if (f6 != null && valueType == typeof(T6)) { f6((T6)this.value); return; }
-            if (f7 != null && valueType == typeof(T7)) { f7((T7)this.value); return; }
-            if (f8 != null && valueType == typeof(T8)) { f8((T8)this.value); return; }
+            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
+            if (f1 != null && valueType == typeT1) { f1((T1)this.value); return; }
+            if (f2 != null && valueType == typeT2) { f2((T2)this.value); return; }
+            if (f3 != null && valueType == typeT3) { f3((T3)this.value); return; }
+            if (f4 != null && valueType == typeT4) { f4((T4)this.value); return; }
+            if (f5 != null && valueType == typeT5) { f5((T5)this.value); return; }
+            if (f6 != null && valueType == typeT6) { f6((T6)this.value); return; }
+            if (f7 != null && valueType == typeT7) { f7((T7)this.value); return; }
+            if (f8 != null && valueType == typeT8) { f8((T8)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -950,15 +995,15 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
-            if (f1 != null && valueType == typeof(T1)) return f1((T1)this.value);
-            if (f2 != null && valueType == typeof(T2)) return f2((T2)this.value);
-            if (f3 != null && valueType == typeof(T3)) return f3((T3)this.value);
-            if (f4 != null && valueType == typeof(T4)) return f4((T4)this.value);
-            if (f5 != null && valueType == typeof(T5)) return f5((T5)this.value);
-            if (f6 != null && valueType == typeof(T6)) return f6((T6)this.value);
-            if (f7 != null && valueType == typeof(T7)) return f7((T7)this.value);
-            if (f8 != null && valueType == typeof(T8)) return f8((T8)this.value);
+            if (f0 != null && valueType == typeT0) return f0((T0)this.value);
+            if (f1 != null && valueType == typeT1) return f1((T1)this.value);
+            if (f2 != null && valueType == typeT2) return f2((T2)this.value);
+            if (f3 != null && valueType == typeT3) return f3((T3)this.value);
+            if (f4 != null && valueType == typeT4) return f4((T4)this.value);
+            if (f5 != null && valueType == typeT5) return f5((T5)this.value);
+            if (f6 != null && valueType == typeT6) return f6((T6)this.value);
+            if (f7 != null && valueType == typeT7) return f7((T7)this.value);
+            if (f8 != null && valueType == typeT8) return f8((T8)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -983,6 +1028,7 @@ namespace OneOf
     public class OneOfBase<T0> : IOneOf
     {
         readonly object value;
+        static readonly Type typeT0 = typeof(T0);
 
         internal OneOfBase(object value)
         {
@@ -1001,7 +1047,7 @@ namespace OneOf
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeof(T0)) return;
+            if (valueType == typeT0) return;
 
             throw new ArgumentException("value");
         }
@@ -1045,7 +1091,7 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
+            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -1056,7 +1102,7 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
+            if (f0 != null && valueType == typeT0) return f0((T0)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -1081,6 +1127,8 @@ namespace OneOf
     public class OneOfBase<T0, T1> : IOneOf
     {
         readonly object value;
+        static readonly Type typeT0 = typeof(T0);
+        static readonly Type typeT1 = typeof(T1);
 
         internal OneOfBase(object value)
         {
@@ -1099,8 +1147,8 @@ namespace OneOf
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeof(T0)) return;
-            if (valueType == typeof(T1)) return;
+            if (valueType == typeT0) return;
+            if (valueType == typeT1) return;
 
             throw new ArgumentException("value");
         }
@@ -1145,8 +1193,8 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
-            if (f1 != null && valueType == typeof(T1)) { f1((T1)this.value); return; }
+            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
+            if (f1 != null && valueType == typeT1) { f1((T1)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -1157,8 +1205,8 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
-            if (f1 != null && valueType == typeof(T1)) return f1((T1)this.value);
+            if (f0 != null && valueType == typeT0) return f0((T0)this.value);
+            if (f1 != null && valueType == typeT1) return f1((T1)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -1183,6 +1231,9 @@ namespace OneOf
     public class OneOfBase<T0, T1, T2> : IOneOf
     {
         readonly object value;
+        static readonly Type typeT0 = typeof(T0);
+        static readonly Type typeT1 = typeof(T1);
+        static readonly Type typeT2 = typeof(T2);
 
         internal OneOfBase(object value)
         {
@@ -1201,9 +1252,9 @@ namespace OneOf
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeof(T0)) return;
-            if (valueType == typeof(T1)) return;
-            if (valueType == typeof(T2)) return;
+            if (valueType == typeT0) return;
+            if (valueType == typeT1) return;
+            if (valueType == typeT2) return;
 
             throw new ArgumentException("value");
         }
@@ -1249,9 +1300,9 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
-            if (f1 != null && valueType == typeof(T1)) { f1((T1)this.value); return; }
-            if (f2 != null && valueType == typeof(T2)) { f2((T2)this.value); return; }
+            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
+            if (f1 != null && valueType == typeT1) { f1((T1)this.value); return; }
+            if (f2 != null && valueType == typeT2) { f2((T2)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -1262,9 +1313,9 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
-            if (f1 != null && valueType == typeof(T1)) return f1((T1)this.value);
-            if (f2 != null && valueType == typeof(T2)) return f2((T2)this.value);
+            if (f0 != null && valueType == typeT0) return f0((T0)this.value);
+            if (f1 != null && valueType == typeT1) return f1((T1)this.value);
+            if (f2 != null && valueType == typeT2) return f2((T2)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -1289,6 +1340,10 @@ namespace OneOf
     public class OneOfBase<T0, T1, T2, T3> : IOneOf
     {
         readonly object value;
+        static readonly Type typeT0 = typeof(T0);
+        static readonly Type typeT1 = typeof(T1);
+        static readonly Type typeT2 = typeof(T2);
+        static readonly Type typeT3 = typeof(T3);
 
         internal OneOfBase(object value)
         {
@@ -1307,10 +1362,10 @@ namespace OneOf
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeof(T0)) return;
-            if (valueType == typeof(T1)) return;
-            if (valueType == typeof(T2)) return;
-            if (valueType == typeof(T3)) return;
+            if (valueType == typeT0) return;
+            if (valueType == typeT1) return;
+            if (valueType == typeT2) return;
+            if (valueType == typeT3) return;
 
             throw new ArgumentException("value");
         }
@@ -1357,10 +1412,10 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
-            if (f1 != null && valueType == typeof(T1)) { f1((T1)this.value); return; }
-            if (f2 != null && valueType == typeof(T2)) { f2((T2)this.value); return; }
-            if (f3 != null && valueType == typeof(T3)) { f3((T3)this.value); return; }
+            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
+            if (f1 != null && valueType == typeT1) { f1((T1)this.value); return; }
+            if (f2 != null && valueType == typeT2) { f2((T2)this.value); return; }
+            if (f3 != null && valueType == typeT3) { f3((T3)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -1371,10 +1426,10 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
-            if (f1 != null && valueType == typeof(T1)) return f1((T1)this.value);
-            if (f2 != null && valueType == typeof(T2)) return f2((T2)this.value);
-            if (f3 != null && valueType == typeof(T3)) return f3((T3)this.value);
+            if (f0 != null && valueType == typeT0) return f0((T0)this.value);
+            if (f1 != null && valueType == typeT1) return f1((T1)this.value);
+            if (f2 != null && valueType == typeT2) return f2((T2)this.value);
+            if (f3 != null && valueType == typeT3) return f3((T3)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -1399,6 +1454,11 @@ namespace OneOf
     public class OneOfBase<T0, T1, T2, T3, T4> : IOneOf
     {
         readonly object value;
+        static readonly Type typeT0 = typeof(T0);
+        static readonly Type typeT1 = typeof(T1);
+        static readonly Type typeT2 = typeof(T2);
+        static readonly Type typeT3 = typeof(T3);
+        static readonly Type typeT4 = typeof(T4);
 
         internal OneOfBase(object value)
         {
@@ -1417,11 +1477,11 @@ namespace OneOf
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeof(T0)) return;
-            if (valueType == typeof(T1)) return;
-            if (valueType == typeof(T2)) return;
-            if (valueType == typeof(T3)) return;
-            if (valueType == typeof(T4)) return;
+            if (valueType == typeT0) return;
+            if (valueType == typeT1) return;
+            if (valueType == typeT2) return;
+            if (valueType == typeT3) return;
+            if (valueType == typeT4) return;
 
             throw new ArgumentException("value");
         }
@@ -1469,11 +1529,11 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
-            if (f1 != null && valueType == typeof(T1)) { f1((T1)this.value); return; }
-            if (f2 != null && valueType == typeof(T2)) { f2((T2)this.value); return; }
-            if (f3 != null && valueType == typeof(T3)) { f3((T3)this.value); return; }
-            if (f4 != null && valueType == typeof(T4)) { f4((T4)this.value); return; }
+            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
+            if (f1 != null && valueType == typeT1) { f1((T1)this.value); return; }
+            if (f2 != null && valueType == typeT2) { f2((T2)this.value); return; }
+            if (f3 != null && valueType == typeT3) { f3((T3)this.value); return; }
+            if (f4 != null && valueType == typeT4) { f4((T4)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -1484,11 +1544,11 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
-            if (f1 != null && valueType == typeof(T1)) return f1((T1)this.value);
-            if (f2 != null && valueType == typeof(T2)) return f2((T2)this.value);
-            if (f3 != null && valueType == typeof(T3)) return f3((T3)this.value);
-            if (f4 != null && valueType == typeof(T4)) return f4((T4)this.value);
+            if (f0 != null && valueType == typeT0) return f0((T0)this.value);
+            if (f1 != null && valueType == typeT1) return f1((T1)this.value);
+            if (f2 != null && valueType == typeT2) return f2((T2)this.value);
+            if (f3 != null && valueType == typeT3) return f3((T3)this.value);
+            if (f4 != null && valueType == typeT4) return f4((T4)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -1513,6 +1573,12 @@ namespace OneOf
     public class OneOfBase<T0, T1, T2, T3, T4, T5> : IOneOf
     {
         readonly object value;
+        static readonly Type typeT0 = typeof(T0);
+        static readonly Type typeT1 = typeof(T1);
+        static readonly Type typeT2 = typeof(T2);
+        static readonly Type typeT3 = typeof(T3);
+        static readonly Type typeT4 = typeof(T4);
+        static readonly Type typeT5 = typeof(T5);
 
         internal OneOfBase(object value)
         {
@@ -1531,12 +1597,12 @@ namespace OneOf
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeof(T0)) return;
-            if (valueType == typeof(T1)) return;
-            if (valueType == typeof(T2)) return;
-            if (valueType == typeof(T3)) return;
-            if (valueType == typeof(T4)) return;
-            if (valueType == typeof(T5)) return;
+            if (valueType == typeT0) return;
+            if (valueType == typeT1) return;
+            if (valueType == typeT2) return;
+            if (valueType == typeT3) return;
+            if (valueType == typeT4) return;
+            if (valueType == typeT5) return;
 
             throw new ArgumentException("value");
         }
@@ -1585,12 +1651,12 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
-            if (f1 != null && valueType == typeof(T1)) { f1((T1)this.value); return; }
-            if (f2 != null && valueType == typeof(T2)) { f2((T2)this.value); return; }
-            if (f3 != null && valueType == typeof(T3)) { f3((T3)this.value); return; }
-            if (f4 != null && valueType == typeof(T4)) { f4((T4)this.value); return; }
-            if (f5 != null && valueType == typeof(T5)) { f5((T5)this.value); return; }
+            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
+            if (f1 != null && valueType == typeT1) { f1((T1)this.value); return; }
+            if (f2 != null && valueType == typeT2) { f2((T2)this.value); return; }
+            if (f3 != null && valueType == typeT3) { f3((T3)this.value); return; }
+            if (f4 != null && valueType == typeT4) { f4((T4)this.value); return; }
+            if (f5 != null && valueType == typeT5) { f5((T5)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -1601,12 +1667,12 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
-            if (f1 != null && valueType == typeof(T1)) return f1((T1)this.value);
-            if (f2 != null && valueType == typeof(T2)) return f2((T2)this.value);
-            if (f3 != null && valueType == typeof(T3)) return f3((T3)this.value);
-            if (f4 != null && valueType == typeof(T4)) return f4((T4)this.value);
-            if (f5 != null && valueType == typeof(T5)) return f5((T5)this.value);
+            if (f0 != null && valueType == typeT0) return f0((T0)this.value);
+            if (f1 != null && valueType == typeT1) return f1((T1)this.value);
+            if (f2 != null && valueType == typeT2) return f2((T2)this.value);
+            if (f3 != null && valueType == typeT3) return f3((T3)this.value);
+            if (f4 != null && valueType == typeT4) return f4((T4)this.value);
+            if (f5 != null && valueType == typeT5) return f5((T5)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -1631,6 +1697,13 @@ namespace OneOf
     public class OneOfBase<T0, T1, T2, T3, T4, T5, T6> : IOneOf
     {
         readonly object value;
+        static readonly Type typeT0 = typeof(T0);
+        static readonly Type typeT1 = typeof(T1);
+        static readonly Type typeT2 = typeof(T2);
+        static readonly Type typeT3 = typeof(T3);
+        static readonly Type typeT4 = typeof(T4);
+        static readonly Type typeT5 = typeof(T5);
+        static readonly Type typeT6 = typeof(T6);
 
         internal OneOfBase(object value)
         {
@@ -1649,13 +1722,13 @@ namespace OneOf
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeof(T0)) return;
-            if (valueType == typeof(T1)) return;
-            if (valueType == typeof(T2)) return;
-            if (valueType == typeof(T3)) return;
-            if (valueType == typeof(T4)) return;
-            if (valueType == typeof(T5)) return;
-            if (valueType == typeof(T6)) return;
+            if (valueType == typeT0) return;
+            if (valueType == typeT1) return;
+            if (valueType == typeT2) return;
+            if (valueType == typeT3) return;
+            if (valueType == typeT4) return;
+            if (valueType == typeT5) return;
+            if (valueType == typeT6) return;
 
             throw new ArgumentException("value");
         }
@@ -1705,13 +1778,13 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
-            if (f1 != null && valueType == typeof(T1)) { f1((T1)this.value); return; }
-            if (f2 != null && valueType == typeof(T2)) { f2((T2)this.value); return; }
-            if (f3 != null && valueType == typeof(T3)) { f3((T3)this.value); return; }
-            if (f4 != null && valueType == typeof(T4)) { f4((T4)this.value); return; }
-            if (f5 != null && valueType == typeof(T5)) { f5((T5)this.value); return; }
-            if (f6 != null && valueType == typeof(T6)) { f6((T6)this.value); return; }
+            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
+            if (f1 != null && valueType == typeT1) { f1((T1)this.value); return; }
+            if (f2 != null && valueType == typeT2) { f2((T2)this.value); return; }
+            if (f3 != null && valueType == typeT3) { f3((T3)this.value); return; }
+            if (f4 != null && valueType == typeT4) { f4((T4)this.value); return; }
+            if (f5 != null && valueType == typeT5) { f5((T5)this.value); return; }
+            if (f6 != null && valueType == typeT6) { f6((T6)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -1722,13 +1795,13 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
-            if (f1 != null && valueType == typeof(T1)) return f1((T1)this.value);
-            if (f2 != null && valueType == typeof(T2)) return f2((T2)this.value);
-            if (f3 != null && valueType == typeof(T3)) return f3((T3)this.value);
-            if (f4 != null && valueType == typeof(T4)) return f4((T4)this.value);
-            if (f5 != null && valueType == typeof(T5)) return f5((T5)this.value);
-            if (f6 != null && valueType == typeof(T6)) return f6((T6)this.value);
+            if (f0 != null && valueType == typeT0) return f0((T0)this.value);
+            if (f1 != null && valueType == typeT1) return f1((T1)this.value);
+            if (f2 != null && valueType == typeT2) return f2((T2)this.value);
+            if (f3 != null && valueType == typeT3) return f3((T3)this.value);
+            if (f4 != null && valueType == typeT4) return f4((T4)this.value);
+            if (f5 != null && valueType == typeT5) return f5((T5)this.value);
+            if (f6 != null && valueType == typeT6) return f6((T6)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -1753,6 +1826,14 @@ namespace OneOf
     public class OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> : IOneOf
     {
         readonly object value;
+        static readonly Type typeT0 = typeof(T0);
+        static readonly Type typeT1 = typeof(T1);
+        static readonly Type typeT2 = typeof(T2);
+        static readonly Type typeT3 = typeof(T3);
+        static readonly Type typeT4 = typeof(T4);
+        static readonly Type typeT5 = typeof(T5);
+        static readonly Type typeT6 = typeof(T6);
+        static readonly Type typeT7 = typeof(T7);
 
         internal OneOfBase(object value)
         {
@@ -1771,14 +1852,14 @@ namespace OneOf
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeof(T0)) return;
-            if (valueType == typeof(T1)) return;
-            if (valueType == typeof(T2)) return;
-            if (valueType == typeof(T3)) return;
-            if (valueType == typeof(T4)) return;
-            if (valueType == typeof(T5)) return;
-            if (valueType == typeof(T6)) return;
-            if (valueType == typeof(T7)) return;
+            if (valueType == typeT0) return;
+            if (valueType == typeT1) return;
+            if (valueType == typeT2) return;
+            if (valueType == typeT3) return;
+            if (valueType == typeT4) return;
+            if (valueType == typeT5) return;
+            if (valueType == typeT6) return;
+            if (valueType == typeT7) return;
 
             throw new ArgumentException("value");
         }
@@ -1829,14 +1910,14 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
-            if (f1 != null && valueType == typeof(T1)) { f1((T1)this.value); return; }
-            if (f2 != null && valueType == typeof(T2)) { f2((T2)this.value); return; }
-            if (f3 != null && valueType == typeof(T3)) { f3((T3)this.value); return; }
-            if (f4 != null && valueType == typeof(T4)) { f4((T4)this.value); return; }
-            if (f5 != null && valueType == typeof(T5)) { f5((T5)this.value); return; }
-            if (f6 != null && valueType == typeof(T6)) { f6((T6)this.value); return; }
-            if (f7 != null && valueType == typeof(T7)) { f7((T7)this.value); return; }
+            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
+            if (f1 != null && valueType == typeT1) { f1((T1)this.value); return; }
+            if (f2 != null && valueType == typeT2) { f2((T2)this.value); return; }
+            if (f3 != null && valueType == typeT3) { f3((T3)this.value); return; }
+            if (f4 != null && valueType == typeT4) { f4((T4)this.value); return; }
+            if (f5 != null && valueType == typeT5) { f5((T5)this.value); return; }
+            if (f6 != null && valueType == typeT6) { f6((T6)this.value); return; }
+            if (f7 != null && valueType == typeT7) { f7((T7)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -1847,14 +1928,14 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
-            if (f1 != null && valueType == typeof(T1)) return f1((T1)this.value);
-            if (f2 != null && valueType == typeof(T2)) return f2((T2)this.value);
-            if (f3 != null && valueType == typeof(T3)) return f3((T3)this.value);
-            if (f4 != null && valueType == typeof(T4)) return f4((T4)this.value);
-            if (f5 != null && valueType == typeof(T5)) return f5((T5)this.value);
-            if (f6 != null && valueType == typeof(T6)) return f6((T6)this.value);
-            if (f7 != null && valueType == typeof(T7)) return f7((T7)this.value);
+            if (f0 != null && valueType == typeT0) return f0((T0)this.value);
+            if (f1 != null && valueType == typeT1) return f1((T1)this.value);
+            if (f2 != null && valueType == typeT2) return f2((T2)this.value);
+            if (f3 != null && valueType == typeT3) return f3((T3)this.value);
+            if (f4 != null && valueType == typeT4) return f4((T4)this.value);
+            if (f5 != null && valueType == typeT5) return f5((T5)this.value);
+            if (f6 != null && valueType == typeT6) return f6((T6)this.value);
+            if (f7 != null && valueType == typeT7) return f7((T7)this.value);
 
             if (otherwise != null) return otherwise();
 
@@ -1879,6 +1960,15 @@ namespace OneOf
     public class OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> : IOneOf
     {
         readonly object value;
+        static readonly Type typeT0 = typeof(T0);
+        static readonly Type typeT1 = typeof(T1);
+        static readonly Type typeT2 = typeof(T2);
+        static readonly Type typeT3 = typeof(T3);
+        static readonly Type typeT4 = typeof(T4);
+        static readonly Type typeT5 = typeof(T5);
+        static readonly Type typeT6 = typeof(T6);
+        static readonly Type typeT7 = typeof(T7);
+        static readonly Type typeT8 = typeof(T8);
 
         internal OneOfBase(object value)
         {
@@ -1897,15 +1987,15 @@ namespace OneOf
             if (value == null) throw new ArgumentNullException("value");
 
             var valueType = value.GetType();
-            if (valueType == typeof(T0)) return;
-            if (valueType == typeof(T1)) return;
-            if (valueType == typeof(T2)) return;
-            if (valueType == typeof(T3)) return;
-            if (valueType == typeof(T4)) return;
-            if (valueType == typeof(T5)) return;
-            if (valueType == typeof(T6)) return;
-            if (valueType == typeof(T7)) return;
-            if (valueType == typeof(T8)) return;
+            if (valueType == typeT0) return;
+            if (valueType == typeT1) return;
+            if (valueType == typeT2) return;
+            if (valueType == typeT3) return;
+            if (valueType == typeT4) return;
+            if (valueType == typeT5) return;
+            if (valueType == typeT6) return;
+            if (valueType == typeT7) return;
+            if (valueType == typeT8) return;
 
             throw new ArgumentException("value");
         }
@@ -1957,15 +2047,15 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) { f0((T0)this.value); return; }
-            if (f1 != null && valueType == typeof(T1)) { f1((T1)this.value); return; }
-            if (f2 != null && valueType == typeof(T2)) { f2((T2)this.value); return; }
-            if (f3 != null && valueType == typeof(T3)) { f3((T3)this.value); return; }
-            if (f4 != null && valueType == typeof(T4)) { f4((T4)this.value); return; }
-            if (f5 != null && valueType == typeof(T5)) { f5((T5)this.value); return; }
-            if (f6 != null && valueType == typeof(T6)) { f6((T6)this.value); return; }
-            if (f7 != null && valueType == typeof(T7)) { f7((T7)this.value); return; }
-            if (f8 != null && valueType == typeof(T8)) { f8((T8)this.value); return; }
+            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
+            if (f1 != null && valueType == typeT1) { f1((T1)this.value); return; }
+            if (f2 != null && valueType == typeT2) { f2((T2)this.value); return; }
+            if (f3 != null && valueType == typeT3) { f3((T3)this.value); return; }
+            if (f4 != null && valueType == typeT4) { f4((T4)this.value); return; }
+            if (f5 != null && valueType == typeT5) { f5((T5)this.value); return; }
+            if (f6 != null && valueType == typeT6) { f6((T6)this.value); return; }
+            if (f7 != null && valueType == typeT7) { f7((T7)this.value); return; }
+            if (f8 != null && valueType == typeT8) { f8((T8)this.value); return; }
 
             if (otherwise != null) { otherwise(); return; }
 
@@ -1976,15 +2066,15 @@ namespace OneOf
         {
             EnsureValueNotNull();
             var valueType = value.GetType();
-            if (f0 != null && valueType == typeof(T0)) return f0((T0)this.value);
-            if (f1 != null && valueType == typeof(T1)) return f1((T1)this.value);
-            if (f2 != null && valueType == typeof(T2)) return f2((T2)this.value);
-            if (f3 != null && valueType == typeof(T3)) return f3((T3)this.value);
-            if (f4 != null && valueType == typeof(T4)) return f4((T4)this.value);
-            if (f5 != null && valueType == typeof(T5)) return f5((T5)this.value);
-            if (f6 != null && valueType == typeof(T6)) return f6((T6)this.value);
-            if (f7 != null && valueType == typeof(T7)) return f7((T7)this.value);
-            if (f8 != null && valueType == typeof(T8)) return f8((T8)this.value);
+            if (f0 != null && valueType == typeT0) return f0((T0)this.value);
+            if (f1 != null && valueType == typeT1) return f1((T1)this.value);
+            if (f2 != null && valueType == typeT2) return f2((T2)this.value);
+            if (f3 != null && valueType == typeT3) return f3((T3)this.value);
+            if (f4 != null && valueType == typeT4) return f4((T4)this.value);
+            if (f5 != null && valueType == typeT5) return f5((T5)this.value);
+            if (f6 != null && valueType == typeT6) return f6((T6)this.value);
+            if (f7 != null && valueType == typeT7) return f7((T7)this.value);
+            if (f8 != null && valueType == typeT8) return f8((T8)this.value);
 
             if (otherwise != null) return otherwise();
 

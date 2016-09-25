@@ -41,6 +41,11 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 	{
 		WriteLine("readonly object value;");
 
+		for (var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex++)
+		{
+			WriteLine($"static readonly Type typeT{parmIndex} = typeof(T{parmIndex});");
+		}
+
 		// =============== Constructors
 	    
 		WriteLine("");
@@ -74,7 +79,7 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 			WriteLine("var valueType = value.GetType();");
 			for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
 			{
-				WriteLine($"if (valueType == typeof(T{parmIndex})) return;");
+				WriteLine($"if (valueType == typeT{parmIndex}) return;");
 			}
 
 			WriteLine("");
@@ -149,7 +154,7 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 			WriteLine("var valueType = value.GetType();");
 			for (var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex++)
 			{
-				WriteLine($"if (f{parmIndex} != null && valueType == typeof(T{parmIndex})) {{ f{parmIndex}((T{parmIndex})this.value); return; }}");
+				WriteLine($"if (f{parmIndex} != null && valueType == typeT{parmIndex}) {{ f{parmIndex}((T{parmIndex})this.value); return; }}");
 			}
 
 			WriteLine("");
@@ -171,7 +176,7 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 			WriteLine("var valueType = value.GetType();");
 			for (var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex++)
 			{
-				WriteLine($"if (f{parmIndex} != null && valueType == typeof(T{parmIndex})) return f{parmIndex}((T{parmIndex})this.value);");
+				WriteLine($"if (f{parmIndex} != null && valueType == typeT{parmIndex}) return f{parmIndex}((T{parmIndex})this.value);");
 			}
 
 			WriteLine("");
