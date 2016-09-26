@@ -20,7 +20,7 @@ namespace OneOf
 
         public OneOfMatcher<T> When<TValue>(Func<TValue, T> func)
         {
-            if (oneOfValue.GetType() == typeof(TValue))
+            if (oneOfValue is TValue)
                 result = func.Invoke((TValue)oneOfValue);
 
             return this;

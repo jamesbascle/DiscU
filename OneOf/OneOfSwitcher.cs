@@ -18,7 +18,7 @@ namespace OneOf
 
         public OneOfSwitcher When<TValue>(Action<TValue> action)
         {
-            if (oneOfValue.GetType() == typeof(TValue))
+            if (oneOfValue is TValue)
                 action.Invoke((TValue)oneOfValue);
 
             return this;
