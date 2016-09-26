@@ -33,9 +33,6 @@ namespace OneOf.Tests
             Assert.Throws<InvalidOperationException>(() => str.As<bool>());
             Assert.Throws<InvalidOperationException>(() => str.As<double>());
 
-            // while string is an object, As should only exactly match the generic types in the declaration
-            Assert.Throws<InvalidOperationException>(() => str.As<object>()); 
-
             var bln = (OneOf<string, bool>)true;
             Assert.Throws<InvalidOperationException>(() => bln.As<string>());
         }

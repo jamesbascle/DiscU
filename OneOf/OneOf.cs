@@ -11,7 +11,6 @@ namespace OneOf
     public struct OneOf<T0> : IOneOf
     {
         readonly object value;
-        static readonly Type typeT0 = typeof(T0);
 
         OneOf(object value)
         {
@@ -23,8 +22,7 @@ namespace OneOf
         {
             if (value == null) throw new ArgumentNullException("value");
 
-            var valueType = value.GetType();
-            if (valueType == typeT0) return new OneOf<T0>((T0)value);
+            if (value is T0) return new OneOf<T0>((T0)value);
 
             throw new ArgumentException("value");
         }
@@ -39,7 +37,7 @@ namespace OneOf
         public bool Is<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return true;
+            if (this.value is T) return true;
 
             return false;
         }
@@ -47,7 +45,7 @@ namespace OneOf
         public T As<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return (T)this.value;
+            if (this.value is T) return (T)this.value;
 
             throw new InvalidOperationException();
         }
@@ -95,8 +93,6 @@ namespace OneOf
     public struct OneOf<T0, T1> : IOneOf
     {
         readonly object value;
-        static readonly Type typeT0 = typeof(T0);
-        static readonly Type typeT1 = typeof(T1);
 
         OneOf(object value)
         {
@@ -108,9 +104,8 @@ namespace OneOf
         {
             if (value == null) throw new ArgumentNullException("value");
 
-            var valueType = value.GetType();
-            if (valueType == typeT0) return new OneOf<T0, T1>((T0)value);
-            if (valueType == typeT1) return new OneOf<T0, T1>((T1)value);
+            if (value is T0) return new OneOf<T0, T1>((T0)value);
+            if (value is T1) return new OneOf<T0, T1>((T1)value);
 
             throw new ArgumentException("value");
         }
@@ -125,7 +120,7 @@ namespace OneOf
         public bool Is<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return true;
+            if (this.value is T) return true;
 
             return false;
         }
@@ -133,7 +128,7 @@ namespace OneOf
         public T As<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return (T)this.value;
+            if (this.value is T) return (T)this.value;
 
             throw new InvalidOperationException();
         }
@@ -182,9 +177,6 @@ namespace OneOf
     public struct OneOf<T0, T1, T2> : IOneOf
     {
         readonly object value;
-        static readonly Type typeT0 = typeof(T0);
-        static readonly Type typeT1 = typeof(T1);
-        static readonly Type typeT2 = typeof(T2);
 
         OneOf(object value)
         {
@@ -196,10 +188,9 @@ namespace OneOf
         {
             if (value == null) throw new ArgumentNullException("value");
 
-            var valueType = value.GetType();
-            if (valueType == typeT0) return new OneOf<T0, T1, T2>((T0)value);
-            if (valueType == typeT1) return new OneOf<T0, T1, T2>((T1)value);
-            if (valueType == typeT2) return new OneOf<T0, T1, T2>((T2)value);
+            if (value is T0) return new OneOf<T0, T1, T2>((T0)value);
+            if (value is T1) return new OneOf<T0, T1, T2>((T1)value);
+            if (value is T2) return new OneOf<T0, T1, T2>((T2)value);
 
             throw new ArgumentException("value");
         }
@@ -214,7 +205,7 @@ namespace OneOf
         public bool Is<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return true;
+            if (this.value is T) return true;
 
             return false;
         }
@@ -222,7 +213,7 @@ namespace OneOf
         public T As<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return (T)this.value;
+            if (this.value is T) return (T)this.value;
 
             throw new InvalidOperationException();
         }
@@ -272,10 +263,6 @@ namespace OneOf
     public struct OneOf<T0, T1, T2, T3> : IOneOf
     {
         readonly object value;
-        static readonly Type typeT0 = typeof(T0);
-        static readonly Type typeT1 = typeof(T1);
-        static readonly Type typeT2 = typeof(T2);
-        static readonly Type typeT3 = typeof(T3);
 
         OneOf(object value)
         {
@@ -287,11 +274,10 @@ namespace OneOf
         {
             if (value == null) throw new ArgumentNullException("value");
 
-            var valueType = value.GetType();
-            if (valueType == typeT0) return new OneOf<T0, T1, T2, T3>((T0)value);
-            if (valueType == typeT1) return new OneOf<T0, T1, T2, T3>((T1)value);
-            if (valueType == typeT2) return new OneOf<T0, T1, T2, T3>((T2)value);
-            if (valueType == typeT3) return new OneOf<T0, T1, T2, T3>((T3)value);
+            if (value is T0) return new OneOf<T0, T1, T2, T3>((T0)value);
+            if (value is T1) return new OneOf<T0, T1, T2, T3>((T1)value);
+            if (value is T2) return new OneOf<T0, T1, T2, T3>((T2)value);
+            if (value is T3) return new OneOf<T0, T1, T2, T3>((T3)value);
 
             throw new ArgumentException("value");
         }
@@ -306,7 +292,7 @@ namespace OneOf
         public bool Is<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return true;
+            if (this.value is T) return true;
 
             return false;
         }
@@ -314,7 +300,7 @@ namespace OneOf
         public T As<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return (T)this.value;
+            if (this.value is T) return (T)this.value;
 
             throw new InvalidOperationException();
         }
@@ -365,11 +351,6 @@ namespace OneOf
     public struct OneOf<T0, T1, T2, T3, T4> : IOneOf
     {
         readonly object value;
-        static readonly Type typeT0 = typeof(T0);
-        static readonly Type typeT1 = typeof(T1);
-        static readonly Type typeT2 = typeof(T2);
-        static readonly Type typeT3 = typeof(T3);
-        static readonly Type typeT4 = typeof(T4);
 
         OneOf(object value)
         {
@@ -381,12 +362,11 @@ namespace OneOf
         {
             if (value == null) throw new ArgumentNullException("value");
 
-            var valueType = value.GetType();
-            if (valueType == typeT0) return new OneOf<T0, T1, T2, T3, T4>((T0)value);
-            if (valueType == typeT1) return new OneOf<T0, T1, T2, T3, T4>((T1)value);
-            if (valueType == typeT2) return new OneOf<T0, T1, T2, T3, T4>((T2)value);
-            if (valueType == typeT3) return new OneOf<T0, T1, T2, T3, T4>((T3)value);
-            if (valueType == typeT4) return new OneOf<T0, T1, T2, T3, T4>((T4)value);
+            if (value is T0) return new OneOf<T0, T1, T2, T3, T4>((T0)value);
+            if (value is T1) return new OneOf<T0, T1, T2, T3, T4>((T1)value);
+            if (value is T2) return new OneOf<T0, T1, T2, T3, T4>((T2)value);
+            if (value is T3) return new OneOf<T0, T1, T2, T3, T4>((T3)value);
+            if (value is T4) return new OneOf<T0, T1, T2, T3, T4>((T4)value);
 
             throw new ArgumentException("value");
         }
@@ -401,7 +381,7 @@ namespace OneOf
         public bool Is<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return true;
+            if (this.value is T) return true;
 
             return false;
         }
@@ -409,7 +389,7 @@ namespace OneOf
         public T As<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return (T)this.value;
+            if (this.value is T) return (T)this.value;
 
             throw new InvalidOperationException();
         }
@@ -461,12 +441,6 @@ namespace OneOf
     public struct OneOf<T0, T1, T2, T3, T4, T5> : IOneOf
     {
         readonly object value;
-        static readonly Type typeT0 = typeof(T0);
-        static readonly Type typeT1 = typeof(T1);
-        static readonly Type typeT2 = typeof(T2);
-        static readonly Type typeT3 = typeof(T3);
-        static readonly Type typeT4 = typeof(T4);
-        static readonly Type typeT5 = typeof(T5);
 
         OneOf(object value)
         {
@@ -478,13 +452,12 @@ namespace OneOf
         {
             if (value == null) throw new ArgumentNullException("value");
 
-            var valueType = value.GetType();
-            if (valueType == typeT0) return new OneOf<T0, T1, T2, T3, T4, T5>((T0)value);
-            if (valueType == typeT1) return new OneOf<T0, T1, T2, T3, T4, T5>((T1)value);
-            if (valueType == typeT2) return new OneOf<T0, T1, T2, T3, T4, T5>((T2)value);
-            if (valueType == typeT3) return new OneOf<T0, T1, T2, T3, T4, T5>((T3)value);
-            if (valueType == typeT4) return new OneOf<T0, T1, T2, T3, T4, T5>((T4)value);
-            if (valueType == typeT5) return new OneOf<T0, T1, T2, T3, T4, T5>((T5)value);
+            if (value is T0) return new OneOf<T0, T1, T2, T3, T4, T5>((T0)value);
+            if (value is T1) return new OneOf<T0, T1, T2, T3, T4, T5>((T1)value);
+            if (value is T2) return new OneOf<T0, T1, T2, T3, T4, T5>((T2)value);
+            if (value is T3) return new OneOf<T0, T1, T2, T3, T4, T5>((T3)value);
+            if (value is T4) return new OneOf<T0, T1, T2, T3, T4, T5>((T4)value);
+            if (value is T5) return new OneOf<T0, T1, T2, T3, T4, T5>((T5)value);
 
             throw new ArgumentException("value");
         }
@@ -499,7 +472,7 @@ namespace OneOf
         public bool Is<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return true;
+            if (this.value is T) return true;
 
             return false;
         }
@@ -507,7 +480,7 @@ namespace OneOf
         public T As<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return (T)this.value;
+            if (this.value is T) return (T)this.value;
 
             throw new InvalidOperationException();
         }
@@ -560,13 +533,6 @@ namespace OneOf
     public struct OneOf<T0, T1, T2, T3, T4, T5, T6> : IOneOf
     {
         readonly object value;
-        static readonly Type typeT0 = typeof(T0);
-        static readonly Type typeT1 = typeof(T1);
-        static readonly Type typeT2 = typeof(T2);
-        static readonly Type typeT3 = typeof(T3);
-        static readonly Type typeT4 = typeof(T4);
-        static readonly Type typeT5 = typeof(T5);
-        static readonly Type typeT6 = typeof(T6);
 
         OneOf(object value)
         {
@@ -578,14 +544,13 @@ namespace OneOf
         {
             if (value == null) throw new ArgumentNullException("value");
 
-            var valueType = value.GetType();
-            if (valueType == typeT0) return new OneOf<T0, T1, T2, T3, T4, T5, T6>((T0)value);
-            if (valueType == typeT1) return new OneOf<T0, T1, T2, T3, T4, T5, T6>((T1)value);
-            if (valueType == typeT2) return new OneOf<T0, T1, T2, T3, T4, T5, T6>((T2)value);
-            if (valueType == typeT3) return new OneOf<T0, T1, T2, T3, T4, T5, T6>((T3)value);
-            if (valueType == typeT4) return new OneOf<T0, T1, T2, T3, T4, T5, T6>((T4)value);
-            if (valueType == typeT5) return new OneOf<T0, T1, T2, T3, T4, T5, T6>((T5)value);
-            if (valueType == typeT6) return new OneOf<T0, T1, T2, T3, T4, T5, T6>((T6)value);
+            if (value is T0) return new OneOf<T0, T1, T2, T3, T4, T5, T6>((T0)value);
+            if (value is T1) return new OneOf<T0, T1, T2, T3, T4, T5, T6>((T1)value);
+            if (value is T2) return new OneOf<T0, T1, T2, T3, T4, T5, T6>((T2)value);
+            if (value is T3) return new OneOf<T0, T1, T2, T3, T4, T5, T6>((T3)value);
+            if (value is T4) return new OneOf<T0, T1, T2, T3, T4, T5, T6>((T4)value);
+            if (value is T5) return new OneOf<T0, T1, T2, T3, T4, T5, T6>((T5)value);
+            if (value is T6) return new OneOf<T0, T1, T2, T3, T4, T5, T6>((T6)value);
 
             throw new ArgumentException("value");
         }
@@ -600,7 +565,7 @@ namespace OneOf
         public bool Is<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return true;
+            if (this.value is T) return true;
 
             return false;
         }
@@ -608,7 +573,7 @@ namespace OneOf
         public T As<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return (T)this.value;
+            if (this.value is T) return (T)this.value;
 
             throw new InvalidOperationException();
         }
@@ -662,14 +627,6 @@ namespace OneOf
     public struct OneOf<T0, T1, T2, T3, T4, T5, T6, T7> : IOneOf
     {
         readonly object value;
-        static readonly Type typeT0 = typeof(T0);
-        static readonly Type typeT1 = typeof(T1);
-        static readonly Type typeT2 = typeof(T2);
-        static readonly Type typeT3 = typeof(T3);
-        static readonly Type typeT4 = typeof(T4);
-        static readonly Type typeT5 = typeof(T5);
-        static readonly Type typeT6 = typeof(T6);
-        static readonly Type typeT7 = typeof(T7);
 
         OneOf(object value)
         {
@@ -681,15 +638,14 @@ namespace OneOf
         {
             if (value == null) throw new ArgumentNullException("value");
 
-            var valueType = value.GetType();
-            if (valueType == typeT0) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T0)value);
-            if (valueType == typeT1) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T1)value);
-            if (valueType == typeT2) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T2)value);
-            if (valueType == typeT3) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T3)value);
-            if (valueType == typeT4) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T4)value);
-            if (valueType == typeT5) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T5)value);
-            if (valueType == typeT6) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T6)value);
-            if (valueType == typeT7) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T7)value);
+            if (value is T0) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T0)value);
+            if (value is T1) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T1)value);
+            if (value is T2) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T2)value);
+            if (value is T3) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T3)value);
+            if (value is T4) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T4)value);
+            if (value is T5) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T5)value);
+            if (value is T6) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T6)value);
+            if (value is T7) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T7)value);
 
             throw new ArgumentException("value");
         }
@@ -704,7 +660,7 @@ namespace OneOf
         public bool Is<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return true;
+            if (this.value is T) return true;
 
             return false;
         }
@@ -712,7 +668,7 @@ namespace OneOf
         public T As<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return (T)this.value;
+            if (this.value is T) return (T)this.value;
 
             throw new InvalidOperationException();
         }
@@ -767,15 +723,6 @@ namespace OneOf
     public struct OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> : IOneOf
     {
         readonly object value;
-        static readonly Type typeT0 = typeof(T0);
-        static readonly Type typeT1 = typeof(T1);
-        static readonly Type typeT2 = typeof(T2);
-        static readonly Type typeT3 = typeof(T3);
-        static readonly Type typeT4 = typeof(T4);
-        static readonly Type typeT5 = typeof(T5);
-        static readonly Type typeT6 = typeof(T6);
-        static readonly Type typeT7 = typeof(T7);
-        static readonly Type typeT8 = typeof(T8);
 
         OneOf(object value)
         {
@@ -787,16 +734,15 @@ namespace OneOf
         {
             if (value == null) throw new ArgumentNullException("value");
 
-            var valueType = value.GetType();
-            if (valueType == typeT0) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T0)value);
-            if (valueType == typeT1) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T1)value);
-            if (valueType == typeT2) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T2)value);
-            if (valueType == typeT3) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T3)value);
-            if (valueType == typeT4) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T4)value);
-            if (valueType == typeT5) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T5)value);
-            if (valueType == typeT6) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T6)value);
-            if (valueType == typeT7) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T7)value);
-            if (valueType == typeT8) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T8)value);
+            if (value is T0) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T0)value);
+            if (value is T1) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T1)value);
+            if (value is T2) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T2)value);
+            if (value is T3) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T3)value);
+            if (value is T4) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T4)value);
+            if (value is T5) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T5)value);
+            if (value is T6) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T6)value);
+            if (value is T7) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T7)value);
+            if (value is T8) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T8)value);
 
             throw new ArgumentException("value");
         }
@@ -811,7 +757,7 @@ namespace OneOf
         public bool Is<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return true;
+            if (this.value is T) return true;
 
             return false;
         }
@@ -819,7 +765,7 @@ namespace OneOf
         public T As<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return (T)this.value;
+            if (this.value is T) return (T)this.value;
 
             throw new InvalidOperationException();
         }
@@ -875,7 +821,6 @@ namespace OneOf
     public class OneOfBase<T0> : IOneOf
     {
         readonly object value;
-        static readonly Type typeT0 = typeof(T0);
 
         OneOfBase(object value)
         {
@@ -893,8 +838,7 @@ namespace OneOf
         {
             if (value == null) throw new ArgumentNullException("value");
 
-            var valueType = value.GetType();
-            if (valueType == typeT0) return new OneOfBase<T0>((T0)value);
+            if (value is T0) return new OneOfBase<T0>((T0)value);
 
             throw new ArgumentException("value");
         }
@@ -909,7 +853,7 @@ namespace OneOf
         public bool Is<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return true;
+            if (this.value is T) return true;
 
             return false;
         }
@@ -917,7 +861,7 @@ namespace OneOf
         public T As<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return (T)this.value;
+            if (this.value is T) return (T)this.value;
 
             throw new InvalidOperationException();
         }
@@ -965,8 +909,6 @@ namespace OneOf
     public class OneOfBase<T0, T1> : IOneOf
     {
         readonly object value;
-        static readonly Type typeT0 = typeof(T0);
-        static readonly Type typeT1 = typeof(T1);
 
         OneOfBase(object value)
         {
@@ -984,9 +926,8 @@ namespace OneOf
         {
             if (value == null) throw new ArgumentNullException("value");
 
-            var valueType = value.GetType();
-            if (valueType == typeT0) return new OneOfBase<T0, T1>((T0)value);
-            if (valueType == typeT1) return new OneOfBase<T0, T1>((T1)value);
+            if (value is T0) return new OneOfBase<T0, T1>((T0)value);
+            if (value is T1) return new OneOfBase<T0, T1>((T1)value);
 
             throw new ArgumentException("value");
         }
@@ -1001,7 +942,7 @@ namespace OneOf
         public bool Is<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return true;
+            if (this.value is T) return true;
 
             return false;
         }
@@ -1009,7 +950,7 @@ namespace OneOf
         public T As<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return (T)this.value;
+            if (this.value is T) return (T)this.value;
 
             throw new InvalidOperationException();
         }
@@ -1058,9 +999,6 @@ namespace OneOf
     public class OneOfBase<T0, T1, T2> : IOneOf
     {
         readonly object value;
-        static readonly Type typeT0 = typeof(T0);
-        static readonly Type typeT1 = typeof(T1);
-        static readonly Type typeT2 = typeof(T2);
 
         OneOfBase(object value)
         {
@@ -1078,10 +1016,9 @@ namespace OneOf
         {
             if (value == null) throw new ArgumentNullException("value");
 
-            var valueType = value.GetType();
-            if (valueType == typeT0) return new OneOfBase<T0, T1, T2>((T0)value);
-            if (valueType == typeT1) return new OneOfBase<T0, T1, T2>((T1)value);
-            if (valueType == typeT2) return new OneOfBase<T0, T1, T2>((T2)value);
+            if (value is T0) return new OneOfBase<T0, T1, T2>((T0)value);
+            if (value is T1) return new OneOfBase<T0, T1, T2>((T1)value);
+            if (value is T2) return new OneOfBase<T0, T1, T2>((T2)value);
 
             throw new ArgumentException("value");
         }
@@ -1096,7 +1033,7 @@ namespace OneOf
         public bool Is<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return true;
+            if (this.value is T) return true;
 
             return false;
         }
@@ -1104,7 +1041,7 @@ namespace OneOf
         public T As<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return (T)this.value;
+            if (this.value is T) return (T)this.value;
 
             throw new InvalidOperationException();
         }
@@ -1154,10 +1091,6 @@ namespace OneOf
     public class OneOfBase<T0, T1, T2, T3> : IOneOf
     {
         readonly object value;
-        static readonly Type typeT0 = typeof(T0);
-        static readonly Type typeT1 = typeof(T1);
-        static readonly Type typeT2 = typeof(T2);
-        static readonly Type typeT3 = typeof(T3);
 
         OneOfBase(object value)
         {
@@ -1175,11 +1108,10 @@ namespace OneOf
         {
             if (value == null) throw new ArgumentNullException("value");
 
-            var valueType = value.GetType();
-            if (valueType == typeT0) return new OneOfBase<T0, T1, T2, T3>((T0)value);
-            if (valueType == typeT1) return new OneOfBase<T0, T1, T2, T3>((T1)value);
-            if (valueType == typeT2) return new OneOfBase<T0, T1, T2, T3>((T2)value);
-            if (valueType == typeT3) return new OneOfBase<T0, T1, T2, T3>((T3)value);
+            if (value is T0) return new OneOfBase<T0, T1, T2, T3>((T0)value);
+            if (value is T1) return new OneOfBase<T0, T1, T2, T3>((T1)value);
+            if (value is T2) return new OneOfBase<T0, T1, T2, T3>((T2)value);
+            if (value is T3) return new OneOfBase<T0, T1, T2, T3>((T3)value);
 
             throw new ArgumentException("value");
         }
@@ -1194,7 +1126,7 @@ namespace OneOf
         public bool Is<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return true;
+            if (this.value is T) return true;
 
             return false;
         }
@@ -1202,7 +1134,7 @@ namespace OneOf
         public T As<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return (T)this.value;
+            if (this.value is T) return (T)this.value;
 
             throw new InvalidOperationException();
         }
@@ -1253,11 +1185,6 @@ namespace OneOf
     public class OneOfBase<T0, T1, T2, T3, T4> : IOneOf
     {
         readonly object value;
-        static readonly Type typeT0 = typeof(T0);
-        static readonly Type typeT1 = typeof(T1);
-        static readonly Type typeT2 = typeof(T2);
-        static readonly Type typeT3 = typeof(T3);
-        static readonly Type typeT4 = typeof(T4);
 
         OneOfBase(object value)
         {
@@ -1275,12 +1202,11 @@ namespace OneOf
         {
             if (value == null) throw new ArgumentNullException("value");
 
-            var valueType = value.GetType();
-            if (valueType == typeT0) return new OneOfBase<T0, T1, T2, T3, T4>((T0)value);
-            if (valueType == typeT1) return new OneOfBase<T0, T1, T2, T3, T4>((T1)value);
-            if (valueType == typeT2) return new OneOfBase<T0, T1, T2, T3, T4>((T2)value);
-            if (valueType == typeT3) return new OneOfBase<T0, T1, T2, T3, T4>((T3)value);
-            if (valueType == typeT4) return new OneOfBase<T0, T1, T2, T3, T4>((T4)value);
+            if (value is T0) return new OneOfBase<T0, T1, T2, T3, T4>((T0)value);
+            if (value is T1) return new OneOfBase<T0, T1, T2, T3, T4>((T1)value);
+            if (value is T2) return new OneOfBase<T0, T1, T2, T3, T4>((T2)value);
+            if (value is T3) return new OneOfBase<T0, T1, T2, T3, T4>((T3)value);
+            if (value is T4) return new OneOfBase<T0, T1, T2, T3, T4>((T4)value);
 
             throw new ArgumentException("value");
         }
@@ -1295,7 +1221,7 @@ namespace OneOf
         public bool Is<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return true;
+            if (this.value is T) return true;
 
             return false;
         }
@@ -1303,7 +1229,7 @@ namespace OneOf
         public T As<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return (T)this.value;
+            if (this.value is T) return (T)this.value;
 
             throw new InvalidOperationException();
         }
@@ -1355,12 +1281,6 @@ namespace OneOf
     public class OneOfBase<T0, T1, T2, T3, T4, T5> : IOneOf
     {
         readonly object value;
-        static readonly Type typeT0 = typeof(T0);
-        static readonly Type typeT1 = typeof(T1);
-        static readonly Type typeT2 = typeof(T2);
-        static readonly Type typeT3 = typeof(T3);
-        static readonly Type typeT4 = typeof(T4);
-        static readonly Type typeT5 = typeof(T5);
 
         OneOfBase(object value)
         {
@@ -1378,13 +1298,12 @@ namespace OneOf
         {
             if (value == null) throw new ArgumentNullException("value");
 
-            var valueType = value.GetType();
-            if (valueType == typeT0) return new OneOfBase<T0, T1, T2, T3, T4, T5>((T0)value);
-            if (valueType == typeT1) return new OneOfBase<T0, T1, T2, T3, T4, T5>((T1)value);
-            if (valueType == typeT2) return new OneOfBase<T0, T1, T2, T3, T4, T5>((T2)value);
-            if (valueType == typeT3) return new OneOfBase<T0, T1, T2, T3, T4, T5>((T3)value);
-            if (valueType == typeT4) return new OneOfBase<T0, T1, T2, T3, T4, T5>((T4)value);
-            if (valueType == typeT5) return new OneOfBase<T0, T1, T2, T3, T4, T5>((T5)value);
+            if (value is T0) return new OneOfBase<T0, T1, T2, T3, T4, T5>((T0)value);
+            if (value is T1) return new OneOfBase<T0, T1, T2, T3, T4, T5>((T1)value);
+            if (value is T2) return new OneOfBase<T0, T1, T2, T3, T4, T5>((T2)value);
+            if (value is T3) return new OneOfBase<T0, T1, T2, T3, T4, T5>((T3)value);
+            if (value is T4) return new OneOfBase<T0, T1, T2, T3, T4, T5>((T4)value);
+            if (value is T5) return new OneOfBase<T0, T1, T2, T3, T4, T5>((T5)value);
 
             throw new ArgumentException("value");
         }
@@ -1399,7 +1318,7 @@ namespace OneOf
         public bool Is<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return true;
+            if (this.value is T) return true;
 
             return false;
         }
@@ -1407,7 +1326,7 @@ namespace OneOf
         public T As<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return (T)this.value;
+            if (this.value is T) return (T)this.value;
 
             throw new InvalidOperationException();
         }
@@ -1460,13 +1379,6 @@ namespace OneOf
     public class OneOfBase<T0, T1, T2, T3, T4, T5, T6> : IOneOf
     {
         readonly object value;
-        static readonly Type typeT0 = typeof(T0);
-        static readonly Type typeT1 = typeof(T1);
-        static readonly Type typeT2 = typeof(T2);
-        static readonly Type typeT3 = typeof(T3);
-        static readonly Type typeT4 = typeof(T4);
-        static readonly Type typeT5 = typeof(T5);
-        static readonly Type typeT6 = typeof(T6);
 
         OneOfBase(object value)
         {
@@ -1484,14 +1396,13 @@ namespace OneOf
         {
             if (value == null) throw new ArgumentNullException("value");
 
-            var valueType = value.GetType();
-            if (valueType == typeT0) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6>((T0)value);
-            if (valueType == typeT1) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6>((T1)value);
-            if (valueType == typeT2) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6>((T2)value);
-            if (valueType == typeT3) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6>((T3)value);
-            if (valueType == typeT4) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6>((T4)value);
-            if (valueType == typeT5) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6>((T5)value);
-            if (valueType == typeT6) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6>((T6)value);
+            if (value is T0) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6>((T0)value);
+            if (value is T1) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6>((T1)value);
+            if (value is T2) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6>((T2)value);
+            if (value is T3) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6>((T3)value);
+            if (value is T4) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6>((T4)value);
+            if (value is T5) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6>((T5)value);
+            if (value is T6) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6>((T6)value);
 
             throw new ArgumentException("value");
         }
@@ -1506,7 +1417,7 @@ namespace OneOf
         public bool Is<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return true;
+            if (this.value is T) return true;
 
             return false;
         }
@@ -1514,7 +1425,7 @@ namespace OneOf
         public T As<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return (T)this.value;
+            if (this.value is T) return (T)this.value;
 
             throw new InvalidOperationException();
         }
@@ -1568,14 +1479,6 @@ namespace OneOf
     public class OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> : IOneOf
     {
         readonly object value;
-        static readonly Type typeT0 = typeof(T0);
-        static readonly Type typeT1 = typeof(T1);
-        static readonly Type typeT2 = typeof(T2);
-        static readonly Type typeT3 = typeof(T3);
-        static readonly Type typeT4 = typeof(T4);
-        static readonly Type typeT5 = typeof(T5);
-        static readonly Type typeT6 = typeof(T6);
-        static readonly Type typeT7 = typeof(T7);
 
         OneOfBase(object value)
         {
@@ -1593,15 +1496,14 @@ namespace OneOf
         {
             if (value == null) throw new ArgumentNullException("value");
 
-            var valueType = value.GetType();
-            if (valueType == typeT0) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T0)value);
-            if (valueType == typeT1) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T1)value);
-            if (valueType == typeT2) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T2)value);
-            if (valueType == typeT3) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T3)value);
-            if (valueType == typeT4) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T4)value);
-            if (valueType == typeT5) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T5)value);
-            if (valueType == typeT6) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T6)value);
-            if (valueType == typeT7) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T7)value);
+            if (value is T0) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T0)value);
+            if (value is T1) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T1)value);
+            if (value is T2) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T2)value);
+            if (value is T3) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T3)value);
+            if (value is T4) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T4)value);
+            if (value is T5) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T5)value);
+            if (value is T6) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T6)value);
+            if (value is T7) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T7)value);
 
             throw new ArgumentException("value");
         }
@@ -1616,7 +1518,7 @@ namespace OneOf
         public bool Is<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return true;
+            if (this.value is T) return true;
 
             return false;
         }
@@ -1624,7 +1526,7 @@ namespace OneOf
         public T As<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return (T)this.value;
+            if (this.value is T) return (T)this.value;
 
             throw new InvalidOperationException();
         }
@@ -1679,15 +1581,6 @@ namespace OneOf
     public class OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> : IOneOf
     {
         readonly object value;
-        static readonly Type typeT0 = typeof(T0);
-        static readonly Type typeT1 = typeof(T1);
-        static readonly Type typeT2 = typeof(T2);
-        static readonly Type typeT3 = typeof(T3);
-        static readonly Type typeT4 = typeof(T4);
-        static readonly Type typeT5 = typeof(T5);
-        static readonly Type typeT6 = typeof(T6);
-        static readonly Type typeT7 = typeof(T7);
-        static readonly Type typeT8 = typeof(T8);
 
         OneOfBase(object value)
         {
@@ -1705,16 +1598,15 @@ namespace OneOf
         {
             if (value == null) throw new ArgumentNullException("value");
 
-            var valueType = value.GetType();
-            if (valueType == typeT0) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T0)value);
-            if (valueType == typeT1) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T1)value);
-            if (valueType == typeT2) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T2)value);
-            if (valueType == typeT3) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T3)value);
-            if (valueType == typeT4) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T4)value);
-            if (valueType == typeT5) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T5)value);
-            if (valueType == typeT6) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T6)value);
-            if (valueType == typeT7) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T7)value);
-            if (valueType == typeT8) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T8)value);
+            if (value is T0) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T0)value);
+            if (value is T1) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T1)value);
+            if (value is T2) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T2)value);
+            if (value is T3) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T3)value);
+            if (value is T4) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T4)value);
+            if (value is T5) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T5)value);
+            if (value is T6) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T6)value);
+            if (value is T7) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T7)value);
+            if (value is T8) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T8)value);
 
             throw new ArgumentException("value");
         }
@@ -1729,7 +1621,7 @@ namespace OneOf
         public bool Is<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return true;
+            if (this.value is T) return true;
 
             return false;
         }
@@ -1737,7 +1629,7 @@ namespace OneOf
         public T As<T>()
         {
             EnsureValueNotNull();
-            if (this.value.GetType() == typeof(T)) return (T)this.value;
+            if (this.value is T) return (T)this.value;
 
             throw new InvalidOperationException();
         }

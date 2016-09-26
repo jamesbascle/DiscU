@@ -41,11 +41,6 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 	{
 		WriteLine("readonly object value;");
 
-		for (var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex++)
-		{
-			WriteLine($"static readonly Type typeT{parmIndex} = typeof(T{parmIndex});");
-		}
-
 		// =============== Constructors
 	    
 		WriteLine("");
@@ -76,10 +71,9 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 			WriteLine($"if (value == null) throw new ArgumentNullException(\"value\");");
 			WriteLine("");
 
-			WriteLine("var valueType = value.GetType();");
 			for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
 			{
-				WriteLine($"if (valueType == typeT{parmIndex}) return new {typeName}<{genericArg}>((T{parmIndex})value);");
+				WriteLine($"if (value is T{parmIndex}) return new {typeName}<{genericArg}>((T{parmIndex})value);");
 			}
 
 			WriteLine("");
@@ -107,7 +101,7 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 		using(var indent2 = new Indent(this))
 		{
 			WriteLine("EnsureValueNotNull();");
-			WriteLine($"if (this.value.GetType() == typeof(T)) return true;");
+			WriteLine($"if (this.value is T) return true;");
 			WriteLine("");
 			WriteLine("return false;");
 		}
@@ -119,7 +113,7 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 		using(var indent2 = new Indent(this))
 		{
 			WriteLine("EnsureValueNotNull();");
-			WriteLine($"if (this.value.GetType() == typeof(T)) return (T)this.value;");
+			WriteLine($"if (this.value is T) return (T)this.value;");
 			WriteLine("");
 			WriteLine("throw new InvalidOperationException();");
 		}
