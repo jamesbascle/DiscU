@@ -17,7 +17,8 @@ namespace OneOf.Tests
 
             x.Switch()
                 .When<string>(str => Assert.Fail())
-                .When<bool>(bln => success = (bln == true));
+                .When<bool>(bln => success = (bln == true))
+                .Otherwise(obj => Assert.Fail());
 
             Assert.AreEqual(true, success);
         }
@@ -30,7 +31,8 @@ namespace OneOf.Tests
 
             x.Switch()
                 .When<string>(str => success = (str == "xyz"))
-                .When<bool>(bln => Assert.Fail());
+                .When<bool>(bln => Assert.Fail())
+                .Otherwise(obj => Assert.Fail());
 
             Assert.AreEqual(true, success);
         }

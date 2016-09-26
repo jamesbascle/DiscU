@@ -10,23 +10,31 @@ namespace OneOf
     public struct OneOfSwitcher
     {
         object oneOfValue;
+        bool switched;
 
         public OneOfSwitcher(object oneOfValue)
         {
             this.oneOfValue = oneOfValue;
+            this.switched = false;
         }
 
         public OneOfSwitcher When<TValue>(Action<TValue> action)
         {
             if (oneOfValue is TValue)
+            {
                 action.Invoke((TValue)oneOfValue);
+                switched = true;
+            }
 
             return this;
         }
 
         public void Otherwise(Action<object> action)
         {
-            action.Invoke(oneOfValue);
+            if (!switched)
+            {
+                action.Invoke(oneOfValue);
+            }
         }
     }
 }
