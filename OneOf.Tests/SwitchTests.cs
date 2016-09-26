@@ -13,11 +13,12 @@ namespace OneOf.Tests
         public void SwitchCallsBoolActionWhenBool()
         {
             var success = false;
-
             var x = (OneOf<string, bool>)true;
-            x.Switch(
-                str => Assert.Fail(),
-                bln => success = (bln == true));
+
+            x.Switch()
+                .When<string>(str => Assert.Fail())
+                .When<bool>(bln => success = (bln == true));
+
             Assert.AreEqual(true, success);
         }
 
@@ -25,11 +26,12 @@ namespace OneOf.Tests
         public void SwitchCallsStringActionWhenString()
         {
             var success = false;
-
             var x = (OneOf<string, bool>)"xyz";
-            x.Switch(
-                str => success = (str == "xyz"),
-                bln => Assert.Fail());
+
+            x.Switch()
+                .When<string>(str => success = (str == "xyz"))
+                .When<bool>(bln => Assert.Fail());
+
             Assert.AreEqual(true, success);
         }
 
@@ -37,10 +39,11 @@ namespace OneOf.Tests
         public void SwitchCallsOtherActionWhenNoMatch()
         {
             var success = false;
-
             var x = (OneOf<string, bool>)"xyz";
-            x.Switch(
-                otherwise: () => success = true);
+
+            x.Switch()
+                .Otherwise(v => success = true);
+
             Assert.AreEqual(true, success);
         }
     }

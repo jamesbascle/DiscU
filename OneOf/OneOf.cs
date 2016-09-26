@@ -66,15 +66,10 @@ namespace OneOf
         // Can use fast Ctor as compiler can check types for us.
         public static implicit operator OneOf<T0>(T0 value) => new OneOf<T0>(value);
 
-        public void Switch(Action<T0> f0 = null, Action otherwise = null)
+        public OneOfSwitcher Switch()
         {
             EnsureValueNotNull();
-
-            var valueType = value.GetType();
-            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
-            if (otherwise != null) { otherwise(); return; }
-
-            throw new InvalidOperationException();
+            return new OneOfSwitcher(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -158,16 +153,10 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1>(T0 value) => new OneOf<T0, T1>(value);
         public static implicit operator OneOf<T0, T1>(T1 value) => new OneOf<T0, T1>(value);
 
-        public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action otherwise = null)
+        public OneOfSwitcher Switch()
         {
             EnsureValueNotNull();
-
-            var valueType = value.GetType();
-            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
-            if (f1 != null && valueType == typeT1) { f1((T1)this.value); return; }
-            if (otherwise != null) { otherwise(); return; }
-
-            throw new InvalidOperationException();
+            return new OneOfSwitcher(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -254,17 +243,10 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2>(T1 value) => new OneOf<T0, T1, T2>(value);
         public static implicit operator OneOf<T0, T1, T2>(T2 value) => new OneOf<T0, T1, T2>(value);
 
-        public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action otherwise = null)
+        public OneOfSwitcher Switch()
         {
             EnsureValueNotNull();
-
-            var valueType = value.GetType();
-            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
-            if (f1 != null && valueType == typeT1) { f1((T1)this.value); return; }
-            if (f2 != null && valueType == typeT2) { f2((T2)this.value); return; }
-            if (otherwise != null) { otherwise(); return; }
-
-            throw new InvalidOperationException();
+            return new OneOfSwitcher(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -354,18 +336,10 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2, T3>(T2 value) => new OneOf<T0, T1, T2, T3>(value);
         public static implicit operator OneOf<T0, T1, T2, T3>(T3 value) => new OneOf<T0, T1, T2, T3>(value);
 
-        public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action otherwise = null)
+        public OneOfSwitcher Switch()
         {
             EnsureValueNotNull();
-
-            var valueType = value.GetType();
-            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
-            if (f1 != null && valueType == typeT1) { f1((T1)this.value); return; }
-            if (f2 != null && valueType == typeT2) { f2((T2)this.value); return; }
-            if (f3 != null && valueType == typeT3) { f3((T3)this.value); return; }
-            if (otherwise != null) { otherwise(); return; }
-
-            throw new InvalidOperationException();
+            return new OneOfSwitcher(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -458,19 +432,10 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2, T3, T4>(T3 value) => new OneOf<T0, T1, T2, T3, T4>(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4>(T4 value) => new OneOf<T0, T1, T2, T3, T4>(value);
 
-        public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action otherwise = null)
+        public OneOfSwitcher Switch()
         {
             EnsureValueNotNull();
-
-            var valueType = value.GetType();
-            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
-            if (f1 != null && valueType == typeT1) { f1((T1)this.value); return; }
-            if (f2 != null && valueType == typeT2) { f2((T2)this.value); return; }
-            if (f3 != null && valueType == typeT3) { f3((T3)this.value); return; }
-            if (f4 != null && valueType == typeT4) { f4((T4)this.value); return; }
-            if (otherwise != null) { otherwise(); return; }
-
-            throw new InvalidOperationException();
+            return new OneOfSwitcher(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -566,20 +531,10 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T4 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T5 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value);
 
-        public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action<T5> f5 = null, Action otherwise = null)
+        public OneOfSwitcher Switch()
         {
             EnsureValueNotNull();
-
-            var valueType = value.GetType();
-            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
-            if (f1 != null && valueType == typeT1) { f1((T1)this.value); return; }
-            if (f2 != null && valueType == typeT2) { f2((T2)this.value); return; }
-            if (f3 != null && valueType == typeT3) { f3((T3)this.value); return; }
-            if (f4 != null && valueType == typeT4) { f4((T4)this.value); return; }
-            if (f5 != null && valueType == typeT5) { f5((T5)this.value); return; }
-            if (otherwise != null) { otherwise(); return; }
-
-            throw new InvalidOperationException();
+            return new OneOfSwitcher(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -678,21 +633,10 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T5 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T6 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value);
 
-        public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action<T5> f5 = null, Action<T6> f6 = null, Action otherwise = null)
+        public OneOfSwitcher Switch()
         {
             EnsureValueNotNull();
-
-            var valueType = value.GetType();
-            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
-            if (f1 != null && valueType == typeT1) { f1((T1)this.value); return; }
-            if (f2 != null && valueType == typeT2) { f2((T2)this.value); return; }
-            if (f3 != null && valueType == typeT3) { f3((T3)this.value); return; }
-            if (f4 != null && valueType == typeT4) { f4((T4)this.value); return; }
-            if (f5 != null && valueType == typeT5) { f5((T5)this.value); return; }
-            if (f6 != null && valueType == typeT6) { f6((T6)this.value); return; }
-            if (otherwise != null) { otherwise(); return; }
-
-            throw new InvalidOperationException();
+            return new OneOfSwitcher(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -794,22 +738,10 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T6 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T7 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value);
 
-        public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action<T5> f5 = null, Action<T6> f6 = null, Action<T7> f7 = null, Action otherwise = null)
+        public OneOfSwitcher Switch()
         {
             EnsureValueNotNull();
-
-            var valueType = value.GetType();
-            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
-            if (f1 != null && valueType == typeT1) { f1((T1)this.value); return; }
-            if (f2 != null && valueType == typeT2) { f2((T2)this.value); return; }
-            if (f3 != null && valueType == typeT3) { f3((T3)this.value); return; }
-            if (f4 != null && valueType == typeT4) { f4((T4)this.value); return; }
-            if (f5 != null && valueType == typeT5) { f5((T5)this.value); return; }
-            if (f6 != null && valueType == typeT6) { f6((T6)this.value); return; }
-            if (f7 != null && valueType == typeT7) { f7((T7)this.value); return; }
-            if (otherwise != null) { otherwise(); return; }
-
-            throw new InvalidOperationException();
+            return new OneOfSwitcher(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -914,23 +846,10 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T7 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T8 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
 
-        public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action<T5> f5 = null, Action<T6> f6 = null, Action<T7> f7 = null, Action<T8> f8 = null, Action otherwise = null)
+        public OneOfSwitcher Switch()
         {
             EnsureValueNotNull();
-
-            var valueType = value.GetType();
-            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
-            if (f1 != null && valueType == typeT1) { f1((T1)this.value); return; }
-            if (f2 != null && valueType == typeT2) { f2((T2)this.value); return; }
-            if (f3 != null && valueType == typeT3) { f3((T3)this.value); return; }
-            if (f4 != null && valueType == typeT4) { f4((T4)this.value); return; }
-            if (f5 != null && valueType == typeT5) { f5((T5)this.value); return; }
-            if (f6 != null && valueType == typeT6) { f6((T6)this.value); return; }
-            if (f7 != null && valueType == typeT7) { f7((T7)this.value); return; }
-            if (f8 != null && valueType == typeT8) { f8((T8)this.value); return; }
-            if (otherwise != null) { otherwise(); return; }
-
-            throw new InvalidOperationException();
+            return new OneOfSwitcher(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -1017,15 +936,10 @@ namespace OneOf
         // Can use fast Ctor as compiler can check types for us.
         public static implicit operator OneOfBase<T0>(T0 value) => new OneOfBase<T0>(value);
 
-        public void Switch(Action<T0> f0 = null, Action otherwise = null)
+        public OneOfSwitcher Switch()
         {
             EnsureValueNotNull();
-
-            var valueType = value.GetType();
-            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
-            if (otherwise != null) { otherwise(); return; }
-
-            throw new InvalidOperationException();
+            return new OneOfSwitcher(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -1115,16 +1029,10 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1>(T0 value) => new OneOfBase<T0, T1>(value);
         public static implicit operator OneOfBase<T0, T1>(T1 value) => new OneOfBase<T0, T1>(value);
 
-        public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action otherwise = null)
+        public OneOfSwitcher Switch()
         {
             EnsureValueNotNull();
-
-            var valueType = value.GetType();
-            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
-            if (f1 != null && valueType == typeT1) { f1((T1)this.value); return; }
-            if (otherwise != null) { otherwise(); return; }
-
-            throw new InvalidOperationException();
+            return new OneOfSwitcher(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -1217,17 +1125,10 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2>(T1 value) => new OneOfBase<T0, T1, T2>(value);
         public static implicit operator OneOfBase<T0, T1, T2>(T2 value) => new OneOfBase<T0, T1, T2>(value);
 
-        public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action otherwise = null)
+        public OneOfSwitcher Switch()
         {
             EnsureValueNotNull();
-
-            var valueType = value.GetType();
-            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
-            if (f1 != null && valueType == typeT1) { f1((T1)this.value); return; }
-            if (f2 != null && valueType == typeT2) { f2((T2)this.value); return; }
-            if (otherwise != null) { otherwise(); return; }
-
-            throw new InvalidOperationException();
+            return new OneOfSwitcher(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -1323,18 +1224,10 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2, T3>(T2 value) => new OneOfBase<T0, T1, T2, T3>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3>(T3 value) => new OneOfBase<T0, T1, T2, T3>(value);
 
-        public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action otherwise = null)
+        public OneOfSwitcher Switch()
         {
             EnsureValueNotNull();
-
-            var valueType = value.GetType();
-            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
-            if (f1 != null && valueType == typeT1) { f1((T1)this.value); return; }
-            if (f2 != null && valueType == typeT2) { f2((T2)this.value); return; }
-            if (f3 != null && valueType == typeT3) { f3((T3)this.value); return; }
-            if (otherwise != null) { otherwise(); return; }
-
-            throw new InvalidOperationException();
+            return new OneOfSwitcher(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -1433,19 +1326,10 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T3 value) => new OneOfBase<T0, T1, T2, T3, T4>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T4 value) => new OneOfBase<T0, T1, T2, T3, T4>(value);
 
-        public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action otherwise = null)
+        public OneOfSwitcher Switch()
         {
             EnsureValueNotNull();
-
-            var valueType = value.GetType();
-            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
-            if (f1 != null && valueType == typeT1) { f1((T1)this.value); return; }
-            if (f2 != null && valueType == typeT2) { f2((T2)this.value); return; }
-            if (f3 != null && valueType == typeT3) { f3((T3)this.value); return; }
-            if (f4 != null && valueType == typeT4) { f4((T4)this.value); return; }
-            if (otherwise != null) { otherwise(); return; }
-
-            throw new InvalidOperationException();
+            return new OneOfSwitcher(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -1547,20 +1431,10 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T4 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T5 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value);
 
-        public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action<T5> f5 = null, Action otherwise = null)
+        public OneOfSwitcher Switch()
         {
             EnsureValueNotNull();
-
-            var valueType = value.GetType();
-            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
-            if (f1 != null && valueType == typeT1) { f1((T1)this.value); return; }
-            if (f2 != null && valueType == typeT2) { f2((T2)this.value); return; }
-            if (f3 != null && valueType == typeT3) { f3((T3)this.value); return; }
-            if (f4 != null && valueType == typeT4) { f4((T4)this.value); return; }
-            if (f5 != null && valueType == typeT5) { f5((T5)this.value); return; }
-            if (otherwise != null) { otherwise(); return; }
-
-            throw new InvalidOperationException();
+            return new OneOfSwitcher(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -1665,21 +1539,10 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T5 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T6 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value);
 
-        public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action<T5> f5 = null, Action<T6> f6 = null, Action otherwise = null)
+        public OneOfSwitcher Switch()
         {
             EnsureValueNotNull();
-
-            var valueType = value.GetType();
-            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
-            if (f1 != null && valueType == typeT1) { f1((T1)this.value); return; }
-            if (f2 != null && valueType == typeT2) { f2((T2)this.value); return; }
-            if (f3 != null && valueType == typeT3) { f3((T3)this.value); return; }
-            if (f4 != null && valueType == typeT4) { f4((T4)this.value); return; }
-            if (f5 != null && valueType == typeT5) { f5((T5)this.value); return; }
-            if (f6 != null && valueType == typeT6) { f6((T6)this.value); return; }
-            if (otherwise != null) { otherwise(); return; }
-
-            throw new InvalidOperationException();
+            return new OneOfSwitcher(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -1787,22 +1650,10 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T6 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T7 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value);
 
-        public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action<T5> f5 = null, Action<T6> f6 = null, Action<T7> f7 = null, Action otherwise = null)
+        public OneOfSwitcher Switch()
         {
             EnsureValueNotNull();
-
-            var valueType = value.GetType();
-            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
-            if (f1 != null && valueType == typeT1) { f1((T1)this.value); return; }
-            if (f2 != null && valueType == typeT2) { f2((T2)this.value); return; }
-            if (f3 != null && valueType == typeT3) { f3((T3)this.value); return; }
-            if (f4 != null && valueType == typeT4) { f4((T4)this.value); return; }
-            if (f5 != null && valueType == typeT5) { f5((T5)this.value); return; }
-            if (f6 != null && valueType == typeT6) { f6((T6)this.value); return; }
-            if (f7 != null && valueType == typeT7) { f7((T7)this.value); return; }
-            if (otherwise != null) { otherwise(); return; }
-
-            throw new InvalidOperationException();
+            return new OneOfSwitcher(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -1913,23 +1764,10 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T7 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T8 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
 
-        public void Switch(Action<T0> f0 = null, Action<T1> f1 = null, Action<T2> f2 = null, Action<T3> f3 = null, Action<T4> f4 = null, Action<T5> f5 = null, Action<T6> f6 = null, Action<T7> f7 = null, Action<T8> f8 = null, Action otherwise = null)
+        public OneOfSwitcher Switch()
         {
             EnsureValueNotNull();
-
-            var valueType = value.GetType();
-            if (f0 != null && valueType == typeT0) { f0((T0)this.value); return; }
-            if (f1 != null && valueType == typeT1) { f1((T1)this.value); return; }
-            if (f2 != null && valueType == typeT2) { f2((T2)this.value); return; }
-            if (f3 != null && valueType == typeT3) { f3((T3)this.value); return; }
-            if (f4 != null && valueType == typeT4) { f4((T4)this.value); return; }
-            if (f5 != null && valueType == typeT5) { f5((T5)this.value); return; }
-            if (f6 != null && valueType == typeT6) { f6((T6)this.value); return; }
-            if (f7 != null && valueType == typeT7) { f7((T7)this.value); return; }
-            if (f8 != null && valueType == typeT8) { f8((T8)this.value); return; }
-            if (otherwise != null) { otherwise(); return; }
-
-            throw new InvalidOperationException();
+            return new OneOfSwitcher(value);
         }
 
         public OneOfMatcher<T> Match<T>()

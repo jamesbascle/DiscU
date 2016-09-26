@@ -32,7 +32,7 @@ namespace OneOf.Tests
             Assert.AreEqual(true, x.Match<bool>()
                 .When<Response.MethodNotAllowed>(methodNotAllowed => true)
                 .When<Response.InvokeSuccessResponse>(invokeSuccessResponse => false)
-                .Result
+                .Otherwise(v => new InvalidOperationException())
                 );
         }
     }

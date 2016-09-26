@@ -26,19 +26,20 @@ namespace OneOf
             return this;
         }
 
-        public OneOfMatcher<T> Otherwise(Func<object, T> func)
+        public T Otherwise(Func<object, T> func)
         {
-            result = func.Invoke(oneOfValue);
-            return this;
+            if (result == null)
+                result = func.Invoke(oneOfValue);
+
+            return (T)result;
         }
 
-        public T Result
+        public T Otherwise(Func<object, Exception> func)
         {
-            get
-            {
-                if (result == null) throw new InvalidOperationException("No match found");
-                return (T)result;
-            }
+            if (result == null)
+                throw func.Invoke(oneOfValue);
+
+            return (T)result;
         }
     }
 }

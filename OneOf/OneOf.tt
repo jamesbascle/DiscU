@@ -146,25 +146,13 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 
 		// =============== Switch
 
-		var switchArgList = string.Join(", ", Enumerable.Range(0, countOfgenericParams).Select(e => "Action<T" + e + "> f" + e + " = null"));
-
 		WriteLine("");
-	    WriteLine($"public void Switch({switchArgList}, Action otherwise = null)");
+		WriteLine("public OneOfSwitcher Switch()");
 		using(var indent2 = new Indent(this))
-		{
+        {
 			WriteLine("EnsureValueNotNull();");
-			WriteLine("");
-			WriteLine("var valueType = value.GetType();");
-			for (var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex++)
-			{
-				WriteLine($"if (f{parmIndex} != null && valueType == typeT{parmIndex}) {{ f{parmIndex}((T{parmIndex})this.value); return; }}");
-			}
-
-		    WriteLine("if (otherwise != null) { otherwise(); return; }");
-
-			WriteLine("");
-			WriteLine("throw new InvalidOperationException();");
-		}
+            WriteLine("return new OneOfSwitcher(value);");
+        }
 
 		// =============== Match
 
@@ -175,7 +163,6 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 			WriteLine("EnsureValueNotNull();");
             WriteLine("return new OneOfMatcher<T>(value);");
         }
-
 
 		// =============== object overrides
 
