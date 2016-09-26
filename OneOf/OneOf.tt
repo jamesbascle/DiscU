@@ -153,13 +153,13 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 		using(var indent2 = new Indent(this))
 		{
 			WriteLine("EnsureValueNotNull();");
+			WriteLine("");
 			WriteLine("var valueType = value.GetType();");
 			for (var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex++)
 			{
 				WriteLine($"if (f{parmIndex} != null && valueType == typeT{parmIndex}) {{ f{parmIndex}((T{parmIndex})this.value); return; }}");
 			}
 
-			WriteLine("");
 		    WriteLine("if (otherwise != null) { otherwise(); return; }");
 
 			WriteLine("");
@@ -168,25 +168,14 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 
 		// =============== Match
 
-		var matchArgList = string.Join(", ", Enumerable.Range(0, countOfgenericParams).Select(e => "Func<T" + e + ", TResult> f" + e + " = null"));
-
 		WriteLine("");
-	    WriteLine($"public TResult Match<TResult>({matchArgList}, Func<TResult> otherwise = null)");
+		WriteLine("public OneOfMatcher<T> Match<T>()");
 		using(var indent2 = new Indent(this))
-		{
+        {
 			WriteLine("EnsureValueNotNull();");
-			WriteLine("var valueType = value.GetType();");
-			for (var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex++)
-			{
-				WriteLine($"if (f{parmIndex} != null && valueType == typeT{parmIndex}) return f{parmIndex}((T{parmIndex})this.value);");
-			}
+            WriteLine("return new OneOfMatcher<T>(value);");
+        }
 
-			WriteLine("");
-		    WriteLine("if (otherwise != null) return otherwise();");
-
-			WriteLine("");
-	    	WriteLine("throw new InvalidOperationException();");
-		}
 
 		// =============== object overrides
 
@@ -194,7 +183,6 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 		WriteLine("public override bool Equals(object obj)");
 		using(var indent2 = new Indent(this))
 		{
-            WriteLine("if (ReferenceEquals(null, obj)) return false;");
             WriteLine($"if (!(obj is {typeName}<{genericArg}>)) return false;");
 			WriteLine("");
             WriteLine($"var other = ({typeName}<{genericArg}>)obj;");

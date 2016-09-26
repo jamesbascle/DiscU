@@ -44,6 +44,7 @@
       <DependentUpon>OneOf.tt</DependentUpon>
     </Compile>
     <Compile Include="OneOfJsonConverter.cs" />
+    <Compile Include="OneOfMatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IOneOf.cs" />
     <Compile Include="Types\Assorted.cs" />

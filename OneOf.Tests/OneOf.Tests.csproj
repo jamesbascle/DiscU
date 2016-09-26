@@ -49,8 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MatcherTests.cs" />
     <Compile Include="AsTests.cs" />
-    <Compile Include="MatchTests.cs" />
     <Compile Include="SwitchTests.cs" />
     <Compile Include="IsTests.cs" />
     <Compile Include="BaseClassTests.cs" />
