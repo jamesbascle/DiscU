@@ -14,7 +14,7 @@ namespace OneOf.Tests
         {
             var oneOf = (OneOf<string, bool>)true;
 
-            var success = oneOf.Matcher<bool>()
+            var success = oneOf.Match<bool>()
                 .When<string>(str => false)
                 .When<bool>(bln => bln == true)
                 .Result;
@@ -27,7 +27,7 @@ namespace OneOf.Tests
         {
             var oneOf = (OneOf<string, bool>)"xyz";
 
-            var success = oneOf.Matcher<bool>()
+            var success = oneOf.Match<bool>()
                 .When<string>(str => str == "xyz")
                 .When<bool>(bln => false)
                 .Result;
@@ -40,7 +40,7 @@ namespace OneOf.Tests
         {
             var oneOf = (OneOf<string, bool>)"xyz";
 
-            var success = oneOf.Matcher<bool>()
+            var success = oneOf.Match<bool>()
                 .Otherwise(obj => obj.ToString() == "xyz")
                 .Result;
 

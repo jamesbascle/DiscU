@@ -41,12 +41,4 @@ namespace OneOf
             }
         }
     }
-
-    public static class OneOfExtensions
-    {
-        public static OneOfMatcher<T> Matcher<T>(this IOneOf oneOf)
-        {
-            return new OneOfMatcher<T>(oneOf.Value);
-        }
-    }
 }
