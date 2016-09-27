@@ -73,7 +73,7 @@ namespace OneOf
         public OneOfMatcher<T0, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T0, TResult>(value);
+            return new OneOfMatcher<T0, TResult>(value, null);
         }
 
         public override bool Equals(object obj)
@@ -157,7 +157,7 @@ namespace OneOf
         public OneOfMatcher<T0, T1, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T0, T1, TResult>(value);
+            return new OneOfMatcher<T0, T1, TResult>(value, null);
         }
 
         public override bool Equals(object obj)
@@ -243,7 +243,7 @@ namespace OneOf
         public OneOfMatcher<T0, T1, T2, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T0, T1, T2, TResult>(value);
+            return new OneOfMatcher<T0, T1, T2, TResult>(value, null);
         }
 
         public override bool Equals(object obj)
@@ -331,7 +331,7 @@ namespace OneOf
         public OneOfMatcher<T0, T1, T2, T3, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T0, T1, T2, T3, TResult>(value);
+            return new OneOfMatcher<T0, T1, T2, T3, TResult>(value, null);
         }
 
         public override bool Equals(object obj)
@@ -421,7 +421,7 @@ namespace OneOf
         public OneOfMatcher<T0, T1, T2, T3, T4, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T0, T1, T2, T3, T4, TResult>(value);
+            return new OneOfMatcher<T0, T1, T2, T3, T4, TResult>(value, null);
         }
 
         public override bool Equals(object obj)
@@ -513,7 +513,7 @@ namespace OneOf
         public OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>(value);
+            return new OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>(value, null);
         }
 
         public override bool Equals(object obj)
@@ -607,7 +607,7 @@ namespace OneOf
         public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(value);
+            return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(value, null);
         }
 
         public override bool Equals(object obj)
@@ -703,7 +703,7 @@ namespace OneOf
         public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value);
+            return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value, null);
         }
 
         public override bool Equals(object obj)
@@ -801,7 +801,7 @@ namespace OneOf
         public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value);
+            return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, null);
         }
 
         public override bool Equals(object obj)
@@ -889,7 +889,7 @@ namespace OneOf
         public OneOfMatcher<T0, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T0, TResult>(value);
+            return new OneOfMatcher<T0, TResult>(value, null);
         }
 
         public override bool Equals(object obj)
@@ -979,7 +979,7 @@ namespace OneOf
         public OneOfMatcher<T0, T1, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T0, T1, TResult>(value);
+            return new OneOfMatcher<T0, T1, TResult>(value, null);
         }
 
         public override bool Equals(object obj)
@@ -1071,7 +1071,7 @@ namespace OneOf
         public OneOfMatcher<T0, T1, T2, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T0, T1, T2, TResult>(value);
+            return new OneOfMatcher<T0, T1, T2, TResult>(value, null);
         }
 
         public override bool Equals(object obj)
@@ -1165,7 +1165,7 @@ namespace OneOf
         public OneOfMatcher<T0, T1, T2, T3, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T0, T1, T2, T3, TResult>(value);
+            return new OneOfMatcher<T0, T1, T2, T3, TResult>(value, null);
         }
 
         public override bool Equals(object obj)
@@ -1261,7 +1261,7 @@ namespace OneOf
         public OneOfMatcher<T0, T1, T2, T3, T4, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T0, T1, T2, T3, T4, TResult>(value);
+            return new OneOfMatcher<T0, T1, T2, T3, T4, TResult>(value, null);
         }
 
         public override bool Equals(object obj)
@@ -1359,7 +1359,7 @@ namespace OneOf
         public OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>(value);
+            return new OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>(value, null);
         }
 
         public override bool Equals(object obj)
@@ -1459,7 +1459,7 @@ namespace OneOf
         public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(value);
+            return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(value, null);
         }
 
         public override bool Equals(object obj)
@@ -1561,7 +1561,7 @@ namespace OneOf
         public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value);
+            return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value, null);
         }
 
         public override bool Equals(object obj)
@@ -1665,7 +1665,7 @@ namespace OneOf
         public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value);
+            return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, null);
         }
 
         public override bool Equals(object obj)
@@ -2330,30 +2330,29 @@ namespace OneOf
         }
     }
 
-    public struct OneOfMatcher<T0, TResult>
+    public struct OneOfMatcher<T0, TResult> : IOneOfMatcher<T0, TResult>
     {
         readonly object value;
         object result;
 
-        internal OneOfMatcher(object value)
+        internal OneOfMatcher(object value, object result)
         {
             this.value = value;
-            this.result = null;
+            this.result = result;
         }
-
-        public OneOfMatcher<T0, TResult> When(Func<T0, TResult> func)
+        public IOtherwiser<TResult> When(Func<T0, TResult> func)
         {
             if (value is T0) result = func.Invoke((T0)value);
             return this;
         }
 
-        public OneOfMatcher<T0, TResult> Otherwise(Func<object, TResult> func)
+        public IMatchResultGiver<TResult> Otherwise(Func<object, TResult> func)
         {
             if (result == null) result = func.Invoke(value);
             return this;
         }
 
-        public OneOfMatcher<T0, TResult> OtherwiseThrow(Func<object, Exception> func)
+        public IMatchResultGiver<TResult> OtherwiseThrow(Func<object, Exception> func)
         {
             if (result == null) throw func.Invoke(value);
             return this;
@@ -2369,36 +2368,36 @@ namespace OneOf
         }
     }
 
-    public struct OneOfMatcher<T0, T1, TResult>
+    public struct OneOfMatcher<T0, T1, TResult> : IOneOfMatcher<T0, T1, TResult>
     {
         readonly object value;
         object result;
 
-        internal OneOfMatcher(object value)
+        internal OneOfMatcher(object value, object result)
         {
             this.value = value;
-            this.result = null;
+            this.result = result;
         }
 
-        public OneOfMatcher<T0, T1, TResult> When(Func<T0, TResult> func)
+        public IOneOfMatcher<T1, TResult> When(Func<T0, TResult> func)
         {
             if (value is T0) result = func.Invoke((T0)value);
-            return this;
+            return new OneOfMatcher<T1, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, TResult> When(Func<T1, TResult> func)
+        public IOneOfMatcher<T0, TResult> When(Func<T1, TResult> func)
         {
             if (value is T1) result = func.Invoke((T1)value);
-            return this;
+            return new OneOfMatcher<T0, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, TResult> Otherwise(Func<object, TResult> func)
+        public IMatchResultGiver<TResult> Otherwise(Func<object, TResult> func)
         {
             if (result == null) result = func.Invoke(value);
             return this;
         }
 
-        public OneOfMatcher<T0, T1, TResult> OtherwiseThrow(Func<object, Exception> func)
+        public IMatchResultGiver<TResult> OtherwiseThrow(Func<object, Exception> func)
         {
             if (result == null) throw func.Invoke(value);
             return this;
@@ -2414,42 +2413,42 @@ namespace OneOf
         }
     }
 
-    public struct OneOfMatcher<T0, T1, T2, TResult>
+    public struct OneOfMatcher<T0, T1, T2, TResult> : IOneOfMatcher<T0, T1, T2, TResult>
     {
         readonly object value;
         object result;
 
-        internal OneOfMatcher(object value)
+        internal OneOfMatcher(object value, object result)
         {
             this.value = value;
-            this.result = null;
+            this.result = result;
         }
 
-        public OneOfMatcher<T0, T1, T2, TResult> When(Func<T0, TResult> func)
+        public IOneOfMatcher<T1, T2, TResult> When(Func<T0, TResult> func)
         {
             if (value is T0) result = func.Invoke((T0)value);
-            return this;
+            return new OneOfMatcher<T1, T2, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, TResult> When(Func<T1, TResult> func)
+        public IOneOfMatcher<T0, T2, TResult> When(Func<T1, TResult> func)
         {
             if (value is T1) result = func.Invoke((T1)value);
-            return this;
+            return new OneOfMatcher<T0, T2, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, TResult> When(Func<T2, TResult> func)
+        public IOneOfMatcher<T0, T1, TResult> When(Func<T2, TResult> func)
         {
             if (value is T2) result = func.Invoke((T2)value);
-            return this;
+            return new OneOfMatcher<T0, T1, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, TResult> Otherwise(Func<object, TResult> func)
+        public IMatchResultGiver<TResult> Otherwise(Func<object, TResult> func)
         {
             if (result == null) result = func.Invoke(value);
             return this;
         }
 
-        public OneOfMatcher<T0, T1, T2, TResult> OtherwiseThrow(Func<object, Exception> func)
+        public IMatchResultGiver<TResult> OtherwiseThrow(Func<object, Exception> func)
         {
             if (result == null) throw func.Invoke(value);
             return this;
@@ -2465,48 +2464,48 @@ namespace OneOf
         }
     }
 
-    public struct OneOfMatcher<T0, T1, T2, T3, TResult>
+    public struct OneOfMatcher<T0, T1, T2, T3, TResult> : IOneOfMatcher<T0, T1, T2, T3, TResult>
     {
         readonly object value;
         object result;
 
-        internal OneOfMatcher(object value)
+        internal OneOfMatcher(object value, object result)
         {
             this.value = value;
-            this.result = null;
+            this.result = result;
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, TResult> When(Func<T0, TResult> func)
+        public IOneOfMatcher<T1, T2, T3, TResult> When(Func<T0, TResult> func)
         {
             if (value is T0) result = func.Invoke((T0)value);
-            return this;
+            return new OneOfMatcher<T1, T2, T3, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, TResult> When(Func<T1, TResult> func)
+        public IOneOfMatcher<T0, T2, T3, TResult> When(Func<T1, TResult> func)
         {
             if (value is T1) result = func.Invoke((T1)value);
-            return this;
+            return new OneOfMatcher<T0, T2, T3, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, TResult> When(Func<T2, TResult> func)
+        public IOneOfMatcher<T0, T1, T3, TResult> When(Func<T2, TResult> func)
         {
             if (value is T2) result = func.Invoke((T2)value);
-            return this;
+            return new OneOfMatcher<T0, T1, T3, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, TResult> When(Func<T3, TResult> func)
+        public IOneOfMatcher<T0, T1, T2, TResult> When(Func<T3, TResult> func)
         {
             if (value is T3) result = func.Invoke((T3)value);
-            return this;
+            return new OneOfMatcher<T0, T1, T2, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, TResult> Otherwise(Func<object, TResult> func)
+        public IMatchResultGiver<TResult> Otherwise(Func<object, TResult> func)
         {
             if (result == null) result = func.Invoke(value);
             return this;
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, TResult> OtherwiseThrow(Func<object, Exception> func)
+        public IMatchResultGiver<TResult> OtherwiseThrow(Func<object, Exception> func)
         {
             if (result == null) throw func.Invoke(value);
             return this;
@@ -2522,54 +2521,54 @@ namespace OneOf
         }
     }
 
-    public struct OneOfMatcher<T0, T1, T2, T3, T4, TResult>
+    public struct OneOfMatcher<T0, T1, T2, T3, T4, TResult> : IOneOfMatcher<T0, T1, T2, T3, T4, TResult>
     {
         readonly object value;
         object result;
 
-        internal OneOfMatcher(object value)
+        internal OneOfMatcher(object value, object result)
         {
             this.value = value;
-            this.result = null;
+            this.result = result;
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, TResult> When(Func<T0, TResult> func)
+        public IOneOfMatcher<T1, T2, T3, T4, TResult> When(Func<T0, TResult> func)
         {
             if (value is T0) result = func.Invoke((T0)value);
-            return this;
+            return new OneOfMatcher<T1, T2, T3, T4, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, TResult> When(Func<T1, TResult> func)
+        public IOneOfMatcher<T0, T2, T3, T4, TResult> When(Func<T1, TResult> func)
         {
             if (value is T1) result = func.Invoke((T1)value);
-            return this;
+            return new OneOfMatcher<T0, T2, T3, T4, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, TResult> When(Func<T2, TResult> func)
+        public IOneOfMatcher<T0, T1, T3, T4, TResult> When(Func<T2, TResult> func)
         {
             if (value is T2) result = func.Invoke((T2)value);
-            return this;
+            return new OneOfMatcher<T0, T1, T3, T4, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, TResult> When(Func<T3, TResult> func)
+        public IOneOfMatcher<T0, T1, T2, T4, TResult> When(Func<T3, TResult> func)
         {
             if (value is T3) result = func.Invoke((T3)value);
-            return this;
+            return new OneOfMatcher<T0, T1, T2, T4, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, TResult> When(Func<T4, TResult> func)
+        public IOneOfMatcher<T0, T1, T2, T3, TResult> When(Func<T4, TResult> func)
         {
             if (value is T4) result = func.Invoke((T4)value);
-            return this;
+            return new OneOfMatcher<T0, T1, T2, T3, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, TResult> Otherwise(Func<object, TResult> func)
+        public IMatchResultGiver<TResult> Otherwise(Func<object, TResult> func)
         {
             if (result == null) result = func.Invoke(value);
             return this;
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, TResult> OtherwiseThrow(Func<object, Exception> func)
+        public IMatchResultGiver<TResult> OtherwiseThrow(Func<object, Exception> func)
         {
             if (result == null) throw func.Invoke(value);
             return this;
@@ -2585,60 +2584,60 @@ namespace OneOf
         }
     }
 
-    public struct OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>
+    public struct OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult> : IOneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>
     {
         readonly object value;
         object result;
 
-        internal OneOfMatcher(object value)
+        internal OneOfMatcher(object value, object result)
         {
             this.value = value;
-            this.result = null;
+            this.result = result;
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult> When(Func<T0, TResult> func)
+        public IOneOfMatcher<T1, T2, T3, T4, T5, TResult> When(Func<T0, TResult> func)
         {
             if (value is T0) result = func.Invoke((T0)value);
-            return this;
+            return new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult> When(Func<T1, TResult> func)
+        public IOneOfMatcher<T0, T2, T3, T4, T5, TResult> When(Func<T1, TResult> func)
         {
             if (value is T1) result = func.Invoke((T1)value);
-            return this;
+            return new OneOfMatcher<T0, T2, T3, T4, T5, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult> When(Func<T2, TResult> func)
+        public IOneOfMatcher<T0, T1, T3, T4, T5, TResult> When(Func<T2, TResult> func)
         {
             if (value is T2) result = func.Invoke((T2)value);
-            return this;
+            return new OneOfMatcher<T0, T1, T3, T4, T5, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult> When(Func<T3, TResult> func)
+        public IOneOfMatcher<T0, T1, T2, T4, T5, TResult> When(Func<T3, TResult> func)
         {
             if (value is T3) result = func.Invoke((T3)value);
-            return this;
+            return new OneOfMatcher<T0, T1, T2, T4, T5, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult> When(Func<T4, TResult> func)
+        public IOneOfMatcher<T0, T1, T2, T3, T5, TResult> When(Func<T4, TResult> func)
         {
             if (value is T4) result = func.Invoke((T4)value);
-            return this;
+            return new OneOfMatcher<T0, T1, T2, T3, T5, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult> When(Func<T5, TResult> func)
+        public IOneOfMatcher<T0, T1, T2, T3, T4, TResult> When(Func<T5, TResult> func)
         {
             if (value is T5) result = func.Invoke((T5)value);
-            return this;
+            return new OneOfMatcher<T0, T1, T2, T3, T4, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult> Otherwise(Func<object, TResult> func)
+        public IMatchResultGiver<TResult> Otherwise(Func<object, TResult> func)
         {
             if (result == null) result = func.Invoke(value);
             return this;
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult> OtherwiseThrow(Func<object, Exception> func)
+        public IMatchResultGiver<TResult> OtherwiseThrow(Func<object, Exception> func)
         {
             if (result == null) throw func.Invoke(value);
             return this;
@@ -2654,66 +2653,66 @@ namespace OneOf
         }
     }
 
-    public struct OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>
+    public struct OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult> : IOneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>
     {
         readonly object value;
         object result;
 
-        internal OneOfMatcher(object value)
+        internal OneOfMatcher(object value, object result)
         {
             this.value = value;
-            this.result = null;
+            this.result = result;
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult> When(Func<T0, TResult> func)
+        public IOneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> When(Func<T0, TResult> func)
         {
             if (value is T0) result = func.Invoke((T0)value);
-            return this;
+            return new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult> When(Func<T1, TResult> func)
+        public IOneOfMatcher<T0, T2, T3, T4, T5, T6, TResult> When(Func<T1, TResult> func)
         {
             if (value is T1) result = func.Invoke((T1)value);
-            return this;
+            return new OneOfMatcher<T0, T2, T3, T4, T5, T6, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult> When(Func<T2, TResult> func)
+        public IOneOfMatcher<T0, T1, T3, T4, T5, T6, TResult> When(Func<T2, TResult> func)
         {
             if (value is T2) result = func.Invoke((T2)value);
-            return this;
+            return new OneOfMatcher<T0, T1, T3, T4, T5, T6, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult> When(Func<T3, TResult> func)
+        public IOneOfMatcher<T0, T1, T2, T4, T5, T6, TResult> When(Func<T3, TResult> func)
         {
             if (value is T3) result = func.Invoke((T3)value);
-            return this;
+            return new OneOfMatcher<T0, T1, T2, T4, T5, T6, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult> When(Func<T4, TResult> func)
+        public IOneOfMatcher<T0, T1, T2, T3, T5, T6, TResult> When(Func<T4, TResult> func)
         {
             if (value is T4) result = func.Invoke((T4)value);
-            return this;
+            return new OneOfMatcher<T0, T1, T2, T3, T5, T6, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult> When(Func<T5, TResult> func)
+        public IOneOfMatcher<T0, T1, T2, T3, T4, T6, TResult> When(Func<T5, TResult> func)
         {
             if (value is T5) result = func.Invoke((T5)value);
-            return this;
+            return new OneOfMatcher<T0, T1, T2, T3, T4, T6, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult> When(Func<T6, TResult> func)
+        public IOneOfMatcher<T0, T1, T2, T3, T4, T5, TResult> When(Func<T6, TResult> func)
         {
             if (value is T6) result = func.Invoke((T6)value);
-            return this;
+            return new OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult> Otherwise(Func<object, TResult> func)
+        public IMatchResultGiver<TResult> Otherwise(Func<object, TResult> func)
         {
             if (result == null) result = func.Invoke(value);
             return this;
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult> OtherwiseThrow(Func<object, Exception> func)
+        public IMatchResultGiver<TResult> OtherwiseThrow(Func<object, Exception> func)
         {
             if (result == null) throw func.Invoke(value);
             return this;
@@ -2729,72 +2728,72 @@ namespace OneOf
         }
     }
 
-    public struct OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>
+    public struct OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> : IOneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>
     {
         readonly object value;
         object result;
 
-        internal OneOfMatcher(object value)
+        internal OneOfMatcher(object value, object result)
         {
             this.value = value;
-            this.result = null;
+            this.result = result;
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> When(Func<T0, TResult> func)
+        public IOneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> When(Func<T0, TResult> func)
         {
             if (value is T0) result = func.Invoke((T0)value);
-            return this;
+            return new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> When(Func<T1, TResult> func)
+        public IOneOfMatcher<T0, T2, T3, T4, T5, T6, T7, TResult> When(Func<T1, TResult> func)
         {
             if (value is T1) result = func.Invoke((T1)value);
-            return this;
+            return new OneOfMatcher<T0, T2, T3, T4, T5, T6, T7, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> When(Func<T2, TResult> func)
+        public IOneOfMatcher<T0, T1, T3, T4, T5, T6, T7, TResult> When(Func<T2, TResult> func)
         {
             if (value is T2) result = func.Invoke((T2)value);
-            return this;
+            return new OneOfMatcher<T0, T1, T3, T4, T5, T6, T7, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> When(Func<T3, TResult> func)
+        public IOneOfMatcher<T0, T1, T2, T4, T5, T6, T7, TResult> When(Func<T3, TResult> func)
         {
             if (value is T3) result = func.Invoke((T3)value);
-            return this;
+            return new OneOfMatcher<T0, T1, T2, T4, T5, T6, T7, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> When(Func<T4, TResult> func)
+        public IOneOfMatcher<T0, T1, T2, T3, T5, T6, T7, TResult> When(Func<T4, TResult> func)
         {
             if (value is T4) result = func.Invoke((T4)value);
-            return this;
+            return new OneOfMatcher<T0, T1, T2, T3, T5, T6, T7, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> When(Func<T5, TResult> func)
+        public IOneOfMatcher<T0, T1, T2, T3, T4, T6, T7, TResult> When(Func<T5, TResult> func)
         {
             if (value is T5) result = func.Invoke((T5)value);
-            return this;
+            return new OneOfMatcher<T0, T1, T2, T3, T4, T6, T7, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> When(Func<T6, TResult> func)
+        public IOneOfMatcher<T0, T1, T2, T3, T4, T5, T7, TResult> When(Func<T6, TResult> func)
         {
             if (value is T6) result = func.Invoke((T6)value);
-            return this;
+            return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T7, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> When(Func<T7, TResult> func)
+        public IOneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult> When(Func<T7, TResult> func)
         {
             if (value is T7) result = func.Invoke((T7)value);
-            return this;
+            return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> Otherwise(Func<object, TResult> func)
+        public IMatchResultGiver<TResult> Otherwise(Func<object, TResult> func)
         {
             if (result == null) result = func.Invoke(value);
             return this;
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> OtherwiseThrow(Func<object, Exception> func)
+        public IMatchResultGiver<TResult> OtherwiseThrow(Func<object, Exception> func)
         {
             if (result == null) throw func.Invoke(value);
             return this;
@@ -2810,78 +2809,78 @@ namespace OneOf
         }
     }
 
-    public struct OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>
+    public struct OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult> : IOneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>
     {
         readonly object value;
         object result;
 
-        internal OneOfMatcher(object value)
+        internal OneOfMatcher(object value, object result)
         {
             this.value = value;
-            this.result = null;
+            this.result = result;
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult> When(Func<T0, TResult> func)
+        public IOneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> When(Func<T0, TResult> func)
         {
             if (value is T0) result = func.Invoke((T0)value);
-            return this;
+            return new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult> When(Func<T1, TResult> func)
+        public IOneOfMatcher<T0, T2, T3, T4, T5, T6, T7, T8, TResult> When(Func<T1, TResult> func)
         {
             if (value is T1) result = func.Invoke((T1)value);
-            return this;
+            return new OneOfMatcher<T0, T2, T3, T4, T5, T6, T7, T8, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult> When(Func<T2, TResult> func)
+        public IOneOfMatcher<T0, T1, T3, T4, T5, T6, T7, T8, TResult> When(Func<T2, TResult> func)
         {
             if (value is T2) result = func.Invoke((T2)value);
-            return this;
+            return new OneOfMatcher<T0, T1, T3, T4, T5, T6, T7, T8, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult> When(Func<T3, TResult> func)
+        public IOneOfMatcher<T0, T1, T2, T4, T5, T6, T7, T8, TResult> When(Func<T3, TResult> func)
         {
             if (value is T3) result = func.Invoke((T3)value);
-            return this;
+            return new OneOfMatcher<T0, T1, T2, T4, T5, T6, T7, T8, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult> When(Func<T4, TResult> func)
+        public IOneOfMatcher<T0, T1, T2, T3, T5, T6, T7, T8, TResult> When(Func<T4, TResult> func)
         {
             if (value is T4) result = func.Invoke((T4)value);
-            return this;
+            return new OneOfMatcher<T0, T1, T2, T3, T5, T6, T7, T8, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult> When(Func<T5, TResult> func)
+        public IOneOfMatcher<T0, T1, T2, T3, T4, T6, T7, T8, TResult> When(Func<T5, TResult> func)
         {
             if (value is T5) result = func.Invoke((T5)value);
-            return this;
+            return new OneOfMatcher<T0, T1, T2, T3, T4, T6, T7, T8, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult> When(Func<T6, TResult> func)
+        public IOneOfMatcher<T0, T1, T2, T3, T4, T5, T7, T8, TResult> When(Func<T6, TResult> func)
         {
             if (value is T6) result = func.Invoke((T6)value);
-            return this;
+            return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T7, T8, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult> When(Func<T7, TResult> func)
+        public IOneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T8, TResult> When(Func<T7, TResult> func)
         {
             if (value is T7) result = func.Invoke((T7)value);
-            return this;
+            return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T8, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult> When(Func<T8, TResult> func)
+        public IOneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> When(Func<T8, TResult> func)
         {
             if (value is T8) result = func.Invoke((T8)value);
-            return this;
+            return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult> Otherwise(Func<object, TResult> func)
+        public IMatchResultGiver<TResult> Otherwise(Func<object, TResult> func)
         {
             if (result == null) result = func.Invoke(value);
             return this;
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult> OtherwiseThrow(Func<object, Exception> func)
+        public IMatchResultGiver<TResult> OtherwiseThrow(Func<object, Exception> func)
         {
             if (result == null) throw func.Invoke(value);
             return this;
@@ -2895,5 +2894,121 @@ namespace OneOf
                 return (TResult)result;
             }
         }
+    }
+    public interface IOneOfMatcher<T0, TResult> : IOtherwiser<TResult>
+    {
+        IOtherwiser<TResult> When(Func<T0, TResult> func);
+    }
+    public interface IOneOfMatcher<T0, T1, TResult> : IOtherwiser<TResult>
+    {
+
+        IOneOfMatcher<T1, TResult> When(Func<T0, TResult> func);
+
+        IOneOfMatcher<T0, TResult> When(Func<T1, TResult> func);
+    }
+    public interface IOneOfMatcher<T0, T1, T2, TResult> : IOtherwiser<TResult>
+    {
+
+        IOneOfMatcher<T1, T2, TResult> When(Func<T0, TResult> func);
+
+        IOneOfMatcher<T0, T2, TResult> When(Func<T1, TResult> func);
+
+        IOneOfMatcher<T0, T1, TResult> When(Func<T2, TResult> func);
+    }
+    public interface IOneOfMatcher<T0, T1, T2, T3, TResult> : IOtherwiser<TResult>
+    {
+
+        IOneOfMatcher<T1, T2, T3, TResult> When(Func<T0, TResult> func);
+
+        IOneOfMatcher<T0, T2, T3, TResult> When(Func<T1, TResult> func);
+
+        IOneOfMatcher<T0, T1, T3, TResult> When(Func<T2, TResult> func);
+
+        IOneOfMatcher<T0, T1, T2, TResult> When(Func<T3, TResult> func);
+    }
+    public interface IOneOfMatcher<T0, T1, T2, T3, T4, TResult> : IOtherwiser<TResult>
+    {
+
+        IOneOfMatcher<T1, T2, T3, T4, TResult> When(Func<T0, TResult> func);
+
+        IOneOfMatcher<T0, T2, T3, T4, TResult> When(Func<T1, TResult> func);
+
+        IOneOfMatcher<T0, T1, T3, T4, TResult> When(Func<T2, TResult> func);
+
+        IOneOfMatcher<T0, T1, T2, T4, TResult> When(Func<T3, TResult> func);
+
+        IOneOfMatcher<T0, T1, T2, T3, TResult> When(Func<T4, TResult> func);
+    }
+    public interface IOneOfMatcher<T0, T1, T2, T3, T4, T5, TResult> : IOtherwiser<TResult>
+    {
+
+        IOneOfMatcher<T1, T2, T3, T4, T5, TResult> When(Func<T0, TResult> func);
+
+        IOneOfMatcher<T0, T2, T3, T4, T5, TResult> When(Func<T1, TResult> func);
+
+        IOneOfMatcher<T0, T1, T3, T4, T5, TResult> When(Func<T2, TResult> func);
+
+        IOneOfMatcher<T0, T1, T2, T4, T5, TResult> When(Func<T3, TResult> func);
+
+        IOneOfMatcher<T0, T1, T2, T3, T5, TResult> When(Func<T4, TResult> func);
+
+        IOneOfMatcher<T0, T1, T2, T3, T4, TResult> When(Func<T5, TResult> func);
+    }
+    public interface IOneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult> : IOtherwiser<TResult>
+    {
+
+        IOneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> When(Func<T0, TResult> func);
+
+        IOneOfMatcher<T0, T2, T3, T4, T5, T6, TResult> When(Func<T1, TResult> func);
+
+        IOneOfMatcher<T0, T1, T3, T4, T5, T6, TResult> When(Func<T2, TResult> func);
+
+        IOneOfMatcher<T0, T1, T2, T4, T5, T6, TResult> When(Func<T3, TResult> func);
+
+        IOneOfMatcher<T0, T1, T2, T3, T5, T6, TResult> When(Func<T4, TResult> func);
+
+        IOneOfMatcher<T0, T1, T2, T3, T4, T6, TResult> When(Func<T5, TResult> func);
+
+        IOneOfMatcher<T0, T1, T2, T3, T4, T5, TResult> When(Func<T6, TResult> func);
+    }
+    public interface IOneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> : IOtherwiser<TResult>
+    {
+
+        IOneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> When(Func<T0, TResult> func);
+
+        IOneOfMatcher<T0, T2, T3, T4, T5, T6, T7, TResult> When(Func<T1, TResult> func);
+
+        IOneOfMatcher<T0, T1, T3, T4, T5, T6, T7, TResult> When(Func<T2, TResult> func);
+
+        IOneOfMatcher<T0, T1, T2, T4, T5, T6, T7, TResult> When(Func<T3, TResult> func);
+
+        IOneOfMatcher<T0, T1, T2, T3, T5, T6, T7, TResult> When(Func<T4, TResult> func);
+
+        IOneOfMatcher<T0, T1, T2, T3, T4, T6, T7, TResult> When(Func<T5, TResult> func);
+
+        IOneOfMatcher<T0, T1, T2, T3, T4, T5, T7, TResult> When(Func<T6, TResult> func);
+
+        IOneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult> When(Func<T7, TResult> func);
+    }
+    public interface IOneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult> : IOtherwiser<TResult>
+    {
+
+        IOneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> When(Func<T0, TResult> func);
+
+        IOneOfMatcher<T0, T2, T3, T4, T5, T6, T7, T8, TResult> When(Func<T1, TResult> func);
+
+        IOneOfMatcher<T0, T1, T3, T4, T5, T6, T7, T8, TResult> When(Func<T2, TResult> func);
+
+        IOneOfMatcher<T0, T1, T2, T4, T5, T6, T7, T8, TResult> When(Func<T3, TResult> func);
+
+        IOneOfMatcher<T0, T1, T2, T3, T5, T6, T7, T8, TResult> When(Func<T4, TResult> func);
+
+        IOneOfMatcher<T0, T1, T2, T3, T4, T6, T7, T8, TResult> When(Func<T5, TResult> func);
+
+        IOneOfMatcher<T0, T1, T2, T3, T4, T5, T7, T8, TResult> When(Func<T6, TResult> func);
+
+        IOneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T8, TResult> When(Func<T7, TResult> func);
+
+        IOneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> When(Func<T8, TResult> func);
     }
 }
