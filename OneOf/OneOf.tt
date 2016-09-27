@@ -33,12 +33,18 @@ void GenerateClasses()
 
 		for (var i = 1; i < 10; i++)
 			WriteMatcher(i);
+
+		for (var i = 1; i < 10; i++)
+			WriteMatcherInterface(i);
 	}
 }
-
+string GenerateGenericArgs(IEnumerable<int> ints, string typePrefix = "T", string withResult = null)
+{
+    return string.Join(", ", ints.Select(e => typePrefix + e)) + (withResult != null ? ", " + withResult : "");
+}
 void WriteOneOf(bool isStruct, int countOfgenericParams) 
 {
-	var genericArg = string.Join(", ", Enumerable.Range(0, countOfgenericParams).Select(e => "T" + e));
+	var genericArg = GenerateGenericArgs(Enumerable.Range(0, countOfgenericParams));
 	var structOrClass = isStruct ? "struct" : "class";
 	var typeName = isStruct ? "OneOf" : "OneOfBase";
 
@@ -162,7 +168,7 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 		using(var indent2 = new Indent(this))
         {
 			WriteLine("EnsureValueNotNull();");
-            WriteLine($"return new OneOfMatcher<{genericArg}, TResult>(value);");
+            WriteLine($"return new OneOfMatcher<{genericArg}, TResult>(value, null);");
         }
 
 		// =============== object overrides
@@ -189,7 +195,7 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 
 void WriteSwitcher(int countOfgenericParams) 
 {
-	var genericArg = string.Join(", ", Enumerable.Range(0, countOfgenericParams).Select(e => "T" + e));
+	var genericArg = GenerateGenericArgs(Enumerable.Range(0, countOfgenericParams));
 
 	WriteLine("");
 	WriteLine($"public struct OneOfSwitcher<{genericArg}>");
@@ -246,12 +252,38 @@ void WriteSwitcher(int countOfgenericParams)
 	}
 }
 
+
+void WriteMatcherInterface(int countOfGenericParams)
+{
+	var genericArg = GenerateGenericArgs(Enumerable.Range(0, countOfGenericParams), withResult: "TResult");
+
+	WriteLine($"public interface IOneOfMatcher<{genericArg}> : IOtherwiser<TResult>");
+	using(new Indent(this))
+	{
+		for(var parmIndex = 0; parmIndex < countOfGenericParams; parmIndex++)
+		{
+			var lesserArityOneOf = Enumerable.Range(0, countOfGenericParams).ToList();
+			if(lesserArityOneOf.Count > 1)
+			{
+				lesserArityOneOf.Remove(parmIndex);
+				var lesserArityGenericArg = GenerateGenericArgs(lesserArityOneOf,withResult: "TResult");
+				WriteLine("");
+				WriteLine($"IOneOfMatcher<{lesserArityGenericArg}> When(Func<T{parmIndex}, TResult> func);");
+			}
+			else
+            {
+				WriteLine($"IOtherwiser<TResult> When(Func<T{parmIndex}, TResult> func);");
+            }
+		}
+	}
+}
+
 void WriteMatcher(int countOfgenericParams) 
 {
-	var genericArg = string.Join(", ", Enumerable.Range(0, countOfgenericParams).Select(e => "T" + e)) + ", TResult";
+	var genericArg = GenerateGenericArgs(Enumerable.Range(0, countOfgenericParams), withResult: "TResult");
 
 	WriteLine("");
-	WriteLine($"public struct OneOfMatcher<{genericArg}>");
+	WriteLine($"public struct OneOfMatcher<{genericArg}> : IOneOfMatcher<{genericArg}>" );
 	using(var indent1 = new Indent(this))
 	{
 		WriteLine("readonly object value;");
@@ -260,30 +292,46 @@ void WriteMatcher(int countOfgenericParams)
 		// =============== Constructors
 	    
 		WriteLine("");
-		WriteLine("internal OneOfMatcher(object value)");
+		WriteLine("internal OneOfMatcher(object value, object result)");
 		using(var indent2 = new Indent(this))
 		{
 			WriteLine($"this.value = value;");
-			WriteLine($"this.result = null;");
+			WriteLine($"this.result = result;");
 		}
 
 		// =============== When
 
 		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex++)
 		{
-			WriteLine("");
-			WriteLine($"public OneOfMatcher<{genericArg}> When(Func<T{parmIndex}, TResult> func)");
-			using(var indent2 = new Indent(this))
+			var lesserArityOneOf = Enumerable.Range(0, countOfgenericParams).ToList();
+			if(lesserArityOneOf.Count > 1)
 			{
-				WriteLine($"if (value is T{parmIndex}) result = func.Invoke((T{parmIndex})value);");
-				WriteLine("return this;");
+				lesserArityOneOf.Remove(parmIndex);
+			
+				var lesserArityGenericArg = GenerateGenericArgs(lesserArityOneOf,withResult: "TResult");
+				WriteLine("");
+				WriteLine($"public IOneOfMatcher<{lesserArityGenericArg}> When(Func<T{parmIndex}, TResult> func)");
+				using(var indent2 = new Indent(this))
+				{
+					WriteLine($"if (value is T{parmIndex}) result = func.Invoke((T{parmIndex})value);");
+					WriteLine($"return new OneOfMatcher<{lesserArityGenericArg}>(this.value, this.result);");
+				}
 			}
+			else
+            {
+				WriteLine($"public IOtherwiser<TResult> When(Func<T{parmIndex}, TResult> func)");
+				using(var indent2 = new Indent(this))
+				{
+					WriteLine($"if (value is T{parmIndex}) result = func.Invoke((T{parmIndex})value);");
+					WriteLine($"return this;");
+				}
+            }
 		}
 
 		// =============== Otherwise
 
 		WriteLine("");
-		WriteLine($"public OneOfMatcher<{genericArg}> Otherwise(Func<object, TResult> func)");
+		WriteLine($"public IMatchResultGiver<TResult> Otherwise(Func<object, TResult> func)");
 		using(var indent2 = new Indent(this))
 		{
 			WriteLine($"if (result == null) result = func.Invoke(value);");
@@ -293,7 +341,7 @@ void WriteMatcher(int countOfgenericParams)
 		// =============== OtherwiseThrow
 
 		WriteLine("");
-		WriteLine($"public OneOfMatcher<{genericArg}> OtherwiseThrow(Func<object, Exception> func)");
+		WriteLine($"public IMatchResultGiver<TResult> OtherwiseThrow(Func<object, Exception> func)");
 		using(var indent2 = new Indent(this))
 		{
 			WriteLine($"if (result == null) throw func.Invoke(value);");

@@ -38,6 +38,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IOtherwiser.cs" />
     <Compile Include="OneOf.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
