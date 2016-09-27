@@ -29,11 +29,9 @@ namespace OneOf.Tests
         public void CanMatchOnBase()
         {
             Response x = new Response.MethodNotAllowed();
-            Assert.AreEqual(true, x.Match<bool>()
-                .When((Response.MethodNotAllowed methodNotAllowed) => true)
-                .When((Response.InvokeSuccessResponse invokeSuccessResponse) => false)
+            Assert.AreEqual(true, x.Match((Response.MethodNotAllowed methodNotAllowed) => true)
+                //.When((Response.InvokeSuccessResponse invokeSuccessResponse) => false)
                 .OtherwiseThrow(v => new InvalidOperationException())
-                .Result
                 );
         }
     }
