@@ -37,19 +37,47 @@ public OneOf<User, InvalidName, NameTaken> CreateUser(string username)
 Matching
 --------
 
-You use the `TOut Match(Func<T0, TOut> f0, ... Func<Tn,TOut> fn)` method to get a value out. E.g.
+You use the `Match` method along with `When` and `Otherwise` chained-methods to get a value out. E.g.
 
 ```C#
 public void SetBackground(OneOf<string, ColorName, Color> backgroundColor)
 {
-   Color c = backgroundColor.Match(
-     str => CssHelper.GetColorFromString(str),
-     name => new Color(name),
-     col => col
+   Color c = backgroundColor.Match()
+       .When((string str) => CssHelper.GetColorFromString(str))
+       .When((ColorName name) => new Color(name))
+       .When((Color col) => col)
    );
    
    _window.BackgroundColor = c;
 }
 ```
+
+Switching
+---------
+
+You use the `Switch` method along with `When` and `Otherwise` chained-methods to execute specific actions based on the value's type. E.g.
+
+```C#
+OneOf<string, NotFound> fileContents = ReadFile(fileName)
+    .Switch()
+    .When((string contents) => /* success */)
+    .When((NotFound) => /* handle file not found */);
+```
+
+ToOneOf
+--------
+
+The `ToOneOf` method enables conversion to other OneOfs. E.g.
+
+```C#
+OneOf<True,False> trueOrFalse = True;
+
+// this will work
+OneOf<True,False,Unknown> trueFalseOrUnknown = trueOrFalse.ToOneOf<True,False,Unknown>();
+
+// this will fail at runtime as the source contains a value that isn't supported by the new OneOf
+OneOf<False> justFalse = trueOrFalse.ToOneOf<False>();
+```
+
 
 
