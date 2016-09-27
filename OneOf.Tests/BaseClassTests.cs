@@ -30,9 +30,9 @@ namespace OneOf.Tests
         {
             Response x = new Response.MethodNotAllowed();
             Assert.AreEqual(true, x.Match<bool>()
-                .When<Response.MethodNotAllowed>(methodNotAllowed => true)
-                .When<Response.InvokeSuccessResponse>(invokeSuccessResponse => false)
-                .Otherwise(v => new InvalidOperationException())
+                .When((Response.MethodNotAllowed methodNotAllowed) => true)
+                .When((Response.InvokeSuccessResponse invokeSuccessResponse) => false)
+                .OtherwiseThrow(v => new InvalidOperationException())
                 );
         }
     }

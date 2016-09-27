@@ -30,6 +30,9 @@ void GenerateClasses()
 
 		for (var i = 1; i < 10; i++)
 			WriteSwitcher(i);
+
+		for (var i = 1; i < 10; i++)
+			WriteMatcher(i);
 	}
 }
 
@@ -155,11 +158,11 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 		// =============== Match
 
 		WriteLine("");
-		WriteLine("public OneOfMatcher<T> Match<T>()");
+		WriteLine($"public OneOfMatcher<{genericArg}, TResult> Match<TResult>()");
 		using(var indent2 = new Indent(this))
         {
 			WriteLine("EnsureValueNotNull();");
-            WriteLine("return new OneOfMatcher<T>(value);");
+            WriteLine($"return new OneOfMatcher<{genericArg}, TResult>(value);");
         }
 
 		// =============== object overrides
@@ -188,6 +191,7 @@ void WriteSwitcher(int countOfgenericParams)
 {
 	var genericArg = string.Join(", ", Enumerable.Range(0, countOfgenericParams).Select(e => "T" + e));
 
+	WriteLine("");
 	WriteLine($"public struct OneOfSwitcher<{genericArg}>");
 	using(var indent1 = new Indent(this))
 	{
@@ -228,11 +232,72 @@ void WriteSwitcher(int countOfgenericParams)
 		WriteLine($"public void Otherwise(Action<object> action)");
 		using(var indent2 = new Indent(this))
 		{
-			WriteLine($"if (!hasSwitched)");
-			using(var indent3 = new Indent(this))
+			WriteLine($"if (!hasSwitched) action.Invoke(value);");
+		}
+
+		// =============== OtherwiseThrow
+
+		WriteLine("");
+		WriteLine($"public void OtherwiseThrow(Func<object, Exception> func)");
+		using(var indent2 = new Indent(this))
+		{
+			WriteLine($"if (!hasSwitched) throw func.Invoke(value);");
+		}
+	}
+}
+
+void WriteMatcher(int countOfgenericParams) 
+{
+	var genericArg = string.Join(", ", Enumerable.Range(0, countOfgenericParams).Select(e => "T" + e)) + ", TResult";
+
+	WriteLine("");
+	WriteLine($"public struct OneOfMatcher<{genericArg}>");
+	using(var indent1 = new Indent(this))
+	{
+		WriteLine("readonly object value;");
+		WriteLine("object result;");
+
+		// =============== Constructors
+	    
+		WriteLine("");
+		WriteLine("internal OneOfMatcher(object value)");
+		using(var indent2 = new Indent(this))
+		{
+			WriteLine($"this.value = value;");
+			WriteLine($"this.result = null;");
+		}
+
+		// =============== When
+
+		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex++)
+		{
+			WriteLine("");
+			WriteLine($"public OneOfMatcher<{genericArg}> When(Func<T{parmIndex}, TResult> func)");
+			using(var indent2 = new Indent(this))
 			{
-				WriteLine($"action.Invoke(value);");
+				WriteLine($"if (value is T{parmIndex}) result = func.Invoke((T{parmIndex})value);");
+				WriteLine("return this;");
 			}
+		}
+
+		// =============== Otherwise
+
+		WriteLine("");
+		WriteLine($"public TResult Otherwise(Func<object, TResult> func)");
+		using(var indent2 = new Indent(this))
+		{
+			WriteLine($"if (result == null) result = func.Invoke(value);");
+			WriteLine($"return (TResult)result;");
+		}
+
+		// =============== OtherwiseThrow
+
+		WriteLine("");
+		WriteLine($"public TResult OtherwiseThrow(Func<object, Exception> func)");
+		using(var indent2 = new Indent(this))
+		{
+			WriteLine($"if (result == null) throw func.Invoke(value);");
+			WriteLine($"return (TResult)result;");
 		}
 	}
 }

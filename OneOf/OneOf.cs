@@ -70,10 +70,10 @@ namespace OneOf
             return new OneOfSwitcher<T0>(value);
         }
 
-        public OneOfMatcher<T> Match<T>()
+        public OneOfMatcher<T0, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T>(value);
+            return new OneOfMatcher<T0, TResult>(value);
         }
 
         public override bool Equals(object obj)
@@ -154,10 +154,10 @@ namespace OneOf
             return new OneOfSwitcher<T0, T1>(value);
         }
 
-        public OneOfMatcher<T> Match<T>()
+        public OneOfMatcher<T0, T1, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T>(value);
+            return new OneOfMatcher<T0, T1, TResult>(value);
         }
 
         public override bool Equals(object obj)
@@ -240,10 +240,10 @@ namespace OneOf
             return new OneOfSwitcher<T0, T1, T2>(value);
         }
 
-        public OneOfMatcher<T> Match<T>()
+        public OneOfMatcher<T0, T1, T2, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T>(value);
+            return new OneOfMatcher<T0, T1, T2, TResult>(value);
         }
 
         public override bool Equals(object obj)
@@ -328,10 +328,10 @@ namespace OneOf
             return new OneOfSwitcher<T0, T1, T2, T3>(value);
         }
 
-        public OneOfMatcher<T> Match<T>()
+        public OneOfMatcher<T0, T1, T2, T3, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T>(value);
+            return new OneOfMatcher<T0, T1, T2, T3, TResult>(value);
         }
 
         public override bool Equals(object obj)
@@ -418,10 +418,10 @@ namespace OneOf
             return new OneOfSwitcher<T0, T1, T2, T3, T4>(value);
         }
 
-        public OneOfMatcher<T> Match<T>()
+        public OneOfMatcher<T0, T1, T2, T3, T4, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T>(value);
+            return new OneOfMatcher<T0, T1, T2, T3, T4, TResult>(value);
         }
 
         public override bool Equals(object obj)
@@ -510,10 +510,10 @@ namespace OneOf
             return new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(value);
         }
 
-        public OneOfMatcher<T> Match<T>()
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T>(value);
+            return new OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>(value);
         }
 
         public override bool Equals(object obj)
@@ -604,10 +604,10 @@ namespace OneOf
             return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(value);
         }
 
-        public OneOfMatcher<T> Match<T>()
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T>(value);
+            return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(value);
         }
 
         public override bool Equals(object obj)
@@ -700,10 +700,10 @@ namespace OneOf
             return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(value);
         }
 
-        public OneOfMatcher<T> Match<T>()
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T>(value);
+            return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value);
         }
 
         public override bool Equals(object obj)
@@ -798,10 +798,10 @@ namespace OneOf
             return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
         }
 
-        public OneOfMatcher<T> Match<T>()
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T>(value);
+            return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value);
         }
 
         public override bool Equals(object obj)
@@ -886,10 +886,10 @@ namespace OneOf
             return new OneOfSwitcher<T0>(value);
         }
 
-        public OneOfMatcher<T> Match<T>()
+        public OneOfMatcher<T0, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T>(value);
+            return new OneOfMatcher<T0, TResult>(value);
         }
 
         public override bool Equals(object obj)
@@ -976,10 +976,10 @@ namespace OneOf
             return new OneOfSwitcher<T0, T1>(value);
         }
 
-        public OneOfMatcher<T> Match<T>()
+        public OneOfMatcher<T0, T1, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T>(value);
+            return new OneOfMatcher<T0, T1, TResult>(value);
         }
 
         public override bool Equals(object obj)
@@ -1068,10 +1068,10 @@ namespace OneOf
             return new OneOfSwitcher<T0, T1, T2>(value);
         }
 
-        public OneOfMatcher<T> Match<T>()
+        public OneOfMatcher<T0, T1, T2, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T>(value);
+            return new OneOfMatcher<T0, T1, T2, TResult>(value);
         }
 
         public override bool Equals(object obj)
@@ -1162,10 +1162,10 @@ namespace OneOf
             return new OneOfSwitcher<T0, T1, T2, T3>(value);
         }
 
-        public OneOfMatcher<T> Match<T>()
+        public OneOfMatcher<T0, T1, T2, T3, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T>(value);
+            return new OneOfMatcher<T0, T1, T2, T3, TResult>(value);
         }
 
         public override bool Equals(object obj)
@@ -1258,10 +1258,10 @@ namespace OneOf
             return new OneOfSwitcher<T0, T1, T2, T3, T4>(value);
         }
 
-        public OneOfMatcher<T> Match<T>()
+        public OneOfMatcher<T0, T1, T2, T3, T4, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T>(value);
+            return new OneOfMatcher<T0, T1, T2, T3, T4, TResult>(value);
         }
 
         public override bool Equals(object obj)
@@ -1356,10 +1356,10 @@ namespace OneOf
             return new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(value);
         }
 
-        public OneOfMatcher<T> Match<T>()
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T>(value);
+            return new OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>(value);
         }
 
         public override bool Equals(object obj)
@@ -1456,10 +1456,10 @@ namespace OneOf
             return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(value);
         }
 
-        public OneOfMatcher<T> Match<T>()
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T>(value);
+            return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(value);
         }
 
         public override bool Equals(object obj)
@@ -1558,10 +1558,10 @@ namespace OneOf
             return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(value);
         }
 
-        public OneOfMatcher<T> Match<T>()
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T>(value);
+            return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value);
         }
 
         public override bool Equals(object obj)
@@ -1662,10 +1662,10 @@ namespace OneOf
             return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
         }
 
-        public OneOfMatcher<T> Match<T>()
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult> Match<TResult>()
         {
             EnsureValueNotNull();
-            return new OneOfMatcher<T>(value);
+            return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value);
         }
 
         public override bool Equals(object obj)
@@ -1680,6 +1680,7 @@ namespace OneOf
 
         public override string ToString() => (value?.ToString() ?? "");
     }
+
 
     public struct OneOfSwitcher<T0>
     {
@@ -1704,12 +1705,15 @@ namespace OneOf
 
         public void Otherwise(Action<object> action)
         {
-            if (!hasSwitched)
-            {
-                action.Invoke(value);
-            }
+            if (!hasSwitched) action.Invoke(value);
+        }
+
+        public void OtherwiseThrow(Func<object, Exception> func)
+        {
+            if (!hasSwitched) throw func.Invoke(value);
         }
     }
+
     public struct OneOfSwitcher<T0, T1>
     {
         readonly object value;
@@ -1743,12 +1747,15 @@ namespace OneOf
 
         public void Otherwise(Action<object> action)
         {
-            if (!hasSwitched)
-            {
-                action.Invoke(value);
-            }
+            if (!hasSwitched) action.Invoke(value);
+        }
+
+        public void OtherwiseThrow(Func<object, Exception> func)
+        {
+            if (!hasSwitched) throw func.Invoke(value);
         }
     }
+
     public struct OneOfSwitcher<T0, T1, T2>
     {
         readonly object value;
@@ -1792,12 +1799,15 @@ namespace OneOf
 
         public void Otherwise(Action<object> action)
         {
-            if (!hasSwitched)
-            {
-                action.Invoke(value);
-            }
+            if (!hasSwitched) action.Invoke(value);
+        }
+
+        public void OtherwiseThrow(Func<object, Exception> func)
+        {
+            if (!hasSwitched) throw func.Invoke(value);
         }
     }
+
     public struct OneOfSwitcher<T0, T1, T2, T3>
     {
         readonly object value;
@@ -1851,12 +1861,15 @@ namespace OneOf
 
         public void Otherwise(Action<object> action)
         {
-            if (!hasSwitched)
-            {
-                action.Invoke(value);
-            }
+            if (!hasSwitched) action.Invoke(value);
+        }
+
+        public void OtherwiseThrow(Func<object, Exception> func)
+        {
+            if (!hasSwitched) throw func.Invoke(value);
         }
     }
+
     public struct OneOfSwitcher<T0, T1, T2, T3, T4>
     {
         readonly object value;
@@ -1920,12 +1933,15 @@ namespace OneOf
 
         public void Otherwise(Action<object> action)
         {
-            if (!hasSwitched)
-            {
-                action.Invoke(value);
-            }
+            if (!hasSwitched) action.Invoke(value);
+        }
+
+        public void OtherwiseThrow(Func<object, Exception> func)
+        {
+            if (!hasSwitched) throw func.Invoke(value);
         }
     }
+
     public struct OneOfSwitcher<T0, T1, T2, T3, T4, T5>
     {
         readonly object value;
@@ -1999,12 +2015,15 @@ namespace OneOf
 
         public void Otherwise(Action<object> action)
         {
-            if (!hasSwitched)
-            {
-                action.Invoke(value);
-            }
+            if (!hasSwitched) action.Invoke(value);
+        }
+
+        public void OtherwiseThrow(Func<object, Exception> func)
+        {
+            if (!hasSwitched) throw func.Invoke(value);
         }
     }
+
     public struct OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>
     {
         readonly object value;
@@ -2088,12 +2107,15 @@ namespace OneOf
 
         public void Otherwise(Action<object> action)
         {
-            if (!hasSwitched)
-            {
-                action.Invoke(value);
-            }
+            if (!hasSwitched) action.Invoke(value);
+        }
+
+        public void OtherwiseThrow(Func<object, Exception> func)
+        {
+            if (!hasSwitched) throw func.Invoke(value);
         }
     }
+
     public struct OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>
     {
         readonly object value;
@@ -2187,12 +2209,15 @@ namespace OneOf
 
         public void Otherwise(Action<object> action)
         {
-            if (!hasSwitched)
-            {
-                action.Invoke(value);
-            }
+            if (!hasSwitched) action.Invoke(value);
+        }
+
+        public void OtherwiseThrow(Func<object, Exception> func)
+        {
+            if (!hasSwitched) throw func.Invoke(value);
         }
     }
+
     public struct OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>
     {
         readonly object value;
@@ -2296,10 +2321,498 @@ namespace OneOf
 
         public void Otherwise(Action<object> action)
         {
-            if (!hasSwitched)
-            {
-                action.Invoke(value);
-            }
+            if (!hasSwitched) action.Invoke(value);
+        }
+
+        public void OtherwiseThrow(Func<object, Exception> func)
+        {
+            if (!hasSwitched) throw func.Invoke(value);
+        }
+    }
+
+    public struct OneOfMatcher<T0, TResult>
+    {
+        readonly object value;
+        object result;
+
+        internal OneOfMatcher(object value)
+        {
+            this.value = value;
+            this.result = null;
+        }
+
+        public OneOfMatcher<T0, TResult> When(Func<T0, TResult> func)
+        {
+            if (value is T0) result = func.Invoke((T0)value);
+            return this;
+        }
+
+        public TResult Otherwise(Func<object, TResult> func)
+        {
+            if (result == null) result = func.Invoke(value);
+            return (TResult)result;
+        }
+
+        public TResult OtherwiseThrow(Func<object, Exception> func)
+        {
+            if (result == null) throw func.Invoke(value);
+            return (TResult)result;
+        }
+    }
+
+    public struct OneOfMatcher<T0, T1, TResult>
+    {
+        readonly object value;
+        object result;
+
+        internal OneOfMatcher(object value)
+        {
+            this.value = value;
+            this.result = null;
+        }
+
+        public OneOfMatcher<T0, T1, TResult> When(Func<T0, TResult> func)
+        {
+            if (value is T0) result = func.Invoke((T0)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, TResult> When(Func<T1, TResult> func)
+        {
+            if (value is T1) result = func.Invoke((T1)value);
+            return this;
+        }
+
+        public TResult Otherwise(Func<object, TResult> func)
+        {
+            if (result == null) result = func.Invoke(value);
+            return (TResult)result;
+        }
+
+        public TResult OtherwiseThrow(Func<object, Exception> func)
+        {
+            if (result == null) throw func.Invoke(value);
+            return (TResult)result;
+        }
+    }
+
+    public struct OneOfMatcher<T0, T1, T2, TResult>
+    {
+        readonly object value;
+        object result;
+
+        internal OneOfMatcher(object value)
+        {
+            this.value = value;
+            this.result = null;
+        }
+
+        public OneOfMatcher<T0, T1, T2, TResult> When(Func<T0, TResult> func)
+        {
+            if (value is T0) result = func.Invoke((T0)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, TResult> When(Func<T1, TResult> func)
+        {
+            if (value is T1) result = func.Invoke((T1)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, TResult> When(Func<T2, TResult> func)
+        {
+            if (value is T2) result = func.Invoke((T2)value);
+            return this;
+        }
+
+        public TResult Otherwise(Func<object, TResult> func)
+        {
+            if (result == null) result = func.Invoke(value);
+            return (TResult)result;
+        }
+
+        public TResult OtherwiseThrow(Func<object, Exception> func)
+        {
+            if (result == null) throw func.Invoke(value);
+            return (TResult)result;
+        }
+    }
+
+    public struct OneOfMatcher<T0, T1, T2, T3, TResult>
+    {
+        readonly object value;
+        object result;
+
+        internal OneOfMatcher(object value)
+        {
+            this.value = value;
+            this.result = null;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, TResult> When(Func<T0, TResult> func)
+        {
+            if (value is T0) result = func.Invoke((T0)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, TResult> When(Func<T1, TResult> func)
+        {
+            if (value is T1) result = func.Invoke((T1)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, TResult> When(Func<T2, TResult> func)
+        {
+            if (value is T2) result = func.Invoke((T2)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, TResult> When(Func<T3, TResult> func)
+        {
+            if (value is T3) result = func.Invoke((T3)value);
+            return this;
+        }
+
+        public TResult Otherwise(Func<object, TResult> func)
+        {
+            if (result == null) result = func.Invoke(value);
+            return (TResult)result;
+        }
+
+        public TResult OtherwiseThrow(Func<object, Exception> func)
+        {
+            if (result == null) throw func.Invoke(value);
+            return (TResult)result;
+        }
+    }
+
+    public struct OneOfMatcher<T0, T1, T2, T3, T4, TResult>
+    {
+        readonly object value;
+        object result;
+
+        internal OneOfMatcher(object value)
+        {
+            this.value = value;
+            this.result = null;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, TResult> When(Func<T0, TResult> func)
+        {
+            if (value is T0) result = func.Invoke((T0)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, TResult> When(Func<T1, TResult> func)
+        {
+            if (value is T1) result = func.Invoke((T1)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, TResult> When(Func<T2, TResult> func)
+        {
+            if (value is T2) result = func.Invoke((T2)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, TResult> When(Func<T3, TResult> func)
+        {
+            if (value is T3) result = func.Invoke((T3)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, TResult> When(Func<T4, TResult> func)
+        {
+            if (value is T4) result = func.Invoke((T4)value);
+            return this;
+        }
+
+        public TResult Otherwise(Func<object, TResult> func)
+        {
+            if (result == null) result = func.Invoke(value);
+            return (TResult)result;
+        }
+
+        public TResult OtherwiseThrow(Func<object, Exception> func)
+        {
+            if (result == null) throw func.Invoke(value);
+            return (TResult)result;
+        }
+    }
+
+    public struct OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>
+    {
+        readonly object value;
+        object result;
+
+        internal OneOfMatcher(object value)
+        {
+            this.value = value;
+            this.result = null;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult> When(Func<T0, TResult> func)
+        {
+            if (value is T0) result = func.Invoke((T0)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult> When(Func<T1, TResult> func)
+        {
+            if (value is T1) result = func.Invoke((T1)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult> When(Func<T2, TResult> func)
+        {
+            if (value is T2) result = func.Invoke((T2)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult> When(Func<T3, TResult> func)
+        {
+            if (value is T3) result = func.Invoke((T3)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult> When(Func<T4, TResult> func)
+        {
+            if (value is T4) result = func.Invoke((T4)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult> When(Func<T5, TResult> func)
+        {
+            if (value is T5) result = func.Invoke((T5)value);
+            return this;
+        }
+
+        public TResult Otherwise(Func<object, TResult> func)
+        {
+            if (result == null) result = func.Invoke(value);
+            return (TResult)result;
+        }
+
+        public TResult OtherwiseThrow(Func<object, Exception> func)
+        {
+            if (result == null) throw func.Invoke(value);
+            return (TResult)result;
+        }
+    }
+
+    public struct OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>
+    {
+        readonly object value;
+        object result;
+
+        internal OneOfMatcher(object value)
+        {
+            this.value = value;
+            this.result = null;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult> When(Func<T0, TResult> func)
+        {
+            if (value is T0) result = func.Invoke((T0)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult> When(Func<T1, TResult> func)
+        {
+            if (value is T1) result = func.Invoke((T1)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult> When(Func<T2, TResult> func)
+        {
+            if (value is T2) result = func.Invoke((T2)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult> When(Func<T3, TResult> func)
+        {
+            if (value is T3) result = func.Invoke((T3)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult> When(Func<T4, TResult> func)
+        {
+            if (value is T4) result = func.Invoke((T4)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult> When(Func<T5, TResult> func)
+        {
+            if (value is T5) result = func.Invoke((T5)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult> When(Func<T6, TResult> func)
+        {
+            if (value is T6) result = func.Invoke((T6)value);
+            return this;
+        }
+
+        public TResult Otherwise(Func<object, TResult> func)
+        {
+            if (result == null) result = func.Invoke(value);
+            return (TResult)result;
+        }
+
+        public TResult OtherwiseThrow(Func<object, Exception> func)
+        {
+            if (result == null) throw func.Invoke(value);
+            return (TResult)result;
+        }
+    }
+
+    public struct OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>
+    {
+        readonly object value;
+        object result;
+
+        internal OneOfMatcher(object value)
+        {
+            this.value = value;
+            this.result = null;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> When(Func<T0, TResult> func)
+        {
+            if (value is T0) result = func.Invoke((T0)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> When(Func<T1, TResult> func)
+        {
+            if (value is T1) result = func.Invoke((T1)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> When(Func<T2, TResult> func)
+        {
+            if (value is T2) result = func.Invoke((T2)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> When(Func<T3, TResult> func)
+        {
+            if (value is T3) result = func.Invoke((T3)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> When(Func<T4, TResult> func)
+        {
+            if (value is T4) result = func.Invoke((T4)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> When(Func<T5, TResult> func)
+        {
+            if (value is T5) result = func.Invoke((T5)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> When(Func<T6, TResult> func)
+        {
+            if (value is T6) result = func.Invoke((T6)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> When(Func<T7, TResult> func)
+        {
+            if (value is T7) result = func.Invoke((T7)value);
+            return this;
+        }
+
+        public TResult Otherwise(Func<object, TResult> func)
+        {
+            if (result == null) result = func.Invoke(value);
+            return (TResult)result;
+        }
+
+        public TResult OtherwiseThrow(Func<object, Exception> func)
+        {
+            if (result == null) throw func.Invoke(value);
+            return (TResult)result;
+        }
+    }
+
+    public struct OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>
+    {
+        readonly object value;
+        object result;
+
+        internal OneOfMatcher(object value)
+        {
+            this.value = value;
+            this.result = null;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult> When(Func<T0, TResult> func)
+        {
+            if (value is T0) result = func.Invoke((T0)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult> When(Func<T1, TResult> func)
+        {
+            if (value is T1) result = func.Invoke((T1)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult> When(Func<T2, TResult> func)
+        {
+            if (value is T2) result = func.Invoke((T2)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult> When(Func<T3, TResult> func)
+        {
+            if (value is T3) result = func.Invoke((T3)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult> When(Func<T4, TResult> func)
+        {
+            if (value is T4) result = func.Invoke((T4)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult> When(Func<T5, TResult> func)
+        {
+            if (value is T5) result = func.Invoke((T5)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult> When(Func<T6, TResult> func)
+        {
+            if (value is T6) result = func.Invoke((T6)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult> When(Func<T7, TResult> func)
+        {
+            if (value is T7) result = func.Invoke((T7)value);
+            return this;
+        }
+
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult> When(Func<T8, TResult> func)
+        {
+            if (value is T8) result = func.Invoke((T8)value);
+            return this;
+        }
+
+        public TResult Otherwise(Func<object, TResult> func)
+        {
+            if (result == null) result = func.Invoke(value);
+            return (TResult)result;
+        }
+
+        public TResult OtherwiseThrow(Func<object, Exception> func)
+        {
+            if (result == null) throw func.Invoke(value);
+            return (TResult)result;
         }
     }
 }
