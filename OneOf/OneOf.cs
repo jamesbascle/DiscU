@@ -2347,16 +2347,25 @@ namespace OneOf
             return this;
         }
 
-        public TResult Otherwise(Func<object, TResult> func)
+        public OneOfMatcher<T0, TResult> Otherwise(Func<object, TResult> func)
         {
             if (result == null) result = func.Invoke(value);
-            return (TResult)result;
+            return this;
         }
 
-        public TResult OtherwiseThrow(Func<object, Exception> func)
+        public OneOfMatcher<T0, TResult> OtherwiseThrow(Func<object, Exception> func)
         {
             if (result == null) throw func.Invoke(value);
-            return (TResult)result;
+            return this;
+        }
+
+        public TResult Result
+        {
+            get
+            {
+                if (result == null) throw new InvalidOperationException();
+                return (TResult)result;
+            }
         }
     }
 
@@ -2383,16 +2392,25 @@ namespace OneOf
             return this;
         }
 
-        public TResult Otherwise(Func<object, TResult> func)
+        public OneOfMatcher<T0, T1, TResult> Otherwise(Func<object, TResult> func)
         {
             if (result == null) result = func.Invoke(value);
-            return (TResult)result;
+            return this;
         }
 
-        public TResult OtherwiseThrow(Func<object, Exception> func)
+        public OneOfMatcher<T0, T1, TResult> OtherwiseThrow(Func<object, Exception> func)
         {
             if (result == null) throw func.Invoke(value);
-            return (TResult)result;
+            return this;
+        }
+
+        public TResult Result
+        {
+            get
+            {
+                if (result == null) throw new InvalidOperationException();
+                return (TResult)result;
+            }
         }
     }
 
@@ -2425,16 +2443,25 @@ namespace OneOf
             return this;
         }
 
-        public TResult Otherwise(Func<object, TResult> func)
+        public OneOfMatcher<T0, T1, T2, TResult> Otherwise(Func<object, TResult> func)
         {
             if (result == null) result = func.Invoke(value);
-            return (TResult)result;
+            return this;
         }
 
-        public TResult OtherwiseThrow(Func<object, Exception> func)
+        public OneOfMatcher<T0, T1, T2, TResult> OtherwiseThrow(Func<object, Exception> func)
         {
             if (result == null) throw func.Invoke(value);
-            return (TResult)result;
+            return this;
+        }
+
+        public TResult Result
+        {
+            get
+            {
+                if (result == null) throw new InvalidOperationException();
+                return (TResult)result;
+            }
         }
     }
 
@@ -2473,16 +2500,25 @@ namespace OneOf
             return this;
         }
 
-        public TResult Otherwise(Func<object, TResult> func)
+        public OneOfMatcher<T0, T1, T2, T3, TResult> Otherwise(Func<object, TResult> func)
         {
             if (result == null) result = func.Invoke(value);
-            return (TResult)result;
+            return this;
         }
 
-        public TResult OtherwiseThrow(Func<object, Exception> func)
+        public OneOfMatcher<T0, T1, T2, T3, TResult> OtherwiseThrow(Func<object, Exception> func)
         {
             if (result == null) throw func.Invoke(value);
-            return (TResult)result;
+            return this;
+        }
+
+        public TResult Result
+        {
+            get
+            {
+                if (result == null) throw new InvalidOperationException();
+                return (TResult)result;
+            }
         }
     }
 
@@ -2527,16 +2563,25 @@ namespace OneOf
             return this;
         }
 
-        public TResult Otherwise(Func<object, TResult> func)
+        public OneOfMatcher<T0, T1, T2, T3, T4, TResult> Otherwise(Func<object, TResult> func)
         {
             if (result == null) result = func.Invoke(value);
-            return (TResult)result;
+            return this;
         }
 
-        public TResult OtherwiseThrow(Func<object, Exception> func)
+        public OneOfMatcher<T0, T1, T2, T3, T4, TResult> OtherwiseThrow(Func<object, Exception> func)
         {
             if (result == null) throw func.Invoke(value);
-            return (TResult)result;
+            return this;
+        }
+
+        public TResult Result
+        {
+            get
+            {
+                if (result == null) throw new InvalidOperationException();
+                return (TResult)result;
+            }
         }
     }
 
@@ -2587,16 +2632,25 @@ namespace OneOf
             return this;
         }
 
-        public TResult Otherwise(Func<object, TResult> func)
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult> Otherwise(Func<object, TResult> func)
         {
             if (result == null) result = func.Invoke(value);
-            return (TResult)result;
+            return this;
         }
 
-        public TResult OtherwiseThrow(Func<object, Exception> func)
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult> OtherwiseThrow(Func<object, Exception> func)
         {
             if (result == null) throw func.Invoke(value);
-            return (TResult)result;
+            return this;
+        }
+
+        public TResult Result
+        {
+            get
+            {
+                if (result == null) throw new InvalidOperationException();
+                return (TResult)result;
+            }
         }
     }
 
@@ -2653,16 +2707,25 @@ namespace OneOf
             return this;
         }
 
-        public TResult Otherwise(Func<object, TResult> func)
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult> Otherwise(Func<object, TResult> func)
         {
             if (result == null) result = func.Invoke(value);
-            return (TResult)result;
+            return this;
         }
 
-        public TResult OtherwiseThrow(Func<object, Exception> func)
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult> OtherwiseThrow(Func<object, Exception> func)
         {
             if (result == null) throw func.Invoke(value);
-            return (TResult)result;
+            return this;
+        }
+
+        public TResult Result
+        {
+            get
+            {
+                if (result == null) throw new InvalidOperationException();
+                return (TResult)result;
+            }
         }
     }
 
@@ -2725,16 +2788,25 @@ namespace OneOf
             return this;
         }
 
-        public TResult Otherwise(Func<object, TResult> func)
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> Otherwise(Func<object, TResult> func)
         {
             if (result == null) result = func.Invoke(value);
-            return (TResult)result;
+            return this;
         }
 
-        public TResult OtherwiseThrow(Func<object, Exception> func)
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> OtherwiseThrow(Func<object, Exception> func)
         {
             if (result == null) throw func.Invoke(value);
-            return (TResult)result;
+            return this;
+        }
+
+        public TResult Result
+        {
+            get
+            {
+                if (result == null) throw new InvalidOperationException();
+                return (TResult)result;
+            }
         }
     }
 
@@ -2803,16 +2875,25 @@ namespace OneOf
             return this;
         }
 
-        public TResult Otherwise(Func<object, TResult> func)
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult> Otherwise(Func<object, TResult> func)
         {
             if (result == null) result = func.Invoke(value);
-            return (TResult)result;
+            return this;
         }
 
-        public TResult OtherwiseThrow(Func<object, Exception> func)
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult> OtherwiseThrow(Func<object, Exception> func)
         {
             if (result == null) throw func.Invoke(value);
-            return (TResult)result;
+            return this;
+        }
+
+        public TResult Result
+        {
+            get
+            {
+                if (result == null) throw new InvalidOperationException();
+                return (TResult)result;
+            }
         }
     }
 }

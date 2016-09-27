@@ -283,21 +283,35 @@ void WriteMatcher(int countOfgenericParams)
 		// =============== Otherwise
 
 		WriteLine("");
-		WriteLine($"public TResult Otherwise(Func<object, TResult> func)");
+		WriteLine($"public OneOfMatcher<{genericArg}> Otherwise(Func<object, TResult> func)");
 		using(var indent2 = new Indent(this))
 		{
 			WriteLine($"if (result == null) result = func.Invoke(value);");
-			WriteLine($"return (TResult)result;");
+			WriteLine("return this;");
 		}
 
 		// =============== OtherwiseThrow
 
 		WriteLine("");
-		WriteLine($"public TResult OtherwiseThrow(Func<object, Exception> func)");
+		WriteLine($"public OneOfMatcher<{genericArg}> OtherwiseThrow(Func<object, Exception> func)");
 		using(var indent2 = new Indent(this))
 		{
 			WriteLine($"if (result == null) throw func.Invoke(value);");
-			WriteLine($"return (TResult)result;");
+			WriteLine("return this;");
+		}
+
+		// =============== Result
+
+		WriteLine("");
+		WriteLine($"public TResult Result");
+		using(var indent2 = new Indent(this))
+		{
+			WriteLine($"get");
+			using(var indent3 = new Indent(this))
+			{
+				WriteLine($"if (result == null) throw new InvalidOperationException();");
+				WriteLine($"return (TResult)result;");
+			}
 		}
 	}
 }

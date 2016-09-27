@@ -33,6 +33,7 @@ namespace OneOf.Tests
                 .When((Response.MethodNotAllowed methodNotAllowed) => true)
                 .When((Response.InvokeSuccessResponse invokeSuccessResponse) => false)
                 .OtherwiseThrow(v => new InvalidOperationException())
+                .Result
                 );
         }
     }
