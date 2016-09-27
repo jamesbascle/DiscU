@@ -37,23 +37,23 @@ public OneOf<User, InvalidName, NameTaken> CreateUser(string username)
 Matching
 --------
 
-You use the `Match` method along with `When` and `Otherwise` chained-methods to get a value out. E.g.
+You use the `Match` methods plus `Otherwise` and `OtherwiseThrow` chained-methods to get a value out.
+When all cases are handled, the last call to `Match` returns the result.  When `Otherwise/OtherwiseThrow` is used, they return the result if a match has occurred, otherwise they return a default value / throw an exception respectively.
+E.g.
 
 ```C#
-public void SetBackground(OneOf<string, ColorName, Color> backgroundColor)
-{
-   Color c = backgroundColor
-       .Match()
-       .When((string str) => CssHelper.GetColorFromString(str))
-       .When((ColorName name) => new Color(name))
-       .When((Color col) => col)
-       .Otherwise(x => /* handle other values */)
-       .OtherwiseThrow(x => /* return Exception to throw when not matched above */)
-       .Result
-   );
-   
-   _window.BackgroundColor = c;
-}
+Color c = backgroundColor
+   .Match((string str) => CssHelper.GetColorFromString(str))
+   .Match((ColorName name) => new Color(name))
+   .Match((Color col) => col)
+
+Color c2 = backgroundColor
+   .Match((Color col) => col)
+   .OtherwiseThrow(obj => new InvalidOperationException("this will be thrown when not Color"))
+
+Color c3 = backgroundColor
+   .Match((Color col) => col)
+   .Otherwise(obj => /* called to handle cases where failed previous matches, eg return default value */)
 ```
 
 Switching
