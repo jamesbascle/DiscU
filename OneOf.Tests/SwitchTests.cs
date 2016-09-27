@@ -16,8 +16,8 @@ namespace OneOf.Tests
             var x = (OneOf<string, bool>)true;
 
             x.Switch()
-                .When<string>(str => Assert.Fail())
-                .When<bool>(bln => success = (bln == true))
+                .When((string str) => Assert.Fail())
+                .When((bool bln) => success = (bln == true))
                 .Otherwise(obj => Assert.Fail());
 
             Assert.AreEqual(true, success);
@@ -30,8 +30,8 @@ namespace OneOf.Tests
             var x = (OneOf<string, bool>)"xyz";
 
             x.Switch()
-                .When<string>(str => success = (str == "xyz"))
-                .When<bool>(bln => Assert.Fail())
+                .When((string str) => success = (str == "xyz"))
+                .When((bool bln) => Assert.Fail())
                 .Otherwise(obj => Assert.Fail());
 
             Assert.AreEqual(true, success);
@@ -44,7 +44,7 @@ namespace OneOf.Tests
             var x = (OneOf<string, bool>)"xyz";
 
             x.Switch()
-                .Otherwise(v => success = true);
+                .Otherwise(v => success = v.ToString() == "xyz");
 
             Assert.AreEqual(true, success);
         }

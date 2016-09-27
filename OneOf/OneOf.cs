@@ -64,10 +64,10 @@ namespace OneOf
         // Can use fast Ctor as compiler can check types for us.
         public static implicit operator OneOf<T0>(T0 value) => new OneOf<T0>(value);
 
-        public OneOfSwitcher Switch()
+        public OneOfSwitcher<T0> Switch()
         {
             EnsureValueNotNull();
-            return new OneOfSwitcher(value);
+            return new OneOfSwitcher<T0>(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -148,10 +148,10 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1>(T0 value) => new OneOf<T0, T1>(value);
         public static implicit operator OneOf<T0, T1>(T1 value) => new OneOf<T0, T1>(value);
 
-        public OneOfSwitcher Switch()
+        public OneOfSwitcher<T0, T1> Switch()
         {
             EnsureValueNotNull();
-            return new OneOfSwitcher(value);
+            return new OneOfSwitcher<T0, T1>(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -234,10 +234,10 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2>(T1 value) => new OneOf<T0, T1, T2>(value);
         public static implicit operator OneOf<T0, T1, T2>(T2 value) => new OneOf<T0, T1, T2>(value);
 
-        public OneOfSwitcher Switch()
+        public OneOfSwitcher<T0, T1, T2> Switch()
         {
             EnsureValueNotNull();
-            return new OneOfSwitcher(value);
+            return new OneOfSwitcher<T0, T1, T2>(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -322,10 +322,10 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2, T3>(T2 value) => new OneOf<T0, T1, T2, T3>(value);
         public static implicit operator OneOf<T0, T1, T2, T3>(T3 value) => new OneOf<T0, T1, T2, T3>(value);
 
-        public OneOfSwitcher Switch()
+        public OneOfSwitcher<T0, T1, T2, T3> Switch()
         {
             EnsureValueNotNull();
-            return new OneOfSwitcher(value);
+            return new OneOfSwitcher<T0, T1, T2, T3>(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -412,10 +412,10 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2, T3, T4>(T3 value) => new OneOf<T0, T1, T2, T3, T4>(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4>(T4 value) => new OneOf<T0, T1, T2, T3, T4>(value);
 
-        public OneOfSwitcher Switch()
+        public OneOfSwitcher<T0, T1, T2, T3, T4> Switch()
         {
             EnsureValueNotNull();
-            return new OneOfSwitcher(value);
+            return new OneOfSwitcher<T0, T1, T2, T3, T4>(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -504,10 +504,10 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T4 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T5 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value);
 
-        public OneOfSwitcher Switch()
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5> Switch()
         {
             EnsureValueNotNull();
-            return new OneOfSwitcher(value);
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -598,10 +598,10 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T5 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T6 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value);
 
-        public OneOfSwitcher Switch()
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6> Switch()
         {
             EnsureValueNotNull();
-            return new OneOfSwitcher(value);
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -694,10 +694,10 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T6 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T7 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value);
 
-        public OneOfSwitcher Switch()
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7> Switch()
         {
             EnsureValueNotNull();
-            return new OneOfSwitcher(value);
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -792,10 +792,10 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T7 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T8 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
 
-        public OneOfSwitcher Switch()
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8> Switch()
         {
             EnsureValueNotNull();
-            return new OneOfSwitcher(value);
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -880,10 +880,10 @@ namespace OneOf
         // Can use fast Ctor as compiler can check types for us.
         public static implicit operator OneOfBase<T0>(T0 value) => new OneOfBase<T0>(value);
 
-        public OneOfSwitcher Switch()
+        public OneOfSwitcher<T0> Switch()
         {
             EnsureValueNotNull();
-            return new OneOfSwitcher(value);
+            return new OneOfSwitcher<T0>(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -970,10 +970,10 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1>(T0 value) => new OneOfBase<T0, T1>(value);
         public static implicit operator OneOfBase<T0, T1>(T1 value) => new OneOfBase<T0, T1>(value);
 
-        public OneOfSwitcher Switch()
+        public OneOfSwitcher<T0, T1> Switch()
         {
             EnsureValueNotNull();
-            return new OneOfSwitcher(value);
+            return new OneOfSwitcher<T0, T1>(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -1062,10 +1062,10 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2>(T1 value) => new OneOfBase<T0, T1, T2>(value);
         public static implicit operator OneOfBase<T0, T1, T2>(T2 value) => new OneOfBase<T0, T1, T2>(value);
 
-        public OneOfSwitcher Switch()
+        public OneOfSwitcher<T0, T1, T2> Switch()
         {
             EnsureValueNotNull();
-            return new OneOfSwitcher(value);
+            return new OneOfSwitcher<T0, T1, T2>(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -1156,10 +1156,10 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2, T3>(T2 value) => new OneOfBase<T0, T1, T2, T3>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3>(T3 value) => new OneOfBase<T0, T1, T2, T3>(value);
 
-        public OneOfSwitcher Switch()
+        public OneOfSwitcher<T0, T1, T2, T3> Switch()
         {
             EnsureValueNotNull();
-            return new OneOfSwitcher(value);
+            return new OneOfSwitcher<T0, T1, T2, T3>(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -1252,10 +1252,10 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T3 value) => new OneOfBase<T0, T1, T2, T3, T4>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T4 value) => new OneOfBase<T0, T1, T2, T3, T4>(value);
 
-        public OneOfSwitcher Switch()
+        public OneOfSwitcher<T0, T1, T2, T3, T4> Switch()
         {
             EnsureValueNotNull();
-            return new OneOfSwitcher(value);
+            return new OneOfSwitcher<T0, T1, T2, T3, T4>(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -1350,10 +1350,10 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T4 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T5 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value);
 
-        public OneOfSwitcher Switch()
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5> Switch()
         {
             EnsureValueNotNull();
-            return new OneOfSwitcher(value);
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -1450,10 +1450,10 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T5 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T6 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value);
 
-        public OneOfSwitcher Switch()
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6> Switch()
         {
             EnsureValueNotNull();
-            return new OneOfSwitcher(value);
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -1552,10 +1552,10 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T6 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T7 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value);
 
-        public OneOfSwitcher Switch()
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7> Switch()
         {
             EnsureValueNotNull();
-            return new OneOfSwitcher(value);
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -1656,10 +1656,10 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T7 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T8 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
 
-        public OneOfSwitcher Switch()
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8> Switch()
         {
             EnsureValueNotNull();
-            return new OneOfSwitcher(value);
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
         }
 
         public OneOfMatcher<T> Match<T>()
@@ -1681,4 +1681,625 @@ namespace OneOf
         public override string ToString() => (value?.ToString() ?? "");
     }
 
+    public struct OneOfSwitcher<T0>
+    {
+        readonly object value;
+        bool hasSwitched;
+
+        internal OneOfSwitcher(object value)
+        {
+            this.value = value;
+            this.hasSwitched = false;
+        }
+
+        public OneOfSwitcher<T0> When(Action<T0> action)
+        {
+            if (this.value is T0)
+            {
+                action.Invoke((T0)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public void Otherwise(Action<object> action)
+        {
+            if (!hasSwitched)
+            {
+                action.Invoke(value);
+            }
+        }
+    }
+    public struct OneOfSwitcher<T0, T1>
+    {
+        readonly object value;
+        bool hasSwitched;
+
+        internal OneOfSwitcher(object value)
+        {
+            this.value = value;
+            this.hasSwitched = false;
+        }
+
+        public OneOfSwitcher<T0, T1> When(Action<T0> action)
+        {
+            if (this.value is T0)
+            {
+                action.Invoke((T0)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1> When(Action<T1> action)
+        {
+            if (this.value is T1)
+            {
+                action.Invoke((T1)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public void Otherwise(Action<object> action)
+        {
+            if (!hasSwitched)
+            {
+                action.Invoke(value);
+            }
+        }
+    }
+    public struct OneOfSwitcher<T0, T1, T2>
+    {
+        readonly object value;
+        bool hasSwitched;
+
+        internal OneOfSwitcher(object value)
+        {
+            this.value = value;
+            this.hasSwitched = false;
+        }
+
+        public OneOfSwitcher<T0, T1, T2> When(Action<T0> action)
+        {
+            if (this.value is T0)
+            {
+                action.Invoke((T0)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2> When(Action<T1> action)
+        {
+            if (this.value is T1)
+            {
+                action.Invoke((T1)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2> When(Action<T2> action)
+        {
+            if (this.value is T2)
+            {
+                action.Invoke((T2)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public void Otherwise(Action<object> action)
+        {
+            if (!hasSwitched)
+            {
+                action.Invoke(value);
+            }
+        }
+    }
+    public struct OneOfSwitcher<T0, T1, T2, T3>
+    {
+        readonly object value;
+        bool hasSwitched;
+
+        internal OneOfSwitcher(object value)
+        {
+            this.value = value;
+            this.hasSwitched = false;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3> When(Action<T0> action)
+        {
+            if (this.value is T0)
+            {
+                action.Invoke((T0)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3> When(Action<T1> action)
+        {
+            if (this.value is T1)
+            {
+                action.Invoke((T1)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3> When(Action<T2> action)
+        {
+            if (this.value is T2)
+            {
+                action.Invoke((T2)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3> When(Action<T3> action)
+        {
+            if (this.value is T3)
+            {
+                action.Invoke((T3)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public void Otherwise(Action<object> action)
+        {
+            if (!hasSwitched)
+            {
+                action.Invoke(value);
+            }
+        }
+    }
+    public struct OneOfSwitcher<T0, T1, T2, T3, T4>
+    {
+        readonly object value;
+        bool hasSwitched;
+
+        internal OneOfSwitcher(object value)
+        {
+            this.value = value;
+            this.hasSwitched = false;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4> When(Action<T0> action)
+        {
+            if (this.value is T0)
+            {
+                action.Invoke((T0)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4> When(Action<T1> action)
+        {
+            if (this.value is T1)
+            {
+                action.Invoke((T1)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4> When(Action<T2> action)
+        {
+            if (this.value is T2)
+            {
+                action.Invoke((T2)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4> When(Action<T3> action)
+        {
+            if (this.value is T3)
+            {
+                action.Invoke((T3)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4> When(Action<T4> action)
+        {
+            if (this.value is T4)
+            {
+                action.Invoke((T4)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public void Otherwise(Action<object> action)
+        {
+            if (!hasSwitched)
+            {
+                action.Invoke(value);
+            }
+        }
+    }
+    public struct OneOfSwitcher<T0, T1, T2, T3, T4, T5>
+    {
+        readonly object value;
+        bool hasSwitched;
+
+        internal OneOfSwitcher(object value)
+        {
+            this.value = value;
+            this.hasSwitched = false;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5> When(Action<T0> action)
+        {
+            if (this.value is T0)
+            {
+                action.Invoke((T0)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5> When(Action<T1> action)
+        {
+            if (this.value is T1)
+            {
+                action.Invoke((T1)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5> When(Action<T2> action)
+        {
+            if (this.value is T2)
+            {
+                action.Invoke((T2)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5> When(Action<T3> action)
+        {
+            if (this.value is T3)
+            {
+                action.Invoke((T3)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5> When(Action<T4> action)
+        {
+            if (this.value is T4)
+            {
+                action.Invoke((T4)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5> When(Action<T5> action)
+        {
+            if (this.value is T5)
+            {
+                action.Invoke((T5)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public void Otherwise(Action<object> action)
+        {
+            if (!hasSwitched)
+            {
+                action.Invoke(value);
+            }
+        }
+    }
+    public struct OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>
+    {
+        readonly object value;
+        bool hasSwitched;
+
+        internal OneOfSwitcher(object value)
+        {
+            this.value = value;
+            this.hasSwitched = false;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6> When(Action<T0> action)
+        {
+            if (this.value is T0)
+            {
+                action.Invoke((T0)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6> When(Action<T1> action)
+        {
+            if (this.value is T1)
+            {
+                action.Invoke((T1)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6> When(Action<T2> action)
+        {
+            if (this.value is T2)
+            {
+                action.Invoke((T2)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6> When(Action<T3> action)
+        {
+            if (this.value is T3)
+            {
+                action.Invoke((T3)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6> When(Action<T4> action)
+        {
+            if (this.value is T4)
+            {
+                action.Invoke((T4)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6> When(Action<T5> action)
+        {
+            if (this.value is T5)
+            {
+                action.Invoke((T5)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6> When(Action<T6> action)
+        {
+            if (this.value is T6)
+            {
+                action.Invoke((T6)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public void Otherwise(Action<object> action)
+        {
+            if (!hasSwitched)
+            {
+                action.Invoke(value);
+            }
+        }
+    }
+    public struct OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>
+    {
+        readonly object value;
+        bool hasSwitched;
+
+        internal OneOfSwitcher(object value)
+        {
+            this.value = value;
+            this.hasSwitched = false;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7> When(Action<T0> action)
+        {
+            if (this.value is T0)
+            {
+                action.Invoke((T0)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7> When(Action<T1> action)
+        {
+            if (this.value is T1)
+            {
+                action.Invoke((T1)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7> When(Action<T2> action)
+        {
+            if (this.value is T2)
+            {
+                action.Invoke((T2)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7> When(Action<T3> action)
+        {
+            if (this.value is T3)
+            {
+                action.Invoke((T3)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7> When(Action<T4> action)
+        {
+            if (this.value is T4)
+            {
+                action.Invoke((T4)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7> When(Action<T5> action)
+        {
+            if (this.value is T5)
+            {
+                action.Invoke((T5)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7> When(Action<T6> action)
+        {
+            if (this.value is T6)
+            {
+                action.Invoke((T6)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7> When(Action<T7> action)
+        {
+            if (this.value is T7)
+            {
+                action.Invoke((T7)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public void Otherwise(Action<object> action)
+        {
+            if (!hasSwitched)
+            {
+                action.Invoke(value);
+            }
+        }
+    }
+    public struct OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>
+    {
+        readonly object value;
+        bool hasSwitched;
+
+        internal OneOfSwitcher(object value)
+        {
+            this.value = value;
+            this.hasSwitched = false;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8> When(Action<T0> action)
+        {
+            if (this.value is T0)
+            {
+                action.Invoke((T0)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8> When(Action<T1> action)
+        {
+            if (this.value is T1)
+            {
+                action.Invoke((T1)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8> When(Action<T2> action)
+        {
+            if (this.value is T2)
+            {
+                action.Invoke((T2)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8> When(Action<T3> action)
+        {
+            if (this.value is T3)
+            {
+                action.Invoke((T3)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8> When(Action<T4> action)
+        {
+            if (this.value is T4)
+            {
+                action.Invoke((T4)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8> When(Action<T5> action)
+        {
+            if (this.value is T5)
+            {
+                action.Invoke((T5)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8> When(Action<T6> action)
+        {
+            if (this.value is T6)
+            {
+                action.Invoke((T6)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8> When(Action<T7> action)
+        {
+            if (this.value is T7)
+            {
+                action.Invoke((T7)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8> When(Action<T8> action)
+        {
+            if (this.value is T8)
+            {
+                action.Invoke((T8)value);
+                hasSwitched = true;
+            }
+            return this;
+        }
+
+        public void Otherwise(Action<object> action)
+        {
+            if (!hasSwitched)
+            {
+                action.Invoke(value);
+            }
+        }
+    }
 }

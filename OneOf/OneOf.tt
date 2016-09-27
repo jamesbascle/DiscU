@@ -23,17 +23,21 @@ void GenerateClasses()
 	using(var indent1 = new Indent(this))
 	{
 		for (var i = 1; i < 10; i++)
-			WriteType("OneOf", true, i);
+			WriteOneOf(true, i);
 
 		for (var i = 1; i < 10; i++)
-			WriteType("OneOfBase", false, i);
+			WriteOneOf(false, i);
+
+		for (var i = 1; i < 10; i++)
+			WriteSwitcher(i);
 	}
 }
 
-void WriteType(string typeName, bool isStruct, int countOfgenericParams) 
+void WriteOneOf(bool isStruct, int countOfgenericParams) 
 {
 	var genericArg = string.Join(", ", Enumerable.Range(0, countOfgenericParams).Select(e => "T" + e));
 	var structOrClass = isStruct ? "struct" : "class";
+	var typeName = isStruct ? "OneOf" : "OneOfBase";
 
     WriteLine("[JsonConverter(typeof(OneOfJsonConverter))]");
 	WriteLine($"public {structOrClass} {typeName}<{genericArg}> : IOneOf");
@@ -141,11 +145,11 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 		// =============== Switch
 
 		WriteLine("");
-		WriteLine("public OneOfSwitcher Switch()");
+		WriteLine($"public OneOfSwitcher<{genericArg}> Switch()");
 		using(var indent2 = new Indent(this))
         {
 			WriteLine("EnsureValueNotNull();");
-            WriteLine("return new OneOfSwitcher(value);");
+            WriteLine($"return new OneOfSwitcher<{genericArg}>(value);");
         }
 
 		// =============== Match
@@ -178,6 +182,59 @@ void WriteType(string typeName, bool isStruct, int countOfgenericParams)
 	}
 
 	WriteLine("");
+}
+
+void WriteSwitcher(int countOfgenericParams) 
+{
+	var genericArg = string.Join(", ", Enumerable.Range(0, countOfgenericParams).Select(e => "T" + e));
+
+	WriteLine($"public struct OneOfSwitcher<{genericArg}>");
+	using(var indent1 = new Indent(this))
+	{
+		WriteLine("readonly object value;");
+		WriteLine("bool hasSwitched;");
+
+		// =============== Constructors
+	    
+		WriteLine("");
+		WriteLine("internal OneOfSwitcher(object value)");
+		using(var indent2 = new Indent(this))
+		{
+			WriteLine($"this.value = value;");
+			WriteLine($"this.hasSwitched = false;");
+		}
+
+		// =============== When
+
+		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex++)
+		{
+			WriteLine("");
+			WriteLine($"public OneOfSwitcher<{genericArg}> When(Action<T{parmIndex}> action)");
+			using(var indent2 = new Indent(this))
+			{
+				WriteLine($"if (this.value is T{parmIndex})");
+				using(var indent3 = new Indent(this))
+				{
+					WriteLine($"action.Invoke((T{parmIndex})value);");
+					WriteLine("hasSwitched = true;");
+				}
+				WriteLine("return this;");
+			}
+		}
+
+		// =============== Otherwise
+
+		WriteLine("");
+		WriteLine($"public void Otherwise(Action<object> action)");
+		using(var indent2 = new Indent(this))
+		{
+			WriteLine($"if (!hasSwitched)");
+			using(var indent3 = new Indent(this))
+			{
+				WriteLine($"action.Invoke(value);");
+			}
+		}
+	}
 }
 
 class Indent: IDisposable
