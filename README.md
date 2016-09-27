@@ -42,10 +42,14 @@ You use the `Match` method along with `When` and `Otherwise` chained-methods to 
 ```C#
 public void SetBackground(OneOf<string, ColorName, Color> backgroundColor)
 {
-   Color c = backgroundColor.Match()
+   Color c = backgroundColor
+       .Match()
        .When((string str) => CssHelper.GetColorFromString(str))
        .When((ColorName name) => new Color(name))
        .When((Color col) => col)
+       .Otherwise(x => /* handle other values */)
+       .OtherwiseThrow(x => /* return Exception to throw when not matched above */)
+       .Result
    );
    
    _window.BackgroundColor = c;
@@ -58,10 +62,12 @@ Switching
 You use the `Switch` method along with `When` and `Otherwise` chained-methods to execute specific actions based on the value's type. E.g.
 
 ```C#
-OneOf<string, NotFound> fileContents = ReadFile(fileName)
+OneOf<string, NotFound, ErrX, ErrY, Etc> fileContents = ReadFile(fileName)
     .Switch()
     .When((string contents) => /* success */)
-    .When((NotFound) => /* handle file not found */);
+    .When((NotFound) => /* handle file not found */)
+    .Otherwise(x => /* handle other types */)
+    .OtherwiseThrow(x => /* return Exception to throw when not matched above */);
 ```
 
 ToOneOf
