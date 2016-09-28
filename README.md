@@ -63,11 +63,10 @@ You use the `Switch` method along with `When` and `Otherwise` chained-methods to
 
 ```C#
 OneOf<string, NotFound, ErrX, ErrY, Etc> fileContents = ReadFile(fileName)
-    .Switch()
-    .When((string contents) => /* success */)
-    .When((NotFound) => /* handle file not found */)
+    .Switch((string contents) => /* handled success */)
+    .Switch((NotFound) => /* handle file not found */)
     .Otherwise(x => /* handle other types */)
-    .OtherwiseThrow(x => /* return Exception to throw when not matched above */);
+    .OtherwiseThrow(x => /* return Exception to throw when not handled above */);
 ```
 
 ToOneOf
@@ -84,6 +83,3 @@ OneOf<True,False,Unknown> trueFalseOrUnknown = trueOrFalse.ToOneOf<True,False,Un
 // this will fail at runtime as the source contains a value that isn't supported by the new OneOf
 OneOf<False> justFalse = trueOrFalse.ToOneOf<False>();
 ```
-
-
-
