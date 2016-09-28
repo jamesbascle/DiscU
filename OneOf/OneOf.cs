@@ -65,10 +65,16 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1>(T0 value) => new OneOf<T0, T1>(value);
         public static implicit operator OneOf<T0, T1>(T1 value) => new OneOf<T0, T1>(value);
 
-        public OneOfSwitcher<T0, T1> Switch()
+        public OneOfSwitcher<T1> Switch(Action<T0> action)
         {
             EnsureValueNotNull();
-            return new OneOfSwitcher<T0, T1>(value);
+            return new OneOfSwitcher<T0, T1>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0> Switch(Action<T1> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1>(value, false).Switch(action);
         }
 
         public OneOfMatcher<T1, TResult> Match<TResult>(Func<T0, TResult> func)
@@ -156,10 +162,22 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2>(T1 value) => new OneOf<T0, T1, T2>(value);
         public static implicit operator OneOf<T0, T1, T2>(T2 value) => new OneOf<T0, T1, T2>(value);
 
-        public OneOfSwitcher<T0, T1, T2> Switch()
+        public OneOfSwitcher<T1, T2> Switch(Action<T0> action)
         {
             EnsureValueNotNull();
-            return new OneOfSwitcher<T0, T1, T2>(value);
+            return new OneOfSwitcher<T0, T1, T2>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T2> Switch(Action<T1> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1> Switch(Action<T2> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2>(value, false).Switch(action);
         }
 
         public OneOfMatcher<T1, T2, TResult> Match<TResult>(Func<T0, TResult> func)
@@ -255,10 +273,28 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2, T3>(T2 value) => new OneOf<T0, T1, T2, T3>(value);
         public static implicit operator OneOf<T0, T1, T2, T3>(T3 value) => new OneOf<T0, T1, T2, T3>(value);
 
-        public OneOfSwitcher<T0, T1, T2, T3> Switch()
+        public OneOfSwitcher<T1, T2, T3> Switch(Action<T0> action)
         {
             EnsureValueNotNull();
-            return new OneOfSwitcher<T0, T1, T2, T3>(value);
+            return new OneOfSwitcher<T0, T1, T2, T3>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T2, T3> Switch(Action<T1> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T3> Switch(Action<T2> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2> Switch(Action<T3> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3>(value, false).Switch(action);
         }
 
         public OneOfMatcher<T1, T2, T3, TResult> Match<TResult>(Func<T0, TResult> func)
@@ -362,10 +398,34 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2, T3, T4>(T3 value) => new OneOf<T0, T1, T2, T3, T4>(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4>(T4 value) => new OneOf<T0, T1, T2, T3, T4>(value);
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4> Switch()
+        public OneOfSwitcher<T1, T2, T3, T4> Switch(Action<T0> action)
         {
             EnsureValueNotNull();
-            return new OneOfSwitcher<T0, T1, T2, T3, T4>(value);
+            return new OneOfSwitcher<T0, T1, T2, T3, T4>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T2, T3, T4> Switch(Action<T1> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T3, T4> Switch(Action<T2> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T4> Switch(Action<T3> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3> Switch(Action<T4> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4>(value, false).Switch(action);
         }
 
         public OneOfMatcher<T1, T2, T3, T4, TResult> Match<TResult>(Func<T0, TResult> func)
@@ -477,10 +537,40 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T4 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T5 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value);
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5> Switch()
+        public OneOfSwitcher<T1, T2, T3, T4, T5> Switch(Action<T0> action)
         {
             EnsureValueNotNull();
-            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(value);
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T2, T3, T4, T5> Switch(Action<T1> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T3, T4, T5> Switch(Action<T2> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T4, T5> Switch(Action<T3> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T5> Switch(Action<T4> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4> Switch(Action<T5> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(value, false).Switch(action);
         }
 
         public OneOfMatcher<T1, T2, T3, T4, T5, TResult> Match<TResult>(Func<T0, TResult> func)
@@ -600,10 +690,46 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T5 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T6 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value);
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6> Switch()
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6> Switch(Action<T0> action)
         {
             EnsureValueNotNull();
-            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(value);
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T2, T3, T4, T5, T6> Switch(Action<T1> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T3, T4, T5, T6> Switch(Action<T2> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T4, T5, T6> Switch(Action<T3> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T5, T6> Switch(Action<T4> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T6> Switch(Action<T5> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5> Switch(Action<T6> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(value, false).Switch(action);
         }
 
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> Match<TResult>(Func<T0, TResult> func)
@@ -731,10 +857,52 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T6 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T7 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value);
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7> Switch()
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> Switch(Action<T0> action)
         {
             EnsureValueNotNull();
-            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(value);
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T2, T3, T4, T5, T6, T7> Switch(Action<T1> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T3, T4, T5, T6, T7> Switch(Action<T2> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T4, T5, T6, T7> Switch(Action<T3> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T5, T6, T7> Switch(Action<T4> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T6, T7> Switch(Action<T5> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T7> Switch(Action<T6> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6> Switch(Action<T7> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(value, false).Switch(action);
         }
 
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> Match<TResult>(Func<T0, TResult> func)
@@ -870,10 +1038,58 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T7 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T8 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8> Switch()
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> Switch(Action<T0> action)
         {
             EnsureValueNotNull();
-            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T2, T3, T4, T5, T6, T7, T8> Switch(Action<T1> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T3, T4, T5, T6, T7, T8> Switch(Action<T2> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T4, T5, T6, T7, T8> Switch(Action<T3> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T5, T6, T7, T8> Switch(Action<T4> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T6, T7, T8> Switch(Action<T5> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T7, T8> Switch(Action<T6> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T8> Switch(Action<T7> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7> Switch(Action<T8> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, false).Switch(action);
         }
 
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T0, TResult> func)
@@ -1007,10 +1223,16 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1>(T0 value) => new OneOfBase<T0, T1>(value);
         public static implicit operator OneOfBase<T0, T1>(T1 value) => new OneOfBase<T0, T1>(value);
 
-        public OneOfSwitcher<T0, T1> Switch()
+        public OneOfSwitcher<T1> Switch(Action<T0> action)
         {
             EnsureValueNotNull();
-            return new OneOfSwitcher<T0, T1>(value);
+            return new OneOfSwitcher<T0, T1>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0> Switch(Action<T1> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1>(value, false).Switch(action);
         }
 
         public OneOfMatcher<T1, TResult> Match<TResult>(Func<T0, TResult> func)
@@ -1104,10 +1326,22 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2>(T1 value) => new OneOfBase<T0, T1, T2>(value);
         public static implicit operator OneOfBase<T0, T1, T2>(T2 value) => new OneOfBase<T0, T1, T2>(value);
 
-        public OneOfSwitcher<T0, T1, T2> Switch()
+        public OneOfSwitcher<T1, T2> Switch(Action<T0> action)
         {
             EnsureValueNotNull();
-            return new OneOfSwitcher<T0, T1, T2>(value);
+            return new OneOfSwitcher<T0, T1, T2>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T2> Switch(Action<T1> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1> Switch(Action<T2> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2>(value, false).Switch(action);
         }
 
         public OneOfMatcher<T1, T2, TResult> Match<TResult>(Func<T0, TResult> func)
@@ -1209,10 +1443,28 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2, T3>(T2 value) => new OneOfBase<T0, T1, T2, T3>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3>(T3 value) => new OneOfBase<T0, T1, T2, T3>(value);
 
-        public OneOfSwitcher<T0, T1, T2, T3> Switch()
+        public OneOfSwitcher<T1, T2, T3> Switch(Action<T0> action)
         {
             EnsureValueNotNull();
-            return new OneOfSwitcher<T0, T1, T2, T3>(value);
+            return new OneOfSwitcher<T0, T1, T2, T3>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T2, T3> Switch(Action<T1> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T3> Switch(Action<T2> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2> Switch(Action<T3> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3>(value, false).Switch(action);
         }
 
         public OneOfMatcher<T1, T2, T3, TResult> Match<TResult>(Func<T0, TResult> func)
@@ -1322,10 +1574,34 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T3 value) => new OneOfBase<T0, T1, T2, T3, T4>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T4 value) => new OneOfBase<T0, T1, T2, T3, T4>(value);
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4> Switch()
+        public OneOfSwitcher<T1, T2, T3, T4> Switch(Action<T0> action)
         {
             EnsureValueNotNull();
-            return new OneOfSwitcher<T0, T1, T2, T3, T4>(value);
+            return new OneOfSwitcher<T0, T1, T2, T3, T4>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T2, T3, T4> Switch(Action<T1> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T3, T4> Switch(Action<T2> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T4> Switch(Action<T3> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3> Switch(Action<T4> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4>(value, false).Switch(action);
         }
 
         public OneOfMatcher<T1, T2, T3, T4, TResult> Match<TResult>(Func<T0, TResult> func)
@@ -1443,10 +1719,40 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T4 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T5 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value);
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5> Switch()
+        public OneOfSwitcher<T1, T2, T3, T4, T5> Switch(Action<T0> action)
         {
             EnsureValueNotNull();
-            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(value);
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T2, T3, T4, T5> Switch(Action<T1> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T3, T4, T5> Switch(Action<T2> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T4, T5> Switch(Action<T3> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T5> Switch(Action<T4> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4> Switch(Action<T5> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(value, false).Switch(action);
         }
 
         public OneOfMatcher<T1, T2, T3, T4, T5, TResult> Match<TResult>(Func<T0, TResult> func)
@@ -1572,10 +1878,46 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T5 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T6 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value);
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6> Switch()
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6> Switch(Action<T0> action)
         {
             EnsureValueNotNull();
-            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(value);
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T2, T3, T4, T5, T6> Switch(Action<T1> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T3, T4, T5, T6> Switch(Action<T2> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T4, T5, T6> Switch(Action<T3> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T5, T6> Switch(Action<T4> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T6> Switch(Action<T5> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5> Switch(Action<T6> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(value, false).Switch(action);
         }
 
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> Match<TResult>(Func<T0, TResult> func)
@@ -1709,10 +2051,52 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T6 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T7 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value);
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7> Switch()
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> Switch(Action<T0> action)
         {
             EnsureValueNotNull();
-            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(value);
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T2, T3, T4, T5, T6, T7> Switch(Action<T1> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T3, T4, T5, T6, T7> Switch(Action<T2> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T4, T5, T6, T7> Switch(Action<T3> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T5, T6, T7> Switch(Action<T4> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T6, T7> Switch(Action<T5> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T7> Switch(Action<T6> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6> Switch(Action<T7> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(value, false).Switch(action);
         }
 
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> Match<TResult>(Func<T0, TResult> func)
@@ -1854,10 +2238,58 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T7 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T8 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8> Switch()
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> Switch(Action<T0> action)
         {
             EnsureValueNotNull();
-            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T2, T3, T4, T5, T6, T7, T8> Switch(Action<T1> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T3, T4, T5, T6, T7, T8> Switch(Action<T2> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T4, T5, T6, T7, T8> Switch(Action<T3> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T5, T6, T7, T8> Switch(Action<T4> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T6, T7, T8> Switch(Action<T5> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T7, T8> Switch(Action<T6> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T8> Switch(Action<T7> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, false).Switch(action);
+        }
+
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7> Switch(Action<T8> action)
+        {
+            EnsureValueNotNull();
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, false).Switch(action);
         }
 
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T0, TResult> func)
@@ -1928,35 +2360,62 @@ namespace OneOf
     }
 
 
+    public struct OneOfSwitcher<T0>
+    {
+        readonly object value;
+        bool hasSwitched;
+
+        internal OneOfSwitcher(object value, bool hasSwitched)
+        {
+            this.value = value;
+            this.hasSwitched = hasSwitched;
+        }
+
+        public void Switch(Action<T0> action)
+        {
+            if (this.value is T0) action.Invoke((T0)value);
+        }
+
+        public void Otherwise(Action<object> action)
+        {
+            if (!hasSwitched) action.Invoke(value);
+        }
+
+        public void OtherwiseThrow(Func<object, Exception> func)
+        {
+            if (!hasSwitched) throw func.Invoke(value);
+        }
+    }
+
     public struct OneOfSwitcher<T0, T1>
     {
         readonly object value;
         bool hasSwitched;
 
-        internal OneOfSwitcher(object value)
+        internal OneOfSwitcher(object value, bool hasSwitched)
         {
             this.value = value;
-            this.hasSwitched = false;
+            this.hasSwitched = hasSwitched;
         }
 
-        public OneOfSwitcher<T0, T1> When(Action<T0> action)
+        public OneOfSwitcher<T1> Switch(Action<T0> action)
         {
             if (this.value is T0)
             {
                 action.Invoke((T0)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T1>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1> When(Action<T1> action)
+        public OneOfSwitcher<T0> Switch(Action<T1> action)
         {
             if (this.value is T1)
             {
                 action.Invoke((T1)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0>(this.value, this.hasSwitched);
         }
 
         public void Otherwise(Action<object> action)
@@ -1975,40 +2434,40 @@ namespace OneOf
         readonly object value;
         bool hasSwitched;
 
-        internal OneOfSwitcher(object value)
+        internal OneOfSwitcher(object value, bool hasSwitched)
         {
             this.value = value;
-            this.hasSwitched = false;
+            this.hasSwitched = hasSwitched;
         }
 
-        public OneOfSwitcher<T0, T1, T2> When(Action<T0> action)
+        public OneOfSwitcher<T1, T2> Switch(Action<T0> action)
         {
             if (this.value is T0)
             {
                 action.Invoke((T0)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T1, T2>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2> When(Action<T1> action)
+        public OneOfSwitcher<T0, T2> Switch(Action<T1> action)
         {
             if (this.value is T1)
             {
                 action.Invoke((T1)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T2>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2> When(Action<T2> action)
+        public OneOfSwitcher<T0, T1> Switch(Action<T2> action)
         {
             if (this.value is T2)
             {
                 action.Invoke((T2)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T1>(this.value, this.hasSwitched);
         }
 
         public void Otherwise(Action<object> action)
@@ -2027,50 +2486,50 @@ namespace OneOf
         readonly object value;
         bool hasSwitched;
 
-        internal OneOfSwitcher(object value)
+        internal OneOfSwitcher(object value, bool hasSwitched)
         {
             this.value = value;
-            this.hasSwitched = false;
+            this.hasSwitched = hasSwitched;
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3> When(Action<T0> action)
+        public OneOfSwitcher<T1, T2, T3> Switch(Action<T0> action)
         {
             if (this.value is T0)
             {
                 action.Invoke((T0)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T1, T2, T3>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3> When(Action<T1> action)
+        public OneOfSwitcher<T0, T2, T3> Switch(Action<T1> action)
         {
             if (this.value is T1)
             {
                 action.Invoke((T1)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T2, T3>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3> When(Action<T2> action)
+        public OneOfSwitcher<T0, T1, T3> Switch(Action<T2> action)
         {
             if (this.value is T2)
             {
                 action.Invoke((T2)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T1, T3>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3> When(Action<T3> action)
+        public OneOfSwitcher<T0, T1, T2> Switch(Action<T3> action)
         {
             if (this.value is T3)
             {
                 action.Invoke((T3)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T1, T2>(this.value, this.hasSwitched);
         }
 
         public void Otherwise(Action<object> action)
@@ -2089,60 +2548,60 @@ namespace OneOf
         readonly object value;
         bool hasSwitched;
 
-        internal OneOfSwitcher(object value)
+        internal OneOfSwitcher(object value, bool hasSwitched)
         {
             this.value = value;
-            this.hasSwitched = false;
+            this.hasSwitched = hasSwitched;
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4> When(Action<T0> action)
+        public OneOfSwitcher<T1, T2, T3, T4> Switch(Action<T0> action)
         {
             if (this.value is T0)
             {
                 action.Invoke((T0)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T1, T2, T3, T4>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4> When(Action<T1> action)
+        public OneOfSwitcher<T0, T2, T3, T4> Switch(Action<T1> action)
         {
             if (this.value is T1)
             {
                 action.Invoke((T1)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T2, T3, T4>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4> When(Action<T2> action)
+        public OneOfSwitcher<T0, T1, T3, T4> Switch(Action<T2> action)
         {
             if (this.value is T2)
             {
                 action.Invoke((T2)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T1, T3, T4>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4> When(Action<T3> action)
+        public OneOfSwitcher<T0, T1, T2, T4> Switch(Action<T3> action)
         {
             if (this.value is T3)
             {
                 action.Invoke((T3)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T1, T2, T4>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4> When(Action<T4> action)
+        public OneOfSwitcher<T0, T1, T2, T3> Switch(Action<T4> action)
         {
             if (this.value is T4)
             {
                 action.Invoke((T4)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T1, T2, T3>(this.value, this.hasSwitched);
         }
 
         public void Otherwise(Action<object> action)
@@ -2161,70 +2620,70 @@ namespace OneOf
         readonly object value;
         bool hasSwitched;
 
-        internal OneOfSwitcher(object value)
+        internal OneOfSwitcher(object value, bool hasSwitched)
         {
             this.value = value;
-            this.hasSwitched = false;
+            this.hasSwitched = hasSwitched;
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5> When(Action<T0> action)
+        public OneOfSwitcher<T1, T2, T3, T4, T5> Switch(Action<T0> action)
         {
             if (this.value is T0)
             {
                 action.Invoke((T0)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T1, T2, T3, T4, T5>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5> When(Action<T1> action)
+        public OneOfSwitcher<T0, T2, T3, T4, T5> Switch(Action<T1> action)
         {
             if (this.value is T1)
             {
                 action.Invoke((T1)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T2, T3, T4, T5>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5> When(Action<T2> action)
+        public OneOfSwitcher<T0, T1, T3, T4, T5> Switch(Action<T2> action)
         {
             if (this.value is T2)
             {
                 action.Invoke((T2)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T1, T3, T4, T5>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5> When(Action<T3> action)
+        public OneOfSwitcher<T0, T1, T2, T4, T5> Switch(Action<T3> action)
         {
             if (this.value is T3)
             {
                 action.Invoke((T3)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T1, T2, T4, T5>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5> When(Action<T4> action)
+        public OneOfSwitcher<T0, T1, T2, T3, T5> Switch(Action<T4> action)
         {
             if (this.value is T4)
             {
                 action.Invoke((T4)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T1, T2, T3, T5>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5> When(Action<T5> action)
+        public OneOfSwitcher<T0, T1, T2, T3, T4> Switch(Action<T5> action)
         {
             if (this.value is T5)
             {
                 action.Invoke((T5)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T1, T2, T3, T4>(this.value, this.hasSwitched);
         }
 
         public void Otherwise(Action<object> action)
@@ -2243,80 +2702,80 @@ namespace OneOf
         readonly object value;
         bool hasSwitched;
 
-        internal OneOfSwitcher(object value)
+        internal OneOfSwitcher(object value, bool hasSwitched)
         {
             this.value = value;
-            this.hasSwitched = false;
+            this.hasSwitched = hasSwitched;
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6> When(Action<T0> action)
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6> Switch(Action<T0> action)
         {
             if (this.value is T0)
             {
                 action.Invoke((T0)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6> When(Action<T1> action)
+        public OneOfSwitcher<T0, T2, T3, T4, T5, T6> Switch(Action<T1> action)
         {
             if (this.value is T1)
             {
                 action.Invoke((T1)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T2, T3, T4, T5, T6>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6> When(Action<T2> action)
+        public OneOfSwitcher<T0, T1, T3, T4, T5, T6> Switch(Action<T2> action)
         {
             if (this.value is T2)
             {
                 action.Invoke((T2)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T1, T3, T4, T5, T6>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6> When(Action<T3> action)
+        public OneOfSwitcher<T0, T1, T2, T4, T5, T6> Switch(Action<T3> action)
         {
             if (this.value is T3)
             {
                 action.Invoke((T3)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T1, T2, T4, T5, T6>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6> When(Action<T4> action)
+        public OneOfSwitcher<T0, T1, T2, T3, T5, T6> Switch(Action<T4> action)
         {
             if (this.value is T4)
             {
                 action.Invoke((T4)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T1, T2, T3, T5, T6>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6> When(Action<T5> action)
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T6> Switch(Action<T5> action)
         {
             if (this.value is T5)
             {
                 action.Invoke((T5)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T6>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6> When(Action<T6> action)
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5> Switch(Action<T6> action)
         {
             if (this.value is T6)
             {
                 action.Invoke((T6)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(this.value, this.hasSwitched);
         }
 
         public void Otherwise(Action<object> action)
@@ -2335,90 +2794,90 @@ namespace OneOf
         readonly object value;
         bool hasSwitched;
 
-        internal OneOfSwitcher(object value)
+        internal OneOfSwitcher(object value, bool hasSwitched)
         {
             this.value = value;
-            this.hasSwitched = false;
+            this.hasSwitched = hasSwitched;
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7> When(Action<T0> action)
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> Switch(Action<T0> action)
         {
             if (this.value is T0)
             {
                 action.Invoke((T0)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7> When(Action<T1> action)
+        public OneOfSwitcher<T0, T2, T3, T4, T5, T6, T7> Switch(Action<T1> action)
         {
             if (this.value is T1)
             {
                 action.Invoke((T1)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T2, T3, T4, T5, T6, T7>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7> When(Action<T2> action)
+        public OneOfSwitcher<T0, T1, T3, T4, T5, T6, T7> Switch(Action<T2> action)
         {
             if (this.value is T2)
             {
                 action.Invoke((T2)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T1, T3, T4, T5, T6, T7>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7> When(Action<T3> action)
+        public OneOfSwitcher<T0, T1, T2, T4, T5, T6, T7> Switch(Action<T3> action)
         {
             if (this.value is T3)
             {
                 action.Invoke((T3)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T1, T2, T4, T5, T6, T7>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7> When(Action<T4> action)
+        public OneOfSwitcher<T0, T1, T2, T3, T5, T6, T7> Switch(Action<T4> action)
         {
             if (this.value is T4)
             {
                 action.Invoke((T4)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T1, T2, T3, T5, T6, T7>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7> When(Action<T5> action)
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T6, T7> Switch(Action<T5> action)
         {
             if (this.value is T5)
             {
                 action.Invoke((T5)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T6, T7>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7> When(Action<T6> action)
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T7> Switch(Action<T6> action)
         {
             if (this.value is T6)
             {
                 action.Invoke((T6)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T7>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7> When(Action<T7> action)
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6> Switch(Action<T7> action)
         {
             if (this.value is T7)
             {
                 action.Invoke((T7)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(this.value, this.hasSwitched);
         }
 
         public void Otherwise(Action<object> action)
@@ -2437,100 +2896,100 @@ namespace OneOf
         readonly object value;
         bool hasSwitched;
 
-        internal OneOfSwitcher(object value)
+        internal OneOfSwitcher(object value, bool hasSwitched)
         {
             this.value = value;
-            this.hasSwitched = false;
+            this.hasSwitched = hasSwitched;
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8> When(Action<T0> action)
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> Switch(Action<T0> action)
         {
             if (this.value is T0)
             {
                 action.Invoke((T0)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8> When(Action<T1> action)
+        public OneOfSwitcher<T0, T2, T3, T4, T5, T6, T7, T8> Switch(Action<T1> action)
         {
             if (this.value is T1)
             {
                 action.Invoke((T1)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T2, T3, T4, T5, T6, T7, T8>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8> When(Action<T2> action)
+        public OneOfSwitcher<T0, T1, T3, T4, T5, T6, T7, T8> Switch(Action<T2> action)
         {
             if (this.value is T2)
             {
                 action.Invoke((T2)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T1, T3, T4, T5, T6, T7, T8>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8> When(Action<T3> action)
+        public OneOfSwitcher<T0, T1, T2, T4, T5, T6, T7, T8> Switch(Action<T3> action)
         {
             if (this.value is T3)
             {
                 action.Invoke((T3)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T1, T2, T4, T5, T6, T7, T8>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8> When(Action<T4> action)
+        public OneOfSwitcher<T0, T1, T2, T3, T5, T6, T7, T8> Switch(Action<T4> action)
         {
             if (this.value is T4)
             {
                 action.Invoke((T4)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T1, T2, T3, T5, T6, T7, T8>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8> When(Action<T5> action)
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T6, T7, T8> Switch(Action<T5> action)
         {
             if (this.value is T5)
             {
                 action.Invoke((T5)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T6, T7, T8>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8> When(Action<T6> action)
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T7, T8> Switch(Action<T6> action)
         {
             if (this.value is T6)
             {
                 action.Invoke((T6)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T7, T8>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8> When(Action<T7> action)
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T8> Switch(Action<T7> action)
         {
             if (this.value is T7)
             {
                 action.Invoke((T7)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T8>(this.value, this.hasSwitched);
         }
 
-        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8> When(Action<T8> action)
+        public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7> Switch(Action<T8> action)
         {
             if (this.value is T8)
             {
                 action.Invoke((T8)value);
                 hasSwitched = true;
             }
-            return this;
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(this.value, this.hasSwitched);
         }
 
         public void Otherwise(Action<object> action)

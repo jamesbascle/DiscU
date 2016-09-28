@@ -28,7 +28,7 @@ void GenerateClasses()
 		for (var i = 2; i < 10; i++)
 			WriteOneOf(false, i);
 
-		for (var i = 2; i < 10; i++)
+		for (var i = 1; i < 10; i++)
 			WriteSwitcher(i);
 
 		for (var i = 1; i < 10; i++)
@@ -150,13 +150,29 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 
 		// =============== Switch
 
-		WriteLine("");
-		WriteLine($"public OneOfSwitcher<{genericArg}> Switch()");
-		using(new WriteIndent(this))
-        {
-			WriteLine("EnsureValueNotNull();");
-            WriteLine($"return new OneOfSwitcher<{genericArg}>(value);");
-        }
+//		WriteLine("");
+//		WriteLine($"public OneOfSwitcher<{genericArg}> Switch()");
+//		using(new WriteIndent(this))
+//      {
+//			WriteLine("EnsureValueNotNull();");
+//          WriteLine($"return new OneOfSwitcher<{genericArg}>(value, false);");
+//      }
+
+		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
+		{
+			var lesserArityOneOf = Enumerable.Range(0, countOfgenericParams)
+				.Where(n => n != parmIndex)
+				.ToList();
+			var lesserArityGenericArg = GenerateGenericArgs(lesserArityOneOf);
+
+			WriteLine("");
+			WriteLine($"public OneOfSwitcher<{lesserArityGenericArg}> Switch(Action<T{parmIndex}> action)");
+			using(new WriteIndent(this))
+			{
+				WriteLine("EnsureValueNotNull();");
+				WriteLine($"return new OneOfSwitcher<{genericArg}>(value, false).Switch(action);");
+			}
+		}
 
 		// =============== Match
 
@@ -212,28 +228,44 @@ void WriteSwitcher(int countOfgenericParams)
 		// =============== Constructors
 	    
 		WriteLine("");
-		WriteLine("internal OneOfSwitcher(object value)");
+		WriteLine("internal OneOfSwitcher(object value, bool hasSwitched)");
 		using(new WriteIndent(this))
 		{
 			WriteLine($"this.value = value;");
-			WriteLine($"this.hasSwitched = false;");
+			WriteLine($"this.hasSwitched = hasSwitched;");
 		}
 
-		// =============== When
+		// =============== Switch
 
 		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex++)
 		{
-			WriteLine("");
-			WriteLine($"public OneOfSwitcher<{genericArg}> When(Action<T{parmIndex}> action)");
-			using(new WriteIndent(this))
+			var lesserArityOneOf = Enumerable.Range(0, countOfgenericParams).ToList();
+			if(lesserArityOneOf.Count > 1)
 			{
-				WriteLine($"if (this.value is T{parmIndex})");
+				lesserArityOneOf.Remove(parmIndex);
+				var lesserArityGenericArg = GenerateGenericArgs(lesserArityOneOf);
+
+				WriteLine("");
+				WriteLine($"public OneOfSwitcher<{lesserArityGenericArg}> Switch(Action<T{parmIndex}> action)");
 				using(new WriteIndent(this))
 				{
-					WriteLine($"action.Invoke((T{parmIndex})value);");
-					WriteLine("hasSwitched = true;");
+					WriteLine($"if (this.value is T{parmIndex})");
+					using(new WriteIndent(this))
+					{
+						WriteLine($"action.Invoke((T{parmIndex})value);");
+						WriteLine("hasSwitched = true;");
+					}
+					WriteLine($"return new OneOfSwitcher<{lesserArityGenericArg}>(this.value, this.hasSwitched);");
 				}
-				WriteLine("return this;");
+			}
+			else
+			{
+				WriteLine("");
+				WriteLine($"public void Switch(Action<T{parmIndex}> action)");
+				using(new WriteIndent(this))
+				{
+					WriteLine($"if (this.value is T{parmIndex}) action.Invoke((T{parmIndex})value);");
+				}
 			}
 		}
 
