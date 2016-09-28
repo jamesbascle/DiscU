@@ -52,12 +52,12 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 		WriteLine("readonly object value;");
 
 		// =============== Constructors
+		// must only be called after value has been validated to be Tn
 	    
 		WriteLine("");
 		WriteLine($"{typeName}(object value)");
 		using(new WriteIndent(this))
 		{
-			WriteLine("// assumes will only be called after being validated in some way");
 			WriteLine($"this.value = value;");
 		}
 
@@ -67,7 +67,6 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 			WriteLine($"protected {typeName}()");
 			using(new WriteIndent(this))
 			{
-				WriteLine("// assumes will only be called after being validated in some way");
 				WriteLine("this.value = this;");
 			}
 		}
@@ -78,25 +77,12 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 		WriteLine($"internal static {typeName}<{genericArg}> Create(object value)");
 		using(new WriteIndent(this))
 		{
-			WriteLine($"if (value == null) throw new ArgumentNullException(\"value\");");
-			WriteLine("");
-
 			for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
 			{
 				WriteLine($"if (value is T{parmIndex}) return new {typeName}<{genericArg}>((T{parmIndex})value);");
 			}
 
-			WriteLine("");
-	    	WriteLine($"throw new ArgumentException(\"value\");");
-		}
-
-		// =============== EnsureValueNotNull
-
-		WriteLine("");
-		WriteLine($"void EnsureValueNotNull()");
-		using(new WriteIndent(this))
-		{
-			WriteLine($"if (value == null) throw new InvalidOperationException(\"Value has not been set\");");
+			WriteLine($"throw (value == null) ? new ArgumentNullException(\"value\") : new ArgumentException(\"value\");");
 		}
 
 		// =============== IOneOf implementation
@@ -107,14 +93,7 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 		// =============== Is
 
 		WriteLine("");
-		WriteLine($"public bool Is<T>()");
-		using(new WriteIndent(this))
-		{
-			WriteLine("EnsureValueNotNull();");
-			WriteLine($"if (this.value is T) return true;");
-			WriteLine("");
-			WriteLine("return false;");
-		}
+		WriteLine($"public bool Is<T>() => (this.value is T);");
 
 		// =============== As
 
@@ -122,27 +101,26 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 		WriteLine($"public T As<T>()");
 		using(new WriteIndent(this))
 		{
-			WriteLine("EnsureValueNotNull();");
 			WriteLine($"if (this.value is T) return (T)this.value;");
 			WriteLine("");
 			WriteLine("throw new InvalidOperationException();");
 		}
 
 		// =============== ToOneOf
+		// Use slower Create method which does type checks at runtime as compiler couldn't check them for us.
 
 		WriteLine("");
-		WriteLine("// Use slower Create method which does full type checks at runtime as compiler couldn't do them for us.");
-		for(var newIndex = 1; newIndex < 9; newIndex ++)
+		for(var newIndex = 2; newIndex < 10; newIndex ++)
 		{
-			var otherGenericArgs = string.Join(", ", Enumerable.Range(0, newIndex+1).Select(e => "N" + e));
+			var otherGenericArgs = string.Join(", ", Enumerable.Range(0, newIndex).Select(e => "N" + e));
 
 			WriteLine($"public {typeName}<{otherGenericArgs}> ToOneOf<{otherGenericArgs}>() => {typeName}<{otherGenericArgs}>.Create(value);");
 		}
 
 		// =============== implicit conversion to T
+		// Use fast Ctor as compiler can check types for us.
 
 		WriteLine("");
-		WriteLine("// Can use fast Ctor as compiler can check types for us.");
 		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
 		{
 			WriteLine($"public static implicit operator {typeName}<{genericArg}>(T{parmIndex} value) => new {typeName}<{genericArg}>(value);"); 
@@ -150,68 +128,33 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 
 		// =============== Switch
 
-//		WriteLine("");
-//		WriteLine($"public OneOfSwitcher<{genericArg}> Switch()");
-//		using(new WriteIndent(this))
-//      {
-//			WriteLine("EnsureValueNotNull();");
-//          WriteLine($"return new OneOfSwitcher<{genericArg}>(value, false);");
-//      }
-
+		WriteLine("");
 		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
 		{
-			var lesserArityOneOf = Enumerable.Range(0, countOfgenericParams)
-				.Where(n => n != parmIndex)
-				.ToList();
+			var lesserArityOneOf = Enumerable.Range(0, countOfgenericParams).Where(n => n != parmIndex).ToList();
 			var lesserArityGenericArg = GenerateGenericArgs(lesserArityOneOf);
 
-			WriteLine("");
-			WriteLine($"public OneOfSwitcher<{lesserArityGenericArg}> Switch(Action<T{parmIndex}> action)");
-			using(new WriteIndent(this))
-			{
-				WriteLine("EnsureValueNotNull();");
-				WriteLine($"return new OneOfSwitcher<{genericArg}>(value, false).Switch(action);");
-			}
+			WriteLine($"public OneOfSwitcher<{lesserArityGenericArg}> Switch(Action<T{parmIndex}> action) => new OneOfSwitcher<{genericArg}>(value, false).Switch(action);");
 		}
 
 		// =============== Match
 
+		WriteLine("");
 		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
 		{
-			var lesserArityOneOf = Enumerable.Range(0, countOfgenericParams)
-				.Where(n => n != parmIndex)
-				.ToList();
+			var lesserArityOneOf = Enumerable.Range(0, countOfgenericParams).Where(n => n != parmIndex).ToList();
 			var lesserArityGenericArg = GenerateGenericArgs(lesserArityOneOf);
 
-			WriteLine("");
-			WriteLine($"public OneOfMatcher<{lesserArityGenericArg}, TResult> Match<TResult>(Func<T{parmIndex}, TResult> func)");
-			using(new WriteIndent(this))
-			{
-				WriteLine("EnsureValueNotNull();");
-				WriteLine($"return new OneOfMatcher<{genericArg}, TResult>(value, null).Match(func);");
-			}
+			WriteLine($"public OneOfMatcher<{lesserArityGenericArg}, TResult> Match<TResult>(Func<T{parmIndex}, TResult> func)  => new OneOfMatcher<{genericArg}, TResult>(value, null).Match(func);");
 		}
 
 		// =============== object overrides
 
 		WriteLine("");
-		WriteLine("public override bool Equals(object obj)");
-		using(new WriteIndent(this))
-		{
-            WriteLine($"if (!(obj is {typeName}<{genericArg}>)) return false;");
-			WriteLine("");
-            WriteLine($"var other = ({typeName}<{genericArg}>)obj;");
-            WriteLine("return Equals(value, other.value);");
-		}
-
-		WriteLine("");
+		WriteLine($"public override bool Equals(object obj) => obj is {typeName}<{genericArg}> && Equals(value, (({typeName}<{genericArg}>)obj).value);");
 		WriteLine("public override int GetHashCode() => (value?.GetHashCode() ?? 0);");
-
-		WriteLine("");
 		WriteLine("public override string ToString() => (value?.ToString() ?? \"\");");
 	}
-
-	WriteLine("");
 }
 
 void WriteSwitcher(int countOfgenericParams) 
