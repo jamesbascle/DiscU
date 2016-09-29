@@ -40,13 +40,15 @@ Matching
 `Match` is used for translating the value depending on it's type.  Each Match must translate the value to the same type.
 When all cases are handled, the last call to `Match` returns the result.    
 ```C#
+OneOf<string, ColorName, Color> backgroundColor = ...;
+
 Color c = backgroundColor
    .Match((string str) => CssHelper.GetColorFromString(str))
    .Match((ColorName name) => new Color(name))
    .Match((Color col) => col)
 ```
-```C#
 `Otherwise` can be used when you don't want to match for every type, returning a default value for remaining types.
+```C#
 Color c2 = backgroundColor
    .Match((Color col) => col)
    .Otherwise(obj => /* return default value */)
