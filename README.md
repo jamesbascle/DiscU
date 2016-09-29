@@ -37,36 +37,42 @@ public OneOf<User, InvalidName, NameTaken> CreateUser(string username)
 Matching
 --------
 
-You use the `Match` methods plus `Otherwise` and `OtherwiseThrow` chained-methods to get a value out.
-When all cases are handled, the last call to `Match` returns the result.  When `Otherwise/OtherwiseThrow` is used, they return the result if a match has occurred, otherwise they return a default value / throw an exception respectively.
-E.g.
-
+`Match` is used for translating the value depending on it's type.  Each Match must translate the value to the same type.
+When all cases are handled, the last call to `Match` returns the result.    
 ```C#
 Color c = backgroundColor
    .Match((string str) => CssHelper.GetColorFromString(str))
    .Match((ColorName name) => new Color(name))
    .Match((Color col) => col)
-
+```
+```C#
+`Otherwise` can be used when you don't want to match for every type, returning a default value for remaining types.
 Color c2 = backgroundColor
    .Match((Color col) => col)
-   .OtherwiseThrow(obj => new InvalidOperationException("this will be thrown when not Color"))
-
+   .Otherwise(obj => /* return default value */)
+```
+`OtherwiseThrow` can be used to create an exception to throw when the value doesn't match any specified types.
+```C#
 Color c3 = backgroundColor
    .Match((Color col) => col)
-   .Otherwise(obj => /* called to handle cases where failed previous matches, eg return default value */)
+   .OtherwiseThrow(obj => new InvalidOperationException("this will be thrown when not Color"))
 ```
 
 Switching
 ---------
 
-You use the `Switch` method along with `When` and `Otherwise` chained-methods to execute specific actions based on the value's type. E.g.
+You use the `Switch` methods along with `Otherwise` and `OtherwiseThrow` chained-methods to execute specific actions based on the value's type. E.g.
 
 ```C#
 OneOf<string, NotFound, ErrX, ErrY, Etc> fileContents = ReadFile(fileName)
     .Switch((string contents) => /* handled success */)
-    .Switch((NotFound) => /* handle file not found */)
-    .Otherwise(x => /* handle other types */)
-    .OtherwiseThrow(x => /* return Exception to throw when not handled above */);
+    .Switch((NotFound notFound) => /* handle file not found */)
+    .Otherwise(object x => /* handle other types */)
+    
+OneOf<string, NotFound, ErrX, ErrY, Etc> fileContents = ReadFile(fileName)
+    .Switch((string contents) => /* handled success */)
+    .Switch((NotFound notFound) => /* handle file not found */)
+    .OtherwiseThrow(x => /* return Exception to throw when not handled above by any Switch's */);
 ```
 
 ToOneOf
