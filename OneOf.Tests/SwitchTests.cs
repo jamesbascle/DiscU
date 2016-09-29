@@ -34,13 +34,13 @@ namespace OneOf.Tests
         }
 
         [Test]
-        public void SwitchCallsOtherActionWhenNoMatch()
+        public void SwitchCallsDefaultActionWhenNoMatch()
         {
             var success = false;
             var x = (OneOf<string, bool>)"xyz";
 
             x.Switch((bool bln) => Assert.Fail())
-                .Otherwise(v => success = v.ToString() == "xyz");
+                .Default(v => success = v.ToString() == "xyz");
 
             Assert.AreEqual(true, success);
         }

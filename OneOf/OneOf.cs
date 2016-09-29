@@ -1088,12 +1088,12 @@ namespace OneOf
             if (this.value is T0) action.Invoke((T0)value);
         }
 
-        public void Otherwise(Action<object> action)
+        public void Default(Action<object> action)
         {
             if (!hasSwitched) action.Invoke(value);
         }
 
-        public void OtherwiseThrow(Func<object, Exception> func)
+        public void OrThrow(Func<object, Exception> func)
         {
             if (!hasSwitched) throw func.Invoke(value);
         }
@@ -1130,12 +1130,12 @@ namespace OneOf
             return new OneOfSwitcher<T0>(this.value, this.hasSwitched);
         }
 
-        public void Otherwise(Action<object> action)
+        public void Default(Action<object> action)
         {
             if (!hasSwitched) action.Invoke(value);
         }
 
-        public void OtherwiseThrow(Func<object, Exception> func)
+        public void OrThrow(Func<object, Exception> func)
         {
             if (!hasSwitched) throw func.Invoke(value);
         }
@@ -1182,12 +1182,12 @@ namespace OneOf
             return new OneOfSwitcher<T0, T1>(this.value, this.hasSwitched);
         }
 
-        public void Otherwise(Action<object> action)
+        public void Default(Action<object> action)
         {
             if (!hasSwitched) action.Invoke(value);
         }
 
-        public void OtherwiseThrow(Func<object, Exception> func)
+        public void OrThrow(Func<object, Exception> func)
         {
             if (!hasSwitched) throw func.Invoke(value);
         }
@@ -1244,12 +1244,12 @@ namespace OneOf
             return new OneOfSwitcher<T0, T1, T2>(this.value, this.hasSwitched);
         }
 
-        public void Otherwise(Action<object> action)
+        public void Default(Action<object> action)
         {
             if (!hasSwitched) action.Invoke(value);
         }
 
-        public void OtherwiseThrow(Func<object, Exception> func)
+        public void OrThrow(Func<object, Exception> func)
         {
             if (!hasSwitched) throw func.Invoke(value);
         }
@@ -1316,12 +1316,12 @@ namespace OneOf
             return new OneOfSwitcher<T0, T1, T2, T3>(this.value, this.hasSwitched);
         }
 
-        public void Otherwise(Action<object> action)
+        public void Default(Action<object> action)
         {
             if (!hasSwitched) action.Invoke(value);
         }
 
-        public void OtherwiseThrow(Func<object, Exception> func)
+        public void OrThrow(Func<object, Exception> func)
         {
             if (!hasSwitched) throw func.Invoke(value);
         }
@@ -1398,12 +1398,12 @@ namespace OneOf
             return new OneOfSwitcher<T0, T1, T2, T3, T4>(this.value, this.hasSwitched);
         }
 
-        public void Otherwise(Action<object> action)
+        public void Default(Action<object> action)
         {
             if (!hasSwitched) action.Invoke(value);
         }
 
-        public void OtherwiseThrow(Func<object, Exception> func)
+        public void OrThrow(Func<object, Exception> func)
         {
             if (!hasSwitched) throw func.Invoke(value);
         }
@@ -1490,12 +1490,12 @@ namespace OneOf
             return new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(this.value, this.hasSwitched);
         }
 
-        public void Otherwise(Action<object> action)
+        public void Default(Action<object> action)
         {
             if (!hasSwitched) action.Invoke(value);
         }
 
-        public void OtherwiseThrow(Func<object, Exception> func)
+        public void OrThrow(Func<object, Exception> func)
         {
             if (!hasSwitched) throw func.Invoke(value);
         }
@@ -1592,12 +1592,12 @@ namespace OneOf
             return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(this.value, this.hasSwitched);
         }
 
-        public void Otherwise(Action<object> action)
+        public void Default(Action<object> action)
         {
             if (!hasSwitched) action.Invoke(value);
         }
 
-        public void OtherwiseThrow(Func<object, Exception> func)
+        public void OrThrow(Func<object, Exception> func)
         {
             if (!hasSwitched) throw func.Invoke(value);
         }
@@ -1704,12 +1704,12 @@ namespace OneOf
             return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(this.value, this.hasSwitched);
         }
 
-        public void Otherwise(Action<object> action)
+        public void Default(Action<object> action)
         {
             if (!hasSwitched) action.Invoke(value);
         }
 
-        public void OtherwiseThrow(Func<object, Exception> func)
+        public void OrThrow(Func<object, Exception> func)
         {
             if (!hasSwitched) throw func.Invoke(value);
         }
@@ -1731,13 +1731,13 @@ namespace OneOf
             return (TResult)result;
         }
 
-        public TResult Otherwise(Func<object, TResult> func)
+        public TResult Default(Func<object, TResult> func)
         {
             if (result == null) result = func.Invoke(value);
             return (TResult)result;
         }
 
-        public TResult OtherwiseThrow(Func<object, Exception> func)
+        public TResult OrThrow(Func<object, Exception> func)
         {
             if (result == null) throw func.Invoke(value);
             return (TResult)result;
@@ -1767,13 +1767,13 @@ namespace OneOf
             return new OneOfMatcher<T0, TResult>(this.value, this.result);
         }
 
-        public TResult Otherwise(Func<object, TResult> func)
+        public TResult Default(Func<object, TResult> func)
         {
             if (result == null) result = func.Invoke(value);
             return (TResult)result;
         }
 
-        public TResult OtherwiseThrow(Func<object, Exception> func)
+        public TResult OrThrow(Func<object, Exception> func)
         {
             if (result == null) throw func.Invoke(value);
             return (TResult)result;
@@ -1809,13 +1809,13 @@ namespace OneOf
             return new OneOfMatcher<T0, T1, TResult>(this.value, this.result);
         }
 
-        public TResult Otherwise(Func<object, TResult> func)
+        public TResult Default(Func<object, TResult> func)
         {
             if (result == null) result = func.Invoke(value);
             return (TResult)result;
         }
 
-        public TResult OtherwiseThrow(Func<object, Exception> func)
+        public TResult OrThrow(Func<object, Exception> func)
         {
             if (result == null) throw func.Invoke(value);
             return (TResult)result;
@@ -1857,13 +1857,13 @@ namespace OneOf
             return new OneOfMatcher<T0, T1, T2, TResult>(this.value, this.result);
         }
 
-        public TResult Otherwise(Func<object, TResult> func)
+        public TResult Default(Func<object, TResult> func)
         {
             if (result == null) result = func.Invoke(value);
             return (TResult)result;
         }
 
-        public TResult OtherwiseThrow(Func<object, Exception> func)
+        public TResult OrThrow(Func<object, Exception> func)
         {
             if (result == null) throw func.Invoke(value);
             return (TResult)result;
@@ -1911,13 +1911,13 @@ namespace OneOf
             return new OneOfMatcher<T0, T1, T2, T3, TResult>(this.value, this.result);
         }
 
-        public TResult Otherwise(Func<object, TResult> func)
+        public TResult Default(Func<object, TResult> func)
         {
             if (result == null) result = func.Invoke(value);
             return (TResult)result;
         }
 
-        public TResult OtherwiseThrow(Func<object, Exception> func)
+        public TResult OrThrow(Func<object, Exception> func)
         {
             if (result == null) throw func.Invoke(value);
             return (TResult)result;
@@ -1971,13 +1971,13 @@ namespace OneOf
             return new OneOfMatcher<T0, T1, T2, T3, T4, TResult>(this.value, this.result);
         }
 
-        public TResult Otherwise(Func<object, TResult> func)
+        public TResult Default(Func<object, TResult> func)
         {
             if (result == null) result = func.Invoke(value);
             return (TResult)result;
         }
 
-        public TResult OtherwiseThrow(Func<object, Exception> func)
+        public TResult OrThrow(Func<object, Exception> func)
         {
             if (result == null) throw func.Invoke(value);
             return (TResult)result;
@@ -2037,13 +2037,13 @@ namespace OneOf
             return new OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>(this.value, this.result);
         }
 
-        public TResult Otherwise(Func<object, TResult> func)
+        public TResult Default(Func<object, TResult> func)
         {
             if (result == null) result = func.Invoke(value);
             return (TResult)result;
         }
 
-        public TResult OtherwiseThrow(Func<object, Exception> func)
+        public TResult OrThrow(Func<object, Exception> func)
         {
             if (result == null) throw func.Invoke(value);
             return (TResult)result;
@@ -2109,13 +2109,13 @@ namespace OneOf
             return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(this.value, this.result);
         }
 
-        public TResult Otherwise(Func<object, TResult> func)
+        public TResult Default(Func<object, TResult> func)
         {
             if (result == null) result = func.Invoke(value);
             return (TResult)result;
         }
 
-        public TResult OtherwiseThrow(Func<object, Exception> func)
+        public TResult OrThrow(Func<object, Exception> func)
         {
             if (result == null) throw func.Invoke(value);
             return (TResult)result;
@@ -2187,13 +2187,13 @@ namespace OneOf
             return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(this.value, this.result);
         }
 
-        public TResult Otherwise(Func<object, TResult> func)
+        public TResult Default(Func<object, TResult> func)
         {
             if (result == null) result = func.Invoke(value);
             return (TResult)result;
         }
 
-        public TResult OtherwiseThrow(Func<object, Exception> func)
+        public TResult OrThrow(Func<object, Exception> func)
         {
             if (result == null) throw func.Invoke(value);
             return (TResult)result;
