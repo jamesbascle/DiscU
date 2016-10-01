@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EqualityTests.cs" />
     <Compile Include="MatcherTests.cs" />
     <Compile Include="AsTests.cs" />
     <Compile Include="SwitchTests.cs" />

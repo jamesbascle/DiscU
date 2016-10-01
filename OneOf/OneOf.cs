@@ -47,6 +47,9 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1>(T0 value) => new OneOf<T0, T1>(value);
         public static implicit operator OneOf<T0, T1>(T1 value) => new OneOf<T0, T1>(value);
 
+        public static bool operator ==(OneOf<T0, T1> v1, OneOf<T0, T1> v2) => v1.Equals(v2);
+        public static bool operator !=(OneOf<T0, T1> v1, OneOf<T0, T1> v2) => !v1.Equals(v2);
+
         public OneOfSwitcher<T1> Switch(Action<T0> action) => new OneOfSwitcher<T0, T1>(value, false).Switch(action);
         public OneOfSwitcher<T0> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1>(value, false).Switch(action);
 
@@ -98,6 +101,9 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2>(T0 value) => new OneOf<T0, T1, T2>(value);
         public static implicit operator OneOf<T0, T1, T2>(T1 value) => new OneOf<T0, T1, T2>(value);
         public static implicit operator OneOf<T0, T1, T2>(T2 value) => new OneOf<T0, T1, T2>(value);
+
+        public static bool operator ==(OneOf<T0, T1, T2> v1, OneOf<T0, T1, T2> v2) => v1.Equals(v2);
+        public static bool operator !=(OneOf<T0, T1, T2> v1, OneOf<T0, T1, T2> v2) => !v1.Equals(v2);
 
         public OneOfSwitcher<T1, T2> Switch(Action<T0> action) => new OneOfSwitcher<T0, T1, T2>(value, false).Switch(action);
         public OneOfSwitcher<T0, T2> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1, T2>(value, false).Switch(action);
@@ -154,6 +160,9 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2, T3>(T1 value) => new OneOf<T0, T1, T2, T3>(value);
         public static implicit operator OneOf<T0, T1, T2, T3>(T2 value) => new OneOf<T0, T1, T2, T3>(value);
         public static implicit operator OneOf<T0, T1, T2, T3>(T3 value) => new OneOf<T0, T1, T2, T3>(value);
+
+        public static bool operator ==(OneOf<T0, T1, T2, T3> v1, OneOf<T0, T1, T2, T3> v2) => v1.Equals(v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3> v1, OneOf<T0, T1, T2, T3> v2) => !v1.Equals(v2);
 
         public OneOfSwitcher<T1, T2, T3> Switch(Action<T0> action) => new OneOfSwitcher<T0, T1, T2, T3>(value, false).Switch(action);
         public OneOfSwitcher<T0, T2, T3> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1, T2, T3>(value, false).Switch(action);
@@ -214,6 +223,9 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2, T3, T4>(T2 value) => new OneOf<T0, T1, T2, T3, T4>(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4>(T3 value) => new OneOf<T0, T1, T2, T3, T4>(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4>(T4 value) => new OneOf<T0, T1, T2, T3, T4>(value);
+
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4> v1, OneOf<T0, T1, T2, T3, T4> v2) => v1.Equals(v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4> v1, OneOf<T0, T1, T2, T3, T4> v2) => !v1.Equals(v2);
 
         public OneOfSwitcher<T1, T2, T3, T4> Switch(Action<T0> action) => new OneOfSwitcher<T0, T1, T2, T3, T4>(value, false).Switch(action);
         public OneOfSwitcher<T0, T2, T3, T4> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1, T2, T3, T4>(value, false).Switch(action);
@@ -278,6 +290,9 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T3 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T4 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T5 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value);
+
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5> v1, OneOf<T0, T1, T2, T3, T4, T5> v2) => v1.Equals(v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5> v1, OneOf<T0, T1, T2, T3, T4, T5> v2) => !v1.Equals(v2);
 
         public OneOfSwitcher<T1, T2, T3, T4, T5> Switch(Action<T0> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(value, false).Switch(action);
         public OneOfSwitcher<T0, T2, T3, T4, T5> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(value, false).Switch(action);
@@ -346,6 +361,9 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T4 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T5 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T6 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value);
+
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, OneOf<T0, T1, T2, T3, T4, T5, T6> v2) => v1.Equals(v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, OneOf<T0, T1, T2, T3, T4, T5, T6> v2) => !v1.Equals(v2);
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6> Switch(Action<T0> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(value, false).Switch(action);
         public OneOfSwitcher<T0, T2, T3, T4, T5, T6> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(value, false).Switch(action);
@@ -418,6 +436,9 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T5 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T6 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T7 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value);
+
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v2) => v1.Equals(v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v2) => !v1.Equals(v2);
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> Switch(Action<T0> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(value, false).Switch(action);
         public OneOfSwitcher<T0, T2, T3, T4, T5, T6, T7> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(value, false).Switch(action);
@@ -495,6 +516,9 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T7 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T8 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
 
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => v1.Equals(v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !v1.Equals(v2);
+
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> Switch(Action<T0> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, false).Switch(action);
         public OneOfSwitcher<T0, T2, T3, T4, T5, T6, T7, T8> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, false).Switch(action);
         public OneOfSwitcher<T0, T1, T3, T4, T5, T6, T7, T8> Switch(Action<T2> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, false).Switch(action);
@@ -564,6 +588,9 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1>(T0 value) => new OneOfBase<T0, T1>(value);
         public static implicit operator OneOfBase<T0, T1>(T1 value) => new OneOfBase<T0, T1>(value);
 
+        public static bool operator ==(OneOfBase<T0, T1> v1, OneOfBase<T0, T1> v2) => v1.Equals(v2);
+        public static bool operator !=(OneOfBase<T0, T1> v1, OneOfBase<T0, T1> v2) => !v1.Equals(v2);
+
         public OneOfSwitcher<T1> Switch(Action<T0> action) => new OneOfSwitcher<T0, T1>(value, false).Switch(action);
         public OneOfSwitcher<T0> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1>(value, false).Switch(action);
 
@@ -620,6 +647,9 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2>(T0 value) => new OneOfBase<T0, T1, T2>(value);
         public static implicit operator OneOfBase<T0, T1, T2>(T1 value) => new OneOfBase<T0, T1, T2>(value);
         public static implicit operator OneOfBase<T0, T1, T2>(T2 value) => new OneOfBase<T0, T1, T2>(value);
+
+        public static bool operator ==(OneOfBase<T0, T1, T2> v1, OneOfBase<T0, T1, T2> v2) => v1.Equals(v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2> v1, OneOfBase<T0, T1, T2> v2) => !v1.Equals(v2);
 
         public OneOfSwitcher<T1, T2> Switch(Action<T0> action) => new OneOfSwitcher<T0, T1, T2>(value, false).Switch(action);
         public OneOfSwitcher<T0, T2> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1, T2>(value, false).Switch(action);
@@ -681,6 +711,9 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2, T3>(T1 value) => new OneOfBase<T0, T1, T2, T3>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3>(T2 value) => new OneOfBase<T0, T1, T2, T3>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3>(T3 value) => new OneOfBase<T0, T1, T2, T3>(value);
+
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3> v1, OneOfBase<T0, T1, T2, T3> v2) => v1.Equals(v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3> v1, OneOfBase<T0, T1, T2, T3> v2) => !v1.Equals(v2);
 
         public OneOfSwitcher<T1, T2, T3> Switch(Action<T0> action) => new OneOfSwitcher<T0, T1, T2, T3>(value, false).Switch(action);
         public OneOfSwitcher<T0, T2, T3> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1, T2, T3>(value, false).Switch(action);
@@ -746,6 +779,9 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T2 value) => new OneOfBase<T0, T1, T2, T3, T4>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T3 value) => new OneOfBase<T0, T1, T2, T3, T4>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T4 value) => new OneOfBase<T0, T1, T2, T3, T4>(value);
+
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4> v1, OneOfBase<T0, T1, T2, T3, T4> v2) => v1.Equals(v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4> v1, OneOfBase<T0, T1, T2, T3, T4> v2) => !v1.Equals(v2);
 
         public OneOfSwitcher<T1, T2, T3, T4> Switch(Action<T0> action) => new OneOfSwitcher<T0, T1, T2, T3, T4>(value, false).Switch(action);
         public OneOfSwitcher<T0, T2, T3, T4> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1, T2, T3, T4>(value, false).Switch(action);
@@ -815,6 +851,9 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T3 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T4 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T5 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value);
+
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5> v1, OneOfBase<T0, T1, T2, T3, T4, T5> v2) => v1.Equals(v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5> v1, OneOfBase<T0, T1, T2, T3, T4, T5> v2) => !v1.Equals(v2);
 
         public OneOfSwitcher<T1, T2, T3, T4, T5> Switch(Action<T0> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(value, false).Switch(action);
         public OneOfSwitcher<T0, T2, T3, T4, T5> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(value, false).Switch(action);
@@ -888,6 +927,9 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T4 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T5 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T6 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value);
+
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6> v2) => v1.Equals(v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6> v2) => !v1.Equals(v2);
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6> Switch(Action<T0> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(value, false).Switch(action);
         public OneOfSwitcher<T0, T2, T3, T4, T5, T6> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(value, false).Switch(action);
@@ -965,6 +1007,9 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T5 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T6 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T7 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value);
+
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v2) => v1.Equals(v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v2) => !v1.Equals(v2);
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> Switch(Action<T0> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(value, false).Switch(action);
         public OneOfSwitcher<T0, T2, T3, T4, T5, T6, T7> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(value, false).Switch(action);
@@ -1046,6 +1091,9 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T6 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T7 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T8 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value);
+
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => v1.Equals(v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !v1.Equals(v2);
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> Switch(Action<T0> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, false).Switch(action);
         public OneOfSwitcher<T0, T2, T3, T4, T5, T6, T7, T8> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, false).Switch(action);

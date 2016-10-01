@@ -126,6 +126,12 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 			WriteLine($"public static implicit operator {typeName}<{genericArg}>(T{parmIndex} value) => new {typeName}<{genericArg}>(value);"); 
 		}
 
+		// =============== equality operators
+
+		WriteLine("");
+		WriteLine($"public static bool operator ==({typeName}<{genericArg}> v1, {typeName}<{genericArg}> v2) => v1.Equals(v2);"); 
+		WriteLine($"public static bool operator !=({typeName}<{genericArg}> v1, {typeName}<{genericArg}> v2) => !v1.Equals(v2);"); 
+
 		// =============== Switch
 
 		WriteLine("");
