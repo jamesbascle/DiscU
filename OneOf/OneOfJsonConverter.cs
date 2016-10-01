@@ -9,21 +9,55 @@ namespace OneOf
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            if (value is IOneOf)
+            var oneOfValue = ((IOneOf)value).Value;
+
+            var packedValue = new PackedOneOfValue
             {
-                value = ((IOneOf) value).Value;
-            }
-            serializer.Serialize(writer, value);
+                Type = oneOfValue.GetType().AssemblyQualifiedName,
+                Value = oneOfValue,
+            };
+
+            serializer.Serialize(writer, packedValue);
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            throw new NotImplementedException();
+            // recreate the OneOf's underlying value
+
+            var packedValue = serializer.Deserialize<PackedOneOfValue>(reader);
+            var oneOfValueType = Type.GetType(packedValue.Type);
+            var oneOfValue = packedValue.Value;
+
+            if (oneOfValue is Newtonsoft.Json.Linq.JObject)
+            {
+                oneOfValue = RecreateComplexType(
+                    oneOfValueType, 
+                    (Newtonsoft.Json.Linq.JObject)oneOfValue);
+            }
+
+            // create the OneOf with that value
+
+            var createMethod = existingValue.GetType().GetTypeInfo().GetDeclaredMethod("Create");
+            var oneOf = createMethod.Invoke(null, new[] { oneOfValue });
+
+            return oneOf;
+        }
+
+        object RecreateComplexType(Type type, Newtonsoft.Json.Linq.JObject jObject)
+        {
+            var value = jObject.ToObject(type);
+            return value;
         }
 
         public override bool CanConvert(Type objectType)
         {
             return objectType.GetTypeInfo().ImplementedInterfaces.Contains(typeof(IOneOf));
+        }
+
+        class PackedOneOfValue
+        {
+            public string Type { get; set; }
+            public object Value { get; set; }
         }
     }
 }
