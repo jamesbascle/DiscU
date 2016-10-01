@@ -10,39 +10,50 @@ namespace OneOf.Tests
     public class SwitchTests
     {
         [Test]
-        public void SwitchCallsBoolActionWhenBool()
+        public void SwitchBool()
         {
             var success = false;
-            var x = (OneOf<string, bool>)true;
+            var oneOf = (OneOf<string, bool>)true;
 
-            x.Switch((string str) => Assert.Fail())
-                .Switch((bool bln) => success = (bln == true));
+            oneOf.Switch((string str) => Assert.Fail())
+                 .Switch((bool bln) => success = (bln == true));
 
             Assert.AreEqual(true, success);
         }
 
         [Test]
-        public void SwitchCallsStringActionWhenString()
+        public void SwitchString()
         {
             var success = false;
-            var x = (OneOf<string, bool>)"xyz";
+            var oneOf = (OneOf<string, bool>)"xyz";
 
-            x.Switch((string str) => success = (str == "xyz"))
-                .Switch((bool bln) => Assert.Fail());
+            oneOf.Switch((string str) => success = (str == "xyz"))
+                 .Switch((bool bln) => Assert.Fail());
 
             Assert.AreEqual(true, success);
         }
 
         [Test]
-        public void SwitchCallsDefaultActionWhenNoMatch()
+        public void NoSwitchCallsDefault()
         {
             var success = false;
-            var x = (OneOf<string, bool>)"xyz";
+            var oneOf = (OneOf<string, bool>)"xyz";
 
-            x.Switch((bool bln) => Assert.Fail())
-                .Default(v => success = v.ToString() == "xyz");
+            oneOf.Switch((bool bln) => Assert.Fail())
+                 .Default(v => success = v.ToString() == "xyz");
 
             Assert.AreEqual(true, success);
+        }
+
+        [Test]
+        public void NoSwitchThrowsException()
+        {
+            var oneOf = (OneOf<string, bool>)"xyz";
+
+            Assert.Throws<InvalidOperationException>(() =>
+                oneOf.Switch((bool bln) => Assert.Fail())
+                     .OrThrow(obj => new InvalidOperationException())
+                );
         }
     }
 

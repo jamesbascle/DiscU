@@ -6,7 +6,7 @@ namespace OneOf.Tests
     public class MatcherTests
     {
         [Test]
-        public void MatchCallsBoolFuncWhenBool()
+        public void MatchBool()
         {
             var oneOf = (OneOf<string, bool>)true;
 
@@ -18,7 +18,7 @@ namespace OneOf.Tests
         }
 
         [Test]
-        public void MatchCallsStringFuncWhenString()
+        public void MatchString()
         {
             var oneOf = (OneOf<string, bool>)"xyz";
 
@@ -30,7 +30,7 @@ namespace OneOf.Tests
         }
 
         [Test]
-        public void MatchCallsDefaultFuncWhenNoMatch()
+        public void NoMatchReturnsDefault()
         {
             var oneOf = (OneOf<string, bool>)"xyz";
 
@@ -42,7 +42,7 @@ namespace OneOf.Tests
         }
 
         [Test]
-        public void MatchCallsOrThrowWhenNoMatch()
+        public void NoMatchThrowsException()
         {
             var oneOf = (OneOf<string, bool>)"xyz";
 
