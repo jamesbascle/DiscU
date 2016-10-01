@@ -82,7 +82,7 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 				WriteLine($"if (value is T{parmIndex}) return new {typeName}<{genericArg}>((T{parmIndex})value);");
 			}
 
-			WriteLine($"throw (value == null) ? new ArgumentNullException(\"value\") : new ArgumentException(\"value\");");
+			WriteLine($"throw (value == null) ? new ArgumentNullException(nameof(value)) : new ArgumentException(nameof(value));");
 		}
 
 		// =============== IOneOf implementation

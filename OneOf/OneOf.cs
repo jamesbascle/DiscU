@@ -21,7 +21,7 @@ namespace OneOf
         {
             if (value is T0) return new OneOf<T0, T1>((T0)value);
             if (value is T1) return new OneOf<T0, T1>((T1)value);
-            throw (value == null) ? new ArgumentNullException("value") : new ArgumentException("value");
+            throw (value == null) ? new ArgumentNullException(nameof(value)) : new ArgumentException(nameof(value));
         }
 
         object IOneOf.Value => value;
@@ -72,7 +72,7 @@ namespace OneOf
             if (value is T0) return new OneOf<T0, T1, T2>((T0)value);
             if (value is T1) return new OneOf<T0, T1, T2>((T1)value);
             if (value is T2) return new OneOf<T0, T1, T2>((T2)value);
-            throw (value == null) ? new ArgumentNullException("value") : new ArgumentException("value");
+            throw (value == null) ? new ArgumentNullException(nameof(value)) : new ArgumentException(nameof(value));
         }
 
         object IOneOf.Value => value;
@@ -127,7 +127,7 @@ namespace OneOf
             if (value is T1) return new OneOf<T0, T1, T2, T3>((T1)value);
             if (value is T2) return new OneOf<T0, T1, T2, T3>((T2)value);
             if (value is T3) return new OneOf<T0, T1, T2, T3>((T3)value);
-            throw (value == null) ? new ArgumentNullException("value") : new ArgumentException("value");
+            throw (value == null) ? new ArgumentNullException(nameof(value)) : new ArgumentException(nameof(value));
         }
 
         object IOneOf.Value => value;
@@ -186,7 +186,7 @@ namespace OneOf
             if (value is T2) return new OneOf<T0, T1, T2, T3, T4>((T2)value);
             if (value is T3) return new OneOf<T0, T1, T2, T3, T4>((T3)value);
             if (value is T4) return new OneOf<T0, T1, T2, T3, T4>((T4)value);
-            throw (value == null) ? new ArgumentNullException("value") : new ArgumentException("value");
+            throw (value == null) ? new ArgumentNullException(nameof(value)) : new ArgumentException(nameof(value));
         }
 
         object IOneOf.Value => value;
@@ -249,7 +249,7 @@ namespace OneOf
             if (value is T3) return new OneOf<T0, T1, T2, T3, T4, T5>((T3)value);
             if (value is T4) return new OneOf<T0, T1, T2, T3, T4, T5>((T4)value);
             if (value is T5) return new OneOf<T0, T1, T2, T3, T4, T5>((T5)value);
-            throw (value == null) ? new ArgumentNullException("value") : new ArgumentException("value");
+            throw (value == null) ? new ArgumentNullException(nameof(value)) : new ArgumentException(nameof(value));
         }
 
         object IOneOf.Value => value;
@@ -316,7 +316,7 @@ namespace OneOf
             if (value is T4) return new OneOf<T0, T1, T2, T3, T4, T5, T6>((T4)value);
             if (value is T5) return new OneOf<T0, T1, T2, T3, T4, T5, T6>((T5)value);
             if (value is T6) return new OneOf<T0, T1, T2, T3, T4, T5, T6>((T6)value);
-            throw (value == null) ? new ArgumentNullException("value") : new ArgumentException("value");
+            throw (value == null) ? new ArgumentNullException(nameof(value)) : new ArgumentException(nameof(value));
         }
 
         object IOneOf.Value => value;
@@ -387,7 +387,7 @@ namespace OneOf
             if (value is T5) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T5)value);
             if (value is T6) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T6)value);
             if (value is T7) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T7)value);
-            throw (value == null) ? new ArgumentNullException("value") : new ArgumentException("value");
+            throw (value == null) ? new ArgumentNullException(nameof(value)) : new ArgumentException(nameof(value));
         }
 
         object IOneOf.Value => value;
@@ -462,7 +462,7 @@ namespace OneOf
             if (value is T6) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T6)value);
             if (value is T7) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T7)value);
             if (value is T8) return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T8)value);
-            throw (value == null) ? new ArgumentNullException("value") : new ArgumentException("value");
+            throw (value == null) ? new ArgumentNullException(nameof(value)) : new ArgumentException(nameof(value));
         }
 
         object IOneOf.Value => value;
@@ -538,7 +538,7 @@ namespace OneOf
         {
             if (value is T0) return new OneOfBase<T0, T1>((T0)value);
             if (value is T1) return new OneOfBase<T0, T1>((T1)value);
-            throw (value == null) ? new ArgumentNullException("value") : new ArgumentException("value");
+            throw (value == null) ? new ArgumentNullException(nameof(value)) : new ArgumentException(nameof(value));
         }
 
         object IOneOf.Value => value;
@@ -594,7 +594,7 @@ namespace OneOf
             if (value is T0) return new OneOfBase<T0, T1, T2>((T0)value);
             if (value is T1) return new OneOfBase<T0, T1, T2>((T1)value);
             if (value is T2) return new OneOfBase<T0, T1, T2>((T2)value);
-            throw (value == null) ? new ArgumentNullException("value") : new ArgumentException("value");
+            throw (value == null) ? new ArgumentNullException(nameof(value)) : new ArgumentException(nameof(value));
         }
 
         object IOneOf.Value => value;
@@ -654,7 +654,7 @@ namespace OneOf
             if (value is T1) return new OneOfBase<T0, T1, T2, T3>((T1)value);
             if (value is T2) return new OneOfBase<T0, T1, T2, T3>((T2)value);
             if (value is T3) return new OneOfBase<T0, T1, T2, T3>((T3)value);
-            throw (value == null) ? new ArgumentNullException("value") : new ArgumentException("value");
+            throw (value == null) ? new ArgumentNullException(nameof(value)) : new ArgumentException(nameof(value));
         }
 
         object IOneOf.Value => value;
@@ -718,7 +718,7 @@ namespace OneOf
             if (value is T2) return new OneOfBase<T0, T1, T2, T3, T4>((T2)value);
             if (value is T3) return new OneOfBase<T0, T1, T2, T3, T4>((T3)value);
             if (value is T4) return new OneOfBase<T0, T1, T2, T3, T4>((T4)value);
-            throw (value == null) ? new ArgumentNullException("value") : new ArgumentException("value");
+            throw (value == null) ? new ArgumentNullException(nameof(value)) : new ArgumentException(nameof(value));
         }
 
         object IOneOf.Value => value;
@@ -786,7 +786,7 @@ namespace OneOf
             if (value is T3) return new OneOfBase<T0, T1, T2, T3, T4, T5>((T3)value);
             if (value is T4) return new OneOfBase<T0, T1, T2, T3, T4, T5>((T4)value);
             if (value is T5) return new OneOfBase<T0, T1, T2, T3, T4, T5>((T5)value);
-            throw (value == null) ? new ArgumentNullException("value") : new ArgumentException("value");
+            throw (value == null) ? new ArgumentNullException(nameof(value)) : new ArgumentException(nameof(value));
         }
 
         object IOneOf.Value => value;
@@ -858,7 +858,7 @@ namespace OneOf
             if (value is T4) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6>((T4)value);
             if (value is T5) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6>((T5)value);
             if (value is T6) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6>((T6)value);
-            throw (value == null) ? new ArgumentNullException("value") : new ArgumentException("value");
+            throw (value == null) ? new ArgumentNullException(nameof(value)) : new ArgumentException(nameof(value));
         }
 
         object IOneOf.Value => value;
@@ -934,7 +934,7 @@ namespace OneOf
             if (value is T5) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T5)value);
             if (value is T6) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T6)value);
             if (value is T7) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T7)value);
-            throw (value == null) ? new ArgumentNullException("value") : new ArgumentException("value");
+            throw (value == null) ? new ArgumentNullException(nameof(value)) : new ArgumentException(nameof(value));
         }
 
         object IOneOf.Value => value;
@@ -1014,7 +1014,7 @@ namespace OneOf
             if (value is T6) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T6)value);
             if (value is T7) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T7)value);
             if (value is T8) return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T8)value);
-            throw (value == null) ? new ArgumentNullException("value") : new ArgumentException("value");
+            throw (value == null) ? new ArgumentNullException(nameof(value)) : new ArgumentException(nameof(value));
         }
 
         object IOneOf.Value => value;
