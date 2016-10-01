@@ -17,13 +17,13 @@ namespace OneOf.Tests
         {
             var oneOf = new SomeThing() { Value = "A string value" };
             var json = JsonConvert.SerializeObject(oneOf);
-            Assert.AreEqual("{\"Value\":{\"Type\":\"System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089\",\"Value\":\"A string value\"}}", json);
+            Assert.AreEqual("{\"Value\":{\"Value\":\"A string value\",\"Type\":\"String\"}}", json);
         }
 
         [Test]
         public void CanDeserializeString()
         {
-            var json = "{\"Value\":{\"Type\":\"System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089\",\"Value\":\"A string value\"}}";
+            var json = "{\"Value\":{\"Value\":\"A string value\",\"Type\":\"String\"}}";
             var oneOf = JsonConvert.DeserializeObject<SomeThing>(json);
             Assert.AreEqual("A string value", oneOf.Value.As<string>());
         }
@@ -33,13 +33,13 @@ namespace OneOf.Tests
         {
             var oneOf = new SomeThing() { Value = new SomeOtherThing { Value = 123 } };
             var json = JsonConvert.SerializeObject(oneOf);
-            Assert.AreEqual("{\"Value\":{\"Type\":\"OneOf.Tests.SomeOtherThing, OneOf.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\"Value\":{\"Value\":123}}}", json);
+            Assert.AreEqual("{\"Value\":{\"Value\":{\"Value\":123},\"Type\":\"SomeOtherThing\"}}", json);
         }
 
         [Test]
         public void CanDeserializeSomeOtherThing()
         {
-            var json = "{\"Value\":{\"Type\":\"OneOf.Tests.SomeOtherThing, OneOf.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\"Value\":{\"Value\":123}}}";
+            var json = "{\"Value\":{\"Value\":{\"Value\":123},\"Type\":\"SomeOtherThing\"}}";
             var oneOf = JsonConvert.DeserializeObject<SomeThing>(json);
             Assert.AreEqual(123, oneOf.Value.As<SomeOtherThing>().Value);
         }

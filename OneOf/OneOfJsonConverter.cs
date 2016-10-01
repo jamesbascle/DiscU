@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
@@ -9,12 +10,13 @@ namespace OneOf
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            var oneOfValue = ((IOneOf)value).Value;
+            var oneOf = (IOneOf)value;
+            var oneOfValue = oneOf.Value;
 
             var packedValue = new PackedOneOfValue
             {
-                Type = oneOfValue.GetType().AssemblyQualifiedName,
                 Value = oneOfValue,
+                Type = oneOfValue.GetType().Name,
             };
 
             serializer.Serialize(writer, packedValue);
@@ -25,28 +27,32 @@ namespace OneOf
             // recreate the OneOf's underlying value
 
             var packedValue = serializer.Deserialize<PackedOneOfValue>(reader);
-            var oneOfValueType = Type.GetType(packedValue.Type);
+
+            var oneOfType = objectType;
             var oneOfValue = packedValue.Value;
+            var oneOfValueType = oneOfType.GenericTypeArguments
+                .FirstOrDefault(t => t.Name == packedValue.Type);
+
+            if (oneOfValueType == null)
+            {
+                var genericArgs = string.Join(",", oneOfType.GenericTypeArguments.Select(t => t.Name));
+                throw new InvalidOperationException($"Value of type {packedValue.Type} is not compatible with OneOf<{genericArgs}>");
+            }
 
             if (oneOfValue is Newtonsoft.Json.Linq.JObject)
             {
-                oneOfValue = RecreateComplexType(
-                    oneOfValueType, 
-                    (Newtonsoft.Json.Linq.JObject)oneOfValue);
+                // The packed value must be something more complex than String, Int32 etc,
+                // so the deserializer needs us to help convert it.
+                var jObject = (Newtonsoft.Json.Linq.JObject)oneOfValue;
+                oneOfValue = jObject.ToObject(oneOfValueType);
             }
 
             // create the OneOf with that value
 
-            var createMethod = existingValue.GetType().GetTypeInfo().GetDeclaredMethod("Create");
+            var createMethod = oneOfType.GetTypeInfo().GetDeclaredMethod("Create");
             var oneOf = createMethod.Invoke(null, new[] { oneOfValue });
 
             return oneOf;
-        }
-
-        object RecreateComplexType(Type type, Newtonsoft.Json.Linq.JObject jObject)
-        {
-            var value = jObject.ToObject(type);
-            return value;
         }
 
         public override bool CanConvert(Type objectType)
@@ -56,8 +62,8 @@ namespace OneOf
 
         class PackedOneOfValue
         {
-            public string Type { get; set; }
-            public object Value { get; set; }
+            public object Value;
+            public string Type;
         }
     }
 }
