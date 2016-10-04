@@ -40,7 +40,7 @@ namespace OneOf.Tests
             var oneOf = (OneOf<string, bool>)"xyz";
 
             oneOf.Switch((bool bln) => Assert.Fail())
-                 .Default(v => success = v.ToString() == "xyz");
+                 .Else(v => success = v.ToString() == "xyz");
 
             Assert.AreEqual(true, success);
         }
@@ -52,7 +52,7 @@ namespace OneOf.Tests
 
             Assert.Throws<InvalidOperationException>(() =>
                 oneOf.Switch((bool bln) => Assert.Fail())
-                     .OrThrow(obj => new InvalidOperationException())
+                     .ElseThrow(obj => new InvalidOperationException())
                 );
         }
     }

@@ -218,19 +218,19 @@ void WriteSwitcher(int countOfgenericParams)
 			}
 		}
 
-		// =============== Default
+		// =============== Else
 
 		WriteLine("");
-		WriteLine($"public void Default(Action<object> action)");
+		WriteLine($"public void Else(Action<object> action)");
 		using(new WriteIndent(this))
 		{
 			WriteLine($"if (!hasSwitched) action.Invoke(value);");
 		}
 
-		// =============== OrThrow
+		// =============== ElseThrow
 
 		WriteLine("");
-		WriteLine($"public void OrThrow(Func<object, Exception> func)");
+		WriteLine($"public void ElseThrow(Func<object, Exception> func)");
 		using(new WriteIndent(this))
 		{
 			WriteLine($"if (!hasSwitched) throw func.Invoke(value);");
@@ -288,20 +288,20 @@ void WriteMatcher(int countOfgenericParams)
             }
 		}
 
-		// =============== Default
+		// =============== Else
 
 		WriteLine("");
-		WriteLine($"public TResult Default(Func<object, TResult> func)");
+		WriteLine($"public TResult Else(Func<object, TResult> func)");
 		using(new WriteIndent(this))
 		{
 			WriteLine($"if (result == null) result = func.Invoke(value);");
 			WriteLine("return (TResult)result;");
 		}
 
-		// =============== OrThrow
+		// =============== ElseThrow
 
 		WriteLine("");
-		WriteLine($"public TResult OrThrow(Func<object, Exception> func)");
+		WriteLine($"public TResult ElseThrow(Func<object, Exception> func)");
 		using(new WriteIndent(this))
 		{
 			WriteLine($"if (result == null) throw func.Invoke(value);");

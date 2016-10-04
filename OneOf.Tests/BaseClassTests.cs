@@ -31,7 +31,7 @@ namespace OneOf.Tests
             Response x = new Response.MethodNotAllowed();
             Assert.AreEqual(true, 
                 x.Match((Response.MethodNotAllowed methodNotAllowed) => true)
-                .OrThrow(v => new InvalidOperationException())
+                .ElseThrow(v => new InvalidOperationException())
                 );
         }
     }

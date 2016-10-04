@@ -36,7 +36,7 @@ namespace OneOf.Tests
 
             var success = oneOf
                 .Match((bool bln) => false)
-                .Default(obj => obj.ToString() == "xyz");
+                .Else(obj => obj.ToString() == "xyz");
 
             Assert.AreEqual(true, success);
         }
@@ -48,7 +48,7 @@ namespace OneOf.Tests
 
             Assert.Throws<InvalidOperationException>(() =>
                 oneOf.Match((bool bln) => false)
-                     .OrThrow(obj => new InvalidOperationException())
+                     .ElseThrow(obj => new InvalidOperationException())
                 );
         }
     }
