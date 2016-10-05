@@ -55,7 +55,6 @@
     <Compile Include="SwitchTests.cs" />
     <Compile Include="IsTests.cs" />
     <Compile Include="BaseClassTests.cs" />
-    <Compile Include="Serialization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

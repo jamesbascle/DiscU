@@ -45,7 +45,6 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 	var structOrClass = isStruct ? "struct" : "class";
 	var typeName = isStruct ? "OneOf" : "OneOfBase";
 
-    WriteLine("[JsonConverter(typeof(OneOfJsonConverter))]");
 	WriteLine($"public {structOrClass} {typeName}<{genericArg}> : IOneOf");
 	using(new WriteIndent(this))
 	{
