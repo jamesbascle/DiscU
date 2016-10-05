@@ -38,7 +38,7 @@ Matching
 --------
 
 `Match` is used for translating the value depending on it's type.  Each Match must translate the value to the same type.
-When all cases are handled, the last call to `Match` returns the result.    
+When all cases are handled the last call to `Match` returns the result.    
 ```C#
 OneOf<string, ColorName, Color> backgroundColor = ...;
 
@@ -52,6 +52,10 @@ Color c = backgroundColor
 Color c2 = backgroundColor
    .Match((Color col) => col)
    .Else(obj => /* return default value */)
+
+Color c2 = backgroundColor
+   .Match((Color col) => col)
+   .Else(/* default value*/)
 ```
 `ElseThrow` can be used to create an exception to throw when nothing matches.
 ```C#
@@ -67,12 +71,12 @@ You use the `Switch` methods along with `Else` and `ElseThrow` methods to execut
 
 ```C#
 OneOf<string, NotFound, ErrX, ErrY, Etc> fileContents = ReadFile(fileName)
-    .Switch((string contents) => /* handled success */)
+    .Switch((string contents) => /* handle success */)
     .Switch((NotFound notFound) => /* handle file not found */)
     .Else(object x => /* handle other types */)
     
 OneOf<string, NotFound, ErrX, ErrY, Etc> fileContents = ReadFile(fileName)
-    .Switch((string contents) => /* handled success */)
+    .Switch((string contents) => /* handle success */)
     .Switch((NotFound notFound) => /* handle file not found */)
     .ElseThrow(x => /* return Exception to throw when not handled above by any Switch's */);
 ```
@@ -88,6 +92,7 @@ OneOf<True,False> trueOrFalse = True;
 // this will work as the new OneOf supports True
 OneOf<True,False,Unknown> success = trueOrFalse.ToOneOf<True,False,Unknown>();
 
-// this will fail at runtime as the new OneOf doesn't support True (compile-time checks not yet available, yet to figure out how to do that)
+// this will fail at runtime as the new OneOf doesn't support True
+// (compile-time checks not yet available, yet to figure out how to do that)
 OneOf<False, Unknown> fail = trueOrFalse.ToOneOf<False, Unknown>();
 ```
