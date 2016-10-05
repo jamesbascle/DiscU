@@ -47,34 +47,34 @@ Color c = backgroundColor
    .Match((ColorName name) => new Color(name))
    .Match((Color col) => col)
 ```
-`Default` can be used when you don't need to match every type, returning a default value for remaining types.
+`Else` can be used to return a default value when nothing matches.
 ```C#
 Color c2 = backgroundColor
    .Match((Color col) => col)
-   .Default(obj => /* return default value */)
+   .Else(obj => /* return default value */)
 ```
-`OrThrow` can be used to create an exception to throw when the value doesn't match any specified types.
+`ElseThrow` can be used to create an exception to throw when nothing matches.
 ```C#
 Color c3 = backgroundColor
    .Match((Color col) => col)
-   .OrThrow(obj => new InvalidOperationException("this will be thrown when not Color"))
+   .ElseThrow(obj => new InvalidOperationException("this will be thrown when not Color"))
 ```
 
 Switching
 ---------
 
-You use the `Switch` methods along with `Default` and `OrThrow` methods to execute specific actions based on the value's type. E.g.
+You use the `Switch` methods along with `Else` and `ElseThrow` methods to execute specific actions based on the value's type. E.g.
 
 ```C#
 OneOf<string, NotFound, ErrX, ErrY, Etc> fileContents = ReadFile(fileName)
     .Switch((string contents) => /* handled success */)
     .Switch((NotFound notFound) => /* handle file not found */)
-    .Default(object x => /* handle other types */)
+    .Else(object x => /* handle other types */)
     
 OneOf<string, NotFound, ErrX, ErrY, Etc> fileContents = ReadFile(fileName)
     .Switch((string contents) => /* handled success */)
     .Switch((NotFound notFound) => /* handle file not found */)
-    .OrThrow(x => /* return Exception to throw when not handled above by any Switch's */);
+    .ElseThrow(x => /* return Exception to throw when not handled above by any Switch's */);
 ```
 
 ToOneOf
@@ -85,9 +85,9 @@ The `ToOneOf` method enables conversion to other OneOfs. E.g.
 ```C#
 OneOf<True,False> trueOrFalse = True;
 
-// this will work
-OneOf<True,False,Unknown> trueFalseOrUnknown = trueOrFalse.ToOneOf<True,False,Unknown>();
+// this will work as the new OneOf supports True
+OneOf<True,False,Unknown> success = trueOrFalse.ToOneOf<True,False,Unknown>();
 
-// this will fail at runtime as the source contains a value that isn't supported by the new OneOf
-OneOf<False> justFalse = trueOrFalse.ToOneOf<False>();
+// this will fail at runtime as the new OneOf doesn't support True (compile-time checks not yet available, yet to figure out how to do that)
+OneOf<False, Unknown> fail = trueOrFalse.ToOneOf<False, Unknown>();
 ```
