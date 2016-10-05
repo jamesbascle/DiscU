@@ -201,7 +201,7 @@ void WriteSwitcher(int countOfgenericParams)
 					WriteLine($"if (this.value is T{parmIndex})");
 					using(new WriteIndent(this))
 					{
-						WriteLine($"action.Invoke((T{parmIndex})value);");
+						WriteLine($"action((T{parmIndex})value);");
 						WriteLine("hasSwitched = true;");
 					}
 					WriteLine($"return new OneOfSwitcher<{lesserArityGenericArg}>(this.value, this.hasSwitched);");
@@ -213,7 +213,7 @@ void WriteSwitcher(int countOfgenericParams)
 				WriteLine($"public void Switch(Action<T{parmIndex}> action)");
 				using(new WriteIndent(this))
 				{
-					WriteLine($"if (this.value is T{parmIndex}) action.Invoke((T{parmIndex})value);");
+					WriteLine($"if (this.value is T{parmIndex}) action((T{parmIndex})value);");
 				}
 			}
 		}
@@ -224,7 +224,7 @@ void WriteSwitcher(int countOfgenericParams)
 		WriteLine($"public void Else(Action<object> action)");
 		using(new WriteIndent(this))
 		{
-			WriteLine($"if (!hasSwitched) action.Invoke(value);");
+			WriteLine($"if (!hasSwitched) action(value);");
 		}
 
 		// =============== ElseThrow
@@ -233,7 +233,7 @@ void WriteSwitcher(int countOfgenericParams)
 		WriteLine($"public void ElseThrow(Func<object, Exception> func)");
 		using(new WriteIndent(this))
 		{
-			WriteLine($"if (!hasSwitched) throw func.Invoke(value);");
+			WriteLine($"if (!hasSwitched) throw func(value);");
 		}
 	}
 }
@@ -270,41 +270,51 @@ void WriteMatcher(int countOfgenericParams)
 			
 				var lesserArityGenericArg = GenerateGenericArgs(lesserArityOneOf,withResult: "TResult");
 				WriteLine("");
-				WriteLine($"public OneOfMatcher<{lesserArityGenericArg}> Match(Func<T{parmIndex}, TResult> func)");
+				WriteLine($"public OneOfMatcher<{lesserArityGenericArg}> Match(Func<T{parmIndex}, TResult> createResult)");
 				using(new WriteIndent(this))
 				{
-					WriteLine($"if (value is T{parmIndex}) result = func.Invoke((T{parmIndex})value);");
+					WriteLine($"if (result == null && value is T{parmIndex}) result = createResult((T{parmIndex})value);");
 					WriteLine($"return new OneOfMatcher<{lesserArityGenericArg}>(this.value, this.result);");
 				}
 			}
 			else
             {
-				WriteLine($"public TResult Match(Func<T{parmIndex}, TResult> func)");
+				WriteLine($"public TResult Match(Func<T{parmIndex}, TResult> createResult)");
 				using(new WriteIndent(this))
 				{
-					WriteLine($"if (value is T{parmIndex}) result = func.Invoke((T{parmIndex})value);");
+					WriteLine($"if (result == null && value is T{parmIndex}) result = createResult((T{parmIndex})value);");
 					WriteLine($"return (TResult)result;");
 				}
             }
 		}
 
-		// =============== Else
+		// =============== Else(default)
 
 		WriteLine("");
-		WriteLine($"public TResult Else(Func<object, TResult> func)");
+		WriteLine($"public TResult Else(TResult defaultValue)");
 		using(new WriteIndent(this))
 		{
-			WriteLine($"if (result == null) result = func.Invoke(value);");
+			WriteLine($"if (result == null) result = defaultValue;");
+			WriteLine("return (TResult)result;");
+		}
+
+		// =============== Else(func)
+
+		WriteLine("");
+		WriteLine($"public TResult Else(Func<object, TResult> createResult)");
+		using(new WriteIndent(this))
+		{
+			WriteLine($"if (result == null) result = createResult(value);");
 			WriteLine("return (TResult)result;");
 		}
 
 		// =============== ElseThrow
 
 		WriteLine("");
-		WriteLine($"public TResult ElseThrow(Func<object, Exception> func)");
+		WriteLine($"public TResult ElseThrow(Func<object, Exception> createException)");
 		using(new WriteIndent(this))
 		{
-			WriteLine($"if (result == null) throw func.Invoke(value);");
+			WriteLine($"if (result == null) throw createException(value);");
 			WriteLine("return (TResult)result;");
 		}
 	}

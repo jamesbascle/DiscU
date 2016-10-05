@@ -1133,17 +1133,17 @@ namespace OneOf
 
         public void Switch(Action<T0> action)
         {
-            if (this.value is T0) action.Invoke((T0)value);
+            if (this.value is T0) action((T0)value);
         }
 
         public void Else(Action<object> action)
         {
-            if (!hasSwitched) action.Invoke(value);
+            if (!hasSwitched) action(value);
         }
 
         public void ElseThrow(Func<object, Exception> func)
         {
-            if (!hasSwitched) throw func.Invoke(value);
+            if (!hasSwitched) throw func(value);
         }
     }
 
@@ -1162,7 +1162,7 @@ namespace OneOf
         {
             if (this.value is T0)
             {
-                action.Invoke((T0)value);
+                action((T0)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T1>(this.value, this.hasSwitched);
@@ -1172,7 +1172,7 @@ namespace OneOf
         {
             if (this.value is T1)
             {
-                action.Invoke((T1)value);
+                action((T1)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0>(this.value, this.hasSwitched);
@@ -1180,12 +1180,12 @@ namespace OneOf
 
         public void Else(Action<object> action)
         {
-            if (!hasSwitched) action.Invoke(value);
+            if (!hasSwitched) action(value);
         }
 
         public void ElseThrow(Func<object, Exception> func)
         {
-            if (!hasSwitched) throw func.Invoke(value);
+            if (!hasSwitched) throw func(value);
         }
     }
 
@@ -1204,7 +1204,7 @@ namespace OneOf
         {
             if (this.value is T0)
             {
-                action.Invoke((T0)value);
+                action((T0)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T1, T2>(this.value, this.hasSwitched);
@@ -1214,7 +1214,7 @@ namespace OneOf
         {
             if (this.value is T1)
             {
-                action.Invoke((T1)value);
+                action((T1)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T2>(this.value, this.hasSwitched);
@@ -1224,7 +1224,7 @@ namespace OneOf
         {
             if (this.value is T2)
             {
-                action.Invoke((T2)value);
+                action((T2)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T1>(this.value, this.hasSwitched);
@@ -1232,12 +1232,12 @@ namespace OneOf
 
         public void Else(Action<object> action)
         {
-            if (!hasSwitched) action.Invoke(value);
+            if (!hasSwitched) action(value);
         }
 
         public void ElseThrow(Func<object, Exception> func)
         {
-            if (!hasSwitched) throw func.Invoke(value);
+            if (!hasSwitched) throw func(value);
         }
     }
 
@@ -1256,7 +1256,7 @@ namespace OneOf
         {
             if (this.value is T0)
             {
-                action.Invoke((T0)value);
+                action((T0)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T1, T2, T3>(this.value, this.hasSwitched);
@@ -1266,7 +1266,7 @@ namespace OneOf
         {
             if (this.value is T1)
             {
-                action.Invoke((T1)value);
+                action((T1)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T2, T3>(this.value, this.hasSwitched);
@@ -1276,7 +1276,7 @@ namespace OneOf
         {
             if (this.value is T2)
             {
-                action.Invoke((T2)value);
+                action((T2)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T1, T3>(this.value, this.hasSwitched);
@@ -1286,7 +1286,7 @@ namespace OneOf
         {
             if (this.value is T3)
             {
-                action.Invoke((T3)value);
+                action((T3)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T1, T2>(this.value, this.hasSwitched);
@@ -1294,12 +1294,12 @@ namespace OneOf
 
         public void Else(Action<object> action)
         {
-            if (!hasSwitched) action.Invoke(value);
+            if (!hasSwitched) action(value);
         }
 
         public void ElseThrow(Func<object, Exception> func)
         {
-            if (!hasSwitched) throw func.Invoke(value);
+            if (!hasSwitched) throw func(value);
         }
     }
 
@@ -1318,7 +1318,7 @@ namespace OneOf
         {
             if (this.value is T0)
             {
-                action.Invoke((T0)value);
+                action((T0)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T1, T2, T3, T4>(this.value, this.hasSwitched);
@@ -1328,7 +1328,7 @@ namespace OneOf
         {
             if (this.value is T1)
             {
-                action.Invoke((T1)value);
+                action((T1)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T2, T3, T4>(this.value, this.hasSwitched);
@@ -1338,7 +1338,7 @@ namespace OneOf
         {
             if (this.value is T2)
             {
-                action.Invoke((T2)value);
+                action((T2)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T1, T3, T4>(this.value, this.hasSwitched);
@@ -1348,7 +1348,7 @@ namespace OneOf
         {
             if (this.value is T3)
             {
-                action.Invoke((T3)value);
+                action((T3)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T1, T2, T4>(this.value, this.hasSwitched);
@@ -1358,7 +1358,7 @@ namespace OneOf
         {
             if (this.value is T4)
             {
-                action.Invoke((T4)value);
+                action((T4)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T1, T2, T3>(this.value, this.hasSwitched);
@@ -1366,12 +1366,12 @@ namespace OneOf
 
         public void Else(Action<object> action)
         {
-            if (!hasSwitched) action.Invoke(value);
+            if (!hasSwitched) action(value);
         }
 
         public void ElseThrow(Func<object, Exception> func)
         {
-            if (!hasSwitched) throw func.Invoke(value);
+            if (!hasSwitched) throw func(value);
         }
     }
 
@@ -1390,7 +1390,7 @@ namespace OneOf
         {
             if (this.value is T0)
             {
-                action.Invoke((T0)value);
+                action((T0)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T1, T2, T3, T4, T5>(this.value, this.hasSwitched);
@@ -1400,7 +1400,7 @@ namespace OneOf
         {
             if (this.value is T1)
             {
-                action.Invoke((T1)value);
+                action((T1)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T2, T3, T4, T5>(this.value, this.hasSwitched);
@@ -1410,7 +1410,7 @@ namespace OneOf
         {
             if (this.value is T2)
             {
-                action.Invoke((T2)value);
+                action((T2)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T1, T3, T4, T5>(this.value, this.hasSwitched);
@@ -1420,7 +1420,7 @@ namespace OneOf
         {
             if (this.value is T3)
             {
-                action.Invoke((T3)value);
+                action((T3)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T1, T2, T4, T5>(this.value, this.hasSwitched);
@@ -1430,7 +1430,7 @@ namespace OneOf
         {
             if (this.value is T4)
             {
-                action.Invoke((T4)value);
+                action((T4)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T1, T2, T3, T5>(this.value, this.hasSwitched);
@@ -1440,7 +1440,7 @@ namespace OneOf
         {
             if (this.value is T5)
             {
-                action.Invoke((T5)value);
+                action((T5)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T1, T2, T3, T4>(this.value, this.hasSwitched);
@@ -1448,12 +1448,12 @@ namespace OneOf
 
         public void Else(Action<object> action)
         {
-            if (!hasSwitched) action.Invoke(value);
+            if (!hasSwitched) action(value);
         }
 
         public void ElseThrow(Func<object, Exception> func)
         {
-            if (!hasSwitched) throw func.Invoke(value);
+            if (!hasSwitched) throw func(value);
         }
     }
 
@@ -1472,7 +1472,7 @@ namespace OneOf
         {
             if (this.value is T0)
             {
-                action.Invoke((T0)value);
+                action((T0)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(this.value, this.hasSwitched);
@@ -1482,7 +1482,7 @@ namespace OneOf
         {
             if (this.value is T1)
             {
-                action.Invoke((T1)value);
+                action((T1)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T2, T3, T4, T5, T6>(this.value, this.hasSwitched);
@@ -1492,7 +1492,7 @@ namespace OneOf
         {
             if (this.value is T2)
             {
-                action.Invoke((T2)value);
+                action((T2)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T1, T3, T4, T5, T6>(this.value, this.hasSwitched);
@@ -1502,7 +1502,7 @@ namespace OneOf
         {
             if (this.value is T3)
             {
-                action.Invoke((T3)value);
+                action((T3)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T1, T2, T4, T5, T6>(this.value, this.hasSwitched);
@@ -1512,7 +1512,7 @@ namespace OneOf
         {
             if (this.value is T4)
             {
-                action.Invoke((T4)value);
+                action((T4)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T1, T2, T3, T5, T6>(this.value, this.hasSwitched);
@@ -1522,7 +1522,7 @@ namespace OneOf
         {
             if (this.value is T5)
             {
-                action.Invoke((T5)value);
+                action((T5)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T1, T2, T3, T4, T6>(this.value, this.hasSwitched);
@@ -1532,7 +1532,7 @@ namespace OneOf
         {
             if (this.value is T6)
             {
-                action.Invoke((T6)value);
+                action((T6)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(this.value, this.hasSwitched);
@@ -1540,12 +1540,12 @@ namespace OneOf
 
         public void Else(Action<object> action)
         {
-            if (!hasSwitched) action.Invoke(value);
+            if (!hasSwitched) action(value);
         }
 
         public void ElseThrow(Func<object, Exception> func)
         {
-            if (!hasSwitched) throw func.Invoke(value);
+            if (!hasSwitched) throw func(value);
         }
     }
 
@@ -1564,7 +1564,7 @@ namespace OneOf
         {
             if (this.value is T0)
             {
-                action.Invoke((T0)value);
+                action((T0)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(this.value, this.hasSwitched);
@@ -1574,7 +1574,7 @@ namespace OneOf
         {
             if (this.value is T1)
             {
-                action.Invoke((T1)value);
+                action((T1)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T2, T3, T4, T5, T6, T7>(this.value, this.hasSwitched);
@@ -1584,7 +1584,7 @@ namespace OneOf
         {
             if (this.value is T2)
             {
-                action.Invoke((T2)value);
+                action((T2)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T1, T3, T4, T5, T6, T7>(this.value, this.hasSwitched);
@@ -1594,7 +1594,7 @@ namespace OneOf
         {
             if (this.value is T3)
             {
-                action.Invoke((T3)value);
+                action((T3)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T1, T2, T4, T5, T6, T7>(this.value, this.hasSwitched);
@@ -1604,7 +1604,7 @@ namespace OneOf
         {
             if (this.value is T4)
             {
-                action.Invoke((T4)value);
+                action((T4)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T1, T2, T3, T5, T6, T7>(this.value, this.hasSwitched);
@@ -1614,7 +1614,7 @@ namespace OneOf
         {
             if (this.value is T5)
             {
-                action.Invoke((T5)value);
+                action((T5)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T1, T2, T3, T4, T6, T7>(this.value, this.hasSwitched);
@@ -1624,7 +1624,7 @@ namespace OneOf
         {
             if (this.value is T6)
             {
-                action.Invoke((T6)value);
+                action((T6)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T7>(this.value, this.hasSwitched);
@@ -1634,7 +1634,7 @@ namespace OneOf
         {
             if (this.value is T7)
             {
-                action.Invoke((T7)value);
+                action((T7)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(this.value, this.hasSwitched);
@@ -1642,12 +1642,12 @@ namespace OneOf
 
         public void Else(Action<object> action)
         {
-            if (!hasSwitched) action.Invoke(value);
+            if (!hasSwitched) action(value);
         }
 
         public void ElseThrow(Func<object, Exception> func)
         {
-            if (!hasSwitched) throw func.Invoke(value);
+            if (!hasSwitched) throw func(value);
         }
     }
 
@@ -1666,7 +1666,7 @@ namespace OneOf
         {
             if (this.value is T0)
             {
-                action.Invoke((T0)value);
+                action((T0)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(this.value, this.hasSwitched);
@@ -1676,7 +1676,7 @@ namespace OneOf
         {
             if (this.value is T1)
             {
-                action.Invoke((T1)value);
+                action((T1)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T2, T3, T4, T5, T6, T7, T8>(this.value, this.hasSwitched);
@@ -1686,7 +1686,7 @@ namespace OneOf
         {
             if (this.value is T2)
             {
-                action.Invoke((T2)value);
+                action((T2)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T1, T3, T4, T5, T6, T7, T8>(this.value, this.hasSwitched);
@@ -1696,7 +1696,7 @@ namespace OneOf
         {
             if (this.value is T3)
             {
-                action.Invoke((T3)value);
+                action((T3)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T1, T2, T4, T5, T6, T7, T8>(this.value, this.hasSwitched);
@@ -1706,7 +1706,7 @@ namespace OneOf
         {
             if (this.value is T4)
             {
-                action.Invoke((T4)value);
+                action((T4)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T1, T2, T3, T5, T6, T7, T8>(this.value, this.hasSwitched);
@@ -1716,7 +1716,7 @@ namespace OneOf
         {
             if (this.value is T5)
             {
-                action.Invoke((T5)value);
+                action((T5)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T1, T2, T3, T4, T6, T7, T8>(this.value, this.hasSwitched);
@@ -1726,7 +1726,7 @@ namespace OneOf
         {
             if (this.value is T6)
             {
-                action.Invoke((T6)value);
+                action((T6)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T7, T8>(this.value, this.hasSwitched);
@@ -1736,7 +1736,7 @@ namespace OneOf
         {
             if (this.value is T7)
             {
-                action.Invoke((T7)value);
+                action((T7)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T8>(this.value, this.hasSwitched);
@@ -1746,7 +1746,7 @@ namespace OneOf
         {
             if (this.value is T8)
             {
-                action.Invoke((T8)value);
+                action((T8)value);
                 hasSwitched = true;
             }
             return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(this.value, this.hasSwitched);
@@ -1754,12 +1754,12 @@ namespace OneOf
 
         public void Else(Action<object> action)
         {
-            if (!hasSwitched) action.Invoke(value);
+            if (!hasSwitched) action(value);
         }
 
         public void ElseThrow(Func<object, Exception> func)
         {
-            if (!hasSwitched) throw func.Invoke(value);
+            if (!hasSwitched) throw func(value);
         }
     }
 
@@ -1773,21 +1773,27 @@ namespace OneOf
             this.value = value;
             this.result = result;
         }
-        public TResult Match(Func<T0, TResult> func)
+        public TResult Match(Func<T0, TResult> createResult)
         {
-            if (value is T0) result = func.Invoke((T0)value);
+            if (result == null && value is T0) result = createResult((T0)value);
             return (TResult)result;
         }
 
-        public TResult Else(Func<object, TResult> func)
+        public TResult Else(TResult defaultValue)
         {
-            if (result == null) result = func.Invoke(value);
+            if (result == null) result = defaultValue;
             return (TResult)result;
         }
 
-        public TResult ElseThrow(Func<object, Exception> func)
+        public TResult Else(Func<object, TResult> createResult)
         {
-            if (result == null) throw func.Invoke(value);
+            if (result == null) result = createResult(value);
+            return (TResult)result;
+        }
+
+        public TResult ElseThrow(Func<object, Exception> createException)
+        {
+            if (result == null) throw createException(value);
             return (TResult)result;
         }
     }
@@ -1803,27 +1809,33 @@ namespace OneOf
             this.result = result;
         }
 
-        public OneOfMatcher<T1, TResult> Match(Func<T0, TResult> func)
+        public OneOfMatcher<T1, TResult> Match(Func<T0, TResult> createResult)
         {
-            if (value is T0) result = func.Invoke((T0)value);
+            if (result == null && value is T0) result = createResult((T0)value);
             return new OneOfMatcher<T1, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, TResult> Match(Func<T1, TResult> func)
+        public OneOfMatcher<T0, TResult> Match(Func<T1, TResult> createResult)
         {
-            if (value is T1) result = func.Invoke((T1)value);
+            if (result == null && value is T1) result = createResult((T1)value);
             return new OneOfMatcher<T0, TResult>(this.value, this.result);
         }
 
-        public TResult Else(Func<object, TResult> func)
+        public TResult Else(TResult defaultValue)
         {
-            if (result == null) result = func.Invoke(value);
+            if (result == null) result = defaultValue;
             return (TResult)result;
         }
 
-        public TResult ElseThrow(Func<object, Exception> func)
+        public TResult Else(Func<object, TResult> createResult)
         {
-            if (result == null) throw func.Invoke(value);
+            if (result == null) result = createResult(value);
+            return (TResult)result;
+        }
+
+        public TResult ElseThrow(Func<object, Exception> createException)
+        {
+            if (result == null) throw createException(value);
             return (TResult)result;
         }
     }
@@ -1839,33 +1851,39 @@ namespace OneOf
             this.result = result;
         }
 
-        public OneOfMatcher<T1, T2, TResult> Match(Func<T0, TResult> func)
+        public OneOfMatcher<T1, T2, TResult> Match(Func<T0, TResult> createResult)
         {
-            if (value is T0) result = func.Invoke((T0)value);
+            if (result == null && value is T0) result = createResult((T0)value);
             return new OneOfMatcher<T1, T2, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T2, TResult> Match(Func<T1, TResult> func)
+        public OneOfMatcher<T0, T2, TResult> Match(Func<T1, TResult> createResult)
         {
-            if (value is T1) result = func.Invoke((T1)value);
+            if (result == null && value is T1) result = createResult((T1)value);
             return new OneOfMatcher<T0, T2, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, TResult> Match(Func<T2, TResult> func)
+        public OneOfMatcher<T0, T1, TResult> Match(Func<T2, TResult> createResult)
         {
-            if (value is T2) result = func.Invoke((T2)value);
+            if (result == null && value is T2) result = createResult((T2)value);
             return new OneOfMatcher<T0, T1, TResult>(this.value, this.result);
         }
 
-        public TResult Else(Func<object, TResult> func)
+        public TResult Else(TResult defaultValue)
         {
-            if (result == null) result = func.Invoke(value);
+            if (result == null) result = defaultValue;
             return (TResult)result;
         }
 
-        public TResult ElseThrow(Func<object, Exception> func)
+        public TResult Else(Func<object, TResult> createResult)
         {
-            if (result == null) throw func.Invoke(value);
+            if (result == null) result = createResult(value);
+            return (TResult)result;
+        }
+
+        public TResult ElseThrow(Func<object, Exception> createException)
+        {
+            if (result == null) throw createException(value);
             return (TResult)result;
         }
     }
@@ -1881,39 +1899,45 @@ namespace OneOf
             this.result = result;
         }
 
-        public OneOfMatcher<T1, T2, T3, TResult> Match(Func<T0, TResult> func)
+        public OneOfMatcher<T1, T2, T3, TResult> Match(Func<T0, TResult> createResult)
         {
-            if (value is T0) result = func.Invoke((T0)value);
+            if (result == null && value is T0) result = createResult((T0)value);
             return new OneOfMatcher<T1, T2, T3, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T2, T3, TResult> Match(Func<T1, TResult> func)
+        public OneOfMatcher<T0, T2, T3, TResult> Match(Func<T1, TResult> createResult)
         {
-            if (value is T1) result = func.Invoke((T1)value);
+            if (result == null && value is T1) result = createResult((T1)value);
             return new OneOfMatcher<T0, T2, T3, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T3, TResult> Match(Func<T2, TResult> func)
+        public OneOfMatcher<T0, T1, T3, TResult> Match(Func<T2, TResult> createResult)
         {
-            if (value is T2) result = func.Invoke((T2)value);
+            if (result == null && value is T2) result = createResult((T2)value);
             return new OneOfMatcher<T0, T1, T3, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, TResult> Match(Func<T3, TResult> func)
+        public OneOfMatcher<T0, T1, T2, TResult> Match(Func<T3, TResult> createResult)
         {
-            if (value is T3) result = func.Invoke((T3)value);
+            if (result == null && value is T3) result = createResult((T3)value);
             return new OneOfMatcher<T0, T1, T2, TResult>(this.value, this.result);
         }
 
-        public TResult Else(Func<object, TResult> func)
+        public TResult Else(TResult defaultValue)
         {
-            if (result == null) result = func.Invoke(value);
+            if (result == null) result = defaultValue;
             return (TResult)result;
         }
 
-        public TResult ElseThrow(Func<object, Exception> func)
+        public TResult Else(Func<object, TResult> createResult)
         {
-            if (result == null) throw func.Invoke(value);
+            if (result == null) result = createResult(value);
+            return (TResult)result;
+        }
+
+        public TResult ElseThrow(Func<object, Exception> createException)
+        {
+            if (result == null) throw createException(value);
             return (TResult)result;
         }
     }
@@ -1929,45 +1953,51 @@ namespace OneOf
             this.result = result;
         }
 
-        public OneOfMatcher<T1, T2, T3, T4, TResult> Match(Func<T0, TResult> func)
+        public OneOfMatcher<T1, T2, T3, T4, TResult> Match(Func<T0, TResult> createResult)
         {
-            if (value is T0) result = func.Invoke((T0)value);
+            if (result == null && value is T0) result = createResult((T0)value);
             return new OneOfMatcher<T1, T2, T3, T4, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T2, T3, T4, TResult> Match(Func<T1, TResult> func)
+        public OneOfMatcher<T0, T2, T3, T4, TResult> Match(Func<T1, TResult> createResult)
         {
-            if (value is T1) result = func.Invoke((T1)value);
+            if (result == null && value is T1) result = createResult((T1)value);
             return new OneOfMatcher<T0, T2, T3, T4, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T3, T4, TResult> Match(Func<T2, TResult> func)
+        public OneOfMatcher<T0, T1, T3, T4, TResult> Match(Func<T2, TResult> createResult)
         {
-            if (value is T2) result = func.Invoke((T2)value);
+            if (result == null && value is T2) result = createResult((T2)value);
             return new OneOfMatcher<T0, T1, T3, T4, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T4, TResult> Match(Func<T3, TResult> func)
+        public OneOfMatcher<T0, T1, T2, T4, TResult> Match(Func<T3, TResult> createResult)
         {
-            if (value is T3) result = func.Invoke((T3)value);
+            if (result == null && value is T3) result = createResult((T3)value);
             return new OneOfMatcher<T0, T1, T2, T4, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, TResult> Match(Func<T4, TResult> func)
+        public OneOfMatcher<T0, T1, T2, T3, TResult> Match(Func<T4, TResult> createResult)
         {
-            if (value is T4) result = func.Invoke((T4)value);
+            if (result == null && value is T4) result = createResult((T4)value);
             return new OneOfMatcher<T0, T1, T2, T3, TResult>(this.value, this.result);
         }
 
-        public TResult Else(Func<object, TResult> func)
+        public TResult Else(TResult defaultValue)
         {
-            if (result == null) result = func.Invoke(value);
+            if (result == null) result = defaultValue;
             return (TResult)result;
         }
 
-        public TResult ElseThrow(Func<object, Exception> func)
+        public TResult Else(Func<object, TResult> createResult)
         {
-            if (result == null) throw func.Invoke(value);
+            if (result == null) result = createResult(value);
+            return (TResult)result;
+        }
+
+        public TResult ElseThrow(Func<object, Exception> createException)
+        {
+            if (result == null) throw createException(value);
             return (TResult)result;
         }
     }
@@ -1983,51 +2013,57 @@ namespace OneOf
             this.result = result;
         }
 
-        public OneOfMatcher<T1, T2, T3, T4, T5, TResult> Match(Func<T0, TResult> func)
+        public OneOfMatcher<T1, T2, T3, T4, T5, TResult> Match(Func<T0, TResult> createResult)
         {
-            if (value is T0) result = func.Invoke((T0)value);
+            if (result == null && value is T0) result = createResult((T0)value);
             return new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T2, T3, T4, T5, TResult> Match(Func<T1, TResult> func)
+        public OneOfMatcher<T0, T2, T3, T4, T5, TResult> Match(Func<T1, TResult> createResult)
         {
-            if (value is T1) result = func.Invoke((T1)value);
+            if (result == null && value is T1) result = createResult((T1)value);
             return new OneOfMatcher<T0, T2, T3, T4, T5, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T3, T4, T5, TResult> Match(Func<T2, TResult> func)
+        public OneOfMatcher<T0, T1, T3, T4, T5, TResult> Match(Func<T2, TResult> createResult)
         {
-            if (value is T2) result = func.Invoke((T2)value);
+            if (result == null && value is T2) result = createResult((T2)value);
             return new OneOfMatcher<T0, T1, T3, T4, T5, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T4, T5, TResult> Match(Func<T3, TResult> func)
+        public OneOfMatcher<T0, T1, T2, T4, T5, TResult> Match(Func<T3, TResult> createResult)
         {
-            if (value is T3) result = func.Invoke((T3)value);
+            if (result == null && value is T3) result = createResult((T3)value);
             return new OneOfMatcher<T0, T1, T2, T4, T5, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T5, TResult> Match(Func<T4, TResult> func)
+        public OneOfMatcher<T0, T1, T2, T3, T5, TResult> Match(Func<T4, TResult> createResult)
         {
-            if (value is T4) result = func.Invoke((T4)value);
+            if (result == null && value is T4) result = createResult((T4)value);
             return new OneOfMatcher<T0, T1, T2, T3, T5, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, TResult> Match(Func<T5, TResult> func)
+        public OneOfMatcher<T0, T1, T2, T3, T4, TResult> Match(Func<T5, TResult> createResult)
         {
-            if (value is T5) result = func.Invoke((T5)value);
+            if (result == null && value is T5) result = createResult((T5)value);
             return new OneOfMatcher<T0, T1, T2, T3, T4, TResult>(this.value, this.result);
         }
 
-        public TResult Else(Func<object, TResult> func)
+        public TResult Else(TResult defaultValue)
         {
-            if (result == null) result = func.Invoke(value);
+            if (result == null) result = defaultValue;
             return (TResult)result;
         }
 
-        public TResult ElseThrow(Func<object, Exception> func)
+        public TResult Else(Func<object, TResult> createResult)
         {
-            if (result == null) throw func.Invoke(value);
+            if (result == null) result = createResult(value);
+            return (TResult)result;
+        }
+
+        public TResult ElseThrow(Func<object, Exception> createException)
+        {
+            if (result == null) throw createException(value);
             return (TResult)result;
         }
     }
@@ -2043,57 +2079,63 @@ namespace OneOf
             this.result = result;
         }
 
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> Match(Func<T0, TResult> func)
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> Match(Func<T0, TResult> createResult)
         {
-            if (value is T0) result = func.Invoke((T0)value);
+            if (result == null && value is T0) result = createResult((T0)value);
             return new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T2, T3, T4, T5, T6, TResult> Match(Func<T1, TResult> func)
+        public OneOfMatcher<T0, T2, T3, T4, T5, T6, TResult> Match(Func<T1, TResult> createResult)
         {
-            if (value is T1) result = func.Invoke((T1)value);
+            if (result == null && value is T1) result = createResult((T1)value);
             return new OneOfMatcher<T0, T2, T3, T4, T5, T6, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T3, T4, T5, T6, TResult> Match(Func<T2, TResult> func)
+        public OneOfMatcher<T0, T1, T3, T4, T5, T6, TResult> Match(Func<T2, TResult> createResult)
         {
-            if (value is T2) result = func.Invoke((T2)value);
+            if (result == null && value is T2) result = createResult((T2)value);
             return new OneOfMatcher<T0, T1, T3, T4, T5, T6, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T4, T5, T6, TResult> Match(Func<T3, TResult> func)
+        public OneOfMatcher<T0, T1, T2, T4, T5, T6, TResult> Match(Func<T3, TResult> createResult)
         {
-            if (value is T3) result = func.Invoke((T3)value);
+            if (result == null && value is T3) result = createResult((T3)value);
             return new OneOfMatcher<T0, T1, T2, T4, T5, T6, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T5, T6, TResult> Match(Func<T4, TResult> func)
+        public OneOfMatcher<T0, T1, T2, T3, T5, T6, TResult> Match(Func<T4, TResult> createResult)
         {
-            if (value is T4) result = func.Invoke((T4)value);
+            if (result == null && value is T4) result = createResult((T4)value);
             return new OneOfMatcher<T0, T1, T2, T3, T5, T6, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T6, TResult> Match(Func<T5, TResult> func)
+        public OneOfMatcher<T0, T1, T2, T3, T4, T6, TResult> Match(Func<T5, TResult> createResult)
         {
-            if (value is T5) result = func.Invoke((T5)value);
+            if (result == null && value is T5) result = createResult((T5)value);
             return new OneOfMatcher<T0, T1, T2, T3, T4, T6, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult> Match(Func<T6, TResult> func)
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult> Match(Func<T6, TResult> createResult)
         {
-            if (value is T6) result = func.Invoke((T6)value);
+            if (result == null && value is T6) result = createResult((T6)value);
             return new OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>(this.value, this.result);
         }
 
-        public TResult Else(Func<object, TResult> func)
+        public TResult Else(TResult defaultValue)
         {
-            if (result == null) result = func.Invoke(value);
+            if (result == null) result = defaultValue;
             return (TResult)result;
         }
 
-        public TResult ElseThrow(Func<object, Exception> func)
+        public TResult Else(Func<object, TResult> createResult)
         {
-            if (result == null) throw func.Invoke(value);
+            if (result == null) result = createResult(value);
+            return (TResult)result;
+        }
+
+        public TResult ElseThrow(Func<object, Exception> createException)
+        {
+            if (result == null) throw createException(value);
             return (TResult)result;
         }
     }
@@ -2109,63 +2151,69 @@ namespace OneOf
             this.result = result;
         }
 
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> Match(Func<T0, TResult> func)
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> Match(Func<T0, TResult> createResult)
         {
-            if (value is T0) result = func.Invoke((T0)value);
+            if (result == null && value is T0) result = createResult((T0)value);
             return new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T2, T3, T4, T5, T6, T7, TResult> Match(Func<T1, TResult> func)
+        public OneOfMatcher<T0, T2, T3, T4, T5, T6, T7, TResult> Match(Func<T1, TResult> createResult)
         {
-            if (value is T1) result = func.Invoke((T1)value);
+            if (result == null && value is T1) result = createResult((T1)value);
             return new OneOfMatcher<T0, T2, T3, T4, T5, T6, T7, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T3, T4, T5, T6, T7, TResult> Match(Func<T2, TResult> func)
+        public OneOfMatcher<T0, T1, T3, T4, T5, T6, T7, TResult> Match(Func<T2, TResult> createResult)
         {
-            if (value is T2) result = func.Invoke((T2)value);
+            if (result == null && value is T2) result = createResult((T2)value);
             return new OneOfMatcher<T0, T1, T3, T4, T5, T6, T7, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T4, T5, T6, T7, TResult> Match(Func<T3, TResult> func)
+        public OneOfMatcher<T0, T1, T2, T4, T5, T6, T7, TResult> Match(Func<T3, TResult> createResult)
         {
-            if (value is T3) result = func.Invoke((T3)value);
+            if (result == null && value is T3) result = createResult((T3)value);
             return new OneOfMatcher<T0, T1, T2, T4, T5, T6, T7, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T5, T6, T7, TResult> Match(Func<T4, TResult> func)
+        public OneOfMatcher<T0, T1, T2, T3, T5, T6, T7, TResult> Match(Func<T4, TResult> createResult)
         {
-            if (value is T4) result = func.Invoke((T4)value);
+            if (result == null && value is T4) result = createResult((T4)value);
             return new OneOfMatcher<T0, T1, T2, T3, T5, T6, T7, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T6, T7, TResult> Match(Func<T5, TResult> func)
+        public OneOfMatcher<T0, T1, T2, T3, T4, T6, T7, TResult> Match(Func<T5, TResult> createResult)
         {
-            if (value is T5) result = func.Invoke((T5)value);
+            if (result == null && value is T5) result = createResult((T5)value);
             return new OneOfMatcher<T0, T1, T2, T3, T4, T6, T7, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T7, TResult> Match(Func<T6, TResult> func)
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T7, TResult> Match(Func<T6, TResult> createResult)
         {
-            if (value is T6) result = func.Invoke((T6)value);
+            if (result == null && value is T6) result = createResult((T6)value);
             return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T7, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult> Match(Func<T7, TResult> func)
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult> Match(Func<T7, TResult> createResult)
         {
-            if (value is T7) result = func.Invoke((T7)value);
+            if (result == null && value is T7) result = createResult((T7)value);
             return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(this.value, this.result);
         }
 
-        public TResult Else(Func<object, TResult> func)
+        public TResult Else(TResult defaultValue)
         {
-            if (result == null) result = func.Invoke(value);
+            if (result == null) result = defaultValue;
             return (TResult)result;
         }
 
-        public TResult ElseThrow(Func<object, Exception> func)
+        public TResult Else(Func<object, TResult> createResult)
         {
-            if (result == null) throw func.Invoke(value);
+            if (result == null) result = createResult(value);
+            return (TResult)result;
+        }
+
+        public TResult ElseThrow(Func<object, Exception> createException)
+        {
+            if (result == null) throw createException(value);
             return (TResult)result;
         }
     }
@@ -2181,69 +2229,75 @@ namespace OneOf
             this.result = result;
         }
 
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> Match(Func<T0, TResult> func)
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> Match(Func<T0, TResult> createResult)
         {
-            if (value is T0) result = func.Invoke((T0)value);
+            if (result == null && value is T0) result = createResult((T0)value);
             return new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T2, T3, T4, T5, T6, T7, T8, TResult> Match(Func<T1, TResult> func)
+        public OneOfMatcher<T0, T2, T3, T4, T5, T6, T7, T8, TResult> Match(Func<T1, TResult> createResult)
         {
-            if (value is T1) result = func.Invoke((T1)value);
+            if (result == null && value is T1) result = createResult((T1)value);
             return new OneOfMatcher<T0, T2, T3, T4, T5, T6, T7, T8, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T3, T4, T5, T6, T7, T8, TResult> Match(Func<T2, TResult> func)
+        public OneOfMatcher<T0, T1, T3, T4, T5, T6, T7, T8, TResult> Match(Func<T2, TResult> createResult)
         {
-            if (value is T2) result = func.Invoke((T2)value);
+            if (result == null && value is T2) result = createResult((T2)value);
             return new OneOfMatcher<T0, T1, T3, T4, T5, T6, T7, T8, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T4, T5, T6, T7, T8, TResult> Match(Func<T3, TResult> func)
+        public OneOfMatcher<T0, T1, T2, T4, T5, T6, T7, T8, TResult> Match(Func<T3, TResult> createResult)
         {
-            if (value is T3) result = func.Invoke((T3)value);
+            if (result == null && value is T3) result = createResult((T3)value);
             return new OneOfMatcher<T0, T1, T2, T4, T5, T6, T7, T8, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T5, T6, T7, T8, TResult> Match(Func<T4, TResult> func)
+        public OneOfMatcher<T0, T1, T2, T3, T5, T6, T7, T8, TResult> Match(Func<T4, TResult> createResult)
         {
-            if (value is T4) result = func.Invoke((T4)value);
+            if (result == null && value is T4) result = createResult((T4)value);
             return new OneOfMatcher<T0, T1, T2, T3, T5, T6, T7, T8, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T6, T7, T8, TResult> Match(Func<T5, TResult> func)
+        public OneOfMatcher<T0, T1, T2, T3, T4, T6, T7, T8, TResult> Match(Func<T5, TResult> createResult)
         {
-            if (value is T5) result = func.Invoke((T5)value);
+            if (result == null && value is T5) result = createResult((T5)value);
             return new OneOfMatcher<T0, T1, T2, T3, T4, T6, T7, T8, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T7, T8, TResult> Match(Func<T6, TResult> func)
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T7, T8, TResult> Match(Func<T6, TResult> createResult)
         {
-            if (value is T6) result = func.Invoke((T6)value);
+            if (result == null && value is T6) result = createResult((T6)value);
             return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T7, T8, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T8, TResult> Match(Func<T7, TResult> func)
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T8, TResult> Match(Func<T7, TResult> createResult)
         {
-            if (value is T7) result = func.Invoke((T7)value);
+            if (result == null && value is T7) result = createResult((T7)value);
             return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T8, TResult>(this.value, this.result);
         }
 
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> Match(Func<T8, TResult> func)
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> Match(Func<T8, TResult> createResult)
         {
-            if (value is T8) result = func.Invoke((T8)value);
+            if (result == null && value is T8) result = createResult((T8)value);
             return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(this.value, this.result);
         }
 
-        public TResult Else(Func<object, TResult> func)
+        public TResult Else(TResult defaultValue)
         {
-            if (result == null) result = func.Invoke(value);
+            if (result == null) result = defaultValue;
             return (TResult)result;
         }
 
-        public TResult ElseThrow(Func<object, Exception> func)
+        public TResult Else(Func<object, TResult> createResult)
         {
-            if (result == null) throw func.Invoke(value);
+            if (result == null) result = createResult(value);
+            return (TResult)result;
+        }
+
+        public TResult ElseThrow(Func<object, Exception> createException)
+        {
+            if (result == null) throw createException(value);
             return (TResult)result;
         }
     }
