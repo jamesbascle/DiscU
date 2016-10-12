@@ -17,7 +17,6 @@ void GenerateClasses()
 	WriteLine("// ===========================================================================");
 	WriteLine("");
 	WriteLine("using System;");
-	WriteLine("using Newtonsoft.Json;");
 	WriteLine("");
 	WriteLine("namespace OneOf");
 	using(new WriteIndent(this))
