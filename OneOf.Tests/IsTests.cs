@@ -12,7 +12,7 @@ namespace OneOf.Tests
         [Test]
         public void IsReturnsTrueWhenBool()
         {
-            var x = (OneOf<string, bool>)true;
+            var x = (OneOf<string, bool>) true;
             Assert.AreEqual(false, x.Is<string>());
             Assert.AreEqual(true, x.Is<bool>());
         }
@@ -20,10 +20,11 @@ namespace OneOf.Tests
         [Test]
         public void IsReturnsTrueWhenString()
         {
-            var x = (OneOf<string, bool>)"xyz";
+            var x = (OneOf<string, bool>) "xyz";
             Assert.AreEqual(true, x.Is<string>());
             Assert.AreEqual(false, x.Is<bool>());
         }
-    }
 
+
+    }
 }

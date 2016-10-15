@@ -3,12 +3,13 @@ using System;
 
 namespace OneOf.Tests
 {
+    [TestFixture]
     public class MatcherTests
     {
         [Test]
         public void MatchBool()
         {
-            var oneOf = (OneOf<string, bool>)true;
+            var oneOf = (OneOf<string, bool>) true;
 
             var success = oneOf
                 .Match((string str) => false)
@@ -20,7 +21,7 @@ namespace OneOf.Tests
         [Test]
         public void MatchString()
         {
-            var oneOf = (OneOf<string, bool>)"xyz";
+            var oneOf = (OneOf<string, bool>) "xyz";
 
             var success = oneOf
                 .Match((string str) => str == "xyz")
@@ -32,7 +33,7 @@ namespace OneOf.Tests
         [Test]
         public void NoMatchReturnsDefault()
         {
-            var oneOf = (OneOf<string, bool>)"xyz";
+            var oneOf = (OneOf<string, bool>) "xyz";
 
             var success = oneOf
                 .Match((bool bln) => false)
@@ -44,13 +45,13 @@ namespace OneOf.Tests
         [Test]
         public void NoMatchThrowsException()
         {
-            var oneOf = (OneOf<string, bool>)"xyz";
+            var oneOf = (OneOf<string, bool>) "xyz";
 
             Assert.Throws<InvalidOperationException>(() =>
                 oneOf.Match((bool bln) => false)
-                     .ElseThrow(obj => new InvalidOperationException())
+                    .ElseThrow(obj => new InvalidOperationException())
                 );
         }
-    }
 
+    }
 }

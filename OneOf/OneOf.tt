@@ -5,6 +5,7 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
 <#@ output extension=".cs" #>
 <# 
 GenerateClasses(); 
@@ -17,6 +18,8 @@ void GenerateClasses()
 	WriteLine("// ===========================================================================");
 	WriteLine("");
 	WriteLine("using System;");
+	WriteLine("using Microsoft.CSharp.RuntimeBinder;");
+	
 	WriteLine("");
 	WriteLine("namespace OneOf");
 	using(new WriteIndent(this))
@@ -48,15 +51,19 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 	using(new WriteIndent(this))
 	{
 		WriteLine("readonly object value;");
-
+        WriteLine("readonly Type origType;");
+		
 		// =============== Constructors
 		// must only be called after value has been validated to be Tn
 	    
 		WriteLine("");
-		WriteLine($"{typeName}(object value)");
+        WriteLine($"{typeName}(object value, Type origType)");
+
 		using(new WriteIndent(this))
 		{
-			WriteLine($"this.value = value;");
+			WriteLine("this.value = value;");
+            WriteLine("this.origType = origType;");
+
 		}
 
 		if (!isStruct)
@@ -66,79 +73,115 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 			using(new WriteIndent(this))
 			{
 				WriteLine("this.value = this;");
+				WriteLine("this.origType = GetType();");
 			}
 		}
-
-		// =============== Create
-	    
-		WriteLine("");
-		WriteLine($"internal static {typeName}<{genericArg}> Create(object value)");
-		using(new WriteIndent(this))
-		{
-			for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
-			{
-				WriteLine($"if (value is T{parmIndex}) return new {typeName}<{genericArg}>((T{parmIndex})value);");
-			}
-
-			WriteLine($"throw (value == null) ? new ArgumentNullException(nameof(value)) : new ArgumentException(nameof(value));");
-		}
-
-		// =============== IOneOf implementation
+		
+	    // =============== IOneOf implementation
 
 		WriteLine("");
 		WriteLine("object IOneOf.Value => value;");
 
+        // =============== Create/CreateRaw
+        
+        WriteLine("");
+        WriteLine($"internal static {typeName}<{genericArg}> CreateRaw(object value)");
+        using(new WriteIndent(this))
+        {
+			WriteLine("if( value == null) throw new ArgumentNullException(nameof(value));");
+            for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
+            {
+				//cover our fast exact Type matches
+                WriteLine($"if (value.GetType() == typeof(T{parmIndex})) return Create((T{parmIndex})value);");
+            }
+			//prepare to catch any dynamic binding exceptions...
+			WriteLine("try");
+            using(new WriteIndent(this))            
+			{
+				//fall back to best match for non-exact type matches (subclasses, interface implementations, etc.)
+				//by performing double dispatch via dynamic casting. This will attempt to bind to the most specific create method available.
+				// This can be improved via reflection trickery if we decide there is a performance justification for it
+				WriteLine($"return Create((dynamic)value);");
+            }
+            WriteLine("catch(RuntimeBinderException ex)");
+            using (new WriteIndent(this))
+            {
+				//this SHOULDN'T happen thanks to aldready being in the context of a validly casted object, but you never know...
+                WriteLine("throw new ArgumentException(nameof(value), ex);");
+            }
+        }
+
+		WriteLine("");
+		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
+        {
+			WriteLine($"internal static {typeName}<{genericArg}> Create(T{parmIndex} value)");
+			using(new WriteIndent(this))
+			{         
+				WriteLine($" return new {typeName}<{genericArg}>((T{parmIndex})value, typeof(T{parmIndex}));");
+			}
+		}
+
 		// =============== Is
 
 		WriteLine("");
-		WriteLine($"public bool Is<T>() => (this.value is T);");
+		WriteLine("public bool Is<T>() => typeof(T) == origType;");
+
+		// ================ IsDerivedFrom
+		// necessary due to Is now properly reflecting the original circumstances of this OneOf's creation.
+		WriteLine("");
+		WriteLine("public bool IsDerivedFrom<T>() => value is T;");
 
 		// =============== As
 
 		WriteLine("");
-		WriteLine($"public T As<T>()");
+		WriteLine("public T As<T>()");
 		using(new WriteIndent(this))
 		{
-			WriteLine($"if (this.value is T) return (T)this.value;");
+			WriteLine("if (this.value is T) return (T)this.value;");
 			WriteLine("");
 			WriteLine("throw new InvalidOperationException();");
 		}
 
 		// =============== ToOneOf
-		// Use slower Create method which does type checks at runtime as compiler couldn't check them for us.
+		// now just uses CreateRaw to get best of both worlds for conversion.  Can blow up if user has incompatible types, but the C# Type system is
+		// just not powerful enough for us to save them from that with any reasonable approaches.
+		for (var numberOfGenericsInNew = countOfgenericParams - 1; numberOfGenericsInNew < 9; numberOfGenericsInNew ++)
+	    {
+	            var nargs = Enumerable.Range(0, numberOfGenericsInNew + 1).Select(e => "N" + e).ToArray();
+	            var otherGenericArgs = string.Join(", ", nargs);
+	            WriteLine($"public {typeName}<{otherGenericArgs}> ToOneOf<{otherGenericArgs}>() => {typeName}<{otherGenericArgs}>.CreateRaw(value);");
+	    }
 
-		WriteLine("");
-		for(var newIndex = 2; newIndex < 10; newIndex ++)
-		{
-			var otherGenericArgs = string.Join(", ", Enumerable.Range(0, newIndex).Select(e => "N" + e));
-
-			WriteLine($"public {typeName}<{otherGenericArgs}> ToOneOf<{otherGenericArgs}>() => {typeName}<{otherGenericArgs}>.Create(value);");
-		}
-
-		// =============== implicit conversion to T
-		// Use fast Ctor as compiler can check types for us.
-
+	    // =============== implicit conversion to T
+		// Now uses CreateRaw.  Not much slower than just calling the raw constructor, and ensures we get proper handling for polymorphic situations.
 		WriteLine("");
 		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
 		{
-			WriteLine($"public static implicit operator {typeName}<{genericArg}>(T{parmIndex} value) => new {typeName}<{genericArg}>(value);"); 
+			WriteLine($"public static implicit operator {typeName}<{genericArg}>(T{parmIndex} value) => CreateRaw(value);"); 
 		}
 
 		// =============== equality operators
-
 		WriteLine("");
-		WriteLine($"public static bool operator ==({typeName}<{genericArg}> v1, {typeName}<{genericArg}> v2) => v1.Equals(v2);"); 
-		WriteLine($"public static bool operator !=({typeName}<{genericArg}> v1, {typeName}<{genericArg}> v2) => !v1.Equals(v2);"); 
+		WriteLine($"public static bool operator ==({typeName}<{genericArg}> v1, IOneOf v2) => v1.Equals(v2);"); 
+		WriteLine($"public static bool operator !=({typeName}<{genericArg}> v1, IOneOf v2) => !v1.Equals(v2);");
+		//also adding equality operators to compare to the various Generic types by value
+	    for (var i = 0; i < countOfgenericParams; i++)
+	    {
+			WriteLine($"public static bool operator ==({typeName}<{genericArg}> v1, T{i} v2) => v1.Equals(v2);"); 
+			WriteLine($"public static bool operator !=({typeName}<{genericArg}> v1, T{i} v2) => !v1.Equals(v2);");
+			WriteLine($"public static bool operator ==(T{i} v1, {typeName}<{genericArg}> v2) => v2.Equals(v1);"); 
+			WriteLine($"public static bool operator !=(T{i} v1, {typeName}<{genericArg}> v2) => !v2.Equals(v1);");
+	    }
+
 
 		// =============== Switch
-
 		WriteLine("");
 		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
 		{
 			var lesserArityOneOf = Enumerable.Range(0, countOfgenericParams).Where(n => n != parmIndex).ToList();
 			var lesserArityGenericArg = GenerateGenericArgs(lesserArityOneOf);
 
-			WriteLine($"public OneOfSwitcher<{lesserArityGenericArg}> Switch(Action<T{parmIndex}> action) => new OneOfSwitcher<{genericArg}>(value, false).Switch(action);");
+			WriteLine($"public OneOfSwitcher<{lesserArityGenericArg}> Switch(Action<T{parmIndex}> action) => new OneOfSwitcher<{genericArg}>(value, origType, false).Switch(action);");
 		}
 
 		// =============== Match
@@ -149,14 +192,15 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 			var lesserArityOneOf = Enumerable.Range(0, countOfgenericParams).Where(n => n != parmIndex).ToList();
 			var lesserArityGenericArg = GenerateGenericArgs(lesserArityOneOf);
 
-			WriteLine($"public OneOfMatcher<{lesserArityGenericArg}, TResult> Match<TResult>(Func<T{parmIndex}, TResult> func)  => new OneOfMatcher<{genericArg}, TResult>(value, null).Match(func);");
+			WriteLine($"public OneOfMatcher<{lesserArityGenericArg}, TResult> Match<TResult>(Func<T{parmIndex}, TResult> func)  => new OneOfMatcher<{genericArg}, TResult>(value, origType, null).Match(func);");
 		}
 
 		// =============== object overrides
 
 		WriteLine("");
-		WriteLine($"public override bool Equals(object obj) => obj is {typeName}<{genericArg}> && Equals(value, (({typeName}<{genericArg}>)obj).value);");
-		WriteLine("public override int GetHashCode() => (value?.GetHashCode() ?? 0);");
+		// Returns true if the object is either an IOneOf, or if the value equals the OneOf, rather than only if it is the same kind of OneOf.
+		WriteLine($"public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);");
+		WriteLine("public override int GetHashCode() => (value?.GetHashCode() ?? origType?.GetHashCode() ?? 0);");
 		WriteLine("public override string ToString() => (value?.ToString() ?? \"\");");
 	}
 }
@@ -171,19 +215,20 @@ void WriteSwitcher(int countOfgenericParams)
 	{
 		WriteLine("readonly object value;");
 		WriteLine("bool hasSwitched;");
+		WriteLine("Type origType;");
 
 		// =============== Constructors
 	    
 		WriteLine("");
-		WriteLine("internal OneOfSwitcher(object value, bool hasSwitched)");
+		WriteLine("internal OneOfSwitcher(object value, Type origType, bool hasSwitched)");
 		using(new WriteIndent(this))
 		{
 			WriteLine($"this.value = value;");
 			WriteLine($"this.hasSwitched = hasSwitched;");
+			WriteLine($"this.origType = origType;");
 		}
 
 		// =============== Switch
-
 		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex++)
 		{
 			var lesserArityOneOf = Enumerable.Range(0, countOfgenericParams).ToList();
@@ -196,13 +241,13 @@ void WriteSwitcher(int countOfgenericParams)
 				WriteLine($"public OneOfSwitcher<{lesserArityGenericArg}> Switch(Action<T{parmIndex}> action)");
 				using(new WriteIndent(this))
 				{
-					WriteLine($"if (this.value is T{parmIndex})");
+					WriteLine($"if (this.origType == typeof(T{parmIndex}))");
 					using(new WriteIndent(this))
 					{
 						WriteLine($"action((T{parmIndex})value);");
 						WriteLine("hasSwitched = true;");
 					}
-					WriteLine($"return new OneOfSwitcher<{lesserArityGenericArg}>(this.value, this.hasSwitched);");
+					WriteLine($"return new OneOfSwitcher<{lesserArityGenericArg}>(this.value, this.origType, this.hasSwitched);");
 				}
 			}
 			else
@@ -211,7 +256,7 @@ void WriteSwitcher(int countOfgenericParams)
 				WriteLine($"public void Switch(Action<T{parmIndex}> action)");
 				using(new WriteIndent(this))
 				{
-					WriteLine($"if (this.value is T{parmIndex}) action((T{parmIndex})value);");
+					WriteLine($"if (this.origType == typeof(T{parmIndex})) action((T{parmIndex})value);");
 				}
 			}
 		}
@@ -246,15 +291,17 @@ void WriteMatcher(int countOfgenericParams)
 	{
 		WriteLine("readonly object value;");
 		WriteLine("object result;");
+		WriteLine("Type origType;");
 
 		// =============== Constructors
 	    
 		WriteLine("");
-		WriteLine("internal OneOfMatcher(object value, object result)");
+		WriteLine("internal OneOfMatcher(object value, Type origType, object result)");
 		using(new WriteIndent(this))
 		{
 			WriteLine($"this.value = value;");
 			WriteLine($"this.result = result;");
+			WriteLine($"this.origType = origType;");
 		}
 
 		// =============== Match
@@ -271,8 +318,8 @@ void WriteMatcher(int countOfgenericParams)
 				WriteLine($"public OneOfMatcher<{lesserArityGenericArg}> Match(Func<T{parmIndex}, TResult> createResult)");
 				using(new WriteIndent(this))
 				{
-					WriteLine($"if (result == null && value is T{parmIndex}) result = createResult((T{parmIndex})value);");
-					WriteLine($"return new OneOfMatcher<{lesserArityGenericArg}>(this.value, this.result);");
+					WriteLine($"if (result == null && typeof(T{parmIndex}) == origType) result = createResult((T{parmIndex})value);");
+					WriteLine($"return new OneOfMatcher<{lesserArityGenericArg}>(this.value, this.origType, this.result);");
 				}
 			}
 			else
@@ -280,7 +327,7 @@ void WriteMatcher(int countOfgenericParams)
 				WriteLine($"public TResult Match(Func<T{parmIndex}, TResult> createResult)");
 				using(new WriteIndent(this))
 				{
-					WriteLine($"if (result == null && value is T{parmIndex}) result = createResult((T{parmIndex})value);");
+					WriteLine($"if (result == null && typeof(T{parmIndex}) == origType) result = createResult((T{parmIndex})value);");
 					WriteLine($"return (TResult)result;");
 				}
             }
@@ -320,9 +367,9 @@ void WriteMatcher(int countOfgenericParams)
 
 class WriteIndent: IDisposable
 {
-	GeneratedTextTransformation textTransformation;
+	TextTransformation textTransformation;
 
-	public WriteIndent(GeneratedTextTransformation textTransformation)
+	public WriteIndent(TextTransformation textTransformation)
 	{
 		this.textTransformation = textTransformation;
 
