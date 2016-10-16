@@ -46,13 +46,13 @@ namespace OneOf.Tests
         }
 
         [Test]
-        public void EqualsRequiresSameType()
+        public void EqualsDoesNotRequireSameType()
         {
             var v1 = (OneOf<string, bool>)"x";
             var v2 = (OneOf<string, bool, int>)"x";
 
             Assert.IsFalse(v1.Equals(null));
-            Assert.IsFalse(v1.Equals(v2));
+            Assert.IsTrue(v1.Equals(v2));
         }
 
     }

@@ -9,8 +9,7 @@ namespace OneOf.Tests
 {
     public abstract class Response : OneOfBase<
         Response.MethodNotAllowed,
-        Response.InvokeSuccessResponse
-        >
+        Response.InvokeSuccessResponse>
     {
 
         public class MethodNotAllowed : Response
@@ -29,10 +28,12 @@ namespace OneOf.Tests
         public void CanMatchOnBase()
         {
             Response x = new Response.MethodNotAllowed();
-            Assert.AreEqual(true, 
+
+            var result  = 
                 x.Match((Response.MethodNotAllowed methodNotAllowed) => true)
-                .ElseThrow(v => new InvalidOperationException())
-                );
+                .ElseThrow(v => new InvalidOperationException());
+
+            Assert.AreEqual(true, result );
         }
     }
 

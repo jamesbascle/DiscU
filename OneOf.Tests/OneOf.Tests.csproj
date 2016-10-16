@@ -48,10 +48,12 @@
     <Compile Include="EqualityTests.cs" />
     <Compile Include="MatcherTests.cs" />
     <Compile Include="AsTests.cs" />
+    <Compile Include="PolymorphicTests.cs" />
     <Compile Include="SwitchTests.cs" />
     <Compile Include="IsTests.cs" />
     <Compile Include="BaseClassTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ToOneOfTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
