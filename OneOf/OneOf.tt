@@ -88,7 +88,7 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
         WriteLine($"internal static {typeName}<{genericArg}> CreateRaw(object value)");
         using(new WriteIndent(this))
         {
-			WriteLine("if( value == null) throw new ArgumentNullException(nameof(value));");
+			WriteLine("if (value == null) throw new ArgumentNullException(nameof(value));");
             for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
             {
 				//cover our fast exact Type matches
@@ -103,7 +103,7 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 				// This can be improved via reflection trickery if we decide there is a performance justification for it
 				WriteLine($"return Create((dynamic)value);");
             }
-            WriteLine("catch(RuntimeBinderException ex)");
+            WriteLine("catch (RuntimeBinderException ex)");
             using (new WriteIndent(this))
             {
 				//this SHOULDN'T happen thanks to already being in the context of a validly casted object, but you never know...
@@ -114,16 +114,13 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 		WriteLine("");
 		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
         {
-			WriteLine($"internal static {typeName}<{genericArg}> Create(T{parmIndex} value)");
-			using(new WriteIndent(this))
-			{         
-				WriteLine($" return new {typeName}<{genericArg}>((T{parmIndex})value, typeof(T{parmIndex}));");
-			}
+			WriteLine($"static {typeName}<{genericArg}> Create(T{parmIndex} value) => new {typeName}<{genericArg}>(value, typeof(T{parmIndex}));");
 		}
 
 		// =============== ToOneOf
 		// now just uses CreateRaw to get best of both worlds for conversion.  Can blow up if user has incompatible types, but the C# Type system is
 		// just not powerful enough for us to save them from that with any reasonable approaches.
+		WriteLine("");
 		for (var numberOfGenericsInNew = countOfgenericParams - 1; numberOfGenericsInNew < 9; numberOfGenericsInNew ++)
 	    {
 	            var nargs = Enumerable.Range(0, numberOfGenericsInNew + 1).Select(e => "N" + e).ToArray();
@@ -171,7 +168,7 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 			var lesserArityOneOf = Enumerable.Range(0, countOfgenericParams).Where(n => n != parmIndex).ToList();
 			var lesserArityGenericArg = GenerateGenericArgs(lesserArityOneOf);
 
-			WriteLine($"public OneOfMatcher<{lesserArityGenericArg}, TResult> Match<TResult>(Func<T{parmIndex}, TResult> func)  => new OneOfMatcher<{genericArg}, TResult>(value, origType, null).Match(func);");
+			WriteLine($"public OneOfMatcher<{lesserArityGenericArg}, TResult> Match<TResult>(Func<T{parmIndex}, TResult> func) => new OneOfMatcher<{genericArg}, TResult>(value, origType, null).Match(func);");
 		}
 
 		// =============== object overrides
@@ -193,8 +190,8 @@ void WriteSwitcher(int countOfgenericParams)
 	using(new WriteIndent(this))
 	{
 		WriteLine("readonly object value;");
+		WriteLine("readonly Type origType;");
 		WriteLine("bool hasSwitched;");
-		WriteLine("Type origType;");
 
 		// =============== Constructors
 	    
@@ -203,8 +200,8 @@ void WriteSwitcher(int countOfgenericParams)
 		using(new WriteIndent(this))
 		{
 			WriteLine($"this.value = value;");
-			WriteLine($"this.hasSwitched = hasSwitched;");
 			WriteLine($"this.origType = origType;");
+			WriteLine($"this.hasSwitched = hasSwitched;");
 		}
 
 		// =============== Switch
@@ -269,8 +266,8 @@ void WriteMatcher(int countOfgenericParams)
 	using(new WriteIndent(this))
 	{
 		WriteLine("readonly object value;");
+		WriteLine("readonly Type origType;");
 		WriteLine("object result;");
-		WriteLine("Type origType;");
 
 		// =============== Constructors
 	    
@@ -279,8 +276,8 @@ void WriteMatcher(int countOfgenericParams)
 		using(new WriteIndent(this))
 		{
 			WriteLine($"this.value = value;");
-			WriteLine($"this.result = result;");
 			WriteLine($"this.origType = origType;");
+			WriteLine($"this.result = result;");
 		}
 
 		// =============== Match

@@ -22,27 +22,22 @@ namespace OneOf
 
         internal static OneOf<T0, T1> CreateRaw(object value)
         {
-            if( value == null) throw new ArgumentNullException(nameof(value));
+            if (value == null) throw new ArgumentNullException(nameof(value));
             if (value.GetType() == typeof(T0)) return Create((T0)value);
             if (value.GetType() == typeof(T1)) return Create((T1)value);
             try
             {
                 return Create((dynamic)value);
             }
-            catch(RuntimeBinderException ex)
+            catch (RuntimeBinderException ex)
             {
                 throw new ArgumentException(nameof(value), ex);
             }
         }
 
-        internal static OneOf<T0, T1> Create(T0 value)
-        {
-             return new OneOf<T0, T1>((T0)value, typeof(T0));
-        }
-        internal static OneOf<T0, T1> Create(T1 value)
-        {
-             return new OneOf<T0, T1>((T1)value, typeof(T1));
-        }
+        static OneOf<T0, T1> Create(T0 value) => new OneOf<T0, T1>(value, typeof(T0));
+        static OneOf<T0, T1> Create(T1 value) => new OneOf<T0, T1>(value, typeof(T1));
+
         public OneOf<N0, N1> ToOneOf<N0, N1>() => OneOf<N0, N1>.CreateRaw(value);
         public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOf<N0, N1, N2>.CreateRaw(value);
         public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.CreateRaw(value);
@@ -69,8 +64,8 @@ namespace OneOf
         public OneOfSwitcher<T1> Switch(Action<T0> action) => new OneOfSwitcher<T0, T1>(value, origType, false).Switch(action);
         public OneOfSwitcher<T0> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1>(value, origType, false).Switch(action);
 
-        public OneOfMatcher<T1, TResult> Match<TResult>(Func<T0, TResult> func)  => new OneOfMatcher<T0, T1, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, TResult> Match<TResult>(Func<T1, TResult> func)  => new OneOfMatcher<T0, T1, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T1, TResult> Match<TResult>(Func<T0, TResult> func) => new OneOfMatcher<T0, T1, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, TResult> Match<TResult>(Func<T1, TResult> func) => new OneOfMatcher<T0, T1, TResult>(value, origType, null).Match(func);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
         public override int GetHashCode() => (value?.GetHashCode() ?? origType?.GetHashCode() ?? 0);
@@ -91,7 +86,7 @@ namespace OneOf
 
         internal static OneOf<T0, T1, T2> CreateRaw(object value)
         {
-            if( value == null) throw new ArgumentNullException(nameof(value));
+            if (value == null) throw new ArgumentNullException(nameof(value));
             if (value.GetType() == typeof(T0)) return Create((T0)value);
             if (value.GetType() == typeof(T1)) return Create((T1)value);
             if (value.GetType() == typeof(T2)) return Create((T2)value);
@@ -99,24 +94,16 @@ namespace OneOf
             {
                 return Create((dynamic)value);
             }
-            catch(RuntimeBinderException ex)
+            catch (RuntimeBinderException ex)
             {
                 throw new ArgumentException(nameof(value), ex);
             }
         }
 
-        internal static OneOf<T0, T1, T2> Create(T0 value)
-        {
-             return new OneOf<T0, T1, T2>((T0)value, typeof(T0));
-        }
-        internal static OneOf<T0, T1, T2> Create(T1 value)
-        {
-             return new OneOf<T0, T1, T2>((T1)value, typeof(T1));
-        }
-        internal static OneOf<T0, T1, T2> Create(T2 value)
-        {
-             return new OneOf<T0, T1, T2>((T2)value, typeof(T2));
-        }
+        static OneOf<T0, T1, T2> Create(T0 value) => new OneOf<T0, T1, T2>(value, typeof(T0));
+        static OneOf<T0, T1, T2> Create(T1 value) => new OneOf<T0, T1, T2>(value, typeof(T1));
+        static OneOf<T0, T1, T2> Create(T2 value) => new OneOf<T0, T1, T2>(value, typeof(T2));
+
         public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOf<N0, N1, N2>.CreateRaw(value);
         public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.CreateRaw(value);
         public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.CreateRaw(value);
@@ -148,9 +135,9 @@ namespace OneOf
         public OneOfSwitcher<T0, T2> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1, T2>(value, origType, false).Switch(action);
         public OneOfSwitcher<T0, T1> Switch(Action<T2> action) => new OneOfSwitcher<T0, T1, T2>(value, origType, false).Switch(action);
 
-        public OneOfMatcher<T1, T2, TResult> Match<TResult>(Func<T0, TResult> func)  => new OneOfMatcher<T0, T1, T2, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T2, TResult> Match<TResult>(Func<T1, TResult> func)  => new OneOfMatcher<T0, T1, T2, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, TResult> Match<TResult>(Func<T2, TResult> func)  => new OneOfMatcher<T0, T1, T2, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T1, T2, TResult> Match<TResult>(Func<T0, TResult> func) => new OneOfMatcher<T0, T1, T2, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T2, TResult> Match<TResult>(Func<T1, TResult> func) => new OneOfMatcher<T0, T1, T2, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, TResult> Match<TResult>(Func<T2, TResult> func) => new OneOfMatcher<T0, T1, T2, TResult>(value, origType, null).Match(func);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
         public override int GetHashCode() => (value?.GetHashCode() ?? origType?.GetHashCode() ?? 0);
@@ -171,7 +158,7 @@ namespace OneOf
 
         internal static OneOf<T0, T1, T2, T3> CreateRaw(object value)
         {
-            if( value == null) throw new ArgumentNullException(nameof(value));
+            if (value == null) throw new ArgumentNullException(nameof(value));
             if (value.GetType() == typeof(T0)) return Create((T0)value);
             if (value.GetType() == typeof(T1)) return Create((T1)value);
             if (value.GetType() == typeof(T2)) return Create((T2)value);
@@ -180,28 +167,17 @@ namespace OneOf
             {
                 return Create((dynamic)value);
             }
-            catch(RuntimeBinderException ex)
+            catch (RuntimeBinderException ex)
             {
                 throw new ArgumentException(nameof(value), ex);
             }
         }
 
-        internal static OneOf<T0, T1, T2, T3> Create(T0 value)
-        {
-             return new OneOf<T0, T1, T2, T3>((T0)value, typeof(T0));
-        }
-        internal static OneOf<T0, T1, T2, T3> Create(T1 value)
-        {
-             return new OneOf<T0, T1, T2, T3>((T1)value, typeof(T1));
-        }
-        internal static OneOf<T0, T1, T2, T3> Create(T2 value)
-        {
-             return new OneOf<T0, T1, T2, T3>((T2)value, typeof(T2));
-        }
-        internal static OneOf<T0, T1, T2, T3> Create(T3 value)
-        {
-             return new OneOf<T0, T1, T2, T3>((T3)value, typeof(T3));
-        }
+        static OneOf<T0, T1, T2, T3> Create(T0 value) => new OneOf<T0, T1, T2, T3>(value, typeof(T0));
+        static OneOf<T0, T1, T2, T3> Create(T1 value) => new OneOf<T0, T1, T2, T3>(value, typeof(T1));
+        static OneOf<T0, T1, T2, T3> Create(T2 value) => new OneOf<T0, T1, T2, T3>(value, typeof(T2));
+        static OneOf<T0, T1, T2, T3> Create(T3 value) => new OneOf<T0, T1, T2, T3>(value, typeof(T3));
+
         public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.CreateRaw(value);
         public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.CreateRaw(value);
         public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.CreateRaw(value);
@@ -238,10 +214,10 @@ namespace OneOf
         public OneOfSwitcher<T0, T1, T3> Switch(Action<T2> action) => new OneOfSwitcher<T0, T1, T2, T3>(value, origType, false).Switch(action);
         public OneOfSwitcher<T0, T1, T2> Switch(Action<T3> action) => new OneOfSwitcher<T0, T1, T2, T3>(value, origType, false).Switch(action);
 
-        public OneOfMatcher<T1, T2, T3, TResult> Match<TResult>(Func<T0, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T2, T3, TResult> Match<TResult>(Func<T1, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T3, TResult> Match<TResult>(Func<T2, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, TResult> Match<TResult>(Func<T3, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T1, T2, T3, TResult> Match<TResult>(Func<T0, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T2, T3, TResult> Match<TResult>(Func<T1, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T3, TResult> Match<TResult>(Func<T2, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, TResult> Match<TResult>(Func<T3, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, TResult>(value, origType, null).Match(func);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
         public override int GetHashCode() => (value?.GetHashCode() ?? origType?.GetHashCode() ?? 0);
@@ -262,7 +238,7 @@ namespace OneOf
 
         internal static OneOf<T0, T1, T2, T3, T4> CreateRaw(object value)
         {
-            if( value == null) throw new ArgumentNullException(nameof(value));
+            if (value == null) throw new ArgumentNullException(nameof(value));
             if (value.GetType() == typeof(T0)) return Create((T0)value);
             if (value.GetType() == typeof(T1)) return Create((T1)value);
             if (value.GetType() == typeof(T2)) return Create((T2)value);
@@ -272,32 +248,18 @@ namespace OneOf
             {
                 return Create((dynamic)value);
             }
-            catch(RuntimeBinderException ex)
+            catch (RuntimeBinderException ex)
             {
                 throw new ArgumentException(nameof(value), ex);
             }
         }
 
-        internal static OneOf<T0, T1, T2, T3, T4> Create(T0 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4>((T0)value, typeof(T0));
-        }
-        internal static OneOf<T0, T1, T2, T3, T4> Create(T1 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4>((T1)value, typeof(T1));
-        }
-        internal static OneOf<T0, T1, T2, T3, T4> Create(T2 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4>((T2)value, typeof(T2));
-        }
-        internal static OneOf<T0, T1, T2, T3, T4> Create(T3 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4>((T3)value, typeof(T3));
-        }
-        internal static OneOf<T0, T1, T2, T3, T4> Create(T4 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4>((T4)value, typeof(T4));
-        }
+        static OneOf<T0, T1, T2, T3, T4> Create(T0 value) => new OneOf<T0, T1, T2, T3, T4>(value, typeof(T0));
+        static OneOf<T0, T1, T2, T3, T4> Create(T1 value) => new OneOf<T0, T1, T2, T3, T4>(value, typeof(T1));
+        static OneOf<T0, T1, T2, T3, T4> Create(T2 value) => new OneOf<T0, T1, T2, T3, T4>(value, typeof(T2));
+        static OneOf<T0, T1, T2, T3, T4> Create(T3 value) => new OneOf<T0, T1, T2, T3, T4>(value, typeof(T3));
+        static OneOf<T0, T1, T2, T3, T4> Create(T4 value) => new OneOf<T0, T1, T2, T3, T4>(value, typeof(T4));
+
         public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.CreateRaw(value);
         public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.CreateRaw(value);
         public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.CreateRaw(value);
@@ -339,11 +301,11 @@ namespace OneOf
         public OneOfSwitcher<T0, T1, T2, T4> Switch(Action<T3> action) => new OneOfSwitcher<T0, T1, T2, T3, T4>(value, origType, false).Switch(action);
         public OneOfSwitcher<T0, T1, T2, T3> Switch(Action<T4> action) => new OneOfSwitcher<T0, T1, T2, T3, T4>(value, origType, false).Switch(action);
 
-        public OneOfMatcher<T1, T2, T3, T4, TResult> Match<TResult>(Func<T0, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T2, T3, T4, TResult> Match<TResult>(Func<T1, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T3, T4, TResult> Match<TResult>(Func<T2, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T4, TResult> Match<TResult>(Func<T3, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T3, TResult> Match<TResult>(Func<T4, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T1, T2, T3, T4, TResult> Match<TResult>(Func<T0, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T2, T3, T4, TResult> Match<TResult>(Func<T1, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T3, T4, TResult> Match<TResult>(Func<T2, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T4, TResult> Match<TResult>(Func<T3, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T3, TResult> Match<TResult>(Func<T4, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, TResult>(value, origType, null).Match(func);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
         public override int GetHashCode() => (value?.GetHashCode() ?? origType?.GetHashCode() ?? 0);
@@ -364,7 +326,7 @@ namespace OneOf
 
         internal static OneOf<T0, T1, T2, T3, T4, T5> CreateRaw(object value)
         {
-            if( value == null) throw new ArgumentNullException(nameof(value));
+            if (value == null) throw new ArgumentNullException(nameof(value));
             if (value.GetType() == typeof(T0)) return Create((T0)value);
             if (value.GetType() == typeof(T1)) return Create((T1)value);
             if (value.GetType() == typeof(T2)) return Create((T2)value);
@@ -375,36 +337,19 @@ namespace OneOf
             {
                 return Create((dynamic)value);
             }
-            catch(RuntimeBinderException ex)
+            catch (RuntimeBinderException ex)
             {
                 throw new ArgumentException(nameof(value), ex);
             }
         }
 
-        internal static OneOf<T0, T1, T2, T3, T4, T5> Create(T0 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4, T5>((T0)value, typeof(T0));
-        }
-        internal static OneOf<T0, T1, T2, T3, T4, T5> Create(T1 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4, T5>((T1)value, typeof(T1));
-        }
-        internal static OneOf<T0, T1, T2, T3, T4, T5> Create(T2 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4, T5>((T2)value, typeof(T2));
-        }
-        internal static OneOf<T0, T1, T2, T3, T4, T5> Create(T3 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4, T5>((T3)value, typeof(T3));
-        }
-        internal static OneOf<T0, T1, T2, T3, T4, T5> Create(T4 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4, T5>((T4)value, typeof(T4));
-        }
-        internal static OneOf<T0, T1, T2, T3, T4, T5> Create(T5 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4, T5>((T5)value, typeof(T5));
-        }
+        static OneOf<T0, T1, T2, T3, T4, T5> Create(T0 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value, typeof(T0));
+        static OneOf<T0, T1, T2, T3, T4, T5> Create(T1 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value, typeof(T1));
+        static OneOf<T0, T1, T2, T3, T4, T5> Create(T2 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value, typeof(T2));
+        static OneOf<T0, T1, T2, T3, T4, T5> Create(T3 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value, typeof(T3));
+        static OneOf<T0, T1, T2, T3, T4, T5> Create(T4 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value, typeof(T4));
+        static OneOf<T0, T1, T2, T3, T4, T5> Create(T5 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value, typeof(T5));
+
         public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.CreateRaw(value);
         public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.CreateRaw(value);
         public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.CreateRaw(value);
@@ -451,12 +396,12 @@ namespace OneOf
         public OneOfSwitcher<T0, T1, T2, T3, T5> Switch(Action<T4> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(value, origType, false).Switch(action);
         public OneOfSwitcher<T0, T1, T2, T3, T4> Switch(Action<T5> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(value, origType, false).Switch(action);
 
-        public OneOfMatcher<T1, T2, T3, T4, T5, TResult> Match<TResult>(Func<T0, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T2, T3, T4, T5, TResult> Match<TResult>(Func<T1, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T3, T4, T5, TResult> Match<TResult>(Func<T2, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T4, T5, TResult> Match<TResult>(Func<T3, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T3, T5, TResult> Match<TResult>(Func<T4, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T3, T4, TResult> Match<TResult>(Func<T5, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T1, T2, T3, T4, T5, TResult> Match<TResult>(Func<T0, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T2, T3, T4, T5, TResult> Match<TResult>(Func<T1, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T3, T4, T5, TResult> Match<TResult>(Func<T2, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T4, T5, TResult> Match<TResult>(Func<T3, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T3, T5, TResult> Match<TResult>(Func<T4, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T3, T4, TResult> Match<TResult>(Func<T5, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>(value, origType, null).Match(func);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
         public override int GetHashCode() => (value?.GetHashCode() ?? origType?.GetHashCode() ?? 0);
@@ -477,7 +422,7 @@ namespace OneOf
 
         internal static OneOf<T0, T1, T2, T3, T4, T5, T6> CreateRaw(object value)
         {
-            if( value == null) throw new ArgumentNullException(nameof(value));
+            if (value == null) throw new ArgumentNullException(nameof(value));
             if (value.GetType() == typeof(T0)) return Create((T0)value);
             if (value.GetType() == typeof(T1)) return Create((T1)value);
             if (value.GetType() == typeof(T2)) return Create((T2)value);
@@ -489,40 +434,20 @@ namespace OneOf
             {
                 return Create((dynamic)value);
             }
-            catch(RuntimeBinderException ex)
+            catch (RuntimeBinderException ex)
             {
                 throw new ArgumentException(nameof(value), ex);
             }
         }
 
-        internal static OneOf<T0, T1, T2, T3, T4, T5, T6> Create(T0 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4, T5, T6>((T0)value, typeof(T0));
-        }
-        internal static OneOf<T0, T1, T2, T3, T4, T5, T6> Create(T1 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4, T5, T6>((T1)value, typeof(T1));
-        }
-        internal static OneOf<T0, T1, T2, T3, T4, T5, T6> Create(T2 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4, T5, T6>((T2)value, typeof(T2));
-        }
-        internal static OneOf<T0, T1, T2, T3, T4, T5, T6> Create(T3 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4, T5, T6>((T3)value, typeof(T3));
-        }
-        internal static OneOf<T0, T1, T2, T3, T4, T5, T6> Create(T4 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4, T5, T6>((T4)value, typeof(T4));
-        }
-        internal static OneOf<T0, T1, T2, T3, T4, T5, T6> Create(T5 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4, T5, T6>((T5)value, typeof(T5));
-        }
-        internal static OneOf<T0, T1, T2, T3, T4, T5, T6> Create(T6 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4, T5, T6>((T6)value, typeof(T6));
-        }
+        static OneOf<T0, T1, T2, T3, T4, T5, T6> Create(T0 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value, typeof(T0));
+        static OneOf<T0, T1, T2, T3, T4, T5, T6> Create(T1 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value, typeof(T1));
+        static OneOf<T0, T1, T2, T3, T4, T5, T6> Create(T2 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value, typeof(T2));
+        static OneOf<T0, T1, T2, T3, T4, T5, T6> Create(T3 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value, typeof(T3));
+        static OneOf<T0, T1, T2, T3, T4, T5, T6> Create(T4 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value, typeof(T4));
+        static OneOf<T0, T1, T2, T3, T4, T5, T6> Create(T5 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value, typeof(T5));
+        static OneOf<T0, T1, T2, T3, T4, T5, T6> Create(T6 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value, typeof(T6));
+
         public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.CreateRaw(value);
         public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.CreateRaw(value);
         public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.CreateRaw(value);
@@ -574,13 +499,13 @@ namespace OneOf
         public OneOfSwitcher<T0, T1, T2, T3, T4, T6> Switch(Action<T5> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(value, origType, false).Switch(action);
         public OneOfSwitcher<T0, T1, T2, T3, T4, T5> Switch(Action<T6> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(value, origType, false).Switch(action);
 
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> Match<TResult>(Func<T0, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T2, T3, T4, T5, T6, TResult> Match<TResult>(Func<T1, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T3, T4, T5, T6, TResult> Match<TResult>(Func<T2, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T4, T5, T6, TResult> Match<TResult>(Func<T3, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T3, T5, T6, TResult> Match<TResult>(Func<T4, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T3, T4, T6, TResult> Match<TResult>(Func<T5, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult> Match<TResult>(Func<T6, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> Match<TResult>(Func<T0, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T2, T3, T4, T5, T6, TResult> Match<TResult>(Func<T1, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T3, T4, T5, T6, TResult> Match<TResult>(Func<T2, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T4, T5, T6, TResult> Match<TResult>(Func<T3, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T3, T5, T6, TResult> Match<TResult>(Func<T4, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T3, T4, T6, TResult> Match<TResult>(Func<T5, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult> Match<TResult>(Func<T6, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(value, origType, null).Match(func);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
         public override int GetHashCode() => (value?.GetHashCode() ?? origType?.GetHashCode() ?? 0);
@@ -601,7 +526,7 @@ namespace OneOf
 
         internal static OneOf<T0, T1, T2, T3, T4, T5, T6, T7> CreateRaw(object value)
         {
-            if( value == null) throw new ArgumentNullException(nameof(value));
+            if (value == null) throw new ArgumentNullException(nameof(value));
             if (value.GetType() == typeof(T0)) return Create((T0)value);
             if (value.GetType() == typeof(T1)) return Create((T1)value);
             if (value.GetType() == typeof(T2)) return Create((T2)value);
@@ -614,44 +539,21 @@ namespace OneOf
             {
                 return Create((dynamic)value);
             }
-            catch(RuntimeBinderException ex)
+            catch (RuntimeBinderException ex)
             {
                 throw new ArgumentException(nameof(value), ex);
             }
         }
 
-        internal static OneOf<T0, T1, T2, T3, T4, T5, T6, T7> Create(T0 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T0)value, typeof(T0));
-        }
-        internal static OneOf<T0, T1, T2, T3, T4, T5, T6, T7> Create(T1 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T1)value, typeof(T1));
-        }
-        internal static OneOf<T0, T1, T2, T3, T4, T5, T6, T7> Create(T2 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T2)value, typeof(T2));
-        }
-        internal static OneOf<T0, T1, T2, T3, T4, T5, T6, T7> Create(T3 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T3)value, typeof(T3));
-        }
-        internal static OneOf<T0, T1, T2, T3, T4, T5, T6, T7> Create(T4 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T4)value, typeof(T4));
-        }
-        internal static OneOf<T0, T1, T2, T3, T4, T5, T6, T7> Create(T5 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T5)value, typeof(T5));
-        }
-        internal static OneOf<T0, T1, T2, T3, T4, T5, T6, T7> Create(T6 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T6)value, typeof(T6));
-        }
-        internal static OneOf<T0, T1, T2, T3, T4, T5, T6, T7> Create(T7 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T7)value, typeof(T7));
-        }
+        static OneOf<T0, T1, T2, T3, T4, T5, T6, T7> Create(T0 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value, typeof(T0));
+        static OneOf<T0, T1, T2, T3, T4, T5, T6, T7> Create(T1 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value, typeof(T1));
+        static OneOf<T0, T1, T2, T3, T4, T5, T6, T7> Create(T2 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value, typeof(T2));
+        static OneOf<T0, T1, T2, T3, T4, T5, T6, T7> Create(T3 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value, typeof(T3));
+        static OneOf<T0, T1, T2, T3, T4, T5, T6, T7> Create(T4 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value, typeof(T4));
+        static OneOf<T0, T1, T2, T3, T4, T5, T6, T7> Create(T5 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value, typeof(T5));
+        static OneOf<T0, T1, T2, T3, T4, T5, T6, T7> Create(T6 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value, typeof(T6));
+        static OneOf<T0, T1, T2, T3, T4, T5, T6, T7> Create(T7 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value, typeof(T7));
+
         public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.CreateRaw(value);
         public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.CreateRaw(value);
 
@@ -708,14 +610,14 @@ namespace OneOf
         public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T7> Switch(Action<T6> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(value, origType, false).Switch(action);
         public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6> Switch(Action<T7> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(value, origType, false).Switch(action);
 
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> Match<TResult>(Func<T0, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T2, T3, T4, T5, T6, T7, TResult> Match<TResult>(Func<T1, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T3, T4, T5, T6, T7, TResult> Match<TResult>(Func<T2, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T4, T5, T6, T7, TResult> Match<TResult>(Func<T3, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T3, T5, T6, T7, TResult> Match<TResult>(Func<T4, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T3, T4, T6, T7, TResult> Match<TResult>(Func<T5, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T7, TResult> Match<TResult>(Func<T6, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult> Match<TResult>(Func<T7, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> Match<TResult>(Func<T0, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T2, T3, T4, T5, T6, T7, TResult> Match<TResult>(Func<T1, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T3, T4, T5, T6, T7, TResult> Match<TResult>(Func<T2, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T4, T5, T6, T7, TResult> Match<TResult>(Func<T3, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T3, T5, T6, T7, TResult> Match<TResult>(Func<T4, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T3, T4, T6, T7, TResult> Match<TResult>(Func<T5, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T7, TResult> Match<TResult>(Func<T6, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult> Match<TResult>(Func<T7, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value, origType, null).Match(func);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
         public override int GetHashCode() => (value?.GetHashCode() ?? origType?.GetHashCode() ?? 0);
@@ -736,7 +638,7 @@ namespace OneOf
 
         internal static OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> CreateRaw(object value)
         {
-            if( value == null) throw new ArgumentNullException(nameof(value));
+            if (value == null) throw new ArgumentNullException(nameof(value));
             if (value.GetType() == typeof(T0)) return Create((T0)value);
             if (value.GetType() == typeof(T1)) return Create((T1)value);
             if (value.GetType() == typeof(T2)) return Create((T2)value);
@@ -750,48 +652,22 @@ namespace OneOf
             {
                 return Create((dynamic)value);
             }
-            catch(RuntimeBinderException ex)
+            catch (RuntimeBinderException ex)
             {
                 throw new ArgumentException(nameof(value), ex);
             }
         }
 
-        internal static OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T0 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T0)value, typeof(T0));
-        }
-        internal static OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T1 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T1)value, typeof(T1));
-        }
-        internal static OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T2 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T2)value, typeof(T2));
-        }
-        internal static OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T3 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T3)value, typeof(T3));
-        }
-        internal static OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T4 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T4)value, typeof(T4));
-        }
-        internal static OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T5 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T5)value, typeof(T5));
-        }
-        internal static OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T6 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T6)value, typeof(T6));
-        }
-        internal static OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T7 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T7)value, typeof(T7));
-        }
-        internal static OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T8 value)
-        {
-             return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T8)value, typeof(T8));
-        }
+        static OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T0 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T0));
+        static OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T1 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T1));
+        static OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T2 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T2));
+        static OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T3 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T3));
+        static OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T4 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T4));
+        static OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T5 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T5));
+        static OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T6 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T6));
+        static OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T7 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T7));
+        static OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T8 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T8));
+
         public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.CreateRaw(value);
 
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T0 value) => CreateRaw(value);
@@ -853,15 +729,15 @@ namespace OneOf
         public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T8> Switch(Action<T7> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, origType, false).Switch(action);
         public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7> Switch(Action<T8> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, origType, false).Switch(action);
 
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T0, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T2, T3, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T1, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T3, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T2, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T3, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T3, T5, T6, T7, T8, TResult> Match<TResult>(Func<T4, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T3, T4, T6, T7, T8, TResult> Match<TResult>(Func<T5, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T7, T8, TResult> Match<TResult>(Func<T6, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T8, TResult> Match<TResult>(Func<T7, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> Match<TResult>(Func<T8, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T0, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T2, T3, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T1, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T3, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T2, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T3, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T3, T5, T6, T7, T8, TResult> Match<TResult>(Func<T4, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T3, T4, T6, T7, T8, TResult> Match<TResult>(Func<T5, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T7, T8, TResult> Match<TResult>(Func<T6, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T8, TResult> Match<TResult>(Func<T7, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> Match<TResult>(Func<T8, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
         public override int GetHashCode() => (value?.GetHashCode() ?? origType?.GetHashCode() ?? 0);
@@ -888,27 +764,22 @@ namespace OneOf
 
         internal static OneOfBase<T0, T1> CreateRaw(object value)
         {
-            if( value == null) throw new ArgumentNullException(nameof(value));
+            if (value == null) throw new ArgumentNullException(nameof(value));
             if (value.GetType() == typeof(T0)) return Create((T0)value);
             if (value.GetType() == typeof(T1)) return Create((T1)value);
             try
             {
                 return Create((dynamic)value);
             }
-            catch(RuntimeBinderException ex)
+            catch (RuntimeBinderException ex)
             {
                 throw new ArgumentException(nameof(value), ex);
             }
         }
 
-        internal static OneOfBase<T0, T1> Create(T0 value)
-        {
-             return new OneOfBase<T0, T1>((T0)value, typeof(T0));
-        }
-        internal static OneOfBase<T0, T1> Create(T1 value)
-        {
-             return new OneOfBase<T0, T1>((T1)value, typeof(T1));
-        }
+        static OneOfBase<T0, T1> Create(T0 value) => new OneOfBase<T0, T1>(value, typeof(T0));
+        static OneOfBase<T0, T1> Create(T1 value) => new OneOfBase<T0, T1>(value, typeof(T1));
+
         public OneOfBase<N0, N1> ToOneOf<N0, N1>() => OneOfBase<N0, N1>.CreateRaw(value);
         public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfBase<N0, N1, N2>.CreateRaw(value);
         public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.CreateRaw(value);
@@ -935,8 +806,8 @@ namespace OneOf
         public OneOfSwitcher<T1> Switch(Action<T0> action) => new OneOfSwitcher<T0, T1>(value, origType, false).Switch(action);
         public OneOfSwitcher<T0> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1>(value, origType, false).Switch(action);
 
-        public OneOfMatcher<T1, TResult> Match<TResult>(Func<T0, TResult> func)  => new OneOfMatcher<T0, T1, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, TResult> Match<TResult>(Func<T1, TResult> func)  => new OneOfMatcher<T0, T1, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T1, TResult> Match<TResult>(Func<T0, TResult> func) => new OneOfMatcher<T0, T1, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, TResult> Match<TResult>(Func<T1, TResult> func) => new OneOfMatcher<T0, T1, TResult>(value, origType, null).Match(func);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
         public override int GetHashCode() => (value?.GetHashCode() ?? origType?.GetHashCode() ?? 0);
@@ -963,7 +834,7 @@ namespace OneOf
 
         internal static OneOfBase<T0, T1, T2> CreateRaw(object value)
         {
-            if( value == null) throw new ArgumentNullException(nameof(value));
+            if (value == null) throw new ArgumentNullException(nameof(value));
             if (value.GetType() == typeof(T0)) return Create((T0)value);
             if (value.GetType() == typeof(T1)) return Create((T1)value);
             if (value.GetType() == typeof(T2)) return Create((T2)value);
@@ -971,24 +842,16 @@ namespace OneOf
             {
                 return Create((dynamic)value);
             }
-            catch(RuntimeBinderException ex)
+            catch (RuntimeBinderException ex)
             {
                 throw new ArgumentException(nameof(value), ex);
             }
         }
 
-        internal static OneOfBase<T0, T1, T2> Create(T0 value)
-        {
-             return new OneOfBase<T0, T1, T2>((T0)value, typeof(T0));
-        }
-        internal static OneOfBase<T0, T1, T2> Create(T1 value)
-        {
-             return new OneOfBase<T0, T1, T2>((T1)value, typeof(T1));
-        }
-        internal static OneOfBase<T0, T1, T2> Create(T2 value)
-        {
-             return new OneOfBase<T0, T1, T2>((T2)value, typeof(T2));
-        }
+        static OneOfBase<T0, T1, T2> Create(T0 value) => new OneOfBase<T0, T1, T2>(value, typeof(T0));
+        static OneOfBase<T0, T1, T2> Create(T1 value) => new OneOfBase<T0, T1, T2>(value, typeof(T1));
+        static OneOfBase<T0, T1, T2> Create(T2 value) => new OneOfBase<T0, T1, T2>(value, typeof(T2));
+
         public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfBase<N0, N1, N2>.CreateRaw(value);
         public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.CreateRaw(value);
         public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.CreateRaw(value);
@@ -1020,9 +883,9 @@ namespace OneOf
         public OneOfSwitcher<T0, T2> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1, T2>(value, origType, false).Switch(action);
         public OneOfSwitcher<T0, T1> Switch(Action<T2> action) => new OneOfSwitcher<T0, T1, T2>(value, origType, false).Switch(action);
 
-        public OneOfMatcher<T1, T2, TResult> Match<TResult>(Func<T0, TResult> func)  => new OneOfMatcher<T0, T1, T2, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T2, TResult> Match<TResult>(Func<T1, TResult> func)  => new OneOfMatcher<T0, T1, T2, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, TResult> Match<TResult>(Func<T2, TResult> func)  => new OneOfMatcher<T0, T1, T2, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T1, T2, TResult> Match<TResult>(Func<T0, TResult> func) => new OneOfMatcher<T0, T1, T2, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T2, TResult> Match<TResult>(Func<T1, TResult> func) => new OneOfMatcher<T0, T1, T2, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, TResult> Match<TResult>(Func<T2, TResult> func) => new OneOfMatcher<T0, T1, T2, TResult>(value, origType, null).Match(func);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
         public override int GetHashCode() => (value?.GetHashCode() ?? origType?.GetHashCode() ?? 0);
@@ -1049,7 +912,7 @@ namespace OneOf
 
         internal static OneOfBase<T0, T1, T2, T3> CreateRaw(object value)
         {
-            if( value == null) throw new ArgumentNullException(nameof(value));
+            if (value == null) throw new ArgumentNullException(nameof(value));
             if (value.GetType() == typeof(T0)) return Create((T0)value);
             if (value.GetType() == typeof(T1)) return Create((T1)value);
             if (value.GetType() == typeof(T2)) return Create((T2)value);
@@ -1058,28 +921,17 @@ namespace OneOf
             {
                 return Create((dynamic)value);
             }
-            catch(RuntimeBinderException ex)
+            catch (RuntimeBinderException ex)
             {
                 throw new ArgumentException(nameof(value), ex);
             }
         }
 
-        internal static OneOfBase<T0, T1, T2, T3> Create(T0 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3>((T0)value, typeof(T0));
-        }
-        internal static OneOfBase<T0, T1, T2, T3> Create(T1 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3>((T1)value, typeof(T1));
-        }
-        internal static OneOfBase<T0, T1, T2, T3> Create(T2 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3>((T2)value, typeof(T2));
-        }
-        internal static OneOfBase<T0, T1, T2, T3> Create(T3 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3>((T3)value, typeof(T3));
-        }
+        static OneOfBase<T0, T1, T2, T3> Create(T0 value) => new OneOfBase<T0, T1, T2, T3>(value, typeof(T0));
+        static OneOfBase<T0, T1, T2, T3> Create(T1 value) => new OneOfBase<T0, T1, T2, T3>(value, typeof(T1));
+        static OneOfBase<T0, T1, T2, T3> Create(T2 value) => new OneOfBase<T0, T1, T2, T3>(value, typeof(T2));
+        static OneOfBase<T0, T1, T2, T3> Create(T3 value) => new OneOfBase<T0, T1, T2, T3>(value, typeof(T3));
+
         public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.CreateRaw(value);
         public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.CreateRaw(value);
         public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.CreateRaw(value);
@@ -1116,10 +968,10 @@ namespace OneOf
         public OneOfSwitcher<T0, T1, T3> Switch(Action<T2> action) => new OneOfSwitcher<T0, T1, T2, T3>(value, origType, false).Switch(action);
         public OneOfSwitcher<T0, T1, T2> Switch(Action<T3> action) => new OneOfSwitcher<T0, T1, T2, T3>(value, origType, false).Switch(action);
 
-        public OneOfMatcher<T1, T2, T3, TResult> Match<TResult>(Func<T0, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T2, T3, TResult> Match<TResult>(Func<T1, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T3, TResult> Match<TResult>(Func<T2, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, TResult> Match<TResult>(Func<T3, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T1, T2, T3, TResult> Match<TResult>(Func<T0, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T2, T3, TResult> Match<TResult>(Func<T1, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T3, TResult> Match<TResult>(Func<T2, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, TResult> Match<TResult>(Func<T3, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, TResult>(value, origType, null).Match(func);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
         public override int GetHashCode() => (value?.GetHashCode() ?? origType?.GetHashCode() ?? 0);
@@ -1146,7 +998,7 @@ namespace OneOf
 
         internal static OneOfBase<T0, T1, T2, T3, T4> CreateRaw(object value)
         {
-            if( value == null) throw new ArgumentNullException(nameof(value));
+            if (value == null) throw new ArgumentNullException(nameof(value));
             if (value.GetType() == typeof(T0)) return Create((T0)value);
             if (value.GetType() == typeof(T1)) return Create((T1)value);
             if (value.GetType() == typeof(T2)) return Create((T2)value);
@@ -1156,32 +1008,18 @@ namespace OneOf
             {
                 return Create((dynamic)value);
             }
-            catch(RuntimeBinderException ex)
+            catch (RuntimeBinderException ex)
             {
                 throw new ArgumentException(nameof(value), ex);
             }
         }
 
-        internal static OneOfBase<T0, T1, T2, T3, T4> Create(T0 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4>((T0)value, typeof(T0));
-        }
-        internal static OneOfBase<T0, T1, T2, T3, T4> Create(T1 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4>((T1)value, typeof(T1));
-        }
-        internal static OneOfBase<T0, T1, T2, T3, T4> Create(T2 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4>((T2)value, typeof(T2));
-        }
-        internal static OneOfBase<T0, T1, T2, T3, T4> Create(T3 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4>((T3)value, typeof(T3));
-        }
-        internal static OneOfBase<T0, T1, T2, T3, T4> Create(T4 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4>((T4)value, typeof(T4));
-        }
+        static OneOfBase<T0, T1, T2, T3, T4> Create(T0 value) => new OneOfBase<T0, T1, T2, T3, T4>(value, typeof(T0));
+        static OneOfBase<T0, T1, T2, T3, T4> Create(T1 value) => new OneOfBase<T0, T1, T2, T3, T4>(value, typeof(T1));
+        static OneOfBase<T0, T1, T2, T3, T4> Create(T2 value) => new OneOfBase<T0, T1, T2, T3, T4>(value, typeof(T2));
+        static OneOfBase<T0, T1, T2, T3, T4> Create(T3 value) => new OneOfBase<T0, T1, T2, T3, T4>(value, typeof(T3));
+        static OneOfBase<T0, T1, T2, T3, T4> Create(T4 value) => new OneOfBase<T0, T1, T2, T3, T4>(value, typeof(T4));
+
         public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.CreateRaw(value);
         public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.CreateRaw(value);
         public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.CreateRaw(value);
@@ -1223,11 +1061,11 @@ namespace OneOf
         public OneOfSwitcher<T0, T1, T2, T4> Switch(Action<T3> action) => new OneOfSwitcher<T0, T1, T2, T3, T4>(value, origType, false).Switch(action);
         public OneOfSwitcher<T0, T1, T2, T3> Switch(Action<T4> action) => new OneOfSwitcher<T0, T1, T2, T3, T4>(value, origType, false).Switch(action);
 
-        public OneOfMatcher<T1, T2, T3, T4, TResult> Match<TResult>(Func<T0, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T2, T3, T4, TResult> Match<TResult>(Func<T1, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T3, T4, TResult> Match<TResult>(Func<T2, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T4, TResult> Match<TResult>(Func<T3, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T3, TResult> Match<TResult>(Func<T4, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T1, T2, T3, T4, TResult> Match<TResult>(Func<T0, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T2, T3, T4, TResult> Match<TResult>(Func<T1, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T3, T4, TResult> Match<TResult>(Func<T2, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T4, TResult> Match<TResult>(Func<T3, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T3, TResult> Match<TResult>(Func<T4, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, TResult>(value, origType, null).Match(func);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
         public override int GetHashCode() => (value?.GetHashCode() ?? origType?.GetHashCode() ?? 0);
@@ -1254,7 +1092,7 @@ namespace OneOf
 
         internal static OneOfBase<T0, T1, T2, T3, T4, T5> CreateRaw(object value)
         {
-            if( value == null) throw new ArgumentNullException(nameof(value));
+            if (value == null) throw new ArgumentNullException(nameof(value));
             if (value.GetType() == typeof(T0)) return Create((T0)value);
             if (value.GetType() == typeof(T1)) return Create((T1)value);
             if (value.GetType() == typeof(T2)) return Create((T2)value);
@@ -1265,36 +1103,19 @@ namespace OneOf
             {
                 return Create((dynamic)value);
             }
-            catch(RuntimeBinderException ex)
+            catch (RuntimeBinderException ex)
             {
                 throw new ArgumentException(nameof(value), ex);
             }
         }
 
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5> Create(T0 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4, T5>((T0)value, typeof(T0));
-        }
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5> Create(T1 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4, T5>((T1)value, typeof(T1));
-        }
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5> Create(T2 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4, T5>((T2)value, typeof(T2));
-        }
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5> Create(T3 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4, T5>((T3)value, typeof(T3));
-        }
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5> Create(T4 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4, T5>((T4)value, typeof(T4));
-        }
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5> Create(T5 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4, T5>((T5)value, typeof(T5));
-        }
+        static OneOfBase<T0, T1, T2, T3, T4, T5> Create(T0 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value, typeof(T0));
+        static OneOfBase<T0, T1, T2, T3, T4, T5> Create(T1 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value, typeof(T1));
+        static OneOfBase<T0, T1, T2, T3, T4, T5> Create(T2 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value, typeof(T2));
+        static OneOfBase<T0, T1, T2, T3, T4, T5> Create(T3 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value, typeof(T3));
+        static OneOfBase<T0, T1, T2, T3, T4, T5> Create(T4 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value, typeof(T4));
+        static OneOfBase<T0, T1, T2, T3, T4, T5> Create(T5 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value, typeof(T5));
+
         public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.CreateRaw(value);
         public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.CreateRaw(value);
         public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.CreateRaw(value);
@@ -1341,12 +1162,12 @@ namespace OneOf
         public OneOfSwitcher<T0, T1, T2, T3, T5> Switch(Action<T4> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(value, origType, false).Switch(action);
         public OneOfSwitcher<T0, T1, T2, T3, T4> Switch(Action<T5> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(value, origType, false).Switch(action);
 
-        public OneOfMatcher<T1, T2, T3, T4, T5, TResult> Match<TResult>(Func<T0, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T2, T3, T4, T5, TResult> Match<TResult>(Func<T1, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T3, T4, T5, TResult> Match<TResult>(Func<T2, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T4, T5, TResult> Match<TResult>(Func<T3, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T3, T5, TResult> Match<TResult>(Func<T4, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T3, T4, TResult> Match<TResult>(Func<T5, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T1, T2, T3, T4, T5, TResult> Match<TResult>(Func<T0, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T2, T3, T4, T5, TResult> Match<TResult>(Func<T1, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T3, T4, T5, TResult> Match<TResult>(Func<T2, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T4, T5, TResult> Match<TResult>(Func<T3, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T3, T5, TResult> Match<TResult>(Func<T4, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T3, T4, TResult> Match<TResult>(Func<T5, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>(value, origType, null).Match(func);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
         public override int GetHashCode() => (value?.GetHashCode() ?? origType?.GetHashCode() ?? 0);
@@ -1373,7 +1194,7 @@ namespace OneOf
 
         internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6> CreateRaw(object value)
         {
-            if( value == null) throw new ArgumentNullException(nameof(value));
+            if (value == null) throw new ArgumentNullException(nameof(value));
             if (value.GetType() == typeof(T0)) return Create((T0)value);
             if (value.GetType() == typeof(T1)) return Create((T1)value);
             if (value.GetType() == typeof(T2)) return Create((T2)value);
@@ -1385,40 +1206,20 @@ namespace OneOf
             {
                 return Create((dynamic)value);
             }
-            catch(RuntimeBinderException ex)
+            catch (RuntimeBinderException ex)
             {
                 throw new ArgumentException(nameof(value), ex);
             }
         }
 
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6> Create(T0 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4, T5, T6>((T0)value, typeof(T0));
-        }
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6> Create(T1 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4, T5, T6>((T1)value, typeof(T1));
-        }
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6> Create(T2 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4, T5, T6>((T2)value, typeof(T2));
-        }
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6> Create(T3 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4, T5, T6>((T3)value, typeof(T3));
-        }
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6> Create(T4 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4, T5, T6>((T4)value, typeof(T4));
-        }
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6> Create(T5 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4, T5, T6>((T5)value, typeof(T5));
-        }
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6> Create(T6 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4, T5, T6>((T6)value, typeof(T6));
-        }
+        static OneOfBase<T0, T1, T2, T3, T4, T5, T6> Create(T0 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value, typeof(T0));
+        static OneOfBase<T0, T1, T2, T3, T4, T5, T6> Create(T1 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value, typeof(T1));
+        static OneOfBase<T0, T1, T2, T3, T4, T5, T6> Create(T2 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value, typeof(T2));
+        static OneOfBase<T0, T1, T2, T3, T4, T5, T6> Create(T3 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value, typeof(T3));
+        static OneOfBase<T0, T1, T2, T3, T4, T5, T6> Create(T4 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value, typeof(T4));
+        static OneOfBase<T0, T1, T2, T3, T4, T5, T6> Create(T5 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value, typeof(T5));
+        static OneOfBase<T0, T1, T2, T3, T4, T5, T6> Create(T6 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value, typeof(T6));
+
         public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.CreateRaw(value);
         public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.CreateRaw(value);
         public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.CreateRaw(value);
@@ -1470,13 +1271,13 @@ namespace OneOf
         public OneOfSwitcher<T0, T1, T2, T3, T4, T6> Switch(Action<T5> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(value, origType, false).Switch(action);
         public OneOfSwitcher<T0, T1, T2, T3, T4, T5> Switch(Action<T6> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(value, origType, false).Switch(action);
 
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> Match<TResult>(Func<T0, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T2, T3, T4, T5, T6, TResult> Match<TResult>(Func<T1, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T3, T4, T5, T6, TResult> Match<TResult>(Func<T2, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T4, T5, T6, TResult> Match<TResult>(Func<T3, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T3, T5, T6, TResult> Match<TResult>(Func<T4, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T3, T4, T6, TResult> Match<TResult>(Func<T5, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult> Match<TResult>(Func<T6, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> Match<TResult>(Func<T0, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T2, T3, T4, T5, T6, TResult> Match<TResult>(Func<T1, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T3, T4, T5, T6, TResult> Match<TResult>(Func<T2, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T4, T5, T6, TResult> Match<TResult>(Func<T3, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T3, T5, T6, TResult> Match<TResult>(Func<T4, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T3, T4, T6, TResult> Match<TResult>(Func<T5, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult> Match<TResult>(Func<T6, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(value, origType, null).Match(func);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
         public override int GetHashCode() => (value?.GetHashCode() ?? origType?.GetHashCode() ?? 0);
@@ -1503,7 +1304,7 @@ namespace OneOf
 
         internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> CreateRaw(object value)
         {
-            if( value == null) throw new ArgumentNullException(nameof(value));
+            if (value == null) throw new ArgumentNullException(nameof(value));
             if (value.GetType() == typeof(T0)) return Create((T0)value);
             if (value.GetType() == typeof(T1)) return Create((T1)value);
             if (value.GetType() == typeof(T2)) return Create((T2)value);
@@ -1516,44 +1317,21 @@ namespace OneOf
             {
                 return Create((dynamic)value);
             }
-            catch(RuntimeBinderException ex)
+            catch (RuntimeBinderException ex)
             {
                 throw new ArgumentException(nameof(value), ex);
             }
         }
 
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> Create(T0 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T0)value, typeof(T0));
-        }
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> Create(T1 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T1)value, typeof(T1));
-        }
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> Create(T2 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T2)value, typeof(T2));
-        }
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> Create(T3 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T3)value, typeof(T3));
-        }
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> Create(T4 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T4)value, typeof(T4));
-        }
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> Create(T5 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T5)value, typeof(T5));
-        }
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> Create(T6 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T6)value, typeof(T6));
-        }
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> Create(T7 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T7)value, typeof(T7));
-        }
+        static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> Create(T0 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value, typeof(T0));
+        static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> Create(T1 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value, typeof(T1));
+        static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> Create(T2 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value, typeof(T2));
+        static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> Create(T3 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value, typeof(T3));
+        static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> Create(T4 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value, typeof(T4));
+        static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> Create(T5 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value, typeof(T5));
+        static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> Create(T6 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value, typeof(T6));
+        static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> Create(T7 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value, typeof(T7));
+
         public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.CreateRaw(value);
         public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.CreateRaw(value);
 
@@ -1610,14 +1388,14 @@ namespace OneOf
         public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T7> Switch(Action<T6> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(value, origType, false).Switch(action);
         public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6> Switch(Action<T7> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(value, origType, false).Switch(action);
 
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> Match<TResult>(Func<T0, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T2, T3, T4, T5, T6, T7, TResult> Match<TResult>(Func<T1, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T3, T4, T5, T6, T7, TResult> Match<TResult>(Func<T2, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T4, T5, T6, T7, TResult> Match<TResult>(Func<T3, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T3, T5, T6, T7, TResult> Match<TResult>(Func<T4, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T3, T4, T6, T7, TResult> Match<TResult>(Func<T5, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T7, TResult> Match<TResult>(Func<T6, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult> Match<TResult>(Func<T7, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> Match<TResult>(Func<T0, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T2, T3, T4, T5, T6, T7, TResult> Match<TResult>(Func<T1, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T3, T4, T5, T6, T7, TResult> Match<TResult>(Func<T2, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T4, T5, T6, T7, TResult> Match<TResult>(Func<T3, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T3, T5, T6, T7, TResult> Match<TResult>(Func<T4, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T3, T4, T6, T7, TResult> Match<TResult>(Func<T5, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T7, TResult> Match<TResult>(Func<T6, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult> Match<TResult>(Func<T7, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(value, origType, null).Match(func);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
         public override int GetHashCode() => (value?.GetHashCode() ?? origType?.GetHashCode() ?? 0);
@@ -1644,7 +1422,7 @@ namespace OneOf
 
         internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> CreateRaw(object value)
         {
-            if( value == null) throw new ArgumentNullException(nameof(value));
+            if (value == null) throw new ArgumentNullException(nameof(value));
             if (value.GetType() == typeof(T0)) return Create((T0)value);
             if (value.GetType() == typeof(T1)) return Create((T1)value);
             if (value.GetType() == typeof(T2)) return Create((T2)value);
@@ -1658,48 +1436,22 @@ namespace OneOf
             {
                 return Create((dynamic)value);
             }
-            catch(RuntimeBinderException ex)
+            catch (RuntimeBinderException ex)
             {
                 throw new ArgumentException(nameof(value), ex);
             }
         }
 
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T0 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T0)value, typeof(T0));
-        }
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T1 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T1)value, typeof(T1));
-        }
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T2 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T2)value, typeof(T2));
-        }
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T3 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T3)value, typeof(T3));
-        }
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T4 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T4)value, typeof(T4));
-        }
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T5 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T5)value, typeof(T5));
-        }
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T6 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T6)value, typeof(T6));
-        }
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T7 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T7)value, typeof(T7));
-        }
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T8 value)
-        {
-             return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T8)value, typeof(T8));
-        }
+        static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T0 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T0));
+        static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T1 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T1));
+        static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T2 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T2));
+        static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T3 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T3));
+        static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T4 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T4));
+        static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T5 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T5));
+        static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T6 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T6));
+        static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T7 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T7));
+        static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T8 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T8));
+
         public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.CreateRaw(value);
 
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T0 value) => CreateRaw(value);
@@ -1761,15 +1513,15 @@ namespace OneOf
         public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T8> Switch(Action<T7> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, origType, false).Switch(action);
         public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7> Switch(Action<T8> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, origType, false).Switch(action);
 
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T0, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T2, T3, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T1, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T3, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T2, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T3, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T3, T5, T6, T7, T8, TResult> Match<TResult>(Func<T4, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T3, T4, T6, T7, T8, TResult> Match<TResult>(Func<T5, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T7, T8, TResult> Match<TResult>(Func<T6, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T8, TResult> Match<TResult>(Func<T7, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
-        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> Match<TResult>(Func<T8, TResult> func)  => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T0, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T2, T3, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T1, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T3, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T2, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T3, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T3, T5, T6, T7, T8, TResult> Match<TResult>(Func<T4, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T3, T4, T6, T7, T8, TResult> Match<TResult>(Func<T5, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T7, T8, TResult> Match<TResult>(Func<T6, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T8, TResult> Match<TResult>(Func<T7, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
+        public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> Match<TResult>(Func<T8, TResult> func) => new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, origType, null).Match(func);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
         public override int GetHashCode() => (value?.GetHashCode() ?? origType?.GetHashCode() ?? 0);
@@ -1779,14 +1531,14 @@ namespace OneOf
     public struct OneOfSwitcher<T0>
     {
         readonly object value;
+        readonly Type origType;
         bool hasSwitched;
-        Type origType;
 
         internal OneOfSwitcher(object value, Type origType, bool hasSwitched)
         {
             this.value = value;
-            this.hasSwitched = hasSwitched;
             this.origType = origType;
+            this.hasSwitched = hasSwitched;
         }
 
         public void Switch(Action<T0> action)
@@ -1808,14 +1560,14 @@ namespace OneOf
     public struct OneOfSwitcher<T0, T1>
     {
         readonly object value;
+        readonly Type origType;
         bool hasSwitched;
-        Type origType;
 
         internal OneOfSwitcher(object value, Type origType, bool hasSwitched)
         {
             this.value = value;
-            this.hasSwitched = hasSwitched;
             this.origType = origType;
+            this.hasSwitched = hasSwitched;
         }
 
         public OneOfSwitcher<T1> Switch(Action<T0> action)
@@ -1852,14 +1604,14 @@ namespace OneOf
     public struct OneOfSwitcher<T0, T1, T2>
     {
         readonly object value;
+        readonly Type origType;
         bool hasSwitched;
-        Type origType;
 
         internal OneOfSwitcher(object value, Type origType, bool hasSwitched)
         {
             this.value = value;
-            this.hasSwitched = hasSwitched;
             this.origType = origType;
+            this.hasSwitched = hasSwitched;
         }
 
         public OneOfSwitcher<T1, T2> Switch(Action<T0> action)
@@ -1906,14 +1658,14 @@ namespace OneOf
     public struct OneOfSwitcher<T0, T1, T2, T3>
     {
         readonly object value;
+        readonly Type origType;
         bool hasSwitched;
-        Type origType;
 
         internal OneOfSwitcher(object value, Type origType, bool hasSwitched)
         {
             this.value = value;
-            this.hasSwitched = hasSwitched;
             this.origType = origType;
+            this.hasSwitched = hasSwitched;
         }
 
         public OneOfSwitcher<T1, T2, T3> Switch(Action<T0> action)
@@ -1970,14 +1722,14 @@ namespace OneOf
     public struct OneOfSwitcher<T0, T1, T2, T3, T4>
     {
         readonly object value;
+        readonly Type origType;
         bool hasSwitched;
-        Type origType;
 
         internal OneOfSwitcher(object value, Type origType, bool hasSwitched)
         {
             this.value = value;
-            this.hasSwitched = hasSwitched;
             this.origType = origType;
+            this.hasSwitched = hasSwitched;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4> Switch(Action<T0> action)
@@ -2044,14 +1796,14 @@ namespace OneOf
     public struct OneOfSwitcher<T0, T1, T2, T3, T4, T5>
     {
         readonly object value;
+        readonly Type origType;
         bool hasSwitched;
-        Type origType;
 
         internal OneOfSwitcher(object value, Type origType, bool hasSwitched)
         {
             this.value = value;
-            this.hasSwitched = hasSwitched;
             this.origType = origType;
+            this.hasSwitched = hasSwitched;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5> Switch(Action<T0> action)
@@ -2128,14 +1880,14 @@ namespace OneOf
     public struct OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>
     {
         readonly object value;
+        readonly Type origType;
         bool hasSwitched;
-        Type origType;
 
         internal OneOfSwitcher(object value, Type origType, bool hasSwitched)
         {
             this.value = value;
-            this.hasSwitched = hasSwitched;
             this.origType = origType;
+            this.hasSwitched = hasSwitched;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6> Switch(Action<T0> action)
@@ -2222,14 +1974,14 @@ namespace OneOf
     public struct OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>
     {
         readonly object value;
+        readonly Type origType;
         bool hasSwitched;
-        Type origType;
 
         internal OneOfSwitcher(object value, Type origType, bool hasSwitched)
         {
             this.value = value;
-            this.hasSwitched = hasSwitched;
             this.origType = origType;
+            this.hasSwitched = hasSwitched;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> Switch(Action<T0> action)
@@ -2326,14 +2078,14 @@ namespace OneOf
     public struct OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>
     {
         readonly object value;
+        readonly Type origType;
         bool hasSwitched;
-        Type origType;
 
         internal OneOfSwitcher(object value, Type origType, bool hasSwitched)
         {
             this.value = value;
-            this.hasSwitched = hasSwitched;
             this.origType = origType;
+            this.hasSwitched = hasSwitched;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> Switch(Action<T0> action)
@@ -2440,14 +2192,14 @@ namespace OneOf
     public struct OneOfMatcher<T0, TResult>
     {
         readonly object value;
+        readonly Type origType;
         object result;
-        Type origType;
 
         internal OneOfMatcher(object value, Type origType, object result)
         {
             this.value = value;
-            this.result = result;
             this.origType = origType;
+            this.result = result;
         }
         public TResult Match(Func<T0, TResult> createResult)
         {
@@ -2477,14 +2229,14 @@ namespace OneOf
     public struct OneOfMatcher<T0, T1, TResult>
     {
         readonly object value;
+        readonly Type origType;
         object result;
-        Type origType;
 
         internal OneOfMatcher(object value, Type origType, object result)
         {
             this.value = value;
-            this.result = result;
             this.origType = origType;
+            this.result = result;
         }
 
         public OneOfMatcher<T1, TResult> Match(Func<T0, TResult> createResult)
@@ -2521,14 +2273,14 @@ namespace OneOf
     public struct OneOfMatcher<T0, T1, T2, TResult>
     {
         readonly object value;
+        readonly Type origType;
         object result;
-        Type origType;
 
         internal OneOfMatcher(object value, Type origType, object result)
         {
             this.value = value;
-            this.result = result;
             this.origType = origType;
+            this.result = result;
         }
 
         public OneOfMatcher<T1, T2, TResult> Match(Func<T0, TResult> createResult)
@@ -2571,14 +2323,14 @@ namespace OneOf
     public struct OneOfMatcher<T0, T1, T2, T3, TResult>
     {
         readonly object value;
+        readonly Type origType;
         object result;
-        Type origType;
 
         internal OneOfMatcher(object value, Type origType, object result)
         {
             this.value = value;
-            this.result = result;
             this.origType = origType;
+            this.result = result;
         }
 
         public OneOfMatcher<T1, T2, T3, TResult> Match(Func<T0, TResult> createResult)
@@ -2627,14 +2379,14 @@ namespace OneOf
     public struct OneOfMatcher<T0, T1, T2, T3, T4, TResult>
     {
         readonly object value;
+        readonly Type origType;
         object result;
-        Type origType;
 
         internal OneOfMatcher(object value, Type origType, object result)
         {
             this.value = value;
-            this.result = result;
             this.origType = origType;
+            this.result = result;
         }
 
         public OneOfMatcher<T1, T2, T3, T4, TResult> Match(Func<T0, TResult> createResult)
@@ -2689,14 +2441,14 @@ namespace OneOf
     public struct OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>
     {
         readonly object value;
+        readonly Type origType;
         object result;
-        Type origType;
 
         internal OneOfMatcher(object value, Type origType, object result)
         {
             this.value = value;
-            this.result = result;
             this.origType = origType;
+            this.result = result;
         }
 
         public OneOfMatcher<T1, T2, T3, T4, T5, TResult> Match(Func<T0, TResult> createResult)
@@ -2757,14 +2509,14 @@ namespace OneOf
     public struct OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>
     {
         readonly object value;
+        readonly Type origType;
         object result;
-        Type origType;
 
         internal OneOfMatcher(object value, Type origType, object result)
         {
             this.value = value;
-            this.result = result;
             this.origType = origType;
+            this.result = result;
         }
 
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> Match(Func<T0, TResult> createResult)
@@ -2831,14 +2583,14 @@ namespace OneOf
     public struct OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>
     {
         readonly object value;
+        readonly Type origType;
         object result;
-        Type origType;
 
         internal OneOfMatcher(object value, Type origType, object result)
         {
             this.value = value;
-            this.result = result;
             this.origType = origType;
+            this.result = result;
         }
 
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> Match(Func<T0, TResult> createResult)
@@ -2911,14 +2663,14 @@ namespace OneOf
     public struct OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>
     {
         readonly object value;
+        readonly Type origType;
         object result;
-        Type origType;
 
         internal OneOfMatcher(object value, Type origType, object result)
         {
             this.value = value;
-            this.result = result;
             this.origType = origType;
+            this.result = result;
         }
 
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> Match(Func<T0, TResult> createResult)
