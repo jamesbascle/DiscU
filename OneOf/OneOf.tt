@@ -275,7 +275,7 @@ void WriteMatcher(int countOfgenericParams)
 		// =============== Constructors
 	    
 		WriteLine("");
-		WriteLine("internal OneOfMatcher(object value, Type origType) : this(value, origType, false) { }");
+		WriteLine("internal OneOfMatcher(object value, Type origType) : this(value, origType, null) { }");
 	    
 		WriteLine("");
 		WriteLine("internal OneOfMatcher(object value, Type origType, object result)");

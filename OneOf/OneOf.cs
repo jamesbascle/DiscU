@@ -2213,7 +2213,7 @@ namespace OneOf
         readonly Type origType;
         object result;
 
-        internal OneOfMatcher(object value, Type origType) : this(value, origType, false) { }
+        internal OneOfMatcher(object value, Type origType) : this(value, origType, null) { }
 
         internal OneOfMatcher(object value, Type origType, object result)
         {
@@ -2252,7 +2252,7 @@ namespace OneOf
         readonly Type origType;
         object result;
 
-        internal OneOfMatcher(object value, Type origType) : this(value, origType, false) { }
+        internal OneOfMatcher(object value, Type origType) : this(value, origType, null) { }
 
         internal OneOfMatcher(object value, Type origType, object result)
         {
@@ -2298,7 +2298,7 @@ namespace OneOf
         readonly Type origType;
         object result;
 
-        internal OneOfMatcher(object value, Type origType) : this(value, origType, false) { }
+        internal OneOfMatcher(object value, Type origType) : this(value, origType, null) { }
 
         internal OneOfMatcher(object value, Type origType, object result)
         {
@@ -2350,7 +2350,7 @@ namespace OneOf
         readonly Type origType;
         object result;
 
-        internal OneOfMatcher(object value, Type origType) : this(value, origType, false) { }
+        internal OneOfMatcher(object value, Type origType) : this(value, origType, null) { }
 
         internal OneOfMatcher(object value, Type origType, object result)
         {
@@ -2408,7 +2408,7 @@ namespace OneOf
         readonly Type origType;
         object result;
 
-        internal OneOfMatcher(object value, Type origType) : this(value, origType, false) { }
+        internal OneOfMatcher(object value, Type origType) : this(value, origType, null) { }
 
         internal OneOfMatcher(object value, Type origType, object result)
         {
@@ -2472,7 +2472,7 @@ namespace OneOf
         readonly Type origType;
         object result;
 
-        internal OneOfMatcher(object value, Type origType) : this(value, origType, false) { }
+        internal OneOfMatcher(object value, Type origType) : this(value, origType, null) { }
 
         internal OneOfMatcher(object value, Type origType, object result)
         {
@@ -2542,7 +2542,7 @@ namespace OneOf
         readonly Type origType;
         object result;
 
-        internal OneOfMatcher(object value, Type origType) : this(value, origType, false) { }
+        internal OneOfMatcher(object value, Type origType) : this(value, origType, null) { }
 
         internal OneOfMatcher(object value, Type origType, object result)
         {
@@ -2618,7 +2618,7 @@ namespace OneOf
         readonly Type origType;
         object result;
 
-        internal OneOfMatcher(object value, Type origType) : this(value, origType, false) { }
+        internal OneOfMatcher(object value, Type origType) : this(value, origType, null) { }
 
         internal OneOfMatcher(object value, Type origType, object result)
         {
@@ -2700,7 +2700,7 @@ namespace OneOf
         readonly Type origType;
         object result;
 
-        internal OneOfMatcher(object value, Type origType) : this(value, origType, false) { }
+        internal OneOfMatcher(object value, Type origType) : this(value, origType, null) { }
 
         internal OneOfMatcher(object value, Type origType, object result)
         {
