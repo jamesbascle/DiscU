@@ -43,17 +43,6 @@ namespace OneOf
         {
              return new OneOf<T0, T1>((T1)value, typeof(T1));
         }
-
-        public bool Is<T>() => typeof(T) == origType;
-
-        public bool IsDerivedFrom<T>() => value is T;
-
-        public T As<T>()
-        {
-            if (this.value is T) return (T)this.value;
-
-            throw new InvalidOperationException();
-        }
         public OneOf<N0, N1> ToOneOf<N0, N1>() => OneOf<N0, N1>.CreateRaw(value);
         public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOf<N0, N1, N2>.CreateRaw(value);
         public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.CreateRaw(value);
@@ -127,17 +116,6 @@ namespace OneOf
         internal static OneOf<T0, T1, T2> Create(T2 value)
         {
              return new OneOf<T0, T1, T2>((T2)value, typeof(T2));
-        }
-
-        public bool Is<T>() => typeof(T) == origType;
-
-        public bool IsDerivedFrom<T>() => value is T;
-
-        public T As<T>()
-        {
-            if (this.value is T) return (T)this.value;
-
-            throw new InvalidOperationException();
         }
         public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOf<N0, N1, N2>.CreateRaw(value);
         public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.CreateRaw(value);
@@ -223,17 +201,6 @@ namespace OneOf
         internal static OneOf<T0, T1, T2, T3> Create(T3 value)
         {
              return new OneOf<T0, T1, T2, T3>((T3)value, typeof(T3));
-        }
-
-        public bool Is<T>() => typeof(T) == origType;
-
-        public bool IsDerivedFrom<T>() => value is T;
-
-        public T As<T>()
-        {
-            if (this.value is T) return (T)this.value;
-
-            throw new InvalidOperationException();
         }
         public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.CreateRaw(value);
         public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.CreateRaw(value);
@@ -330,17 +297,6 @@ namespace OneOf
         internal static OneOf<T0, T1, T2, T3, T4> Create(T4 value)
         {
              return new OneOf<T0, T1, T2, T3, T4>((T4)value, typeof(T4));
-        }
-
-        public bool Is<T>() => typeof(T) == origType;
-
-        public bool IsDerivedFrom<T>() => value is T;
-
-        public T As<T>()
-        {
-            if (this.value is T) return (T)this.value;
-
-            throw new InvalidOperationException();
         }
         public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.CreateRaw(value);
         public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.CreateRaw(value);
@@ -448,17 +404,6 @@ namespace OneOf
         internal static OneOf<T0, T1, T2, T3, T4, T5> Create(T5 value)
         {
              return new OneOf<T0, T1, T2, T3, T4, T5>((T5)value, typeof(T5));
-        }
-
-        public bool Is<T>() => typeof(T) == origType;
-
-        public bool IsDerivedFrom<T>() => value is T;
-
-        public T As<T>()
-        {
-            if (this.value is T) return (T)this.value;
-
-            throw new InvalidOperationException();
         }
         public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.CreateRaw(value);
         public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.CreateRaw(value);
@@ -577,17 +522,6 @@ namespace OneOf
         internal static OneOf<T0, T1, T2, T3, T4, T5, T6> Create(T6 value)
         {
              return new OneOf<T0, T1, T2, T3, T4, T5, T6>((T6)value, typeof(T6));
-        }
-
-        public bool Is<T>() => typeof(T) == origType;
-
-        public bool IsDerivedFrom<T>() => value is T;
-
-        public T As<T>()
-        {
-            if (this.value is T) return (T)this.value;
-
-            throw new InvalidOperationException();
         }
         public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.CreateRaw(value);
         public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.CreateRaw(value);
@@ -717,17 +651,6 @@ namespace OneOf
         internal static OneOf<T0, T1, T2, T3, T4, T5, T6, T7> Create(T7 value)
         {
              return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>((T7)value, typeof(T7));
-        }
-
-        public bool Is<T>() => typeof(T) == origType;
-
-        public bool IsDerivedFrom<T>() => value is T;
-
-        public T As<T>()
-        {
-            if (this.value is T) return (T)this.value;
-
-            throw new InvalidOperationException();
         }
         public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.CreateRaw(value);
         public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.CreateRaw(value);
@@ -869,17 +792,6 @@ namespace OneOf
         {
              return new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T8)value, typeof(T8));
         }
-
-        public bool Is<T>() => typeof(T) == origType;
-
-        public bool IsDerivedFrom<T>() => value is T;
-
-        public T As<T>()
-        {
-            if (this.value is T) return (T)this.value;
-
-            throw new InvalidOperationException();
-        }
         public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.CreateRaw(value);
 
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T0 value) => CreateRaw(value);
@@ -997,17 +909,6 @@ namespace OneOf
         {
              return new OneOfBase<T0, T1>((T1)value, typeof(T1));
         }
-
-        public bool Is<T>() => typeof(T) == origType;
-
-        public bool IsDerivedFrom<T>() => value is T;
-
-        public T As<T>()
-        {
-            if (this.value is T) return (T)this.value;
-
-            throw new InvalidOperationException();
-        }
         public OneOfBase<N0, N1> ToOneOf<N0, N1>() => OneOfBase<N0, N1>.CreateRaw(value);
         public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfBase<N0, N1, N2>.CreateRaw(value);
         public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.CreateRaw(value);
@@ -1087,17 +988,6 @@ namespace OneOf
         internal static OneOfBase<T0, T1, T2> Create(T2 value)
         {
              return new OneOfBase<T0, T1, T2>((T2)value, typeof(T2));
-        }
-
-        public bool Is<T>() => typeof(T) == origType;
-
-        public bool IsDerivedFrom<T>() => value is T;
-
-        public T As<T>()
-        {
-            if (this.value is T) return (T)this.value;
-
-            throw new InvalidOperationException();
         }
         public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfBase<N0, N1, N2>.CreateRaw(value);
         public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.CreateRaw(value);
@@ -1189,17 +1079,6 @@ namespace OneOf
         internal static OneOfBase<T0, T1, T2, T3> Create(T3 value)
         {
              return new OneOfBase<T0, T1, T2, T3>((T3)value, typeof(T3));
-        }
-
-        public bool Is<T>() => typeof(T) == origType;
-
-        public bool IsDerivedFrom<T>() => value is T;
-
-        public T As<T>()
-        {
-            if (this.value is T) return (T)this.value;
-
-            throw new InvalidOperationException();
         }
         public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.CreateRaw(value);
         public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.CreateRaw(value);
@@ -1302,17 +1181,6 @@ namespace OneOf
         internal static OneOfBase<T0, T1, T2, T3, T4> Create(T4 value)
         {
              return new OneOfBase<T0, T1, T2, T3, T4>((T4)value, typeof(T4));
-        }
-
-        public bool Is<T>() => typeof(T) == origType;
-
-        public bool IsDerivedFrom<T>() => value is T;
-
-        public T As<T>()
-        {
-            if (this.value is T) return (T)this.value;
-
-            throw new InvalidOperationException();
         }
         public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.CreateRaw(value);
         public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.CreateRaw(value);
@@ -1426,17 +1294,6 @@ namespace OneOf
         internal static OneOfBase<T0, T1, T2, T3, T4, T5> Create(T5 value)
         {
              return new OneOfBase<T0, T1, T2, T3, T4, T5>((T5)value, typeof(T5));
-        }
-
-        public bool Is<T>() => typeof(T) == origType;
-
-        public bool IsDerivedFrom<T>() => value is T;
-
-        public T As<T>()
-        {
-            if (this.value is T) return (T)this.value;
-
-            throw new InvalidOperationException();
         }
         public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.CreateRaw(value);
         public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.CreateRaw(value);
@@ -1561,17 +1418,6 @@ namespace OneOf
         internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6> Create(T6 value)
         {
              return new OneOfBase<T0, T1, T2, T3, T4, T5, T6>((T6)value, typeof(T6));
-        }
-
-        public bool Is<T>() => typeof(T) == origType;
-
-        public bool IsDerivedFrom<T>() => value is T;
-
-        public T As<T>()
-        {
-            if (this.value is T) return (T)this.value;
-
-            throw new InvalidOperationException();
         }
         public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.CreateRaw(value);
         public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.CreateRaw(value);
@@ -1707,17 +1553,6 @@ namespace OneOf
         internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> Create(T7 value)
         {
              return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>((T7)value, typeof(T7));
-        }
-
-        public bool Is<T>() => typeof(T) == origType;
-
-        public bool IsDerivedFrom<T>() => value is T;
-
-        public T As<T>()
-        {
-            if (this.value is T) return (T)this.value;
-
-            throw new InvalidOperationException();
         }
         public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.CreateRaw(value);
         public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.CreateRaw(value);
@@ -1864,17 +1699,6 @@ namespace OneOf
         internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T8 value)
         {
              return new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>((T8)value, typeof(T8));
-        }
-
-        public bool Is<T>() => typeof(T) == origType;
-
-        public bool IsDerivedFrom<T>() => value is T;
-
-        public T As<T>()
-        {
-            if (this.value is T) return (T)this.value;
-
-            throw new InvalidOperationException();
         }
         public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.CreateRaw(value);
 

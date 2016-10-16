@@ -106,7 +106,7 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
             WriteLine("catch(RuntimeBinderException ex)");
             using (new WriteIndent(this))
             {
-				//this SHOULDN'T happen thanks to aldready being in the context of a validly casted object, but you never know...
+				//this SHOULDN'T happen thanks to already being in the context of a validly casted object, but you never know...
                 WriteLine("throw new ArgumentException(nameof(value), ex);");
             }
         }
@@ -119,27 +119,6 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 			{         
 				WriteLine($" return new {typeName}<{genericArg}>((T{parmIndex})value, typeof(T{parmIndex}));");
 			}
-		}
-
-		// =============== Is
-
-		WriteLine("");
-		WriteLine("public bool Is<T>() => typeof(T) == origType;");
-
-		// ================ IsDerivedFrom
-		// necessary due to Is now properly reflecting the original circumstances of this OneOf's creation.
-		WriteLine("");
-		WriteLine("public bool IsDerivedFrom<T>() => value is T;");
-
-		// =============== As
-
-		WriteLine("");
-		WriteLine("public T As<T>()");
-		using(new WriteIndent(this))
-		{
-			WriteLine("if (this.value is T) return (T)this.value;");
-			WriteLine("");
-			WriteLine("throw new InvalidOperationException();");
 		}
 
 		// =============== ToOneOf

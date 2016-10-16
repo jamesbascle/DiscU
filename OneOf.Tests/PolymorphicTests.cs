@@ -15,11 +15,9 @@ namespace OneOf.Tests
 
             Func<OneOf<Fake, Fake.One, Fake.Two>, int> testerFunc = o =>
             {
-                var i = 0;
-
-                var result = o.Match((Fake f) => i = 3).
-                    Match((Fake.One f) => i = 1).
-                    Match((Fake.Two f) => i = 2);
+                var result = o.Match((Fake f) => 3).
+                    Match((Fake.One f) => 1).
+                    Match((Fake.Two f) => 2);
 
                 return result;
             };
@@ -36,34 +34,14 @@ namespace OneOf.Tests
             
             Func<OneOf<Fake, Fake.One, Fake.Two>, int> testerFunc = o =>
             {
-                var i = 0;
-
-                var result = o.Match((Fake f) => i = 3).
-                    Match((Fake.One f) => i = 1).
-                    Match((Fake.Two f) => i = 2);
+                var result = o.Match((Fake f) => 3).
+                    Match((Fake.One f) => 1).
+                    Match((Fake.Two f) => 2);
 
                 return result;
             };
 
             Assert.AreEqual(1, testerFunc(hiddenOne));
-        }
-
-
-        [Test]
-        public void IsReturnsTrueOnlyWhenTWasTheOriginalTypeOneOfWasConstructedWith()
-        {
-            OneOf<Fake, Fake.One, Fake.Two> one = new Fake.One();
-            OneOf<Fake, Fake.One, Fake.Two> two = new Fake.Two();
-            OneOf<Fake, Fake.One, Fake.Two> three = new Fake.Three();
-
-            Assert.True(one.Is<Fake.One>());
-            Assert.False(one.Is<Fake>());
-
-            Assert.True(two.Is<Fake.Two>());
-            Assert.False(two.Is<Fake>());
-
-            Assert.True(three.Is<Fake>());
-            Assert.False(three.Is<Fake.Three>());
         }
 
         [Test]
