@@ -157,7 +157,7 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 			var lesserArityOneOf = Enumerable.Range(0, countOfgenericParams).Where(n => n != parmIndex).ToList();
 			var lesserArityGenericArg = GenerateGenericArgs(lesserArityOneOf);
 
-			WriteLine($"public OneOfSwitcher<{lesserArityGenericArg}> Switch(Action<T{parmIndex}> action) => new OneOfSwitcher<{genericArg}>(value, origType, false).Switch(action);");
+			WriteLine($"public OneOfSwitcher<{lesserArityGenericArg}> Switch(Action<T{parmIndex}> action) => new OneOfSwitcher<{genericArg}>(value, origType).Switch(action);");
 		}
 
 		// =============== Match
@@ -168,7 +168,7 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 			var lesserArityOneOf = Enumerable.Range(0, countOfgenericParams).Where(n => n != parmIndex).ToList();
 			var lesserArityGenericArg = GenerateGenericArgs(lesserArityOneOf);
 
-			WriteLine($"public OneOfMatcher<{lesserArityGenericArg}, TResult> Match<TResult>(Func<T{parmIndex}, TResult> func) => new OneOfMatcher<{genericArg}, TResult>(value, origType, null).Match(func);");
+			WriteLine($"public OneOfMatcher<{lesserArityGenericArg}, TResult> Match<TResult>(Func<T{parmIndex}, TResult> func) => new OneOfMatcher<{genericArg}, TResult>(value, origType).Match(func);");
 		}
 
 		// =============== object overrides
@@ -194,6 +194,9 @@ void WriteSwitcher(int countOfgenericParams)
 		WriteLine("bool hasSwitched;");
 
 		// =============== Constructors
+	    
+		WriteLine("");
+		WriteLine("internal OneOfSwitcher(object value, Type origType) : this(value, origType, false) { }");
 	    
 		WriteLine("");
 		WriteLine("internal OneOfSwitcher(object value, Type origType, bool hasSwitched)");
@@ -270,6 +273,9 @@ void WriteMatcher(int countOfgenericParams)
 		WriteLine("object result;");
 
 		// =============== Constructors
+	    
+		WriteLine("");
+		WriteLine("internal OneOfMatcher(object value, Type origType) : this(value, origType, false) { }");
 	    
 		WriteLine("");
 		WriteLine("internal OneOfMatcher(object value, Type origType, object result)");
