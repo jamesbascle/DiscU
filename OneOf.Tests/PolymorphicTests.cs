@@ -4,6 +4,8 @@ using NUnit.Framework;
 
 namespace OneOf.Tests
 {
+    [TestFixture]
+    [Category("Unit")]
     public class PolymorphicTests
     {
         [Test]
