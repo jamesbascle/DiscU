@@ -1545,7 +1545,16 @@ namespace OneOf
 
         public void Switch(Action<T0> action)
         {
-            if (this.origType == typeof(T0)) action((T0)value);
+            SwitchIf<T0>(action);
+        }
+
+        void SwitchIf<T>(Action<T> action)
+        {
+            if (!hasSwitched && origType == typeof(T))
+            {
+                action((T)value);
+                hasSwitched = true;
+            }
         }
 
         public void Else(Action<object> action)
@@ -1576,22 +1585,23 @@ namespace OneOf
 
         public OneOfSwitcher<T1> Switch(Action<T0> action)
         {
-            if (this.origType == typeof(T0))
-            {
-                action((T0)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T0>(action);
             return new OneOfSwitcher<T1>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0> Switch(Action<T1> action)
         {
-            if (this.origType == typeof(T1))
+            SwitchIf<T1>(action);
+            return new OneOfSwitcher<T0>(this.value, this.origType, this.hasSwitched);
+        }
+
+        void SwitchIf<T>(Action<T> action)
+        {
+            if (!hasSwitched && origType == typeof(T))
             {
-                action((T1)value);
+                action((T)value);
                 hasSwitched = true;
             }
-            return new OneOfSwitcher<T0>(this.value, this.origType, this.hasSwitched);
         }
 
         public void Else(Action<object> action)
@@ -1622,32 +1632,29 @@ namespace OneOf
 
         public OneOfSwitcher<T1, T2> Switch(Action<T0> action)
         {
-            if (this.origType == typeof(T0))
-            {
-                action((T0)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T0>(action);
             return new OneOfSwitcher<T1, T2>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T2> Switch(Action<T1> action)
         {
-            if (this.origType == typeof(T1))
-            {
-                action((T1)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T1>(action);
             return new OneOfSwitcher<T0, T2>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T1> Switch(Action<T2> action)
         {
-            if (this.origType == typeof(T2))
+            SwitchIf<T2>(action);
+            return new OneOfSwitcher<T0, T1>(this.value, this.origType, this.hasSwitched);
+        }
+
+        void SwitchIf<T>(Action<T> action)
+        {
+            if (!hasSwitched && origType == typeof(T))
             {
-                action((T2)value);
+                action((T)value);
                 hasSwitched = true;
             }
-            return new OneOfSwitcher<T0, T1>(this.value, this.origType, this.hasSwitched);
         }
 
         public void Else(Action<object> action)
@@ -1678,42 +1685,35 @@ namespace OneOf
 
         public OneOfSwitcher<T1, T2, T3> Switch(Action<T0> action)
         {
-            if (this.origType == typeof(T0))
-            {
-                action((T0)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T0>(action);
             return new OneOfSwitcher<T1, T2, T3>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T2, T3> Switch(Action<T1> action)
         {
-            if (this.origType == typeof(T1))
-            {
-                action((T1)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T1>(action);
             return new OneOfSwitcher<T0, T2, T3>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T1, T3> Switch(Action<T2> action)
         {
-            if (this.origType == typeof(T2))
-            {
-                action((T2)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T2>(action);
             return new OneOfSwitcher<T0, T1, T3>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T1, T2> Switch(Action<T3> action)
         {
-            if (this.origType == typeof(T3))
+            SwitchIf<T3>(action);
+            return new OneOfSwitcher<T0, T1, T2>(this.value, this.origType, this.hasSwitched);
+        }
+
+        void SwitchIf<T>(Action<T> action)
+        {
+            if (!hasSwitched && origType == typeof(T))
             {
-                action((T3)value);
+                action((T)value);
                 hasSwitched = true;
             }
-            return new OneOfSwitcher<T0, T1, T2>(this.value, this.origType, this.hasSwitched);
         }
 
         public void Else(Action<object> action)
@@ -1744,52 +1744,41 @@ namespace OneOf
 
         public OneOfSwitcher<T1, T2, T3, T4> Switch(Action<T0> action)
         {
-            if (this.origType == typeof(T0))
-            {
-                action((T0)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T0>(action);
             return new OneOfSwitcher<T1, T2, T3, T4>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T2, T3, T4> Switch(Action<T1> action)
         {
-            if (this.origType == typeof(T1))
-            {
-                action((T1)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T1>(action);
             return new OneOfSwitcher<T0, T2, T3, T4>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T1, T3, T4> Switch(Action<T2> action)
         {
-            if (this.origType == typeof(T2))
-            {
-                action((T2)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T2>(action);
             return new OneOfSwitcher<T0, T1, T3, T4>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T1, T2, T4> Switch(Action<T3> action)
         {
-            if (this.origType == typeof(T3))
-            {
-                action((T3)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T3>(action);
             return new OneOfSwitcher<T0, T1, T2, T4>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T1, T2, T3> Switch(Action<T4> action)
         {
-            if (this.origType == typeof(T4))
+            SwitchIf<T4>(action);
+            return new OneOfSwitcher<T0, T1, T2, T3>(this.value, this.origType, this.hasSwitched);
+        }
+
+        void SwitchIf<T>(Action<T> action)
+        {
+            if (!hasSwitched && origType == typeof(T))
             {
-                action((T4)value);
+                action((T)value);
                 hasSwitched = true;
             }
-            return new OneOfSwitcher<T0, T1, T2, T3>(this.value, this.origType, this.hasSwitched);
         }
 
         public void Else(Action<object> action)
@@ -1820,62 +1809,47 @@ namespace OneOf
 
         public OneOfSwitcher<T1, T2, T3, T4, T5> Switch(Action<T0> action)
         {
-            if (this.origType == typeof(T0))
-            {
-                action((T0)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T0>(action);
             return new OneOfSwitcher<T1, T2, T3, T4, T5>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T2, T3, T4, T5> Switch(Action<T1> action)
         {
-            if (this.origType == typeof(T1))
-            {
-                action((T1)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T1>(action);
             return new OneOfSwitcher<T0, T2, T3, T4, T5>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T1, T3, T4, T5> Switch(Action<T2> action)
         {
-            if (this.origType == typeof(T2))
-            {
-                action((T2)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T2>(action);
             return new OneOfSwitcher<T0, T1, T3, T4, T5>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T1, T2, T4, T5> Switch(Action<T3> action)
         {
-            if (this.origType == typeof(T3))
-            {
-                action((T3)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T3>(action);
             return new OneOfSwitcher<T0, T1, T2, T4, T5>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T1, T2, T3, T5> Switch(Action<T4> action)
         {
-            if (this.origType == typeof(T4))
-            {
-                action((T4)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T4>(action);
             return new OneOfSwitcher<T0, T1, T2, T3, T5>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T1, T2, T3, T4> Switch(Action<T5> action)
         {
-            if (this.origType == typeof(T5))
+            SwitchIf<T5>(action);
+            return new OneOfSwitcher<T0, T1, T2, T3, T4>(this.value, this.origType, this.hasSwitched);
+        }
+
+        void SwitchIf<T>(Action<T> action)
+        {
+            if (!hasSwitched && origType == typeof(T))
             {
-                action((T5)value);
+                action((T)value);
                 hasSwitched = true;
             }
-            return new OneOfSwitcher<T0, T1, T2, T3, T4>(this.value, this.origType, this.hasSwitched);
         }
 
         public void Else(Action<object> action)
@@ -1906,72 +1880,53 @@ namespace OneOf
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6> Switch(Action<T0> action)
         {
-            if (this.origType == typeof(T0))
-            {
-                action((T0)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T0>(action);
             return new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T2, T3, T4, T5, T6> Switch(Action<T1> action)
         {
-            if (this.origType == typeof(T1))
-            {
-                action((T1)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T1>(action);
             return new OneOfSwitcher<T0, T2, T3, T4, T5, T6>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T1, T3, T4, T5, T6> Switch(Action<T2> action)
         {
-            if (this.origType == typeof(T2))
-            {
-                action((T2)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T2>(action);
             return new OneOfSwitcher<T0, T1, T3, T4, T5, T6>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T1, T2, T4, T5, T6> Switch(Action<T3> action)
         {
-            if (this.origType == typeof(T3))
-            {
-                action((T3)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T3>(action);
             return new OneOfSwitcher<T0, T1, T2, T4, T5, T6>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T1, T2, T3, T5, T6> Switch(Action<T4> action)
         {
-            if (this.origType == typeof(T4))
-            {
-                action((T4)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T4>(action);
             return new OneOfSwitcher<T0, T1, T2, T3, T5, T6>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T1, T2, T3, T4, T6> Switch(Action<T5> action)
         {
-            if (this.origType == typeof(T5))
-            {
-                action((T5)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T5>(action);
             return new OneOfSwitcher<T0, T1, T2, T3, T4, T6>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T1, T2, T3, T4, T5> Switch(Action<T6> action)
         {
-            if (this.origType == typeof(T6))
+            SwitchIf<T6>(action);
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(this.value, this.origType, this.hasSwitched);
+        }
+
+        void SwitchIf<T>(Action<T> action)
+        {
+            if (!hasSwitched && origType == typeof(T))
             {
-                action((T6)value);
+                action((T)value);
                 hasSwitched = true;
             }
-            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(this.value, this.origType, this.hasSwitched);
         }
 
         public void Else(Action<object> action)
@@ -2002,82 +1957,59 @@ namespace OneOf
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> Switch(Action<T0> action)
         {
-            if (this.origType == typeof(T0))
-            {
-                action((T0)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T0>(action);
             return new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T2, T3, T4, T5, T6, T7> Switch(Action<T1> action)
         {
-            if (this.origType == typeof(T1))
-            {
-                action((T1)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T1>(action);
             return new OneOfSwitcher<T0, T2, T3, T4, T5, T6, T7>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T1, T3, T4, T5, T6, T7> Switch(Action<T2> action)
         {
-            if (this.origType == typeof(T2))
-            {
-                action((T2)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T2>(action);
             return new OneOfSwitcher<T0, T1, T3, T4, T5, T6, T7>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T1, T2, T4, T5, T6, T7> Switch(Action<T3> action)
         {
-            if (this.origType == typeof(T3))
-            {
-                action((T3)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T3>(action);
             return new OneOfSwitcher<T0, T1, T2, T4, T5, T6, T7>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T1, T2, T3, T5, T6, T7> Switch(Action<T4> action)
         {
-            if (this.origType == typeof(T4))
-            {
-                action((T4)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T4>(action);
             return new OneOfSwitcher<T0, T1, T2, T3, T5, T6, T7>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T1, T2, T3, T4, T6, T7> Switch(Action<T5> action)
         {
-            if (this.origType == typeof(T5))
-            {
-                action((T5)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T5>(action);
             return new OneOfSwitcher<T0, T1, T2, T3, T4, T6, T7>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T7> Switch(Action<T6> action)
         {
-            if (this.origType == typeof(T6))
-            {
-                action((T6)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T6>(action);
             return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T7>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6> Switch(Action<T7> action)
         {
-            if (this.origType == typeof(T7))
+            SwitchIf<T7>(action);
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(this.value, this.origType, this.hasSwitched);
+        }
+
+        void SwitchIf<T>(Action<T> action)
+        {
+            if (!hasSwitched && origType == typeof(T))
             {
-                action((T7)value);
+                action((T)value);
                 hasSwitched = true;
             }
-            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(this.value, this.origType, this.hasSwitched);
         }
 
         public void Else(Action<object> action)
@@ -2108,92 +2040,65 @@ namespace OneOf
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> Switch(Action<T0> action)
         {
-            if (this.origType == typeof(T0))
-            {
-                action((T0)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T0>(action);
             return new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T2, T3, T4, T5, T6, T7, T8> Switch(Action<T1> action)
         {
-            if (this.origType == typeof(T1))
-            {
-                action((T1)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T1>(action);
             return new OneOfSwitcher<T0, T2, T3, T4, T5, T6, T7, T8>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T1, T3, T4, T5, T6, T7, T8> Switch(Action<T2> action)
         {
-            if (this.origType == typeof(T2))
-            {
-                action((T2)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T2>(action);
             return new OneOfSwitcher<T0, T1, T3, T4, T5, T6, T7, T8>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T1, T2, T4, T5, T6, T7, T8> Switch(Action<T3> action)
         {
-            if (this.origType == typeof(T3))
-            {
-                action((T3)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T3>(action);
             return new OneOfSwitcher<T0, T1, T2, T4, T5, T6, T7, T8>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T1, T2, T3, T5, T6, T7, T8> Switch(Action<T4> action)
         {
-            if (this.origType == typeof(T4))
-            {
-                action((T4)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T4>(action);
             return new OneOfSwitcher<T0, T1, T2, T3, T5, T6, T7, T8>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T1, T2, T3, T4, T6, T7, T8> Switch(Action<T5> action)
         {
-            if (this.origType == typeof(T5))
-            {
-                action((T5)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T5>(action);
             return new OneOfSwitcher<T0, T1, T2, T3, T4, T6, T7, T8>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T7, T8> Switch(Action<T6> action)
         {
-            if (this.origType == typeof(T6))
-            {
-                action((T6)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T6>(action);
             return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T7, T8>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T8> Switch(Action<T7> action)
         {
-            if (this.origType == typeof(T7))
-            {
-                action((T7)value);
-                hasSwitched = true;
-            }
+            SwitchIf<T7>(action);
             return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T8>(this.value, this.origType, this.hasSwitched);
         }
 
         public OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7> Switch(Action<T8> action)
         {
-            if (this.origType == typeof(T8))
+            SwitchIf<T8>(action);
+            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(this.value, this.origType, this.hasSwitched);
+        }
+
+        void SwitchIf<T>(Action<T> action)
+        {
+            if (!hasSwitched && origType == typeof(T))
             {
-                action((T8)value);
+                action((T)value);
                 hasSwitched = true;
             }
-            return new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(this.value, this.origType, this.hasSwitched);
         }
 
         public void Else(Action<object> action)
@@ -2223,8 +2128,16 @@ namespace OneOf
         }
         public TResult Match(Func<T0, TResult> createResult)
         {
-            if (result == null && typeof(T0) == origType) result = createResult((T0)value);
+            MatchIf<T0>(createResult);
             return (TResult)result;
+        }
+
+        void MatchIf<T>(Func<T, TResult> createResult)
+        {
+            if (result == null && origType == typeof(T))
+            {
+                result = createResult((T)value);
+            }
         }
 
         public TResult Else(TResult defaultValue)
@@ -2263,14 +2176,22 @@ namespace OneOf
 
         public OneOfMatcher<T1, TResult> Match(Func<T0, TResult> createResult)
         {
-            if (result == null && typeof(T0) == origType) result = createResult((T0)value);
+            MatchIf<T0>(createResult);
             return new OneOfMatcher<T1, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, TResult> Match(Func<T1, TResult> createResult)
         {
-            if (result == null && typeof(T1) == origType) result = createResult((T1)value);
+            MatchIf<T1>(createResult);
             return new OneOfMatcher<T0, TResult>(this.value, this.origType, this.result);
+        }
+
+        void MatchIf<T>(Func<T, TResult> createResult)
+        {
+            if (result == null && origType == typeof(T))
+            {
+                result = createResult((T)value);
+            }
         }
 
         public TResult Else(TResult defaultValue)
@@ -2309,20 +2230,28 @@ namespace OneOf
 
         public OneOfMatcher<T1, T2, TResult> Match(Func<T0, TResult> createResult)
         {
-            if (result == null && typeof(T0) == origType) result = createResult((T0)value);
+            MatchIf<T0>(createResult);
             return new OneOfMatcher<T1, T2, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T2, TResult> Match(Func<T1, TResult> createResult)
         {
-            if (result == null && typeof(T1) == origType) result = createResult((T1)value);
+            MatchIf<T1>(createResult);
             return new OneOfMatcher<T0, T2, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T1, TResult> Match(Func<T2, TResult> createResult)
         {
-            if (result == null && typeof(T2) == origType) result = createResult((T2)value);
+            MatchIf<T2>(createResult);
             return new OneOfMatcher<T0, T1, TResult>(this.value, this.origType, this.result);
+        }
+
+        void MatchIf<T>(Func<T, TResult> createResult)
+        {
+            if (result == null && origType == typeof(T))
+            {
+                result = createResult((T)value);
+            }
         }
 
         public TResult Else(TResult defaultValue)
@@ -2361,26 +2290,34 @@ namespace OneOf
 
         public OneOfMatcher<T1, T2, T3, TResult> Match(Func<T0, TResult> createResult)
         {
-            if (result == null && typeof(T0) == origType) result = createResult((T0)value);
+            MatchIf<T0>(createResult);
             return new OneOfMatcher<T1, T2, T3, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T2, T3, TResult> Match(Func<T1, TResult> createResult)
         {
-            if (result == null && typeof(T1) == origType) result = createResult((T1)value);
+            MatchIf<T1>(createResult);
             return new OneOfMatcher<T0, T2, T3, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T1, T3, TResult> Match(Func<T2, TResult> createResult)
         {
-            if (result == null && typeof(T2) == origType) result = createResult((T2)value);
+            MatchIf<T2>(createResult);
             return new OneOfMatcher<T0, T1, T3, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T1, T2, TResult> Match(Func<T3, TResult> createResult)
         {
-            if (result == null && typeof(T3) == origType) result = createResult((T3)value);
+            MatchIf<T3>(createResult);
             return new OneOfMatcher<T0, T1, T2, TResult>(this.value, this.origType, this.result);
+        }
+
+        void MatchIf<T>(Func<T, TResult> createResult)
+        {
+            if (result == null && origType == typeof(T))
+            {
+                result = createResult((T)value);
+            }
         }
 
         public TResult Else(TResult defaultValue)
@@ -2419,32 +2356,40 @@ namespace OneOf
 
         public OneOfMatcher<T1, T2, T3, T4, TResult> Match(Func<T0, TResult> createResult)
         {
-            if (result == null && typeof(T0) == origType) result = createResult((T0)value);
+            MatchIf<T0>(createResult);
             return new OneOfMatcher<T1, T2, T3, T4, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T2, T3, T4, TResult> Match(Func<T1, TResult> createResult)
         {
-            if (result == null && typeof(T1) == origType) result = createResult((T1)value);
+            MatchIf<T1>(createResult);
             return new OneOfMatcher<T0, T2, T3, T4, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T1, T3, T4, TResult> Match(Func<T2, TResult> createResult)
         {
-            if (result == null && typeof(T2) == origType) result = createResult((T2)value);
+            MatchIf<T2>(createResult);
             return new OneOfMatcher<T0, T1, T3, T4, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T1, T2, T4, TResult> Match(Func<T3, TResult> createResult)
         {
-            if (result == null && typeof(T3) == origType) result = createResult((T3)value);
+            MatchIf<T3>(createResult);
             return new OneOfMatcher<T0, T1, T2, T4, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T1, T2, T3, TResult> Match(Func<T4, TResult> createResult)
         {
-            if (result == null && typeof(T4) == origType) result = createResult((T4)value);
+            MatchIf<T4>(createResult);
             return new OneOfMatcher<T0, T1, T2, T3, TResult>(this.value, this.origType, this.result);
+        }
+
+        void MatchIf<T>(Func<T, TResult> createResult)
+        {
+            if (result == null && origType == typeof(T))
+            {
+                result = createResult((T)value);
+            }
         }
 
         public TResult Else(TResult defaultValue)
@@ -2483,38 +2428,46 @@ namespace OneOf
 
         public OneOfMatcher<T1, T2, T3, T4, T5, TResult> Match(Func<T0, TResult> createResult)
         {
-            if (result == null && typeof(T0) == origType) result = createResult((T0)value);
+            MatchIf<T0>(createResult);
             return new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T2, T3, T4, T5, TResult> Match(Func<T1, TResult> createResult)
         {
-            if (result == null && typeof(T1) == origType) result = createResult((T1)value);
+            MatchIf<T1>(createResult);
             return new OneOfMatcher<T0, T2, T3, T4, T5, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T1, T3, T4, T5, TResult> Match(Func<T2, TResult> createResult)
         {
-            if (result == null && typeof(T2) == origType) result = createResult((T2)value);
+            MatchIf<T2>(createResult);
             return new OneOfMatcher<T0, T1, T3, T4, T5, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T1, T2, T4, T5, TResult> Match(Func<T3, TResult> createResult)
         {
-            if (result == null && typeof(T3) == origType) result = createResult((T3)value);
+            MatchIf<T3>(createResult);
             return new OneOfMatcher<T0, T1, T2, T4, T5, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T1, T2, T3, T5, TResult> Match(Func<T4, TResult> createResult)
         {
-            if (result == null && typeof(T4) == origType) result = createResult((T4)value);
+            MatchIf<T4>(createResult);
             return new OneOfMatcher<T0, T1, T2, T3, T5, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T1, T2, T3, T4, TResult> Match(Func<T5, TResult> createResult)
         {
-            if (result == null && typeof(T5) == origType) result = createResult((T5)value);
+            MatchIf<T5>(createResult);
             return new OneOfMatcher<T0, T1, T2, T3, T4, TResult>(this.value, this.origType, this.result);
+        }
+
+        void MatchIf<T>(Func<T, TResult> createResult)
+        {
+            if (result == null && origType == typeof(T))
+            {
+                result = createResult((T)value);
+            }
         }
 
         public TResult Else(TResult defaultValue)
@@ -2553,44 +2506,52 @@ namespace OneOf
 
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> Match(Func<T0, TResult> createResult)
         {
-            if (result == null && typeof(T0) == origType) result = createResult((T0)value);
+            MatchIf<T0>(createResult);
             return new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T2, T3, T4, T5, T6, TResult> Match(Func<T1, TResult> createResult)
         {
-            if (result == null && typeof(T1) == origType) result = createResult((T1)value);
+            MatchIf<T1>(createResult);
             return new OneOfMatcher<T0, T2, T3, T4, T5, T6, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T1, T3, T4, T5, T6, TResult> Match(Func<T2, TResult> createResult)
         {
-            if (result == null && typeof(T2) == origType) result = createResult((T2)value);
+            MatchIf<T2>(createResult);
             return new OneOfMatcher<T0, T1, T3, T4, T5, T6, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T1, T2, T4, T5, T6, TResult> Match(Func<T3, TResult> createResult)
         {
-            if (result == null && typeof(T3) == origType) result = createResult((T3)value);
+            MatchIf<T3>(createResult);
             return new OneOfMatcher<T0, T1, T2, T4, T5, T6, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T1, T2, T3, T5, T6, TResult> Match(Func<T4, TResult> createResult)
         {
-            if (result == null && typeof(T4) == origType) result = createResult((T4)value);
+            MatchIf<T4>(createResult);
             return new OneOfMatcher<T0, T1, T2, T3, T5, T6, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T1, T2, T3, T4, T6, TResult> Match(Func<T5, TResult> createResult)
         {
-            if (result == null && typeof(T5) == origType) result = createResult((T5)value);
+            MatchIf<T5>(createResult);
             return new OneOfMatcher<T0, T1, T2, T3, T4, T6, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult> Match(Func<T6, TResult> createResult)
         {
-            if (result == null && typeof(T6) == origType) result = createResult((T6)value);
+            MatchIf<T6>(createResult);
             return new OneOfMatcher<T0, T1, T2, T3, T4, T5, TResult>(this.value, this.origType, this.result);
+        }
+
+        void MatchIf<T>(Func<T, TResult> createResult)
+        {
+            if (result == null && origType == typeof(T))
+            {
+                result = createResult((T)value);
+            }
         }
 
         public TResult Else(TResult defaultValue)
@@ -2629,50 +2590,58 @@ namespace OneOf
 
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> Match(Func<T0, TResult> createResult)
         {
-            if (result == null && typeof(T0) == origType) result = createResult((T0)value);
+            MatchIf<T0>(createResult);
             return new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T2, T3, T4, T5, T6, T7, TResult> Match(Func<T1, TResult> createResult)
         {
-            if (result == null && typeof(T1) == origType) result = createResult((T1)value);
+            MatchIf<T1>(createResult);
             return new OneOfMatcher<T0, T2, T3, T4, T5, T6, T7, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T1, T3, T4, T5, T6, T7, TResult> Match(Func<T2, TResult> createResult)
         {
-            if (result == null && typeof(T2) == origType) result = createResult((T2)value);
+            MatchIf<T2>(createResult);
             return new OneOfMatcher<T0, T1, T3, T4, T5, T6, T7, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T1, T2, T4, T5, T6, T7, TResult> Match(Func<T3, TResult> createResult)
         {
-            if (result == null && typeof(T3) == origType) result = createResult((T3)value);
+            MatchIf<T3>(createResult);
             return new OneOfMatcher<T0, T1, T2, T4, T5, T6, T7, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T1, T2, T3, T5, T6, T7, TResult> Match(Func<T4, TResult> createResult)
         {
-            if (result == null && typeof(T4) == origType) result = createResult((T4)value);
+            MatchIf<T4>(createResult);
             return new OneOfMatcher<T0, T1, T2, T3, T5, T6, T7, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T1, T2, T3, T4, T6, T7, TResult> Match(Func<T5, TResult> createResult)
         {
-            if (result == null && typeof(T5) == origType) result = createResult((T5)value);
+            MatchIf<T5>(createResult);
             return new OneOfMatcher<T0, T1, T2, T3, T4, T6, T7, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T1, T2, T3, T4, T5, T7, TResult> Match(Func<T6, TResult> createResult)
         {
-            if (result == null && typeof(T6) == origType) result = createResult((T6)value);
+            MatchIf<T6>(createResult);
             return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T7, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult> Match(Func<T7, TResult> createResult)
         {
-            if (result == null && typeof(T7) == origType) result = createResult((T7)value);
+            MatchIf<T7>(createResult);
             return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, TResult>(this.value, this.origType, this.result);
+        }
+
+        void MatchIf<T>(Func<T, TResult> createResult)
+        {
+            if (result == null && origType == typeof(T))
+            {
+                result = createResult((T)value);
+            }
         }
 
         public TResult Else(TResult defaultValue)
@@ -2711,56 +2680,64 @@ namespace OneOf
 
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> Match(Func<T0, TResult> createResult)
         {
-            if (result == null && typeof(T0) == origType) result = createResult((T0)value);
+            MatchIf<T0>(createResult);
             return new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T2, T3, T4, T5, T6, T7, T8, TResult> Match(Func<T1, TResult> createResult)
         {
-            if (result == null && typeof(T1) == origType) result = createResult((T1)value);
+            MatchIf<T1>(createResult);
             return new OneOfMatcher<T0, T2, T3, T4, T5, T6, T7, T8, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T1, T3, T4, T5, T6, T7, T8, TResult> Match(Func<T2, TResult> createResult)
         {
-            if (result == null && typeof(T2) == origType) result = createResult((T2)value);
+            MatchIf<T2>(createResult);
             return new OneOfMatcher<T0, T1, T3, T4, T5, T6, T7, T8, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T1, T2, T4, T5, T6, T7, T8, TResult> Match(Func<T3, TResult> createResult)
         {
-            if (result == null && typeof(T3) == origType) result = createResult((T3)value);
+            MatchIf<T3>(createResult);
             return new OneOfMatcher<T0, T1, T2, T4, T5, T6, T7, T8, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T1, T2, T3, T5, T6, T7, T8, TResult> Match(Func<T4, TResult> createResult)
         {
-            if (result == null && typeof(T4) == origType) result = createResult((T4)value);
+            MatchIf<T4>(createResult);
             return new OneOfMatcher<T0, T1, T2, T3, T5, T6, T7, T8, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T1, T2, T3, T4, T6, T7, T8, TResult> Match(Func<T5, TResult> createResult)
         {
-            if (result == null && typeof(T5) == origType) result = createResult((T5)value);
+            MatchIf<T5>(createResult);
             return new OneOfMatcher<T0, T1, T2, T3, T4, T6, T7, T8, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T1, T2, T3, T4, T5, T7, T8, TResult> Match(Func<T6, TResult> createResult)
         {
-            if (result == null && typeof(T6) == origType) result = createResult((T6)value);
+            MatchIf<T6>(createResult);
             return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T7, T8, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T8, TResult> Match(Func<T7, TResult> createResult)
         {
-            if (result == null && typeof(T7) == origType) result = createResult((T7)value);
+            MatchIf<T7>(createResult);
             return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T8, TResult>(this.value, this.origType, this.result);
         }
 
         public OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult> Match(Func<T8, TResult> createResult)
         {
-            if (result == null && typeof(T8) == origType) result = createResult((T8)value);
+            MatchIf<T8>(createResult);
             return new OneOfMatcher<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(this.value, this.origType, this.result);
+        }
+
+        void MatchIf<T>(Func<T, TResult> createResult)
+        {
+            if (result == null && origType == typeof(T))
+            {
+                result = createResult((T)value);
+            }
         }
 
         public TResult Else(TResult defaultValue)
