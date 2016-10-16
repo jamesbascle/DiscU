@@ -1,9 +1,7 @@
 ﻿<#@ template debug="true" hostspecific="true" language="C#" #>
 <#@ assembly name="System.Core" #>
 <#@ assembly name="Microsoft.CSharp" #>
-<#@ import namespace="System.IO" #>
 <#@ import namespace="System.Linq" #>
-<#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
 <#@ output extension=".cs" #>
@@ -50,8 +48,8 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 	WriteLine($"public {structOrClass} {typeName}<{genericArg}> : IOneOf");
 	using(new WriteIndent(this))
 	{
-		WriteLine("readonly object value;");
-        WriteLine("readonly Type origType;");
+		WriteLine("private readonly object value;");
+        WriteLine("private readonly Type origType;");
 		
 		// =============== Constructors
 		// must only be called after value has been validated to be Tn
@@ -138,15 +136,15 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 
 		// =============== equality operators
 		WriteLine("");
-		WriteLine($"public static bool operator ==({typeName}<{genericArg}> v1, IOneOf v2) => v1.Equals(v2);"); 
-		WriteLine($"public static bool operator !=({typeName}<{genericArg}> v1, IOneOf v2) => !v1.Equals(v2);");
+		WriteLine($"public static bool operator ==({typeName}<{genericArg}> v1, IOneOf v2) => Equals(v1,v2);"); 
+		WriteLine($"public static bool operator !=({typeName}<{genericArg}> v1, IOneOf v2) => !Equals(v1,v2);");
 		//also adding equality operators to compare to the various Generic types by value
 	    for (var i = 0; i < countOfgenericParams; i++)
 	    {
-			WriteLine($"public static bool operator ==({typeName}<{genericArg}> v1, T{i} v2) => v1.Equals(v2);"); 
-			WriteLine($"public static bool operator !=({typeName}<{genericArg}> v1, T{i} v2) => !v1.Equals(v2);");
-			WriteLine($"public static bool operator ==(T{i} v1, {typeName}<{genericArg}> v2) => v2.Equals(v1);"); 
-			WriteLine($"public static bool operator !=(T{i} v1, {typeName}<{genericArg}> v2) => !v2.Equals(v1);");
+			WriteLine($"public static bool operator ==({typeName}<{genericArg}> v1, T{i} v2) => Equals(v1,v2);"); 
+			WriteLine($"public static bool operator !=({typeName}<{genericArg}> v1, T{i} v2) => !Equals(v1,v2);");
+			WriteLine($"public static bool operator ==(T{i} v1, {typeName}<{genericArg}> v2) => Equals(v2,v1);"); 
+			WriteLine($"public static bool operator !=(T{i} v1, {typeName}<{genericArg}> v2) => !Equals(v2,v1);");
 	    }
 
 
