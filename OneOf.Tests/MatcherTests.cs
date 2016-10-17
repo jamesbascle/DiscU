@@ -4,6 +4,7 @@ using System;
 namespace OneOf.Tests
 {
     [TestFixture]
+    [Category("Unit")]
     public class MatcherTests
     {
         [Test]

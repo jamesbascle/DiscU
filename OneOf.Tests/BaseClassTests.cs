@@ -22,6 +22,8 @@ namespace OneOf.Tests
 
     }
 
+    [TestFixture]
+    [Category("Unit")]
     public class BaseClassTests
     {
         [Test]

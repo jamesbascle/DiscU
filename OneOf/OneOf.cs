@@ -9,8 +9,8 @@ namespace OneOf
 {
     public struct OneOf<T0, T1> : IOneOf
     {
-        readonly object value;
-        readonly Type origType;
+        private readonly object value;
+        private readonly Type origType;
 
         OneOf(object value, Type origType)
         {
@@ -50,16 +50,16 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1>(T0 value) => CreateRaw(value);
         public static implicit operator OneOf<T0, T1>(T1 value) => CreateRaw(value);
 
-        public static bool operator ==(OneOf<T0, T1> v1, IOneOf v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1> v1, IOneOf v2) => !v1.Equals(v2);
-        public static bool operator ==(OneOf<T0, T1> v1, T0 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1> v1, T0 v2) => !v1.Equals(v2);
-        public static bool operator ==(T0 v1, OneOf<T0, T1> v2) => v2.Equals(v1);
-        public static bool operator !=(T0 v1, OneOf<T0, T1> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1> v1, T1 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1> v1, T1 v2) => !v1.Equals(v2);
-        public static bool operator ==(T1 v1, OneOf<T0, T1> v2) => v2.Equals(v1);
-        public static bool operator !=(T1 v1, OneOf<T0, T1> v2) => !v2.Equals(v1);
+        public static bool operator ==(OneOf<T0, T1> v1, IOneOf v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1> v1, IOneOf v2) => !Equals(v1,v2);
+        public static bool operator ==(OneOf<T0, T1> v1, T0 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1> v1, T0 v2) => !Equals(v1,v2);
+        public static bool operator ==(T0 v1, OneOf<T0, T1> v2) => Equals(v2,v1);
+        public static bool operator !=(T0 v1, OneOf<T0, T1> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1> v1, T1 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1> v1, T1 v2) => !Equals(v1,v2);
+        public static bool operator ==(T1 v1, OneOf<T0, T1> v2) => Equals(v2,v1);
+        public static bool operator !=(T1 v1, OneOf<T0, T1> v2) => !Equals(v2,v1);
 
         public OneOfSwitcher<T1> Switch(Action<T0> action) => new OneOfSwitcher<T0, T1>(value, origType).Switch(action);
         public OneOfSwitcher<T0> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1>(value, origType).Switch(action);
@@ -73,8 +73,8 @@ namespace OneOf
     }
     public struct OneOf<T0, T1, T2> : IOneOf
     {
-        readonly object value;
-        readonly Type origType;
+        private readonly object value;
+        private readonly Type origType;
 
         OneOf(object value, Type origType)
         {
@@ -116,20 +116,20 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2>(T1 value) => CreateRaw(value);
         public static implicit operator OneOf<T0, T1, T2>(T2 value) => CreateRaw(value);
 
-        public static bool operator ==(OneOf<T0, T1, T2> v1, IOneOf v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2> v1, IOneOf v2) => !v1.Equals(v2);
-        public static bool operator ==(OneOf<T0, T1, T2> v1, T0 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2> v1, T0 v2) => !v1.Equals(v2);
-        public static bool operator ==(T0 v1, OneOf<T0, T1, T2> v2) => v2.Equals(v1);
-        public static bool operator !=(T0 v1, OneOf<T0, T1, T2> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2> v1, T1 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2> v1, T1 v2) => !v1.Equals(v2);
-        public static bool operator ==(T1 v1, OneOf<T0, T1, T2> v2) => v2.Equals(v1);
-        public static bool operator !=(T1 v1, OneOf<T0, T1, T2> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2> v1, T2 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2> v1, T2 v2) => !v1.Equals(v2);
-        public static bool operator ==(T2 v1, OneOf<T0, T1, T2> v2) => v2.Equals(v1);
-        public static bool operator !=(T2 v1, OneOf<T0, T1, T2> v2) => !v2.Equals(v1);
+        public static bool operator ==(OneOf<T0, T1, T2> v1, IOneOf v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2> v1, IOneOf v2) => !Equals(v1,v2);
+        public static bool operator ==(OneOf<T0, T1, T2> v1, T0 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2> v1, T0 v2) => !Equals(v1,v2);
+        public static bool operator ==(T0 v1, OneOf<T0, T1, T2> v2) => Equals(v2,v1);
+        public static bool operator !=(T0 v1, OneOf<T0, T1, T2> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2> v1, T1 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2> v1, T1 v2) => !Equals(v1,v2);
+        public static bool operator ==(T1 v1, OneOf<T0, T1, T2> v2) => Equals(v2,v1);
+        public static bool operator !=(T1 v1, OneOf<T0, T1, T2> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2> v1, T2 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2> v1, T2 v2) => !Equals(v1,v2);
+        public static bool operator ==(T2 v1, OneOf<T0, T1, T2> v2) => Equals(v2,v1);
+        public static bool operator !=(T2 v1, OneOf<T0, T1, T2> v2) => !Equals(v2,v1);
 
         public OneOfSwitcher<T1, T2> Switch(Action<T0> action) => new OneOfSwitcher<T0, T1, T2>(value, origType).Switch(action);
         public OneOfSwitcher<T0, T2> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1, T2>(value, origType).Switch(action);
@@ -145,8 +145,8 @@ namespace OneOf
     }
     public struct OneOf<T0, T1, T2, T3> : IOneOf
     {
-        readonly object value;
-        readonly Type origType;
+        private readonly object value;
+        private readonly Type origType;
 
         OneOf(object value, Type origType)
         {
@@ -190,24 +190,24 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2, T3>(T2 value) => CreateRaw(value);
         public static implicit operator OneOf<T0, T1, T2, T3>(T3 value) => CreateRaw(value);
 
-        public static bool operator ==(OneOf<T0, T1, T2, T3> v1, IOneOf v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3> v1, IOneOf v2) => !v1.Equals(v2);
-        public static bool operator ==(OneOf<T0, T1, T2, T3> v1, T0 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3> v1, T0 v2) => !v1.Equals(v2);
-        public static bool operator ==(T0 v1, OneOf<T0, T1, T2, T3> v2) => v2.Equals(v1);
-        public static bool operator !=(T0 v1, OneOf<T0, T1, T2, T3> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2, T3> v1, T1 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3> v1, T1 v2) => !v1.Equals(v2);
-        public static bool operator ==(T1 v1, OneOf<T0, T1, T2, T3> v2) => v2.Equals(v1);
-        public static bool operator !=(T1 v1, OneOf<T0, T1, T2, T3> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2, T3> v1, T2 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3> v1, T2 v2) => !v1.Equals(v2);
-        public static bool operator ==(T2 v1, OneOf<T0, T1, T2, T3> v2) => v2.Equals(v1);
-        public static bool operator !=(T2 v1, OneOf<T0, T1, T2, T3> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2, T3> v1, T3 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3> v1, T3 v2) => !v1.Equals(v2);
-        public static bool operator ==(T3 v1, OneOf<T0, T1, T2, T3> v2) => v2.Equals(v1);
-        public static bool operator !=(T3 v1, OneOf<T0, T1, T2, T3> v2) => !v2.Equals(v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3> v1, IOneOf v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3> v1, IOneOf v2) => !Equals(v1,v2);
+        public static bool operator ==(OneOf<T0, T1, T2, T3> v1, T0 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3> v1, T0 v2) => !Equals(v1,v2);
+        public static bool operator ==(T0 v1, OneOf<T0, T1, T2, T3> v2) => Equals(v2,v1);
+        public static bool operator !=(T0 v1, OneOf<T0, T1, T2, T3> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3> v1, T1 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3> v1, T1 v2) => !Equals(v1,v2);
+        public static bool operator ==(T1 v1, OneOf<T0, T1, T2, T3> v2) => Equals(v2,v1);
+        public static bool operator !=(T1 v1, OneOf<T0, T1, T2, T3> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3> v1, T2 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3> v1, T2 v2) => !Equals(v1,v2);
+        public static bool operator ==(T2 v1, OneOf<T0, T1, T2, T3> v2) => Equals(v2,v1);
+        public static bool operator !=(T2 v1, OneOf<T0, T1, T2, T3> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3> v1, T3 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3> v1, T3 v2) => !Equals(v1,v2);
+        public static bool operator ==(T3 v1, OneOf<T0, T1, T2, T3> v2) => Equals(v2,v1);
+        public static bool operator !=(T3 v1, OneOf<T0, T1, T2, T3> v2) => !Equals(v2,v1);
 
         public OneOfSwitcher<T1, T2, T3> Switch(Action<T0> action) => new OneOfSwitcher<T0, T1, T2, T3>(value, origType).Switch(action);
         public OneOfSwitcher<T0, T2, T3> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1, T2, T3>(value, origType).Switch(action);
@@ -225,8 +225,8 @@ namespace OneOf
     }
     public struct OneOf<T0, T1, T2, T3, T4> : IOneOf
     {
-        readonly object value;
-        readonly Type origType;
+        private readonly object value;
+        private readonly Type origType;
 
         OneOf(object value, Type origType)
         {
@@ -272,28 +272,28 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2, T3, T4>(T3 value) => CreateRaw(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4>(T4 value) => CreateRaw(value);
 
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4> v1, IOneOf v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4> v1, IOneOf v2) => !v1.Equals(v2);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4> v1, T0 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4> v1, T0 v2) => !v1.Equals(v2);
-        public static bool operator ==(T0 v1, OneOf<T0, T1, T2, T3, T4> v2) => v2.Equals(v1);
-        public static bool operator !=(T0 v1, OneOf<T0, T1, T2, T3, T4> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4> v1, T1 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4> v1, T1 v2) => !v1.Equals(v2);
-        public static bool operator ==(T1 v1, OneOf<T0, T1, T2, T3, T4> v2) => v2.Equals(v1);
-        public static bool operator !=(T1 v1, OneOf<T0, T1, T2, T3, T4> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4> v1, T2 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4> v1, T2 v2) => !v1.Equals(v2);
-        public static bool operator ==(T2 v1, OneOf<T0, T1, T2, T3, T4> v2) => v2.Equals(v1);
-        public static bool operator !=(T2 v1, OneOf<T0, T1, T2, T3, T4> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4> v1, T3 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4> v1, T3 v2) => !v1.Equals(v2);
-        public static bool operator ==(T3 v1, OneOf<T0, T1, T2, T3, T4> v2) => v2.Equals(v1);
-        public static bool operator !=(T3 v1, OneOf<T0, T1, T2, T3, T4> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4> v1, T4 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4> v1, T4 v2) => !v1.Equals(v2);
-        public static bool operator ==(T4 v1, OneOf<T0, T1, T2, T3, T4> v2) => v2.Equals(v1);
-        public static bool operator !=(T4 v1, OneOf<T0, T1, T2, T3, T4> v2) => !v2.Equals(v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4> v1, IOneOf v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4> v1, IOneOf v2) => !Equals(v1,v2);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4> v1, T0 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4> v1, T0 v2) => !Equals(v1,v2);
+        public static bool operator ==(T0 v1, OneOf<T0, T1, T2, T3, T4> v2) => Equals(v2,v1);
+        public static bool operator !=(T0 v1, OneOf<T0, T1, T2, T3, T4> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4> v1, T1 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4> v1, T1 v2) => !Equals(v1,v2);
+        public static bool operator ==(T1 v1, OneOf<T0, T1, T2, T3, T4> v2) => Equals(v2,v1);
+        public static bool operator !=(T1 v1, OneOf<T0, T1, T2, T3, T4> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4> v1, T2 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4> v1, T2 v2) => !Equals(v1,v2);
+        public static bool operator ==(T2 v1, OneOf<T0, T1, T2, T3, T4> v2) => Equals(v2,v1);
+        public static bool operator !=(T2 v1, OneOf<T0, T1, T2, T3, T4> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4> v1, T3 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4> v1, T3 v2) => !Equals(v1,v2);
+        public static bool operator ==(T3 v1, OneOf<T0, T1, T2, T3, T4> v2) => Equals(v2,v1);
+        public static bool operator !=(T3 v1, OneOf<T0, T1, T2, T3, T4> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4> v1, T4 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4> v1, T4 v2) => !Equals(v1,v2);
+        public static bool operator ==(T4 v1, OneOf<T0, T1, T2, T3, T4> v2) => Equals(v2,v1);
+        public static bool operator !=(T4 v1, OneOf<T0, T1, T2, T3, T4> v2) => !Equals(v2,v1);
 
         public OneOfSwitcher<T1, T2, T3, T4> Switch(Action<T0> action) => new OneOfSwitcher<T0, T1, T2, T3, T4>(value, origType).Switch(action);
         public OneOfSwitcher<T0, T2, T3, T4> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1, T2, T3, T4>(value, origType).Switch(action);
@@ -313,8 +313,8 @@ namespace OneOf
     }
     public struct OneOf<T0, T1, T2, T3, T4, T5> : IOneOf
     {
-        readonly object value;
-        readonly Type origType;
+        private readonly object value;
+        private readonly Type origType;
 
         OneOf(object value, Type origType)
         {
@@ -362,32 +362,32 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T4 value) => CreateRaw(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T5 value) => CreateRaw(value);
 
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5> v1, IOneOf v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5> v1, IOneOf v2) => !v1.Equals(v2);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5> v1, T0 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5> v1, T0 v2) => !v1.Equals(v2);
-        public static bool operator ==(T0 v1, OneOf<T0, T1, T2, T3, T4, T5> v2) => v2.Equals(v1);
-        public static bool operator !=(T0 v1, OneOf<T0, T1, T2, T3, T4, T5> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5> v1, T1 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5> v1, T1 v2) => !v1.Equals(v2);
-        public static bool operator ==(T1 v1, OneOf<T0, T1, T2, T3, T4, T5> v2) => v2.Equals(v1);
-        public static bool operator !=(T1 v1, OneOf<T0, T1, T2, T3, T4, T5> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5> v1, T2 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5> v1, T2 v2) => !v1.Equals(v2);
-        public static bool operator ==(T2 v1, OneOf<T0, T1, T2, T3, T4, T5> v2) => v2.Equals(v1);
-        public static bool operator !=(T2 v1, OneOf<T0, T1, T2, T3, T4, T5> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5> v1, T3 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5> v1, T3 v2) => !v1.Equals(v2);
-        public static bool operator ==(T3 v1, OneOf<T0, T1, T2, T3, T4, T5> v2) => v2.Equals(v1);
-        public static bool operator !=(T3 v1, OneOf<T0, T1, T2, T3, T4, T5> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5> v1, T4 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5> v1, T4 v2) => !v1.Equals(v2);
-        public static bool operator ==(T4 v1, OneOf<T0, T1, T2, T3, T4, T5> v2) => v2.Equals(v1);
-        public static bool operator !=(T4 v1, OneOf<T0, T1, T2, T3, T4, T5> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5> v1, T5 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5> v1, T5 v2) => !v1.Equals(v2);
-        public static bool operator ==(T5 v1, OneOf<T0, T1, T2, T3, T4, T5> v2) => v2.Equals(v1);
-        public static bool operator !=(T5 v1, OneOf<T0, T1, T2, T3, T4, T5> v2) => !v2.Equals(v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5> v1, IOneOf v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5> v1, IOneOf v2) => !Equals(v1,v2);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5> v1, T0 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5> v1, T0 v2) => !Equals(v1,v2);
+        public static bool operator ==(T0 v1, OneOf<T0, T1, T2, T3, T4, T5> v2) => Equals(v2,v1);
+        public static bool operator !=(T0 v1, OneOf<T0, T1, T2, T3, T4, T5> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5> v1, T1 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5> v1, T1 v2) => !Equals(v1,v2);
+        public static bool operator ==(T1 v1, OneOf<T0, T1, T2, T3, T4, T5> v2) => Equals(v2,v1);
+        public static bool operator !=(T1 v1, OneOf<T0, T1, T2, T3, T4, T5> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5> v1, T2 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5> v1, T2 v2) => !Equals(v1,v2);
+        public static bool operator ==(T2 v1, OneOf<T0, T1, T2, T3, T4, T5> v2) => Equals(v2,v1);
+        public static bool operator !=(T2 v1, OneOf<T0, T1, T2, T3, T4, T5> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5> v1, T3 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5> v1, T3 v2) => !Equals(v1,v2);
+        public static bool operator ==(T3 v1, OneOf<T0, T1, T2, T3, T4, T5> v2) => Equals(v2,v1);
+        public static bool operator !=(T3 v1, OneOf<T0, T1, T2, T3, T4, T5> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5> v1, T4 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5> v1, T4 v2) => !Equals(v1,v2);
+        public static bool operator ==(T4 v1, OneOf<T0, T1, T2, T3, T4, T5> v2) => Equals(v2,v1);
+        public static bool operator !=(T4 v1, OneOf<T0, T1, T2, T3, T4, T5> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5> v1, T5 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5> v1, T5 v2) => !Equals(v1,v2);
+        public static bool operator ==(T5 v1, OneOf<T0, T1, T2, T3, T4, T5> v2) => Equals(v2,v1);
+        public static bool operator !=(T5 v1, OneOf<T0, T1, T2, T3, T4, T5> v2) => !Equals(v2,v1);
 
         public OneOfSwitcher<T1, T2, T3, T4, T5> Switch(Action<T0> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(value, origType).Switch(action);
         public OneOfSwitcher<T0, T2, T3, T4, T5> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(value, origType).Switch(action);
@@ -409,8 +409,8 @@ namespace OneOf
     }
     public struct OneOf<T0, T1, T2, T3, T4, T5, T6> : IOneOf
     {
-        readonly object value;
-        readonly Type origType;
+        private readonly object value;
+        private readonly Type origType;
 
         OneOf(object value, Type origType)
         {
@@ -460,36 +460,36 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T5 value) => CreateRaw(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T6 value) => CreateRaw(value);
 
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, IOneOf v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, IOneOf v2) => !v1.Equals(v2);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, T0 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, T0 v2) => !v1.Equals(v2);
-        public static bool operator ==(T0 v1, OneOf<T0, T1, T2, T3, T4, T5, T6> v2) => v2.Equals(v1);
-        public static bool operator !=(T0 v1, OneOf<T0, T1, T2, T3, T4, T5, T6> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, T1 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, T1 v2) => !v1.Equals(v2);
-        public static bool operator ==(T1 v1, OneOf<T0, T1, T2, T3, T4, T5, T6> v2) => v2.Equals(v1);
-        public static bool operator !=(T1 v1, OneOf<T0, T1, T2, T3, T4, T5, T6> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, T2 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, T2 v2) => !v1.Equals(v2);
-        public static bool operator ==(T2 v1, OneOf<T0, T1, T2, T3, T4, T5, T6> v2) => v2.Equals(v1);
-        public static bool operator !=(T2 v1, OneOf<T0, T1, T2, T3, T4, T5, T6> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, T3 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, T3 v2) => !v1.Equals(v2);
-        public static bool operator ==(T3 v1, OneOf<T0, T1, T2, T3, T4, T5, T6> v2) => v2.Equals(v1);
-        public static bool operator !=(T3 v1, OneOf<T0, T1, T2, T3, T4, T5, T6> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, T4 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, T4 v2) => !v1.Equals(v2);
-        public static bool operator ==(T4 v1, OneOf<T0, T1, T2, T3, T4, T5, T6> v2) => v2.Equals(v1);
-        public static bool operator !=(T4 v1, OneOf<T0, T1, T2, T3, T4, T5, T6> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, T5 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, T5 v2) => !v1.Equals(v2);
-        public static bool operator ==(T5 v1, OneOf<T0, T1, T2, T3, T4, T5, T6> v2) => v2.Equals(v1);
-        public static bool operator !=(T5 v1, OneOf<T0, T1, T2, T3, T4, T5, T6> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, T6 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, T6 v2) => !v1.Equals(v2);
-        public static bool operator ==(T6 v1, OneOf<T0, T1, T2, T3, T4, T5, T6> v2) => v2.Equals(v1);
-        public static bool operator !=(T6 v1, OneOf<T0, T1, T2, T3, T4, T5, T6> v2) => !v2.Equals(v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, IOneOf v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, IOneOf v2) => !Equals(v1,v2);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, T0 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, T0 v2) => !Equals(v1,v2);
+        public static bool operator ==(T0 v1, OneOf<T0, T1, T2, T3, T4, T5, T6> v2) => Equals(v2,v1);
+        public static bool operator !=(T0 v1, OneOf<T0, T1, T2, T3, T4, T5, T6> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, T1 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, T1 v2) => !Equals(v1,v2);
+        public static bool operator ==(T1 v1, OneOf<T0, T1, T2, T3, T4, T5, T6> v2) => Equals(v2,v1);
+        public static bool operator !=(T1 v1, OneOf<T0, T1, T2, T3, T4, T5, T6> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, T2 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, T2 v2) => !Equals(v1,v2);
+        public static bool operator ==(T2 v1, OneOf<T0, T1, T2, T3, T4, T5, T6> v2) => Equals(v2,v1);
+        public static bool operator !=(T2 v1, OneOf<T0, T1, T2, T3, T4, T5, T6> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, T3 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, T3 v2) => !Equals(v1,v2);
+        public static bool operator ==(T3 v1, OneOf<T0, T1, T2, T3, T4, T5, T6> v2) => Equals(v2,v1);
+        public static bool operator !=(T3 v1, OneOf<T0, T1, T2, T3, T4, T5, T6> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, T4 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, T4 v2) => !Equals(v1,v2);
+        public static bool operator ==(T4 v1, OneOf<T0, T1, T2, T3, T4, T5, T6> v2) => Equals(v2,v1);
+        public static bool operator !=(T4 v1, OneOf<T0, T1, T2, T3, T4, T5, T6> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, T5 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, T5 v2) => !Equals(v1,v2);
+        public static bool operator ==(T5 v1, OneOf<T0, T1, T2, T3, T4, T5, T6> v2) => Equals(v2,v1);
+        public static bool operator !=(T5 v1, OneOf<T0, T1, T2, T3, T4, T5, T6> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, T6 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, T6 v2) => !Equals(v1,v2);
+        public static bool operator ==(T6 v1, OneOf<T0, T1, T2, T3, T4, T5, T6> v2) => Equals(v2,v1);
+        public static bool operator !=(T6 v1, OneOf<T0, T1, T2, T3, T4, T5, T6> v2) => !Equals(v2,v1);
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6> Switch(Action<T0> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(value, origType).Switch(action);
         public OneOfSwitcher<T0, T2, T3, T4, T5, T6> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(value, origType).Switch(action);
@@ -513,8 +513,8 @@ namespace OneOf
     }
     public struct OneOf<T0, T1, T2, T3, T4, T5, T6, T7> : IOneOf
     {
-        readonly object value;
-        readonly Type origType;
+        private readonly object value;
+        private readonly Type origType;
 
         OneOf(object value, Type origType)
         {
@@ -566,40 +566,40 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T6 value) => CreateRaw(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T7 value) => CreateRaw(value);
 
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, IOneOf v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, IOneOf v2) => !v1.Equals(v2);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, T0 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, T0 v2) => !v1.Equals(v2);
-        public static bool operator ==(T0 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v2) => v2.Equals(v1);
-        public static bool operator !=(T0 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, T1 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, T1 v2) => !v1.Equals(v2);
-        public static bool operator ==(T1 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v2) => v2.Equals(v1);
-        public static bool operator !=(T1 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, T2 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, T2 v2) => !v1.Equals(v2);
-        public static bool operator ==(T2 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v2) => v2.Equals(v1);
-        public static bool operator !=(T2 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, T3 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, T3 v2) => !v1.Equals(v2);
-        public static bool operator ==(T3 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v2) => v2.Equals(v1);
-        public static bool operator !=(T3 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, T4 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, T4 v2) => !v1.Equals(v2);
-        public static bool operator ==(T4 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v2) => v2.Equals(v1);
-        public static bool operator !=(T4 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, T5 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, T5 v2) => !v1.Equals(v2);
-        public static bool operator ==(T5 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v2) => v2.Equals(v1);
-        public static bool operator !=(T5 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, T6 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, T6 v2) => !v1.Equals(v2);
-        public static bool operator ==(T6 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v2) => v2.Equals(v1);
-        public static bool operator !=(T6 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, T7 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, T7 v2) => !v1.Equals(v2);
-        public static bool operator ==(T7 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v2) => v2.Equals(v1);
-        public static bool operator !=(T7 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v2) => !v2.Equals(v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, IOneOf v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, IOneOf v2) => !Equals(v1,v2);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, T0 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, T0 v2) => !Equals(v1,v2);
+        public static bool operator ==(T0 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v2) => Equals(v2,v1);
+        public static bool operator !=(T0 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, T1 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, T1 v2) => !Equals(v1,v2);
+        public static bool operator ==(T1 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v2) => Equals(v2,v1);
+        public static bool operator !=(T1 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, T2 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, T2 v2) => !Equals(v1,v2);
+        public static bool operator ==(T2 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v2) => Equals(v2,v1);
+        public static bool operator !=(T2 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, T3 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, T3 v2) => !Equals(v1,v2);
+        public static bool operator ==(T3 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v2) => Equals(v2,v1);
+        public static bool operator !=(T3 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, T4 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, T4 v2) => !Equals(v1,v2);
+        public static bool operator ==(T4 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v2) => Equals(v2,v1);
+        public static bool operator !=(T4 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, T5 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, T5 v2) => !Equals(v1,v2);
+        public static bool operator ==(T5 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v2) => Equals(v2,v1);
+        public static bool operator !=(T5 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, T6 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, T6 v2) => !Equals(v1,v2);
+        public static bool operator ==(T6 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v2) => Equals(v2,v1);
+        public static bool operator !=(T6 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, T7 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, T7 v2) => !Equals(v1,v2);
+        public static bool operator ==(T7 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v2) => Equals(v2,v1);
+        public static bool operator !=(T7 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v2) => !Equals(v2,v1);
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> Switch(Action<T0> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(value, origType).Switch(action);
         public OneOfSwitcher<T0, T2, T3, T4, T5, T6, T7> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(value, origType).Switch(action);
@@ -625,8 +625,8 @@ namespace OneOf
     }
     public struct OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> : IOneOf
     {
-        readonly object value;
-        readonly Type origType;
+        private readonly object value;
+        private readonly Type origType;
 
         OneOf(object value, Type origType)
         {
@@ -680,44 +680,44 @@ namespace OneOf
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T7 value) => CreateRaw(value);
         public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T8 value) => CreateRaw(value);
 
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, IOneOf v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, IOneOf v2) => !v1.Equals(v2);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T0 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T0 v2) => !v1.Equals(v2);
-        public static bool operator ==(T0 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => v2.Equals(v1);
-        public static bool operator !=(T0 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T1 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T1 v2) => !v1.Equals(v2);
-        public static bool operator ==(T1 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => v2.Equals(v1);
-        public static bool operator !=(T1 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T2 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T2 v2) => !v1.Equals(v2);
-        public static bool operator ==(T2 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => v2.Equals(v1);
-        public static bool operator !=(T2 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T3 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T3 v2) => !v1.Equals(v2);
-        public static bool operator ==(T3 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => v2.Equals(v1);
-        public static bool operator !=(T3 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T4 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T4 v2) => !v1.Equals(v2);
-        public static bool operator ==(T4 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => v2.Equals(v1);
-        public static bool operator !=(T4 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T5 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T5 v2) => !v1.Equals(v2);
-        public static bool operator ==(T5 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => v2.Equals(v1);
-        public static bool operator !=(T5 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T6 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T6 v2) => !v1.Equals(v2);
-        public static bool operator ==(T6 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => v2.Equals(v1);
-        public static bool operator !=(T6 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T7 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T7 v2) => !v1.Equals(v2);
-        public static bool operator ==(T7 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => v2.Equals(v1);
-        public static bool operator !=(T7 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T8 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T8 v2) => !v1.Equals(v2);
-        public static bool operator ==(T8 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => v2.Equals(v1);
-        public static bool operator !=(T8 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !v2.Equals(v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, IOneOf v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, IOneOf v2) => !Equals(v1,v2);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T0 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T0 v2) => !Equals(v1,v2);
+        public static bool operator ==(T0 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => Equals(v2,v1);
+        public static bool operator !=(T0 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T1 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T1 v2) => !Equals(v1,v2);
+        public static bool operator ==(T1 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => Equals(v2,v1);
+        public static bool operator !=(T1 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T2 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T2 v2) => !Equals(v1,v2);
+        public static bool operator ==(T2 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => Equals(v2,v1);
+        public static bool operator !=(T2 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T3 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T3 v2) => !Equals(v1,v2);
+        public static bool operator ==(T3 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => Equals(v2,v1);
+        public static bool operator !=(T3 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T4 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T4 v2) => !Equals(v1,v2);
+        public static bool operator ==(T4 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => Equals(v2,v1);
+        public static bool operator !=(T4 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T5 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T5 v2) => !Equals(v1,v2);
+        public static bool operator ==(T5 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => Equals(v2,v1);
+        public static bool operator !=(T5 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T6 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T6 v2) => !Equals(v1,v2);
+        public static bool operator ==(T6 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => Equals(v2,v1);
+        public static bool operator !=(T6 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T7 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T7 v2) => !Equals(v1,v2);
+        public static bool operator ==(T7 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => Equals(v2,v1);
+        public static bool operator !=(T7 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T8 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T8 v2) => !Equals(v1,v2);
+        public static bool operator ==(T8 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => Equals(v2,v1);
+        public static bool operator !=(T8 v1, OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !Equals(v2,v1);
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> Switch(Action<T0> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, origType).Switch(action);
         public OneOfSwitcher<T0, T2, T3, T4, T5, T6, T7, T8> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, origType).Switch(action);
@@ -745,8 +745,8 @@ namespace OneOf
     }
     public class OneOfBase<T0, T1> : IOneOf
     {
-        readonly object value;
-        readonly Type origType;
+        private readonly object value;
+        private readonly Type origType;
 
         OneOfBase(object value, Type origType)
         {
@@ -792,16 +792,16 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1>(T0 value) => CreateRaw(value);
         public static implicit operator OneOfBase<T0, T1>(T1 value) => CreateRaw(value);
 
-        public static bool operator ==(OneOfBase<T0, T1> v1, IOneOf v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1> v1, IOneOf v2) => !v1.Equals(v2);
-        public static bool operator ==(OneOfBase<T0, T1> v1, T0 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1> v1, T0 v2) => !v1.Equals(v2);
-        public static bool operator ==(T0 v1, OneOfBase<T0, T1> v2) => v2.Equals(v1);
-        public static bool operator !=(T0 v1, OneOfBase<T0, T1> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1> v1, T1 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1> v1, T1 v2) => !v1.Equals(v2);
-        public static bool operator ==(T1 v1, OneOfBase<T0, T1> v2) => v2.Equals(v1);
-        public static bool operator !=(T1 v1, OneOfBase<T0, T1> v2) => !v2.Equals(v1);
+        public static bool operator ==(OneOfBase<T0, T1> v1, IOneOf v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1> v1, IOneOf v2) => !Equals(v1,v2);
+        public static bool operator ==(OneOfBase<T0, T1> v1, T0 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1> v1, T0 v2) => !Equals(v1,v2);
+        public static bool operator ==(T0 v1, OneOfBase<T0, T1> v2) => Equals(v2,v1);
+        public static bool operator !=(T0 v1, OneOfBase<T0, T1> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1> v1, T1 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1> v1, T1 v2) => !Equals(v1,v2);
+        public static bool operator ==(T1 v1, OneOfBase<T0, T1> v2) => Equals(v2,v1);
+        public static bool operator !=(T1 v1, OneOfBase<T0, T1> v2) => !Equals(v2,v1);
 
         public OneOfSwitcher<T1> Switch(Action<T0> action) => new OneOfSwitcher<T0, T1>(value, origType).Switch(action);
         public OneOfSwitcher<T0> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1>(value, origType).Switch(action);
@@ -815,8 +815,8 @@ namespace OneOf
     }
     public class OneOfBase<T0, T1, T2> : IOneOf
     {
-        readonly object value;
-        readonly Type origType;
+        private readonly object value;
+        private readonly Type origType;
 
         OneOfBase(object value, Type origType)
         {
@@ -864,20 +864,20 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2>(T1 value) => CreateRaw(value);
         public static implicit operator OneOfBase<T0, T1, T2>(T2 value) => CreateRaw(value);
 
-        public static bool operator ==(OneOfBase<T0, T1, T2> v1, IOneOf v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2> v1, IOneOf v2) => !v1.Equals(v2);
-        public static bool operator ==(OneOfBase<T0, T1, T2> v1, T0 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2> v1, T0 v2) => !v1.Equals(v2);
-        public static bool operator ==(T0 v1, OneOfBase<T0, T1, T2> v2) => v2.Equals(v1);
-        public static bool operator !=(T0 v1, OneOfBase<T0, T1, T2> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2> v1, T1 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2> v1, T1 v2) => !v1.Equals(v2);
-        public static bool operator ==(T1 v1, OneOfBase<T0, T1, T2> v2) => v2.Equals(v1);
-        public static bool operator !=(T1 v1, OneOfBase<T0, T1, T2> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2> v1, T2 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2> v1, T2 v2) => !v1.Equals(v2);
-        public static bool operator ==(T2 v1, OneOfBase<T0, T1, T2> v2) => v2.Equals(v1);
-        public static bool operator !=(T2 v1, OneOfBase<T0, T1, T2> v2) => !v2.Equals(v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2> v1, IOneOf v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2> v1, IOneOf v2) => !Equals(v1,v2);
+        public static bool operator ==(OneOfBase<T0, T1, T2> v1, T0 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2> v1, T0 v2) => !Equals(v1,v2);
+        public static bool operator ==(T0 v1, OneOfBase<T0, T1, T2> v2) => Equals(v2,v1);
+        public static bool operator !=(T0 v1, OneOfBase<T0, T1, T2> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2> v1, T1 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2> v1, T1 v2) => !Equals(v1,v2);
+        public static bool operator ==(T1 v1, OneOfBase<T0, T1, T2> v2) => Equals(v2,v1);
+        public static bool operator !=(T1 v1, OneOfBase<T0, T1, T2> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2> v1, T2 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2> v1, T2 v2) => !Equals(v1,v2);
+        public static bool operator ==(T2 v1, OneOfBase<T0, T1, T2> v2) => Equals(v2,v1);
+        public static bool operator !=(T2 v1, OneOfBase<T0, T1, T2> v2) => !Equals(v2,v1);
 
         public OneOfSwitcher<T1, T2> Switch(Action<T0> action) => new OneOfSwitcher<T0, T1, T2>(value, origType).Switch(action);
         public OneOfSwitcher<T0, T2> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1, T2>(value, origType).Switch(action);
@@ -893,8 +893,8 @@ namespace OneOf
     }
     public class OneOfBase<T0, T1, T2, T3> : IOneOf
     {
-        readonly object value;
-        readonly Type origType;
+        private readonly object value;
+        private readonly Type origType;
 
         OneOfBase(object value, Type origType)
         {
@@ -944,24 +944,24 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2, T3>(T2 value) => CreateRaw(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3>(T3 value) => CreateRaw(value);
 
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3> v1, IOneOf v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3> v1, IOneOf v2) => !v1.Equals(v2);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3> v1, T0 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3> v1, T0 v2) => !v1.Equals(v2);
-        public static bool operator ==(T0 v1, OneOfBase<T0, T1, T2, T3> v2) => v2.Equals(v1);
-        public static bool operator !=(T0 v1, OneOfBase<T0, T1, T2, T3> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3> v1, T1 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3> v1, T1 v2) => !v1.Equals(v2);
-        public static bool operator ==(T1 v1, OneOfBase<T0, T1, T2, T3> v2) => v2.Equals(v1);
-        public static bool operator !=(T1 v1, OneOfBase<T0, T1, T2, T3> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3> v1, T2 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3> v1, T2 v2) => !v1.Equals(v2);
-        public static bool operator ==(T2 v1, OneOfBase<T0, T1, T2, T3> v2) => v2.Equals(v1);
-        public static bool operator !=(T2 v1, OneOfBase<T0, T1, T2, T3> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3> v1, T3 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3> v1, T3 v2) => !v1.Equals(v2);
-        public static bool operator ==(T3 v1, OneOfBase<T0, T1, T2, T3> v2) => v2.Equals(v1);
-        public static bool operator !=(T3 v1, OneOfBase<T0, T1, T2, T3> v2) => !v2.Equals(v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3> v1, IOneOf v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3> v1, IOneOf v2) => !Equals(v1,v2);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3> v1, T0 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3> v1, T0 v2) => !Equals(v1,v2);
+        public static bool operator ==(T0 v1, OneOfBase<T0, T1, T2, T3> v2) => Equals(v2,v1);
+        public static bool operator !=(T0 v1, OneOfBase<T0, T1, T2, T3> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3> v1, T1 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3> v1, T1 v2) => !Equals(v1,v2);
+        public static bool operator ==(T1 v1, OneOfBase<T0, T1, T2, T3> v2) => Equals(v2,v1);
+        public static bool operator !=(T1 v1, OneOfBase<T0, T1, T2, T3> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3> v1, T2 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3> v1, T2 v2) => !Equals(v1,v2);
+        public static bool operator ==(T2 v1, OneOfBase<T0, T1, T2, T3> v2) => Equals(v2,v1);
+        public static bool operator !=(T2 v1, OneOfBase<T0, T1, T2, T3> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3> v1, T3 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3> v1, T3 v2) => !Equals(v1,v2);
+        public static bool operator ==(T3 v1, OneOfBase<T0, T1, T2, T3> v2) => Equals(v2,v1);
+        public static bool operator !=(T3 v1, OneOfBase<T0, T1, T2, T3> v2) => !Equals(v2,v1);
 
         public OneOfSwitcher<T1, T2, T3> Switch(Action<T0> action) => new OneOfSwitcher<T0, T1, T2, T3>(value, origType).Switch(action);
         public OneOfSwitcher<T0, T2, T3> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1, T2, T3>(value, origType).Switch(action);
@@ -979,8 +979,8 @@ namespace OneOf
     }
     public class OneOfBase<T0, T1, T2, T3, T4> : IOneOf
     {
-        readonly object value;
-        readonly Type origType;
+        private readonly object value;
+        private readonly Type origType;
 
         OneOfBase(object value, Type origType)
         {
@@ -1032,28 +1032,28 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T3 value) => CreateRaw(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T4 value) => CreateRaw(value);
 
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4> v1, IOneOf v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4> v1, IOneOf v2) => !v1.Equals(v2);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4> v1, T0 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4> v1, T0 v2) => !v1.Equals(v2);
-        public static bool operator ==(T0 v1, OneOfBase<T0, T1, T2, T3, T4> v2) => v2.Equals(v1);
-        public static bool operator !=(T0 v1, OneOfBase<T0, T1, T2, T3, T4> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4> v1, T1 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4> v1, T1 v2) => !v1.Equals(v2);
-        public static bool operator ==(T1 v1, OneOfBase<T0, T1, T2, T3, T4> v2) => v2.Equals(v1);
-        public static bool operator !=(T1 v1, OneOfBase<T0, T1, T2, T3, T4> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4> v1, T2 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4> v1, T2 v2) => !v1.Equals(v2);
-        public static bool operator ==(T2 v1, OneOfBase<T0, T1, T2, T3, T4> v2) => v2.Equals(v1);
-        public static bool operator !=(T2 v1, OneOfBase<T0, T1, T2, T3, T4> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4> v1, T3 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4> v1, T3 v2) => !v1.Equals(v2);
-        public static bool operator ==(T3 v1, OneOfBase<T0, T1, T2, T3, T4> v2) => v2.Equals(v1);
-        public static bool operator !=(T3 v1, OneOfBase<T0, T1, T2, T3, T4> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4> v1, T4 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4> v1, T4 v2) => !v1.Equals(v2);
-        public static bool operator ==(T4 v1, OneOfBase<T0, T1, T2, T3, T4> v2) => v2.Equals(v1);
-        public static bool operator !=(T4 v1, OneOfBase<T0, T1, T2, T3, T4> v2) => !v2.Equals(v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4> v1, IOneOf v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4> v1, IOneOf v2) => !Equals(v1,v2);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4> v1, T0 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4> v1, T0 v2) => !Equals(v1,v2);
+        public static bool operator ==(T0 v1, OneOfBase<T0, T1, T2, T3, T4> v2) => Equals(v2,v1);
+        public static bool operator !=(T0 v1, OneOfBase<T0, T1, T2, T3, T4> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4> v1, T1 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4> v1, T1 v2) => !Equals(v1,v2);
+        public static bool operator ==(T1 v1, OneOfBase<T0, T1, T2, T3, T4> v2) => Equals(v2,v1);
+        public static bool operator !=(T1 v1, OneOfBase<T0, T1, T2, T3, T4> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4> v1, T2 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4> v1, T2 v2) => !Equals(v1,v2);
+        public static bool operator ==(T2 v1, OneOfBase<T0, T1, T2, T3, T4> v2) => Equals(v2,v1);
+        public static bool operator !=(T2 v1, OneOfBase<T0, T1, T2, T3, T4> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4> v1, T3 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4> v1, T3 v2) => !Equals(v1,v2);
+        public static bool operator ==(T3 v1, OneOfBase<T0, T1, T2, T3, T4> v2) => Equals(v2,v1);
+        public static bool operator !=(T3 v1, OneOfBase<T0, T1, T2, T3, T4> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4> v1, T4 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4> v1, T4 v2) => !Equals(v1,v2);
+        public static bool operator ==(T4 v1, OneOfBase<T0, T1, T2, T3, T4> v2) => Equals(v2,v1);
+        public static bool operator !=(T4 v1, OneOfBase<T0, T1, T2, T3, T4> v2) => !Equals(v2,v1);
 
         public OneOfSwitcher<T1, T2, T3, T4> Switch(Action<T0> action) => new OneOfSwitcher<T0, T1, T2, T3, T4>(value, origType).Switch(action);
         public OneOfSwitcher<T0, T2, T3, T4> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1, T2, T3, T4>(value, origType).Switch(action);
@@ -1073,8 +1073,8 @@ namespace OneOf
     }
     public class OneOfBase<T0, T1, T2, T3, T4, T5> : IOneOf
     {
-        readonly object value;
-        readonly Type origType;
+        private readonly object value;
+        private readonly Type origType;
 
         OneOfBase(object value, Type origType)
         {
@@ -1128,32 +1128,32 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T4 value) => CreateRaw(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T5 value) => CreateRaw(value);
 
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5> v1, IOneOf v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5> v1, IOneOf v2) => !v1.Equals(v2);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5> v1, T0 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5> v1, T0 v2) => !v1.Equals(v2);
-        public static bool operator ==(T0 v1, OneOfBase<T0, T1, T2, T3, T4, T5> v2) => v2.Equals(v1);
-        public static bool operator !=(T0 v1, OneOfBase<T0, T1, T2, T3, T4, T5> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5> v1, T1 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5> v1, T1 v2) => !v1.Equals(v2);
-        public static bool operator ==(T1 v1, OneOfBase<T0, T1, T2, T3, T4, T5> v2) => v2.Equals(v1);
-        public static bool operator !=(T1 v1, OneOfBase<T0, T1, T2, T3, T4, T5> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5> v1, T2 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5> v1, T2 v2) => !v1.Equals(v2);
-        public static bool operator ==(T2 v1, OneOfBase<T0, T1, T2, T3, T4, T5> v2) => v2.Equals(v1);
-        public static bool operator !=(T2 v1, OneOfBase<T0, T1, T2, T3, T4, T5> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5> v1, T3 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5> v1, T3 v2) => !v1.Equals(v2);
-        public static bool operator ==(T3 v1, OneOfBase<T0, T1, T2, T3, T4, T5> v2) => v2.Equals(v1);
-        public static bool operator !=(T3 v1, OneOfBase<T0, T1, T2, T3, T4, T5> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5> v1, T4 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5> v1, T4 v2) => !v1.Equals(v2);
-        public static bool operator ==(T4 v1, OneOfBase<T0, T1, T2, T3, T4, T5> v2) => v2.Equals(v1);
-        public static bool operator !=(T4 v1, OneOfBase<T0, T1, T2, T3, T4, T5> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5> v1, T5 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5> v1, T5 v2) => !v1.Equals(v2);
-        public static bool operator ==(T5 v1, OneOfBase<T0, T1, T2, T3, T4, T5> v2) => v2.Equals(v1);
-        public static bool operator !=(T5 v1, OneOfBase<T0, T1, T2, T3, T4, T5> v2) => !v2.Equals(v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5> v1, IOneOf v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5> v1, IOneOf v2) => !Equals(v1,v2);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5> v1, T0 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5> v1, T0 v2) => !Equals(v1,v2);
+        public static bool operator ==(T0 v1, OneOfBase<T0, T1, T2, T3, T4, T5> v2) => Equals(v2,v1);
+        public static bool operator !=(T0 v1, OneOfBase<T0, T1, T2, T3, T4, T5> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5> v1, T1 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5> v1, T1 v2) => !Equals(v1,v2);
+        public static bool operator ==(T1 v1, OneOfBase<T0, T1, T2, T3, T4, T5> v2) => Equals(v2,v1);
+        public static bool operator !=(T1 v1, OneOfBase<T0, T1, T2, T3, T4, T5> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5> v1, T2 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5> v1, T2 v2) => !Equals(v1,v2);
+        public static bool operator ==(T2 v1, OneOfBase<T0, T1, T2, T3, T4, T5> v2) => Equals(v2,v1);
+        public static bool operator !=(T2 v1, OneOfBase<T0, T1, T2, T3, T4, T5> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5> v1, T3 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5> v1, T3 v2) => !Equals(v1,v2);
+        public static bool operator ==(T3 v1, OneOfBase<T0, T1, T2, T3, T4, T5> v2) => Equals(v2,v1);
+        public static bool operator !=(T3 v1, OneOfBase<T0, T1, T2, T3, T4, T5> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5> v1, T4 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5> v1, T4 v2) => !Equals(v1,v2);
+        public static bool operator ==(T4 v1, OneOfBase<T0, T1, T2, T3, T4, T5> v2) => Equals(v2,v1);
+        public static bool operator !=(T4 v1, OneOfBase<T0, T1, T2, T3, T4, T5> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5> v1, T5 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5> v1, T5 v2) => !Equals(v1,v2);
+        public static bool operator ==(T5 v1, OneOfBase<T0, T1, T2, T3, T4, T5> v2) => Equals(v2,v1);
+        public static bool operator !=(T5 v1, OneOfBase<T0, T1, T2, T3, T4, T5> v2) => !Equals(v2,v1);
 
         public OneOfSwitcher<T1, T2, T3, T4, T5> Switch(Action<T0> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(value, origType).Switch(action);
         public OneOfSwitcher<T0, T2, T3, T4, T5> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5>(value, origType).Switch(action);
@@ -1175,8 +1175,8 @@ namespace OneOf
     }
     public class OneOfBase<T0, T1, T2, T3, T4, T5, T6> : IOneOf
     {
-        readonly object value;
-        readonly Type origType;
+        private readonly object value;
+        private readonly Type origType;
 
         OneOfBase(object value, Type origType)
         {
@@ -1232,36 +1232,36 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T5 value) => CreateRaw(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T6 value) => CreateRaw(value);
 
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, IOneOf v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, IOneOf v2) => !v1.Equals(v2);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, T0 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, T0 v2) => !v1.Equals(v2);
-        public static bool operator ==(T0 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6> v2) => v2.Equals(v1);
-        public static bool operator !=(T0 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, T1 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, T1 v2) => !v1.Equals(v2);
-        public static bool operator ==(T1 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6> v2) => v2.Equals(v1);
-        public static bool operator !=(T1 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, T2 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, T2 v2) => !v1.Equals(v2);
-        public static bool operator ==(T2 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6> v2) => v2.Equals(v1);
-        public static bool operator !=(T2 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, T3 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, T3 v2) => !v1.Equals(v2);
-        public static bool operator ==(T3 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6> v2) => v2.Equals(v1);
-        public static bool operator !=(T3 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, T4 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, T4 v2) => !v1.Equals(v2);
-        public static bool operator ==(T4 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6> v2) => v2.Equals(v1);
-        public static bool operator !=(T4 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, T5 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, T5 v2) => !v1.Equals(v2);
-        public static bool operator ==(T5 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6> v2) => v2.Equals(v1);
-        public static bool operator !=(T5 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, T6 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, T6 v2) => !v1.Equals(v2);
-        public static bool operator ==(T6 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6> v2) => v2.Equals(v1);
-        public static bool operator !=(T6 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6> v2) => !v2.Equals(v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, IOneOf v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, IOneOf v2) => !Equals(v1,v2);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, T0 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, T0 v2) => !Equals(v1,v2);
+        public static bool operator ==(T0 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6> v2) => Equals(v2,v1);
+        public static bool operator !=(T0 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, T1 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, T1 v2) => !Equals(v1,v2);
+        public static bool operator ==(T1 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6> v2) => Equals(v2,v1);
+        public static bool operator !=(T1 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, T2 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, T2 v2) => !Equals(v1,v2);
+        public static bool operator ==(T2 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6> v2) => Equals(v2,v1);
+        public static bool operator !=(T2 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, T3 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, T3 v2) => !Equals(v1,v2);
+        public static bool operator ==(T3 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6> v2) => Equals(v2,v1);
+        public static bool operator !=(T3 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, T4 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, T4 v2) => !Equals(v1,v2);
+        public static bool operator ==(T4 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6> v2) => Equals(v2,v1);
+        public static bool operator !=(T4 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, T5 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, T5 v2) => !Equals(v1,v2);
+        public static bool operator ==(T5 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6> v2) => Equals(v2,v1);
+        public static bool operator !=(T5 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, T6 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, T6 v2) => !Equals(v1,v2);
+        public static bool operator ==(T6 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6> v2) => Equals(v2,v1);
+        public static bool operator !=(T6 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6> v2) => !Equals(v2,v1);
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6> Switch(Action<T0> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(value, origType).Switch(action);
         public OneOfSwitcher<T0, T2, T3, T4, T5, T6> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6>(value, origType).Switch(action);
@@ -1285,8 +1285,8 @@ namespace OneOf
     }
     public class OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> : IOneOf
     {
-        readonly object value;
-        readonly Type origType;
+        private readonly object value;
+        private readonly Type origType;
 
         OneOfBase(object value, Type origType)
         {
@@ -1344,40 +1344,40 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T6 value) => CreateRaw(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T7 value) => CreateRaw(value);
 
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, IOneOf v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, IOneOf v2) => !v1.Equals(v2);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, T0 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, T0 v2) => !v1.Equals(v2);
-        public static bool operator ==(T0 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v2) => v2.Equals(v1);
-        public static bool operator !=(T0 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, T1 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, T1 v2) => !v1.Equals(v2);
-        public static bool operator ==(T1 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v2) => v2.Equals(v1);
-        public static bool operator !=(T1 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, T2 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, T2 v2) => !v1.Equals(v2);
-        public static bool operator ==(T2 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v2) => v2.Equals(v1);
-        public static bool operator !=(T2 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, T3 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, T3 v2) => !v1.Equals(v2);
-        public static bool operator ==(T3 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v2) => v2.Equals(v1);
-        public static bool operator !=(T3 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, T4 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, T4 v2) => !v1.Equals(v2);
-        public static bool operator ==(T4 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v2) => v2.Equals(v1);
-        public static bool operator !=(T4 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, T5 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, T5 v2) => !v1.Equals(v2);
-        public static bool operator ==(T5 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v2) => v2.Equals(v1);
-        public static bool operator !=(T5 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, T6 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, T6 v2) => !v1.Equals(v2);
-        public static bool operator ==(T6 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v2) => v2.Equals(v1);
-        public static bool operator !=(T6 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, T7 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, T7 v2) => !v1.Equals(v2);
-        public static bool operator ==(T7 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v2) => v2.Equals(v1);
-        public static bool operator !=(T7 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v2) => !v2.Equals(v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, IOneOf v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, IOneOf v2) => !Equals(v1,v2);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, T0 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, T0 v2) => !Equals(v1,v2);
+        public static bool operator ==(T0 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v2) => Equals(v2,v1);
+        public static bool operator !=(T0 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, T1 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, T1 v2) => !Equals(v1,v2);
+        public static bool operator ==(T1 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v2) => Equals(v2,v1);
+        public static bool operator !=(T1 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, T2 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, T2 v2) => !Equals(v1,v2);
+        public static bool operator ==(T2 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v2) => Equals(v2,v1);
+        public static bool operator !=(T2 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, T3 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, T3 v2) => !Equals(v1,v2);
+        public static bool operator ==(T3 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v2) => Equals(v2,v1);
+        public static bool operator !=(T3 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, T4 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, T4 v2) => !Equals(v1,v2);
+        public static bool operator ==(T4 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v2) => Equals(v2,v1);
+        public static bool operator !=(T4 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, T5 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, T5 v2) => !Equals(v1,v2);
+        public static bool operator ==(T5 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v2) => Equals(v2,v1);
+        public static bool operator !=(T5 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, T6 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, T6 v2) => !Equals(v1,v2);
+        public static bool operator ==(T6 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v2) => Equals(v2,v1);
+        public static bool operator !=(T6 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, T7 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, T7 v2) => !Equals(v1,v2);
+        public static bool operator ==(T7 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v2) => Equals(v2,v1);
+        public static bool operator !=(T7 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v2) => !Equals(v2,v1);
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> Switch(Action<T0> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(value, origType).Switch(action);
         public OneOfSwitcher<T0, T2, T3, T4, T5, T6, T7> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7>(value, origType).Switch(action);
@@ -1403,8 +1403,8 @@ namespace OneOf
     }
     public class OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> : IOneOf
     {
-        readonly object value;
-        readonly Type origType;
+        private readonly object value;
+        private readonly Type origType;
 
         OneOfBase(object value, Type origType)
         {
@@ -1464,44 +1464,44 @@ namespace OneOf
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T7 value) => CreateRaw(value);
         public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T8 value) => CreateRaw(value);
 
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, IOneOf v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, IOneOf v2) => !v1.Equals(v2);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T0 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T0 v2) => !v1.Equals(v2);
-        public static bool operator ==(T0 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => v2.Equals(v1);
-        public static bool operator !=(T0 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T1 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T1 v2) => !v1.Equals(v2);
-        public static bool operator ==(T1 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => v2.Equals(v1);
-        public static bool operator !=(T1 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T2 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T2 v2) => !v1.Equals(v2);
-        public static bool operator ==(T2 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => v2.Equals(v1);
-        public static bool operator !=(T2 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T3 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T3 v2) => !v1.Equals(v2);
-        public static bool operator ==(T3 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => v2.Equals(v1);
-        public static bool operator !=(T3 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T4 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T4 v2) => !v1.Equals(v2);
-        public static bool operator ==(T4 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => v2.Equals(v1);
-        public static bool operator !=(T4 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T5 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T5 v2) => !v1.Equals(v2);
-        public static bool operator ==(T5 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => v2.Equals(v1);
-        public static bool operator !=(T5 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T6 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T6 v2) => !v1.Equals(v2);
-        public static bool operator ==(T6 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => v2.Equals(v1);
-        public static bool operator !=(T6 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T7 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T7 v2) => !v1.Equals(v2);
-        public static bool operator ==(T7 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => v2.Equals(v1);
-        public static bool operator !=(T7 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !v2.Equals(v1);
-        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T8 v2) => v1.Equals(v2);
-        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T8 v2) => !v1.Equals(v2);
-        public static bool operator ==(T8 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => v2.Equals(v1);
-        public static bool operator !=(T8 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !v2.Equals(v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, IOneOf v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, IOneOf v2) => !Equals(v1,v2);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T0 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T0 v2) => !Equals(v1,v2);
+        public static bool operator ==(T0 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => Equals(v2,v1);
+        public static bool operator !=(T0 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T1 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T1 v2) => !Equals(v1,v2);
+        public static bool operator ==(T1 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => Equals(v2,v1);
+        public static bool operator !=(T1 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T2 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T2 v2) => !Equals(v1,v2);
+        public static bool operator ==(T2 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => Equals(v2,v1);
+        public static bool operator !=(T2 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T3 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T3 v2) => !Equals(v1,v2);
+        public static bool operator ==(T3 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => Equals(v2,v1);
+        public static bool operator !=(T3 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T4 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T4 v2) => !Equals(v1,v2);
+        public static bool operator ==(T4 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => Equals(v2,v1);
+        public static bool operator !=(T4 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T5 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T5 v2) => !Equals(v1,v2);
+        public static bool operator ==(T5 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => Equals(v2,v1);
+        public static bool operator !=(T5 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T6 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T6 v2) => !Equals(v1,v2);
+        public static bool operator ==(T6 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => Equals(v2,v1);
+        public static bool operator !=(T6 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T7 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T7 v2) => !Equals(v1,v2);
+        public static bool operator ==(T7 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => Equals(v2,v1);
+        public static bool operator !=(T7 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !Equals(v2,v1);
+        public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T8 v2) => Equals(v1,v2);
+        public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, T8 v2) => !Equals(v1,v2);
+        public static bool operator ==(T8 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => Equals(v2,v1);
+        public static bool operator !=(T8 v1, OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v2) => !Equals(v2,v1);
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> Switch(Action<T0> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, origType).Switch(action);
         public OneOfSwitcher<T0, T2, T3, T4, T5, T6, T7, T8> Switch(Action<T1> action) => new OneOfSwitcher<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, origType).Switch(action);
