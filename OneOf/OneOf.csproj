@@ -48,10 +48,10 @@
     <Compile Include="Types\YesOrNo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="OneOf.tt">
+    <None Include="OneOf.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>OneOf.cs</LastGenOutput>
-    </Content>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

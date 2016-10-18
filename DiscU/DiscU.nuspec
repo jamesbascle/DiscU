@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>DiscU</id>
+    <id>$id$</id>
     <version>$version$</version>
     <title>DiscU</title>
     <authors>Original by Harry McIntyre. Fork by Will Moar. Contributions by James Bascle</authors>
