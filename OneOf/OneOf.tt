@@ -219,7 +219,7 @@ void WriteSwitcher(int countOfgenericParams)
 				using(new WriteIndent(this))
 				{
 					WriteLine($"SwitchIf<T{parmIndex}>(action);");
-					WriteLine($"return new OneOfSwitcher<{lesserArityGenericArg}>(this.value, this.origType, this.hasSwitched);");
+					WriteLine($"return new OneOfSwitcher<{lesserArityGenericArg}>(value, origType, hasSwitched);");
 				}
 			}
 			else
@@ -308,7 +308,7 @@ void WriteMatcher(int countOfgenericParams)
 				using(new WriteIndent(this))
 				{
 					WriteLine($"MatchIf<T{parmIndex}>(createResult);");
-					WriteLine($"return new OneOfMatcher<{lesserArityGenericArg}>(this.value, this.origType, this.result);");
+					WriteLine($"return new OneOfMatcher<{lesserArityGenericArg}>(value, origType, result);");
 				}
 			}
 			else
