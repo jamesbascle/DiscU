@@ -16,7 +16,6 @@ void GenerateClasses()
 	WriteLine("// ===========================================================================");
 	WriteLine("");
 	WriteLine("using System;");
-	WriteLine("using Microsoft.CSharp.RuntimeBinder;");
 	
 	WriteLine("");
 	WriteLine("namespace OneOf");
@@ -35,10 +34,12 @@ void GenerateClasses()
 			WriteMatcher(i);
 	}
 }
+
 string GenerateGenericArgs(IEnumerable<int> ints, string typePrefix = "T", string withResult = null)
 {
     return string.Join(", ", ints.Select(e => typePrefix + e)) + (withResult != null ? ", " + withResult : "");
 }
+
 void WriteOneOf(bool isStruct, int countOfgenericParams) 
 {
 	var genericArg = GenerateGenericArgs(Enumerable.Range(0, countOfgenericParams));
@@ -80,42 +81,8 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 		WriteLine("");
 		WriteLine("object IOneOf.Value => value;");
 
-        // =============== Create/CreateRaw
-        
-        WriteLine("");
-        WriteLine($"internal static {typeName}<{genericArg}> CreateRaw(object value)");
-        using(new WriteIndent(this))
-        {
-			WriteLine("if (value == null) throw new ArgumentNullException(nameof(value));");
-            for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
-            {
-				//cover our fast exact Type matches
-                WriteLine($"if (value.GetType() == typeof(T{parmIndex})) return Create((T{parmIndex})value);");
-            }
-			//prepare to catch any dynamic binding exceptions...
-			WriteLine("try");
-            using(new WriteIndent(this))            
-			{
-				//fall back to best match for non-exact type matches (subclasses, interface implementations, etc.)
-				//by performing double dispatch via dynamic casting. This will attempt to bind to the most specific create method available.
-				// This can be improved via reflection trickery if we decide there is a performance justification for it
-				WriteLine($"return Create((dynamic)value);");
-            }
-            WriteLine("catch (RuntimeBinderException ex)");
-            using (new WriteIndent(this))
-            {
-				//this SHOULDN'T happen thanks to already being in the context of a validly casted object, but you never know...
-                WriteLine("throw new ArgumentException(nameof(value), ex);");
-            }
-        }
-
-		WriteLine("");
-		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
-        {
-			WriteLine($"static {typeName}<{genericArg}> Create(T{parmIndex} value) => new {typeName}<{genericArg}>(value, typeof(T{parmIndex}));");
-		}
-
 		// =============== ToOneOf
+
 		// now just uses CreateRaw to get best of both worlds for conversion.  Can blow up if user has incompatible types, but the C# Type system is
 		// just not powerful enough for us to save them from that with any reasonable approaches.
 		WriteLine("");
@@ -123,18 +90,20 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 	    {
 	            var nargs = Enumerable.Range(0, numberOfGenericsInNew + 1).Select(e => "N" + e).ToArray();
 	            var otherGenericArgs = string.Join(", ", nargs);
-	            WriteLine($"public {typeName}<{otherGenericArgs}> ToOneOf<{otherGenericArgs}>() => {typeName}<{otherGenericArgs}>.CreateRaw(value);");
+	            WriteLine($"public {typeName}<{otherGenericArgs}> ToOneOf<{otherGenericArgs}>() => OneOfFactory<{typeName}<{otherGenericArgs}>>.Create(value);");
 	    }
 
 	    // =============== implicit conversion to T
+
 		// Now uses CreateRaw.  Not much slower than just calling the raw constructor, and ensures we get proper handling for polymorphic situations.
 		WriteLine("");
 		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
 		{
-			WriteLine($"public static implicit operator {typeName}<{genericArg}>(T{parmIndex} value) => CreateRaw(value);"); 
+			WriteLine($"public static implicit operator {typeName}<{genericArg}>(T{parmIndex} value) => OneOfFactory<{typeName}<{genericArg}>>.Create(value);"); 
 		}
 
 		// =============== equality operators
+
 		WriteLine("");
 		WriteLine($"public static bool operator ==({typeName}<{genericArg}> v1, IOneOf v2) => Equals(v1,v2);"); 
 		WriteLine($"public static bool operator !=({typeName}<{genericArg}> v1, IOneOf v2) => !Equals(v1,v2);");
@@ -147,8 +116,8 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 			WriteLine($"public static bool operator !=(T{i} v1, {typeName}<{genericArg}> v2) => !Equals(v2,v1);");
 	    }
 
-
 		// =============== Switch
+
 		WriteLine("");
 		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
 		{

@@ -3,7 +3,6 @@
 // ===========================================================================
 
 using System;
-using Microsoft.CSharp.RuntimeBinder;
 
 namespace OneOf
 {
@@ -20,35 +19,17 @@ namespace OneOf
 
         object IOneOf.Value => value;
 
-        internal static OneOf<T0, T1> CreateRaw(object value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            if (value.GetType() == typeof(T0)) return Create((T0)value);
-            if (value.GetType() == typeof(T1)) return Create((T1)value);
-            try
-            {
-                return Create((dynamic)value);
-            }
-            catch (RuntimeBinderException ex)
-            {
-                throw new ArgumentException(nameof(value), ex);
-            }
-        }
+        public OneOf<N0, N1> ToOneOf<N0, N1>() => OneOfFactory<OneOf<N0, N1>>.Create(value);
+        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfFactory<OneOf<N0, N1, N2>>.Create(value);
+        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfFactory<OneOf<N0, N1, N2, N3>>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4>>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4, N5>>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4, N5, N6>>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4, N5, N6, N7>>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>>.Create(value);
 
-        static OneOf<T0, T1> Create(T0 value) => new OneOf<T0, T1>(value, typeof(T0));
-        static OneOf<T0, T1> Create(T1 value) => new OneOf<T0, T1>(value, typeof(T1));
-
-        public OneOf<N0, N1> ToOneOf<N0, N1>() => OneOf<N0, N1>.CreateRaw(value);
-        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOf<N0, N1, N2>.CreateRaw(value);
-        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.CreateRaw(value);
-        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.CreateRaw(value);
-        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.CreateRaw(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.CreateRaw(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.CreateRaw(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.CreateRaw(value);
-
-        public static implicit operator OneOf<T0, T1>(T0 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1>(T1 value) => CreateRaw(value);
+        public static implicit operator OneOf<T0, T1>(T0 value) => OneOfFactory<OneOf<T0, T1>>.Create(value);
+        public static implicit operator OneOf<T0, T1>(T1 value) => OneOfFactory<OneOf<T0, T1>>.Create(value);
 
         public static bool operator ==(OneOf<T0, T1> v1, IOneOf v2) => Equals(v1,v2);
         public static bool operator !=(OneOf<T0, T1> v1, IOneOf v2) => !Equals(v1,v2);
@@ -84,37 +65,17 @@ namespace OneOf
 
         object IOneOf.Value => value;
 
-        internal static OneOf<T0, T1, T2> CreateRaw(object value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            if (value.GetType() == typeof(T0)) return Create((T0)value);
-            if (value.GetType() == typeof(T1)) return Create((T1)value);
-            if (value.GetType() == typeof(T2)) return Create((T2)value);
-            try
-            {
-                return Create((dynamic)value);
-            }
-            catch (RuntimeBinderException ex)
-            {
-                throw new ArgumentException(nameof(value), ex);
-            }
-        }
+        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfFactory<OneOf<N0, N1, N2>>.Create(value);
+        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfFactory<OneOf<N0, N1, N2, N3>>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4>>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4, N5>>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4, N5, N6>>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4, N5, N6, N7>>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>>.Create(value);
 
-        static OneOf<T0, T1, T2> Create(T0 value) => new OneOf<T0, T1, T2>(value, typeof(T0));
-        static OneOf<T0, T1, T2> Create(T1 value) => new OneOf<T0, T1, T2>(value, typeof(T1));
-        static OneOf<T0, T1, T2> Create(T2 value) => new OneOf<T0, T1, T2>(value, typeof(T2));
-
-        public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOf<N0, N1, N2>.CreateRaw(value);
-        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.CreateRaw(value);
-        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.CreateRaw(value);
-        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.CreateRaw(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.CreateRaw(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.CreateRaw(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.CreateRaw(value);
-
-        public static implicit operator OneOf<T0, T1, T2>(T0 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2>(T1 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2>(T2 value) => CreateRaw(value);
+        public static implicit operator OneOf<T0, T1, T2>(T0 value) => OneOfFactory<OneOf<T0, T1, T2>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2>(T1 value) => OneOfFactory<OneOf<T0, T1, T2>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2>(T2 value) => OneOfFactory<OneOf<T0, T1, T2>>.Create(value);
 
         public static bool operator ==(OneOf<T0, T1, T2> v1, IOneOf v2) => Equals(v1,v2);
         public static bool operator !=(OneOf<T0, T1, T2> v1, IOneOf v2) => !Equals(v1,v2);
@@ -156,39 +117,17 @@ namespace OneOf
 
         object IOneOf.Value => value;
 
-        internal static OneOf<T0, T1, T2, T3> CreateRaw(object value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            if (value.GetType() == typeof(T0)) return Create((T0)value);
-            if (value.GetType() == typeof(T1)) return Create((T1)value);
-            if (value.GetType() == typeof(T2)) return Create((T2)value);
-            if (value.GetType() == typeof(T3)) return Create((T3)value);
-            try
-            {
-                return Create((dynamic)value);
-            }
-            catch (RuntimeBinderException ex)
-            {
-                throw new ArgumentException(nameof(value), ex);
-            }
-        }
+        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfFactory<OneOf<N0, N1, N2, N3>>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4>>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4, N5>>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4, N5, N6>>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4, N5, N6, N7>>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>>.Create(value);
 
-        static OneOf<T0, T1, T2, T3> Create(T0 value) => new OneOf<T0, T1, T2, T3>(value, typeof(T0));
-        static OneOf<T0, T1, T2, T3> Create(T1 value) => new OneOf<T0, T1, T2, T3>(value, typeof(T1));
-        static OneOf<T0, T1, T2, T3> Create(T2 value) => new OneOf<T0, T1, T2, T3>(value, typeof(T2));
-        static OneOf<T0, T1, T2, T3> Create(T3 value) => new OneOf<T0, T1, T2, T3>(value, typeof(T3));
-
-        public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOf<N0, N1, N2, N3>.CreateRaw(value);
-        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.CreateRaw(value);
-        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.CreateRaw(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.CreateRaw(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.CreateRaw(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.CreateRaw(value);
-
-        public static implicit operator OneOf<T0, T1, T2, T3>(T0 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2, T3>(T1 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2, T3>(T2 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2, T3>(T3 value) => CreateRaw(value);
+        public static implicit operator OneOf<T0, T1, T2, T3>(T0 value) => OneOfFactory<OneOf<T0, T1, T2, T3>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2, T3>(T1 value) => OneOfFactory<OneOf<T0, T1, T2, T3>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2, T3>(T2 value) => OneOfFactory<OneOf<T0, T1, T2, T3>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2, T3>(T3 value) => OneOfFactory<OneOf<T0, T1, T2, T3>>.Create(value);
 
         public static bool operator ==(OneOf<T0, T1, T2, T3> v1, IOneOf v2) => Equals(v1,v2);
         public static bool operator !=(OneOf<T0, T1, T2, T3> v1, IOneOf v2) => !Equals(v1,v2);
@@ -236,41 +175,17 @@ namespace OneOf
 
         object IOneOf.Value => value;
 
-        internal static OneOf<T0, T1, T2, T3, T4> CreateRaw(object value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            if (value.GetType() == typeof(T0)) return Create((T0)value);
-            if (value.GetType() == typeof(T1)) return Create((T1)value);
-            if (value.GetType() == typeof(T2)) return Create((T2)value);
-            if (value.GetType() == typeof(T3)) return Create((T3)value);
-            if (value.GetType() == typeof(T4)) return Create((T4)value);
-            try
-            {
-                return Create((dynamic)value);
-            }
-            catch (RuntimeBinderException ex)
-            {
-                throw new ArgumentException(nameof(value), ex);
-            }
-        }
+        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4>>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4, N5>>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4, N5, N6>>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4, N5, N6, N7>>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>>.Create(value);
 
-        static OneOf<T0, T1, T2, T3, T4> Create(T0 value) => new OneOf<T0, T1, T2, T3, T4>(value, typeof(T0));
-        static OneOf<T0, T1, T2, T3, T4> Create(T1 value) => new OneOf<T0, T1, T2, T3, T4>(value, typeof(T1));
-        static OneOf<T0, T1, T2, T3, T4> Create(T2 value) => new OneOf<T0, T1, T2, T3, T4>(value, typeof(T2));
-        static OneOf<T0, T1, T2, T3, T4> Create(T3 value) => new OneOf<T0, T1, T2, T3, T4>(value, typeof(T3));
-        static OneOf<T0, T1, T2, T3, T4> Create(T4 value) => new OneOf<T0, T1, T2, T3, T4>(value, typeof(T4));
-
-        public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOf<N0, N1, N2, N3, N4>.CreateRaw(value);
-        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.CreateRaw(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.CreateRaw(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.CreateRaw(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.CreateRaw(value);
-
-        public static implicit operator OneOf<T0, T1, T2, T3, T4>(T0 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4>(T1 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4>(T2 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4>(T3 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4>(T4 value) => CreateRaw(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4>(T0 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4>(T1 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4>(T2 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4>(T3 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4>(T4 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4>>.Create(value);
 
         public static bool operator ==(OneOf<T0, T1, T2, T3, T4> v1, IOneOf v2) => Equals(v1,v2);
         public static bool operator !=(OneOf<T0, T1, T2, T3, T4> v1, IOneOf v2) => !Equals(v1,v2);
@@ -324,43 +239,17 @@ namespace OneOf
 
         object IOneOf.Value => value;
 
-        internal static OneOf<T0, T1, T2, T3, T4, T5> CreateRaw(object value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            if (value.GetType() == typeof(T0)) return Create((T0)value);
-            if (value.GetType() == typeof(T1)) return Create((T1)value);
-            if (value.GetType() == typeof(T2)) return Create((T2)value);
-            if (value.GetType() == typeof(T3)) return Create((T3)value);
-            if (value.GetType() == typeof(T4)) return Create((T4)value);
-            if (value.GetType() == typeof(T5)) return Create((T5)value);
-            try
-            {
-                return Create((dynamic)value);
-            }
-            catch (RuntimeBinderException ex)
-            {
-                throw new ArgumentException(nameof(value), ex);
-            }
-        }
+        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4, N5>>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4, N5, N6>>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4, N5, N6, N7>>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>>.Create(value);
 
-        static OneOf<T0, T1, T2, T3, T4, T5> Create(T0 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value, typeof(T0));
-        static OneOf<T0, T1, T2, T3, T4, T5> Create(T1 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value, typeof(T1));
-        static OneOf<T0, T1, T2, T3, T4, T5> Create(T2 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value, typeof(T2));
-        static OneOf<T0, T1, T2, T3, T4, T5> Create(T3 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value, typeof(T3));
-        static OneOf<T0, T1, T2, T3, T4, T5> Create(T4 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value, typeof(T4));
-        static OneOf<T0, T1, T2, T3, T4, T5> Create(T5 value) => new OneOf<T0, T1, T2, T3, T4, T5>(value, typeof(T5));
-
-        public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOf<N0, N1, N2, N3, N4, N5>.CreateRaw(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.CreateRaw(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.CreateRaw(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.CreateRaw(value);
-
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T0 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T1 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T2 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T3 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T4 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T5 value) => CreateRaw(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T0 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4, T5>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T1 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4, T5>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T2 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4, T5>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T3 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4, T5>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T4 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4, T5>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5>(T5 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4, T5>>.Create(value);
 
         public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5> v1, IOneOf v2) => Equals(v1,v2);
         public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5> v1, IOneOf v2) => !Equals(v1,v2);
@@ -420,45 +309,17 @@ namespace OneOf
 
         object IOneOf.Value => value;
 
-        internal static OneOf<T0, T1, T2, T3, T4, T5, T6> CreateRaw(object value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            if (value.GetType() == typeof(T0)) return Create((T0)value);
-            if (value.GetType() == typeof(T1)) return Create((T1)value);
-            if (value.GetType() == typeof(T2)) return Create((T2)value);
-            if (value.GetType() == typeof(T3)) return Create((T3)value);
-            if (value.GetType() == typeof(T4)) return Create((T4)value);
-            if (value.GetType() == typeof(T5)) return Create((T5)value);
-            if (value.GetType() == typeof(T6)) return Create((T6)value);
-            try
-            {
-                return Create((dynamic)value);
-            }
-            catch (RuntimeBinderException ex)
-            {
-                throw new ArgumentException(nameof(value), ex);
-            }
-        }
+        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4, N5, N6>>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4, N5, N6, N7>>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>>.Create(value);
 
-        static OneOf<T0, T1, T2, T3, T4, T5, T6> Create(T0 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value, typeof(T0));
-        static OneOf<T0, T1, T2, T3, T4, T5, T6> Create(T1 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value, typeof(T1));
-        static OneOf<T0, T1, T2, T3, T4, T5, T6> Create(T2 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value, typeof(T2));
-        static OneOf<T0, T1, T2, T3, T4, T5, T6> Create(T3 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value, typeof(T3));
-        static OneOf<T0, T1, T2, T3, T4, T5, T6> Create(T4 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value, typeof(T4));
-        static OneOf<T0, T1, T2, T3, T4, T5, T6> Create(T5 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value, typeof(T5));
-        static OneOf<T0, T1, T2, T3, T4, T5, T6> Create(T6 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6>(value, typeof(T6));
-
-        public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOf<N0, N1, N2, N3, N4, N5, N6>.CreateRaw(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.CreateRaw(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.CreateRaw(value);
-
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T0 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T1 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T2 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T3 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T4 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T5 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T6 value) => CreateRaw(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T0 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4, T5, T6>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T1 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4, T5, T6>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T2 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4, T5, T6>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T3 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4, T5, T6>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T4 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4, T5, T6>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T5 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4, T5, T6>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6>(T6 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4, T5, T6>>.Create(value);
 
         public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, IOneOf v2) => Equals(v1,v2);
         public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6> v1, IOneOf v2) => !Equals(v1,v2);
@@ -524,47 +385,17 @@ namespace OneOf
 
         object IOneOf.Value => value;
 
-        internal static OneOf<T0, T1, T2, T3, T4, T5, T6, T7> CreateRaw(object value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            if (value.GetType() == typeof(T0)) return Create((T0)value);
-            if (value.GetType() == typeof(T1)) return Create((T1)value);
-            if (value.GetType() == typeof(T2)) return Create((T2)value);
-            if (value.GetType() == typeof(T3)) return Create((T3)value);
-            if (value.GetType() == typeof(T4)) return Create((T4)value);
-            if (value.GetType() == typeof(T5)) return Create((T5)value);
-            if (value.GetType() == typeof(T6)) return Create((T6)value);
-            if (value.GetType() == typeof(T7)) return Create((T7)value);
-            try
-            {
-                return Create((dynamic)value);
-            }
-            catch (RuntimeBinderException ex)
-            {
-                throw new ArgumentException(nameof(value), ex);
-            }
-        }
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4, N5, N6, N7>>.Create(value);
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>>.Create(value);
 
-        static OneOf<T0, T1, T2, T3, T4, T5, T6, T7> Create(T0 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value, typeof(T0));
-        static OneOf<T0, T1, T2, T3, T4, T5, T6, T7> Create(T1 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value, typeof(T1));
-        static OneOf<T0, T1, T2, T3, T4, T5, T6, T7> Create(T2 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value, typeof(T2));
-        static OneOf<T0, T1, T2, T3, T4, T5, T6, T7> Create(T3 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value, typeof(T3));
-        static OneOf<T0, T1, T2, T3, T4, T5, T6, T7> Create(T4 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value, typeof(T4));
-        static OneOf<T0, T1, T2, T3, T4, T5, T6, T7> Create(T5 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value, typeof(T5));
-        static OneOf<T0, T1, T2, T3, T4, T5, T6, T7> Create(T6 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value, typeof(T6));
-        static OneOf<T0, T1, T2, T3, T4, T5, T6, T7> Create(T7 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(value, typeof(T7));
-
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7>.CreateRaw(value);
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.CreateRaw(value);
-
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T0 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T1 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T2 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T3 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T4 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T5 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T6 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T7 value) => CreateRaw(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T0 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4, T5, T6, T7>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T1 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4, T5, T6, T7>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T2 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4, T5, T6, T7>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T3 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4, T5, T6, T7>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T4 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4, T5, T6, T7>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T5 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4, T5, T6, T7>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T6 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4, T5, T6, T7>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7>(T7 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4, T5, T6, T7>>.Create(value);
 
         public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, IOneOf v2) => Equals(v1,v2);
         public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7> v1, IOneOf v2) => !Equals(v1,v2);
@@ -636,49 +467,17 @@ namespace OneOf
 
         object IOneOf.Value => value;
 
-        internal static OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> CreateRaw(object value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            if (value.GetType() == typeof(T0)) return Create((T0)value);
-            if (value.GetType() == typeof(T1)) return Create((T1)value);
-            if (value.GetType() == typeof(T2)) return Create((T2)value);
-            if (value.GetType() == typeof(T3)) return Create((T3)value);
-            if (value.GetType() == typeof(T4)) return Create((T4)value);
-            if (value.GetType() == typeof(T5)) return Create((T5)value);
-            if (value.GetType() == typeof(T6)) return Create((T6)value);
-            if (value.GetType() == typeof(T7)) return Create((T7)value);
-            if (value.GetType() == typeof(T8)) return Create((T8)value);
-            try
-            {
-                return Create((dynamic)value);
-            }
-            catch (RuntimeBinderException ex)
-            {
-                throw new ArgumentException(nameof(value), ex);
-            }
-        }
+        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>>.Create(value);
 
-        static OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T0 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T0));
-        static OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T1 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T1));
-        static OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T2 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T2));
-        static OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T3 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T3));
-        static OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T4 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T4));
-        static OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T5 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T5));
-        static OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T6 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T6));
-        static OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T7 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T7));
-        static OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T8 value) => new OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T8));
-
-        public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>.CreateRaw(value);
-
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T0 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T1 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T2 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T3 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T4 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T5 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T6 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T7 value) => CreateRaw(value);
-        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T8 value) => CreateRaw(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T0 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T1 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T2 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T3 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T4 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T5 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T6 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T7 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>>.Create(value);
+        public static implicit operator OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T8 value) => OneOfFactory<OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8>>.Create(value);
 
         public static bool operator ==(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, IOneOf v2) => Equals(v1,v2);
         public static bool operator !=(OneOf<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, IOneOf v2) => !Equals(v1,v2);
@@ -762,35 +561,17 @@ namespace OneOf
 
         object IOneOf.Value => value;
 
-        internal static OneOfBase<T0, T1> CreateRaw(object value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            if (value.GetType() == typeof(T0)) return Create((T0)value);
-            if (value.GetType() == typeof(T1)) return Create((T1)value);
-            try
-            {
-                return Create((dynamic)value);
-            }
-            catch (RuntimeBinderException ex)
-            {
-                throw new ArgumentException(nameof(value), ex);
-            }
-        }
+        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => OneOfFactory<OneOfBase<N0, N1>>.Create(value);
+        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfFactory<OneOfBase<N0, N1, N2>>.Create(value);
+        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfFactory<OneOfBase<N0, N1, N2, N3>>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4>>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4, N5>>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4, N5, N6>>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>>.Create(value);
 
-        static OneOfBase<T0, T1> Create(T0 value) => new OneOfBase<T0, T1>(value, typeof(T0));
-        static OneOfBase<T0, T1> Create(T1 value) => new OneOfBase<T0, T1>(value, typeof(T1));
-
-        public OneOfBase<N0, N1> ToOneOf<N0, N1>() => OneOfBase<N0, N1>.CreateRaw(value);
-        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfBase<N0, N1, N2>.CreateRaw(value);
-        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.CreateRaw(value);
-        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.CreateRaw(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.CreateRaw(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.CreateRaw(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.CreateRaw(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.CreateRaw(value);
-
-        public static implicit operator OneOfBase<T0, T1>(T0 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1>(T1 value) => CreateRaw(value);
+        public static implicit operator OneOfBase<T0, T1>(T0 value) => OneOfFactory<OneOfBase<T0, T1>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1>(T1 value) => OneOfFactory<OneOfBase<T0, T1>>.Create(value);
 
         public static bool operator ==(OneOfBase<T0, T1> v1, IOneOf v2) => Equals(v1,v2);
         public static bool operator !=(OneOfBase<T0, T1> v1, IOneOf v2) => !Equals(v1,v2);
@@ -832,37 +613,17 @@ namespace OneOf
 
         object IOneOf.Value => value;
 
-        internal static OneOfBase<T0, T1, T2> CreateRaw(object value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            if (value.GetType() == typeof(T0)) return Create((T0)value);
-            if (value.GetType() == typeof(T1)) return Create((T1)value);
-            if (value.GetType() == typeof(T2)) return Create((T2)value);
-            try
-            {
-                return Create((dynamic)value);
-            }
-            catch (RuntimeBinderException ex)
-            {
-                throw new ArgumentException(nameof(value), ex);
-            }
-        }
+        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfFactory<OneOfBase<N0, N1, N2>>.Create(value);
+        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfFactory<OneOfBase<N0, N1, N2, N3>>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4>>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4, N5>>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4, N5, N6>>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>>.Create(value);
 
-        static OneOfBase<T0, T1, T2> Create(T0 value) => new OneOfBase<T0, T1, T2>(value, typeof(T0));
-        static OneOfBase<T0, T1, T2> Create(T1 value) => new OneOfBase<T0, T1, T2>(value, typeof(T1));
-        static OneOfBase<T0, T1, T2> Create(T2 value) => new OneOfBase<T0, T1, T2>(value, typeof(T2));
-
-        public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfBase<N0, N1, N2>.CreateRaw(value);
-        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.CreateRaw(value);
-        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.CreateRaw(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.CreateRaw(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.CreateRaw(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.CreateRaw(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.CreateRaw(value);
-
-        public static implicit operator OneOfBase<T0, T1, T2>(T0 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2>(T1 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2>(T2 value) => CreateRaw(value);
+        public static implicit operator OneOfBase<T0, T1, T2>(T0 value) => OneOfFactory<OneOfBase<T0, T1, T2>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2>(T1 value) => OneOfFactory<OneOfBase<T0, T1, T2>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2>(T2 value) => OneOfFactory<OneOfBase<T0, T1, T2>>.Create(value);
 
         public static bool operator ==(OneOfBase<T0, T1, T2> v1, IOneOf v2) => Equals(v1,v2);
         public static bool operator !=(OneOfBase<T0, T1, T2> v1, IOneOf v2) => !Equals(v1,v2);
@@ -910,39 +671,17 @@ namespace OneOf
 
         object IOneOf.Value => value;
 
-        internal static OneOfBase<T0, T1, T2, T3> CreateRaw(object value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            if (value.GetType() == typeof(T0)) return Create((T0)value);
-            if (value.GetType() == typeof(T1)) return Create((T1)value);
-            if (value.GetType() == typeof(T2)) return Create((T2)value);
-            if (value.GetType() == typeof(T3)) return Create((T3)value);
-            try
-            {
-                return Create((dynamic)value);
-            }
-            catch (RuntimeBinderException ex)
-            {
-                throw new ArgumentException(nameof(value), ex);
-            }
-        }
+        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfFactory<OneOfBase<N0, N1, N2, N3>>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4>>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4, N5>>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4, N5, N6>>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>>.Create(value);
 
-        static OneOfBase<T0, T1, T2, T3> Create(T0 value) => new OneOfBase<T0, T1, T2, T3>(value, typeof(T0));
-        static OneOfBase<T0, T1, T2, T3> Create(T1 value) => new OneOfBase<T0, T1, T2, T3>(value, typeof(T1));
-        static OneOfBase<T0, T1, T2, T3> Create(T2 value) => new OneOfBase<T0, T1, T2, T3>(value, typeof(T2));
-        static OneOfBase<T0, T1, T2, T3> Create(T3 value) => new OneOfBase<T0, T1, T2, T3>(value, typeof(T3));
-
-        public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfBase<N0, N1, N2, N3>.CreateRaw(value);
-        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.CreateRaw(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.CreateRaw(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.CreateRaw(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.CreateRaw(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.CreateRaw(value);
-
-        public static implicit operator OneOfBase<T0, T1, T2, T3>(T0 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2, T3>(T1 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2, T3>(T2 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2, T3>(T3 value) => CreateRaw(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3>(T0 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3>(T1 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3>(T2 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3>(T3 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3>>.Create(value);
 
         public static bool operator ==(OneOfBase<T0, T1, T2, T3> v1, IOneOf v2) => Equals(v1,v2);
         public static bool operator !=(OneOfBase<T0, T1, T2, T3> v1, IOneOf v2) => !Equals(v1,v2);
@@ -996,41 +735,17 @@ namespace OneOf
 
         object IOneOf.Value => value;
 
-        internal static OneOfBase<T0, T1, T2, T3, T4> CreateRaw(object value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            if (value.GetType() == typeof(T0)) return Create((T0)value);
-            if (value.GetType() == typeof(T1)) return Create((T1)value);
-            if (value.GetType() == typeof(T2)) return Create((T2)value);
-            if (value.GetType() == typeof(T3)) return Create((T3)value);
-            if (value.GetType() == typeof(T4)) return Create((T4)value);
-            try
-            {
-                return Create((dynamic)value);
-            }
-            catch (RuntimeBinderException ex)
-            {
-                throw new ArgumentException(nameof(value), ex);
-            }
-        }
+        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4>>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4, N5>>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4, N5, N6>>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>>.Create(value);
 
-        static OneOfBase<T0, T1, T2, T3, T4> Create(T0 value) => new OneOfBase<T0, T1, T2, T3, T4>(value, typeof(T0));
-        static OneOfBase<T0, T1, T2, T3, T4> Create(T1 value) => new OneOfBase<T0, T1, T2, T3, T4>(value, typeof(T1));
-        static OneOfBase<T0, T1, T2, T3, T4> Create(T2 value) => new OneOfBase<T0, T1, T2, T3, T4>(value, typeof(T2));
-        static OneOfBase<T0, T1, T2, T3, T4> Create(T3 value) => new OneOfBase<T0, T1, T2, T3, T4>(value, typeof(T3));
-        static OneOfBase<T0, T1, T2, T3, T4> Create(T4 value) => new OneOfBase<T0, T1, T2, T3, T4>(value, typeof(T4));
-
-        public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfBase<N0, N1, N2, N3, N4>.CreateRaw(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.CreateRaw(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.CreateRaw(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.CreateRaw(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.CreateRaw(value);
-
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T0 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T1 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T2 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T3 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T4 value) => CreateRaw(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T0 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T1 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T2 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T3 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4>(T4 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4>>.Create(value);
 
         public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4> v1, IOneOf v2) => Equals(v1,v2);
         public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4> v1, IOneOf v2) => !Equals(v1,v2);
@@ -1090,43 +805,17 @@ namespace OneOf
 
         object IOneOf.Value => value;
 
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5> CreateRaw(object value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            if (value.GetType() == typeof(T0)) return Create((T0)value);
-            if (value.GetType() == typeof(T1)) return Create((T1)value);
-            if (value.GetType() == typeof(T2)) return Create((T2)value);
-            if (value.GetType() == typeof(T3)) return Create((T3)value);
-            if (value.GetType() == typeof(T4)) return Create((T4)value);
-            if (value.GetType() == typeof(T5)) return Create((T5)value);
-            try
-            {
-                return Create((dynamic)value);
-            }
-            catch (RuntimeBinderException ex)
-            {
-                throw new ArgumentException(nameof(value), ex);
-            }
-        }
+        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4, N5>>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4, N5, N6>>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>>.Create(value);
 
-        static OneOfBase<T0, T1, T2, T3, T4, T5> Create(T0 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value, typeof(T0));
-        static OneOfBase<T0, T1, T2, T3, T4, T5> Create(T1 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value, typeof(T1));
-        static OneOfBase<T0, T1, T2, T3, T4, T5> Create(T2 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value, typeof(T2));
-        static OneOfBase<T0, T1, T2, T3, T4, T5> Create(T3 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value, typeof(T3));
-        static OneOfBase<T0, T1, T2, T3, T4, T5> Create(T4 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value, typeof(T4));
-        static OneOfBase<T0, T1, T2, T3, T4, T5> Create(T5 value) => new OneOfBase<T0, T1, T2, T3, T4, T5>(value, typeof(T5));
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfBase<N0, N1, N2, N3, N4, N5>.CreateRaw(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.CreateRaw(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.CreateRaw(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.CreateRaw(value);
-
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T0 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T1 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T2 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T3 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T4 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T5 value) => CreateRaw(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T0 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4, T5>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T1 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4, T5>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T2 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4, T5>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T3 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4, T5>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T4 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4, T5>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5>(T5 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4, T5>>.Create(value);
 
         public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5> v1, IOneOf v2) => Equals(v1,v2);
         public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5> v1, IOneOf v2) => !Equals(v1,v2);
@@ -1192,45 +881,17 @@ namespace OneOf
 
         object IOneOf.Value => value;
 
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6> CreateRaw(object value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            if (value.GetType() == typeof(T0)) return Create((T0)value);
-            if (value.GetType() == typeof(T1)) return Create((T1)value);
-            if (value.GetType() == typeof(T2)) return Create((T2)value);
-            if (value.GetType() == typeof(T3)) return Create((T3)value);
-            if (value.GetType() == typeof(T4)) return Create((T4)value);
-            if (value.GetType() == typeof(T5)) return Create((T5)value);
-            if (value.GetType() == typeof(T6)) return Create((T6)value);
-            try
-            {
-                return Create((dynamic)value);
-            }
-            catch (RuntimeBinderException ex)
-            {
-                throw new ArgumentException(nameof(value), ex);
-            }
-        }
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4, N5, N6>>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>>.Create(value);
 
-        static OneOfBase<T0, T1, T2, T3, T4, T5, T6> Create(T0 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value, typeof(T0));
-        static OneOfBase<T0, T1, T2, T3, T4, T5, T6> Create(T1 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value, typeof(T1));
-        static OneOfBase<T0, T1, T2, T3, T4, T5, T6> Create(T2 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value, typeof(T2));
-        static OneOfBase<T0, T1, T2, T3, T4, T5, T6> Create(T3 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value, typeof(T3));
-        static OneOfBase<T0, T1, T2, T3, T4, T5, T6> Create(T4 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value, typeof(T4));
-        static OneOfBase<T0, T1, T2, T3, T4, T5, T6> Create(T5 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value, typeof(T5));
-        static OneOfBase<T0, T1, T2, T3, T4, T5, T6> Create(T6 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6>(value, typeof(T6));
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6>.CreateRaw(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.CreateRaw(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.CreateRaw(value);
-
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T0 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T1 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T2 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T3 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T4 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T5 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T6 value) => CreateRaw(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T0 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4, T5, T6>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T1 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4, T5, T6>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T2 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4, T5, T6>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T3 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4, T5, T6>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T4 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4, T5, T6>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T5 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4, T5, T6>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6>(T6 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4, T5, T6>>.Create(value);
 
         public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, IOneOf v2) => Equals(v1,v2);
         public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6> v1, IOneOf v2) => !Equals(v1,v2);
@@ -1302,47 +963,17 @@ namespace OneOf
 
         object IOneOf.Value => value;
 
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> CreateRaw(object value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            if (value.GetType() == typeof(T0)) return Create((T0)value);
-            if (value.GetType() == typeof(T1)) return Create((T1)value);
-            if (value.GetType() == typeof(T2)) return Create((T2)value);
-            if (value.GetType() == typeof(T3)) return Create((T3)value);
-            if (value.GetType() == typeof(T4)) return Create((T4)value);
-            if (value.GetType() == typeof(T5)) return Create((T5)value);
-            if (value.GetType() == typeof(T6)) return Create((T6)value);
-            if (value.GetType() == typeof(T7)) return Create((T7)value);
-            try
-            {
-                return Create((dynamic)value);
-            }
-            catch (RuntimeBinderException ex)
-            {
-                throw new ArgumentException(nameof(value), ex);
-            }
-        }
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>>.Create(value);
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>>.Create(value);
 
-        static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> Create(T0 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value, typeof(T0));
-        static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> Create(T1 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value, typeof(T1));
-        static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> Create(T2 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value, typeof(T2));
-        static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> Create(T3 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value, typeof(T3));
-        static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> Create(T4 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value, typeof(T4));
-        static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> Create(T5 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value, typeof(T5));
-        static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> Create(T6 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value, typeof(T6));
-        static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> Create(T7 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(value, typeof(T7));
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>.CreateRaw(value);
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.CreateRaw(value);
-
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T0 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T1 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T2 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T3 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T4 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T5 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T6 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T7 value) => CreateRaw(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T0 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T1 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T2 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T3 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T4 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T5 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T6 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>(T7 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7>>.Create(value);
 
         public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, IOneOf v2) => Equals(v1,v2);
         public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7> v1, IOneOf v2) => !Equals(v1,v2);
@@ -1420,49 +1051,17 @@ namespace OneOf
 
         object IOneOf.Value => value;
 
-        internal static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> CreateRaw(object value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            if (value.GetType() == typeof(T0)) return Create((T0)value);
-            if (value.GetType() == typeof(T1)) return Create((T1)value);
-            if (value.GetType() == typeof(T2)) return Create((T2)value);
-            if (value.GetType() == typeof(T3)) return Create((T3)value);
-            if (value.GetType() == typeof(T4)) return Create((T4)value);
-            if (value.GetType() == typeof(T5)) return Create((T5)value);
-            if (value.GetType() == typeof(T6)) return Create((T6)value);
-            if (value.GetType() == typeof(T7)) return Create((T7)value);
-            if (value.GetType() == typeof(T8)) return Create((T8)value);
-            try
-            {
-                return Create((dynamic)value);
-            }
-            catch (RuntimeBinderException ex)
-            {
-                throw new ArgumentException(nameof(value), ex);
-            }
-        }
+        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>>.Create(value);
 
-        static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T0 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T0));
-        static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T1 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T1));
-        static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T2 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T2));
-        static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T3 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T3));
-        static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T4 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T4));
-        static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T5 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T5));
-        static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T6 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T6));
-        static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T7 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T7));
-        static OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> Create(T8 value) => new OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T8));
-
-        public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>.CreateRaw(value);
-
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T0 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T1 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T2 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T3 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T4 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T5 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T6 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T7 value) => CreateRaw(value);
-        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T8 value) => CreateRaw(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T0 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T1 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T2 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T3 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T4 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T5 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T6 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T7 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>>.Create(value);
+        public static implicit operator OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T8 value) => OneOfFactory<OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8>>.Create(value);
 
         public static bool operator ==(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, IOneOf v2) => Equals(v1,v2);
         public static bool operator !=(OneOfBase<T0, T1, T2, T3, T4, T5, T6, T7, T8> v1, IOneOf v2) => !Equals(v1,v2);
