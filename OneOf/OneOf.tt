@@ -83,8 +83,6 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 
 		// =============== ToOneOf
 
-		// now just uses CreateRaw to get best of both worlds for conversion.  Can blow up if user has incompatible types, but the C# Type system is
-		// just not powerful enough for us to save them from that with any reasonable approaches.
 		WriteLine("");
 		for (var numberOfGenericsInNew = countOfgenericParams - 1; numberOfGenericsInNew < 9; numberOfGenericsInNew ++)
 	    {
@@ -95,7 +93,6 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 
 	    // =============== implicit conversion to T
 
-		// Now uses CreateRaw.  Not much slower than just calling the raw constructor, and ensures we get proper handling for polymorphic situations.
 		WriteLine("");
 		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
 		{
