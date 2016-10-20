@@ -294,7 +294,7 @@ void WriteMatcher(int countOfgenericParams)
 		WriteLine($"void MatchIf<T>(Func<T, TResult> createResult)");
 		using(new WriteIndent(this))
 		{
-			WriteLine($"if (result == null && origType == typeof(T))");
+			WriteLine($"if (ReferenceEquals(result, null) && origType == typeof(T))");
 			using(new WriteIndent(this))
 			{
 				WriteLine($"result = createResult((T)value);");
@@ -307,7 +307,7 @@ void WriteMatcher(int countOfgenericParams)
 		WriteLine($"public TResult Else(TResult defaultValue)");
 		using(new WriteIndent(this))
 		{
-			WriteLine($"if (result == null) result = defaultValue;");
+			WriteLine($"if (ReferenceEquals(result, null)) result = defaultValue;");
 			WriteLine("return (TResult)result;");
 		}
 
@@ -317,7 +317,7 @@ void WriteMatcher(int countOfgenericParams)
 		WriteLine($"public TResult Else(Func<object, TResult> createResult)");
 		using(new WriteIndent(this))
 		{
-			WriteLine($"if (result == null) result = createResult(value);");
+			WriteLine($"if (ReferenceEquals(result, null)) result = createResult(value);");
 			WriteLine("return (TResult)result;");
 		}
 
@@ -327,7 +327,7 @@ void WriteMatcher(int countOfgenericParams)
 		WriteLine($"public TResult ElseThrow(Func<object, Exception> createException)");
 		using(new WriteIndent(this))
 		{
-			WriteLine($"if (result == null) throw createException(value);");
+			WriteLine($"if (ReferenceEquals(result, null)) throw createException(value);");
 			WriteLine("return (TResult)result;");
 		}
 	}

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,8 +12,9 @@ namespace OneOf
         where TOneOf: IOneOf
     {
         static readonly TypeInfo oneofTypeInfo = typeof(TOneOf).GetTypeInfo();
-        static readonly ConstructorInfo oneofCtor = oneofTypeInfo.DeclaredConstructors.First();
         static readonly TypeInfo[] oneofArgTypeInfos = oneofTypeInfo.GenericTypeArguments.Select(x => x.GetTypeInfo()).ToArray();
+        static readonly ConstructorInfo oneofCtor = oneofTypeInfo.DeclaredConstructors.First();
+        static readonly Func<object, Type, TOneOf> createInstance = GetCreateInstanceFunc();
 
         /// <summary>
         /// Maps value type to one of the OneOf generic arguments
@@ -26,6 +28,10 @@ namespace OneOf
                 throw new ArgumentNullException(nameof(value));
 
             var valueType = value.GetType();
+
+            if (oneofArgTypeInfos.Contains(valueType.GetTypeInfo()))
+                return createInstance(value, valueType);
+
             Type bestType;
 
             if (!mapValueTypeToGenericArgType.TryGetValue(valueType, out bestType))
@@ -41,7 +47,7 @@ namespace OneOf
                 mapValueTypeToGenericArgType.Add(valueType, bestType);
             }
 
-            var oneofInstance = (TOneOf)oneofCtor.Invoke(new object[] { value, bestType });
+            var oneofInstance = createInstance(value, bestType);
 
             return oneofInstance;
         }
@@ -72,6 +78,16 @@ namespace OneOf
                 return null;
 
             return bestTypeInfo.AsType();
+        }
+
+        static Func<object, Type, TOneOf> GetCreateInstanceFunc()
+        {
+            var parmValueExpr = Expression.Parameter(typeof(object), "value");
+            var parmTypeExpr = Expression.Parameter(typeof(Type), "type");
+            var newExpr = Expression.New(oneofCtor, parmValueExpr, parmTypeExpr);
+            var lambdaExpr = Expression.Lambda<Func<object, Type, TOneOf>>(newExpr, parmValueExpr, parmTypeExpr);
+            var func = lambdaExpr.Compile();
+            return func;
         }
     }
 }

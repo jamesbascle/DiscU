@@ -1733,7 +1733,7 @@ namespace OneOf
 
         void MatchIf<T>(Func<T, TResult> createResult)
         {
-            if (result == null && origType == typeof(T))
+            if (ReferenceEquals(result, null) && origType == typeof(T))
             {
                 result = createResult((T)value);
             }
@@ -1741,19 +1741,19 @@ namespace OneOf
 
         public TResult Else(TResult defaultValue)
         {
-            if (result == null) result = defaultValue;
+            if (ReferenceEquals(result, null)) result = defaultValue;
             return (TResult)result;
         }
 
         public TResult Else(Func<object, TResult> createResult)
         {
-            if (result == null) result = createResult(value);
+            if (ReferenceEquals(result, null)) result = createResult(value);
             return (TResult)result;
         }
 
         public TResult ElseThrow(Func<object, Exception> createException)
         {
-            if (result == null) throw createException(value);
+            if (ReferenceEquals(result, null)) throw createException(value);
             return (TResult)result;
         }
     }
@@ -1787,7 +1787,7 @@ namespace OneOf
 
         void MatchIf<T>(Func<T, TResult> createResult)
         {
-            if (result == null && origType == typeof(T))
+            if (ReferenceEquals(result, null) && origType == typeof(T))
             {
                 result = createResult((T)value);
             }
@@ -1795,19 +1795,19 @@ namespace OneOf
 
         public TResult Else(TResult defaultValue)
         {
-            if (result == null) result = defaultValue;
+            if (ReferenceEquals(result, null)) result = defaultValue;
             return (TResult)result;
         }
 
         public TResult Else(Func<object, TResult> createResult)
         {
-            if (result == null) result = createResult(value);
+            if (ReferenceEquals(result, null)) result = createResult(value);
             return (TResult)result;
         }
 
         public TResult ElseThrow(Func<object, Exception> createException)
         {
-            if (result == null) throw createException(value);
+            if (ReferenceEquals(result, null)) throw createException(value);
             return (TResult)result;
         }
     }
@@ -1847,7 +1847,7 @@ namespace OneOf
 
         void MatchIf<T>(Func<T, TResult> createResult)
         {
-            if (result == null && origType == typeof(T))
+            if (ReferenceEquals(result, null) && origType == typeof(T))
             {
                 result = createResult((T)value);
             }
@@ -1855,19 +1855,19 @@ namespace OneOf
 
         public TResult Else(TResult defaultValue)
         {
-            if (result == null) result = defaultValue;
+            if (ReferenceEquals(result, null)) result = defaultValue;
             return (TResult)result;
         }
 
         public TResult Else(Func<object, TResult> createResult)
         {
-            if (result == null) result = createResult(value);
+            if (ReferenceEquals(result, null)) result = createResult(value);
             return (TResult)result;
         }
 
         public TResult ElseThrow(Func<object, Exception> createException)
         {
-            if (result == null) throw createException(value);
+            if (ReferenceEquals(result, null)) throw createException(value);
             return (TResult)result;
         }
     }
@@ -1913,7 +1913,7 @@ namespace OneOf
 
         void MatchIf<T>(Func<T, TResult> createResult)
         {
-            if (result == null && origType == typeof(T))
+            if (ReferenceEquals(result, null) && origType == typeof(T))
             {
                 result = createResult((T)value);
             }
@@ -1921,19 +1921,19 @@ namespace OneOf
 
         public TResult Else(TResult defaultValue)
         {
-            if (result == null) result = defaultValue;
+            if (ReferenceEquals(result, null)) result = defaultValue;
             return (TResult)result;
         }
 
         public TResult Else(Func<object, TResult> createResult)
         {
-            if (result == null) result = createResult(value);
+            if (ReferenceEquals(result, null)) result = createResult(value);
             return (TResult)result;
         }
 
         public TResult ElseThrow(Func<object, Exception> createException)
         {
-            if (result == null) throw createException(value);
+            if (ReferenceEquals(result, null)) throw createException(value);
             return (TResult)result;
         }
     }
@@ -1985,7 +1985,7 @@ namespace OneOf
 
         void MatchIf<T>(Func<T, TResult> createResult)
         {
-            if (result == null && origType == typeof(T))
+            if (ReferenceEquals(result, null) && origType == typeof(T))
             {
                 result = createResult((T)value);
             }
@@ -1993,19 +1993,19 @@ namespace OneOf
 
         public TResult Else(TResult defaultValue)
         {
-            if (result == null) result = defaultValue;
+            if (ReferenceEquals(result, null)) result = defaultValue;
             return (TResult)result;
         }
 
         public TResult Else(Func<object, TResult> createResult)
         {
-            if (result == null) result = createResult(value);
+            if (ReferenceEquals(result, null)) result = createResult(value);
             return (TResult)result;
         }
 
         public TResult ElseThrow(Func<object, Exception> createException)
         {
-            if (result == null) throw createException(value);
+            if (ReferenceEquals(result, null)) throw createException(value);
             return (TResult)result;
         }
     }
@@ -2063,7 +2063,7 @@ namespace OneOf
 
         void MatchIf<T>(Func<T, TResult> createResult)
         {
-            if (result == null && origType == typeof(T))
+            if (ReferenceEquals(result, null) && origType == typeof(T))
             {
                 result = createResult((T)value);
             }
@@ -2071,19 +2071,19 @@ namespace OneOf
 
         public TResult Else(TResult defaultValue)
         {
-            if (result == null) result = defaultValue;
+            if (ReferenceEquals(result, null)) result = defaultValue;
             return (TResult)result;
         }
 
         public TResult Else(Func<object, TResult> createResult)
         {
-            if (result == null) result = createResult(value);
+            if (ReferenceEquals(result, null)) result = createResult(value);
             return (TResult)result;
         }
 
         public TResult ElseThrow(Func<object, Exception> createException)
         {
-            if (result == null) throw createException(value);
+            if (ReferenceEquals(result, null)) throw createException(value);
             return (TResult)result;
         }
     }
@@ -2147,7 +2147,7 @@ namespace OneOf
 
         void MatchIf<T>(Func<T, TResult> createResult)
         {
-            if (result == null && origType == typeof(T))
+            if (ReferenceEquals(result, null) && origType == typeof(T))
             {
                 result = createResult((T)value);
             }
@@ -2155,19 +2155,19 @@ namespace OneOf
 
         public TResult Else(TResult defaultValue)
         {
-            if (result == null) result = defaultValue;
+            if (ReferenceEquals(result, null)) result = defaultValue;
             return (TResult)result;
         }
 
         public TResult Else(Func<object, TResult> createResult)
         {
-            if (result == null) result = createResult(value);
+            if (ReferenceEquals(result, null)) result = createResult(value);
             return (TResult)result;
         }
 
         public TResult ElseThrow(Func<object, Exception> createException)
         {
-            if (result == null) throw createException(value);
+            if (ReferenceEquals(result, null)) throw createException(value);
             return (TResult)result;
         }
     }
@@ -2237,7 +2237,7 @@ namespace OneOf
 
         void MatchIf<T>(Func<T, TResult> createResult)
         {
-            if (result == null && origType == typeof(T))
+            if (ReferenceEquals(result, null) && origType == typeof(T))
             {
                 result = createResult((T)value);
             }
@@ -2245,19 +2245,19 @@ namespace OneOf
 
         public TResult Else(TResult defaultValue)
         {
-            if (result == null) result = defaultValue;
+            if (ReferenceEquals(result, null)) result = defaultValue;
             return (TResult)result;
         }
 
         public TResult Else(Func<object, TResult> createResult)
         {
-            if (result == null) result = createResult(value);
+            if (ReferenceEquals(result, null)) result = createResult(value);
             return (TResult)result;
         }
 
         public TResult ElseThrow(Func<object, Exception> createException)
         {
-            if (result == null) throw createException(value);
+            if (ReferenceEquals(result, null)) throw createException(value);
             return (TResult)result;
         }
     }
@@ -2333,7 +2333,7 @@ namespace OneOf
 
         void MatchIf<T>(Func<T, TResult> createResult)
         {
-            if (result == null && origType == typeof(T))
+            if (ReferenceEquals(result, null) && origType == typeof(T))
             {
                 result = createResult((T)value);
             }
@@ -2341,19 +2341,19 @@ namespace OneOf
 
         public TResult Else(TResult defaultValue)
         {
-            if (result == null) result = defaultValue;
+            if (ReferenceEquals(result, null)) result = defaultValue;
             return (TResult)result;
         }
 
         public TResult Else(Func<object, TResult> createResult)
         {
-            if (result == null) result = createResult(value);
+            if (ReferenceEquals(result, null)) result = createResult(value);
             return (TResult)result;
         }
 
         public TResult ElseThrow(Func<object, Exception> createException)
         {
-            if (result == null) throw createException(value);
+            if (ReferenceEquals(result, null)) throw createException(value);
             return (TResult)result;
         }
     }
