@@ -9,56 +9,66 @@ using System.Threading.Tasks;
 namespace OneOf
 {
     internal static class OneOfFactory<TOneOf>
-        where TOneOf: IOneOf
+        where TOneOf : IOneOf
     {
+        /// <summary>The OneOf's type</summary>
         static readonly TypeInfo oneofTypeInfo = typeof(TOneOf).GetTypeInfo();
+
+        /// <summary>The OneOf's value types it supports (plus subclasses)</summary>
         static readonly TypeInfo[] oneofArgTypeInfos = oneofTypeInfo.GenericTypeArguments.Select(x => x.GetTypeInfo()).ToArray();
-        static readonly ConstructorInfo oneofCtor = oneofTypeInfo.DeclaredConstructors.First();
+
+        /// <summary>Function to quickly create instances of OneOf without needing reflection</summary>
         static readonly Func<object, Type, TOneOf> createInstance = GetCreateInstanceFunc();
 
-        /// <summary>
-        /// Maps value type to one of the OneOf generic arguments
-        /// </summary>
-        static readonly Dictionary<Type, Type> mapValueTypeToGenericArgType
-            = new Dictionary<Type, Type>(10);
+        /// <summary>Maps value type to one of the OneOf generic arguments</summary>
+        static readonly Dictionary<TypeInfo, TypeInfo> mapValueTypeToGenericArgType
+            = new Dictionary<TypeInfo, TypeInfo>(10);
 
-        internal static TOneOf Create(object value)
+        /// <summary>
+        /// Create an instance of OneOf
+        /// </summary>
+        public static TOneOf Create(object value)
         {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
 
-            var valueType = value.GetType();
+            var valueTypeInfo = value.GetType().GetTypeInfo();
 
-            if (oneofArgTypeInfos.Contains(valueType.GetTypeInfo()))
-                return createInstance(value, valueType);
+            var matchingTypeInfo
+                = GetExactMatchingType(valueTypeInfo)
+                ?? GetBestMatchingType(valueTypeInfo);
 
-            Type bestType;
-
-            if (!mapValueTypeToGenericArgType.TryGetValue(valueType, out bestType))
+            if (matchingTypeInfo == null)
             {
-                bestType = GetBestType(valueType);
-
-                if (bestType == null)
-                {
-                    var genArgs = string.Join(", ", oneofArgTypeInfos.Select(type => type.Name));
-                    throw new ArgumentException($"Value of type {valueType.Name} is not compatible with OneOf<{genArgs}>", nameof(value));
-                }
-
-                mapValueTypeToGenericArgType.Add(valueType, bestType);
+                var genArgs = string.Join(", ", oneofArgTypeInfos.Select(type => type.Name));
+                throw new ArgumentException($"Value of type {valueTypeInfo.Name} is not compatible with OneOf<{genArgs}>", nameof(value));
             }
 
-            var oneofInstance = createInstance(value, bestType);
+            var oneofInstance = createInstance(value, matchingTypeInfo.AsType());
 
             return oneofInstance;
         }
 
         /// <summary>
-        /// Which OneOf generic argument is the best match for valueType?
+        /// Get the OneOf's Tn the value type exactly matches, or null.
         /// </summary>
-        static Type GetBestType(Type valueType)
+        static TypeInfo GetExactMatchingType(TypeInfo valueTypeInfo)
         {
-            var valueTypeInfo = valueType.GetTypeInfo();
+            if (oneofArgTypeInfos.Contains(valueTypeInfo))
+                return valueTypeInfo;
+
+            return null;
+        }
+
+        /// <summary>
+        /// Get the OneOf's Tn the value type best matches, or null.
+        /// </summary>
+        static TypeInfo GetBestMatchingType(TypeInfo valueTypeInfo)
+        {
             TypeInfo bestTypeInfo = null;
+
+            if (mapValueTypeToGenericArgType.TryGetValue(valueTypeInfo, out bestTypeInfo))
+                return bestTypeInfo;
 
             foreach (var argTypeInfo in oneofArgTypeInfos)
             {
@@ -74,14 +84,18 @@ namespace OneOf
                 }
             }
 
-            if (bestTypeInfo == null)
-                return null;
+            mapValueTypeToGenericArgType.Add(valueTypeInfo, bestTypeInfo);
 
-            return bestTypeInfo.AsType();
+            return bestTypeInfo;
         }
 
+        /// <summary>
+        /// Create a Func that quickly creates an instance of the OneOf.
+        /// </summary>
         static Func<object, Type, TOneOf> GetCreateInstanceFunc()
         {
+            var oneofCtor = oneofTypeInfo.DeclaredConstructors.First();
+
             var parmValueExpr = Expression.Parameter(typeof(object), "value");
             var parmTypeExpr = Expression.Parameter(typeof(Type), "type");
             var newExpr = Expression.New(oneofCtor, parmValueExpr, parmTypeExpr);
