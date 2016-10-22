@@ -22,7 +22,7 @@ namespace OneOf
 
         /// <summary>Maps value type to one of the OneOf generic arguments</summary>
         static readonly Dictionary<TypeInfo, TypeInfo> mapValueTypeToGenericArgType
-            = new Dictionary<TypeInfo, TypeInfo>(10);
+            = oneofArgTypeInfos.ToDictionary(k=>k, v=>v);
 
         /// <summary>
         /// Create an instance of OneOf
@@ -34,9 +34,7 @@ namespace OneOf
 
             var valueTypeInfo = value.GetType().GetTypeInfo();
 
-            var matchingTypeInfo
-                = GetExactMatchingType(valueTypeInfo)
-                ?? GetBestMatchingType(valueTypeInfo);
+            var matchingTypeInfo = GetBestMatchingType(valueTypeInfo);
 
             if (matchingTypeInfo == null)
             {
@@ -47,17 +45,6 @@ namespace OneOf
             var oneofInstance = createInstance(value, matchingTypeInfo.AsType());
 
             return oneofInstance;
-        }
-
-        /// <summary>
-        /// Get the OneOf's Tn the value type exactly matches, or null.
-        /// </summary>
-        static TypeInfo GetExactMatchingType(TypeInfo valueTypeInfo)
-        {
-            if (oneofArgTypeInfos.Contains(valueTypeInfo))
-                return valueTypeInfo;
-
-            return null;
         }
 
         /// <summary>

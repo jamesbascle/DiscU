@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using NBench;
 using NUnit.Framework;
 // ReSharper disable UnusedMember.Global - test classes are obviously not instantiated by reference.
@@ -9,7 +10,7 @@ namespace OneOf.Tests
     [Category("Performance")]
     public class T1 : PerfTest<T1>
     {
-        private static readonly Func<OneOf<PerfFakeBase, One, Two, Three, Four>, Counter, string> Func = (oo, c) =>
+        private static string Func(OneOf<PerfFakeBase, One, Two, Three, Four> oo, Counter c)
         {
             c.Increment();
             return oo
@@ -18,7 +19,7 @@ namespace OneOf.Tests
                 .Match(th => th.ThreeProp)
                 .Match(f => f.FourProp).
                 Match(b => b.Type.ToString());
-        };
+        }
 
         private Counter _counter;
 
