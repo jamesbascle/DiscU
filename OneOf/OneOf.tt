@@ -85,11 +85,7 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 		using(new WriteIndent(this))
 		{
 			WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
-			WriteLine("get");
-			using(new WriteIndent(this))
-			{
-				WriteLine("return value;");
-			}
+			WriteLine("get { return value; }");
 		}
 
 		WriteLine("");
@@ -97,11 +93,7 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 		using(new WriteIndent(this))
 		{
 			WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
-			WriteLine("get");
-			using(new WriteIndent(this))
-			{
-				WriteLine("return origType;");
-			}
+			WriteLine("get { return origType; }");
 		}
 
 		// =============== ToOneOf
@@ -115,6 +107,8 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 	    }
 
 	    // =============== implicit conversion to T
+		// While it looks like we could use OneOf ctor directly as we know the value is a Tn, it might be a subclass of tn.
+		// So to determine the best Tn to match the value with we need to use the OneOfFactory.
 
 		WriteLine("");
 		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
@@ -323,7 +317,7 @@ void WriteMatcher(int countOfgenericParams)
 		WriteLine($"void MatchIf<T>(Func<T, TResult> createResult)");
 		using(new WriteIndent(this))
 		{
-			WriteLine($"if (ReferenceEquals(result, null) && oneOf.OrigType == typeof(T))");
+			WriteLine($"if (ReferenceEquals(result, null) && ReferenceEquals(oneOf.OrigType, typeof(T)))");
 			using(new WriteIndent(this))
 			{
 				WriteLine($"result = createResult((T)oneOf.Value);");

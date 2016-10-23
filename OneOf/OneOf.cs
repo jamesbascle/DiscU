@@ -22,19 +22,13 @@ namespace OneOf
         object IOneOf.Value
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return value;
-            }
+            get { return value; }
         }
 
         Type IOneOf.OrigType
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return origType;
-            }
+            get { return origType; }
         }
 
         public OneOf<N0, N1> ToOneOf<N0, N1>() => OneOfFactory<OneOf<N0, N1>>.Create(value);
@@ -87,19 +81,13 @@ namespace OneOf
         object IOneOf.Value
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return value;
-            }
+            get { return value; }
         }
 
         Type IOneOf.OrigType
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return origType;
-            }
+            get { return origType; }
         }
 
         public OneOf<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfFactory<OneOf<N0, N1, N2>>.Create(value);
@@ -159,19 +147,13 @@ namespace OneOf
         object IOneOf.Value
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return value;
-            }
+            get { return value; }
         }
 
         Type IOneOf.OrigType
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return origType;
-            }
+            get { return origType; }
         }
 
         public OneOf<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfFactory<OneOf<N0, N1, N2, N3>>.Create(value);
@@ -238,19 +220,13 @@ namespace OneOf
         object IOneOf.Value
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return value;
-            }
+            get { return value; }
         }
 
         Type IOneOf.OrigType
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return origType;
-            }
+            get { return origType; }
         }
 
         public OneOf<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4>>.Create(value);
@@ -324,19 +300,13 @@ namespace OneOf
         object IOneOf.Value
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return value;
-            }
+            get { return value; }
         }
 
         Type IOneOf.OrigType
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return origType;
-            }
+            get { return origType; }
         }
 
         public OneOf<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4, N5>>.Create(value);
@@ -417,19 +387,13 @@ namespace OneOf
         object IOneOf.Value
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return value;
-            }
+            get { return value; }
         }
 
         Type IOneOf.OrigType
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return origType;
-            }
+            get { return origType; }
         }
 
         public OneOf<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4, N5, N6>>.Create(value);
@@ -517,19 +481,13 @@ namespace OneOf
         object IOneOf.Value
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return value;
-            }
+            get { return value; }
         }
 
         Type IOneOf.OrigType
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return origType;
-            }
+            get { return origType; }
         }
 
         public OneOf<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4, N5, N6, N7>>.Create(value);
@@ -624,19 +582,13 @@ namespace OneOf
         object IOneOf.Value
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return value;
-            }
+            get { return value; }
         }
 
         Type IOneOf.OrigType
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return origType;
-            }
+            get { return origType; }
         }
 
         public OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfFactory<OneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>>.Create(value);
@@ -744,19 +696,13 @@ namespace OneOf
         object IOneOf.Value
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return value;
-            }
+            get { return value; }
         }
 
         Type IOneOf.OrigType
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return origType;
-            }
+            get { return origType; }
         }
 
         public OneOfBase<N0, N1> ToOneOf<N0, N1>() => OneOfFactory<OneOfBase<N0, N1>>.Create(value);
@@ -815,19 +761,13 @@ namespace OneOf
         object IOneOf.Value
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return value;
-            }
+            get { return value; }
         }
 
         Type IOneOf.OrigType
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return origType;
-            }
+            get { return origType; }
         }
 
         public OneOfBase<N0, N1, N2> ToOneOf<N0, N1, N2>() => OneOfFactory<OneOfBase<N0, N1, N2>>.Create(value);
@@ -893,19 +833,13 @@ namespace OneOf
         object IOneOf.Value
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return value;
-            }
+            get { return value; }
         }
 
         Type IOneOf.OrigType
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return origType;
-            }
+            get { return origType; }
         }
 
         public OneOfBase<N0, N1, N2, N3> ToOneOf<N0, N1, N2, N3>() => OneOfFactory<OneOfBase<N0, N1, N2, N3>>.Create(value);
@@ -978,19 +912,13 @@ namespace OneOf
         object IOneOf.Value
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return value;
-            }
+            get { return value; }
         }
 
         Type IOneOf.OrigType
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return origType;
-            }
+            get { return origType; }
         }
 
         public OneOfBase<N0, N1, N2, N3, N4> ToOneOf<N0, N1, N2, N3, N4>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4>>.Create(value);
@@ -1070,19 +998,13 @@ namespace OneOf
         object IOneOf.Value
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return value;
-            }
+            get { return value; }
         }
 
         Type IOneOf.OrigType
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return origType;
-            }
+            get { return origType; }
         }
 
         public OneOfBase<N0, N1, N2, N3, N4, N5> ToOneOf<N0, N1, N2, N3, N4, N5>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4, N5>>.Create(value);
@@ -1169,19 +1091,13 @@ namespace OneOf
         object IOneOf.Value
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return value;
-            }
+            get { return value; }
         }
 
         Type IOneOf.OrigType
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return origType;
-            }
+            get { return origType; }
         }
 
         public OneOfBase<N0, N1, N2, N3, N4, N5, N6> ToOneOf<N0, N1, N2, N3, N4, N5, N6>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4, N5, N6>>.Create(value);
@@ -1275,19 +1191,13 @@ namespace OneOf
         object IOneOf.Value
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return value;
-            }
+            get { return value; }
         }
 
         Type IOneOf.OrigType
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return origType;
-            }
+            get { return origType; }
         }
 
         public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7>>.Create(value);
@@ -1388,19 +1298,13 @@ namespace OneOf
         object IOneOf.Value
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return value;
-            }
+            get { return value; }
         }
 
         Type IOneOf.OrigType
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return origType;
-            }
+            get { return origType; }
         }
 
         public OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N0, N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfFactory<OneOfBase<N0, N1, N2, N3, N4, N5, N6, N7, N8>>.Create(value);
@@ -2105,7 +2009,7 @@ namespace OneOf
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         void MatchIf<T>(Func<T, TResult> createResult)
         {
-            if (ReferenceEquals(result, null) && oneOf.OrigType == typeof(T))
+            if (ReferenceEquals(result, null) && ReferenceEquals(oneOf.OrigType, typeof(T)))
             {
                 result = createResult((T)oneOf.Value);
             }
@@ -2165,7 +2069,7 @@ namespace OneOf
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         void MatchIf<T>(Func<T, TResult> createResult)
         {
-            if (ReferenceEquals(result, null) && oneOf.OrigType == typeof(T))
+            if (ReferenceEquals(result, null) && ReferenceEquals(oneOf.OrigType, typeof(T)))
             {
                 result = createResult((T)oneOf.Value);
             }
@@ -2232,7 +2136,7 @@ namespace OneOf
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         void MatchIf<T>(Func<T, TResult> createResult)
         {
-            if (ReferenceEquals(result, null) && oneOf.OrigType == typeof(T))
+            if (ReferenceEquals(result, null) && ReferenceEquals(oneOf.OrigType, typeof(T)))
             {
                 result = createResult((T)oneOf.Value);
             }
@@ -2306,7 +2210,7 @@ namespace OneOf
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         void MatchIf<T>(Func<T, TResult> createResult)
         {
-            if (ReferenceEquals(result, null) && oneOf.OrigType == typeof(T))
+            if (ReferenceEquals(result, null) && ReferenceEquals(oneOf.OrigType, typeof(T)))
             {
                 result = createResult((T)oneOf.Value);
             }
@@ -2387,7 +2291,7 @@ namespace OneOf
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         void MatchIf<T>(Func<T, TResult> createResult)
         {
-            if (ReferenceEquals(result, null) && oneOf.OrigType == typeof(T))
+            if (ReferenceEquals(result, null) && ReferenceEquals(oneOf.OrigType, typeof(T)))
             {
                 result = createResult((T)oneOf.Value);
             }
@@ -2475,7 +2379,7 @@ namespace OneOf
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         void MatchIf<T>(Func<T, TResult> createResult)
         {
-            if (ReferenceEquals(result, null) && oneOf.OrigType == typeof(T))
+            if (ReferenceEquals(result, null) && ReferenceEquals(oneOf.OrigType, typeof(T)))
             {
                 result = createResult((T)oneOf.Value);
             }
@@ -2570,7 +2474,7 @@ namespace OneOf
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         void MatchIf<T>(Func<T, TResult> createResult)
         {
-            if (ReferenceEquals(result, null) && oneOf.OrigType == typeof(T))
+            if (ReferenceEquals(result, null) && ReferenceEquals(oneOf.OrigType, typeof(T)))
             {
                 result = createResult((T)oneOf.Value);
             }
@@ -2672,7 +2576,7 @@ namespace OneOf
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         void MatchIf<T>(Func<T, TResult> createResult)
         {
-            if (ReferenceEquals(result, null) && oneOf.OrigType == typeof(T))
+            if (ReferenceEquals(result, null) && ReferenceEquals(oneOf.OrigType, typeof(T)))
             {
                 result = createResult((T)oneOf.Value);
             }
@@ -2781,7 +2685,7 @@ namespace OneOf
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         void MatchIf<T>(Func<T, TResult> createResult)
         {
-            if (ReferenceEquals(result, null) && oneOf.OrigType == typeof(T))
+            if (ReferenceEquals(result, null) && ReferenceEquals(oneOf.OrigType, typeof(T)))
             {
                 result = createResult((T)oneOf.Value);
             }

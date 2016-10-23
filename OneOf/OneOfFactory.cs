@@ -12,17 +12,18 @@ namespace OneOf
         where TOneOf : IOneOf
     {
         /// <summary>The OneOf's type</summary>
-        static readonly TypeInfo oneofTypeInfo = typeof(TOneOf).GetTypeInfo();
+        static readonly TypeInfo oneOfType = typeof(TOneOf).GetTypeInfo();
 
-        /// <summary>The OneOf's value types it supports (plus subclasses)</summary>
-        static readonly TypeInfo[] oneofArgTypeInfos = oneofTypeInfo.GenericTypeArguments.Select(x => x.GetTypeInfo()).ToArray();
+        /// <summary>The OneOf's permitted value types</summary>
+        static readonly TypeInfo[] oneOfPermittedValueTypes = oneOfType.GenericTypeArguments.Select(x => x.GetTypeInfo()).ToArray();
 
         /// <summary>Function to quickly create instances of OneOf without needing reflection</summary>
-        static readonly Func<object, Type, TOneOf> createInstance = GetCreateInstanceFunc();
+        static readonly Func<object, Type, TOneOf> createOneOfInstance = GetCreateInstanceFunc();
 
-        /// <summary>Maps value type to one of the OneOf generic arguments</summary>
-        static readonly Dictionary<TypeInfo, TypeInfo> mapValueTypeToGenericArgType
-            = oneofArgTypeInfos.ToDictionary(k=>k, v=>v);
+        /// <summary>Maps value type to one of the OneOf's permitted value types</summary>
+        static readonly Dictionary<TypeInfo, TypeInfo> mapValueTypeToOneOfPermittedType
+                                   = oneOfPermittedValueTypes.ToDictionary(k=>k, v=>v);
+
 
         /// <summary>
         /// Create an instance of OneOf
@@ -32,48 +33,49 @@ namespace OneOf
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
 
-            var valueTypeInfo = value.GetType().GetTypeInfo();
+            var valueType = value.GetType().GetTypeInfo();
 
-            var matchingTypeInfo = GetBestMatchingType(valueTypeInfo);
+            var matchingType = GetBestMatchingType(valueType);
 
-            if (matchingTypeInfo == null)
+            if (matchingType == null)
             {
-                var genArgs = string.Join(", ", oneofArgTypeInfos.Select(type => type.Name));
-                throw new ArgumentException($"Value of type {valueTypeInfo.Name} is not compatible with OneOf<{genArgs}>", nameof(value));
+                var genArgs = string.Join(", ", oneOfPermittedValueTypes.Select(type => type.Name));
+                throw new ArgumentException($"Value of type {valueType.Name} is not compatible with OneOf<{genArgs}>", nameof(value));
             }
 
-            var oneofInstance = createInstance(value, matchingTypeInfo.AsType());
+            var oneofInstance = createOneOfInstance(value, matchingType.AsType());
 
             return oneofInstance;
         }
 
         /// <summary>
+        /// <summary>
         /// Get the OneOf's Tn the value type best matches, or null.
         /// </summary>
-        static TypeInfo GetBestMatchingType(TypeInfo valueTypeInfo)
+        static TypeInfo GetBestMatchingType(TypeInfo valueType)
         {
-            TypeInfo bestTypeInfo = null;
+            TypeInfo bestType = null;
 
-            if (mapValueTypeToGenericArgType.TryGetValue(valueTypeInfo, out bestTypeInfo))
-                return bestTypeInfo;
+            if (mapValueTypeToOneOfPermittedType.TryGetValue(valueType, out bestType))
+                return bestType;
 
-            foreach (var argTypeInfo in oneofArgTypeInfos)
+            foreach (var permittedType in oneOfPermittedValueTypes)
             {
                 // is this OneOf Generic Parameter a match for the value?
-                if (argTypeInfo.IsAssignableFrom(valueTypeInfo))
+                if (permittedType.IsAssignableFrom(valueType))
                 {
                     // is this OneOf Generic Parameter a better match than what we've seen previously.
-                    if (bestTypeInfo == null ||
-                        bestTypeInfo.IsAssignableFrom(argTypeInfo) && !argTypeInfo.IsAssignableFrom(bestTypeInfo))
+                    if (bestType == null ||
+                        bestType.IsAssignableFrom(permittedType) && !permittedType.IsAssignableFrom(bestType))
                     {
-                        bestTypeInfo = argTypeInfo;
+                        bestType = permittedType;
                     }
                 }
             }
 
-            mapValueTypeToGenericArgType.Add(valueTypeInfo, bestTypeInfo);
+            mapValueTypeToOneOfPermittedType.Add(valueType, bestType);
 
-            return bestTypeInfo;
+            return bestType;
         }
 
         /// <summary>
@@ -81,7 +83,7 @@ namespace OneOf
         /// </summary>
         static Func<object, Type, TOneOf> GetCreateInstanceFunc()
         {
-            var oneofCtor = oneofTypeInfo.DeclaredConstructors.First();
+            var oneofCtor = oneOfType.DeclaredConstructors.First();
 
             var parmValueExpr = Expression.Parameter(typeof(object), "value");
             var parmTypeExpr = Expression.Parameter(typeof(Type), "type");
