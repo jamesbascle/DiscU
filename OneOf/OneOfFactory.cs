@@ -22,7 +22,8 @@ namespace OneOf
 
         /// <summary>Maps value type to one of the OneOf's permitted value types</summary>
         static readonly Dictionary<TypeInfo, TypeInfo> mapValueTypeToOneOfPermittedType
-            = new Dictionary<TypeInfo, TypeInfo>(13);
+                                   = oneOfPermittedValueTypes.ToDictionary(k=>k, v=>v);
+
 
         /// <summary>
         /// Create an instance of OneOf
@@ -34,9 +35,7 @@ namespace OneOf
 
             var valueType = value.GetType().GetTypeInfo();
 
-            var matchingType
-                = GetExactMatchingType(valueType)
-                ?? GetBestMatchingType(valueType);
+            var matchingType = GetBestMatchingType(valueType);
 
             if (matchingType == null)
             {
@@ -50,16 +49,6 @@ namespace OneOf
         }
 
         /// <summary>
-        /// Get the OneOf's Tn the value type exactly matches, or null.
-        /// </summary>
-        static TypeInfo GetExactMatchingType(TypeInfo valueType)
-        {
-            if (oneOfPermittedValueTypes.Contains(valueType))
-                return valueType;
-
-            return null;
-        }
-
         /// <summary>
         /// Get the OneOf's Tn the value type best matches, or null.
         /// </summary>
