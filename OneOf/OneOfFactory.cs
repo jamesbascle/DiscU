@@ -19,10 +19,10 @@ namespace OneOf
 
         /// <summary>Function to quickly create instances of OneOf without needing reflection</summary>
         static readonly Func<object, Type, TOneOf> createOneOfInstance = GetCreateInstanceFunc();
-
+            
         /// <summary>Maps value type to one of the OneOf's permitted value types</summary>
         static readonly Dictionary<TypeInfo, TypeInfo> mapValueTypeToOneOfPermittedType
-                                   = oneOfPermittedValueTypes.ToDictionary(k=>k, v=>v);
+                                   = oneOfPermittedValueTypes.ToDictionary(k => k);
 
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace OneOf
 
         /// <summary>
         /// <summary>
-        /// Get the OneOf's Tn the value type best matches, or null.
+        /// Get the OneOf's Tn that best matches the value, or null.
         /// </summary>
         static TypeInfo GetBestMatchingType(TypeInfo valueType)
         {
@@ -61,10 +61,10 @@ namespace OneOf
 
             foreach (var permittedType in oneOfPermittedValueTypes)
             {
-                // is this OneOf Generic Parameter a match for the value?
+                // does the value match this Tn?
                 if (permittedType.IsAssignableFrom(valueType))
                 {
-                    // is this OneOf Generic Parameter a better match than what we've seen previously.
+                    // is this Tn a better match than seen previously?
                     if (bestType == null ||
                         bestType.IsAssignableFrom(permittedType) && !permittedType.IsAssignableFrom(bestType))
                     {
