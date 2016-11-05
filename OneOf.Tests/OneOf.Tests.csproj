@@ -55,11 +55,15 @@
     <Compile Include="MatcherTests.cs" />
     <Compile Include="NunitNBenchBridge.cs" />
     <Compile Include="PerfFake.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
       <DependentUpon>PerfFake.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PerfTests.cs">
+      <DependentUpon>PerfTests.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="MatcherPerformanceTests.cs" />
     <Compile Include="PolymorphicTests.cs" />
     <Compile Include="SwitchTests.cs" />
     <Compile Include="BaseClassTests.cs" />
@@ -83,6 +87,10 @@
     <Content Include="PerfFake.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PerfFake.cs</LastGenOutput>
+    </Content>
+    <Content Include="PerfTests.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PerfTests.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -25,7 +25,7 @@ void GenerateClasses()
     {
         WriteLine("public abstract class PerfFakeBase");
         using (new WriteIndent(this))
-        {
+        {                                                                
 			WriteLine("protected static readonly Random Ran = new Random();");
             WriteLine("public FakeType Type { get; private set; }");
             WriteLine("protected PerfFakeBase(FakeType type = FakeType.Base)");

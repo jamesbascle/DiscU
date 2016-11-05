@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Linq;
+using System.Reflection;
 using NBench.Reporting.Targets;
 using NBench.Sdk;
 using NBench.Sdk.Compiler;
@@ -27,9 +28,9 @@ namespace OneOf.Tests
                     Assert.True(assertion.Passed, results.BenchmarkName + " " + assertion.Message);
                     Console.WriteLine(assertion.Message);
                 }
-            }));
+            }), DefaultBenchmarkAssertionRunner.Instance, new RunnerSettings{ ConcurrentModeEnabled = true });
 
-            var benchmarks = discovery.FindBenchmarks(typeof(T)).ToList();
+            var benchmarks = Assembly.GetAssembly(typeof(T)).DefinedTypes.Where(t => t.BaseType == typeof(T)).Concat(new []{typeof(T)}).SelectMany(t=>discovery.FindBenchmarks(t)).ToList();
 
             foreach (var benchmark in benchmarks)
             {
