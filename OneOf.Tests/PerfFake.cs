@@ -8,12 +8,12 @@ namespace OneOf.Tests
 {
     public abstract class PerfFakeBase
     {
-        protected static readonly Random Ran = new Random();
-        public FakeType Type { get; private set; }
+        public FakeType Type { get; }
         protected PerfFakeBase(FakeType type = FakeType.Base)
         {
             Type = type;
         }
+        public int BaseProp { get; } = 0;
     }
     public enum FakeType
     {
@@ -28,32 +28,32 @@ namespace OneOf.Tests
     public class One : PerfFakeBase
     {
         public One() : base(FakeType.One){}
-        public string OneProp { get; set; } = Ran.NextDouble().ToString();
+        public int OneProp { get; } = 1;
     }
     public class Two : PerfFakeBase
     {
         public Two() : base(FakeType.Two){}
-        public string TwoProp { get; set; } = Ran.NextDouble().ToString();
+        public int TwoProp { get; } = 2;
     }
     public class Three : PerfFakeBase
     {
         public Three() : base(FakeType.Three){}
-        public string ThreeProp { get; set; } = Ran.NextDouble().ToString();
+        public int ThreeProp { get; } = 3;
     }
     public class Four : PerfFakeBase
     {
         public Four() : base(FakeType.Four){}
-        public string FourProp { get; set; } = Ran.NextDouble().ToString();
+        public int FourProp { get; } = 4;
     }
     public class Five : PerfFakeBase
     {
         public Five() : base(FakeType.Five){}
-        public string FiveProp { get; set; } = Ran.NextDouble().ToString();
+        public int FiveProp { get; } = 5;
     }
     public class Six : PerfFakeBase
     {
         public Six() : base(FakeType.Six){}
-        public string SixProp { get; set; } = Ran.NextDouble().ToString();
+        public int SixProp { get; } = 6;
     }
     public static class PerfOneOfs
     {

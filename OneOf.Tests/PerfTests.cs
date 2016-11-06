@@ -71,14 +71,14 @@ namespace OneOf.Tests
             {
                 WarmUpHelper();
             }
-            public static string Func(OneOf<PerfFakeBase, One, Two, Three, Four> oo)
+            public static int Func(OneOf<PerfFakeBase, One, Two, Three, Four> oo)
             {
                 return oo
                 .Match(o => o.OneProp)
                 .Match(tw => tw.TwoProp)
                 .Match(th => th.ThreeProp)
-                .Match(f => f.FourProp).
-                Match(b => b.Type.ToString());
+                .Match(f => f.FourProp)
+                .Match(b => b.BaseProp);
             }
             private Counter _counter;
             [PerfSetup]
@@ -105,14 +105,14 @@ namespace OneOf.Tests
             {
                 WarmUpHelper();
             }
-            public static string Func(OneOf<PerfFakeBase, One, Two, Three, Four> oo)
+            public static int Func(OneOf<PerfFakeBase, One, Two, Three, Four> oo)
             {
                 return oo
                 .Match(o => o.OneProp)
                 .Match(tw => tw.TwoProp)
                 .Match(th => th.ThreeProp)
-                .Match(f => f.FourProp).
-                Match(b => b.Type.ToString());
+                .Match(f => f.FourProp)
+                .Match(b => b.BaseProp);
             }
             private Counter _counter;
             [PerfSetup]
@@ -139,14 +139,14 @@ namespace OneOf.Tests
             {
                 WarmUpHelper();
             }
-            public static string Func(OneOf<PerfFakeBase, One, Two, Three, Four> oo)
+            public static int Func(OneOf<PerfFakeBase, One, Two, Three, Four> oo)
             {
                 return oo
                 .Match(o => o.OneProp)
                 .Match(tw => tw.TwoProp)
                 .Match(th => th.ThreeProp)
-                .Match(f => f.FourProp).
-                Match(b => b.Type.ToString());
+                .Match(f => f.FourProp)
+                .Match(b => b.BaseProp);
             }
             private Counter _counter;
             [PerfSetup]
@@ -173,14 +173,14 @@ namespace OneOf.Tests
             {
                 WarmUpHelper();
             }
-            public static string Func(OneOf<PerfFakeBase, One, Two, Three, Four> oo)
+            public static int Func(OneOf<PerfFakeBase, One, Two, Three, Four> oo)
             {
                 return oo
                 .Match(o => o.OneProp)
                 .Match(tw => tw.TwoProp)
                 .Match(th => th.ThreeProp)
-                .Match(f => f.FourProp).
-                Match(b => b.Type.ToString());
+                .Match(f => f.FourProp)
+                .Match(b => b.BaseProp);
             }
             private Counter _counter;
             [PerfSetup]
@@ -207,14 +207,14 @@ namespace OneOf.Tests
             {
                 WarmUpHelper();
             }
-            public static string Func(OneOf<PerfFakeBase, One, Two, Three, Four> oo)
+            public static int Func(OneOf<PerfFakeBase, One, Two, Three, Four> oo)
             {
                 return oo
                 .Match(o => o.OneProp)
                 .Match(tw => tw.TwoProp)
                 .Match(th => th.ThreeProp)
-                .Match(f => f.FourProp).
-                Match(b => b.Type.ToString());
+                .Match(f => f.FourProp)
+                .Match(b => b.BaseProp);
             }
             private Counter _counter;
             [PerfSetup]
@@ -241,14 +241,14 @@ namespace OneOf.Tests
             {
                 WarmUpHelper();
             }
-            public static string Func(OneOf<PerfFakeBase, One, Two, Three, Four> oo)
+            public static int Func(OneOf<PerfFakeBase, One, Two, Three, Four> oo)
             {
                 return oo
                 .Match(o => o.OneProp)
                 .Match(tw => tw.TwoProp)
                 .Match(th => th.ThreeProp)
-                .Match(f => f.FourProp).
-                Match(b => b.Type.ToString());
+                .Match(f => f.FourProp)
+                .Match(b => b.BaseProp);
             }
             private Counter _counter;
             [PerfSetup]

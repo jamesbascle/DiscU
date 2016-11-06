@@ -60,15 +60,15 @@
                             WriteLine("WarmUpHelper();");
                         }
                         
-                        WriteLine("public static string Func(OneOf<PerfFakeBase, One, Two, Three, Four> oo)");
+                        WriteLine("public static int Func(OneOf<PerfFakeBase, One, Two, Three, Four> oo)");
                         using(Indent)
                         {
                             WriteLine("return oo");
                             WriteLine(".Match(o => o.OneProp)");
                             WriteLine(".Match(tw => tw.TwoProp)");
                             WriteLine(".Match(th => th.ThreeProp)");
-                            WriteLine(".Match(f => f.FourProp).");
-                            WriteLine("Match(b => b.Type.ToString());");
+                            WriteLine(".Match(f => f.FourProp)");
+                            WriteLine(".Match(b => b.BaseProp);");
                         }
 
                         WriteLine("private Counter _counter;");
