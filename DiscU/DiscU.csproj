@@ -40,6 +40,9 @@
     <Compile Include="..\OneOf\OneOf.cs">
       <Link>OneOf.cs</Link>
     </Compile>
+    <Compile Include="..\OneOf\OneOfFactory.cs">
+      <Link>OneOfFactory.cs</Link>
+    </Compile>
     <Compile Include="..\OneOf\Types\Assorted.cs">
       <Link>Types\Assorted.cs</Link>
     </Compile>
