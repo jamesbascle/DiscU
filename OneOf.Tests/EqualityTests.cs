@@ -57,5 +57,44 @@ namespace OneOf.Tests
             Assert.IsTrue(v1.Equals(v2));
         }
 
+        [Test]
+        public void OpEquals_OneOfVsOneOf_SameType()
+        {
+            var v1 = (OneOf<string, bool>)"x";
+            var v2 = (OneOf<string, bool>)"x";
+
+            Assert.IsTrue(v1 == v2);
+            Assert.IsFalse(v1 != v2);
+        }
+
+        [Test]
+        public void OpEquals_OneOfVsOneOf_DiffType()
+        {
+            var v1 = (OneOf<string, bool>)"x";
+            var v2 = (OneOf<string, int>)"x";
+
+            Assert.IsTrue(v1 == v2);
+            Assert.IsFalse(v1 != v2);
+        }
+
+        [Test]
+        public void OpEquals_OneOfVsValue()
+        {
+            var v1 = (OneOf<string, bool>)"x";
+            var v2 = "x";
+
+            Assert.IsTrue(v1 == v2);
+            Assert.IsFalse(v1 != v2);
+        }
+
+        [Test]
+        public void OpEquals_ValueVsOneOf()
+        {
+            var v1 = "x";
+            var v2 = (OneOf<string, bool>)"x";
+
+            Assert.IsTrue(v1 == v2);
+            Assert.IsFalse(v1 != v2);
+        }
     }
 }

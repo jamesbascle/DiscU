@@ -16,7 +16,7 @@ void GenerateClasses()
 	WriteLine("// ===========================================================================");
 	WriteLine("");
 	WriteLine("using System;");
-	WriteLine("using Microsoft.CSharp.RuntimeBinder;");
+	WriteLine("using System.Runtime.CompilerServices;");
 	
 	WriteLine("");
 	WriteLine("namespace OneOf");
@@ -35,10 +35,12 @@ void GenerateClasses()
 			WriteMatcher(i);
 	}
 }
+
 string GenerateGenericArgs(IEnumerable<int> ints, string typePrefix = "T", string withResult = null)
 {
     return string.Join(", ", ints.Select(e => typePrefix + e)) + (withResult != null ? ", " + withResult : "");
 }
+
 void WriteOneOf(bool isStruct, int countOfgenericParams) 
 {
 	var genericArg = GenerateGenericArgs(Enumerable.Range(0, countOfgenericParams));
@@ -55,6 +57,7 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 		// must only be called after value has been validated to be Tn
 	    
 		WriteLine("");
+		WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
         WriteLine($"{typeName}(object value, Type origType)");
 
 		using(new WriteIndent(this))
@@ -78,84 +81,64 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 	    // =============== IOneOf implementation
 
 		WriteLine("");
-		WriteLine("object IOneOf.Value => value;");
-
-        // =============== Create/CreateRaw
-        
-        WriteLine("");
-        WriteLine($"internal static {typeName}<{genericArg}> CreateRaw(object value)");
-        using(new WriteIndent(this))
-        {
-			WriteLine("if (value == null) throw new ArgumentNullException(nameof(value));");
-            for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
-            {
-				//cover our fast exact Type matches
-                WriteLine($"if (value.GetType() == typeof(T{parmIndex})) return Create((T{parmIndex})value);");
-            }
-			//prepare to catch any dynamic binding exceptions...
-			WriteLine("try");
-            using(new WriteIndent(this))            
-			{
-				//fall back to best match for non-exact type matches (subclasses, interface implementations, etc.)
-				//by performing double dispatch via dynamic casting. This will attempt to bind to the most specific create method available.
-				// This can be improved via reflection trickery if we decide there is a performance justification for it
-				WriteLine($"return Create((dynamic)value);");
-            }
-            WriteLine("catch (RuntimeBinderException ex)");
-            using (new WriteIndent(this))
-            {
-				//this SHOULDN'T happen thanks to already being in the context of a validly casted object, but you never know...
-                WriteLine("throw new ArgumentException(nameof(value), ex);");
-            }
-        }
+		WriteLine("object IOneOf.Value");
+		using(new WriteIndent(this))
+		{
+			WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
+			WriteLine("get { return value; }");
+		}
 
 		WriteLine("");
-		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
-        {
-			WriteLine($"static {typeName}<{genericArg}> Create(T{parmIndex} value) => new {typeName}<{genericArg}>(value, typeof(T{parmIndex}));");
+		WriteLine("Type IOneOf.OrigType");
+		using(new WriteIndent(this))
+		{
+			WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
+			WriteLine("get { return origType; }");
 		}
 
 		// =============== ToOneOf
-		// now just uses CreateRaw to get best of both worlds for conversion.  Can blow up if user has incompatible types, but the C# Type system is
-		// just not powerful enough for us to save them from that with any reasonable approaches.
+
 		WriteLine("");
 		for (var numberOfGenericsInNew = countOfgenericParams - 1; numberOfGenericsInNew < 9; numberOfGenericsInNew ++)
 	    {
 	            var nargs = Enumerable.Range(0, numberOfGenericsInNew + 1).Select(e => "N" + e).ToArray();
 	            var otherGenericArgs = string.Join(", ", nargs);
-	            WriteLine($"public {typeName}<{otherGenericArgs}> ToOneOf<{otherGenericArgs}>() => {typeName}<{otherGenericArgs}>.CreateRaw(value);");
+	            WriteLine($"public {typeName}<{otherGenericArgs}> ToOneOf<{otherGenericArgs}>() => OneOfFactory<{typeName}<{otherGenericArgs}>>.Create(value);");
 	    }
 
 	    // =============== implicit conversion to T
-		// Now uses CreateRaw.  Not much slower than just calling the raw constructor, and ensures we get proper handling for polymorphic situations.
+		// While it looks like we could use OneOf ctor directly as we know the value is a Tn, it might be a subclass of tn.
+		// So to determine the best Tn to match the value with we need to use the OneOfFactory.
+
 		WriteLine("");
 		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
 		{
-			WriteLine($"public static implicit operator {typeName}<{genericArg}>(T{parmIndex} value) => CreateRaw(value);"); 
+			WriteLine($"public static implicit operator {typeName}<{genericArg}>(T{parmIndex} value) => OneOfFactory<{typeName}<{genericArg}>>.Create(value);"); 
 		}
 
 		// =============== equality operators
+
 		WriteLine("");
-		WriteLine($"public static bool operator ==({typeName}<{genericArg}> v1, IOneOf v2) => Equals(v1,v2);"); 
-		WriteLine($"public static bool operator !=({typeName}<{genericArg}> v1, IOneOf v2) => !Equals(v1,v2);");
+		WriteLine($"public static bool operator ==({typeName}<{genericArg}> v1, IOneOf v2) => Equals(v1, v2);"); 
+		WriteLine($"public static bool operator !=({typeName}<{genericArg}> v1, IOneOf v2) => !Equals(v1, v2);");
 		//also adding equality operators to compare to the various Generic types by value
 	    for (var i = 0; i < countOfgenericParams; i++)
 	    {
-			WriteLine($"public static bool operator ==({typeName}<{genericArg}> v1, T{i} v2) => Equals(v1,v2);"); 
-			WriteLine($"public static bool operator !=({typeName}<{genericArg}> v1, T{i} v2) => !Equals(v1,v2);");
-			WriteLine($"public static bool operator ==(T{i} v1, {typeName}<{genericArg}> v2) => Equals(v2,v1);"); 
-			WriteLine($"public static bool operator !=(T{i} v1, {typeName}<{genericArg}> v2) => !Equals(v2,v1);");
+			WriteLine($"public static bool operator ==({typeName}<{genericArg}> v1, T{i} v2) => Equals(v1, v2);"); 
+			WriteLine($"public static bool operator !=({typeName}<{genericArg}> v1, T{i} v2) => !Equals(v1, v2);");
+			WriteLine($"public static bool operator ==(T{i} v1, {typeName}<{genericArg}> v2) => Equals(v2, v1);"); 
+			WriteLine($"public static bool operator !=(T{i} v1, {typeName}<{genericArg}> v2) => !Equals(v2, v1);");
 	    }
 
-
 		// =============== Switch
+
 		WriteLine("");
 		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
 		{
 			var lesserArityOneOf = Enumerable.Range(0, countOfgenericParams).Where(n => n != parmIndex).ToList();
 			var lesserArityGenericArg = GenerateGenericArgs(lesserArityOneOf);
 
-			WriteLine($"public OneOfSwitcher<{lesserArityGenericArg}> Switch(Action<T{parmIndex}> action) => new OneOfSwitcher<{genericArg}>(value, origType).Switch(action);");
+			WriteLine($"public OneOfSwitcher<{lesserArityGenericArg}> Switch(Action<T{parmIndex}> action) => new OneOfSwitcher<{genericArg}>(this).Switch(action);");
 		}
 
 		// =============== Match
@@ -166,7 +149,8 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 			var lesserArityOneOf = Enumerable.Range(0, countOfgenericParams).Where(n => n != parmIndex).ToList();
 			var lesserArityGenericArg = GenerateGenericArgs(lesserArityOneOf);
 
-			WriteLine($"public OneOfMatcher<{lesserArityGenericArg}, TResult> Match<TResult>(Func<T{parmIndex}, TResult> func) => new OneOfMatcher<{genericArg}, TResult>(value, origType).Match(func);");
+			WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
+			WriteLine($"public OneOfMatcher<{lesserArityGenericArg}, TResult> Match<TResult>(Func<T{parmIndex}, TResult> func) => new OneOfMatcher<{genericArg}, TResult>(this).Match(func);");
 		}
 
 		// =============== object overrides
@@ -187,21 +171,21 @@ void WriteSwitcher(int countOfgenericParams)
 	WriteLine($"public struct OneOfSwitcher<{genericArg}>");
 	using(new WriteIndent(this))
 	{
-		WriteLine("readonly object value;");
-		WriteLine("readonly Type origType;");
+		WriteLine("readonly IOneOf oneOf;");
 		WriteLine("bool hasSwitched;");
 
 		// =============== Constructors
 	    
 		WriteLine("");
-		WriteLine("internal OneOfSwitcher(object value, Type origType) : this(value, origType, false) { }");
+		WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
+		WriteLine("internal OneOfSwitcher(IOneOf oneOf) : this(oneOf, false) { }");
 	    
 		WriteLine("");
-		WriteLine("internal OneOfSwitcher(object value, Type origType, bool hasSwitched)");
+		WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
+		WriteLine("internal OneOfSwitcher(IOneOf oneOf, bool hasSwitched)");
 		using(new WriteIndent(this))
 		{
-			WriteLine($"this.value = value;");
-			WriteLine($"this.origType = origType;");
+			WriteLine($"this.oneOf = oneOf;");
 			WriteLine($"this.hasSwitched = hasSwitched;");
 		}
 
@@ -219,7 +203,7 @@ void WriteSwitcher(int countOfgenericParams)
 				using(new WriteIndent(this))
 				{
 					WriteLine($"SwitchIf<T{parmIndex}>(action);");
-					WriteLine($"return new OneOfSwitcher<{lesserArityGenericArg}>(value, origType, hasSwitched);");
+					WriteLine($"return new OneOfSwitcher<{lesserArityGenericArg}>(oneOf, hasSwitched);");
 				}
 			}
 			else
@@ -236,13 +220,14 @@ void WriteSwitcher(int countOfgenericParams)
 		// =============== SwitchIf
 		
 		WriteLine("");
+		WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
 		WriteLine($"void SwitchIf<T>(Action<T> action)");
 		using(new WriteIndent(this))
 		{
-			WriteLine($"if (!hasSwitched && origType == typeof(T))");
+			WriteLine($"if (!hasSwitched && oneOf.OrigType == typeof(T))");
 			using(new WriteIndent(this))
 			{
-				WriteLine($"action((T)value);");
+				WriteLine($"action((T)oneOf.Value);");
 				WriteLine("hasSwitched = true;");
 			}
 		}
@@ -253,7 +238,7 @@ void WriteSwitcher(int countOfgenericParams)
 		WriteLine($"public void Else(Action<object> action)");
 		using(new WriteIndent(this))
 		{
-			WriteLine($"if (!hasSwitched) action(value);");
+			WriteLine($"if (!hasSwitched) action(oneOf.Value);");
 		}
 
 		// =============== ElseThrow
@@ -262,7 +247,7 @@ void WriteSwitcher(int countOfgenericParams)
 		WriteLine($"public void ElseThrow(Func<object, Exception> func)");
 		using(new WriteIndent(this))
 		{
-			WriteLine($"if (!hasSwitched) throw func(value);");
+			WriteLine($"if (!hasSwitched) throw func(oneOf.Value);");
 		}
 	}
 }
@@ -275,21 +260,21 @@ void WriteMatcher(int countOfgenericParams)
 	WriteLine($"public struct OneOfMatcher<{genericArg}>" );
 	using(new WriteIndent(this))
 	{
-		WriteLine("readonly object value;");
-		WriteLine("readonly Type origType;");
+		WriteLine("readonly IOneOf oneOf;");
 		WriteLine("object result;");
 
 		// =============== Constructors
 	    
 		WriteLine("");
-		WriteLine("internal OneOfMatcher(object value, Type origType) : this(value, origType, null) { }");
+		WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
+		WriteLine("internal OneOfMatcher(IOneOf oneOf) : this(oneOf, null) { }");
 	    
 		WriteLine("");
-		WriteLine("internal OneOfMatcher(object value, Type origType, object result)");
+		WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
+		WriteLine("internal OneOfMatcher(IOneOf oneOf, object result)");
 		using(new WriteIndent(this))
 		{
-			WriteLine($"this.value = value;");
-			WriteLine($"this.origType = origType;");
+			WriteLine($"this.oneOf = oneOf;");
 			WriteLine($"this.result = result;");
 		}
 
@@ -301,18 +286,21 @@ void WriteMatcher(int countOfgenericParams)
 			if(lesserArityOneOf.Count > 1)
 			{
 				lesserArityOneOf.Remove(parmIndex);
-			
 				var lesserArityGenericArg = GenerateGenericArgs(lesserArityOneOf,withResult: "TResult");
+
 				WriteLine("");
+				WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
 				WriteLine($"public OneOfMatcher<{lesserArityGenericArg}> Match(Func<T{parmIndex}, TResult> createResult)");
 				using(new WriteIndent(this))
 				{
 					WriteLine($"MatchIf<T{parmIndex}>(createResult);");
-					WriteLine($"return new OneOfMatcher<{lesserArityGenericArg}>(value, origType, result);");
+					WriteLine($"return new OneOfMatcher<{lesserArityGenericArg}>(oneOf, result);");
 				}
 			}
 			else
             {
+				WriteLine("");
+				//WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
 				WriteLine($"public TResult Match(Func<T{parmIndex}, TResult> createResult)");
 				using(new WriteIndent(this))
 				{
@@ -325,43 +313,47 @@ void WriteMatcher(int countOfgenericParams)
 		// =============== MatchIf
 		
 		WriteLine("");
+		WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
 		WriteLine($"void MatchIf<T>(Func<T, TResult> createResult)");
 		using(new WriteIndent(this))
 		{
-			WriteLine($"if (result == null && origType == typeof(T))");
+			WriteLine($"if (ReferenceEquals(result, null) && ReferenceEquals(oneOf.OrigType, typeof(T)))");
 			using(new WriteIndent(this))
 			{
-				WriteLine($"result = createResult((T)value);");
+				WriteLine($"result = createResult((T)oneOf.Value);");
 			}
 		}
 
 		// =============== Else(default)
 
 		WriteLine("");
+		WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
 		WriteLine($"public TResult Else(TResult defaultValue)");
 		using(new WriteIndent(this))
 		{
-			WriteLine($"if (result == null) result = defaultValue;");
+			WriteLine($"if (ReferenceEquals(result, null)) result = defaultValue;");
 			WriteLine("return (TResult)result;");
 		}
 
 		// =============== Else(func)
 
 		WriteLine("");
+		WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
 		WriteLine($"public TResult Else(Func<object, TResult> createResult)");
 		using(new WriteIndent(this))
 		{
-			WriteLine($"if (result == null) result = createResult(value);");
+			WriteLine($"if (ReferenceEquals(result, null)) result = createResult(oneOf.Value);");
 			WriteLine("return (TResult)result;");
 		}
 
 		// =============== ElseThrow
 
 		WriteLine("");
+		WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
 		WriteLine($"public TResult ElseThrow(Func<object, Exception> createException)");
 		using(new WriteIndent(this))
 		{
-			WriteLine($"if (result == null) throw createException(value);");
+			WriteLine($"if (ReferenceEquals(result, null)) throw createException(oneOf.Value);");
 			WriteLine("return (TResult)result;");
 		}
 	}

@@ -25,9 +25,8 @@ void GenerateClasses()
     {
         WriteLine("public abstract class PerfFakeBase");
         using (new WriteIndent(this))
-        {
-			WriteLine("protected static readonly Random Ran = new Random();");
-            WriteLine("public FakeType Type { get; private set; }");
+        {                                                                
+            WriteLine("public FakeType Type { get; }");
             WriteLine("protected PerfFakeBase(FakeType type = FakeType.Base)");
             using (new WriteIndent(this))
             {
@@ -46,7 +45,6 @@ void GenerateClasses()
             WriteLine("Five = 5,");
             WriteLine("Six = 6");
         }
-		var ran = new Random();
         var allButBase = Enum.GetValues(typeof(FakeType)).Cast<FakeType>().Skip(1).ToList();
         foreach (var ft in allButBase)
         {
@@ -56,7 +54,7 @@ void GenerateClasses()
             using (new WriteIndent(this))
             {
                 WriteLine($"public {name}() : base(FakeType.{name}){{}}");
-				WriteLine($"public string {name}Prop {{ get; set; }} = Ran.NextDouble().ToString();");
+				WriteLine($"public int {name}Prop {{ get; }} = {(int)ft};");
             }
         }
 
