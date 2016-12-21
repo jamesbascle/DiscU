@@ -10,10 +10,12 @@ namespace OneOf.Tests
         [Test]
         public void MatchWhenConditionIsTrue()
         {
-            var oneOf = (OneOf<string, bool>) "True";
+            var oneOf = (OneOf<string, bool>) "apple";
 
             var success = oneOf
-                .MatchWhen(v => v == "True", v => true)
+                .MatchWhen(v => v == "mango", v => false)
+                .MatchWhen(v => v == "apple", v => true)
+                .MatchWhen(v => v == "pear", v => false)
                 .Else(false);
 
             Assert.AreEqual(true, success);
@@ -22,10 +24,12 @@ namespace OneOf.Tests
         [Test]
         public void DoesntMatchWhenConditionIsFalse()
         {
-            var oneOf = (OneOf<string, bool>)"False";
+            var oneOf = (OneOf<string, bool>)"monkey";
 
             var success = oneOf
-                .MatchWhen(v => v == "True", v => false)
+                .MatchWhen(v => v == "mango", v => false)
+                .MatchWhen(v => v == "apple", v => false)
+                .MatchWhen(v => v == "pear", v => false)
                 .Else(true);
 
             Assert.AreEqual(true, success);

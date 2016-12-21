@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EqualityTests.cs" />
+    <Compile Include="SwitchWhenTests.cs" />
     <Compile Include="MatchWhenTests.cs" />
     <Compile Include="MatcherTests.cs" />
     <Compile Include="PolymorphicTests.cs" />

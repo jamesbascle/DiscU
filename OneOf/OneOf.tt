@@ -130,7 +130,7 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 			WriteLine($"public static bool operator !=(T{i} v1, {typeName}<{genericArgs}> v2) => !Equals(v2, v1);");
 	    }
 
-		// =============== Switch
+		// =============== Switch / SwitchWhen
 
 		WriteLine("");
 		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
@@ -139,6 +139,13 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 			var lesserArityGenericArg = GenerateGenericArgs(lesserArityOneOf);
 
 			WriteLine($"public OneOfSwitcher<{lesserArityGenericArg}> Switch(Action<T{parmIndex}> action) => new OneOfSwitcher<{genericArgs}>(this).Switch(action);");
+		}
+
+
+		WriteLine("");
+		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
+		{
+			WriteLine($"public OneOfSwitcher<{genericArgs}> SwitchWhen(Predicate<T{parmIndex}> condition, Action<T{parmIndex}> action) => new OneOfSwitcher<{genericArgs}>(this).SwitchWhen(condition, action);");
 		}
 
 		// =============== Match / MatchWhen
@@ -209,7 +216,7 @@ void WriteSwitcher(int countOfgenericParams)
 				WriteLine($"public OneOfSwitcher<{lesserArityGenericArg}> Switch(Action<T{parmIndex}> action)");
 				using(new WriteIndent(this))
 				{
-					WriteLine($"SwitchIf<T{parmIndex}>(action);");
+					WriteLine($"SwitchIf<T{parmIndex}>(null, action);");
 					WriteLine($"return new OneOfSwitcher<{lesserArityGenericArg}>(oneOf, hasSwitched);");
 				}
 			}
@@ -219,24 +226,39 @@ void WriteSwitcher(int countOfgenericParams)
 				WriteLine($"public void Switch(Action<T{parmIndex}> action)");
 				using(new WriteIndent(this))
 				{
-					WriteLine($"SwitchIf<T{parmIndex}>(action);");
+					WriteLine($"SwitchIf<T{parmIndex}>(null, action);");
 				}
+			}
+		}
+
+		// =============== SwitchWhen
+		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex++)
+		{
+			WriteLine("");
+			WriteLine($"public OneOfSwitcher<{genericArgs}> SwitchWhen(Predicate<T{parmIndex}> condition, Action<T{parmIndex}> action)");
+			using(new WriteIndent(this))
+			{
+				WriteLine($"SwitchIf<T{parmIndex}>(condition, action);");
+				WriteLine($"return this;");
 			}
 		}
 
 		// =============== SwitchIf
 		
 		WriteLine("");
-		WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
-		WriteLine($"void SwitchIf<T>(Action<T> action)");
+		//WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
+		WriteLine($"void SwitchIf<T>(Predicate<T> condition, Action<T> action)");
 		using(new WriteIndent(this))
 		{
-			WriteLine($"if (!hasSwitched && oneOf.OrigType == typeof(T))");
-			using(new WriteIndent(this))
-			{
-				WriteLine($"action((T)oneOf.Value);");
-				WriteLine("hasSwitched = true;");
-			}
+			WriteLine($"if (hasSwitched) return;                 // already switched");
+			WriteLine("");
+
+			WriteLine($"if (oneOf.OrigType != typeof(T)) return; // not correct type");
+			WriteLine($"if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition");
+
+			WriteLine("");
+			WriteLine($"action((T)oneOf.Value);                  // yes!");
+			WriteLine("hasSwitched = true;");
 		}
 
 		// =============== Else
@@ -327,7 +349,7 @@ void WriteMatcher(int countOfgenericParams)
 			using(new WriteIndent(this))
 			{
 				WriteLine($"MatchIf<T{parmIndex}>(condition, createResult);");
-				WriteLine($"return new OneOfMatcher<{genericArgs}>(oneOf, result);");
+				WriteLine($"return this;");
 			}
 		}
 
