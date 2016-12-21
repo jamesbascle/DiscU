@@ -19,11 +19,12 @@ namespace OneOf
 
         /// <summary>Function to quickly create instances of OneOf without needing reflection</summary>
         static readonly Func<object, Type, TOneOf> createOneOfInstance = GetCreateInstanceFunc();
-            
-        /// <summary>Maps value type to one of the OneOf's permitted value types</summary>
-        static readonly Dictionary<TypeInfo, TypeInfo> mapValueTypeToOneOfPermittedType
-                                   = oneOfPermittedValueTypes.ToDictionary(k => k);
 
+        ///// <summary>Maps value type to one of the OneOf's permitted value types</summary>
+        //static readonly Dictionary<TypeInfo, TypeInfo> mapValueTypeToOneOfPermittedType
+        //                           = oneOfPermittedValueTypes.ToDictionary(k => k);
+        static readonly List<KeyValuePair<TypeInfo, TypeInfo>> mapValueTypeToOneOfPermittedType
+            = oneOfPermittedValueTypes.Select(x => new KeyValuePair<TypeInfo, TypeInfo>(x, x)).ToList();
 
         /// <summary>
         /// Create an instance of OneOf
@@ -56,8 +57,14 @@ namespace OneOf
         {
             TypeInfo bestType = null;
 
-            if (mapValueTypeToOneOfPermittedType.TryGetValue(valueType, out bestType))
-                return bestType;
+            //if (mapValueTypeToOneOfPermittedType.TryGetValue(valueType, out bestType))
+            //    return bestType;
+            for (var i = mapValueTypeToOneOfPermittedType.Count - 1; i >= 0; i--)
+            {
+                var kv = mapValueTypeToOneOfPermittedType[i];
+                if (valueType == kv.Key)
+                    return kv.Value;
+            }
 
             foreach (var permittedType in oneOfPermittedValueTypes)
             {
@@ -73,7 +80,8 @@ namespace OneOf
                 }
             }
 
-            mapValueTypeToOneOfPermittedType.Add(valueType, bestType);
+            //mapValueTypeToOneOfPermittedType.Add(valueType, bestType);
+            mapValueTypeToOneOfPermittedType.Add(new KeyValuePair<TypeInfo, TypeInfo>(valueType, bestType));
 
             return bestType;
         }

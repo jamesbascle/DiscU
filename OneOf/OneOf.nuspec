@@ -4,7 +4,7 @@
     <id>$id$</id>
     <version>$version$</version>
     <title>OneOf</title>
-    <authors>Harry McIntyre</authors>
+    <authors>Harry McIntyre, Will Mooar</authors>
     <owners>Harry McIntyre</owners>
     <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
     <projectUrl>https://github.com/mcintyre321/OneOf</projectUrl>

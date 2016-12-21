@@ -317,7 +317,7 @@ void WriteMatcher(int countOfgenericParams)
 		WriteLine($"void MatchIf<T>(Func<T, TResult> createResult)");
 		using(new WriteIndent(this))
 		{
-			WriteLine($"if (ReferenceEquals(result, null) && ReferenceEquals(oneOf.OrigType, typeof(T)))");
+			WriteLine($"if (result == null && oneOf.OrigType == typeof(T))");
 			using(new WriteIndent(this))
 			{
 				WriteLine($"result = createResult((T)oneOf.Value);");

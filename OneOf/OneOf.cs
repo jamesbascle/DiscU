@@ -2009,7 +2009,7 @@ namespace OneOf
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         void MatchIf<T>(Func<T, TResult> createResult)
         {
-            if (ReferenceEquals(result, null) && ReferenceEquals(oneOf.OrigType, typeof(T)))
+            if (result == null && oneOf.OrigType == typeof(T))
             {
                 result = createResult((T)oneOf.Value);
             }
@@ -2069,7 +2069,7 @@ namespace OneOf
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         void MatchIf<T>(Func<T, TResult> createResult)
         {
-            if (ReferenceEquals(result, null) && ReferenceEquals(oneOf.OrigType, typeof(T)))
+            if (result == null && oneOf.OrigType == typeof(T))
             {
                 result = createResult((T)oneOf.Value);
             }
@@ -2136,7 +2136,7 @@ namespace OneOf
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         void MatchIf<T>(Func<T, TResult> createResult)
         {
-            if (ReferenceEquals(result, null) && ReferenceEquals(oneOf.OrigType, typeof(T)))
+            if (result == null && oneOf.OrigType == typeof(T))
             {
                 result = createResult((T)oneOf.Value);
             }
@@ -2210,7 +2210,7 @@ namespace OneOf
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         void MatchIf<T>(Func<T, TResult> createResult)
         {
-            if (ReferenceEquals(result, null) && ReferenceEquals(oneOf.OrigType, typeof(T)))
+            if (result == null && oneOf.OrigType == typeof(T))
             {
                 result = createResult((T)oneOf.Value);
             }
@@ -2291,7 +2291,7 @@ namespace OneOf
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         void MatchIf<T>(Func<T, TResult> createResult)
         {
-            if (ReferenceEquals(result, null) && ReferenceEquals(oneOf.OrigType, typeof(T)))
+            if (result == null && oneOf.OrigType == typeof(T))
             {
                 result = createResult((T)oneOf.Value);
             }
@@ -2379,7 +2379,7 @@ namespace OneOf
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         void MatchIf<T>(Func<T, TResult> createResult)
         {
-            if (ReferenceEquals(result, null) && ReferenceEquals(oneOf.OrigType, typeof(T)))
+            if (result == null && oneOf.OrigType == typeof(T))
             {
                 result = createResult((T)oneOf.Value);
             }
@@ -2474,7 +2474,7 @@ namespace OneOf
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         void MatchIf<T>(Func<T, TResult> createResult)
         {
-            if (ReferenceEquals(result, null) && ReferenceEquals(oneOf.OrigType, typeof(T)))
+            if (result == null && oneOf.OrigType == typeof(T))
             {
                 result = createResult((T)oneOf.Value);
             }
@@ -2576,7 +2576,7 @@ namespace OneOf
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         void MatchIf<T>(Func<T, TResult> createResult)
         {
-            if (ReferenceEquals(result, null) && ReferenceEquals(oneOf.OrigType, typeof(T)))
+            if (result == null && oneOf.OrigType == typeof(T))
             {
                 result = createResult((T)oneOf.Value);
             }
@@ -2685,7 +2685,7 @@ namespace OneOf
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         void MatchIf<T>(Func<T, TResult> createResult)
         {
-            if (ReferenceEquals(result, null) && ReferenceEquals(oneOf.OrigType, typeof(T)))
+            if (result == null && oneOf.OrigType == typeof(T))
             {
                 result = createResult((T)oneOf.Value);
             }
