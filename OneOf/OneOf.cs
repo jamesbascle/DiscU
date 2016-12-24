@@ -56,7 +56,7 @@ namespace OneOf
         public OneOfMatcher<T1, T2, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, TResult>(this).MatchWhen(condition, calcResult);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
-        public override int GetHashCode() => (value?.GetHashCode() ?? origType?.GetHashCode() ?? 0);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
         public override string ToString() => (value?.ToString() ?? "");
     }
     public struct OneOf<T1, T2, T3> : IOneOf
@@ -117,7 +117,7 @@ namespace OneOf
         public OneOfMatcher<T1, T2, T3, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, TResult>(this).MatchWhen(condition, calcResult);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
-        public override int GetHashCode() => (value?.GetHashCode() ?? origType?.GetHashCode() ?? 0);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
         public override string ToString() => (value?.ToString() ?? "");
     }
     public struct OneOf<T1, T2, T3, T4> : IOneOf
@@ -186,7 +186,7 @@ namespace OneOf
         public OneOfMatcher<T1, T2, T3, T4, TResult> MatchWhen<TResult>(Predicate<T4> condition, Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(this).MatchWhen(condition, calcResult);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
-        public override int GetHashCode() => (value?.GetHashCode() ?? origType?.GetHashCode() ?? 0);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
         public override string ToString() => (value?.ToString() ?? "");
     }
     public struct OneOf<T1, T2, T3, T4, T5> : IOneOf
@@ -263,7 +263,7 @@ namespace OneOf
         public OneOfMatcher<T1, T2, T3, T4, T5, TResult> MatchWhen<TResult>(Predicate<T5> condition, Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).MatchWhen(condition, calcResult);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
-        public override int GetHashCode() => (value?.GetHashCode() ?? origType?.GetHashCode() ?? 0);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
         public override string ToString() => (value?.ToString() ?? "");
     }
     public struct OneOf<T1, T2, T3, T4, T5, T6> : IOneOf
@@ -348,7 +348,7 @@ namespace OneOf
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen<TResult>(Predicate<T6> condition, Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).MatchWhen(condition, calcResult);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
-        public override int GetHashCode() => (value?.GetHashCode() ?? origType?.GetHashCode() ?? 0);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
         public override string ToString() => (value?.ToString() ?? "");
     }
     public struct OneOf<T1, T2, T3, T4, T5, T6, T7> : IOneOf
@@ -441,7 +441,7 @@ namespace OneOf
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T7> condition, Func<T7, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).MatchWhen(condition, calcResult);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
-        public override int GetHashCode() => (value?.GetHashCode() ?? origType?.GetHashCode() ?? 0);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
         public override string ToString() => (value?.ToString() ?? "");
     }
     public struct OneOf<T1, T2, T3, T4, T5, T6, T7, T8> : IOneOf
@@ -542,7 +542,7 @@ namespace OneOf
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T8> condition, Func<T8, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).MatchWhen(condition, calcResult);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
-        public override int GetHashCode() => (value?.GetHashCode() ?? origType?.GetHashCode() ?? 0);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
         public override string ToString() => (value?.ToString() ?? "");
     }
     public struct OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9> : IOneOf
@@ -651,7 +651,7 @@ namespace OneOf
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T9> condition, Func<T9, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
-        public override int GetHashCode() => (value?.GetHashCode() ?? origType?.GetHashCode() ?? 0);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
         public override string ToString() => (value?.ToString() ?? "");
     }
     public class OneOfBase<T1, T2> : IOneOf
@@ -710,7 +710,7 @@ namespace OneOf
         public OneOfMatcher<T1, T2, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, TResult>(this).MatchWhen(condition, calcResult);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
-        public override int GetHashCode() => (value?.GetHashCode() ?? origType?.GetHashCode() ?? 0);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
         public override string ToString() => (value?.ToString() ?? "");
     }
     public class OneOfBase<T1, T2, T3> : IOneOf
@@ -777,7 +777,7 @@ namespace OneOf
         public OneOfMatcher<T1, T2, T3, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, TResult>(this).MatchWhen(condition, calcResult);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
-        public override int GetHashCode() => (value?.GetHashCode() ?? origType?.GetHashCode() ?? 0);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
         public override string ToString() => (value?.ToString() ?? "");
     }
     public class OneOfBase<T1, T2, T3, T4> : IOneOf
@@ -852,7 +852,7 @@ namespace OneOf
         public OneOfMatcher<T1, T2, T3, T4, TResult> MatchWhen<TResult>(Predicate<T4> condition, Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(this).MatchWhen(condition, calcResult);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
-        public override int GetHashCode() => (value?.GetHashCode() ?? origType?.GetHashCode() ?? 0);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
         public override string ToString() => (value?.ToString() ?? "");
     }
     public class OneOfBase<T1, T2, T3, T4, T5> : IOneOf
@@ -935,7 +935,7 @@ namespace OneOf
         public OneOfMatcher<T1, T2, T3, T4, T5, TResult> MatchWhen<TResult>(Predicate<T5> condition, Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).MatchWhen(condition, calcResult);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
-        public override int GetHashCode() => (value?.GetHashCode() ?? origType?.GetHashCode() ?? 0);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
         public override string ToString() => (value?.ToString() ?? "");
     }
     public class OneOfBase<T1, T2, T3, T4, T5, T6> : IOneOf
@@ -1026,7 +1026,7 @@ namespace OneOf
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen<TResult>(Predicate<T6> condition, Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).MatchWhen(condition, calcResult);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
-        public override int GetHashCode() => (value?.GetHashCode() ?? origType?.GetHashCode() ?? 0);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
         public override string ToString() => (value?.ToString() ?? "");
     }
     public class OneOfBase<T1, T2, T3, T4, T5, T6, T7> : IOneOf
@@ -1125,7 +1125,7 @@ namespace OneOf
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T7> condition, Func<T7, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).MatchWhen(condition, calcResult);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
-        public override int GetHashCode() => (value?.GetHashCode() ?? origType?.GetHashCode() ?? 0);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
         public override string ToString() => (value?.ToString() ?? "");
     }
     public class OneOfBase<T1, T2, T3, T4, T5, T6, T7, T8> : IOneOf
@@ -1232,7 +1232,7 @@ namespace OneOf
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T8> condition, Func<T8, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).MatchWhen(condition, calcResult);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
-        public override int GetHashCode() => (value?.GetHashCode() ?? origType?.GetHashCode() ?? 0);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
         public override string ToString() => (value?.ToString() ?? "");
     }
     public class OneOfBase<T1, T2, T3, T4, T5, T6, T7, T8, T9> : IOneOf
@@ -1347,7 +1347,7 @@ namespace OneOf
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T9> condition, Func<T9, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
-        public override int GetHashCode() => (value?.GetHashCode() ?? origType?.GetHashCode() ?? 0);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
         public override string ToString() => (value?.ToString() ?? "");
     }
 

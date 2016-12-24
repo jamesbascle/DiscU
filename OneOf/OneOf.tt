@@ -154,7 +154,7 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 		WriteLine("");
 		// Returns true if the object is either an IOneOf, or if the value equals the OneOf, rather than only if it is the same kind of OneOf.
 		WriteLine($"public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);");
-		WriteLine("public override int GetHashCode() => (value?.GetHashCode() ?? origType?.GetHashCode() ?? 0);");
+		WriteLine("public override int GetHashCode() => (value?.GetHashCode() ?? 0);");
 		WriteLine("public override string ToString() => (value?.ToString() ?? \"\");");
 	}
 }
