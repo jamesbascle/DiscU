@@ -121,6 +121,7 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 		WriteLine("");
 		WriteLine($"public static bool operator ==({typeName}<{genericArgs}> v1, IOneOf v2) => Equals(v1, v2);"); 
 		WriteLine($"public static bool operator !=({typeName}<{genericArgs}> v1, IOneOf v2) => !Equals(v1, v2);");
+
 		//also adding equality operators to compare to the various Generic types by value
 	    for (var i = 0; i < countOfgenericParams; i++)
 	    {
@@ -136,9 +137,9 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
 		{
 			var lesserArityOneOf = Enumerable.Range(0, countOfgenericParams).Where(n => n != parmIndex).ToList();
-			var lesserArityGenericArg = GenerateGenericArgs(lesserArityOneOf);
+			var lesserArityGenericArgs = GenerateGenericArgs(lesserArityOneOf);
 
-			WriteLine($"public OneOfSwitcher<{lesserArityGenericArg}> Switch(Action<T{parmIndex}> action) => new OneOfSwitcher<{genericArgs}>(this).Switch(action);");
+			WriteLine($"public OneOfSwitcher<{lesserArityGenericArgs}> Switch(Action<T{parmIndex}> action) => new OneOfSwitcher<{genericArgs}>(this).Switch(action);");
 		}
 
 
@@ -154,10 +155,10 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
 		{
 			var lesserArityOneOf = Enumerable.Range(0, countOfgenericParams).Where(n => n != parmIndex).ToList();
-			var lesserArityGenericArg = GenerateGenericArgs(lesserArityOneOf);
+			var lesserArityGenericArgs = GenerateGenericArgs(lesserArityOneOf);
 
 			WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
-			WriteLine($"public OneOfMatcher<{lesserArityGenericArg}, TResult> Match<TResult>(Func<T{parmIndex}, TResult> calcResult) => new OneOfMatcher<{genericArgs}, TResult>(this).Match(calcResult);");
+			WriteLine($"public OneOfMatcher<{lesserArityGenericArgs}, TResult> Match<TResult>(Func<T{parmIndex}, TResult> calcResult) => new OneOfMatcher<{genericArgs}, TResult>(this).Match(calcResult);");
 		}
 
 		WriteLine("");
@@ -206,18 +207,18 @@ void WriteSwitcher(int countOfgenericParams)
 		// =============== Switch
 		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex++)
 		{
-			var lesserArityOneOf = Enumerable.Range(0, countOfgenericParams).ToList();
-			if(lesserArityOneOf.Count > 1)
+			var lesserArityGenericArgNumbers = Enumerable.Range(0, countOfgenericParams).ToList();
+			if(lesserArityGenericArgNumbers.Count > 1)
 			{
-				lesserArityOneOf.Remove(parmIndex);
-				var lesserArityGenericArg = GenerateGenericArgs(lesserArityOneOf);
+				lesserArityGenericArgNumbers.Remove(parmIndex);
+				var lesserArityGenericArgs = GenerateGenericArgs(lesserArityGenericArgNumbers);
 
 				WriteLine("");
-				WriteLine($"public OneOfSwitcher<{lesserArityGenericArg}> Switch(Action<T{parmIndex}> action)");
+				WriteLine($"public OneOfSwitcher<{lesserArityGenericArgs}> Switch(Action<T{parmIndex}> action)");
 				using(new WriteBraces(this))
 				{
 					WriteLine($"SwitchIf<T{parmIndex}>(null, action);");
-					WriteLine($"return new OneOfSwitcher<{lesserArityGenericArg}>(oneOf, hasSwitched);");
+					WriteLine($"return new OneOfSwitcher<{lesserArityGenericArgs}>(oneOf, hasSwitched);");
 				}
 			}
 			else
@@ -311,19 +312,19 @@ void WriteMatcher(int countOfgenericParams)
 
 		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex++)
 		{
-			var lesserArityOneOf = Enumerable.Range(0, countOfgenericParams).ToList();
-			if(lesserArityOneOf.Count > 1)
+			var lesserArityGenericArgNumbers = Enumerable.Range(0, countOfgenericParams).ToList();
+			if(lesserArityGenericArgNumbers.Count > 1)
 			{
-				lesserArityOneOf.Remove(parmIndex);
-				var lesserArityGenericArg = GenerateGenericArgs(lesserArityOneOf,withResult: "TResult");
+				lesserArityGenericArgNumbers.Remove(parmIndex);
+				var lesserArityGenericArgs = GenerateGenericArgs(lesserArityGenericArgNumbers, withResult: "TResult");
 
 				WriteLine("");
 				WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
-				WriteLine($"public OneOfMatcher<{lesserArityGenericArg}> Match(Func<T{parmIndex}, TResult> createResult)");
+				WriteLine($"public OneOfMatcher<{lesserArityGenericArgs}> Match(Func<T{parmIndex}, TResult> createResult)");
 				using(new WriteBraces(this))
 				{
 					WriteLine($"MatchIf<T{parmIndex}>(null, createResult);");
-					WriteLine($"return new OneOfMatcher<{lesserArityGenericArg}>(oneOf, result);");
+					WriteLine($"return new OneOfMatcher<{lesserArityGenericArgs}>(oneOf, result);");
 				}
 			}
 			else
