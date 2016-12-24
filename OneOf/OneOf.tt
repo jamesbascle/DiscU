@@ -20,7 +20,7 @@ void GenerateClasses()
 	
 	WriteLine("");
 	WriteLine("namespace OneOf");
-	using(new WriteIndent(this))
+	using(new WriteBraces(this))
 	{
 		for (var i = 2; i < 10; i++)
 			WriteOneOf(true, i);
@@ -48,7 +48,7 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 	var typeName = isStruct ? "OneOf" : "OneOfBase";
 
 	WriteLine($"public {structOrClass} {typeName}<{genericArgs}> : IOneOf");
-	using(new WriteIndent(this))
+	using(new WriteBraces(this))
 	{
 		WriteLine("private readonly object value;");
         WriteLine("private readonly Type origType;");
@@ -60,7 +60,7 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 		WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
         WriteLine($"{typeName}(object value, Type origType)");
 
-		using(new WriteIndent(this))
+		using(new WriteBraces(this))
 		{
 			WriteLine("this.value = value;");
             WriteLine("this.origType = origType;");
@@ -71,7 +71,7 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 		{
 			WriteLine("");
 			WriteLine($"protected {typeName}()");
-			using(new WriteIndent(this))
+			using(new WriteBraces(this))
 			{
 				WriteLine("this.value = this;");
 				WriteLine("this.origType = GetType();");
@@ -82,7 +82,7 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 
 		WriteLine("");
 		WriteLine("object IOneOf.Value");
-		using(new WriteIndent(this))
+		using(new WriteBraces(this))
 		{
 			WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
 			WriteLine("get { return value; }");
@@ -90,7 +90,7 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 
 		WriteLine("");
 		WriteLine("Type IOneOf.OrigType");
-		using(new WriteIndent(this))
+		using(new WriteBraces(this))
 		{
 			WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
 			WriteLine("get { return origType; }");
@@ -183,7 +183,7 @@ void WriteSwitcher(int countOfgenericParams)
 
 	WriteLine("");
 	WriteLine($"public struct OneOfSwitcher<{genericArgs}>");
-	using(new WriteIndent(this))
+	using(new WriteBraces(this))
 	{
 		WriteLine("readonly IOneOf oneOf;");
 		WriteLine("bool hasSwitched;");
@@ -197,7 +197,7 @@ void WriteSwitcher(int countOfgenericParams)
 		WriteLine("");
 		WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
 		WriteLine("internal OneOfSwitcher(IOneOf oneOf, bool hasSwitched)");
-		using(new WriteIndent(this))
+		using(new WriteBraces(this))
 		{
 			WriteLine($"this.oneOf = oneOf;");
 			WriteLine($"this.hasSwitched = hasSwitched;");
@@ -214,7 +214,7 @@ void WriteSwitcher(int countOfgenericParams)
 
 				WriteLine("");
 				WriteLine($"public OneOfSwitcher<{lesserArityGenericArg}> Switch(Action<T{parmIndex}> action)");
-				using(new WriteIndent(this))
+				using(new WriteBraces(this))
 				{
 					WriteLine($"SwitchIf<T{parmIndex}>(null, action);");
 					WriteLine($"return new OneOfSwitcher<{lesserArityGenericArg}>(oneOf, hasSwitched);");
@@ -224,7 +224,7 @@ void WriteSwitcher(int countOfgenericParams)
 			{
 				WriteLine("");
 				WriteLine($"public void Switch(Action<T{parmIndex}> action)");
-				using(new WriteIndent(this))
+				using(new WriteBraces(this))
 				{
 					WriteLine($"SwitchIf<T{parmIndex}>(null, action);");
 				}
@@ -236,7 +236,7 @@ void WriteSwitcher(int countOfgenericParams)
 		{
 			WriteLine("");
 			WriteLine($"public OneOfSwitcher<{genericArgs}> SwitchWhen(Predicate<T{parmIndex}> condition, Action<T{parmIndex}> action)");
-			using(new WriteIndent(this))
+			using(new WriteBraces(this))
 			{
 				WriteLine($"SwitchIf<T{parmIndex}>(condition, action);");
 				WriteLine($"return this;");
@@ -248,7 +248,7 @@ void WriteSwitcher(int countOfgenericParams)
 		WriteLine("");
 		//WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
 		WriteLine($"void SwitchIf<T>(Predicate<T> condition, Action<T> action)");
-		using(new WriteIndent(this))
+		using(new WriteBraces(this))
 		{
 			WriteLine($"if (hasSwitched) return;                 // already switched");
 			WriteLine("");
@@ -265,7 +265,7 @@ void WriteSwitcher(int countOfgenericParams)
 
 		WriteLine("");
 		WriteLine($"public void Else(Action<object> action)");
-		using(new WriteIndent(this))
+		using(new WriteBraces(this))
 		{
 			WriteLine($"if (!hasSwitched) action(oneOf.Value);");
 		}
@@ -274,7 +274,7 @@ void WriteSwitcher(int countOfgenericParams)
 
 		WriteLine("");
 		WriteLine($"public void ElseThrow(Func<object, Exception> func)");
-		using(new WriteIndent(this))
+		using(new WriteBraces(this))
 		{
 			WriteLine($"if (!hasSwitched) throw func(oneOf.Value);");
 		}
@@ -287,7 +287,7 @@ void WriteMatcher(int countOfgenericParams)
 
 	WriteLine("");
 	WriteLine($"public struct OneOfMatcher<{genericArgs}>" );
-	using(new WriteIndent(this))
+	using(new WriteBraces(this))
 	{
 		WriteLine("readonly IOneOf oneOf;");
 		WriteLine("object result;");
@@ -301,7 +301,7 @@ void WriteMatcher(int countOfgenericParams)
 		WriteLine("");
 		WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
 		WriteLine("internal OneOfMatcher(IOneOf oneOf, object result)");
-		using(new WriteIndent(this))
+		using(new WriteBraces(this))
 		{
 			WriteLine($"this.oneOf = oneOf;");
 			WriteLine($"this.result = result;");
@@ -320,7 +320,7 @@ void WriteMatcher(int countOfgenericParams)
 				WriteLine("");
 				WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
 				WriteLine($"public OneOfMatcher<{lesserArityGenericArg}> Match(Func<T{parmIndex}, TResult> createResult)");
-				using(new WriteIndent(this))
+				using(new WriteBraces(this))
 				{
 					WriteLine($"MatchIf<T{parmIndex}>(null, createResult);");
 					WriteLine($"return new OneOfMatcher<{lesserArityGenericArg}>(oneOf, result);");
@@ -331,7 +331,7 @@ void WriteMatcher(int countOfgenericParams)
 				WriteLine("");
 				//WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
 				WriteLine($"public TResult Match(Func<T{parmIndex}, TResult> createResult)");
-				using(new WriteIndent(this))
+				using(new WriteBraces(this))
 				{
 					WriteLine($"MatchIf<T{parmIndex}>(null, createResult);");
 					WriteLine($"return (TResult)result;");
@@ -346,7 +346,7 @@ void WriteMatcher(int countOfgenericParams)
 			WriteLine("");
 			WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
 			WriteLine($"public OneOfMatcher<{genericArgs}> MatchWhen(Predicate<T{parmIndex}> condition, Func<T{parmIndex}, TResult> createResult)");
-			using(new WriteIndent(this))
+			using(new WriteBraces(this))
 			{
 				WriteLine($"MatchIf<T{parmIndex}>(condition, createResult);");
 				WriteLine($"return this;");
@@ -358,7 +358,7 @@ void WriteMatcher(int countOfgenericParams)
 		WriteLine("");
 		//WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
 		WriteLine($"void MatchIf<T>(Predicate<T> condition, Func<T, TResult> createResult)");
-		using(new WriteIndent(this))
+		using(new WriteBraces(this))
 		{
 			WriteLine($"if (result != null) return;              // already matched");
 			WriteLine("");
@@ -374,7 +374,7 @@ void WriteMatcher(int countOfgenericParams)
 		WriteLine("");
 		WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
 		WriteLine($"public TResult Else(TResult defaultValue)");
-		using(new WriteIndent(this))
+		using(new WriteBraces(this))
 		{
 			WriteLine($"if (result == null) result = defaultValue;");
 			WriteLine("return (TResult)result;");
@@ -385,7 +385,7 @@ void WriteMatcher(int countOfgenericParams)
 		WriteLine("");
 		WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
 		WriteLine($"public TResult Else(Func<object, TResult> createResult)");
-		using(new WriteIndent(this))
+		using(new WriteBraces(this))
 		{
 			WriteLine($"if (result == null) result = createResult(oneOf.Value);");
 			WriteLine("return (TResult)result;");
@@ -396,7 +396,7 @@ void WriteMatcher(int countOfgenericParams)
 		WriteLine("");
 		WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
 		WriteLine($"public TResult ElseThrow(Func<object, Exception> createException)");
-		using(new WriteIndent(this))
+		using(new WriteBraces(this))
 		{
 			WriteLine($"if (result == null) throw createException(oneOf.Value);");
 			WriteLine("return (TResult)result;");
@@ -404,11 +404,11 @@ void WriteMatcher(int countOfgenericParams)
 	}
 }
 
-class WriteIndent: IDisposable
+class WriteBraces: IDisposable
 {
 	TextTransformation textTransformation;
 
-	public WriteIndent(TextTransformation textTransformation)
+	public WriteBraces(TextTransformation textTransformation)
 	{
 		this.textTransformation = textTransformation;
 
