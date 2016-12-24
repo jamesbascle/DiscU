@@ -19,24 +19,33 @@ namespace OneOf.PerfTests
             Console.WriteLine("");
 #endif
 
-            OneOf<C0, C1, C2, C3, C4, C5, C6, C7, C8> test0 = new C0();
-            Test("T0", () => test0.Match((C0 v) => 0).Match((C1 v) => 1).Match((C2 v) => 2).Match((C3 v) => 3).Match((C4 v) => 4).Match((C5 v) => 5).Match((C6 v) => 6).Match((C7 v) => 7).Match((C8 v) => 8));
-
-            OneOf<C0, C1, C2, C3, C4, C5, C6, C7, C8> test8 = new C8();
-            Test("T8", () => test8.Match((C0 v) => 0).Match((C1 v) => 1).Match((C2 v) => 2).Match((C3 v) => 3).Match((C4 v) => 4).Match((C5 v) => 5).Match((C6 v) => 6).Match((C7 v) => 7).Match((C8 v) => 8));
-
-            var c0 = new C0();
-            Test("Ctor0", () => { OneOf<C0, C1, C2, C3, C4, C5, C6, C7, C8> oo = c0; return oo; });
-
-            var c8 = new C8();
-            Test("Ctor8", () => { OneOf<C0, C1, C2, C3, C4, C5, C6, C7, C8> oo = c8; return oo; });
+            TestCtor();
+            TestMatch();
 
             Console.WriteLine("");
             Console.WriteLine("Press any key to end.");
             Console.ReadKey();
         }
 
-        static void Test<T>(string nameOfTest, Func<T> thingToTest)
+        private static void TestCtor()
+        {
+            var c1 = new C1();
+            RunTest("Ctor1", () => { OneOf<C1, C2, C3, C4, C5, C6, C7, C8, C9> oo = c1; return oo; });
+
+            var c9 = new C9();
+            RunTest("Ctor9", () => { OneOf<C1, C2, C3, C4, C5, C6, C7, C8, C9> oo = c9; return oo; });
+        }
+
+        private static void TestMatch()
+        {
+            OneOf<C1, C2, C3, C4, C5, C6, C7, C8, C9> oo1 = new C1();
+            RunTest("T1", () => oo1.Match((C1 v) => 1).Match((C2 v) => 2).Match((C3 v) => 3).Match((C4 v) => 4).Match((C5 v) => 5).Match((C6 v) => 6).Match((C7 v) => 7).Match((C8 v) => 8).Match((C9 v) => 9));
+
+            OneOf<C1, C2, C3, C4, C5, C6, C7, C8, C9> oo2 = new C9();
+            RunTest("T8", () => oo2.Match((C1 v) => 1).Match((C2 v) => 2).Match((C3 v) => 3).Match((C4 v) => 4).Match((C5 v) => 5).Match((C6 v) => 6).Match((C7 v) => 7).Match((C8 v) => 8).Match((C9 v) => 9));
+        }
+
+        static void RunTest<T>(string nameOfTest, Func<T> thingToTest)
         {
             Console.Write("{0:15} ... ", nameOfTest);
             var sw = Stopwatch.StartNew();
@@ -55,7 +64,6 @@ namespace OneOf.PerfTests
             Console.WriteLine("{0:0.00}M per second", iterations / 1000000d);
         }
 
-        class C0 { }
         class C1 { }
         class C2 { }
         class C3 { }
@@ -64,5 +72,6 @@ namespace OneOf.PerfTests
         class C6 { }
         class C7 { }
         class C8 { }
+        class C9 { }
     }
 }

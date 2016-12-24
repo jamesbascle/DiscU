@@ -22,23 +22,23 @@ void GenerateClasses()
 	WriteLine("namespace OneOf");
 	using(new WriteBraces(this))
 	{
-		for (var i = 2; i < 10; i++)
+		for (var i = 2; i <= 9; i++)
 			WriteOneOf(true, i);
 
-		for (var i = 2; i < 10; i++)
+		for (var i = 2; i <= 9; i++)
 			WriteOneOf(false, i);
 
-		for (var i = 1; i < 10; i++)
+		for (var i = 1; i <= 9; i++)
 			WriteSwitcher(i);
 
-		for (var i = 1; i < 10; i++)
+		for (var i = 1; i <= 9; i++)
 			WriteMatcher(i);
 	}
 }
 
 void WriteOneOf(bool isStruct, int countOfgenericParams) 
 {
-	var genericArgs = GenerateGenericArgs(Enumerable.Range(0, countOfgenericParams));
+	var genericArgs = GenerateGenericArgs(Enumerable.Range(1, countOfgenericParams));
 	var structOrClass = isStruct ? "struct" : "class";
 	var typeName = isStruct ? "OneOf" : "OneOfBase";
 
@@ -94,11 +94,11 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 		// =============== ToOneOf
 
 		WriteLine("");
-		for (var numberOfGenericsInNew = countOfgenericParams - 1; numberOfGenericsInNew < 9; numberOfGenericsInNew ++)
+		for (var numberOfGenericsInNew = countOfgenericParams; numberOfGenericsInNew <= 9; numberOfGenericsInNew ++)
 	    {
-	            var nargs = Enumerable.Range(0, numberOfGenericsInNew + 1).Select(e => "N" + e).ToArray();
-	            var otherGenericArgs = string.Join(", ", nargs);
-	            WriteLine($"public {typeName}<{otherGenericArgs}> ToOneOf<{otherGenericArgs}>() => OneOfFactory<{typeName}<{otherGenericArgs}>>.Create(value);");
+	        var nargs = Enumerable.Range(1, numberOfGenericsInNew).Select(e => "N" + e).ToArray();
+	        var otherGenericArgs = string.Join(", ", nargs);
+	        WriteLine($"public {typeName}<{otherGenericArgs}> ToOneOf<{otherGenericArgs}>() => OneOfFactory<{typeName}<{otherGenericArgs}>>.Create(value);");
 	    }
 
 	    // =============== implicit conversion to T
@@ -106,7 +106,7 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 		// So to determine the best Tn to match the value with we need to use the OneOfFactory.
 
 		WriteLine("");
-		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
+		for(var parmIndex = 1; parmIndex <= countOfgenericParams; parmIndex ++)
 		{
 			WriteLine($"public static implicit operator {typeName}<{genericArgs}>(T{parmIndex} value) => OneOfFactory<{typeName}<{genericArgs}>>.Create(value);"); 
 		}
@@ -118,7 +118,7 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 		WriteLine($"public static bool operator !=({typeName}<{genericArgs}> v1, IOneOf v2) => !Equals(v1, v2);");
 
 		//also adding equality operators to compare to the various Generic types by value
-	    for (var i = 0; i < countOfgenericParams; i++)
+	    for (var i = 1; i <= countOfgenericParams; i++)
 	    {
 			WriteLine($"public static bool operator ==({typeName}<{genericArgs}> v1, T{i} v2) => Equals(v1, v2);"); 
 			WriteLine($"public static bool operator !=({typeName}<{genericArgs}> v1, T{i} v2) => !Equals(v1, v2);");
@@ -129,16 +129,16 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 		// =============== Switch / SwitchWhen
 
 		WriteLine("");
-		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
+		for(var parmIndex = 1; parmIndex <= countOfgenericParams; parmIndex ++)
 		{
-			var lesserArityOneOf = Enumerable.Range(0, countOfgenericParams).Where(n => n != parmIndex).ToList();
+			var lesserArityOneOf = Enumerable.Range(1, countOfgenericParams).Where(n => n != parmIndex).ToList();
 			var lesserArityGenericArgs = GenerateGenericArgs(lesserArityOneOf);
 
 			WriteLine($"public OneOfSwitcher<{lesserArityGenericArgs}> Switch(Action<T{parmIndex}> action) => new OneOfSwitcher<{genericArgs}>(this).Switch(action);");
 		}
 
 		WriteLine("");
-		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
+		for(var parmIndex = 1; parmIndex <= countOfgenericParams; parmIndex ++)
 		{
 			WriteLine($"public OneOfSwitcher<{genericArgs}> SwitchWhen(Predicate<T{parmIndex}> condition, Action<T{parmIndex}> action) => new OneOfSwitcher<{genericArgs}>(this).SwitchWhen(condition, action);");
 		}
@@ -146,9 +146,9 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 		// =============== Match / MatchWhen
 
 		WriteLine("");
-		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
+		for(var parmIndex = 1; parmIndex <= countOfgenericParams; parmIndex ++)
 		{
-			var lesserArityOneOf = Enumerable.Range(0, countOfgenericParams).Where(n => n != parmIndex).ToList();
+			var lesserArityOneOf = Enumerable.Range(1, countOfgenericParams).Where(n => n != parmIndex).ToList();
 			var lesserArityGenericArgs = GenerateGenericArgs(lesserArityOneOf);
 
 			WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
@@ -156,7 +156,7 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 		}
 
 		WriteLine("");
-		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
+		for(var parmIndex = 1; parmIndex <= countOfgenericParams; parmIndex ++)
 		{
 			WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
 			WriteLine($"public OneOfMatcher<{genericArgs}, TResult> MatchWhen<TResult>(Predicate<T{parmIndex}> condition, Func<T{parmIndex}, TResult> calcResult) => new OneOfMatcher<{genericArgs}, TResult>(this).MatchWhen(condition, calcResult);");
@@ -174,7 +174,7 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 
 void WriteSwitcher(int countOfgenericParams) 
 {
-	var genericArgs = GenerateGenericArgs(Enumerable.Range(0, countOfgenericParams));
+	var genericArgs = GenerateGenericArgs(Enumerable.Range(1, countOfgenericParams));
 
 	WriteLine("");
 	WriteLine($"public struct OneOfSwitcher<{genericArgs}>");
@@ -199,9 +199,9 @@ void WriteSwitcher(int countOfgenericParams)
 		}
 
 		// =============== Switch
-		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex++)
+		for(var parmIndex = 1; parmIndex <= countOfgenericParams; parmIndex++)
 		{
-			var lesserArityGenericArgNumbers = Enumerable.Range(0, countOfgenericParams).ToList();
+			var lesserArityGenericArgNumbers = Enumerable.Range(1, countOfgenericParams).ToList();
 			if(lesserArityGenericArgNumbers.Count > 1)
 			{
 				lesserArityGenericArgNumbers.Remove(parmIndex);
@@ -227,7 +227,7 @@ void WriteSwitcher(int countOfgenericParams)
 		}
 
 		// =============== SwitchWhen
-		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex++)
+		for(var parmIndex = 1; parmIndex <= countOfgenericParams; parmIndex++)
 		{
 			WriteLine("");
 			WriteLine($"public OneOfSwitcher<{genericArgs}> SwitchWhen(Predicate<T{parmIndex}> condition, Action<T{parmIndex}> action)");
@@ -278,7 +278,7 @@ void WriteSwitcher(int countOfgenericParams)
 
 void WriteMatcher(int countOfgenericParams) 
 {
-	var genericArgs = GenerateGenericArgs(Enumerable.Range(0, countOfgenericParams), withResult: "TResult");
+	var genericArgs = GenerateGenericArgs(Enumerable.Range(1, countOfgenericParams), withResult: "TResult");
 
 	WriteLine("");
 	WriteLine($"public struct OneOfMatcher<{genericArgs}>" );
@@ -304,9 +304,9 @@ void WriteMatcher(int countOfgenericParams)
 
 		// =============== Match
 
-		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex++)
+		for(var parmIndex = 1; parmIndex <= countOfgenericParams; parmIndex++)
 		{
-			var lesserArityGenericArgNumbers = Enumerable.Range(0, countOfgenericParams).ToList();
+			var lesserArityGenericArgNumbers = Enumerable.Range(1, countOfgenericParams).ToList();
 			if(lesserArityGenericArgNumbers.Count > 1)
 			{
 				lesserArityGenericArgNumbers.Remove(parmIndex);
@@ -336,7 +336,7 @@ void WriteMatcher(int countOfgenericParams)
 
 		// =============== MatchWhen
 
-		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex++)
+		for(var parmIndex = 1; parmIndex <= countOfgenericParams; parmIndex++)
 		{
 			WriteLine("");
 			WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
@@ -351,7 +351,6 @@ void WriteMatcher(int countOfgenericParams)
 		// =============== MatchIf
 		
 		WriteLine("");
-		//WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
 		WriteLine($"void MatchIf<T>(Predicate<T> condition, Func<T, TResult> createResult)");
 		using(new WriteBraces(this))
 		{
