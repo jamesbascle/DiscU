@@ -111,6 +111,9 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 			WriteLine($"public static implicit operator {typeName}<{genericArgs}>(T{parmIndex} value) => OneOfFactory<{typeName}<{genericArgs}>>.Create(value);"); 
 		}
 
+		// Error CS0552	- user-defined conversions to or from an interface are not allowed
+		// WriteLine($"public static implicit operator {typeName}<{genericArgs}>(IOneOf oo) => OneOfFactory<{typeName}<{genericArgs}>>.Create(oo.Value);"); 
+
 		// =============== equality operators
 
 		WriteLine("");
