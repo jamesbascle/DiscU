@@ -36,11 +36,6 @@ void GenerateClasses()
 	}
 }
 
-string GenerateGenericArgs(IEnumerable<int> ints, string typePrefix = "T", string withResult = null)
-{
-    return string.Join(", ", ints.Select(e => typePrefix + e)) + (withResult != null ? ", " + withResult : "");
-}
-
 void WriteOneOf(bool isStruct, int countOfgenericParams) 
 {
 	var genericArgs = GenerateGenericArgs(Enumerable.Range(0, countOfgenericParams));
@@ -141,7 +136,6 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 
 			WriteLine($"public OneOfSwitcher<{lesserArityGenericArgs}> Switch(Action<T{parmIndex}> action) => new OneOfSwitcher<{genericArgs}>(this).Switch(action);");
 		}
-
 
 		WriteLine("");
 		for(var parmIndex = 0; parmIndex < countOfgenericParams; parmIndex ++)
@@ -403,6 +397,13 @@ void WriteMatcher(int countOfgenericParams)
 			WriteLine("return (TResult)result;");
 		}
 	}
+
+}
+
+string GenerateGenericArgs(IEnumerable<int> argNumbers, string typePrefix = "T", string withResult = null)
+{
+	return string.Join(", ", argNumbers.Select(n => typePrefix + n))
+		+ (withResult != null ? ", " + withResult : "");
 }
 
 class WriteBraces: IDisposable
