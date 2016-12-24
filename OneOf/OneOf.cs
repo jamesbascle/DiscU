@@ -3,7 +3,6 @@
 // ===========================================================================
 
 using System;
-using System.Runtime.CompilerServices;
 
 namespace OneOf
 {
@@ -12,24 +11,14 @@ namespace OneOf
         private readonly object value;
         private readonly Type origType;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         OneOf(object value, Type origType)
         {
             this.value = value;
             this.origType = origType;
         }
 
-        object IOneOf.Value
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return value; }
-        }
-
-        Type IOneOf.OrigType
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return origType; }
-        }
+        object IOneOf.Value => value;
+        Type IOneOf.OrigType => origType;
 
         public OneOf<N1, N2> ToOneOf<N1, N2>() => OneOfFactory<OneOf<N1, N2>>.Create(value);
         public OneOf<N1, N2, N3> ToOneOf<N1, N2, N3>() => OneOfFactory<OneOf<N1, N2, N3>>.Create(value);
@@ -60,14 +49,10 @@ namespace OneOf
         public OneOfSwitcher<T1, T2> SwitchWhen(Predicate<T1> condition, Action<T1> action) => new OneOfSwitcher<T1, T2>(this).SwitchWhen(condition, action);
         public OneOfSwitcher<T1, T2> SwitchWhen(Predicate<T2> condition, Action<T2> action) => new OneOfSwitcher<T1, T2>(this).SwitchWhen(condition, action);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T2, TResult> Match<TResult>(Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, TResult> Match<TResult>(Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, TResult>(this).Match(calcResult);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, TResult>(this).MatchWhen(condition, calcResult);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
@@ -79,24 +64,14 @@ namespace OneOf
         private readonly object value;
         private readonly Type origType;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         OneOf(object value, Type origType)
         {
             this.value = value;
             this.origType = origType;
         }
 
-        object IOneOf.Value
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return value; }
-        }
-
-        Type IOneOf.OrigType
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return origType; }
-        }
+        object IOneOf.Value => value;
+        Type IOneOf.OrigType => origType;
 
         public OneOf<N1, N2, N3> ToOneOf<N1, N2, N3>() => OneOfFactory<OneOf<N1, N2, N3>>.Create(value);
         public OneOf<N1, N2, N3, N4> ToOneOf<N1, N2, N3, N4>() => OneOfFactory<OneOf<N1, N2, N3, N4>>.Create(value);
@@ -133,18 +108,12 @@ namespace OneOf
         public OneOfSwitcher<T1, T2, T3> SwitchWhen(Predicate<T2> condition, Action<T2> action) => new OneOfSwitcher<T1, T2, T3>(this).SwitchWhen(condition, action);
         public OneOfSwitcher<T1, T2, T3> SwitchWhen(Predicate<T3> condition, Action<T3> action) => new OneOfSwitcher<T1, T2, T3>(this).SwitchWhen(condition, action);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T2, T3, TResult> Match<TResult>(Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T3, TResult> Match<TResult>(Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, TResult> Match<TResult>(Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, TResult>(this).Match(calcResult);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, TResult>(this).MatchWhen(condition, calcResult);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
@@ -156,24 +125,14 @@ namespace OneOf
         private readonly object value;
         private readonly Type origType;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         OneOf(object value, Type origType)
         {
             this.value = value;
             this.origType = origType;
         }
 
-        object IOneOf.Value
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return value; }
-        }
-
-        Type IOneOf.OrigType
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return origType; }
-        }
+        object IOneOf.Value => value;
+        Type IOneOf.OrigType => origType;
 
         public OneOf<N1, N2, N3, N4> ToOneOf<N1, N2, N3, N4>() => OneOfFactory<OneOf<N1, N2, N3, N4>>.Create(value);
         public OneOf<N1, N2, N3, N4, N5> ToOneOf<N1, N2, N3, N4, N5>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5>>.Create(value);
@@ -216,22 +175,14 @@ namespace OneOf
         public OneOfSwitcher<T1, T2, T3, T4> SwitchWhen(Predicate<T3> condition, Action<T3> action) => new OneOfSwitcher<T1, T2, T3, T4>(this).SwitchWhen(condition, action);
         public OneOfSwitcher<T1, T2, T3, T4> SwitchWhen(Predicate<T4> condition, Action<T4> action) => new OneOfSwitcher<T1, T2, T3, T4>(this).SwitchWhen(condition, action);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T2, T3, T4, TResult> Match<TResult>(Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T3, T4, TResult> Match<TResult>(Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T4, TResult> Match<TResult>(Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, TResult> Match<TResult>(Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(this).Match(calcResult);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, TResult> MatchWhen<TResult>(Predicate<T4> condition, Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(this).MatchWhen(condition, calcResult);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
@@ -243,24 +194,14 @@ namespace OneOf
         private readonly object value;
         private readonly Type origType;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         OneOf(object value, Type origType)
         {
             this.value = value;
             this.origType = origType;
         }
 
-        object IOneOf.Value
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return value; }
-        }
-
-        Type IOneOf.OrigType
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return origType; }
-        }
+        object IOneOf.Value => value;
+        Type IOneOf.OrigType => origType;
 
         public OneOf<N1, N2, N3, N4, N5> ToOneOf<N1, N2, N3, N4, N5>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5>>.Create(value);
         public OneOf<N1, N2, N3, N4, N5, N6> ToOneOf<N1, N2, N3, N4, N5, N6>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5, N6>>.Create(value);
@@ -309,26 +250,16 @@ namespace OneOf
         public OneOfSwitcher<T1, T2, T3, T4, T5> SwitchWhen(Predicate<T4> condition, Action<T4> action) => new OneOfSwitcher<T1, T2, T3, T4, T5>(this).SwitchWhen(condition, action);
         public OneOfSwitcher<T1, T2, T3, T4, T5> SwitchWhen(Predicate<T5> condition, Action<T5> action) => new OneOfSwitcher<T1, T2, T3, T4, T5>(this).SwitchWhen(condition, action);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T2, T3, T4, T5, TResult> Match<TResult>(Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T3, T4, T5, TResult> Match<TResult>(Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T4, T5, TResult> Match<TResult>(Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T5, TResult> Match<TResult>(Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, TResult> Match<TResult>(Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).Match(calcResult);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, TResult> MatchWhen<TResult>(Predicate<T4> condition, Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, TResult> MatchWhen<TResult>(Predicate<T5> condition, Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).MatchWhen(condition, calcResult);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
@@ -340,24 +271,14 @@ namespace OneOf
         private readonly object value;
         private readonly Type origType;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         OneOf(object value, Type origType)
         {
             this.value = value;
             this.origType = origType;
         }
 
-        object IOneOf.Value
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return value; }
-        }
-
-        Type IOneOf.OrigType
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return origType; }
-        }
+        object IOneOf.Value => value;
+        Type IOneOf.OrigType => origType;
 
         public OneOf<N1, N2, N3, N4, N5, N6> ToOneOf<N1, N2, N3, N4, N5, N6>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5, N6>>.Create(value);
         public OneOf<N1, N2, N3, N4, N5, N6, N7> ToOneOf<N1, N2, N3, N4, N5, N6, N7>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5, N6, N7>>.Create(value);
@@ -412,30 +333,18 @@ namespace OneOf
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6> SwitchWhen(Predicate<T5> condition, Action<T5> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(this).SwitchWhen(condition, action);
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6> SwitchWhen(Predicate<T6> condition, Action<T6> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(this).SwitchWhen(condition, action);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T2, T3, T4, T5, T6, TResult> Match<TResult>(Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T3, T4, T5, T6, TResult> Match<TResult>(Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T4, T5, T6, TResult> Match<TResult>(Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T5, T6, TResult> Match<TResult>(Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T6, TResult> Match<TResult>(Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, TResult> Match<TResult>(Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).Match(calcResult);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen<TResult>(Predicate<T4> condition, Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen<TResult>(Predicate<T5> condition, Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen<TResult>(Predicate<T6> condition, Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).MatchWhen(condition, calcResult);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
@@ -447,24 +356,14 @@ namespace OneOf
         private readonly object value;
         private readonly Type origType;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         OneOf(object value, Type origType)
         {
             this.value = value;
             this.origType = origType;
         }
 
-        object IOneOf.Value
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return value; }
-        }
-
-        Type IOneOf.OrigType
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return origType; }
-        }
+        object IOneOf.Value => value;
+        Type IOneOf.OrigType => origType;
 
         public OneOf<N1, N2, N3, N4, N5, N6, N7> ToOneOf<N1, N2, N3, N4, N5, N6, N7>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5, N6, N7>>.Create(value);
         public OneOf<N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5, N6, N7, N8>>.Create(value);
@@ -525,34 +424,20 @@ namespace OneOf
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> SwitchWhen(Predicate<T6> condition, Action<T6> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(this).SwitchWhen(condition, action);
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> SwitchWhen(Predicate<T7> condition, Action<T7> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(this).SwitchWhen(condition, action);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T2, T3, T4, T5, T6, T7, TResult> Match<TResult>(Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T3, T4, T5, T6, T7, TResult> Match<TResult>(Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T4, T5, T6, T7, TResult> Match<TResult>(Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T5, T6, T7, TResult> Match<TResult>(Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T6, T7, TResult> Match<TResult>(Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T7, TResult> Match<TResult>(Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> Match<TResult>(Func<T7, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).Match(calcResult);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T4> condition, Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T5> condition, Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T6> condition, Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T7> condition, Func<T7, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).MatchWhen(condition, calcResult);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
@@ -564,24 +449,14 @@ namespace OneOf
         private readonly object value;
         private readonly Type origType;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         OneOf(object value, Type origType)
         {
             this.value = value;
             this.origType = origType;
         }
 
-        object IOneOf.Value
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return value; }
-        }
-
-        Type IOneOf.OrigType
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return origType; }
-        }
+        object IOneOf.Value => value;
+        Type IOneOf.OrigType => origType;
 
         public OneOf<N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5, N6, N7, N8>>.Create(value);
         public OneOf<N1, N2, N3, N4, N5, N6, N7, N8, N9> ToOneOf<N1, N2, N3, N4, N5, N6, N7, N8, N9>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5, N6, N7, N8, N9>>.Create(value);
@@ -648,38 +523,22 @@ namespace OneOf
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> SwitchWhen(Predicate<T7> condition, Action<T7> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(this).SwitchWhen(condition, action);
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> SwitchWhen(Predicate<T8> condition, Action<T8> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(this).SwitchWhen(condition, action);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T2, T3, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T3, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T5, T6, T7, T8, TResult> Match<TResult>(Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T6, T7, T8, TResult> Match<TResult>(Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T7, T8, TResult> Match<TResult>(Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T8, TResult> Match<TResult>(Func<T7, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> Match<TResult>(Func<T8, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).Match(calcResult);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T4> condition, Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T5> condition, Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T6> condition, Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T7> condition, Func<T7, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T8> condition, Func<T8, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).MatchWhen(condition, calcResult);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
@@ -691,24 +550,14 @@ namespace OneOf
         private readonly object value;
         private readonly Type origType;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         OneOf(object value, Type origType)
         {
             this.value = value;
             this.origType = origType;
         }
 
-        object IOneOf.Value
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return value; }
-        }
-
-        Type IOneOf.OrigType
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return origType; }
-        }
+        object IOneOf.Value => value;
+        Type IOneOf.OrigType => origType;
 
         public OneOf<N1, N2, N3, N4, N5, N6, N7, N8, N9> ToOneOf<N1, N2, N3, N4, N5, N6, N7, N8, N9>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5, N6, N7, N8, N9>>.Create(value);
 
@@ -781,42 +630,24 @@ namespace OneOf
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9> SwitchWhen(Predicate<T8> condition, Action<T8> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this).SwitchWhen(condition, action);
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9> SwitchWhen(Predicate<T9> condition, Action<T9> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this).SwitchWhen(condition, action);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T2, T3, T4, T5, T6, T7, T8, T9, TResult> Match<TResult>(Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T3, T4, T5, T6, T7, T8, T9, TResult> Match<TResult>(Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T4, T5, T6, T7, T8, T9, TResult> Match<TResult>(Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T5, T6, T7, T8, T9, TResult> Match<TResult>(Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T6, T7, T8, T9, TResult> Match<TResult>(Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T7, T8, T9, TResult> Match<TResult>(Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T8, T9, TResult> Match<TResult>(Func<T7, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T9, TResult> Match<TResult>(Func<T8, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T9, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).Match(calcResult);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T4> condition, Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T5> condition, Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T6> condition, Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T7> condition, Func<T7, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T8> condition, Func<T8, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T9> condition, Func<T9, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
@@ -828,7 +659,6 @@ namespace OneOf
         private readonly object value;
         private readonly Type origType;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         OneOfBase(object value, Type origType)
         {
             this.value = value;
@@ -841,17 +671,8 @@ namespace OneOf
             this.origType = GetType();
         }
 
-        object IOneOf.Value
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return value; }
-        }
-
-        Type IOneOf.OrigType
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return origType; }
-        }
+        object IOneOf.Value => value;
+        Type IOneOf.OrigType => origType;
 
         public OneOfBase<N1, N2> ToOneOf<N1, N2>() => OneOfFactory<OneOfBase<N1, N2>>.Create(value);
         public OneOfBase<N1, N2, N3> ToOneOf<N1, N2, N3>() => OneOfFactory<OneOfBase<N1, N2, N3>>.Create(value);
@@ -882,14 +703,10 @@ namespace OneOf
         public OneOfSwitcher<T1, T2> SwitchWhen(Predicate<T1> condition, Action<T1> action) => new OneOfSwitcher<T1, T2>(this).SwitchWhen(condition, action);
         public OneOfSwitcher<T1, T2> SwitchWhen(Predicate<T2> condition, Action<T2> action) => new OneOfSwitcher<T1, T2>(this).SwitchWhen(condition, action);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T2, TResult> Match<TResult>(Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, TResult> Match<TResult>(Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, TResult>(this).Match(calcResult);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, TResult>(this).MatchWhen(condition, calcResult);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
@@ -901,7 +718,6 @@ namespace OneOf
         private readonly object value;
         private readonly Type origType;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         OneOfBase(object value, Type origType)
         {
             this.value = value;
@@ -914,17 +730,8 @@ namespace OneOf
             this.origType = GetType();
         }
 
-        object IOneOf.Value
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return value; }
-        }
-
-        Type IOneOf.OrigType
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return origType; }
-        }
+        object IOneOf.Value => value;
+        Type IOneOf.OrigType => origType;
 
         public OneOfBase<N1, N2, N3> ToOneOf<N1, N2, N3>() => OneOfFactory<OneOfBase<N1, N2, N3>>.Create(value);
         public OneOfBase<N1, N2, N3, N4> ToOneOf<N1, N2, N3, N4>() => OneOfFactory<OneOfBase<N1, N2, N3, N4>>.Create(value);
@@ -961,18 +768,12 @@ namespace OneOf
         public OneOfSwitcher<T1, T2, T3> SwitchWhen(Predicate<T2> condition, Action<T2> action) => new OneOfSwitcher<T1, T2, T3>(this).SwitchWhen(condition, action);
         public OneOfSwitcher<T1, T2, T3> SwitchWhen(Predicate<T3> condition, Action<T3> action) => new OneOfSwitcher<T1, T2, T3>(this).SwitchWhen(condition, action);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T2, T3, TResult> Match<TResult>(Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T3, TResult> Match<TResult>(Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, TResult> Match<TResult>(Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, TResult>(this).Match(calcResult);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, TResult>(this).MatchWhen(condition, calcResult);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
@@ -984,7 +785,6 @@ namespace OneOf
         private readonly object value;
         private readonly Type origType;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         OneOfBase(object value, Type origType)
         {
             this.value = value;
@@ -997,17 +797,8 @@ namespace OneOf
             this.origType = GetType();
         }
 
-        object IOneOf.Value
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return value; }
-        }
-
-        Type IOneOf.OrigType
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return origType; }
-        }
+        object IOneOf.Value => value;
+        Type IOneOf.OrigType => origType;
 
         public OneOfBase<N1, N2, N3, N4> ToOneOf<N1, N2, N3, N4>() => OneOfFactory<OneOfBase<N1, N2, N3, N4>>.Create(value);
         public OneOfBase<N1, N2, N3, N4, N5> ToOneOf<N1, N2, N3, N4, N5>() => OneOfFactory<OneOfBase<N1, N2, N3, N4, N5>>.Create(value);
@@ -1050,22 +841,14 @@ namespace OneOf
         public OneOfSwitcher<T1, T2, T3, T4> SwitchWhen(Predicate<T3> condition, Action<T3> action) => new OneOfSwitcher<T1, T2, T3, T4>(this).SwitchWhen(condition, action);
         public OneOfSwitcher<T1, T2, T3, T4> SwitchWhen(Predicate<T4> condition, Action<T4> action) => new OneOfSwitcher<T1, T2, T3, T4>(this).SwitchWhen(condition, action);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T2, T3, T4, TResult> Match<TResult>(Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T3, T4, TResult> Match<TResult>(Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T4, TResult> Match<TResult>(Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, TResult> Match<TResult>(Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(this).Match(calcResult);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, TResult> MatchWhen<TResult>(Predicate<T4> condition, Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(this).MatchWhen(condition, calcResult);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
@@ -1077,7 +860,6 @@ namespace OneOf
         private readonly object value;
         private readonly Type origType;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         OneOfBase(object value, Type origType)
         {
             this.value = value;
@@ -1090,17 +872,8 @@ namespace OneOf
             this.origType = GetType();
         }
 
-        object IOneOf.Value
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return value; }
-        }
-
-        Type IOneOf.OrigType
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return origType; }
-        }
+        object IOneOf.Value => value;
+        Type IOneOf.OrigType => origType;
 
         public OneOfBase<N1, N2, N3, N4, N5> ToOneOf<N1, N2, N3, N4, N5>() => OneOfFactory<OneOfBase<N1, N2, N3, N4, N5>>.Create(value);
         public OneOfBase<N1, N2, N3, N4, N5, N6> ToOneOf<N1, N2, N3, N4, N5, N6>() => OneOfFactory<OneOfBase<N1, N2, N3, N4, N5, N6>>.Create(value);
@@ -1149,26 +922,16 @@ namespace OneOf
         public OneOfSwitcher<T1, T2, T3, T4, T5> SwitchWhen(Predicate<T4> condition, Action<T4> action) => new OneOfSwitcher<T1, T2, T3, T4, T5>(this).SwitchWhen(condition, action);
         public OneOfSwitcher<T1, T2, T3, T4, T5> SwitchWhen(Predicate<T5> condition, Action<T5> action) => new OneOfSwitcher<T1, T2, T3, T4, T5>(this).SwitchWhen(condition, action);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T2, T3, T4, T5, TResult> Match<TResult>(Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T3, T4, T5, TResult> Match<TResult>(Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T4, T5, TResult> Match<TResult>(Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T5, TResult> Match<TResult>(Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, TResult> Match<TResult>(Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).Match(calcResult);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, TResult> MatchWhen<TResult>(Predicate<T4> condition, Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, TResult> MatchWhen<TResult>(Predicate<T5> condition, Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).MatchWhen(condition, calcResult);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
@@ -1180,7 +943,6 @@ namespace OneOf
         private readonly object value;
         private readonly Type origType;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         OneOfBase(object value, Type origType)
         {
             this.value = value;
@@ -1193,17 +955,8 @@ namespace OneOf
             this.origType = GetType();
         }
 
-        object IOneOf.Value
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return value; }
-        }
-
-        Type IOneOf.OrigType
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return origType; }
-        }
+        object IOneOf.Value => value;
+        Type IOneOf.OrigType => origType;
 
         public OneOfBase<N1, N2, N3, N4, N5, N6> ToOneOf<N1, N2, N3, N4, N5, N6>() => OneOfFactory<OneOfBase<N1, N2, N3, N4, N5, N6>>.Create(value);
         public OneOfBase<N1, N2, N3, N4, N5, N6, N7> ToOneOf<N1, N2, N3, N4, N5, N6, N7>() => OneOfFactory<OneOfBase<N1, N2, N3, N4, N5, N6, N7>>.Create(value);
@@ -1258,30 +1011,18 @@ namespace OneOf
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6> SwitchWhen(Predicate<T5> condition, Action<T5> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(this).SwitchWhen(condition, action);
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6> SwitchWhen(Predicate<T6> condition, Action<T6> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(this).SwitchWhen(condition, action);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T2, T3, T4, T5, T6, TResult> Match<TResult>(Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T3, T4, T5, T6, TResult> Match<TResult>(Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T4, T5, T6, TResult> Match<TResult>(Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T5, T6, TResult> Match<TResult>(Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T6, TResult> Match<TResult>(Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, TResult> Match<TResult>(Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).Match(calcResult);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen<TResult>(Predicate<T4> condition, Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen<TResult>(Predicate<T5> condition, Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen<TResult>(Predicate<T6> condition, Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).MatchWhen(condition, calcResult);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
@@ -1293,7 +1034,6 @@ namespace OneOf
         private readonly object value;
         private readonly Type origType;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         OneOfBase(object value, Type origType)
         {
             this.value = value;
@@ -1306,17 +1046,8 @@ namespace OneOf
             this.origType = GetType();
         }
 
-        object IOneOf.Value
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return value; }
-        }
-
-        Type IOneOf.OrigType
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return origType; }
-        }
+        object IOneOf.Value => value;
+        Type IOneOf.OrigType => origType;
 
         public OneOfBase<N1, N2, N3, N4, N5, N6, N7> ToOneOf<N1, N2, N3, N4, N5, N6, N7>() => OneOfFactory<OneOfBase<N1, N2, N3, N4, N5, N6, N7>>.Create(value);
         public OneOfBase<N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfFactory<OneOfBase<N1, N2, N3, N4, N5, N6, N7, N8>>.Create(value);
@@ -1377,34 +1108,20 @@ namespace OneOf
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> SwitchWhen(Predicate<T6> condition, Action<T6> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(this).SwitchWhen(condition, action);
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> SwitchWhen(Predicate<T7> condition, Action<T7> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(this).SwitchWhen(condition, action);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T2, T3, T4, T5, T6, T7, TResult> Match<TResult>(Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T3, T4, T5, T6, T7, TResult> Match<TResult>(Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T4, T5, T6, T7, TResult> Match<TResult>(Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T5, T6, T7, TResult> Match<TResult>(Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T6, T7, TResult> Match<TResult>(Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T7, TResult> Match<TResult>(Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> Match<TResult>(Func<T7, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).Match(calcResult);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T4> condition, Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T5> condition, Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T6> condition, Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T7> condition, Func<T7, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).MatchWhen(condition, calcResult);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
@@ -1416,7 +1133,6 @@ namespace OneOf
         private readonly object value;
         private readonly Type origType;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         OneOfBase(object value, Type origType)
         {
             this.value = value;
@@ -1429,17 +1145,8 @@ namespace OneOf
             this.origType = GetType();
         }
 
-        object IOneOf.Value
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return value; }
-        }
-
-        Type IOneOf.OrigType
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return origType; }
-        }
+        object IOneOf.Value => value;
+        Type IOneOf.OrigType => origType;
 
         public OneOfBase<N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfFactory<OneOfBase<N1, N2, N3, N4, N5, N6, N7, N8>>.Create(value);
         public OneOfBase<N1, N2, N3, N4, N5, N6, N7, N8, N9> ToOneOf<N1, N2, N3, N4, N5, N6, N7, N8, N9>() => OneOfFactory<OneOfBase<N1, N2, N3, N4, N5, N6, N7, N8, N9>>.Create(value);
@@ -1506,38 +1213,22 @@ namespace OneOf
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> SwitchWhen(Predicate<T7> condition, Action<T7> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(this).SwitchWhen(condition, action);
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> SwitchWhen(Predicate<T8> condition, Action<T8> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(this).SwitchWhen(condition, action);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T2, T3, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T3, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T5, T6, T7, T8, TResult> Match<TResult>(Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T6, T7, T8, TResult> Match<TResult>(Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T7, T8, TResult> Match<TResult>(Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T8, TResult> Match<TResult>(Func<T7, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> Match<TResult>(Func<T8, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).Match(calcResult);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T4> condition, Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T5> condition, Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T6> condition, Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T7> condition, Func<T7, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T8> condition, Func<T8, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).MatchWhen(condition, calcResult);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
@@ -1549,7 +1240,6 @@ namespace OneOf
         private readonly object value;
         private readonly Type origType;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         OneOfBase(object value, Type origType)
         {
             this.value = value;
@@ -1562,17 +1252,8 @@ namespace OneOf
             this.origType = GetType();
         }
 
-        object IOneOf.Value
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return value; }
-        }
-
-        Type IOneOf.OrigType
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return origType; }
-        }
+        object IOneOf.Value => value;
+        Type IOneOf.OrigType => origType;
 
         public OneOfBase<N1, N2, N3, N4, N5, N6, N7, N8, N9> ToOneOf<N1, N2, N3, N4, N5, N6, N7, N8, N9>() => OneOfFactory<OneOfBase<N1, N2, N3, N4, N5, N6, N7, N8, N9>>.Create(value);
 
@@ -1645,42 +1326,24 @@ namespace OneOf
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9> SwitchWhen(Predicate<T8> condition, Action<T8> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this).SwitchWhen(condition, action);
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9> SwitchWhen(Predicate<T9> condition, Action<T9> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this).SwitchWhen(condition, action);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T2, T3, T4, T5, T6, T7, T8, T9, TResult> Match<TResult>(Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T3, T4, T5, T6, T7, T8, T9, TResult> Match<TResult>(Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T4, T5, T6, T7, T8, T9, TResult> Match<TResult>(Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T5, T6, T7, T8, T9, TResult> Match<TResult>(Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T6, T7, T8, T9, TResult> Match<TResult>(Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T7, T8, T9, TResult> Match<TResult>(Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T8, T9, TResult> Match<TResult>(Func<T7, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T9, TResult> Match<TResult>(Func<T8, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).Match(calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T9, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).Match(calcResult);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T4> condition, Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T5> condition, Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T6> condition, Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T7> condition, Func<T7, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T8> condition, Func<T8, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T9> condition, Func<T9, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
 
         public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);
@@ -1693,10 +1356,8 @@ namespace OneOf
         readonly IOneOf oneOf;
         bool hasSwitched;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfSwitcher(IOneOf oneOf) : this(oneOf, false) { }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfSwitcher(IOneOf oneOf, bool hasSwitched)
         {
             this.oneOf = oneOf;
@@ -1705,24 +1366,13 @@ namespace OneOf
 
         public void Switch(Action<T1> action)
         {
-            SwitchIf<T1>(null, action);
+            SwitchImpl<T1>(null, action);
         }
 
         public OneOfSwitcher<T1> SwitchWhen(Predicate<T1> condition, Action<T1> action)
         {
-            SwitchIf<T1>(condition, action);
+            SwitchImpl<T1>(condition, action);
             return this;
-        }
-
-        void SwitchIf<T>(Predicate<T> condition, Action<T> action)
-        {
-            if (hasSwitched) return;                 // already switched
-
-            if (oneOf.OrigType != typeof(T)) return; // not correct type
-            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
-
-            action((T)oneOf.Value);                  // yes!
-            hasSwitched = true;
         }
 
         public void Else(Action<object> action)
@@ -1733,6 +1383,17 @@ namespace OneOf
         public void ElseThrow(Func<object, Exception> func)
         {
             if (!hasSwitched) throw func(oneOf.Value);
+        }
+
+        void SwitchImpl<T>(Predicate<T> condition, Action<T> action)
+        {
+            if (hasSwitched) return;                 // already switched
+
+            if (oneOf.OrigType != typeof(T)) return; // not correct type
+            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
+
+            action((T)oneOf.Value);                  // yes!
+            hasSwitched = true;
         }
     }
 
@@ -1741,10 +1402,8 @@ namespace OneOf
         readonly IOneOf oneOf;
         bool hasSwitched;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfSwitcher(IOneOf oneOf) : this(oneOf, false) { }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfSwitcher(IOneOf oneOf, bool hasSwitched)
         {
             this.oneOf = oneOf;
@@ -1753,37 +1412,26 @@ namespace OneOf
 
         public OneOfSwitcher<T2> Switch(Action<T1> action)
         {
-            SwitchIf<T1>(null, action);
+            SwitchImpl<T1>(null, action);
             return new OneOfSwitcher<T2>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1> Switch(Action<T2> action)
         {
-            SwitchIf<T2>(null, action);
+            SwitchImpl<T2>(null, action);
             return new OneOfSwitcher<T1>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2> SwitchWhen(Predicate<T1> condition, Action<T1> action)
         {
-            SwitchIf<T1>(condition, action);
+            SwitchImpl<T1>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2> SwitchWhen(Predicate<T2> condition, Action<T2> action)
         {
-            SwitchIf<T2>(condition, action);
+            SwitchImpl<T2>(condition, action);
             return this;
-        }
-
-        void SwitchIf<T>(Predicate<T> condition, Action<T> action)
-        {
-            if (hasSwitched) return;                 // already switched
-
-            if (oneOf.OrigType != typeof(T)) return; // not correct type
-            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
-
-            action((T)oneOf.Value);                  // yes!
-            hasSwitched = true;
         }
 
         public void Else(Action<object> action)
@@ -1794,6 +1442,17 @@ namespace OneOf
         public void ElseThrow(Func<object, Exception> func)
         {
             if (!hasSwitched) throw func(oneOf.Value);
+        }
+
+        void SwitchImpl<T>(Predicate<T> condition, Action<T> action)
+        {
+            if (hasSwitched) return;                 // already switched
+
+            if (oneOf.OrigType != typeof(T)) return; // not correct type
+            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
+
+            action((T)oneOf.Value);                  // yes!
+            hasSwitched = true;
         }
     }
 
@@ -1802,10 +1461,8 @@ namespace OneOf
         readonly IOneOf oneOf;
         bool hasSwitched;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfSwitcher(IOneOf oneOf) : this(oneOf, false) { }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfSwitcher(IOneOf oneOf, bool hasSwitched)
         {
             this.oneOf = oneOf;
@@ -1814,49 +1471,38 @@ namespace OneOf
 
         public OneOfSwitcher<T2, T3> Switch(Action<T1> action)
         {
-            SwitchIf<T1>(null, action);
+            SwitchImpl<T1>(null, action);
             return new OneOfSwitcher<T2, T3>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T3> Switch(Action<T2> action)
         {
-            SwitchIf<T2>(null, action);
+            SwitchImpl<T2>(null, action);
             return new OneOfSwitcher<T1, T3>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2> Switch(Action<T3> action)
         {
-            SwitchIf<T3>(null, action);
+            SwitchImpl<T3>(null, action);
             return new OneOfSwitcher<T1, T2>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3> SwitchWhen(Predicate<T1> condition, Action<T1> action)
         {
-            SwitchIf<T1>(condition, action);
+            SwitchImpl<T1>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3> SwitchWhen(Predicate<T2> condition, Action<T2> action)
         {
-            SwitchIf<T2>(condition, action);
+            SwitchImpl<T2>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3> SwitchWhen(Predicate<T3> condition, Action<T3> action)
         {
-            SwitchIf<T3>(condition, action);
+            SwitchImpl<T3>(condition, action);
             return this;
-        }
-
-        void SwitchIf<T>(Predicate<T> condition, Action<T> action)
-        {
-            if (hasSwitched) return;                 // already switched
-
-            if (oneOf.OrigType != typeof(T)) return; // not correct type
-            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
-
-            action((T)oneOf.Value);                  // yes!
-            hasSwitched = true;
         }
 
         public void Else(Action<object> action)
@@ -1867,6 +1513,17 @@ namespace OneOf
         public void ElseThrow(Func<object, Exception> func)
         {
             if (!hasSwitched) throw func(oneOf.Value);
+        }
+
+        void SwitchImpl<T>(Predicate<T> condition, Action<T> action)
+        {
+            if (hasSwitched) return;                 // already switched
+
+            if (oneOf.OrigType != typeof(T)) return; // not correct type
+            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
+
+            action((T)oneOf.Value);                  // yes!
+            hasSwitched = true;
         }
     }
 
@@ -1875,10 +1532,8 @@ namespace OneOf
         readonly IOneOf oneOf;
         bool hasSwitched;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfSwitcher(IOneOf oneOf) : this(oneOf, false) { }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfSwitcher(IOneOf oneOf, bool hasSwitched)
         {
             this.oneOf = oneOf;
@@ -1887,61 +1542,50 @@ namespace OneOf
 
         public OneOfSwitcher<T2, T3, T4> Switch(Action<T1> action)
         {
-            SwitchIf<T1>(null, action);
+            SwitchImpl<T1>(null, action);
             return new OneOfSwitcher<T2, T3, T4>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T3, T4> Switch(Action<T2> action)
         {
-            SwitchIf<T2>(null, action);
+            SwitchImpl<T2>(null, action);
             return new OneOfSwitcher<T1, T3, T4>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T4> Switch(Action<T3> action)
         {
-            SwitchIf<T3>(null, action);
+            SwitchImpl<T3>(null, action);
             return new OneOfSwitcher<T1, T2, T4>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3> Switch(Action<T4> action)
         {
-            SwitchIf<T4>(null, action);
+            SwitchImpl<T4>(null, action);
             return new OneOfSwitcher<T1, T2, T3>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4> SwitchWhen(Predicate<T1> condition, Action<T1> action)
         {
-            SwitchIf<T1>(condition, action);
+            SwitchImpl<T1>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4> SwitchWhen(Predicate<T2> condition, Action<T2> action)
         {
-            SwitchIf<T2>(condition, action);
+            SwitchImpl<T2>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4> SwitchWhen(Predicate<T3> condition, Action<T3> action)
         {
-            SwitchIf<T3>(condition, action);
+            SwitchImpl<T3>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4> SwitchWhen(Predicate<T4> condition, Action<T4> action)
         {
-            SwitchIf<T4>(condition, action);
+            SwitchImpl<T4>(condition, action);
             return this;
-        }
-
-        void SwitchIf<T>(Predicate<T> condition, Action<T> action)
-        {
-            if (hasSwitched) return;                 // already switched
-
-            if (oneOf.OrigType != typeof(T)) return; // not correct type
-            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
-
-            action((T)oneOf.Value);                  // yes!
-            hasSwitched = true;
         }
 
         public void Else(Action<object> action)
@@ -1952,6 +1596,17 @@ namespace OneOf
         public void ElseThrow(Func<object, Exception> func)
         {
             if (!hasSwitched) throw func(oneOf.Value);
+        }
+
+        void SwitchImpl<T>(Predicate<T> condition, Action<T> action)
+        {
+            if (hasSwitched) return;                 // already switched
+
+            if (oneOf.OrigType != typeof(T)) return; // not correct type
+            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
+
+            action((T)oneOf.Value);                  // yes!
+            hasSwitched = true;
         }
     }
 
@@ -1960,10 +1615,8 @@ namespace OneOf
         readonly IOneOf oneOf;
         bool hasSwitched;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfSwitcher(IOneOf oneOf) : this(oneOf, false) { }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfSwitcher(IOneOf oneOf, bool hasSwitched)
         {
             this.oneOf = oneOf;
@@ -1972,73 +1625,62 @@ namespace OneOf
 
         public OneOfSwitcher<T2, T3, T4, T5> Switch(Action<T1> action)
         {
-            SwitchIf<T1>(null, action);
+            SwitchImpl<T1>(null, action);
             return new OneOfSwitcher<T2, T3, T4, T5>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T3, T4, T5> Switch(Action<T2> action)
         {
-            SwitchIf<T2>(null, action);
+            SwitchImpl<T2>(null, action);
             return new OneOfSwitcher<T1, T3, T4, T5>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T4, T5> Switch(Action<T3> action)
         {
-            SwitchIf<T3>(null, action);
+            SwitchImpl<T3>(null, action);
             return new OneOfSwitcher<T1, T2, T4, T5>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T5> Switch(Action<T4> action)
         {
-            SwitchIf<T4>(null, action);
+            SwitchImpl<T4>(null, action);
             return new OneOfSwitcher<T1, T2, T3, T5>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4> Switch(Action<T5> action)
         {
-            SwitchIf<T5>(null, action);
+            SwitchImpl<T5>(null, action);
             return new OneOfSwitcher<T1, T2, T3, T4>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5> SwitchWhen(Predicate<T1> condition, Action<T1> action)
         {
-            SwitchIf<T1>(condition, action);
+            SwitchImpl<T1>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5> SwitchWhen(Predicate<T2> condition, Action<T2> action)
         {
-            SwitchIf<T2>(condition, action);
+            SwitchImpl<T2>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5> SwitchWhen(Predicate<T3> condition, Action<T3> action)
         {
-            SwitchIf<T3>(condition, action);
+            SwitchImpl<T3>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5> SwitchWhen(Predicate<T4> condition, Action<T4> action)
         {
-            SwitchIf<T4>(condition, action);
+            SwitchImpl<T4>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5> SwitchWhen(Predicate<T5> condition, Action<T5> action)
         {
-            SwitchIf<T5>(condition, action);
+            SwitchImpl<T5>(condition, action);
             return this;
-        }
-
-        void SwitchIf<T>(Predicate<T> condition, Action<T> action)
-        {
-            if (hasSwitched) return;                 // already switched
-
-            if (oneOf.OrigType != typeof(T)) return; // not correct type
-            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
-
-            action((T)oneOf.Value);                  // yes!
-            hasSwitched = true;
         }
 
         public void Else(Action<object> action)
@@ -2049,6 +1691,17 @@ namespace OneOf
         public void ElseThrow(Func<object, Exception> func)
         {
             if (!hasSwitched) throw func(oneOf.Value);
+        }
+
+        void SwitchImpl<T>(Predicate<T> condition, Action<T> action)
+        {
+            if (hasSwitched) return;                 // already switched
+
+            if (oneOf.OrigType != typeof(T)) return; // not correct type
+            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
+
+            action((T)oneOf.Value);                  // yes!
+            hasSwitched = true;
         }
     }
 
@@ -2057,10 +1710,8 @@ namespace OneOf
         readonly IOneOf oneOf;
         bool hasSwitched;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfSwitcher(IOneOf oneOf) : this(oneOf, false) { }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfSwitcher(IOneOf oneOf, bool hasSwitched)
         {
             this.oneOf = oneOf;
@@ -2069,85 +1720,74 @@ namespace OneOf
 
         public OneOfSwitcher<T2, T3, T4, T5, T6> Switch(Action<T1> action)
         {
-            SwitchIf<T1>(null, action);
+            SwitchImpl<T1>(null, action);
             return new OneOfSwitcher<T2, T3, T4, T5, T6>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T3, T4, T5, T6> Switch(Action<T2> action)
         {
-            SwitchIf<T2>(null, action);
+            SwitchImpl<T2>(null, action);
             return new OneOfSwitcher<T1, T3, T4, T5, T6>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T4, T5, T6> Switch(Action<T3> action)
         {
-            SwitchIf<T3>(null, action);
+            SwitchImpl<T3>(null, action);
             return new OneOfSwitcher<T1, T2, T4, T5, T6>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T5, T6> Switch(Action<T4> action)
         {
-            SwitchIf<T4>(null, action);
+            SwitchImpl<T4>(null, action);
             return new OneOfSwitcher<T1, T2, T3, T5, T6>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T6> Switch(Action<T5> action)
         {
-            SwitchIf<T5>(null, action);
+            SwitchImpl<T5>(null, action);
             return new OneOfSwitcher<T1, T2, T3, T4, T6>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5> Switch(Action<T6> action)
         {
-            SwitchIf<T6>(null, action);
+            SwitchImpl<T6>(null, action);
             return new OneOfSwitcher<T1, T2, T3, T4, T5>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6> SwitchWhen(Predicate<T1> condition, Action<T1> action)
         {
-            SwitchIf<T1>(condition, action);
+            SwitchImpl<T1>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6> SwitchWhen(Predicate<T2> condition, Action<T2> action)
         {
-            SwitchIf<T2>(condition, action);
+            SwitchImpl<T2>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6> SwitchWhen(Predicate<T3> condition, Action<T3> action)
         {
-            SwitchIf<T3>(condition, action);
+            SwitchImpl<T3>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6> SwitchWhen(Predicate<T4> condition, Action<T4> action)
         {
-            SwitchIf<T4>(condition, action);
+            SwitchImpl<T4>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6> SwitchWhen(Predicate<T5> condition, Action<T5> action)
         {
-            SwitchIf<T5>(condition, action);
+            SwitchImpl<T5>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6> SwitchWhen(Predicate<T6> condition, Action<T6> action)
         {
-            SwitchIf<T6>(condition, action);
+            SwitchImpl<T6>(condition, action);
             return this;
-        }
-
-        void SwitchIf<T>(Predicate<T> condition, Action<T> action)
-        {
-            if (hasSwitched) return;                 // already switched
-
-            if (oneOf.OrigType != typeof(T)) return; // not correct type
-            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
-
-            action((T)oneOf.Value);                  // yes!
-            hasSwitched = true;
         }
 
         public void Else(Action<object> action)
@@ -2158,6 +1798,17 @@ namespace OneOf
         public void ElseThrow(Func<object, Exception> func)
         {
             if (!hasSwitched) throw func(oneOf.Value);
+        }
+
+        void SwitchImpl<T>(Predicate<T> condition, Action<T> action)
+        {
+            if (hasSwitched) return;                 // already switched
+
+            if (oneOf.OrigType != typeof(T)) return; // not correct type
+            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
+
+            action((T)oneOf.Value);                  // yes!
+            hasSwitched = true;
         }
     }
 
@@ -2166,10 +1817,8 @@ namespace OneOf
         readonly IOneOf oneOf;
         bool hasSwitched;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfSwitcher(IOneOf oneOf) : this(oneOf, false) { }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfSwitcher(IOneOf oneOf, bool hasSwitched)
         {
             this.oneOf = oneOf;
@@ -2178,97 +1827,86 @@ namespace OneOf
 
         public OneOfSwitcher<T2, T3, T4, T5, T6, T7> Switch(Action<T1> action)
         {
-            SwitchIf<T1>(null, action);
+            SwitchImpl<T1>(null, action);
             return new OneOfSwitcher<T2, T3, T4, T5, T6, T7>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T3, T4, T5, T6, T7> Switch(Action<T2> action)
         {
-            SwitchIf<T2>(null, action);
+            SwitchImpl<T2>(null, action);
             return new OneOfSwitcher<T1, T3, T4, T5, T6, T7>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T4, T5, T6, T7> Switch(Action<T3> action)
         {
-            SwitchIf<T3>(null, action);
+            SwitchImpl<T3>(null, action);
             return new OneOfSwitcher<T1, T2, T4, T5, T6, T7>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T5, T6, T7> Switch(Action<T4> action)
         {
-            SwitchIf<T4>(null, action);
+            SwitchImpl<T4>(null, action);
             return new OneOfSwitcher<T1, T2, T3, T5, T6, T7>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T6, T7> Switch(Action<T5> action)
         {
-            SwitchIf<T5>(null, action);
+            SwitchImpl<T5>(null, action);
             return new OneOfSwitcher<T1, T2, T3, T4, T6, T7>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T7> Switch(Action<T6> action)
         {
-            SwitchIf<T6>(null, action);
+            SwitchImpl<T6>(null, action);
             return new OneOfSwitcher<T1, T2, T3, T4, T5, T7>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6> Switch(Action<T7> action)
         {
-            SwitchIf<T7>(null, action);
+            SwitchImpl<T7>(null, action);
             return new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> SwitchWhen(Predicate<T1> condition, Action<T1> action)
         {
-            SwitchIf<T1>(condition, action);
+            SwitchImpl<T1>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> SwitchWhen(Predicate<T2> condition, Action<T2> action)
         {
-            SwitchIf<T2>(condition, action);
+            SwitchImpl<T2>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> SwitchWhen(Predicate<T3> condition, Action<T3> action)
         {
-            SwitchIf<T3>(condition, action);
+            SwitchImpl<T3>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> SwitchWhen(Predicate<T4> condition, Action<T4> action)
         {
-            SwitchIf<T4>(condition, action);
+            SwitchImpl<T4>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> SwitchWhen(Predicate<T5> condition, Action<T5> action)
         {
-            SwitchIf<T5>(condition, action);
+            SwitchImpl<T5>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> SwitchWhen(Predicate<T6> condition, Action<T6> action)
         {
-            SwitchIf<T6>(condition, action);
+            SwitchImpl<T6>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> SwitchWhen(Predicate<T7> condition, Action<T7> action)
         {
-            SwitchIf<T7>(condition, action);
+            SwitchImpl<T7>(condition, action);
             return this;
-        }
-
-        void SwitchIf<T>(Predicate<T> condition, Action<T> action)
-        {
-            if (hasSwitched) return;                 // already switched
-
-            if (oneOf.OrigType != typeof(T)) return; // not correct type
-            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
-
-            action((T)oneOf.Value);                  // yes!
-            hasSwitched = true;
         }
 
         public void Else(Action<object> action)
@@ -2279,6 +1917,17 @@ namespace OneOf
         public void ElseThrow(Func<object, Exception> func)
         {
             if (!hasSwitched) throw func(oneOf.Value);
+        }
+
+        void SwitchImpl<T>(Predicate<T> condition, Action<T> action)
+        {
+            if (hasSwitched) return;                 // already switched
+
+            if (oneOf.OrigType != typeof(T)) return; // not correct type
+            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
+
+            action((T)oneOf.Value);                  // yes!
+            hasSwitched = true;
         }
     }
 
@@ -2287,10 +1936,8 @@ namespace OneOf
         readonly IOneOf oneOf;
         bool hasSwitched;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfSwitcher(IOneOf oneOf) : this(oneOf, false) { }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfSwitcher(IOneOf oneOf, bool hasSwitched)
         {
             this.oneOf = oneOf;
@@ -2299,109 +1946,98 @@ namespace OneOf
 
         public OneOfSwitcher<T2, T3, T4, T5, T6, T7, T8> Switch(Action<T1> action)
         {
-            SwitchIf<T1>(null, action);
+            SwitchImpl<T1>(null, action);
             return new OneOfSwitcher<T2, T3, T4, T5, T6, T7, T8>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T3, T4, T5, T6, T7, T8> Switch(Action<T2> action)
         {
-            SwitchIf<T2>(null, action);
+            SwitchImpl<T2>(null, action);
             return new OneOfSwitcher<T1, T3, T4, T5, T6, T7, T8>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T4, T5, T6, T7, T8> Switch(Action<T3> action)
         {
-            SwitchIf<T3>(null, action);
+            SwitchImpl<T3>(null, action);
             return new OneOfSwitcher<T1, T2, T4, T5, T6, T7, T8>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T5, T6, T7, T8> Switch(Action<T4> action)
         {
-            SwitchIf<T4>(null, action);
+            SwitchImpl<T4>(null, action);
             return new OneOfSwitcher<T1, T2, T3, T5, T6, T7, T8>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T6, T7, T8> Switch(Action<T5> action)
         {
-            SwitchIf<T5>(null, action);
+            SwitchImpl<T5>(null, action);
             return new OneOfSwitcher<T1, T2, T3, T4, T6, T7, T8>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T7, T8> Switch(Action<T6> action)
         {
-            SwitchIf<T6>(null, action);
+            SwitchImpl<T6>(null, action);
             return new OneOfSwitcher<T1, T2, T3, T4, T5, T7, T8>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T8> Switch(Action<T7> action)
         {
-            SwitchIf<T7>(null, action);
+            SwitchImpl<T7>(null, action);
             return new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T8>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> Switch(Action<T8> action)
         {
-            SwitchIf<T8>(null, action);
+            SwitchImpl<T8>(null, action);
             return new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> SwitchWhen(Predicate<T1> condition, Action<T1> action)
         {
-            SwitchIf<T1>(condition, action);
+            SwitchImpl<T1>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> SwitchWhen(Predicate<T2> condition, Action<T2> action)
         {
-            SwitchIf<T2>(condition, action);
+            SwitchImpl<T2>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> SwitchWhen(Predicate<T3> condition, Action<T3> action)
         {
-            SwitchIf<T3>(condition, action);
+            SwitchImpl<T3>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> SwitchWhen(Predicate<T4> condition, Action<T4> action)
         {
-            SwitchIf<T4>(condition, action);
+            SwitchImpl<T4>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> SwitchWhen(Predicate<T5> condition, Action<T5> action)
         {
-            SwitchIf<T5>(condition, action);
+            SwitchImpl<T5>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> SwitchWhen(Predicate<T6> condition, Action<T6> action)
         {
-            SwitchIf<T6>(condition, action);
+            SwitchImpl<T6>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> SwitchWhen(Predicate<T7> condition, Action<T7> action)
         {
-            SwitchIf<T7>(condition, action);
+            SwitchImpl<T7>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> SwitchWhen(Predicate<T8> condition, Action<T8> action)
         {
-            SwitchIf<T8>(condition, action);
+            SwitchImpl<T8>(condition, action);
             return this;
-        }
-
-        void SwitchIf<T>(Predicate<T> condition, Action<T> action)
-        {
-            if (hasSwitched) return;                 // already switched
-
-            if (oneOf.OrigType != typeof(T)) return; // not correct type
-            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
-
-            action((T)oneOf.Value);                  // yes!
-            hasSwitched = true;
         }
 
         public void Else(Action<object> action)
@@ -2412,6 +2048,17 @@ namespace OneOf
         public void ElseThrow(Func<object, Exception> func)
         {
             if (!hasSwitched) throw func(oneOf.Value);
+        }
+
+        void SwitchImpl<T>(Predicate<T> condition, Action<T> action)
+        {
+            if (hasSwitched) return;                 // already switched
+
+            if (oneOf.OrigType != typeof(T)) return; // not correct type
+            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
+
+            action((T)oneOf.Value);                  // yes!
+            hasSwitched = true;
         }
     }
 
@@ -2420,10 +2067,8 @@ namespace OneOf
         readonly IOneOf oneOf;
         bool hasSwitched;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfSwitcher(IOneOf oneOf) : this(oneOf, false) { }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfSwitcher(IOneOf oneOf, bool hasSwitched)
         {
             this.oneOf = oneOf;
@@ -2432,121 +2077,110 @@ namespace OneOf
 
         public OneOfSwitcher<T2, T3, T4, T5, T6, T7, T8, T9> Switch(Action<T1> action)
         {
-            SwitchIf<T1>(null, action);
+            SwitchImpl<T1>(null, action);
             return new OneOfSwitcher<T2, T3, T4, T5, T6, T7, T8, T9>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T3, T4, T5, T6, T7, T8, T9> Switch(Action<T2> action)
         {
-            SwitchIf<T2>(null, action);
+            SwitchImpl<T2>(null, action);
             return new OneOfSwitcher<T1, T3, T4, T5, T6, T7, T8, T9>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T4, T5, T6, T7, T8, T9> Switch(Action<T3> action)
         {
-            SwitchIf<T3>(null, action);
+            SwitchImpl<T3>(null, action);
             return new OneOfSwitcher<T1, T2, T4, T5, T6, T7, T8, T9>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T5, T6, T7, T8, T9> Switch(Action<T4> action)
         {
-            SwitchIf<T4>(null, action);
+            SwitchImpl<T4>(null, action);
             return new OneOfSwitcher<T1, T2, T3, T5, T6, T7, T8, T9>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T6, T7, T8, T9> Switch(Action<T5> action)
         {
-            SwitchIf<T5>(null, action);
+            SwitchImpl<T5>(null, action);
             return new OneOfSwitcher<T1, T2, T3, T4, T6, T7, T8, T9>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T7, T8, T9> Switch(Action<T6> action)
         {
-            SwitchIf<T6>(null, action);
+            SwitchImpl<T6>(null, action);
             return new OneOfSwitcher<T1, T2, T3, T4, T5, T7, T8, T9>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T8, T9> Switch(Action<T7> action)
         {
-            SwitchIf<T7>(null, action);
+            SwitchImpl<T7>(null, action);
             return new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T8, T9>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T9> Switch(Action<T8> action)
         {
-            SwitchIf<T8>(null, action);
+            SwitchImpl<T8>(null, action);
             return new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T9>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> Switch(Action<T9> action)
         {
-            SwitchIf<T9>(null, action);
+            SwitchImpl<T9>(null, action);
             return new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(oneOf, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9> SwitchWhen(Predicate<T1> condition, Action<T1> action)
         {
-            SwitchIf<T1>(condition, action);
+            SwitchImpl<T1>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9> SwitchWhen(Predicate<T2> condition, Action<T2> action)
         {
-            SwitchIf<T2>(condition, action);
+            SwitchImpl<T2>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9> SwitchWhen(Predicate<T3> condition, Action<T3> action)
         {
-            SwitchIf<T3>(condition, action);
+            SwitchImpl<T3>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9> SwitchWhen(Predicate<T4> condition, Action<T4> action)
         {
-            SwitchIf<T4>(condition, action);
+            SwitchImpl<T4>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9> SwitchWhen(Predicate<T5> condition, Action<T5> action)
         {
-            SwitchIf<T5>(condition, action);
+            SwitchImpl<T5>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9> SwitchWhen(Predicate<T6> condition, Action<T6> action)
         {
-            SwitchIf<T6>(condition, action);
+            SwitchImpl<T6>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9> SwitchWhen(Predicate<T7> condition, Action<T7> action)
         {
-            SwitchIf<T7>(condition, action);
+            SwitchImpl<T7>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9> SwitchWhen(Predicate<T8> condition, Action<T8> action)
         {
-            SwitchIf<T8>(condition, action);
+            SwitchImpl<T8>(condition, action);
             return this;
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9> SwitchWhen(Predicate<T9> condition, Action<T9> action)
         {
-            SwitchIf<T9>(condition, action);
+            SwitchImpl<T9>(condition, action);
             return this;
-        }
-
-        void SwitchIf<T>(Predicate<T> condition, Action<T> action)
-        {
-            if (hasSwitched) return;                 // already switched
-
-            if (oneOf.OrigType != typeof(T)) return; // not correct type
-            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
-
-            action((T)oneOf.Value);                  // yes!
-            hasSwitched = true;
         }
 
         public void Else(Action<object> action)
@@ -2558,6 +2192,17 @@ namespace OneOf
         {
             if (!hasSwitched) throw func(oneOf.Value);
         }
+
+        void SwitchImpl<T>(Predicate<T> condition, Action<T> action)
+        {
+            if (hasSwitched) return;                 // already switched
+
+            if (oneOf.OrigType != typeof(T)) return; // not correct type
+            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
+
+            action((T)oneOf.Value);                  // yes!
+            hasSwitched = true;
+        }
     }
 
     public struct OneOfMatcher<T1, TResult>
@@ -2565,10 +2210,8 @@ namespace OneOf
         readonly IOneOf oneOf;
         object result;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfMatcher(IOneOf oneOf) : this(oneOf, null) { }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfMatcher(IOneOf oneOf, object result)
         {
             this.oneOf = oneOf;
@@ -2577,18 +2220,35 @@ namespace OneOf
 
         public TResult Match(Func<T1, TResult> createResult)
         {
-            MatchIf<T1>(null, createResult);
+            MatchImpl<T1>(null, createResult);
             return (TResult)result;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, TResult> MatchWhen(Predicate<T1> condition, Func<T1, TResult> createResult)
         {
-            MatchIf<T1>(condition, createResult);
+            MatchImpl<T1>(condition, createResult);
             return this;
         }
 
-        void MatchIf<T>(Predicate<T> condition, Func<T, TResult> createResult)
+        public TResult Else(TResult defaultValue)
+        {
+            if (result == null) result = defaultValue;
+            return (TResult)result;
+        }
+
+        public TResult Else(Func<object, TResult> createResult)
+        {
+            if (result == null) result = createResult(oneOf.Value);
+            return (TResult)result;
+        }
+
+        public TResult ElseThrow(Func<object, Exception> createException)
+        {
+            if (result == null) throw createException(oneOf.Value);
+            return (TResult)result;
+        }
+
+        void MatchImpl<T>(Predicate<T> condition, Func<T, TResult> createResult)
         {
             if (result != null) return;              // already matched
 
@@ -2596,27 +2256,6 @@ namespace OneOf
             if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
 
             result = createResult((T)oneOf.Value);   // yes!
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TResult Else(TResult defaultValue)
-        {
-            if (result == null) result = defaultValue;
-            return (TResult)result;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TResult Else(Func<object, TResult> createResult)
-        {
-            if (result == null) result = createResult(oneOf.Value);
-            return (TResult)result;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TResult ElseThrow(Func<object, Exception> createException)
-        {
-            if (result == null) throw createException(oneOf.Value);
-            return (TResult)result;
         }
     }
 
@@ -2625,45 +2264,57 @@ namespace OneOf
         readonly IOneOf oneOf;
         object result;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfMatcher(IOneOf oneOf) : this(oneOf, null) { }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfMatcher(IOneOf oneOf, object result)
         {
             this.oneOf = oneOf;
             this.result = result;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T2, TResult> Match(Func<T1, TResult> createResult)
         {
-            MatchIf<T1>(null, createResult);
+            MatchImpl<T1>(null, createResult);
             return new OneOfMatcher<T2, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, TResult> Match(Func<T2, TResult> createResult)
         {
-            MatchIf<T2>(null, createResult);
+            MatchImpl<T2>(null, createResult);
             return new OneOfMatcher<T1, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, TResult> MatchWhen(Predicate<T1> condition, Func<T1, TResult> createResult)
         {
-            MatchIf<T1>(condition, createResult);
+            MatchImpl<T1>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, TResult> MatchWhen(Predicate<T2> condition, Func<T2, TResult> createResult)
         {
-            MatchIf<T2>(condition, createResult);
+            MatchImpl<T2>(condition, createResult);
             return this;
         }
 
-        void MatchIf<T>(Predicate<T> condition, Func<T, TResult> createResult)
+        public TResult Else(TResult defaultValue)
+        {
+            if (result == null) result = defaultValue;
+            return (TResult)result;
+        }
+
+        public TResult Else(Func<object, TResult> createResult)
+        {
+            if (result == null) result = createResult(oneOf.Value);
+            return (TResult)result;
+        }
+
+        public TResult ElseThrow(Func<object, Exception> createException)
+        {
+            if (result == null) throw createException(oneOf.Value);
+            return (TResult)result;
+        }
+
+        void MatchImpl<T>(Predicate<T> condition, Func<T, TResult> createResult)
         {
             if (result != null) return;              // already matched
 
@@ -2671,27 +2322,6 @@ namespace OneOf
             if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
 
             result = createResult((T)oneOf.Value);   // yes!
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TResult Else(TResult defaultValue)
-        {
-            if (result == null) result = defaultValue;
-            return (TResult)result;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TResult Else(Func<object, TResult> createResult)
-        {
-            if (result == null) result = createResult(oneOf.Value);
-            return (TResult)result;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TResult ElseThrow(Func<object, Exception> createException)
-        {
-            if (result == null) throw createException(oneOf.Value);
-            return (TResult)result;
         }
     }
 
@@ -2700,59 +2330,69 @@ namespace OneOf
         readonly IOneOf oneOf;
         object result;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfMatcher(IOneOf oneOf) : this(oneOf, null) { }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfMatcher(IOneOf oneOf, object result)
         {
             this.oneOf = oneOf;
             this.result = result;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T2, T3, TResult> Match(Func<T1, TResult> createResult)
         {
-            MatchIf<T1>(null, createResult);
+            MatchImpl<T1>(null, createResult);
             return new OneOfMatcher<T2, T3, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T3, TResult> Match(Func<T2, TResult> createResult)
         {
-            MatchIf<T2>(null, createResult);
+            MatchImpl<T2>(null, createResult);
             return new OneOfMatcher<T1, T3, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, TResult> Match(Func<T3, TResult> createResult)
         {
-            MatchIf<T3>(null, createResult);
+            MatchImpl<T3>(null, createResult);
             return new OneOfMatcher<T1, T2, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, TResult> MatchWhen(Predicate<T1> condition, Func<T1, TResult> createResult)
         {
-            MatchIf<T1>(condition, createResult);
+            MatchImpl<T1>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, TResult> MatchWhen(Predicate<T2> condition, Func<T2, TResult> createResult)
         {
-            MatchIf<T2>(condition, createResult);
+            MatchImpl<T2>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, TResult> MatchWhen(Predicate<T3> condition, Func<T3, TResult> createResult)
         {
-            MatchIf<T3>(condition, createResult);
+            MatchImpl<T3>(condition, createResult);
             return this;
         }
 
-        void MatchIf<T>(Predicate<T> condition, Func<T, TResult> createResult)
+        public TResult Else(TResult defaultValue)
+        {
+            if (result == null) result = defaultValue;
+            return (TResult)result;
+        }
+
+        public TResult Else(Func<object, TResult> createResult)
+        {
+            if (result == null) result = createResult(oneOf.Value);
+            return (TResult)result;
+        }
+
+        public TResult ElseThrow(Func<object, Exception> createException)
+        {
+            if (result == null) throw createException(oneOf.Value);
+            return (TResult)result;
+        }
+
+        void MatchImpl<T>(Predicate<T> condition, Func<T, TResult> createResult)
         {
             if (result != null) return;              // already matched
 
@@ -2760,27 +2400,6 @@ namespace OneOf
             if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
 
             result = createResult((T)oneOf.Value);   // yes!
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TResult Else(TResult defaultValue)
-        {
-            if (result == null) result = defaultValue;
-            return (TResult)result;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TResult Else(Func<object, TResult> createResult)
-        {
-            if (result == null) result = createResult(oneOf.Value);
-            return (TResult)result;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TResult ElseThrow(Func<object, Exception> createException)
-        {
-            if (result == null) throw createException(oneOf.Value);
-            return (TResult)result;
         }
     }
 
@@ -2789,73 +2408,81 @@ namespace OneOf
         readonly IOneOf oneOf;
         object result;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfMatcher(IOneOf oneOf) : this(oneOf, null) { }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfMatcher(IOneOf oneOf, object result)
         {
             this.oneOf = oneOf;
             this.result = result;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T2, T3, T4, TResult> Match(Func<T1, TResult> createResult)
         {
-            MatchIf<T1>(null, createResult);
+            MatchImpl<T1>(null, createResult);
             return new OneOfMatcher<T2, T3, T4, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T3, T4, TResult> Match(Func<T2, TResult> createResult)
         {
-            MatchIf<T2>(null, createResult);
+            MatchImpl<T2>(null, createResult);
             return new OneOfMatcher<T1, T3, T4, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T4, TResult> Match(Func<T3, TResult> createResult)
         {
-            MatchIf<T3>(null, createResult);
+            MatchImpl<T3>(null, createResult);
             return new OneOfMatcher<T1, T2, T4, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, TResult> Match(Func<T4, TResult> createResult)
         {
-            MatchIf<T4>(null, createResult);
+            MatchImpl<T4>(null, createResult);
             return new OneOfMatcher<T1, T2, T3, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, TResult> MatchWhen(Predicate<T1> condition, Func<T1, TResult> createResult)
         {
-            MatchIf<T1>(condition, createResult);
+            MatchImpl<T1>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, TResult> MatchWhen(Predicate<T2> condition, Func<T2, TResult> createResult)
         {
-            MatchIf<T2>(condition, createResult);
+            MatchImpl<T2>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, TResult> MatchWhen(Predicate<T3> condition, Func<T3, TResult> createResult)
         {
-            MatchIf<T3>(condition, createResult);
+            MatchImpl<T3>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, TResult> MatchWhen(Predicate<T4> condition, Func<T4, TResult> createResult)
         {
-            MatchIf<T4>(condition, createResult);
+            MatchImpl<T4>(condition, createResult);
             return this;
         }
 
-        void MatchIf<T>(Predicate<T> condition, Func<T, TResult> createResult)
+        public TResult Else(TResult defaultValue)
+        {
+            if (result == null) result = defaultValue;
+            return (TResult)result;
+        }
+
+        public TResult Else(Func<object, TResult> createResult)
+        {
+            if (result == null) result = createResult(oneOf.Value);
+            return (TResult)result;
+        }
+
+        public TResult ElseThrow(Func<object, Exception> createException)
+        {
+            if (result == null) throw createException(oneOf.Value);
+            return (TResult)result;
+        }
+
+        void MatchImpl<T>(Predicate<T> condition, Func<T, TResult> createResult)
         {
             if (result != null) return;              // already matched
 
@@ -2863,27 +2490,6 @@ namespace OneOf
             if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
 
             result = createResult((T)oneOf.Value);   // yes!
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TResult Else(TResult defaultValue)
-        {
-            if (result == null) result = defaultValue;
-            return (TResult)result;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TResult Else(Func<object, TResult> createResult)
-        {
-            if (result == null) result = createResult(oneOf.Value);
-            return (TResult)result;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TResult ElseThrow(Func<object, Exception> createException)
-        {
-            if (result == null) throw createException(oneOf.Value);
-            return (TResult)result;
         }
     }
 
@@ -2892,87 +2498,93 @@ namespace OneOf
         readonly IOneOf oneOf;
         object result;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfMatcher(IOneOf oneOf) : this(oneOf, null) { }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfMatcher(IOneOf oneOf, object result)
         {
             this.oneOf = oneOf;
             this.result = result;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T2, T3, T4, T5, TResult> Match(Func<T1, TResult> createResult)
         {
-            MatchIf<T1>(null, createResult);
+            MatchImpl<T1>(null, createResult);
             return new OneOfMatcher<T2, T3, T4, T5, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T3, T4, T5, TResult> Match(Func<T2, TResult> createResult)
         {
-            MatchIf<T2>(null, createResult);
+            MatchImpl<T2>(null, createResult);
             return new OneOfMatcher<T1, T3, T4, T5, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T4, T5, TResult> Match(Func<T3, TResult> createResult)
         {
-            MatchIf<T3>(null, createResult);
+            MatchImpl<T3>(null, createResult);
             return new OneOfMatcher<T1, T2, T4, T5, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T5, TResult> Match(Func<T4, TResult> createResult)
         {
-            MatchIf<T4>(null, createResult);
+            MatchImpl<T4>(null, createResult);
             return new OneOfMatcher<T1, T2, T3, T5, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, TResult> Match(Func<T5, TResult> createResult)
         {
-            MatchIf<T5>(null, createResult);
+            MatchImpl<T5>(null, createResult);
             return new OneOfMatcher<T1, T2, T3, T4, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, TResult> MatchWhen(Predicate<T1> condition, Func<T1, TResult> createResult)
         {
-            MatchIf<T1>(condition, createResult);
+            MatchImpl<T1>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, TResult> MatchWhen(Predicate<T2> condition, Func<T2, TResult> createResult)
         {
-            MatchIf<T2>(condition, createResult);
+            MatchImpl<T2>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, TResult> MatchWhen(Predicate<T3> condition, Func<T3, TResult> createResult)
         {
-            MatchIf<T3>(condition, createResult);
+            MatchImpl<T3>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, TResult> MatchWhen(Predicate<T4> condition, Func<T4, TResult> createResult)
         {
-            MatchIf<T4>(condition, createResult);
+            MatchImpl<T4>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, TResult> MatchWhen(Predicate<T5> condition, Func<T5, TResult> createResult)
         {
-            MatchIf<T5>(condition, createResult);
+            MatchImpl<T5>(condition, createResult);
             return this;
         }
 
-        void MatchIf<T>(Predicate<T> condition, Func<T, TResult> createResult)
+        public TResult Else(TResult defaultValue)
+        {
+            if (result == null) result = defaultValue;
+            return (TResult)result;
+        }
+
+        public TResult Else(Func<object, TResult> createResult)
+        {
+            if (result == null) result = createResult(oneOf.Value);
+            return (TResult)result;
+        }
+
+        public TResult ElseThrow(Func<object, Exception> createException)
+        {
+            if (result == null) throw createException(oneOf.Value);
+            return (TResult)result;
+        }
+
+        void MatchImpl<T>(Predicate<T> condition, Func<T, TResult> createResult)
         {
             if (result != null) return;              // already matched
 
@@ -2980,27 +2592,6 @@ namespace OneOf
             if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
 
             result = createResult((T)oneOf.Value);   // yes!
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TResult Else(TResult defaultValue)
-        {
-            if (result == null) result = defaultValue;
-            return (TResult)result;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TResult Else(Func<object, TResult> createResult)
-        {
-            if (result == null) result = createResult(oneOf.Value);
-            return (TResult)result;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TResult ElseThrow(Func<object, Exception> createException)
-        {
-            if (result == null) throw createException(oneOf.Value);
-            return (TResult)result;
         }
     }
 
@@ -3009,101 +2600,105 @@ namespace OneOf
         readonly IOneOf oneOf;
         object result;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfMatcher(IOneOf oneOf) : this(oneOf, null) { }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfMatcher(IOneOf oneOf, object result)
         {
             this.oneOf = oneOf;
             this.result = result;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T2, T3, T4, T5, T6, TResult> Match(Func<T1, TResult> createResult)
         {
-            MatchIf<T1>(null, createResult);
+            MatchImpl<T1>(null, createResult);
             return new OneOfMatcher<T2, T3, T4, T5, T6, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T3, T4, T5, T6, TResult> Match(Func<T2, TResult> createResult)
         {
-            MatchIf<T2>(null, createResult);
+            MatchImpl<T2>(null, createResult);
             return new OneOfMatcher<T1, T3, T4, T5, T6, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T4, T5, T6, TResult> Match(Func<T3, TResult> createResult)
         {
-            MatchIf<T3>(null, createResult);
+            MatchImpl<T3>(null, createResult);
             return new OneOfMatcher<T1, T2, T4, T5, T6, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T5, T6, TResult> Match(Func<T4, TResult> createResult)
         {
-            MatchIf<T4>(null, createResult);
+            MatchImpl<T4>(null, createResult);
             return new OneOfMatcher<T1, T2, T3, T5, T6, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T6, TResult> Match(Func<T5, TResult> createResult)
         {
-            MatchIf<T5>(null, createResult);
+            MatchImpl<T5>(null, createResult);
             return new OneOfMatcher<T1, T2, T3, T4, T6, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, TResult> Match(Func<T6, TResult> createResult)
         {
-            MatchIf<T6>(null, createResult);
+            MatchImpl<T6>(null, createResult);
             return new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen(Predicate<T1> condition, Func<T1, TResult> createResult)
         {
-            MatchIf<T1>(condition, createResult);
+            MatchImpl<T1>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen(Predicate<T2> condition, Func<T2, TResult> createResult)
         {
-            MatchIf<T2>(condition, createResult);
+            MatchImpl<T2>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen(Predicate<T3> condition, Func<T3, TResult> createResult)
         {
-            MatchIf<T3>(condition, createResult);
+            MatchImpl<T3>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen(Predicate<T4> condition, Func<T4, TResult> createResult)
         {
-            MatchIf<T4>(condition, createResult);
+            MatchImpl<T4>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen(Predicate<T5> condition, Func<T5, TResult> createResult)
         {
-            MatchIf<T5>(condition, createResult);
+            MatchImpl<T5>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen(Predicate<T6> condition, Func<T6, TResult> createResult)
         {
-            MatchIf<T6>(condition, createResult);
+            MatchImpl<T6>(condition, createResult);
             return this;
         }
 
-        void MatchIf<T>(Predicate<T> condition, Func<T, TResult> createResult)
+        public TResult Else(TResult defaultValue)
+        {
+            if (result == null) result = defaultValue;
+            return (TResult)result;
+        }
+
+        public TResult Else(Func<object, TResult> createResult)
+        {
+            if (result == null) result = createResult(oneOf.Value);
+            return (TResult)result;
+        }
+
+        public TResult ElseThrow(Func<object, Exception> createException)
+        {
+            if (result == null) throw createException(oneOf.Value);
+            return (TResult)result;
+        }
+
+        void MatchImpl<T>(Predicate<T> condition, Func<T, TResult> createResult)
         {
             if (result != null) return;              // already matched
 
@@ -3111,27 +2706,6 @@ namespace OneOf
             if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
 
             result = createResult((T)oneOf.Value);   // yes!
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TResult Else(TResult defaultValue)
-        {
-            if (result == null) result = defaultValue;
-            return (TResult)result;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TResult Else(Func<object, TResult> createResult)
-        {
-            if (result == null) result = createResult(oneOf.Value);
-            return (TResult)result;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TResult ElseThrow(Func<object, Exception> createException)
-        {
-            if (result == null) throw createException(oneOf.Value);
-            return (TResult)result;
         }
     }
 
@@ -3140,115 +2714,117 @@ namespace OneOf
         readonly IOneOf oneOf;
         object result;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfMatcher(IOneOf oneOf) : this(oneOf, null) { }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfMatcher(IOneOf oneOf, object result)
         {
             this.oneOf = oneOf;
             this.result = result;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T2, T3, T4, T5, T6, T7, TResult> Match(Func<T1, TResult> createResult)
         {
-            MatchIf<T1>(null, createResult);
+            MatchImpl<T1>(null, createResult);
             return new OneOfMatcher<T2, T3, T4, T5, T6, T7, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T3, T4, T5, T6, T7, TResult> Match(Func<T2, TResult> createResult)
         {
-            MatchIf<T2>(null, createResult);
+            MatchImpl<T2>(null, createResult);
             return new OneOfMatcher<T1, T3, T4, T5, T6, T7, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T4, T5, T6, T7, TResult> Match(Func<T3, TResult> createResult)
         {
-            MatchIf<T3>(null, createResult);
+            MatchImpl<T3>(null, createResult);
             return new OneOfMatcher<T1, T2, T4, T5, T6, T7, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T5, T6, T7, TResult> Match(Func<T4, TResult> createResult)
         {
-            MatchIf<T4>(null, createResult);
+            MatchImpl<T4>(null, createResult);
             return new OneOfMatcher<T1, T2, T3, T5, T6, T7, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T6, T7, TResult> Match(Func<T5, TResult> createResult)
         {
-            MatchIf<T5>(null, createResult);
+            MatchImpl<T5>(null, createResult);
             return new OneOfMatcher<T1, T2, T3, T4, T6, T7, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T7, TResult> Match(Func<T6, TResult> createResult)
         {
-            MatchIf<T6>(null, createResult);
+            MatchImpl<T6>(null, createResult);
             return new OneOfMatcher<T1, T2, T3, T4, T5, T7, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> Match(Func<T7, TResult> createResult)
         {
-            MatchIf<T7>(null, createResult);
+            MatchImpl<T7>(null, createResult);
             return new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen(Predicate<T1> condition, Func<T1, TResult> createResult)
         {
-            MatchIf<T1>(condition, createResult);
+            MatchImpl<T1>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen(Predicate<T2> condition, Func<T2, TResult> createResult)
         {
-            MatchIf<T2>(condition, createResult);
+            MatchImpl<T2>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen(Predicate<T3> condition, Func<T3, TResult> createResult)
         {
-            MatchIf<T3>(condition, createResult);
+            MatchImpl<T3>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen(Predicate<T4> condition, Func<T4, TResult> createResult)
         {
-            MatchIf<T4>(condition, createResult);
+            MatchImpl<T4>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen(Predicate<T5> condition, Func<T5, TResult> createResult)
         {
-            MatchIf<T5>(condition, createResult);
+            MatchImpl<T5>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen(Predicate<T6> condition, Func<T6, TResult> createResult)
         {
-            MatchIf<T6>(condition, createResult);
+            MatchImpl<T6>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen(Predicate<T7> condition, Func<T7, TResult> createResult)
         {
-            MatchIf<T7>(condition, createResult);
+            MatchImpl<T7>(condition, createResult);
             return this;
         }
 
-        void MatchIf<T>(Predicate<T> condition, Func<T, TResult> createResult)
+        public TResult Else(TResult defaultValue)
+        {
+            if (result == null) result = defaultValue;
+            return (TResult)result;
+        }
+
+        public TResult Else(Func<object, TResult> createResult)
+        {
+            if (result == null) result = createResult(oneOf.Value);
+            return (TResult)result;
+        }
+
+        public TResult ElseThrow(Func<object, Exception> createException)
+        {
+            if (result == null) throw createException(oneOf.Value);
+            return (TResult)result;
+        }
+
+        void MatchImpl<T>(Predicate<T> condition, Func<T, TResult> createResult)
         {
             if (result != null) return;              // already matched
 
@@ -3256,27 +2832,6 @@ namespace OneOf
             if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
 
             result = createResult((T)oneOf.Value);   // yes!
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TResult Else(TResult defaultValue)
-        {
-            if (result == null) result = defaultValue;
-            return (TResult)result;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TResult Else(Func<object, TResult> createResult)
-        {
-            if (result == null) result = createResult(oneOf.Value);
-            return (TResult)result;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TResult ElseThrow(Func<object, Exception> createException)
-        {
-            if (result == null) throw createException(oneOf.Value);
-            return (TResult)result;
         }
     }
 
@@ -3285,129 +2840,129 @@ namespace OneOf
         readonly IOneOf oneOf;
         object result;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfMatcher(IOneOf oneOf) : this(oneOf, null) { }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfMatcher(IOneOf oneOf, object result)
         {
             this.oneOf = oneOf;
             this.result = result;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T2, T3, T4, T5, T6, T7, T8, TResult> Match(Func<T1, TResult> createResult)
         {
-            MatchIf<T1>(null, createResult);
+            MatchImpl<T1>(null, createResult);
             return new OneOfMatcher<T2, T3, T4, T5, T6, T7, T8, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T3, T4, T5, T6, T7, T8, TResult> Match(Func<T2, TResult> createResult)
         {
-            MatchIf<T2>(null, createResult);
+            MatchImpl<T2>(null, createResult);
             return new OneOfMatcher<T1, T3, T4, T5, T6, T7, T8, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T4, T5, T6, T7, T8, TResult> Match(Func<T3, TResult> createResult)
         {
-            MatchIf<T3>(null, createResult);
+            MatchImpl<T3>(null, createResult);
             return new OneOfMatcher<T1, T2, T4, T5, T6, T7, T8, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T5, T6, T7, T8, TResult> Match(Func<T4, TResult> createResult)
         {
-            MatchIf<T4>(null, createResult);
+            MatchImpl<T4>(null, createResult);
             return new OneOfMatcher<T1, T2, T3, T5, T6, T7, T8, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T6, T7, T8, TResult> Match(Func<T5, TResult> createResult)
         {
-            MatchIf<T5>(null, createResult);
+            MatchImpl<T5>(null, createResult);
             return new OneOfMatcher<T1, T2, T3, T4, T6, T7, T8, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T7, T8, TResult> Match(Func<T6, TResult> createResult)
         {
-            MatchIf<T6>(null, createResult);
+            MatchImpl<T6>(null, createResult);
             return new OneOfMatcher<T1, T2, T3, T4, T5, T7, T8, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T8, TResult> Match(Func<T7, TResult> createResult)
         {
-            MatchIf<T7>(null, createResult);
+            MatchImpl<T7>(null, createResult);
             return new OneOfMatcher<T1, T2, T3, T4, T5, T6, T8, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> Match(Func<T8, TResult> createResult)
         {
-            MatchIf<T8>(null, createResult);
+            MatchImpl<T8>(null, createResult);
             return new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen(Predicate<T1> condition, Func<T1, TResult> createResult)
         {
-            MatchIf<T1>(condition, createResult);
+            MatchImpl<T1>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen(Predicate<T2> condition, Func<T2, TResult> createResult)
         {
-            MatchIf<T2>(condition, createResult);
+            MatchImpl<T2>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen(Predicate<T3> condition, Func<T3, TResult> createResult)
         {
-            MatchIf<T3>(condition, createResult);
+            MatchImpl<T3>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen(Predicate<T4> condition, Func<T4, TResult> createResult)
         {
-            MatchIf<T4>(condition, createResult);
+            MatchImpl<T4>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen(Predicate<T5> condition, Func<T5, TResult> createResult)
         {
-            MatchIf<T5>(condition, createResult);
+            MatchImpl<T5>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen(Predicate<T6> condition, Func<T6, TResult> createResult)
         {
-            MatchIf<T6>(condition, createResult);
+            MatchImpl<T6>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen(Predicate<T7> condition, Func<T7, TResult> createResult)
         {
-            MatchIf<T7>(condition, createResult);
+            MatchImpl<T7>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen(Predicate<T8> condition, Func<T8, TResult> createResult)
         {
-            MatchIf<T8>(condition, createResult);
+            MatchImpl<T8>(condition, createResult);
             return this;
         }
 
-        void MatchIf<T>(Predicate<T> condition, Func<T, TResult> createResult)
+        public TResult Else(TResult defaultValue)
+        {
+            if (result == null) result = defaultValue;
+            return (TResult)result;
+        }
+
+        public TResult Else(Func<object, TResult> createResult)
+        {
+            if (result == null) result = createResult(oneOf.Value);
+            return (TResult)result;
+        }
+
+        public TResult ElseThrow(Func<object, Exception> createException)
+        {
+            if (result == null) throw createException(oneOf.Value);
+            return (TResult)result;
+        }
+
+        void MatchImpl<T>(Predicate<T> condition, Func<T, TResult> createResult)
         {
             if (result != null) return;              // already matched
 
@@ -3415,27 +2970,6 @@ namespace OneOf
             if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
 
             result = createResult((T)oneOf.Value);   // yes!
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TResult Else(TResult defaultValue)
-        {
-            if (result == null) result = defaultValue;
-            return (TResult)result;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TResult Else(Func<object, TResult> createResult)
-        {
-            if (result == null) result = createResult(oneOf.Value);
-            return (TResult)result;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TResult ElseThrow(Func<object, Exception> createException)
-        {
-            if (result == null) throw createException(oneOf.Value);
-            return (TResult)result;
         }
     }
 
@@ -3444,143 +2978,141 @@ namespace OneOf
         readonly IOneOf oneOf;
         object result;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfMatcher(IOneOf oneOf) : this(oneOf, null) { }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal OneOfMatcher(IOneOf oneOf, object result)
         {
             this.oneOf = oneOf;
             this.result = result;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T2, T3, T4, T5, T6, T7, T8, T9, TResult> Match(Func<T1, TResult> createResult)
         {
-            MatchIf<T1>(null, createResult);
+            MatchImpl<T1>(null, createResult);
             return new OneOfMatcher<T2, T3, T4, T5, T6, T7, T8, T9, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T3, T4, T5, T6, T7, T8, T9, TResult> Match(Func<T2, TResult> createResult)
         {
-            MatchIf<T2>(null, createResult);
+            MatchImpl<T2>(null, createResult);
             return new OneOfMatcher<T1, T3, T4, T5, T6, T7, T8, T9, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T4, T5, T6, T7, T8, T9, TResult> Match(Func<T3, TResult> createResult)
         {
-            MatchIf<T3>(null, createResult);
+            MatchImpl<T3>(null, createResult);
             return new OneOfMatcher<T1, T2, T4, T5, T6, T7, T8, T9, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T5, T6, T7, T8, T9, TResult> Match(Func<T4, TResult> createResult)
         {
-            MatchIf<T4>(null, createResult);
+            MatchImpl<T4>(null, createResult);
             return new OneOfMatcher<T1, T2, T3, T5, T6, T7, T8, T9, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T6, T7, T8, T9, TResult> Match(Func<T5, TResult> createResult)
         {
-            MatchIf<T5>(null, createResult);
+            MatchImpl<T5>(null, createResult);
             return new OneOfMatcher<T1, T2, T3, T4, T6, T7, T8, T9, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T7, T8, T9, TResult> Match(Func<T6, TResult> createResult)
         {
-            MatchIf<T6>(null, createResult);
+            MatchImpl<T6>(null, createResult);
             return new OneOfMatcher<T1, T2, T3, T4, T5, T7, T8, T9, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T8, T9, TResult> Match(Func<T7, TResult> createResult)
         {
-            MatchIf<T7>(null, createResult);
+            MatchImpl<T7>(null, createResult);
             return new OneOfMatcher<T1, T2, T3, T4, T5, T6, T8, T9, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T9, TResult> Match(Func<T8, TResult> createResult)
         {
-            MatchIf<T8>(null, createResult);
+            MatchImpl<T8>(null, createResult);
             return new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T9, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> Match(Func<T9, TResult> createResult)
         {
-            MatchIf<T9>(null, createResult);
+            MatchImpl<T9>(null, createResult);
             return new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(oneOf, result);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen(Predicate<T1> condition, Func<T1, TResult> createResult)
         {
-            MatchIf<T1>(condition, createResult);
+            MatchImpl<T1>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen(Predicate<T2> condition, Func<T2, TResult> createResult)
         {
-            MatchIf<T2>(condition, createResult);
+            MatchImpl<T2>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen(Predicate<T3> condition, Func<T3, TResult> createResult)
         {
-            MatchIf<T3>(condition, createResult);
+            MatchImpl<T3>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen(Predicate<T4> condition, Func<T4, TResult> createResult)
         {
-            MatchIf<T4>(condition, createResult);
+            MatchImpl<T4>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen(Predicate<T5> condition, Func<T5, TResult> createResult)
         {
-            MatchIf<T5>(condition, createResult);
+            MatchImpl<T5>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen(Predicate<T6> condition, Func<T6, TResult> createResult)
         {
-            MatchIf<T6>(condition, createResult);
+            MatchImpl<T6>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen(Predicate<T7> condition, Func<T7, TResult> createResult)
         {
-            MatchIf<T7>(condition, createResult);
+            MatchImpl<T7>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen(Predicate<T8> condition, Func<T8, TResult> createResult)
         {
-            MatchIf<T8>(condition, createResult);
+            MatchImpl<T8>(condition, createResult);
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen(Predicate<T9> condition, Func<T9, TResult> createResult)
         {
-            MatchIf<T9>(condition, createResult);
+            MatchImpl<T9>(condition, createResult);
             return this;
         }
 
-        void MatchIf<T>(Predicate<T> condition, Func<T, TResult> createResult)
+        public TResult Else(TResult defaultValue)
+        {
+            if (result == null) result = defaultValue;
+            return (TResult)result;
+        }
+
+        public TResult Else(Func<object, TResult> createResult)
+        {
+            if (result == null) result = createResult(oneOf.Value);
+            return (TResult)result;
+        }
+
+        public TResult ElseThrow(Func<object, Exception> createException)
+        {
+            if (result == null) throw createException(oneOf.Value);
+            return (TResult)result;
+        }
+
+        void MatchImpl<T>(Predicate<T> condition, Func<T, TResult> createResult)
         {
             if (result != null) return;              // already matched
 
@@ -3588,27 +3120,6 @@ namespace OneOf
             if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
 
             result = createResult((T)oneOf.Value);   // yes!
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TResult Else(TResult defaultValue)
-        {
-            if (result == null) result = defaultValue;
-            return (TResult)result;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TResult Else(Func<object, TResult> createResult)
-        {
-            if (result == null) result = createResult(oneOf.Value);
-            return (TResult)result;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TResult ElseThrow(Func<object, Exception> createException)
-        {
-            if (result == null) throw createException(oneOf.Value);
-            return (TResult)result;
         }
     }
 }
