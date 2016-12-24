@@ -2601,21 +2601,21 @@ namespace OneOf
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TResult Else(TResult defaultValue)
         {
-            if (ReferenceEquals(result, null)) result = defaultValue;
+            if (result == null) result = defaultValue;
             return (TResult)result;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TResult Else(Func<object, TResult> createResult)
         {
-            if (ReferenceEquals(result, null)) result = createResult(oneOf.Value);
+            if (result == null) result = createResult(oneOf.Value);
             return (TResult)result;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TResult ElseThrow(Func<object, Exception> createException)
         {
-            if (ReferenceEquals(result, null)) throw createException(oneOf.Value);
+            if (result == null) throw createException(oneOf.Value);
             return (TResult)result;
         }
     }
@@ -2676,21 +2676,21 @@ namespace OneOf
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TResult Else(TResult defaultValue)
         {
-            if (ReferenceEquals(result, null)) result = defaultValue;
+            if (result == null) result = defaultValue;
             return (TResult)result;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TResult Else(Func<object, TResult> createResult)
         {
-            if (ReferenceEquals(result, null)) result = createResult(oneOf.Value);
+            if (result == null) result = createResult(oneOf.Value);
             return (TResult)result;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TResult ElseThrow(Func<object, Exception> createException)
         {
-            if (ReferenceEquals(result, null)) throw createException(oneOf.Value);
+            if (result == null) throw createException(oneOf.Value);
             return (TResult)result;
         }
     }
@@ -2765,21 +2765,21 @@ namespace OneOf
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TResult Else(TResult defaultValue)
         {
-            if (ReferenceEquals(result, null)) result = defaultValue;
+            if (result == null) result = defaultValue;
             return (TResult)result;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TResult Else(Func<object, TResult> createResult)
         {
-            if (ReferenceEquals(result, null)) result = createResult(oneOf.Value);
+            if (result == null) result = createResult(oneOf.Value);
             return (TResult)result;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TResult ElseThrow(Func<object, Exception> createException)
         {
-            if (ReferenceEquals(result, null)) throw createException(oneOf.Value);
+            if (result == null) throw createException(oneOf.Value);
             return (TResult)result;
         }
     }
@@ -2868,21 +2868,21 @@ namespace OneOf
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TResult Else(TResult defaultValue)
         {
-            if (ReferenceEquals(result, null)) result = defaultValue;
+            if (result == null) result = defaultValue;
             return (TResult)result;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TResult Else(Func<object, TResult> createResult)
         {
-            if (ReferenceEquals(result, null)) result = createResult(oneOf.Value);
+            if (result == null) result = createResult(oneOf.Value);
             return (TResult)result;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TResult ElseThrow(Func<object, Exception> createException)
         {
-            if (ReferenceEquals(result, null)) throw createException(oneOf.Value);
+            if (result == null) throw createException(oneOf.Value);
             return (TResult)result;
         }
     }
@@ -2985,21 +2985,21 @@ namespace OneOf
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TResult Else(TResult defaultValue)
         {
-            if (ReferenceEquals(result, null)) result = defaultValue;
+            if (result == null) result = defaultValue;
             return (TResult)result;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TResult Else(Func<object, TResult> createResult)
         {
-            if (ReferenceEquals(result, null)) result = createResult(oneOf.Value);
+            if (result == null) result = createResult(oneOf.Value);
             return (TResult)result;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TResult ElseThrow(Func<object, Exception> createException)
         {
-            if (ReferenceEquals(result, null)) throw createException(oneOf.Value);
+            if (result == null) throw createException(oneOf.Value);
             return (TResult)result;
         }
     }
@@ -3116,21 +3116,21 @@ namespace OneOf
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TResult Else(TResult defaultValue)
         {
-            if (ReferenceEquals(result, null)) result = defaultValue;
+            if (result == null) result = defaultValue;
             return (TResult)result;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TResult Else(Func<object, TResult> createResult)
         {
-            if (ReferenceEquals(result, null)) result = createResult(oneOf.Value);
+            if (result == null) result = createResult(oneOf.Value);
             return (TResult)result;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TResult ElseThrow(Func<object, Exception> createException)
         {
-            if (ReferenceEquals(result, null)) throw createException(oneOf.Value);
+            if (result == null) throw createException(oneOf.Value);
             return (TResult)result;
         }
     }
@@ -3261,21 +3261,21 @@ namespace OneOf
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TResult Else(TResult defaultValue)
         {
-            if (ReferenceEquals(result, null)) result = defaultValue;
+            if (result == null) result = defaultValue;
             return (TResult)result;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TResult Else(Func<object, TResult> createResult)
         {
-            if (ReferenceEquals(result, null)) result = createResult(oneOf.Value);
+            if (result == null) result = createResult(oneOf.Value);
             return (TResult)result;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TResult ElseThrow(Func<object, Exception> createException)
         {
-            if (ReferenceEquals(result, null)) throw createException(oneOf.Value);
+            if (result == null) throw createException(oneOf.Value);
             return (TResult)result;
         }
     }
@@ -3420,21 +3420,21 @@ namespace OneOf
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TResult Else(TResult defaultValue)
         {
-            if (ReferenceEquals(result, null)) result = defaultValue;
+            if (result == null) result = defaultValue;
             return (TResult)result;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TResult Else(Func<object, TResult> createResult)
         {
-            if (ReferenceEquals(result, null)) result = createResult(oneOf.Value);
+            if (result == null) result = createResult(oneOf.Value);
             return (TResult)result;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TResult ElseThrow(Func<object, Exception> createException)
         {
-            if (ReferenceEquals(result, null)) throw createException(oneOf.Value);
+            if (result == null) throw createException(oneOf.Value);
             return (TResult)result;
         }
     }
@@ -3593,21 +3593,21 @@ namespace OneOf
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TResult Else(TResult defaultValue)
         {
-            if (ReferenceEquals(result, null)) result = defaultValue;
+            if (result == null) result = defaultValue;
             return (TResult)result;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TResult Else(Func<object, TResult> createResult)
         {
-            if (ReferenceEquals(result, null)) result = createResult(oneOf.Value);
+            if (result == null) result = createResult(oneOf.Value);
             return (TResult)result;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TResult ElseThrow(Func<object, Exception> createException)
         {
-            if (ReferenceEquals(result, null)) throw createException(oneOf.Value);
+            if (result == null) throw createException(oneOf.Value);
             return (TResult)result;
         }
     }

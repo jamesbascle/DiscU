@@ -376,7 +376,7 @@ void WriteMatcher(int countOfgenericParams)
 		WriteLine($"public TResult Else(TResult defaultValue)");
 		using(new WriteIndent(this))
 		{
-			WriteLine($"if (ReferenceEquals(result, null)) result = defaultValue;");
+			WriteLine($"if (result == null) result = defaultValue;");
 			WriteLine("return (TResult)result;");
 		}
 
@@ -387,7 +387,7 @@ void WriteMatcher(int countOfgenericParams)
 		WriteLine($"public TResult Else(Func<object, TResult> createResult)");
 		using(new WriteIndent(this))
 		{
-			WriteLine($"if (ReferenceEquals(result, null)) result = createResult(oneOf.Value);");
+			WriteLine($"if (result == null) result = createResult(oneOf.Value);");
 			WriteLine("return (TResult)result;");
 		}
 
@@ -398,7 +398,7 @@ void WriteMatcher(int countOfgenericParams)
 		WriteLine($"public TResult ElseThrow(Func<object, Exception> createException)");
 		using(new WriteIndent(this))
 		{
-			WriteLine($"if (ReferenceEquals(result, null)) throw createException(oneOf.Value);");
+			WriteLine($"if (result == null) throw createException(oneOf.Value);");
 			WriteLine("return (TResult)result;");
 		}
 	}
