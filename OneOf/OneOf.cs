@@ -6,7 +6,7 @@ using System;
 
 namespace OneOf
 {
-    public struct OneOf<T1, T2> : IOneOf
+    public class OneOf<T1, T2> : IOneOf
     {
         private readonly object value;
         private readonly Type origType;
@@ -59,7 +59,7 @@ namespace OneOf
         public override int GetHashCode() => (value?.GetHashCode() ?? 0);
         public override string ToString() => (value?.ToString() ?? "");
     }
-    public struct OneOf<T1, T2, T3> : IOneOf
+    public class OneOf<T1, T2, T3> : IOneOf
     {
         private readonly object value;
         private readonly Type origType;
@@ -120,7 +120,7 @@ namespace OneOf
         public override int GetHashCode() => (value?.GetHashCode() ?? 0);
         public override string ToString() => (value?.ToString() ?? "");
     }
-    public struct OneOf<T1, T2, T3, T4> : IOneOf
+    public class OneOf<T1, T2, T3, T4> : IOneOf
     {
         private readonly object value;
         private readonly Type origType;
@@ -189,7 +189,7 @@ namespace OneOf
         public override int GetHashCode() => (value?.GetHashCode() ?? 0);
         public override string ToString() => (value?.ToString() ?? "");
     }
-    public struct OneOf<T1, T2, T3, T4, T5> : IOneOf
+    public class OneOf<T1, T2, T3, T4, T5> : IOneOf
     {
         private readonly object value;
         private readonly Type origType;
@@ -266,7 +266,7 @@ namespace OneOf
         public override int GetHashCode() => (value?.GetHashCode() ?? 0);
         public override string ToString() => (value?.ToString() ?? "");
     }
-    public struct OneOf<T1, T2, T3, T4, T5, T6> : IOneOf
+    public class OneOf<T1, T2, T3, T4, T5, T6> : IOneOf
     {
         private readonly object value;
         private readonly Type origType;
@@ -351,7 +351,7 @@ namespace OneOf
         public override int GetHashCode() => (value?.GetHashCode() ?? 0);
         public override string ToString() => (value?.ToString() ?? "");
     }
-    public struct OneOf<T1, T2, T3, T4, T5, T6, T7> : IOneOf
+    public class OneOf<T1, T2, T3, T4, T5, T6, T7> : IOneOf
     {
         private readonly object value;
         private readonly Type origType;
@@ -444,7 +444,7 @@ namespace OneOf
         public override int GetHashCode() => (value?.GetHashCode() ?? 0);
         public override string ToString() => (value?.ToString() ?? "");
     }
-    public struct OneOf<T1, T2, T3, T4, T5, T6, T7, T8> : IOneOf
+    public class OneOf<T1, T2, T3, T4, T5, T6, T7, T8> : IOneOf
     {
         private readonly object value;
         private readonly Type origType;
@@ -545,7 +545,7 @@ namespace OneOf
         public override int GetHashCode() => (value?.GetHashCode() ?? 0);
         public override string ToString() => (value?.ToString() ?? "");
     }
-    public struct OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9> : IOneOf
+    public class OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9> : IOneOf
     {
         private readonly object value;
         private readonly Type origType;

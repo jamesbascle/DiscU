@@ -36,7 +36,7 @@ void WriteOneOf(int countOfgenericParams)
 {
 	var genericArgs = GenerateGenericArgs(Enumerable.Range(1, countOfgenericParams));
 
-	WriteLine($"public struct OneOf<{genericArgs}> : IOneOf");
+	WriteLine($"public class OneOf<{genericArgs}> : IOneOf");
 	using(new WriteBraces(this))
 	{
 		WriteLine("private readonly object value;");
