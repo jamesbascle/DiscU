@@ -39,10 +39,10 @@ namespace OneOf.PerfTests
         private static void TestMatch()
         {
             OneOf<C1, C2, C3, C4, C5, C6, C7, C8, C9> oo1 = new C1();
-            RunTest("T1", () => oo1.Match((C1 v) => 1).Match((C2 v) => 2).Match((C3 v) => 3).Match((C4 v) => 4).Match((C5 v) => 5).Match((C6 v) => 6).Match((C7 v) => 7).Match((C8 v) => 8).Match((C9 v) => 9));
+            RunTest("Match1", () => oo1.Match((C1 v) => 1).Match((C2 v) => 2).Match((C3 v) => 3).Match((C4 v) => 4).Match((C5 v) => 5).Match((C6 v) => 6).Match((C7 v) => 7).Match((C8 v) => 8).Match((C9 v) => 9));
 
             OneOf<C1, C2, C3, C4, C5, C6, C7, C8, C9> oo2 = new C9();
-            RunTest("T8", () => oo2.Match((C1 v) => 1).Match((C2 v) => 2).Match((C3 v) => 3).Match((C4 v) => 4).Match((C5 v) => 5).Match((C6 v) => 6).Match((C7 v) => 7).Match((C8 v) => 8).Match((C9 v) => 9));
+            RunTest("Match9", () => oo2.Match((C1 v) => 1).Match((C2 v) => 2).Match((C3 v) => 3).Match((C4 v) => 4).Match((C5 v) => 5).Match((C6 v) => 6).Match((C7 v) => 7).Match((C8 v) => 8).Match((C9 v) => 9));
         }
 
         static void RunTest<T>(string nameOfTest, Func<T> thingToTest)
