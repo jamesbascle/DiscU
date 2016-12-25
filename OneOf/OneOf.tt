@@ -22,10 +22,7 @@ void GenerateClasses()
 	using(new WriteBraces(this))
 	{
 		for (var i = 2; i <= 9; i++)
-			WriteOneOf(true, i);
-
-		for (var i = 2; i <= 9; i++)
-			WriteOneOf(false, i);
+			WriteOneOf(i);
 
 		for (var i = 1; i <= 9; i++)
 			WriteSwitcher(i);
@@ -35,13 +32,11 @@ void GenerateClasses()
 	}
 }
 
-void WriteOneOf(bool isStruct, int countOfgenericParams) 
+void WriteOneOf(int countOfgenericParams) 
 {
 	var genericArgs = GenerateGenericArgs(Enumerable.Range(1, countOfgenericParams));
-	var structOrClass = isStruct ? "struct" : "class";
-	var typeName = isStruct ? "OneOf" : "OneOfBase";
 
-	WriteLine($"public {structOrClass} {typeName}<{genericArgs}> : IOneOf");
+	WriteLine($"public struct OneOf<{genericArgs}> : IOneOf");
 	using(new WriteBraces(this))
 	{
 		WriteLine("private readonly object value;");
@@ -51,24 +46,13 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 		// must only be called after value has been validated to be Tn
 	    
 		WriteLine("");
-        WriteLine($"{typeName}(object value, Type origType)");
+        WriteLine($"OneOf(object value, Type origType)");
 
 		using(new WriteBraces(this))
 		{
 			WriteLine("this.value = value;");
             WriteLine("this.origType = origType;");
 
-		}
-
-		if (!isStruct)
-		{
-			WriteLine("");
-			WriteLine($"protected {typeName}()");
-			using(new WriteBraces(this))
-			{
-				WriteLine("this.value = this;");
-				WriteLine("this.origType = GetType();");
-			}
 		}
 		
 	    // =============== IOneOf implementation
@@ -84,7 +68,7 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 	    {
 	        var nargs = Enumerable.Range(1, numberOfGenericsInNew).Select(e => "N" + e).ToArray();
 	        var otherGenericArgs = string.Join(", ", nargs);
-	        WriteLine($"public {typeName}<{otherGenericArgs}> ToOneOf<{otherGenericArgs}>() => OneOfFactory<{typeName}<{otherGenericArgs}>>.Create(value);");
+	        WriteLine($"public OneOf<{otherGenericArgs}> ToOneOf<{otherGenericArgs}>() => OneOfFactory<OneOf<{otherGenericArgs}>>.Create(value);");
 	    }
 
 	    // =============== implicit conversion to T
@@ -94,25 +78,25 @@ void WriteOneOf(bool isStruct, int countOfgenericParams)
 		WriteLine("");
 		for(var parmIndex = 1; parmIndex <= countOfgenericParams; parmIndex ++)
 		{
-			WriteLine($"public static implicit operator {typeName}<{genericArgs}>(T{parmIndex} value) => OneOfFactory<{typeName}<{genericArgs}>>.Create(value);"); 
+			WriteLine($"public static implicit operator OneOf<{genericArgs}>(T{parmIndex} value) => OneOfFactory<OneOf<{genericArgs}>>.Create(value);"); 
 		}
 
 		// Error CS0552	- user-defined conversions to or from an interface are not allowed
-		// WriteLine($"public static implicit operator {typeName}<{genericArgs}>(IOneOf oo) => OneOfFactory<{typeName}<{genericArgs}>>.Create(oo.Value);"); 
+		// WriteLine($"public static implicit operator OneOf<{genericArgs}>(IOneOf oo) => OneOfFactory<OneOf<{genericArgs}>>.Create(oo.Value);"); 
 
 		// =============== equality operators
 
 		WriteLine("");
-		WriteLine($"public static bool operator ==({typeName}<{genericArgs}> v1, IOneOf v2) => Equals(v1, v2);"); 
-		WriteLine($"public static bool operator !=({typeName}<{genericArgs}> v1, IOneOf v2) => !Equals(v1, v2);");
+		WriteLine($"public static bool operator ==(OneOf<{genericArgs}> v1, IOneOf v2) => Equals(v1, v2);"); 
+		WriteLine($"public static bool operator !=(OneOf<{genericArgs}> v1, IOneOf v2) => !Equals(v1, v2);");
 
 		//also adding equality operators to compare to the various Generic types by value
 	    for (var i = 1; i <= countOfgenericParams; i++)
 	    {
-			WriteLine($"public static bool operator ==({typeName}<{genericArgs}> v1, T{i} v2) => Equals(v1, v2);"); 
-			WriteLine($"public static bool operator !=({typeName}<{genericArgs}> v1, T{i} v2) => !Equals(v1, v2);");
-			WriteLine($"public static bool operator ==(T{i} v1, {typeName}<{genericArgs}> v2) => Equals(v2, v1);"); 
-			WriteLine($"public static bool operator !=(T{i} v1, {typeName}<{genericArgs}> v2) => !Equals(v2, v1);");
+			WriteLine($"public static bool operator ==(OneOf<{genericArgs}> v1, T{i} v2) => Equals(v1, v2);"); 
+			WriteLine($"public static bool operator !=(OneOf<{genericArgs}> v1, T{i} v2) => !Equals(v1, v2);");
+			WriteLine($"public static bool operator ==(T{i} v1, OneOf<{genericArgs}> v2) => Equals(v2, v1);"); 
+			WriteLine($"public static bool operator !=(T{i} v1, OneOf<{genericArgs}> v2) => !Equals(v2, v1);");
 	    }
 
 		// =============== Switch / SwitchWhen
