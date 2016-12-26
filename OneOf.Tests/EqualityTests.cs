@@ -21,12 +21,6 @@ namespace OneOf.Tests
 
             Assert.IsTrue(same1.Equals(same2));
             Assert.IsFalse(same1.Equals(diff2));
-
-            Assert.IsTrue(same1 == same2);
-            Assert.IsFalse(same1 == diff2);
-
-            Assert.IsFalse(same1 != same2);
-            Assert.IsTrue(same1 != diff2);
         }
 
         [Test]
@@ -39,62 +33,16 @@ namespace OneOf.Tests
 
             Assert.IsTrue(same1.Equals(same2));
             Assert.IsFalse(same1.Equals(diff2));
-
-            Assert.IsTrue(same1 == same2);
-            Assert.IsFalse(same1 == diff2);
-
-            Assert.IsFalse(same1 != same2);
-            Assert.IsTrue(same1 != diff2);
         }
 
         [Test]
-        public void EqualsDoesNotRequireSameType()
+        public void EqualsRequiresSameType()
         {
             var v1 = (OneOf<string, bool>)"x";
             var v2 = (OneOf<string, bool, int>)"x";
 
             Assert.IsFalse(v1.Equals(null));
-            Assert.IsTrue(v1.Equals(v2));
-        }
-
-        [Test]
-        public void OpEquals_OneOfVsOneOf_SameType()
-        {
-            var v1 = (OneOf<string, bool>)"x";
-            var v2 = (OneOf<string, bool>)"x";
-
-            Assert.IsTrue(v1 == v2);
-            Assert.IsFalse(v1 != v2);
-        }
-
-        [Test]
-        public void OpEquals_OneOfVsOneOf_DiffType()
-        {
-            var v1 = (OneOf<string, bool>)"x";
-            var v2 = (OneOf<string, int>)"x";
-
-            Assert.IsTrue(v1 == v2);
-            Assert.IsFalse(v1 != v2);
-        }
-
-        [Test]
-        public void OpEquals_OneOfVsValue()
-        {
-            var v1 = (OneOf<string, bool>)"x";
-            var v2 = "x";
-
-            Assert.IsTrue(v1 == v2);
-            Assert.IsFalse(v1 != v2);
-        }
-
-        [Test]
-        public void OpEquals_ValueVsOneOf()
-        {
-            var v1 = "x";
-            var v2 = (OneOf<string, bool>)"x";
-
-            Assert.IsTrue(v1 == v2);
-            Assert.IsFalse(v1 != v2);
+            Assert.IsFalse(v1.Equals(v2));
         }
     }
 }

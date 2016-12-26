@@ -84,21 +84,6 @@ void WriteOneOf(int countOfgenericParams)
 		// Error CS0552	- user-defined conversions to or from an interface are not allowed
 		// WriteLine($"public static implicit operator OneOf<{genericArgs}>(IOneOf oo) => OneOfFactory<OneOf<{genericArgs}>>.Create(oo.Value);"); 
 
-		// =============== equality operators
-
-		WriteLine("");
-		WriteLine($"public static bool operator ==(OneOf<{genericArgs}> v1, IOneOf v2) => Equals(v1, v2);"); 
-		WriteLine($"public static bool operator !=(OneOf<{genericArgs}> v1, IOneOf v2) => !Equals(v1, v2);");
-
-		//also adding equality operators to compare to the various Generic types by value
-	    for (var i = 1; i <= countOfgenericParams; i++)
-	    {
-			WriteLine($"public static bool operator ==(OneOf<{genericArgs}> v1, T{i} v2) => Equals(v1, v2);"); 
-			WriteLine($"public static bool operator !=(OneOf<{genericArgs}> v1, T{i} v2) => !Equals(v1, v2);");
-			WriteLine($"public static bool operator ==(T{i} v1, OneOf<{genericArgs}> v2) => Equals(v2, v1);"); 
-			WriteLine($"public static bool operator !=(T{i} v1, OneOf<{genericArgs}> v2) => !Equals(v2, v1);");
-	    }
-
 		// =============== Switch / SwitchWhen
 
 		WriteLine("");
@@ -136,8 +121,7 @@ void WriteOneOf(int countOfgenericParams)
 		// =============== object overrides
 
 		WriteLine("");
-		// Returns true if the object is either an IOneOf, or if the value equals the OneOf, rather than only if it is the same kind of OneOf.
-		WriteLine($"public override bool Equals(object obj) => (obj is IOneOf) && Equals(value, ((IOneOf)obj).Value) || value.Equals(obj);");
+		WriteLine($"public override bool Equals(object obj) => (obj is OneOf<{genericArgs}>) && Equals(this.value, ((OneOf<{genericArgs}>)obj).value);");
 		WriteLine("public override int GetHashCode() => (value?.GetHashCode() ?? 0);");
 		WriteLine("public override string ToString() => (value?.ToString() ?? \"\");");
 	}

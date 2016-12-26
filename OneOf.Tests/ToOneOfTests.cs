@@ -13,8 +13,7 @@ namespace OneOf.Tests
 
             var a = oo.ToOneOf<byte, long, int>();
 
-            Assert.IsTrue(1 == a);
-            Assert.IsTrue(a == 1);
+            Assert.IsTrue(a.Match((int v) => true).Else(false));
         }
     }
 }
