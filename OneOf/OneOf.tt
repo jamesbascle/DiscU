@@ -84,6 +84,12 @@ void WriteOneOf(int countOfgenericParams)
 		// Error CS0552	- user-defined conversions to or from an interface are not allowed
 		// WriteLine($"public static implicit operator OneOf<{genericArgs}>(IOneOf oo) => OneOfFactory<OneOf<{genericArgs}>>.Create(oo.Value);"); 
 
+		// =============== equality operators
+
+		WriteLine("");
+		WriteLine($"public static bool operator ==(OneOf<{genericArgs}> v1, OneOf<{genericArgs}> v2) => Equals(v1, v2);"); 
+		WriteLine($"public static bool operator !=(OneOf<{genericArgs}> v1, OneOf<{genericArgs}> v2) => !Equals(v1, v2);");
+
 		// =============== Switch / SwitchWhen
 
 		WriteLine("");

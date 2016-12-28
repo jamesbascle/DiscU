@@ -32,6 +32,9 @@ namespace OneOf
         public static implicit operator OneOf<T1, T2>(T1 value) => OneOfFactory<OneOf<T1, T2>>.Create(value);
         public static implicit operator OneOf<T1, T2>(T2 value) => OneOfFactory<OneOf<T1, T2>>.Create(value);
 
+        public static bool operator ==(OneOf<T1, T2> v1, OneOf<T1, T2> v2) => Equals(v1, v2);
+        public static bool operator !=(OneOf<T1, T2> v1, OneOf<T1, T2> v2) => !Equals(v1, v2);
+
         public OneOfSwitcher<T2> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2>(this).Switch(action);
         public OneOfSwitcher<T1> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2>(this).Switch(action);
 
@@ -73,6 +76,9 @@ namespace OneOf
         public static implicit operator OneOf<T1, T2, T3>(T1 value) => OneOfFactory<OneOf<T1, T2, T3>>.Create(value);
         public static implicit operator OneOf<T1, T2, T3>(T2 value) => OneOfFactory<OneOf<T1, T2, T3>>.Create(value);
         public static implicit operator OneOf<T1, T2, T3>(T3 value) => OneOfFactory<OneOf<T1, T2, T3>>.Create(value);
+
+        public static bool operator ==(OneOf<T1, T2, T3> v1, OneOf<T1, T2, T3> v2) => Equals(v1, v2);
+        public static bool operator !=(OneOf<T1, T2, T3> v1, OneOf<T1, T2, T3> v2) => !Equals(v1, v2);
 
         public OneOfSwitcher<T2, T3> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3>(this).Switch(action);
         public OneOfSwitcher<T1, T3> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3>(this).Switch(action);
@@ -119,6 +125,9 @@ namespace OneOf
         public static implicit operator OneOf<T1, T2, T3, T4>(T2 value) => OneOfFactory<OneOf<T1, T2, T3, T4>>.Create(value);
         public static implicit operator OneOf<T1, T2, T3, T4>(T3 value) => OneOfFactory<OneOf<T1, T2, T3, T4>>.Create(value);
         public static implicit operator OneOf<T1, T2, T3, T4>(T4 value) => OneOfFactory<OneOf<T1, T2, T3, T4>>.Create(value);
+
+        public static bool operator ==(OneOf<T1, T2, T3, T4> v1, OneOf<T1, T2, T3, T4> v2) => Equals(v1, v2);
+        public static bool operator !=(OneOf<T1, T2, T3, T4> v1, OneOf<T1, T2, T3, T4> v2) => !Equals(v1, v2);
 
         public OneOfSwitcher<T2, T3, T4> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4>(this).Switch(action);
         public OneOfSwitcher<T1, T3, T4> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4>(this).Switch(action);
@@ -169,6 +178,9 @@ namespace OneOf
         public static implicit operator OneOf<T1, T2, T3, T4, T5>(T3 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5>>.Create(value);
         public static implicit operator OneOf<T1, T2, T3, T4, T5>(T4 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5>>.Create(value);
         public static implicit operator OneOf<T1, T2, T3, T4, T5>(T5 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5>>.Create(value);
+
+        public static bool operator ==(OneOf<T1, T2, T3, T4, T5> v1, OneOf<T1, T2, T3, T4, T5> v2) => Equals(v1, v2);
+        public static bool operator !=(OneOf<T1, T2, T3, T4, T5> v1, OneOf<T1, T2, T3, T4, T5> v2) => !Equals(v1, v2);
 
         public OneOfSwitcher<T2, T3, T4, T5> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5>(this).Switch(action);
         public OneOfSwitcher<T1, T3, T4, T5> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5>(this).Switch(action);
@@ -223,6 +235,9 @@ namespace OneOf
         public static implicit operator OneOf<T1, T2, T3, T4, T5, T6>(T4 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6>>.Create(value);
         public static implicit operator OneOf<T1, T2, T3, T4, T5, T6>(T5 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6>>.Create(value);
         public static implicit operator OneOf<T1, T2, T3, T4, T5, T6>(T6 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6>>.Create(value);
+
+        public static bool operator ==(OneOf<T1, T2, T3, T4, T5, T6> v1, OneOf<T1, T2, T3, T4, T5, T6> v2) => Equals(v1, v2);
+        public static bool operator !=(OneOf<T1, T2, T3, T4, T5, T6> v1, OneOf<T1, T2, T3, T4, T5, T6> v2) => !Equals(v1, v2);
 
         public OneOfSwitcher<T2, T3, T4, T5, T6> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(this).Switch(action);
         public OneOfSwitcher<T1, T3, T4, T5, T6> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(this).Switch(action);
@@ -281,6 +296,9 @@ namespace OneOf
         public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T5 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6, T7>>.Create(value);
         public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T6 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6, T7>>.Create(value);
         public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T7 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6, T7>>.Create(value);
+
+        public static bool operator ==(OneOf<T1, T2, T3, T4, T5, T6, T7> v1, OneOf<T1, T2, T3, T4, T5, T6, T7> v2) => Equals(v1, v2);
+        public static bool operator !=(OneOf<T1, T2, T3, T4, T5, T6, T7> v1, OneOf<T1, T2, T3, T4, T5, T6, T7> v2) => !Equals(v1, v2);
 
         public OneOfSwitcher<T2, T3, T4, T5, T6, T7> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(this).Switch(action);
         public OneOfSwitcher<T1, T3, T4, T5, T6, T7> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(this).Switch(action);
@@ -343,6 +361,9 @@ namespace OneOf
         public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T6 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6, T7, T8>>.Create(value);
         public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T7 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6, T7, T8>>.Create(value);
         public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T8 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6, T7, T8>>.Create(value);
+
+        public static bool operator ==(OneOf<T1, T2, T3, T4, T5, T6, T7, T8> v1, OneOf<T1, T2, T3, T4, T5, T6, T7, T8> v2) => Equals(v1, v2);
+        public static bool operator !=(OneOf<T1, T2, T3, T4, T5, T6, T7, T8> v1, OneOf<T1, T2, T3, T4, T5, T6, T7, T8> v2) => !Equals(v1, v2);
 
         public OneOfSwitcher<T2, T3, T4, T5, T6, T7, T8> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(this).Switch(action);
         public OneOfSwitcher<T1, T3, T4, T5, T6, T7, T8> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(this).Switch(action);
@@ -409,6 +430,9 @@ namespace OneOf
         public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T7 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>>.Create(value);
         public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T8 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>>.Create(value);
         public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T9 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>>.Create(value);
+
+        public static bool operator ==(OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9> v1, OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9> v2) => Equals(v1, v2);
+        public static bool operator !=(OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9> v1, OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9> v2) => !Equals(v1, v2);
 
         public OneOfSwitcher<T2, T3, T4, T5, T6, T7, T8, T9> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this).Switch(action);
         public OneOfSwitcher<T1, T3, T4, T5, T6, T7, T8, T9> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this).Switch(action);
