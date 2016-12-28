@@ -20,9 +20,8 @@ namespace OneOf
         /// <summary>Function to quickly create instances of OneOf without needing reflection</summary>
         static readonly Func<object, Type, TOneOf> createOneOfInstance = GetCreateInstanceFunc();
 
-        /// <summary>Maps value type to one of the OneOf's permitted value types</summary>
-        static readonly List<KeyValuePair<TypeInfo, TypeInfo>> mapValueTypeToOneOfPermittedType
-            = oneOfPermittedValueTypes.Select(x => new KeyValuePair<TypeInfo, TypeInfo>(x, x)).ToList();
+        /// <summary>Function to quickly create determine if type is Tn</summary>
+        static readonly Func<TypeInfo, Boolean> equalsTn = GetEqualsTnFunc();
 
         /// <summary>
         /// Create an instance of OneOf
@@ -54,16 +53,12 @@ namespace OneOf
         {
             TypeInfo bestType = null;
 
-            // fast case: the value type is Tn, or something we've seen previously
+            // fastest case: the type equals Tn?
 
-            for (var i = mapValueTypeToOneOfPermittedType.Count - 1; i >= 0; i--)
-            {
-                var kv = mapValueTypeToOneOfPermittedType[i];
-                if (valueType == kv.Key)
-                    return kv.Value;
-            }
+            if (equalsTn(valueType))
+                return valueType;
 
-            // slow case: it's a type we haven't seen before, find the best matching Tn
+            // slowest case: find the best matching Tn, if subclass
 
             foreach (var permittedType in oneOfPermittedValueTypes)
             {
@@ -79,10 +74,6 @@ namespace OneOf
                 }
             }
 
-            // remember the match so we can use the fast case next time
-
-            mapValueTypeToOneOfPermittedType.Add(new KeyValuePair<TypeInfo, TypeInfo>(valueType, bestType));
-
             return bestType;
         }
 
@@ -97,6 +88,30 @@ namespace OneOf
             var parmTypeExpr = Expression.Parameter(typeof(Type), "type");
             var newExpr = Expression.New(oneofCtor, parmValueExpr, parmTypeExpr);
             var lambdaExpr = Expression.Lambda<Func<object, Type, TOneOf>>(newExpr, parmValueExpr, parmTypeExpr);
+            var func = lambdaExpr.Compile();
+            return func;
+        }
+
+        /// <summary>
+        /// Create a Func that quickly determines if the ValueType equals Tn
+        /// </summary>
+        static Func<TypeInfo, Boolean> GetEqualsTnFunc()
+        {
+            var typeInfoParm = Expression.Parameter(typeof(Type), "typeInfo");
+            var labelReturn = Expression.Label(typeof(Boolean));
+            var body = new List<Expression>();
+
+            foreach(var tn in oneOfPermittedValueTypes)
+            {
+                // return true if typeInfo == Tn
+                var expr = Expression.IfThen(Expression.Equal(typeInfoParm, Expression.Constant(tn)), Expression.Return(labelReturn, Expression.Constant(true)));
+                body.Add(expr);
+            }
+
+            // otherwise default is false
+            body.Add(Expression.Label(labelReturn, Expression.Constant(false)));
+
+            var lambdaExpr = Expression.Lambda<Func<TypeInfo, Boolean>>(Expression.Block(body.ToArray()), typeInfoParm);
             var func = lambdaExpr.Compile();
             return func;
         }

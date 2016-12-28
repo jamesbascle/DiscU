@@ -32,6 +32,9 @@ namespace OneOf.PerfTests
             var c1 = new C1();
             RunTest("Ctor1", () => { OneOf<C1, C2, C3, C4, C5, C6, C7, C8, C9> oo = c1; return oo; });
 
+            var c5 = new C5();
+            RunTest("Ctor5", () => { OneOf<C1, C2, C3, C4, C5, C6, C7, C8, C9> oo = c5; return oo; });
+
             var c9 = new C9();
             RunTest("Ctor9", () => { OneOf<C1, C2, C3, C4, C5, C6, C7, C8, C9> oo = c9; return oo; });
         }
@@ -41,16 +44,23 @@ namespace OneOf.PerfTests
             OneOf<C1, C2, C3, C4, C5, C6, C7, C8, C9> oo1 = new C1();
             RunTest("Match1", () => oo1.Match((C1 v) => 1).Match((C2 v) => 2).Match((C3 v) => 3).Match((C4 v) => 4).Match((C5 v) => 5).Match((C6 v) => 6).Match((C7 v) => 7).Match((C8 v) => 8).Match((C9 v) => 9));
 
-            OneOf<C1, C2, C3, C4, C5, C6, C7, C8, C9> oo2 = new C9();
-            RunTest("Match9", () => oo2.Match((C1 v) => 1).Match((C2 v) => 2).Match((C3 v) => 3).Match((C4 v) => 4).Match((C5 v) => 5).Match((C6 v) => 6).Match((C7 v) => 7).Match((C8 v) => 8).Match((C9 v) => 9));
+            OneOf<C1, C2, C3, C4, C5, C6, C7, C8, C9> oo5 = new C5();
+            RunTest("Match5", () => oo5.Match((C1 v) => 1).Match((C2 v) => 2).Match((C3 v) => 3).Match((C4 v) => 4).Match((C5 v) => 5).Match((C6 v) => 6).Match((C7 v) => 7).Match((C8 v) => 8).Match((C9 v) => 9));
+
+            OneOf<C1, C2, C3, C4, C5, C6, C7, C8, C9> oo9 = new C9();
+            RunTest("Match9", () => oo9.Match((C1 v) => 1).Match((C2 v) => 2).Match((C3 v) => 3).Match((C4 v) => 4).Match((C5 v) => 5).Match((C6 v) => 6).Match((C7 v) => 7).Match((C8 v) => 8).Match((C9 v) => 9));
         }
 
         static void RunTest<T>(string nameOfTest, Func<T> thingToTest)
         {
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+
             Console.Write("{0:15} ... ", nameOfTest);
 
             // warm it up first
-            thingToTest();
+            for (var i = 0; i < 100; i++)
+                thingToTest();
 
             // and then measure it
             var sw = Stopwatch.StartNew();
