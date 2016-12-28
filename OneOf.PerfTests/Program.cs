@@ -48,16 +48,33 @@ namespace OneOf.PerfTests
         static void RunTest<T>(string nameOfTest, Func<T> thingToTest)
         {
             Console.Write("{0:15} ... ", nameOfTest);
+
+            // warm it up first
+            thingToTest();
+
+            // and then measure it
             var sw = Stopwatch.StartNew();
 
             var iterations = 0;
             while (sw.ElapsedMilliseconds < 1000)
             {
-                for(var i = 0; i < 1000; i++)
+                // don't check the clock too often, and
+                // unroll the loop 10x to take the cost of looping out of the equation as much as possible
+                for(var i = 0; i < 100; i++)
                 {
                     thingToTest();
-                    iterations++;
+                    thingToTest();
+                    thingToTest();
+                    thingToTest();
+                    thingToTest();
+                    thingToTest();
+                    thingToTest();
+                    thingToTest();
+                    thingToTest();
+                    thingToTest();
                 }
+
+                iterations += 1000;     // 100 loops of 10 tests = 1000
             }
 
             sw.Stop();
