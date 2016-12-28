@@ -20,9 +20,7 @@ namespace OneOf
         /// <summary>Function to quickly create instances of OneOf without needing reflection</summary>
         static readonly Func<object, Type, TOneOf> createOneOfInstance = GetCreateInstanceFunc();
 
-        ///// <summary>Maps value type to one of the OneOf's permitted value types</summary>
-        //static readonly Dictionary<TypeInfo, TypeInfo> mapValueTypeToOneOfPermittedType
-        //                           = oneOfPermittedValueTypes.ToDictionary(k => k);
+        /// <summary>Maps value type to one of the OneOf's permitted value types</summary>
         static readonly List<KeyValuePair<TypeInfo, TypeInfo>> mapValueTypeToOneOfPermittedType
             = oneOfPermittedValueTypes.Select(x => new KeyValuePair<TypeInfo, TypeInfo>(x, x)).ToList();
 
@@ -49,7 +47,6 @@ namespace OneOf
             return oneofInstance;
         }
 
-        /// <summary>
         /// <summary>
         /// Get the OneOf's Tn that best matches the value, or null.
         /// </summary>
@@ -80,7 +77,6 @@ namespace OneOf
                 }
             }
 
-            //mapValueTypeToOneOfPermittedType.Add(valueType, bestType);
             mapValueTypeToOneOfPermittedType.Add(new KeyValuePair<TypeInfo, TypeInfo>(valueType, bestType));
 
             return bestType;
