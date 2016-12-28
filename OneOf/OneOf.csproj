@@ -39,7 +39,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>OneOf.tt</DependentUpon>
     </Compile>
-    <Compile Include="OneOfFactory.cs" />
+    <Compile Include="OneOfBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IOneOf.cs" />
   </ItemGroup>

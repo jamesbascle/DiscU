@@ -36,40 +36,13 @@ void WriteOneOf(int countOfgenericParams)
 {
 	var genericArgs = GenerateGenericArgs(Enumerable.Range(1, countOfgenericParams));
 
-	WriteLine($"public class OneOf<{genericArgs}> : IOneOf");
+	WriteLine($"public class OneOf<{genericArgs}> : OneOfBase<OneOf<{genericArgs}>>");
 	using(new WriteBraces(this))
 	{
-		WriteLine("private readonly object value;");
-        WriteLine("private readonly Type origType;");
-		
 		// =============== Constructors
-		// must only be called after value has been validated to be Tn
 	    
-		WriteLine("");
-        WriteLine($"OneOf(object value, Type origType)");
-
-		using(new WriteBraces(this))
-		{
-			WriteLine("this.value = value;");
-            WriteLine("this.origType = origType;");
-
-		}
-		
-	    // =============== IOneOf implementation
-
-		WriteLine("");
-		WriteLine("object IOneOf.Value => value;");
-		WriteLine("Type IOneOf.OrigType => origType;");
-
-		// =============== ToOneOf
-
-		WriteLine("");
-		for (var numberOfGenericsInNew = countOfgenericParams; numberOfGenericsInNew <= 9; numberOfGenericsInNew ++)
-	    {
-	        var nargs = Enumerable.Range(1, numberOfGenericsInNew).Select(e => "N" + e).ToArray();
-	        var otherGenericArgs = string.Join(", ", nargs);
-	        WriteLine($"public OneOf<{otherGenericArgs}> ToOneOf<{otherGenericArgs}>() => OneOfFactory<OneOf<{otherGenericArgs}>>.Create(value);");
-	    }
+        WriteLine($"public OneOf(object value) : base(value) {{ }}");
+        WriteLine($"public OneOf(IOneOf oo) : base(oo.Value) {{ }}");
 
 	    // =============== implicit conversion to T
 		// While it looks like we could use OneOf ctor directly as we know the value is a Tn, it might be a subclass of tn.
@@ -78,17 +51,8 @@ void WriteOneOf(int countOfgenericParams)
 		WriteLine("");
 		for(var parmIndex = 1; parmIndex <= countOfgenericParams; parmIndex ++)
 		{
-			WriteLine($"public static implicit operator OneOf<{genericArgs}>(T{parmIndex} value) => OneOfFactory<OneOf<{genericArgs}>>.Create(value);"); 
+			WriteLine($"public static implicit operator OneOf<{genericArgs}>(T{parmIndex} value) => new OneOf<{genericArgs}>(value);"); 
 		}
-
-		// Error CS0552	- user-defined conversions to or from an interface are not allowed
-		// WriteLine($"public static implicit operator OneOf<{genericArgs}>(IOneOf oo) => OneOfFactory<OneOf<{genericArgs}>>.Create(oo.Value);"); 
-
-		// =============== equality operators
-
-		WriteLine("");
-		WriteLine($"public static bool operator ==(OneOf<{genericArgs}> v1, OneOf<{genericArgs}> v2) => Equals(v1, v2);"); 
-		WriteLine($"public static bool operator !=(OneOf<{genericArgs}> v1, OneOf<{genericArgs}> v2) => !Equals(v1, v2);");
 
 		// =============== Switch / SwitchWhen
 
@@ -123,13 +87,6 @@ void WriteOneOf(int countOfgenericParams)
 		{
 			WriteLine($"public OneOfMatcher<{genericArgs}, TResult> MatchWhen<TResult>(Predicate<T{parmIndex}> condition, Func<T{parmIndex}, TResult> calcResult) => new OneOfMatcher<{genericArgs}, TResult>(this).MatchWhen(condition, calcResult);");
 		}
-
-		// =============== object overrides
-
-		WriteLine("");
-		WriteLine($"public override bool Equals(object obj) => (obj is OneOf<{genericArgs}>) && Equals(this.value, ((OneOf<{genericArgs}>)obj).value);");
-		WriteLine("public override int GetHashCode() => (value?.GetHashCode() ?? 0);");
-		WriteLine("public override string ToString() => (value?.ToString() ?? \"\");");
 	}
 }
 

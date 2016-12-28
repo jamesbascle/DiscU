@@ -8,31 +8,42 @@ using System.Threading.Tasks;
 
 namespace OneOf
 {
-    internal static class OneOfFactory<TOneOf>
+    public abstract class OneOfBase<TOneOf> : IOneOf
         where TOneOf : IOneOf
     {
+        // =========================================================================
+
+        private readonly object value;
+        private readonly Type origType;
+
+        object IOneOf.Value => value;
+        Type IOneOf.OrigType => origType;
+
+        public override bool Equals(object obj) => (obj is TOneOf) && Equals(this.value, ((IOneOf)obj).Value);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
+        public override string ToString() => (value?.ToString() ?? "");
+
+        public static bool operator ==(OneOfBase<TOneOf> v1, TOneOf v2) => Equals(v1, v2);
+        public static bool operator !=(OneOfBase<TOneOf> v1, TOneOf v2) => !Equals(v1, v2);
+
+        // =========================================================================
+        // for constructing instance
+
         /// <summary>The OneOf's type</summary>
         static readonly TypeInfo oneOfType = typeof(TOneOf).GetTypeInfo();
 
         /// <summary>The OneOf's Tn types</summary>
         static readonly TypeInfo[] oneOfTnTypes = oneOfType.GenericTypeArguments.Select(x => x.GetTypeInfo()).ToArray();
 
-        /// <summary>Function to quickly create instances of OneOf without needing reflection</summary>
-        static readonly Func<object, Type, TOneOf> createOneOfInstance = GetCreateInstanceFunc();
-
         /// <summary>Function to quickly determine if type equals Tn</summary>
         static readonly Func<TypeInfo, Boolean> equalsTn = GetEqualsTnFunc();
 
-        /// <summary>
-        /// Create an instance of OneOf
-        /// </summary>
-        public static TOneOf Create(object value)
+        protected OneOfBase(object value)
         {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
 
             var valueType = value.GetType().GetTypeInfo();
-
             var matchingType = GetBestMatchingTn(valueType);
 
             if (matchingType == null)
@@ -41,9 +52,8 @@ namespace OneOf
                 throw new ArgumentException($"Value of type {valueType.Name} is not compatible with OneOf<{oneOfTnCsv}>", nameof(value));
             }
 
-            var oneofInstance = createOneOfInstance(value, matchingType.AsType());
-
-            return oneofInstance;
+            this.value = value;
+            this.origType = matchingType.AsType();
         }
 
         /// <summary>
@@ -78,21 +88,6 @@ namespace OneOf
         }
 
         /// <summary>
-        /// Create a Func that quickly creates an instance of the OneOf.
-        /// </summary>
-        static Func<object, Type, TOneOf> GetCreateInstanceFunc()
-        {
-            var oneofCtor = oneOfType.DeclaredConstructors.First();
-
-            var parmValueExpr = Expression.Parameter(typeof(object), "value");
-            var parmTypeExpr = Expression.Parameter(typeof(Type), "type");
-            var newExpr = Expression.New(oneofCtor, parmValueExpr, parmTypeExpr);
-            var lambdaExpr = Expression.Lambda<Func<object, Type, TOneOf>>(newExpr, parmValueExpr, parmTypeExpr);
-            var func = lambdaExpr.Compile();
-            return func;
-        }
-
-        /// <summary>
         /// Create a Func that quickly determines if the ValueType equals Tn
         /// </summary>
         static Func<TypeInfo, Boolean> GetEqualsTnFunc()
@@ -101,7 +96,7 @@ namespace OneOf
             var labelReturn = Expression.Label(typeof(Boolean));
             var body = new List<Expression>();
 
-            foreach(var tn in oneOfTnTypes)
+            foreach (var tn in oneOfTnTypes)
             {
                 // return true if typeInfo == Tn
                 var expr = Expression.IfThen(Expression.Equal(typeInfoParm, Expression.Constant(tn)), Expression.Return(labelReturn, Expression.Constant(true)));

@@ -6,34 +6,13 @@ using System;
 
 namespace OneOf
 {
-    public class OneOf<T1, T2> : IOneOf
+    public class OneOf<T1, T2> : OneOfBase<OneOf<T1, T2>>
     {
-        private readonly object value;
-        private readonly Type origType;
+        public OneOf(object value) : base(value) { }
+        public OneOf(IOneOf oo) : base(oo.Value) { }
 
-        OneOf(object value, Type origType)
-        {
-            this.value = value;
-            this.origType = origType;
-        }
-
-        object IOneOf.Value => value;
-        Type IOneOf.OrigType => origType;
-
-        public OneOf<N1, N2> ToOneOf<N1, N2>() => OneOfFactory<OneOf<N1, N2>>.Create(value);
-        public OneOf<N1, N2, N3> ToOneOf<N1, N2, N3>() => OneOfFactory<OneOf<N1, N2, N3>>.Create(value);
-        public OneOf<N1, N2, N3, N4> ToOneOf<N1, N2, N3, N4>() => OneOfFactory<OneOf<N1, N2, N3, N4>>.Create(value);
-        public OneOf<N1, N2, N3, N4, N5> ToOneOf<N1, N2, N3, N4, N5>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5>>.Create(value);
-        public OneOf<N1, N2, N3, N4, N5, N6> ToOneOf<N1, N2, N3, N4, N5, N6>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5, N6>>.Create(value);
-        public OneOf<N1, N2, N3, N4, N5, N6, N7> ToOneOf<N1, N2, N3, N4, N5, N6, N7>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5, N6, N7>>.Create(value);
-        public OneOf<N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5, N6, N7, N8>>.Create(value);
-        public OneOf<N1, N2, N3, N4, N5, N6, N7, N8, N9> ToOneOf<N1, N2, N3, N4, N5, N6, N7, N8, N9>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5, N6, N7, N8, N9>>.Create(value);
-
-        public static implicit operator OneOf<T1, T2>(T1 value) => OneOfFactory<OneOf<T1, T2>>.Create(value);
-        public static implicit operator OneOf<T1, T2>(T2 value) => OneOfFactory<OneOf<T1, T2>>.Create(value);
-
-        public static bool operator ==(OneOf<T1, T2> v1, OneOf<T1, T2> v2) => Equals(v1, v2);
-        public static bool operator !=(OneOf<T1, T2> v1, OneOf<T1, T2> v2) => !Equals(v1, v2);
+        public static implicit operator OneOf<T1, T2>(T1 value) => new OneOf<T1, T2>(value);
+        public static implicit operator OneOf<T1, T2>(T2 value) => new OneOf<T1, T2>(value);
 
         public OneOfSwitcher<T2> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2>(this).Switch(action);
         public OneOfSwitcher<T1> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2>(this).Switch(action);
@@ -46,39 +25,15 @@ namespace OneOf
 
         public OneOfMatcher<T1, T2, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, TResult>(this).MatchWhen(condition, calcResult);
         public OneOfMatcher<T1, T2, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, TResult>(this).MatchWhen(condition, calcResult);
-
-        public override bool Equals(object obj) => (obj is OneOf<T1, T2>) && Equals(this.value, ((OneOf<T1, T2>)obj).value);
-        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
-        public override string ToString() => (value?.ToString() ?? "");
     }
-    public class OneOf<T1, T2, T3> : IOneOf
+    public class OneOf<T1, T2, T3> : OneOfBase<OneOf<T1, T2, T3>>
     {
-        private readonly object value;
-        private readonly Type origType;
+        public OneOf(object value) : base(value) { }
+        public OneOf(IOneOf oo) : base(oo.Value) { }
 
-        OneOf(object value, Type origType)
-        {
-            this.value = value;
-            this.origType = origType;
-        }
-
-        object IOneOf.Value => value;
-        Type IOneOf.OrigType => origType;
-
-        public OneOf<N1, N2, N3> ToOneOf<N1, N2, N3>() => OneOfFactory<OneOf<N1, N2, N3>>.Create(value);
-        public OneOf<N1, N2, N3, N4> ToOneOf<N1, N2, N3, N4>() => OneOfFactory<OneOf<N1, N2, N3, N4>>.Create(value);
-        public OneOf<N1, N2, N3, N4, N5> ToOneOf<N1, N2, N3, N4, N5>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5>>.Create(value);
-        public OneOf<N1, N2, N3, N4, N5, N6> ToOneOf<N1, N2, N3, N4, N5, N6>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5, N6>>.Create(value);
-        public OneOf<N1, N2, N3, N4, N5, N6, N7> ToOneOf<N1, N2, N3, N4, N5, N6, N7>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5, N6, N7>>.Create(value);
-        public OneOf<N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5, N6, N7, N8>>.Create(value);
-        public OneOf<N1, N2, N3, N4, N5, N6, N7, N8, N9> ToOneOf<N1, N2, N3, N4, N5, N6, N7, N8, N9>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5, N6, N7, N8, N9>>.Create(value);
-
-        public static implicit operator OneOf<T1, T2, T3>(T1 value) => OneOfFactory<OneOf<T1, T2, T3>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3>(T2 value) => OneOfFactory<OneOf<T1, T2, T3>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3>(T3 value) => OneOfFactory<OneOf<T1, T2, T3>>.Create(value);
-
-        public static bool operator ==(OneOf<T1, T2, T3> v1, OneOf<T1, T2, T3> v2) => Equals(v1, v2);
-        public static bool operator !=(OneOf<T1, T2, T3> v1, OneOf<T1, T2, T3> v2) => !Equals(v1, v2);
+        public static implicit operator OneOf<T1, T2, T3>(T1 value) => new OneOf<T1, T2, T3>(value);
+        public static implicit operator OneOf<T1, T2, T3>(T2 value) => new OneOf<T1, T2, T3>(value);
+        public static implicit operator OneOf<T1, T2, T3>(T3 value) => new OneOf<T1, T2, T3>(value);
 
         public OneOfSwitcher<T2, T3> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3>(this).Switch(action);
         public OneOfSwitcher<T1, T3> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3>(this).Switch(action);
@@ -95,39 +50,16 @@ namespace OneOf
         public OneOfMatcher<T1, T2, T3, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, TResult>(this).MatchWhen(condition, calcResult);
         public OneOfMatcher<T1, T2, T3, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, TResult>(this).MatchWhen(condition, calcResult);
         public OneOfMatcher<T1, T2, T3, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, TResult>(this).MatchWhen(condition, calcResult);
-
-        public override bool Equals(object obj) => (obj is OneOf<T1, T2, T3>) && Equals(this.value, ((OneOf<T1, T2, T3>)obj).value);
-        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
-        public override string ToString() => (value?.ToString() ?? "");
     }
-    public class OneOf<T1, T2, T3, T4> : IOneOf
+    public class OneOf<T1, T2, T3, T4> : OneOfBase<OneOf<T1, T2, T3, T4>>
     {
-        private readonly object value;
-        private readonly Type origType;
+        public OneOf(object value) : base(value) { }
+        public OneOf(IOneOf oo) : base(oo.Value) { }
 
-        OneOf(object value, Type origType)
-        {
-            this.value = value;
-            this.origType = origType;
-        }
-
-        object IOneOf.Value => value;
-        Type IOneOf.OrigType => origType;
-
-        public OneOf<N1, N2, N3, N4> ToOneOf<N1, N2, N3, N4>() => OneOfFactory<OneOf<N1, N2, N3, N4>>.Create(value);
-        public OneOf<N1, N2, N3, N4, N5> ToOneOf<N1, N2, N3, N4, N5>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5>>.Create(value);
-        public OneOf<N1, N2, N3, N4, N5, N6> ToOneOf<N1, N2, N3, N4, N5, N6>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5, N6>>.Create(value);
-        public OneOf<N1, N2, N3, N4, N5, N6, N7> ToOneOf<N1, N2, N3, N4, N5, N6, N7>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5, N6, N7>>.Create(value);
-        public OneOf<N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5, N6, N7, N8>>.Create(value);
-        public OneOf<N1, N2, N3, N4, N5, N6, N7, N8, N9> ToOneOf<N1, N2, N3, N4, N5, N6, N7, N8, N9>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5, N6, N7, N8, N9>>.Create(value);
-
-        public static implicit operator OneOf<T1, T2, T3, T4>(T1 value) => OneOfFactory<OneOf<T1, T2, T3, T4>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3, T4>(T2 value) => OneOfFactory<OneOf<T1, T2, T3, T4>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3, T4>(T3 value) => OneOfFactory<OneOf<T1, T2, T3, T4>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3, T4>(T4 value) => OneOfFactory<OneOf<T1, T2, T3, T4>>.Create(value);
-
-        public static bool operator ==(OneOf<T1, T2, T3, T4> v1, OneOf<T1, T2, T3, T4> v2) => Equals(v1, v2);
-        public static bool operator !=(OneOf<T1, T2, T3, T4> v1, OneOf<T1, T2, T3, T4> v2) => !Equals(v1, v2);
+        public static implicit operator OneOf<T1, T2, T3, T4>(T1 value) => new OneOf<T1, T2, T3, T4>(value);
+        public static implicit operator OneOf<T1, T2, T3, T4>(T2 value) => new OneOf<T1, T2, T3, T4>(value);
+        public static implicit operator OneOf<T1, T2, T3, T4>(T3 value) => new OneOf<T1, T2, T3, T4>(value);
+        public static implicit operator OneOf<T1, T2, T3, T4>(T4 value) => new OneOf<T1, T2, T3, T4>(value);
 
         public OneOfSwitcher<T2, T3, T4> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4>(this).Switch(action);
         public OneOfSwitcher<T1, T3, T4> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4>(this).Switch(action);
@@ -148,39 +80,17 @@ namespace OneOf
         public OneOfMatcher<T1, T2, T3, T4, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(this).MatchWhen(condition, calcResult);
         public OneOfMatcher<T1, T2, T3, T4, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(this).MatchWhen(condition, calcResult);
         public OneOfMatcher<T1, T2, T3, T4, TResult> MatchWhen<TResult>(Predicate<T4> condition, Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(this).MatchWhen(condition, calcResult);
-
-        public override bool Equals(object obj) => (obj is OneOf<T1, T2, T3, T4>) && Equals(this.value, ((OneOf<T1, T2, T3, T4>)obj).value);
-        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
-        public override string ToString() => (value?.ToString() ?? "");
     }
-    public class OneOf<T1, T2, T3, T4, T5> : IOneOf
+    public class OneOf<T1, T2, T3, T4, T5> : OneOfBase<OneOf<T1, T2, T3, T4, T5>>
     {
-        private readonly object value;
-        private readonly Type origType;
+        public OneOf(object value) : base(value) { }
+        public OneOf(IOneOf oo) : base(oo.Value) { }
 
-        OneOf(object value, Type origType)
-        {
-            this.value = value;
-            this.origType = origType;
-        }
-
-        object IOneOf.Value => value;
-        Type IOneOf.OrigType => origType;
-
-        public OneOf<N1, N2, N3, N4, N5> ToOneOf<N1, N2, N3, N4, N5>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5>>.Create(value);
-        public OneOf<N1, N2, N3, N4, N5, N6> ToOneOf<N1, N2, N3, N4, N5, N6>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5, N6>>.Create(value);
-        public OneOf<N1, N2, N3, N4, N5, N6, N7> ToOneOf<N1, N2, N3, N4, N5, N6, N7>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5, N6, N7>>.Create(value);
-        public OneOf<N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5, N6, N7, N8>>.Create(value);
-        public OneOf<N1, N2, N3, N4, N5, N6, N7, N8, N9> ToOneOf<N1, N2, N3, N4, N5, N6, N7, N8, N9>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5, N6, N7, N8, N9>>.Create(value);
-
-        public static implicit operator OneOf<T1, T2, T3, T4, T5>(T1 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5>(T2 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5>(T3 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5>(T4 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5>(T5 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5>>.Create(value);
-
-        public static bool operator ==(OneOf<T1, T2, T3, T4, T5> v1, OneOf<T1, T2, T3, T4, T5> v2) => Equals(v1, v2);
-        public static bool operator !=(OneOf<T1, T2, T3, T4, T5> v1, OneOf<T1, T2, T3, T4, T5> v2) => !Equals(v1, v2);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5>(T1 value) => new OneOf<T1, T2, T3, T4, T5>(value);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5>(T2 value) => new OneOf<T1, T2, T3, T4, T5>(value);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5>(T3 value) => new OneOf<T1, T2, T3, T4, T5>(value);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5>(T4 value) => new OneOf<T1, T2, T3, T4, T5>(value);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5>(T5 value) => new OneOf<T1, T2, T3, T4, T5>(value);
 
         public OneOfSwitcher<T2, T3, T4, T5> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5>(this).Switch(action);
         public OneOfSwitcher<T1, T3, T4, T5> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5>(this).Switch(action);
@@ -205,39 +115,18 @@ namespace OneOf
         public OneOfMatcher<T1, T2, T3, T4, T5, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).MatchWhen(condition, calcResult);
         public OneOfMatcher<T1, T2, T3, T4, T5, TResult> MatchWhen<TResult>(Predicate<T4> condition, Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).MatchWhen(condition, calcResult);
         public OneOfMatcher<T1, T2, T3, T4, T5, TResult> MatchWhen<TResult>(Predicate<T5> condition, Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).MatchWhen(condition, calcResult);
-
-        public override bool Equals(object obj) => (obj is OneOf<T1, T2, T3, T4, T5>) && Equals(this.value, ((OneOf<T1, T2, T3, T4, T5>)obj).value);
-        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
-        public override string ToString() => (value?.ToString() ?? "");
     }
-    public class OneOf<T1, T2, T3, T4, T5, T6> : IOneOf
+    public class OneOf<T1, T2, T3, T4, T5, T6> : OneOfBase<OneOf<T1, T2, T3, T4, T5, T6>>
     {
-        private readonly object value;
-        private readonly Type origType;
+        public OneOf(object value) : base(value) { }
+        public OneOf(IOneOf oo) : base(oo.Value) { }
 
-        OneOf(object value, Type origType)
-        {
-            this.value = value;
-            this.origType = origType;
-        }
-
-        object IOneOf.Value => value;
-        Type IOneOf.OrigType => origType;
-
-        public OneOf<N1, N2, N3, N4, N5, N6> ToOneOf<N1, N2, N3, N4, N5, N6>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5, N6>>.Create(value);
-        public OneOf<N1, N2, N3, N4, N5, N6, N7> ToOneOf<N1, N2, N3, N4, N5, N6, N7>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5, N6, N7>>.Create(value);
-        public OneOf<N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5, N6, N7, N8>>.Create(value);
-        public OneOf<N1, N2, N3, N4, N5, N6, N7, N8, N9> ToOneOf<N1, N2, N3, N4, N5, N6, N7, N8, N9>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5, N6, N7, N8, N9>>.Create(value);
-
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6>(T1 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6>(T2 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6>(T3 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6>(T4 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6>(T5 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6>(T6 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6>>.Create(value);
-
-        public static bool operator ==(OneOf<T1, T2, T3, T4, T5, T6> v1, OneOf<T1, T2, T3, T4, T5, T6> v2) => Equals(v1, v2);
-        public static bool operator !=(OneOf<T1, T2, T3, T4, T5, T6> v1, OneOf<T1, T2, T3, T4, T5, T6> v2) => !Equals(v1, v2);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6>(T1 value) => new OneOf<T1, T2, T3, T4, T5, T6>(value);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6>(T2 value) => new OneOf<T1, T2, T3, T4, T5, T6>(value);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6>(T3 value) => new OneOf<T1, T2, T3, T4, T5, T6>(value);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6>(T4 value) => new OneOf<T1, T2, T3, T4, T5, T6>(value);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6>(T5 value) => new OneOf<T1, T2, T3, T4, T5, T6>(value);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6>(T6 value) => new OneOf<T1, T2, T3, T4, T5, T6>(value);
 
         public OneOfSwitcher<T2, T3, T4, T5, T6> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(this).Switch(action);
         public OneOfSwitcher<T1, T3, T4, T5, T6> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(this).Switch(action);
@@ -266,39 +155,19 @@ namespace OneOf
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen<TResult>(Predicate<T4> condition, Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).MatchWhen(condition, calcResult);
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen<TResult>(Predicate<T5> condition, Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).MatchWhen(condition, calcResult);
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen<TResult>(Predicate<T6> condition, Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).MatchWhen(condition, calcResult);
-
-        public override bool Equals(object obj) => (obj is OneOf<T1, T2, T3, T4, T5, T6>) && Equals(this.value, ((OneOf<T1, T2, T3, T4, T5, T6>)obj).value);
-        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
-        public override string ToString() => (value?.ToString() ?? "");
     }
-    public class OneOf<T1, T2, T3, T4, T5, T6, T7> : IOneOf
+    public class OneOf<T1, T2, T3, T4, T5, T6, T7> : OneOfBase<OneOf<T1, T2, T3, T4, T5, T6, T7>>
     {
-        private readonly object value;
-        private readonly Type origType;
+        public OneOf(object value) : base(value) { }
+        public OneOf(IOneOf oo) : base(oo.Value) { }
 
-        OneOf(object value, Type origType)
-        {
-            this.value = value;
-            this.origType = origType;
-        }
-
-        object IOneOf.Value => value;
-        Type IOneOf.OrigType => origType;
-
-        public OneOf<N1, N2, N3, N4, N5, N6, N7> ToOneOf<N1, N2, N3, N4, N5, N6, N7>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5, N6, N7>>.Create(value);
-        public OneOf<N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5, N6, N7, N8>>.Create(value);
-        public OneOf<N1, N2, N3, N4, N5, N6, N7, N8, N9> ToOneOf<N1, N2, N3, N4, N5, N6, N7, N8, N9>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5, N6, N7, N8, N9>>.Create(value);
-
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T1 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6, T7>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T2 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6, T7>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T3 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6, T7>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T4 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6, T7>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T5 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6, T7>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T6 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6, T7>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T7 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6, T7>>.Create(value);
-
-        public static bool operator ==(OneOf<T1, T2, T3, T4, T5, T6, T7> v1, OneOf<T1, T2, T3, T4, T5, T6, T7> v2) => Equals(v1, v2);
-        public static bool operator !=(OneOf<T1, T2, T3, T4, T5, T6, T7> v1, OneOf<T1, T2, T3, T4, T5, T6, T7> v2) => !Equals(v1, v2);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T1 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7>(value);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T2 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7>(value);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T3 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7>(value);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T4 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7>(value);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T5 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7>(value);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T6 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7>(value);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T7 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7>(value);
 
         public OneOfSwitcher<T2, T3, T4, T5, T6, T7> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(this).Switch(action);
         public OneOfSwitcher<T1, T3, T4, T5, T6, T7> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(this).Switch(action);
@@ -331,39 +200,20 @@ namespace OneOf
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T5> condition, Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).MatchWhen(condition, calcResult);
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T6> condition, Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).MatchWhen(condition, calcResult);
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T7> condition, Func<T7, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).MatchWhen(condition, calcResult);
-
-        public override bool Equals(object obj) => (obj is OneOf<T1, T2, T3, T4, T5, T6, T7>) && Equals(this.value, ((OneOf<T1, T2, T3, T4, T5, T6, T7>)obj).value);
-        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
-        public override string ToString() => (value?.ToString() ?? "");
     }
-    public class OneOf<T1, T2, T3, T4, T5, T6, T7, T8> : IOneOf
+    public class OneOf<T1, T2, T3, T4, T5, T6, T7, T8> : OneOfBase<OneOf<T1, T2, T3, T4, T5, T6, T7, T8>>
     {
-        private readonly object value;
-        private readonly Type origType;
+        public OneOf(object value) : base(value) { }
+        public OneOf(IOneOf oo) : base(oo.Value) { }
 
-        OneOf(object value, Type origType)
-        {
-            this.value = value;
-            this.origType = origType;
-        }
-
-        object IOneOf.Value => value;
-        Type IOneOf.OrigType => origType;
-
-        public OneOf<N1, N2, N3, N4, N5, N6, N7, N8> ToOneOf<N1, N2, N3, N4, N5, N6, N7, N8>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5, N6, N7, N8>>.Create(value);
-        public OneOf<N1, N2, N3, N4, N5, N6, N7, N8, N9> ToOneOf<N1, N2, N3, N4, N5, N6, N7, N8, N9>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5, N6, N7, N8, N9>>.Create(value);
-
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T1 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6, T7, T8>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T2 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6, T7, T8>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T3 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6, T7, T8>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T4 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6, T7, T8>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T5 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6, T7, T8>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T6 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6, T7, T8>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T7 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6, T7, T8>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T8 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6, T7, T8>>.Create(value);
-
-        public static bool operator ==(OneOf<T1, T2, T3, T4, T5, T6, T7, T8> v1, OneOf<T1, T2, T3, T4, T5, T6, T7, T8> v2) => Equals(v1, v2);
-        public static bool operator !=(OneOf<T1, T2, T3, T4, T5, T6, T7, T8> v1, OneOf<T1, T2, T3, T4, T5, T6, T7, T8> v2) => !Equals(v1, v2);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T1 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T2 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T3 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T4 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T5 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T6 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T7 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T8 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(value);
 
         public OneOfSwitcher<T2, T3, T4, T5, T6, T7, T8> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(this).Switch(action);
         public OneOfSwitcher<T1, T3, T4, T5, T6, T7, T8> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(this).Switch(action);
@@ -400,39 +250,21 @@ namespace OneOf
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T6> condition, Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).MatchWhen(condition, calcResult);
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T7> condition, Func<T7, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).MatchWhen(condition, calcResult);
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T8> condition, Func<T8, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).MatchWhen(condition, calcResult);
-
-        public override bool Equals(object obj) => (obj is OneOf<T1, T2, T3, T4, T5, T6, T7, T8>) && Equals(this.value, ((OneOf<T1, T2, T3, T4, T5, T6, T7, T8>)obj).value);
-        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
-        public override string ToString() => (value?.ToString() ?? "");
     }
-    public class OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9> : IOneOf
+    public class OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9> : OneOfBase<OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>>
     {
-        private readonly object value;
-        private readonly Type origType;
+        public OneOf(object value) : base(value) { }
+        public OneOf(IOneOf oo) : base(oo.Value) { }
 
-        OneOf(object value, Type origType)
-        {
-            this.value = value;
-            this.origType = origType;
-        }
-
-        object IOneOf.Value => value;
-        Type IOneOf.OrigType => origType;
-
-        public OneOf<N1, N2, N3, N4, N5, N6, N7, N8, N9> ToOneOf<N1, N2, N3, N4, N5, N6, N7, N8, N9>() => OneOfFactory<OneOf<N1, N2, N3, N4, N5, N6, N7, N8, N9>>.Create(value);
-
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T1 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T2 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T3 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T4 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T5 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T6 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T7 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T8 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>>.Create(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T9 value) => OneOfFactory<OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>>.Create(value);
-
-        public static bool operator ==(OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9> v1, OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9> v2) => Equals(v1, v2);
-        public static bool operator !=(OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9> v1, OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9> v2) => !Equals(v1, v2);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T1 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T2 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T3 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T4 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T5 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T6 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T7 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T8 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T9 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
 
         public OneOfSwitcher<T2, T3, T4, T5, T6, T7, T8, T9> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this).Switch(action);
         public OneOfSwitcher<T1, T3, T4, T5, T6, T7, T8, T9> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this).Switch(action);
@@ -473,10 +305,6 @@ namespace OneOf
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T7> condition, Func<T7, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T8> condition, Func<T8, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T9> condition, Func<T9, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
-
-        public override bool Equals(object obj) => (obj is OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>) && Equals(this.value, ((OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>)obj).value);
-        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
-        public override string ToString() => (value?.ToString() ?? "");
     }
 
     public struct OneOfSwitcher<T1>

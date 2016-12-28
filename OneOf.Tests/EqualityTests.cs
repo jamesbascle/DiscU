@@ -14,35 +14,37 @@ namespace OneOf.Tests
         [Test]
         public void EqualsWorksWithBool()
         {
-            var same1 = (OneOf<string, bool>)true;
-            var same2 = (OneOf<string, bool>)true;
-            var diff1 = (OneOf<string, bool>)false;
-            var diff2 = (OneOf<string, bool>)false;
+            var true1 = (OneOf<string, bool>)true;
+            var true2 = (OneOf<string, bool>)true;
+            var false1 = (OneOf<string, bool>)false;
+            var false2 = (OneOf<string, bool>)false;
 
-            Assert.IsTrue(same1.Equals(same2));
-            Assert.IsFalse(same1.Equals(diff2));
+            Assert.That(true1.Equals(true2));
+            Assert.That(!true1.Equals(false2));
         }
 
         [Test]
         public void EqualsWorksWithString()
         {
-            var same1 = (OneOf<string, bool>)"SAME";
-            var same2 = (OneOf<string, bool>)"SAME";
-            var diff1 = (OneOf<string, bool>)"DIFF";
-            var diff2 = (OneOf<string, bool>)"DIFF";
+            var a1 = (OneOf<string, bool>)"A";
+            var a2 = (OneOf<string, bool>)"A";
+            var b1 = (OneOf<string, bool>)"B";
+            var b2 = (OneOf<string, bool>)"B";
 
-            Assert.IsTrue(same1.Equals(same2));
-            Assert.IsFalse(same1.Equals(diff2));
+            Assert.That(a1.Equals(a2));
+            Assert.That(!a1.Equals(b2));
         }
 
         [Test]
         public void EqualsRequiresSameType()
         {
-            var v1 = (OneOf<string, bool>)"x";
-            var v2 = (OneOf<string, bool, int>)"x";
+            var a1 = new OneOf<string, bool>("x");
+            var a2 = new OneOf<string, bool>("x");
+            var b1 = new OneOf<string, bool, int>("x");
 
-            Assert.IsFalse(v1.Equals(null));
-            Assert.IsFalse(v1.Equals(v2));
+            Assert.That(a1.Equals(a2));
+            Assert.That(!a1.Equals(null));
+            Assert.That(!a1.Equals(b1));
         }
     }
 }
