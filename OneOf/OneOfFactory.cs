@@ -14,13 +14,13 @@ namespace OneOf
         /// <summary>The OneOf's type</summary>
         static readonly TypeInfo oneOfType = typeof(TOneOf).GetTypeInfo();
 
-        /// <summary>The OneOf's permitted value types</summary>
-        static readonly TypeInfo[] oneOfPermittedValueTypes = oneOfType.GenericTypeArguments.Select(x => x.GetTypeInfo()).ToArray();
+        /// <summary>The OneOf's Tn types</summary>
+        static readonly TypeInfo[] oneOfTnTypes = oneOfType.GenericTypeArguments.Select(x => x.GetTypeInfo()).ToArray();
 
         /// <summary>Function to quickly create instances of OneOf without needing reflection</summary>
         static readonly Func<object, Type, TOneOf> createOneOfInstance = GetCreateInstanceFunc();
 
-        /// <summary>Function to quickly create determine if type is Tn</summary>
+        /// <summary>Function to quickly determine if type equals Tn</summary>
         static readonly Func<TypeInfo, Boolean> equalsTn = GetEqualsTnFunc();
 
         /// <summary>
@@ -33,12 +33,12 @@ namespace OneOf
 
             var valueType = value.GetType().GetTypeInfo();
 
-            var matchingType = GetBestMatchingType(valueType);
+            var matchingType = GetBestMatchingTn(valueType);
 
             if (matchingType == null)
             {
-                var genArgs = string.Join(", ", oneOfPermittedValueTypes.Select(type => type.Name));
-                throw new ArgumentException($"Value of type {valueType.Name} is not compatible with OneOf<{genArgs}>", nameof(value));
+                var oneOfTnCsv = string.Join(", ", oneOfTnTypes.Select(type => type.Name));
+                throw new ArgumentException($"Value of type {valueType.Name} is not compatible with OneOf<{oneOfTnCsv}>", nameof(value));
             }
 
             var oneofInstance = createOneOfInstance(value, matchingType.AsType());
@@ -49,7 +49,7 @@ namespace OneOf
         /// <summary>
         /// Get the OneOf's Tn that best matches the value, or null.
         /// </summary>
-        static TypeInfo GetBestMatchingType(TypeInfo valueType)
+        static TypeInfo GetBestMatchingTn(TypeInfo valueType)
         {
             TypeInfo bestType = null;
 
@@ -60,7 +60,7 @@ namespace OneOf
 
             // slowest case: find the best matching Tn, if subclass
 
-            foreach (var permittedType in oneOfPermittedValueTypes)
+            foreach (var permittedType in oneOfTnTypes)
             {
                 // does the value match this Tn?
                 if (permittedType.IsAssignableFrom(valueType))
@@ -101,7 +101,7 @@ namespace OneOf
             var labelReturn = Expression.Label(typeof(Boolean));
             var body = new List<Expression>();
 
-            foreach(var tn in oneOfPermittedValueTypes)
+            foreach(var tn in oneOfTnTypes)
             {
                 // return true if typeInfo == Tn
                 var expr = Expression.IfThen(Expression.Equal(typeInfoParm, Expression.Constant(tn)), Expression.Return(labelReturn, Expression.Constant(true)));
