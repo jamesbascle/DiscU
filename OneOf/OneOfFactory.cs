@@ -54,14 +54,16 @@ namespace OneOf
         {
             TypeInfo bestType = null;
 
-            //if (mapValueTypeToOneOfPermittedType.TryGetValue(valueType, out bestType))
-            //    return bestType;
+            // fast case: the value type is Tn, or something we've seen previously
+
             for (var i = mapValueTypeToOneOfPermittedType.Count - 1; i >= 0; i--)
             {
                 var kv = mapValueTypeToOneOfPermittedType[i];
                 if (valueType == kv.Key)
                     return kv.Value;
             }
+
+            // slow case: it's a type we haven't seen before, find the best matching Tn
 
             foreach (var permittedType in oneOfPermittedValueTypes)
             {
@@ -76,6 +78,8 @@ namespace OneOf
                     }
                 }
             }
+
+            // remember the match so we can use the fast case next time
 
             mapValueTypeToOneOfPermittedType.Add(new KeyValuePair<TypeInfo, TypeInfo>(valueType, bestType));
 
