@@ -3,38 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace OneOf.Tests
 {
-    [TestFixture]
-    [Category("Unit")]
+    [TestClass]
     public class EqualityOperatorTests
     {
-        [Test]
+        [TestMethod]
         public void EqualsWorks()
         {
             var a1 = (OneOf<string, bool>)"A";
             var a2 = (OneOf<string, bool>)"A";
             var b1 = (OneOf<string, bool>)"B";
-            //var b2 = (OneOf<string, bool>)"B";
 
-            Assert.That(a1 == a2);
-            Assert.That(!(a1 == b1));
-            Assert.That(!(a1 == null));
+            Assert.IsTrue(a1 == a2);
+            Assert.IsFalse(a1 == b1);
+            Assert.IsFalse(a1 == null);
         }
 
-        [Test]
+        [TestMethod]
         public void NotEqualsWorks()
         {
             var a1 = (OneOf<string, bool>)"A";
             var a2 = (OneOf<string, bool>)"A";
             var b1 = (OneOf<string, bool>)"B";
-            //var b2 = (OneOf<string, bool>)"B";
 
-            Assert.That(!(a1 != a2));
-            Assert.That(a1 != b1);
-            Assert.That(a1 != null);
+            Assert.IsFalse(a1 != a2);
+            Assert.IsTrue(a1 != b1);
+            Assert.IsTrue(a1 != null);
         }
     }
 }

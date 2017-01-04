@@ -1,13 +1,12 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace OneOf.Tests
 {
-    [TestFixture]
-    [Category("Unit")]
+    [TestClass]
     public class SwitchWhenTests
     {
-        [Test]
+        [TestMethod]
         public void SwitchWhenConditionIsTrue()
         {
             var success = false;
@@ -20,10 +19,10 @@ namespace OneOf.Tests
                  .SwitchWhen(v => v == "pear", v => { switches++; success = false; })
                  .Else(v => success = false);
 
-            Assert.AreEqual(true, switches == 1 && success);
+            Assert.IsTrue(switches == 1 && success);
         }
 
-        [Test]
+        [TestMethod]
         public void DoesNotSwitchWhenConditionIsFalse()
         {
             var success = false;
@@ -36,7 +35,7 @@ namespace OneOf.Tests
                  .SwitchWhen(v => v == "pear", v => { switches++; success = false; })
                  .Else(v => success = true);
 
-            Assert.AreEqual(true, switches == 0 && success);
+            Assert.IsTrue(switches == 0 && success);
         }
     }
 }

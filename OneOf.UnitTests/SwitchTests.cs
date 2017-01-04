@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace OneOf.Tests
 {
-    [TestFixture]
-    [Category("Unit")]
+    [TestClass]
     public class SwitchTests
     {
-        [Test]
+        [TestMethod]
         public void SwitchBool()
         {
             var success = false;
@@ -20,10 +15,10 @@ namespace OneOf.Tests
             oneOf.Switch((string str) => Assert.Fail())
                  .Switch((bool bln) => success = (bln == true));
 
-            Assert.AreEqual(true, success);
+            Assert.IsTrue(success);
         }
 
-        [Test]
+        [TestMethod]
         public void SwitchString()
         {
             var success = false;
@@ -32,10 +27,10 @@ namespace OneOf.Tests
             oneOf.Switch((string str) => success = (str == "xyz"))
                  .Switch((bool bln) => Assert.Fail());
 
-            Assert.AreEqual(true, success);
+            Assert.IsTrue(success);
         }
 
-        [Test]
+        [TestMethod]
         public void NoSwitchCallsDefault()
         {
             var success = false;
@@ -44,18 +39,17 @@ namespace OneOf.Tests
             oneOf.Switch((bool bln) => Assert.Fail())
                  .Else(v => success = v.ToString() == "xyz");
 
-            Assert.AreEqual(true, success);
+            Assert.IsTrue(success);
         }
 
-        [Test]
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void NoSwitchThrowsException()
         {
             var oneOf = (OneOf<string, bool>)"xyz";
 
-            Assert.Throws<InvalidOperationException>(() =>
-                oneOf.Switch((bool bln) => Assert.Fail())
-                     .ElseThrow(obj => new InvalidOperationException())
-                );
+            oneOf.Switch((bool bln) => Assert.Fail())
+                 .ElseThrow(obj => new InvalidOperationException());
         }
     }
 

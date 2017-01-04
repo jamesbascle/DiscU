@@ -1,13 +1,12 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace OneOf.Tests
 {
-    [TestFixture]
-    [Category("Unit")]
+    [TestClass]
     public class MatchWhenTests
     {
-        [Test]
+        [TestMethod]
         public void MatchWhenConditionIsTrue()
         {
             var oneOf = (OneOf<string, bool>) "apple";
@@ -18,10 +17,10 @@ namespace OneOf.Tests
                 .MatchWhen(v => v == "pear", v => false)
                 .Else(false);
 
-            Assert.AreEqual(true, success);
+            Assert.IsTrue(success);
         }
 
-        [Test]
+        [TestMethod]
         public void DoesntMatchWhenConditionIsFalse()
         {
             var oneOf = (OneOf<string, bool>)"monkey";
@@ -32,7 +31,7 @@ namespace OneOf.Tests
                 .MatchWhen(v => v == "pear", v => false)
                 .Else(true);
 
-            Assert.AreEqual(true, success);
+            Assert.IsTrue(success);
         }
     }
 }
