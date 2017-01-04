@@ -14,6 +14,9 @@ namespace OneOf
         public static implicit operator OneOf<T1, T2>(T1 value) => new OneOf<T1, T2>(value);
         public static implicit operator OneOf<T1, T2>(T2 value) => new OneOf<T1, T2>(value);
 
+        public static bool operator ==(OneOf<T1, T2> v1, OneOf<T1, T2> v2) => Equals(v1, v2);
+        public static bool operator !=(OneOf<T1, T2> v1, OneOf<T1, T2> v2) => !Equals(v1, v2);
+
         public OneOfSwitcher<T2> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2>(this).Switch(action);
         public OneOfSwitcher<T1> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2>(this).Switch(action);
 
@@ -25,6 +28,10 @@ namespace OneOf
 
         public OneOfMatcher<T1, T2, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, TResult>(this).MatchWhen(condition, calcResult);
         public OneOfMatcher<T1, T2, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, TResult>(this).MatchWhen(condition, calcResult);
+
+        public override bool Equals(object obj) => (obj is OneOf<T1, T2>) && Equals(this.value, ((OneOf<T1, T2>)obj).value);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
+        public override string ToString() => (value?.ToString() ?? "");
     }
     public class OneOf<T1, T2, T3> : OneOfBase<OneOf<T1, T2, T3>>
     {
@@ -34,6 +41,9 @@ namespace OneOf
         public static implicit operator OneOf<T1, T2, T3>(T1 value) => new OneOf<T1, T2, T3>(value);
         public static implicit operator OneOf<T1, T2, T3>(T2 value) => new OneOf<T1, T2, T3>(value);
         public static implicit operator OneOf<T1, T2, T3>(T3 value) => new OneOf<T1, T2, T3>(value);
+
+        public static bool operator ==(OneOf<T1, T2, T3> v1, OneOf<T1, T2, T3> v2) => Equals(v1, v2);
+        public static bool operator !=(OneOf<T1, T2, T3> v1, OneOf<T1, T2, T3> v2) => !Equals(v1, v2);
 
         public OneOfSwitcher<T2, T3> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3>(this).Switch(action);
         public OneOfSwitcher<T1, T3> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3>(this).Switch(action);
@@ -50,6 +60,10 @@ namespace OneOf
         public OneOfMatcher<T1, T2, T3, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, TResult>(this).MatchWhen(condition, calcResult);
         public OneOfMatcher<T1, T2, T3, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, TResult>(this).MatchWhen(condition, calcResult);
         public OneOfMatcher<T1, T2, T3, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, TResult>(this).MatchWhen(condition, calcResult);
+
+        public override bool Equals(object obj) => (obj is OneOf<T1, T2, T3>) && Equals(this.value, ((OneOf<T1, T2, T3>)obj).value);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
+        public override string ToString() => (value?.ToString() ?? "");
     }
     public class OneOf<T1, T2, T3, T4> : OneOfBase<OneOf<T1, T2, T3, T4>>
     {
@@ -60,6 +74,9 @@ namespace OneOf
         public static implicit operator OneOf<T1, T2, T3, T4>(T2 value) => new OneOf<T1, T2, T3, T4>(value);
         public static implicit operator OneOf<T1, T2, T3, T4>(T3 value) => new OneOf<T1, T2, T3, T4>(value);
         public static implicit operator OneOf<T1, T2, T3, T4>(T4 value) => new OneOf<T1, T2, T3, T4>(value);
+
+        public static bool operator ==(OneOf<T1, T2, T3, T4> v1, OneOf<T1, T2, T3, T4> v2) => Equals(v1, v2);
+        public static bool operator !=(OneOf<T1, T2, T3, T4> v1, OneOf<T1, T2, T3, T4> v2) => !Equals(v1, v2);
 
         public OneOfSwitcher<T2, T3, T4> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4>(this).Switch(action);
         public OneOfSwitcher<T1, T3, T4> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4>(this).Switch(action);
@@ -80,6 +97,10 @@ namespace OneOf
         public OneOfMatcher<T1, T2, T3, T4, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(this).MatchWhen(condition, calcResult);
         public OneOfMatcher<T1, T2, T3, T4, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(this).MatchWhen(condition, calcResult);
         public OneOfMatcher<T1, T2, T3, T4, TResult> MatchWhen<TResult>(Predicate<T4> condition, Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(this).MatchWhen(condition, calcResult);
+
+        public override bool Equals(object obj) => (obj is OneOf<T1, T2, T3, T4>) && Equals(this.value, ((OneOf<T1, T2, T3, T4>)obj).value);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
+        public override string ToString() => (value?.ToString() ?? "");
     }
     public class OneOf<T1, T2, T3, T4, T5> : OneOfBase<OneOf<T1, T2, T3, T4, T5>>
     {
@@ -91,6 +112,9 @@ namespace OneOf
         public static implicit operator OneOf<T1, T2, T3, T4, T5>(T3 value) => new OneOf<T1, T2, T3, T4, T5>(value);
         public static implicit operator OneOf<T1, T2, T3, T4, T5>(T4 value) => new OneOf<T1, T2, T3, T4, T5>(value);
         public static implicit operator OneOf<T1, T2, T3, T4, T5>(T5 value) => new OneOf<T1, T2, T3, T4, T5>(value);
+
+        public static bool operator ==(OneOf<T1, T2, T3, T4, T5> v1, OneOf<T1, T2, T3, T4, T5> v2) => Equals(v1, v2);
+        public static bool operator !=(OneOf<T1, T2, T3, T4, T5> v1, OneOf<T1, T2, T3, T4, T5> v2) => !Equals(v1, v2);
 
         public OneOfSwitcher<T2, T3, T4, T5> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5>(this).Switch(action);
         public OneOfSwitcher<T1, T3, T4, T5> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5>(this).Switch(action);
@@ -115,6 +139,10 @@ namespace OneOf
         public OneOfMatcher<T1, T2, T3, T4, T5, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).MatchWhen(condition, calcResult);
         public OneOfMatcher<T1, T2, T3, T4, T5, TResult> MatchWhen<TResult>(Predicate<T4> condition, Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).MatchWhen(condition, calcResult);
         public OneOfMatcher<T1, T2, T3, T4, T5, TResult> MatchWhen<TResult>(Predicate<T5> condition, Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).MatchWhen(condition, calcResult);
+
+        public override bool Equals(object obj) => (obj is OneOf<T1, T2, T3, T4, T5>) && Equals(this.value, ((OneOf<T1, T2, T3, T4, T5>)obj).value);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
+        public override string ToString() => (value?.ToString() ?? "");
     }
     public class OneOf<T1, T2, T3, T4, T5, T6> : OneOfBase<OneOf<T1, T2, T3, T4, T5, T6>>
     {
@@ -127,6 +155,9 @@ namespace OneOf
         public static implicit operator OneOf<T1, T2, T3, T4, T5, T6>(T4 value) => new OneOf<T1, T2, T3, T4, T5, T6>(value);
         public static implicit operator OneOf<T1, T2, T3, T4, T5, T6>(T5 value) => new OneOf<T1, T2, T3, T4, T5, T6>(value);
         public static implicit operator OneOf<T1, T2, T3, T4, T5, T6>(T6 value) => new OneOf<T1, T2, T3, T4, T5, T6>(value);
+
+        public static bool operator ==(OneOf<T1, T2, T3, T4, T5, T6> v1, OneOf<T1, T2, T3, T4, T5, T6> v2) => Equals(v1, v2);
+        public static bool operator !=(OneOf<T1, T2, T3, T4, T5, T6> v1, OneOf<T1, T2, T3, T4, T5, T6> v2) => !Equals(v1, v2);
 
         public OneOfSwitcher<T2, T3, T4, T5, T6> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(this).Switch(action);
         public OneOfSwitcher<T1, T3, T4, T5, T6> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(this).Switch(action);
@@ -155,6 +186,10 @@ namespace OneOf
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen<TResult>(Predicate<T4> condition, Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).MatchWhen(condition, calcResult);
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen<TResult>(Predicate<T5> condition, Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).MatchWhen(condition, calcResult);
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen<TResult>(Predicate<T6> condition, Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).MatchWhen(condition, calcResult);
+
+        public override bool Equals(object obj) => (obj is OneOf<T1, T2, T3, T4, T5, T6>) && Equals(this.value, ((OneOf<T1, T2, T3, T4, T5, T6>)obj).value);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
+        public override string ToString() => (value?.ToString() ?? "");
     }
     public class OneOf<T1, T2, T3, T4, T5, T6, T7> : OneOfBase<OneOf<T1, T2, T3, T4, T5, T6, T7>>
     {
@@ -168,6 +203,9 @@ namespace OneOf
         public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T5 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7>(value);
         public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T6 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7>(value);
         public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T7 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7>(value);
+
+        public static bool operator ==(OneOf<T1, T2, T3, T4, T5, T6, T7> v1, OneOf<T1, T2, T3, T4, T5, T6, T7> v2) => Equals(v1, v2);
+        public static bool operator !=(OneOf<T1, T2, T3, T4, T5, T6, T7> v1, OneOf<T1, T2, T3, T4, T5, T6, T7> v2) => !Equals(v1, v2);
 
         public OneOfSwitcher<T2, T3, T4, T5, T6, T7> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(this).Switch(action);
         public OneOfSwitcher<T1, T3, T4, T5, T6, T7> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(this).Switch(action);
@@ -200,6 +238,10 @@ namespace OneOf
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T5> condition, Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).MatchWhen(condition, calcResult);
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T6> condition, Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).MatchWhen(condition, calcResult);
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T7> condition, Func<T7, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).MatchWhen(condition, calcResult);
+
+        public override bool Equals(object obj) => (obj is OneOf<T1, T2, T3, T4, T5, T6, T7>) && Equals(this.value, ((OneOf<T1, T2, T3, T4, T5, T6, T7>)obj).value);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
+        public override string ToString() => (value?.ToString() ?? "");
     }
     public class OneOf<T1, T2, T3, T4, T5, T6, T7, T8> : OneOfBase<OneOf<T1, T2, T3, T4, T5, T6, T7, T8>>
     {
@@ -214,6 +256,9 @@ namespace OneOf
         public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T6 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(value);
         public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T7 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(value);
         public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T8 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+
+        public static bool operator ==(OneOf<T1, T2, T3, T4, T5, T6, T7, T8> v1, OneOf<T1, T2, T3, T4, T5, T6, T7, T8> v2) => Equals(v1, v2);
+        public static bool operator !=(OneOf<T1, T2, T3, T4, T5, T6, T7, T8> v1, OneOf<T1, T2, T3, T4, T5, T6, T7, T8> v2) => !Equals(v1, v2);
 
         public OneOfSwitcher<T2, T3, T4, T5, T6, T7, T8> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(this).Switch(action);
         public OneOfSwitcher<T1, T3, T4, T5, T6, T7, T8> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(this).Switch(action);
@@ -250,6 +295,10 @@ namespace OneOf
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T6> condition, Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).MatchWhen(condition, calcResult);
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T7> condition, Func<T7, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).MatchWhen(condition, calcResult);
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T8> condition, Func<T8, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).MatchWhen(condition, calcResult);
+
+        public override bool Equals(object obj) => (obj is OneOf<T1, T2, T3, T4, T5, T6, T7, T8>) && Equals(this.value, ((OneOf<T1, T2, T3, T4, T5, T6, T7, T8>)obj).value);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
+        public override string ToString() => (value?.ToString() ?? "");
     }
     public class OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9> : OneOfBase<OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>>
     {
@@ -265,6 +314,9 @@ namespace OneOf
         public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T7 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
         public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T8 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
         public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T9 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+
+        public static bool operator ==(OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9> v1, OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9> v2) => Equals(v1, v2);
+        public static bool operator !=(OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9> v1, OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9> v2) => !Equals(v1, v2);
 
         public OneOfSwitcher<T2, T3, T4, T5, T6, T7, T8, T9> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this).Switch(action);
         public OneOfSwitcher<T1, T3, T4, T5, T6, T7, T8, T9> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this).Switch(action);
@@ -305,6 +357,10 @@ namespace OneOf
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T7> condition, Func<T7, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T8> condition, Func<T8, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T9> condition, Func<T9, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
+
+        public override bool Equals(object obj) => (obj is OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>) && Equals(this.value, ((OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>)obj).value);
+        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
+        public override string ToString() => (value?.ToString() ?? "");
     }
 
     public struct OneOfSwitcher<T1>

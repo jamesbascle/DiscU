@@ -13,18 +13,11 @@ namespace OneOf
     {
         // =========================================================================
 
-        private readonly object value;
-        private readonly Type origType;
+        protected readonly object value;
+        protected readonly Type origType;
 
         object IOneOf.Value => value;
         Type IOneOf.OrigType => origType;
-
-        public override bool Equals(object obj) => (obj is TOneOf) && Equals(this.value, ((IOneOf)obj).Value);
-        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
-        public override string ToString() => (value?.ToString() ?? "");
-
-        public static bool operator ==(OneOfBase<TOneOf> v1, TOneOf v2) => Equals(v1, v2);
-        public static bool operator !=(OneOfBase<TOneOf> v1, TOneOf v2) => !Equals(v1, v2);
 
         // =========================================================================
         // for constructing instance

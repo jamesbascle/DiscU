@@ -54,6 +54,12 @@ void WriteOneOf(int countOfgenericParams)
 			WriteLine($"public static implicit operator OneOf<{genericArgs}>(T{parmIndex} value) => new OneOf<{genericArgs}>(value);"); 
 		}
 
+		// =============== equality operators
+
+		WriteLine("");
+		WriteLine($"public static bool operator ==(OneOf<{genericArgs}> v1, OneOf<{genericArgs}> v2) => Equals(v1, v2);"); 
+		WriteLine($"public static bool operator !=(OneOf<{genericArgs}> v1, OneOf<{genericArgs}> v2) => !Equals(v1, v2);");
+
 		// =============== Switch / SwitchWhen
 
 		WriteLine("");
@@ -87,6 +93,13 @@ void WriteOneOf(int countOfgenericParams)
 		{
 			WriteLine($"public OneOfMatcher<{genericArgs}, TResult> MatchWhen<TResult>(Predicate<T{parmIndex}> condition, Func<T{parmIndex}, TResult> calcResult) => new OneOfMatcher<{genericArgs}, TResult>(this).MatchWhen(condition, calcResult);");
 		}
+
+		// =============== object overrides
+
+		WriteLine("");
+		WriteLine($"public override bool Equals(object obj) => (obj is OneOf<{genericArgs}>) && Equals(this.value, ((OneOf<{genericArgs}>)obj).value);");
+		WriteLine("public override int GetHashCode() => (value?.GetHashCode() ?? 0);");
+		WriteLine("public override string ToString() => (value?.ToString() ?? \"\");");
 	}
 }
 
