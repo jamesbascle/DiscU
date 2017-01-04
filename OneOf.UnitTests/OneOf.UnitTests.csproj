@@ -51,6 +51,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="EqualityOperatorTests.cs" />
+    <Compile Include="CtorTests.cs" />
     <Compile Include="EqualityTests.cs" />
     <Compile Include="MatcherTests.cs" />
     <Compile Include="MatchWhenTests.cs" />
