@@ -8,19 +8,13 @@ using System.Threading.Tasks;
 
 namespace OneOf
 {
-    public abstract class OneOfBase<TOneOf> : IOneOf
-        where TOneOf : IOneOf
+    public abstract class OneOfBase<TOneOf>
     {
-        // =========================================================================
+        /// <summary>The OneOf's value</summary>
+        internal readonly object Value;
 
-        protected readonly object value;
-        protected readonly Type origType;
-
-        object IOneOf.Value => value;
-        Type IOneOf.OrigType => origType;
-
-        // =========================================================================
-        // for constructing instance
+        /// <summary>The matching OneOf's Tn type that the value is, or is derived from.</summary>
+        internal readonly Type ValueTn;
 
         /// <summary>The OneOf's type</summary>
         static readonly TypeInfo oneOfType = typeof(TOneOf).GetTypeInfo();
@@ -31,6 +25,7 @@ namespace OneOf
         /// <summary>Function to quickly determine if type equals Tn</summary>
         static readonly Func<TypeInfo, Boolean> equalsTn = GetEqualsTnFunc();
 
+        /// <summary>Ctor</summary>
         protected OneOfBase(object value)
         {
             if (value == null)
@@ -45,8 +40,8 @@ namespace OneOf
                 throw new ArgumentException($"Value of type {valueType.Name} is not compatible with OneOf<{oneOfTnCsv}>", nameof(value));
             }
 
-            this.value = value;
-            this.origType = matchingType.AsType();
+            this.Value = value;
+            this.ValueTn = matchingType.AsType();
         }
 
         /// <summary>

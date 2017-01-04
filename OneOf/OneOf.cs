@@ -9,7 +9,6 @@ namespace OneOf
     public class OneOf<T1, T2> : OneOfBase<OneOf<T1, T2>>
     {
         public OneOf(object value) : base(value) { }
-        public OneOf(IOneOf oo) : base(oo.Value) { }
 
         public static implicit operator OneOf<T1, T2>(T1 value) => new OneOf<T1, T2>(value);
         public static implicit operator OneOf<T1, T2>(T2 value) => new OneOf<T1, T2>(value);
@@ -17,26 +16,25 @@ namespace OneOf
         public static bool operator ==(OneOf<T1, T2> v1, OneOf<T1, T2> v2) => Equals(v1, v2);
         public static bool operator !=(OneOf<T1, T2> v1, OneOf<T1, T2> v2) => !Equals(v1, v2);
 
-        public OneOfSwitcher<T2> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2>(this).Switch(action);
-        public OneOfSwitcher<T1> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2>(this).Switch(action);
+        public OneOfSwitcher<T2> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2>(Value, ValueTn).Switch(action);
 
-        public OneOfSwitcher<T1, T2> SwitchWhen(Predicate<T1> condition, Action<T1> action) => new OneOfSwitcher<T1, T2>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2> SwitchWhen(Predicate<T2> condition, Action<T2> action) => new OneOfSwitcher<T1, T2>(this).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2> SwitchWhen(Predicate<T1> condition, Action<T1> action) => new OneOfSwitcher<T1, T2>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2> SwitchWhen(Predicate<T2> condition, Action<T2> action) => new OneOfSwitcher<T1, T2>(Value, ValueTn).SwitchWhen(condition, action);
 
-        public OneOfMatcher<T2, TResult> Match<TResult>(Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, TResult> Match<TResult>(Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, TResult>(this).Match(calcResult);
+        public OneOfMatcher<T2, TResult> Match<TResult>(Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, TResult> Match<TResult>(Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, TResult>(Value, ValueTn).Match(calcResult);
 
-        public OneOfMatcher<T1, T2, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, TResult>(this).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
 
-        public override bool Equals(object obj) => (obj is OneOf<T1, T2>) && Equals(this.value, ((OneOf<T1, T2>)obj).value);
-        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
-        public override string ToString() => (value?.ToString() ?? "");
+        public override bool Equals(object obj) => (obj is OneOf<T1, T2>) && Equals(this.Value, ((OneOf<T1, T2>)obj).Value);
+        public override int GetHashCode() => (this.Value?.GetHashCode() ?? 0);
+        public override string ToString() => (this.Value?.ToString() ?? "");
     }
     public class OneOf<T1, T2, T3> : OneOfBase<OneOf<T1, T2, T3>>
     {
         public OneOf(object value) : base(value) { }
-        public OneOf(IOneOf oo) : base(oo.Value) { }
 
         public static implicit operator OneOf<T1, T2, T3>(T1 value) => new OneOf<T1, T2, T3>(value);
         public static implicit operator OneOf<T1, T2, T3>(T2 value) => new OneOf<T1, T2, T3>(value);
@@ -45,30 +43,29 @@ namespace OneOf
         public static bool operator ==(OneOf<T1, T2, T3> v1, OneOf<T1, T2, T3> v2) => Equals(v1, v2);
         public static bool operator !=(OneOf<T1, T2, T3> v1, OneOf<T1, T2, T3> v2) => !Equals(v1, v2);
 
-        public OneOfSwitcher<T2, T3> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3>(this).Switch(action);
-        public OneOfSwitcher<T1, T3> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3>(this).Switch(action);
-        public OneOfSwitcher<T1, T2> Switch(Action<T3> action) => new OneOfSwitcher<T1, T2, T3>(this).Switch(action);
+        public OneOfSwitcher<T2, T3> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T3> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T2> Switch(Action<T3> action) => new OneOfSwitcher<T1, T2, T3>(Value, ValueTn).Switch(action);
 
-        public OneOfSwitcher<T1, T2, T3> SwitchWhen(Predicate<T1> condition, Action<T1> action) => new OneOfSwitcher<T1, T2, T3>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3> SwitchWhen(Predicate<T2> condition, Action<T2> action) => new OneOfSwitcher<T1, T2, T3>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3> SwitchWhen(Predicate<T3> condition, Action<T3> action) => new OneOfSwitcher<T1, T2, T3>(this).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3> SwitchWhen(Predicate<T1> condition, Action<T1> action) => new OneOfSwitcher<T1, T2, T3>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3> SwitchWhen(Predicate<T2> condition, Action<T2> action) => new OneOfSwitcher<T1, T2, T3>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3> SwitchWhen(Predicate<T3> condition, Action<T3> action) => new OneOfSwitcher<T1, T2, T3>(Value, ValueTn).SwitchWhen(condition, action);
 
-        public OneOfMatcher<T2, T3, TResult> Match<TResult>(Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T3, TResult> Match<TResult>(Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T2, TResult> Match<TResult>(Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, TResult>(this).Match(calcResult);
+        public OneOfMatcher<T2, T3, TResult> Match<TResult>(Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T3, TResult> Match<TResult>(Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T2, TResult> Match<TResult>(Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, TResult>(Value, ValueTn).Match(calcResult);
 
-        public OneOfMatcher<T1, T2, T3, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, TResult>(this).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
 
-        public override bool Equals(object obj) => (obj is OneOf<T1, T2, T3>) && Equals(this.value, ((OneOf<T1, T2, T3>)obj).value);
-        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
-        public override string ToString() => (value?.ToString() ?? "");
+        public override bool Equals(object obj) => (obj is OneOf<T1, T2, T3>) && Equals(this.Value, ((OneOf<T1, T2, T3>)obj).Value);
+        public override int GetHashCode() => (this.Value?.GetHashCode() ?? 0);
+        public override string ToString() => (this.Value?.ToString() ?? "");
     }
     public class OneOf<T1, T2, T3, T4> : OneOfBase<OneOf<T1, T2, T3, T4>>
     {
         public OneOf(object value) : base(value) { }
-        public OneOf(IOneOf oo) : base(oo.Value) { }
 
         public static implicit operator OneOf<T1, T2, T3, T4>(T1 value) => new OneOf<T1, T2, T3, T4>(value);
         public static implicit operator OneOf<T1, T2, T3, T4>(T2 value) => new OneOf<T1, T2, T3, T4>(value);
@@ -78,34 +75,33 @@ namespace OneOf
         public static bool operator ==(OneOf<T1, T2, T3, T4> v1, OneOf<T1, T2, T3, T4> v2) => Equals(v1, v2);
         public static bool operator !=(OneOf<T1, T2, T3, T4> v1, OneOf<T1, T2, T3, T4> v2) => !Equals(v1, v2);
 
-        public OneOfSwitcher<T2, T3, T4> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4>(this).Switch(action);
-        public OneOfSwitcher<T1, T3, T4> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4>(this).Switch(action);
-        public OneOfSwitcher<T1, T2, T4> Switch(Action<T3> action) => new OneOfSwitcher<T1, T2, T3, T4>(this).Switch(action);
-        public OneOfSwitcher<T1, T2, T3> Switch(Action<T4> action) => new OneOfSwitcher<T1, T2, T3, T4>(this).Switch(action);
+        public OneOfSwitcher<T2, T3, T4> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T3, T4> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T2, T4> Switch(Action<T3> action) => new OneOfSwitcher<T1, T2, T3, T4>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T2, T3> Switch(Action<T4> action) => new OneOfSwitcher<T1, T2, T3, T4>(Value, ValueTn).Switch(action);
 
-        public OneOfSwitcher<T1, T2, T3, T4> SwitchWhen(Predicate<T1> condition, Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3, T4> SwitchWhen(Predicate<T2> condition, Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3, T4> SwitchWhen(Predicate<T3> condition, Action<T3> action) => new OneOfSwitcher<T1, T2, T3, T4>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3, T4> SwitchWhen(Predicate<T4> condition, Action<T4> action) => new OneOfSwitcher<T1, T2, T3, T4>(this).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4> SwitchWhen(Predicate<T1> condition, Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4> SwitchWhen(Predicate<T2> condition, Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4> SwitchWhen(Predicate<T3> condition, Action<T3> action) => new OneOfSwitcher<T1, T2, T3, T4>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4> SwitchWhen(Predicate<T4> condition, Action<T4> action) => new OneOfSwitcher<T1, T2, T3, T4>(Value, ValueTn).SwitchWhen(condition, action);
 
-        public OneOfMatcher<T2, T3, T4, TResult> Match<TResult>(Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T3, T4, TResult> Match<TResult>(Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T2, T4, TResult> Match<TResult>(Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T2, T3, TResult> Match<TResult>(Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(this).Match(calcResult);
+        public OneOfMatcher<T2, T3, T4, TResult> Match<TResult>(Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T3, T4, TResult> Match<TResult>(Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T2, T4, TResult> Match<TResult>(Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T2, T3, TResult> Match<TResult>(Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(Value, ValueTn).Match(calcResult);
 
-        public OneOfMatcher<T1, T2, T3, T4, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, TResult> MatchWhen<TResult>(Predicate<T4> condition, Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(this).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, TResult> MatchWhen<TResult>(Predicate<T4> condition, Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
 
-        public override bool Equals(object obj) => (obj is OneOf<T1, T2, T3, T4>) && Equals(this.value, ((OneOf<T1, T2, T3, T4>)obj).value);
-        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
-        public override string ToString() => (value?.ToString() ?? "");
+        public override bool Equals(object obj) => (obj is OneOf<T1, T2, T3, T4>) && Equals(this.Value, ((OneOf<T1, T2, T3, T4>)obj).Value);
+        public override int GetHashCode() => (this.Value?.GetHashCode() ?? 0);
+        public override string ToString() => (this.Value?.ToString() ?? "");
     }
     public class OneOf<T1, T2, T3, T4, T5> : OneOfBase<OneOf<T1, T2, T3, T4, T5>>
     {
         public OneOf(object value) : base(value) { }
-        public OneOf(IOneOf oo) : base(oo.Value) { }
 
         public static implicit operator OneOf<T1, T2, T3, T4, T5>(T1 value) => new OneOf<T1, T2, T3, T4, T5>(value);
         public static implicit operator OneOf<T1, T2, T3, T4, T5>(T2 value) => new OneOf<T1, T2, T3, T4, T5>(value);
@@ -116,38 +112,37 @@ namespace OneOf
         public static bool operator ==(OneOf<T1, T2, T3, T4, T5> v1, OneOf<T1, T2, T3, T4, T5> v2) => Equals(v1, v2);
         public static bool operator !=(OneOf<T1, T2, T3, T4, T5> v1, OneOf<T1, T2, T3, T4, T5> v2) => !Equals(v1, v2);
 
-        public OneOfSwitcher<T2, T3, T4, T5> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5>(this).Switch(action);
-        public OneOfSwitcher<T1, T3, T4, T5> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5>(this).Switch(action);
-        public OneOfSwitcher<T1, T2, T4, T5> Switch(Action<T3> action) => new OneOfSwitcher<T1, T2, T3, T4, T5>(this).Switch(action);
-        public OneOfSwitcher<T1, T2, T3, T5> Switch(Action<T4> action) => new OneOfSwitcher<T1, T2, T3, T4, T5>(this).Switch(action);
-        public OneOfSwitcher<T1, T2, T3, T4> Switch(Action<T5> action) => new OneOfSwitcher<T1, T2, T3, T4, T5>(this).Switch(action);
+        public OneOfSwitcher<T2, T3, T4, T5> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T3, T4, T5> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T2, T4, T5> Switch(Action<T3> action) => new OneOfSwitcher<T1, T2, T3, T4, T5>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T2, T3, T5> Switch(Action<T4> action) => new OneOfSwitcher<T1, T2, T3, T4, T5>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T2, T3, T4> Switch(Action<T5> action) => new OneOfSwitcher<T1, T2, T3, T4, T5>(Value, ValueTn).Switch(action);
 
-        public OneOfSwitcher<T1, T2, T3, T4, T5> SwitchWhen(Predicate<T1> condition, Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5> SwitchWhen(Predicate<T2> condition, Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5> SwitchWhen(Predicate<T3> condition, Action<T3> action) => new OneOfSwitcher<T1, T2, T3, T4, T5>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5> SwitchWhen(Predicate<T4> condition, Action<T4> action) => new OneOfSwitcher<T1, T2, T3, T4, T5>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5> SwitchWhen(Predicate<T5> condition, Action<T5> action) => new OneOfSwitcher<T1, T2, T3, T4, T5>(this).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5> SwitchWhen(Predicate<T1> condition, Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5> SwitchWhen(Predicate<T2> condition, Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5> SwitchWhen(Predicate<T3> condition, Action<T3> action) => new OneOfSwitcher<T1, T2, T3, T4, T5>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5> SwitchWhen(Predicate<T4> condition, Action<T4> action) => new OneOfSwitcher<T1, T2, T3, T4, T5>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5> SwitchWhen(Predicate<T5> condition, Action<T5> action) => new OneOfSwitcher<T1, T2, T3, T4, T5>(Value, ValueTn).SwitchWhen(condition, action);
 
-        public OneOfMatcher<T2, T3, T4, T5, TResult> Match<TResult>(Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T3, T4, T5, TResult> Match<TResult>(Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T2, T4, T5, TResult> Match<TResult>(Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T2, T3, T5, TResult> Match<TResult>(Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, TResult> Match<TResult>(Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).Match(calcResult);
+        public OneOfMatcher<T2, T3, T4, T5, TResult> Match<TResult>(Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T3, T4, T5, TResult> Match<TResult>(Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T2, T4, T5, TResult> Match<TResult>(Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T2, T3, T5, TResult> Match<TResult>(Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, TResult> Match<TResult>(Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(Value, ValueTn).Match(calcResult);
 
-        public OneOfMatcher<T1, T2, T3, T4, T5, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, TResult> MatchWhen<TResult>(Predicate<T4> condition, Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, TResult> MatchWhen<TResult>(Predicate<T5> condition, Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(this).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, TResult> MatchWhen<TResult>(Predicate<T4> condition, Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, TResult> MatchWhen<TResult>(Predicate<T5> condition, Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
 
-        public override bool Equals(object obj) => (obj is OneOf<T1, T2, T3, T4, T5>) && Equals(this.value, ((OneOf<T1, T2, T3, T4, T5>)obj).value);
-        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
-        public override string ToString() => (value?.ToString() ?? "");
+        public override bool Equals(object obj) => (obj is OneOf<T1, T2, T3, T4, T5>) && Equals(this.Value, ((OneOf<T1, T2, T3, T4, T5>)obj).Value);
+        public override int GetHashCode() => (this.Value?.GetHashCode() ?? 0);
+        public override string ToString() => (this.Value?.ToString() ?? "");
     }
     public class OneOf<T1, T2, T3, T4, T5, T6> : OneOfBase<OneOf<T1, T2, T3, T4, T5, T6>>
     {
         public OneOf(object value) : base(value) { }
-        public OneOf(IOneOf oo) : base(oo.Value) { }
 
         public static implicit operator OneOf<T1, T2, T3, T4, T5, T6>(T1 value) => new OneOf<T1, T2, T3, T4, T5, T6>(value);
         public static implicit operator OneOf<T1, T2, T3, T4, T5, T6>(T2 value) => new OneOf<T1, T2, T3, T4, T5, T6>(value);
@@ -159,42 +154,41 @@ namespace OneOf
         public static bool operator ==(OneOf<T1, T2, T3, T4, T5, T6> v1, OneOf<T1, T2, T3, T4, T5, T6> v2) => Equals(v1, v2);
         public static bool operator !=(OneOf<T1, T2, T3, T4, T5, T6> v1, OneOf<T1, T2, T3, T4, T5, T6> v2) => !Equals(v1, v2);
 
-        public OneOfSwitcher<T2, T3, T4, T5, T6> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(this).Switch(action);
-        public OneOfSwitcher<T1, T3, T4, T5, T6> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(this).Switch(action);
-        public OneOfSwitcher<T1, T2, T4, T5, T6> Switch(Action<T3> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(this).Switch(action);
-        public OneOfSwitcher<T1, T2, T3, T5, T6> Switch(Action<T4> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(this).Switch(action);
-        public OneOfSwitcher<T1, T2, T3, T4, T6> Switch(Action<T5> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(this).Switch(action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5> Switch(Action<T6> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(this).Switch(action);
+        public OneOfSwitcher<T2, T3, T4, T5, T6> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T3, T4, T5, T6> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T2, T4, T5, T6> Switch(Action<T3> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T2, T3, T5, T6> Switch(Action<T4> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T2, T3, T4, T6> Switch(Action<T5> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5> Switch(Action<T6> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(Value, ValueTn).Switch(action);
 
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6> SwitchWhen(Predicate<T1> condition, Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6> SwitchWhen(Predicate<T2> condition, Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6> SwitchWhen(Predicate<T3> condition, Action<T3> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6> SwitchWhen(Predicate<T4> condition, Action<T4> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6> SwitchWhen(Predicate<T5> condition, Action<T5> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6> SwitchWhen(Predicate<T6> condition, Action<T6> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(this).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6> SwitchWhen(Predicate<T1> condition, Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6> SwitchWhen(Predicate<T2> condition, Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6> SwitchWhen(Predicate<T3> condition, Action<T3> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6> SwitchWhen(Predicate<T4> condition, Action<T4> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6> SwitchWhen(Predicate<T5> condition, Action<T5> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6> SwitchWhen(Predicate<T6> condition, Action<T6> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(Value, ValueTn).SwitchWhen(condition, action);
 
-        public OneOfMatcher<T2, T3, T4, T5, T6, TResult> Match<TResult>(Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T3, T4, T5, T6, TResult> Match<TResult>(Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T2, T4, T5, T6, TResult> Match<TResult>(Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T2, T3, T5, T6, TResult> Match<TResult>(Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T6, TResult> Match<TResult>(Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, TResult> Match<TResult>(Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).Match(calcResult);
+        public OneOfMatcher<T2, T3, T4, T5, T6, TResult> Match<TResult>(Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T3, T4, T5, T6, TResult> Match<TResult>(Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T2, T4, T5, T6, TResult> Match<TResult>(Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T2, T3, T5, T6, TResult> Match<TResult>(Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T6, TResult> Match<TResult>(Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, TResult> Match<TResult>(Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(Value, ValueTn).Match(calcResult);
 
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen<TResult>(Predicate<T4> condition, Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen<TResult>(Predicate<T5> condition, Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen<TResult>(Predicate<T6> condition, Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(this).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen<TResult>(Predicate<T4> condition, Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen<TResult>(Predicate<T5> condition, Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen<TResult>(Predicate<T6> condition, Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
 
-        public override bool Equals(object obj) => (obj is OneOf<T1, T2, T3, T4, T5, T6>) && Equals(this.value, ((OneOf<T1, T2, T3, T4, T5, T6>)obj).value);
-        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
-        public override string ToString() => (value?.ToString() ?? "");
+        public override bool Equals(object obj) => (obj is OneOf<T1, T2, T3, T4, T5, T6>) && Equals(this.Value, ((OneOf<T1, T2, T3, T4, T5, T6>)obj).Value);
+        public override int GetHashCode() => (this.Value?.GetHashCode() ?? 0);
+        public override string ToString() => (this.Value?.ToString() ?? "");
     }
     public class OneOf<T1, T2, T3, T4, T5, T6, T7> : OneOfBase<OneOf<T1, T2, T3, T4, T5, T6, T7>>
     {
         public OneOf(object value) : base(value) { }
-        public OneOf(IOneOf oo) : base(oo.Value) { }
 
         public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T1 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7>(value);
         public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T2 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7>(value);
@@ -207,46 +201,45 @@ namespace OneOf
         public static bool operator ==(OneOf<T1, T2, T3, T4, T5, T6, T7> v1, OneOf<T1, T2, T3, T4, T5, T6, T7> v2) => Equals(v1, v2);
         public static bool operator !=(OneOf<T1, T2, T3, T4, T5, T6, T7> v1, OneOf<T1, T2, T3, T4, T5, T6, T7> v2) => !Equals(v1, v2);
 
-        public OneOfSwitcher<T2, T3, T4, T5, T6, T7> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(this).Switch(action);
-        public OneOfSwitcher<T1, T3, T4, T5, T6, T7> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(this).Switch(action);
-        public OneOfSwitcher<T1, T2, T4, T5, T6, T7> Switch(Action<T3> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(this).Switch(action);
-        public OneOfSwitcher<T1, T2, T3, T5, T6, T7> Switch(Action<T4> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(this).Switch(action);
-        public OneOfSwitcher<T1, T2, T3, T4, T6, T7> Switch(Action<T5> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(this).Switch(action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T7> Switch(Action<T6> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(this).Switch(action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6> Switch(Action<T7> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(this).Switch(action);
+        public OneOfSwitcher<T2, T3, T4, T5, T6, T7> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T3, T4, T5, T6, T7> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T2, T4, T5, T6, T7> Switch(Action<T3> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T2, T3, T5, T6, T7> Switch(Action<T4> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T2, T3, T4, T6, T7> Switch(Action<T5> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T7> Switch(Action<T6> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6> Switch(Action<T7> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(Value, ValueTn).Switch(action);
 
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> SwitchWhen(Predicate<T1> condition, Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> SwitchWhen(Predicate<T2> condition, Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> SwitchWhen(Predicate<T3> condition, Action<T3> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> SwitchWhen(Predicate<T4> condition, Action<T4> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> SwitchWhen(Predicate<T5> condition, Action<T5> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> SwitchWhen(Predicate<T6> condition, Action<T6> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> SwitchWhen(Predicate<T7> condition, Action<T7> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(this).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> SwitchWhen(Predicate<T1> condition, Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> SwitchWhen(Predicate<T2> condition, Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> SwitchWhen(Predicate<T3> condition, Action<T3> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> SwitchWhen(Predicate<T4> condition, Action<T4> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> SwitchWhen(Predicate<T5> condition, Action<T5> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> SwitchWhen(Predicate<T6> condition, Action<T6> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> SwitchWhen(Predicate<T7> condition, Action<T7> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(Value, ValueTn).SwitchWhen(condition, action);
 
-        public OneOfMatcher<T2, T3, T4, T5, T6, T7, TResult> Match<TResult>(Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T3, T4, T5, T6, T7, TResult> Match<TResult>(Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T2, T4, T5, T6, T7, TResult> Match<TResult>(Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T2, T3, T5, T6, T7, TResult> Match<TResult>(Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T6, T7, TResult> Match<TResult>(Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T7, TResult> Match<TResult>(Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> Match<TResult>(Func<T7, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).Match(calcResult);
+        public OneOfMatcher<T2, T3, T4, T5, T6, T7, TResult> Match<TResult>(Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T3, T4, T5, T6, T7, TResult> Match<TResult>(Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T2, T4, T5, T6, T7, TResult> Match<TResult>(Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T2, T3, T5, T6, T7, TResult> Match<TResult>(Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T6, T7, TResult> Match<TResult>(Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T7, TResult> Match<TResult>(Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> Match<TResult>(Func<T7, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(Value, ValueTn).Match(calcResult);
 
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T4> condition, Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T5> condition, Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T6> condition, Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T7> condition, Func<T7, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(this).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T4> condition, Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T5> condition, Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T6> condition, Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen<TResult>(Predicate<T7> condition, Func<T7, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
 
-        public override bool Equals(object obj) => (obj is OneOf<T1, T2, T3, T4, T5, T6, T7>) && Equals(this.value, ((OneOf<T1, T2, T3, T4, T5, T6, T7>)obj).value);
-        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
-        public override string ToString() => (value?.ToString() ?? "");
+        public override bool Equals(object obj) => (obj is OneOf<T1, T2, T3, T4, T5, T6, T7>) && Equals(this.Value, ((OneOf<T1, T2, T3, T4, T5, T6, T7>)obj).Value);
+        public override int GetHashCode() => (this.Value?.GetHashCode() ?? 0);
+        public override string ToString() => (this.Value?.ToString() ?? "");
     }
     public class OneOf<T1, T2, T3, T4, T5, T6, T7, T8> : OneOfBase<OneOf<T1, T2, T3, T4, T5, T6, T7, T8>>
     {
         public OneOf(object value) : base(value) { }
-        public OneOf(IOneOf oo) : base(oo.Value) { }
 
         public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T1 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(value);
         public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T2 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(value);
@@ -260,50 +253,49 @@ namespace OneOf
         public static bool operator ==(OneOf<T1, T2, T3, T4, T5, T6, T7, T8> v1, OneOf<T1, T2, T3, T4, T5, T6, T7, T8> v2) => Equals(v1, v2);
         public static bool operator !=(OneOf<T1, T2, T3, T4, T5, T6, T7, T8> v1, OneOf<T1, T2, T3, T4, T5, T6, T7, T8> v2) => !Equals(v1, v2);
 
-        public OneOfSwitcher<T2, T3, T4, T5, T6, T7, T8> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(this).Switch(action);
-        public OneOfSwitcher<T1, T3, T4, T5, T6, T7, T8> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(this).Switch(action);
-        public OneOfSwitcher<T1, T2, T4, T5, T6, T7, T8> Switch(Action<T3> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(this).Switch(action);
-        public OneOfSwitcher<T1, T2, T3, T5, T6, T7, T8> Switch(Action<T4> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(this).Switch(action);
-        public OneOfSwitcher<T1, T2, T3, T4, T6, T7, T8> Switch(Action<T5> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(this).Switch(action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T7, T8> Switch(Action<T6> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(this).Switch(action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T8> Switch(Action<T7> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(this).Switch(action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> Switch(Action<T8> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(this).Switch(action);
+        public OneOfSwitcher<T2, T3, T4, T5, T6, T7, T8> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T3, T4, T5, T6, T7, T8> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T2, T4, T5, T6, T7, T8> Switch(Action<T3> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T2, T3, T5, T6, T7, T8> Switch(Action<T4> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T2, T3, T4, T6, T7, T8> Switch(Action<T5> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T7, T8> Switch(Action<T6> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T8> Switch(Action<T7> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> Switch(Action<T8> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(Value, ValueTn).Switch(action);
 
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> SwitchWhen(Predicate<T1> condition, Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> SwitchWhen(Predicate<T2> condition, Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> SwitchWhen(Predicate<T3> condition, Action<T3> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> SwitchWhen(Predicate<T4> condition, Action<T4> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> SwitchWhen(Predicate<T5> condition, Action<T5> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> SwitchWhen(Predicate<T6> condition, Action<T6> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> SwitchWhen(Predicate<T7> condition, Action<T7> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> SwitchWhen(Predicate<T8> condition, Action<T8> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(this).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> SwitchWhen(Predicate<T1> condition, Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> SwitchWhen(Predicate<T2> condition, Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> SwitchWhen(Predicate<T3> condition, Action<T3> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> SwitchWhen(Predicate<T4> condition, Action<T4> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> SwitchWhen(Predicate<T5> condition, Action<T5> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> SwitchWhen(Predicate<T6> condition, Action<T6> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> SwitchWhen(Predicate<T7> condition, Action<T7> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> SwitchWhen(Predicate<T8> condition, Action<T8> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(Value, ValueTn).SwitchWhen(condition, action);
 
-        public OneOfMatcher<T2, T3, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T3, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T2, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T2, T3, T5, T6, T7, T8, TResult> Match<TResult>(Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T6, T7, T8, TResult> Match<TResult>(Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T7, T8, TResult> Match<TResult>(Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T8, TResult> Match<TResult>(Func<T7, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> Match<TResult>(Func<T8, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).Match(calcResult);
+        public OneOfMatcher<T2, T3, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T3, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T2, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T2, T3, T5, T6, T7, T8, TResult> Match<TResult>(Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T6, T7, T8, TResult> Match<TResult>(Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T7, T8, TResult> Match<TResult>(Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T8, TResult> Match<TResult>(Func<T7, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> Match<TResult>(Func<T8, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Value, ValueTn).Match(calcResult);
 
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T4> condition, Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T5> condition, Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T6> condition, Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T7> condition, Func<T7, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T8> condition, Func<T8, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T4> condition, Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T5> condition, Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T6> condition, Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T7> condition, Func<T7, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen<TResult>(Predicate<T8> condition, Func<T8, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
 
-        public override bool Equals(object obj) => (obj is OneOf<T1, T2, T3, T4, T5, T6, T7, T8>) && Equals(this.value, ((OneOf<T1, T2, T3, T4, T5, T6, T7, T8>)obj).value);
-        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
-        public override string ToString() => (value?.ToString() ?? "");
+        public override bool Equals(object obj) => (obj is OneOf<T1, T2, T3, T4, T5, T6, T7, T8>) && Equals(this.Value, ((OneOf<T1, T2, T3, T4, T5, T6, T7, T8>)obj).Value);
+        public override int GetHashCode() => (this.Value?.GetHashCode() ?? 0);
+        public override string ToString() => (this.Value?.ToString() ?? "");
     }
     public class OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9> : OneOfBase<OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>>
     {
         public OneOf(object value) : base(value) { }
-        public OneOf(IOneOf oo) : base(oo.Value) { }
 
         public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T1 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
         public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T2 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
@@ -318,61 +310,63 @@ namespace OneOf
         public static bool operator ==(OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9> v1, OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9> v2) => Equals(v1, v2);
         public static bool operator !=(OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9> v1, OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9> v2) => !Equals(v1, v2);
 
-        public OneOfSwitcher<T2, T3, T4, T5, T6, T7, T8, T9> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this).Switch(action);
-        public OneOfSwitcher<T1, T3, T4, T5, T6, T7, T8, T9> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this).Switch(action);
-        public OneOfSwitcher<T1, T2, T4, T5, T6, T7, T8, T9> Switch(Action<T3> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this).Switch(action);
-        public OneOfSwitcher<T1, T2, T3, T5, T6, T7, T8, T9> Switch(Action<T4> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this).Switch(action);
-        public OneOfSwitcher<T1, T2, T3, T4, T6, T7, T8, T9> Switch(Action<T5> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this).Switch(action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T7, T8, T9> Switch(Action<T6> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this).Switch(action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T8, T9> Switch(Action<T7> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this).Switch(action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T9> Switch(Action<T8> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this).Switch(action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> Switch(Action<T9> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this).Switch(action);
+        public OneOfSwitcher<T2, T3, T4, T5, T6, T7, T8, T9> Switch(Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T3, T4, T5, T6, T7, T8, T9> Switch(Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T2, T4, T5, T6, T7, T8, T9> Switch(Action<T3> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T2, T3, T5, T6, T7, T8, T9> Switch(Action<T4> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T2, T3, T4, T6, T7, T8, T9> Switch(Action<T5> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T7, T8, T9> Switch(Action<T6> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T8, T9> Switch(Action<T7> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T9> Switch(Action<T8> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Value, ValueTn).Switch(action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> Switch(Action<T9> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Value, ValueTn).Switch(action);
 
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9> SwitchWhen(Predicate<T1> condition, Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9> SwitchWhen(Predicate<T2> condition, Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9> SwitchWhen(Predicate<T3> condition, Action<T3> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9> SwitchWhen(Predicate<T4> condition, Action<T4> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9> SwitchWhen(Predicate<T5> condition, Action<T5> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9> SwitchWhen(Predicate<T6> condition, Action<T6> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9> SwitchWhen(Predicate<T7> condition, Action<T7> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9> SwitchWhen(Predicate<T8> condition, Action<T8> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this).SwitchWhen(condition, action);
-        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9> SwitchWhen(Predicate<T9> condition, Action<T9> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9> SwitchWhen(Predicate<T1> condition, Action<T1> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9> SwitchWhen(Predicate<T2> condition, Action<T2> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9> SwitchWhen(Predicate<T3> condition, Action<T3> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9> SwitchWhen(Predicate<T4> condition, Action<T4> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9> SwitchWhen(Predicate<T5> condition, Action<T5> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9> SwitchWhen(Predicate<T6> condition, Action<T6> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9> SwitchWhen(Predicate<T7> condition, Action<T7> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9> SwitchWhen(Predicate<T8> condition, Action<T8> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Value, ValueTn).SwitchWhen(condition, action);
+        public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9> SwitchWhen(Predicate<T9> condition, Action<T9> action) => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Value, ValueTn).SwitchWhen(condition, action);
 
-        public OneOfMatcher<T2, T3, T4, T5, T6, T7, T8, T9, TResult> Match<TResult>(Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T3, T4, T5, T6, T7, T8, T9, TResult> Match<TResult>(Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T2, T4, T5, T6, T7, T8, T9, TResult> Match<TResult>(Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T2, T3, T5, T6, T7, T8, T9, TResult> Match<TResult>(Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T6, T7, T8, T9, TResult> Match<TResult>(Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T7, T8, T9, TResult> Match<TResult>(Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T8, T9, TResult> Match<TResult>(Func<T7, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T9, TResult> Match<TResult>(Func<T8, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).Match(calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T9, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).Match(calcResult);
+        public OneOfMatcher<T2, T3, T4, T5, T6, T7, T8, T9, TResult> Match<TResult>(Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T3, T4, T5, T6, T7, T8, T9, TResult> Match<TResult>(Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T2, T4, T5, T6, T7, T8, T9, TResult> Match<TResult>(Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T2, T3, T5, T6, T7, T8, T9, TResult> Match<TResult>(Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T6, T7, T8, T9, TResult> Match<TResult>(Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T7, T8, T9, TResult> Match<TResult>(Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T8, T9, TResult> Match<TResult>(Func<T7, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T9, TResult> Match<TResult>(Func<T8, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Value, ValueTn).Match(calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T9, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Value, ValueTn).Match(calcResult);
 
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T4> condition, Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T5> condition, Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T6> condition, Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T7> condition, Func<T7, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T8> condition, Func<T8, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
-        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T9> condition, Func<T9, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T1> condition, Func<T1, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T2> condition, Func<T2, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T3> condition, Func<T3, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T4> condition, Func<T4, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T5> condition, Func<T5, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T6> condition, Func<T6, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T7> condition, Func<T7, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T8> condition, Func<T8, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
+        public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen<TResult>(Predicate<T9> condition, Func<T9, TResult> calcResult) => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);
 
-        public override bool Equals(object obj) => (obj is OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>) && Equals(this.value, ((OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>)obj).value);
-        public override int GetHashCode() => (value?.GetHashCode() ?? 0);
-        public override string ToString() => (value?.ToString() ?? "");
+        public override bool Equals(object obj) => (obj is OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>) && Equals(this.Value, ((OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>)obj).Value);
+        public override int GetHashCode() => (this.Value?.GetHashCode() ?? 0);
+        public override string ToString() => (this.Value?.ToString() ?? "");
     }
 
     public struct OneOfSwitcher<T1>
     {
-        readonly IOneOf oneOf;
+        readonly object value;
+        readonly Type valueTn;
         bool hasSwitched;
 
-        internal OneOfSwitcher(IOneOf oneOf) : this(oneOf, false) { }
+        internal OneOfSwitcher(object value, Type valueTn) : this(value, valueTn, false) { }
 
-        internal OneOfSwitcher(IOneOf oneOf, bool hasSwitched)
+        internal OneOfSwitcher(object value, Type valueTn, bool hasSwitched)
         {
-            this.oneOf = oneOf;
+            this.value = value;
+            this.valueTn = valueTn;
             this.hasSwitched = hasSwitched;
         }
 
@@ -389,49 +383,51 @@ namespace OneOf
 
         public void Else(Action<object> action)
         {
-            if (!hasSwitched) action(oneOf.Value);
+            if (!hasSwitched) action(value);
         }
 
         public void ElseThrow(Func<object, Exception> func)
         {
-            if (!hasSwitched) throw func(oneOf.Value);
+            if (!hasSwitched) throw func(value);
         }
 
         void SwitchImpl<T>(Predicate<T> condition, Action<T> action)
         {
             if (hasSwitched) return;                 // already switched
 
-            if (oneOf.OrigType != typeof(T)) return; // not correct type
-            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
+            if (valueTn != typeof(T)) return;        // not correct type
+            if (condition != null && !condition((T)value)) return;  // failed condition
 
-            action((T)oneOf.Value);                  // yes!
+            action((T)value);                        // yes!
             hasSwitched = true;
         }
     }
 
     public struct OneOfSwitcher<T1, T2>
     {
-        readonly IOneOf oneOf;
+        readonly object value;
+        readonly Type valueTn;
         bool hasSwitched;
 
-        internal OneOfSwitcher(IOneOf oneOf) : this(oneOf, false) { }
+        internal OneOfSwitcher(object value, Type valueTn) : this(value, valueTn, false) { }
 
-        internal OneOfSwitcher(IOneOf oneOf, bool hasSwitched)
+        internal OneOfSwitcher(object value, Type valueTn, bool hasSwitched)
         {
-            this.oneOf = oneOf;
+            this.value = value;
+            this.valueTn = valueTn;
             this.hasSwitched = hasSwitched;
         }
 
         public OneOfSwitcher<T2> Switch(Action<T1> action)
         {
             SwitchImpl<T1>(null, action);
-            return new OneOfSwitcher<T2>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T2>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1> Switch(Action<T2> action)
         {
             SwitchImpl<T2>(null, action);
-            return new OneOfSwitcher<T1>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2> SwitchWhen(Predicate<T1> condition, Action<T1> action)
@@ -448,55 +444,57 @@ namespace OneOf
 
         public void Else(Action<object> action)
         {
-            if (!hasSwitched) action(oneOf.Value);
+            if (!hasSwitched) action(value);
         }
 
         public void ElseThrow(Func<object, Exception> func)
         {
-            if (!hasSwitched) throw func(oneOf.Value);
+            if (!hasSwitched) throw func(value);
         }
 
         void SwitchImpl<T>(Predicate<T> condition, Action<T> action)
         {
             if (hasSwitched) return;                 // already switched
 
-            if (oneOf.OrigType != typeof(T)) return; // not correct type
-            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
+            if (valueTn != typeof(T)) return;        // not correct type
+            if (condition != null && !condition((T)value)) return;  // failed condition
 
-            action((T)oneOf.Value);                  // yes!
+            action((T)value);                        // yes!
             hasSwitched = true;
         }
     }
 
     public struct OneOfSwitcher<T1, T2, T3>
     {
-        readonly IOneOf oneOf;
+        readonly object value;
+        readonly Type valueTn;
         bool hasSwitched;
 
-        internal OneOfSwitcher(IOneOf oneOf) : this(oneOf, false) { }
+        internal OneOfSwitcher(object value, Type valueTn) : this(value, valueTn, false) { }
 
-        internal OneOfSwitcher(IOneOf oneOf, bool hasSwitched)
+        internal OneOfSwitcher(object value, Type valueTn, bool hasSwitched)
         {
-            this.oneOf = oneOf;
+            this.value = value;
+            this.valueTn = valueTn;
             this.hasSwitched = hasSwitched;
         }
 
         public OneOfSwitcher<T2, T3> Switch(Action<T1> action)
         {
             SwitchImpl<T1>(null, action);
-            return new OneOfSwitcher<T2, T3>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T2, T3>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T3> Switch(Action<T2> action)
         {
             SwitchImpl<T2>(null, action);
-            return new OneOfSwitcher<T1, T3>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T3>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2> Switch(Action<T3> action)
         {
             SwitchImpl<T3>(null, action);
-            return new OneOfSwitcher<T1, T2>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T2>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3> SwitchWhen(Predicate<T1> condition, Action<T1> action)
@@ -519,61 +517,63 @@ namespace OneOf
 
         public void Else(Action<object> action)
         {
-            if (!hasSwitched) action(oneOf.Value);
+            if (!hasSwitched) action(value);
         }
 
         public void ElseThrow(Func<object, Exception> func)
         {
-            if (!hasSwitched) throw func(oneOf.Value);
+            if (!hasSwitched) throw func(value);
         }
 
         void SwitchImpl<T>(Predicate<T> condition, Action<T> action)
         {
             if (hasSwitched) return;                 // already switched
 
-            if (oneOf.OrigType != typeof(T)) return; // not correct type
-            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
+            if (valueTn != typeof(T)) return;        // not correct type
+            if (condition != null && !condition((T)value)) return;  // failed condition
 
-            action((T)oneOf.Value);                  // yes!
+            action((T)value);                        // yes!
             hasSwitched = true;
         }
     }
 
     public struct OneOfSwitcher<T1, T2, T3, T4>
     {
-        readonly IOneOf oneOf;
+        readonly object value;
+        readonly Type valueTn;
         bool hasSwitched;
 
-        internal OneOfSwitcher(IOneOf oneOf) : this(oneOf, false) { }
+        internal OneOfSwitcher(object value, Type valueTn) : this(value, valueTn, false) { }
 
-        internal OneOfSwitcher(IOneOf oneOf, bool hasSwitched)
+        internal OneOfSwitcher(object value, Type valueTn, bool hasSwitched)
         {
-            this.oneOf = oneOf;
+            this.value = value;
+            this.valueTn = valueTn;
             this.hasSwitched = hasSwitched;
         }
 
         public OneOfSwitcher<T2, T3, T4> Switch(Action<T1> action)
         {
             SwitchImpl<T1>(null, action);
-            return new OneOfSwitcher<T2, T3, T4>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T2, T3, T4>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T3, T4> Switch(Action<T2> action)
         {
             SwitchImpl<T2>(null, action);
-            return new OneOfSwitcher<T1, T3, T4>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T3, T4>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T4> Switch(Action<T3> action)
         {
             SwitchImpl<T3>(null, action);
-            return new OneOfSwitcher<T1, T2, T4>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T2, T4>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3> Switch(Action<T4> action)
         {
             SwitchImpl<T4>(null, action);
-            return new OneOfSwitcher<T1, T2, T3>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T2, T3>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4> SwitchWhen(Predicate<T1> condition, Action<T1> action)
@@ -602,67 +602,69 @@ namespace OneOf
 
         public void Else(Action<object> action)
         {
-            if (!hasSwitched) action(oneOf.Value);
+            if (!hasSwitched) action(value);
         }
 
         public void ElseThrow(Func<object, Exception> func)
         {
-            if (!hasSwitched) throw func(oneOf.Value);
+            if (!hasSwitched) throw func(value);
         }
 
         void SwitchImpl<T>(Predicate<T> condition, Action<T> action)
         {
             if (hasSwitched) return;                 // already switched
 
-            if (oneOf.OrigType != typeof(T)) return; // not correct type
-            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
+            if (valueTn != typeof(T)) return;        // not correct type
+            if (condition != null && !condition((T)value)) return;  // failed condition
 
-            action((T)oneOf.Value);                  // yes!
+            action((T)value);                        // yes!
             hasSwitched = true;
         }
     }
 
     public struct OneOfSwitcher<T1, T2, T3, T4, T5>
     {
-        readonly IOneOf oneOf;
+        readonly object value;
+        readonly Type valueTn;
         bool hasSwitched;
 
-        internal OneOfSwitcher(IOneOf oneOf) : this(oneOf, false) { }
+        internal OneOfSwitcher(object value, Type valueTn) : this(value, valueTn, false) { }
 
-        internal OneOfSwitcher(IOneOf oneOf, bool hasSwitched)
+        internal OneOfSwitcher(object value, Type valueTn, bool hasSwitched)
         {
-            this.oneOf = oneOf;
+            this.value = value;
+            this.valueTn = valueTn;
             this.hasSwitched = hasSwitched;
         }
 
         public OneOfSwitcher<T2, T3, T4, T5> Switch(Action<T1> action)
         {
             SwitchImpl<T1>(null, action);
-            return new OneOfSwitcher<T2, T3, T4, T5>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T2, T3, T4, T5>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T3, T4, T5> Switch(Action<T2> action)
         {
             SwitchImpl<T2>(null, action);
-            return new OneOfSwitcher<T1, T3, T4, T5>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T3, T4, T5>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T4, T5> Switch(Action<T3> action)
         {
             SwitchImpl<T3>(null, action);
-            return new OneOfSwitcher<T1, T2, T4, T5>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T2, T4, T5>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T5> Switch(Action<T4> action)
         {
             SwitchImpl<T4>(null, action);
-            return new OneOfSwitcher<T1, T2, T3, T5>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T2, T3, T5>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4> Switch(Action<T5> action)
         {
             SwitchImpl<T5>(null, action);
-            return new OneOfSwitcher<T1, T2, T3, T4>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T2, T3, T4>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5> SwitchWhen(Predicate<T1> condition, Action<T1> action)
@@ -697,73 +699,75 @@ namespace OneOf
 
         public void Else(Action<object> action)
         {
-            if (!hasSwitched) action(oneOf.Value);
+            if (!hasSwitched) action(value);
         }
 
         public void ElseThrow(Func<object, Exception> func)
         {
-            if (!hasSwitched) throw func(oneOf.Value);
+            if (!hasSwitched) throw func(value);
         }
 
         void SwitchImpl<T>(Predicate<T> condition, Action<T> action)
         {
             if (hasSwitched) return;                 // already switched
 
-            if (oneOf.OrigType != typeof(T)) return; // not correct type
-            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
+            if (valueTn != typeof(T)) return;        // not correct type
+            if (condition != null && !condition((T)value)) return;  // failed condition
 
-            action((T)oneOf.Value);                  // yes!
+            action((T)value);                        // yes!
             hasSwitched = true;
         }
     }
 
     public struct OneOfSwitcher<T1, T2, T3, T4, T5, T6>
     {
-        readonly IOneOf oneOf;
+        readonly object value;
+        readonly Type valueTn;
         bool hasSwitched;
 
-        internal OneOfSwitcher(IOneOf oneOf) : this(oneOf, false) { }
+        internal OneOfSwitcher(object value, Type valueTn) : this(value, valueTn, false) { }
 
-        internal OneOfSwitcher(IOneOf oneOf, bool hasSwitched)
+        internal OneOfSwitcher(object value, Type valueTn, bool hasSwitched)
         {
-            this.oneOf = oneOf;
+            this.value = value;
+            this.valueTn = valueTn;
             this.hasSwitched = hasSwitched;
         }
 
         public OneOfSwitcher<T2, T3, T4, T5, T6> Switch(Action<T1> action)
         {
             SwitchImpl<T1>(null, action);
-            return new OneOfSwitcher<T2, T3, T4, T5, T6>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T2, T3, T4, T5, T6>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T3, T4, T5, T6> Switch(Action<T2> action)
         {
             SwitchImpl<T2>(null, action);
-            return new OneOfSwitcher<T1, T3, T4, T5, T6>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T3, T4, T5, T6>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T4, T5, T6> Switch(Action<T3> action)
         {
             SwitchImpl<T3>(null, action);
-            return new OneOfSwitcher<T1, T2, T4, T5, T6>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T2, T4, T5, T6>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T5, T6> Switch(Action<T4> action)
         {
             SwitchImpl<T4>(null, action);
-            return new OneOfSwitcher<T1, T2, T3, T5, T6>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T2, T3, T5, T6>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T6> Switch(Action<T5> action)
         {
             SwitchImpl<T5>(null, action);
-            return new OneOfSwitcher<T1, T2, T3, T4, T6>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T2, T3, T4, T6>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5> Switch(Action<T6> action)
         {
             SwitchImpl<T6>(null, action);
-            return new OneOfSwitcher<T1, T2, T3, T4, T5>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T2, T3, T4, T5>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6> SwitchWhen(Predicate<T1> condition, Action<T1> action)
@@ -804,79 +808,81 @@ namespace OneOf
 
         public void Else(Action<object> action)
         {
-            if (!hasSwitched) action(oneOf.Value);
+            if (!hasSwitched) action(value);
         }
 
         public void ElseThrow(Func<object, Exception> func)
         {
-            if (!hasSwitched) throw func(oneOf.Value);
+            if (!hasSwitched) throw func(value);
         }
 
         void SwitchImpl<T>(Predicate<T> condition, Action<T> action)
         {
             if (hasSwitched) return;                 // already switched
 
-            if (oneOf.OrigType != typeof(T)) return; // not correct type
-            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
+            if (valueTn != typeof(T)) return;        // not correct type
+            if (condition != null && !condition((T)value)) return;  // failed condition
 
-            action((T)oneOf.Value);                  // yes!
+            action((T)value);                        // yes!
             hasSwitched = true;
         }
     }
 
     public struct OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>
     {
-        readonly IOneOf oneOf;
+        readonly object value;
+        readonly Type valueTn;
         bool hasSwitched;
 
-        internal OneOfSwitcher(IOneOf oneOf) : this(oneOf, false) { }
+        internal OneOfSwitcher(object value, Type valueTn) : this(value, valueTn, false) { }
 
-        internal OneOfSwitcher(IOneOf oneOf, bool hasSwitched)
+        internal OneOfSwitcher(object value, Type valueTn, bool hasSwitched)
         {
-            this.oneOf = oneOf;
+            this.value = value;
+            this.valueTn = valueTn;
             this.hasSwitched = hasSwitched;
         }
 
         public OneOfSwitcher<T2, T3, T4, T5, T6, T7> Switch(Action<T1> action)
         {
             SwitchImpl<T1>(null, action);
-            return new OneOfSwitcher<T2, T3, T4, T5, T6, T7>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T2, T3, T4, T5, T6, T7>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T3, T4, T5, T6, T7> Switch(Action<T2> action)
         {
             SwitchImpl<T2>(null, action);
-            return new OneOfSwitcher<T1, T3, T4, T5, T6, T7>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T3, T4, T5, T6, T7>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T4, T5, T6, T7> Switch(Action<T3> action)
         {
             SwitchImpl<T3>(null, action);
-            return new OneOfSwitcher<T1, T2, T4, T5, T6, T7>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T2, T4, T5, T6, T7>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T5, T6, T7> Switch(Action<T4> action)
         {
             SwitchImpl<T4>(null, action);
-            return new OneOfSwitcher<T1, T2, T3, T5, T6, T7>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T2, T3, T5, T6, T7>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T6, T7> Switch(Action<T5> action)
         {
             SwitchImpl<T5>(null, action);
-            return new OneOfSwitcher<T1, T2, T3, T4, T6, T7>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T2, T3, T4, T6, T7>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T7> Switch(Action<T6> action)
         {
             SwitchImpl<T6>(null, action);
-            return new OneOfSwitcher<T1, T2, T3, T4, T5, T7>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T2, T3, T4, T5, T7>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6> Switch(Action<T7> action)
         {
             SwitchImpl<T7>(null, action);
-            return new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> SwitchWhen(Predicate<T1> condition, Action<T1> action)
@@ -923,85 +929,87 @@ namespace OneOf
 
         public void Else(Action<object> action)
         {
-            if (!hasSwitched) action(oneOf.Value);
+            if (!hasSwitched) action(value);
         }
 
         public void ElseThrow(Func<object, Exception> func)
         {
-            if (!hasSwitched) throw func(oneOf.Value);
+            if (!hasSwitched) throw func(value);
         }
 
         void SwitchImpl<T>(Predicate<T> condition, Action<T> action)
         {
             if (hasSwitched) return;                 // already switched
 
-            if (oneOf.OrigType != typeof(T)) return; // not correct type
-            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
+            if (valueTn != typeof(T)) return;        // not correct type
+            if (condition != null && !condition((T)value)) return;  // failed condition
 
-            action((T)oneOf.Value);                  // yes!
+            action((T)value);                        // yes!
             hasSwitched = true;
         }
     }
 
     public struct OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>
     {
-        readonly IOneOf oneOf;
+        readonly object value;
+        readonly Type valueTn;
         bool hasSwitched;
 
-        internal OneOfSwitcher(IOneOf oneOf) : this(oneOf, false) { }
+        internal OneOfSwitcher(object value, Type valueTn) : this(value, valueTn, false) { }
 
-        internal OneOfSwitcher(IOneOf oneOf, bool hasSwitched)
+        internal OneOfSwitcher(object value, Type valueTn, bool hasSwitched)
         {
-            this.oneOf = oneOf;
+            this.value = value;
+            this.valueTn = valueTn;
             this.hasSwitched = hasSwitched;
         }
 
         public OneOfSwitcher<T2, T3, T4, T5, T6, T7, T8> Switch(Action<T1> action)
         {
             SwitchImpl<T1>(null, action);
-            return new OneOfSwitcher<T2, T3, T4, T5, T6, T7, T8>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T2, T3, T4, T5, T6, T7, T8>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T3, T4, T5, T6, T7, T8> Switch(Action<T2> action)
         {
             SwitchImpl<T2>(null, action);
-            return new OneOfSwitcher<T1, T3, T4, T5, T6, T7, T8>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T3, T4, T5, T6, T7, T8>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T4, T5, T6, T7, T8> Switch(Action<T3> action)
         {
             SwitchImpl<T3>(null, action);
-            return new OneOfSwitcher<T1, T2, T4, T5, T6, T7, T8>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T2, T4, T5, T6, T7, T8>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T5, T6, T7, T8> Switch(Action<T4> action)
         {
             SwitchImpl<T4>(null, action);
-            return new OneOfSwitcher<T1, T2, T3, T5, T6, T7, T8>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T2, T3, T5, T6, T7, T8>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T6, T7, T8> Switch(Action<T5> action)
         {
             SwitchImpl<T5>(null, action);
-            return new OneOfSwitcher<T1, T2, T3, T4, T6, T7, T8>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T2, T3, T4, T6, T7, T8>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T7, T8> Switch(Action<T6> action)
         {
             SwitchImpl<T6>(null, action);
-            return new OneOfSwitcher<T1, T2, T3, T4, T5, T7, T8>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T2, T3, T4, T5, T7, T8>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T8> Switch(Action<T7> action)
         {
             SwitchImpl<T7>(null, action);
-            return new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T8>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T8>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> Switch(Action<T8> action)
         {
             SwitchImpl<T8>(null, action);
-            return new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> SwitchWhen(Predicate<T1> condition, Action<T1> action)
@@ -1054,91 +1062,93 @@ namespace OneOf
 
         public void Else(Action<object> action)
         {
-            if (!hasSwitched) action(oneOf.Value);
+            if (!hasSwitched) action(value);
         }
 
         public void ElseThrow(Func<object, Exception> func)
         {
-            if (!hasSwitched) throw func(oneOf.Value);
+            if (!hasSwitched) throw func(value);
         }
 
         void SwitchImpl<T>(Predicate<T> condition, Action<T> action)
         {
             if (hasSwitched) return;                 // already switched
 
-            if (oneOf.OrigType != typeof(T)) return; // not correct type
-            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
+            if (valueTn != typeof(T)) return;        // not correct type
+            if (condition != null && !condition((T)value)) return;  // failed condition
 
-            action((T)oneOf.Value);                  // yes!
+            action((T)value);                        // yes!
             hasSwitched = true;
         }
     }
 
     public struct OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>
     {
-        readonly IOneOf oneOf;
+        readonly object value;
+        readonly Type valueTn;
         bool hasSwitched;
 
-        internal OneOfSwitcher(IOneOf oneOf) : this(oneOf, false) { }
+        internal OneOfSwitcher(object value, Type valueTn) : this(value, valueTn, false) { }
 
-        internal OneOfSwitcher(IOneOf oneOf, bool hasSwitched)
+        internal OneOfSwitcher(object value, Type valueTn, bool hasSwitched)
         {
-            this.oneOf = oneOf;
+            this.value = value;
+            this.valueTn = valueTn;
             this.hasSwitched = hasSwitched;
         }
 
         public OneOfSwitcher<T2, T3, T4, T5, T6, T7, T8, T9> Switch(Action<T1> action)
         {
             SwitchImpl<T1>(null, action);
-            return new OneOfSwitcher<T2, T3, T4, T5, T6, T7, T8, T9>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T2, T3, T4, T5, T6, T7, T8, T9>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T3, T4, T5, T6, T7, T8, T9> Switch(Action<T2> action)
         {
             SwitchImpl<T2>(null, action);
-            return new OneOfSwitcher<T1, T3, T4, T5, T6, T7, T8, T9>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T3, T4, T5, T6, T7, T8, T9>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T4, T5, T6, T7, T8, T9> Switch(Action<T3> action)
         {
             SwitchImpl<T3>(null, action);
-            return new OneOfSwitcher<T1, T2, T4, T5, T6, T7, T8, T9>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T2, T4, T5, T6, T7, T8, T9>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T5, T6, T7, T8, T9> Switch(Action<T4> action)
         {
             SwitchImpl<T4>(null, action);
-            return new OneOfSwitcher<T1, T2, T3, T5, T6, T7, T8, T9>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T2, T3, T5, T6, T7, T8, T9>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T6, T7, T8, T9> Switch(Action<T5> action)
         {
             SwitchImpl<T5>(null, action);
-            return new OneOfSwitcher<T1, T2, T3, T4, T6, T7, T8, T9>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T2, T3, T4, T6, T7, T8, T9>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T7, T8, T9> Switch(Action<T6> action)
         {
             SwitchImpl<T6>(null, action);
-            return new OneOfSwitcher<T1, T2, T3, T4, T5, T7, T8, T9>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T2, T3, T4, T5, T7, T8, T9>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T8, T9> Switch(Action<T7> action)
         {
             SwitchImpl<T7>(null, action);
-            return new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T8, T9>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T8, T9>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T9> Switch(Action<T8> action)
         {
             SwitchImpl<T8>(null, action);
-            return new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T9>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T9>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> Switch(Action<T9> action)
         {
             SwitchImpl<T9>(null, action);
-            return new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(oneOf, hasSwitched);
+            return new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(value, valueTn, hasSwitched);
         }
 
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9> SwitchWhen(Predicate<T1> condition, Action<T1> action)
@@ -1197,36 +1207,38 @@ namespace OneOf
 
         public void Else(Action<object> action)
         {
-            if (!hasSwitched) action(oneOf.Value);
+            if (!hasSwitched) action(value);
         }
 
         public void ElseThrow(Func<object, Exception> func)
         {
-            if (!hasSwitched) throw func(oneOf.Value);
+            if (!hasSwitched) throw func(value);
         }
 
         void SwitchImpl<T>(Predicate<T> condition, Action<T> action)
         {
             if (hasSwitched) return;                 // already switched
 
-            if (oneOf.OrigType != typeof(T)) return; // not correct type
-            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
+            if (valueTn != typeof(T)) return;        // not correct type
+            if (condition != null && !condition((T)value)) return;  // failed condition
 
-            action((T)oneOf.Value);                  // yes!
+            action((T)value);                        // yes!
             hasSwitched = true;
         }
     }
 
     public struct OneOfMatcher<T1, TResult>
     {
-        readonly IOneOf oneOf;
+        readonly object value;
+        readonly Type valueTn;
         object result;
 
-        internal OneOfMatcher(IOneOf oneOf) : this(oneOf, null) { }
+        internal OneOfMatcher(object value, Type valueTn) : this(value, valueTn, null) { }
 
-        internal OneOfMatcher(IOneOf oneOf, object result)
+        internal OneOfMatcher(object value, Type valueTn, object result)
         {
-            this.oneOf = oneOf;
+            this.value = value;
+            this.valueTn = valueTn;
             this.result = result;
         }
 
@@ -1250,13 +1262,13 @@ namespace OneOf
 
         public TResult Else(Func<object, TResult> createResult)
         {
-            if (result == null) result = createResult(oneOf.Value);
+            if (result == null) result = createResult(value);
             return (TResult)result;
         }
 
         public TResult ElseThrow(Func<object, Exception> createException)
         {
-            if (result == null) throw createException(oneOf.Value);
+            if (result == null) throw createException(value);
             return (TResult)result;
         }
 
@@ -1264,36 +1276,38 @@ namespace OneOf
         {
             if (result != null) return;              // already matched
 
-            if (oneOf.OrigType != typeof(T)) return; // not correct type
-            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
+            if (valueTn != typeof(T)) return;        // not correct type
+            if (condition != null && !condition((T)value)) return;  // failed condition
 
-            result = createResult((T)oneOf.Value);   // yes!
+            result = createResult((T)value);         // yes!
         }
     }
 
     public struct OneOfMatcher<T1, T2, TResult>
     {
-        readonly IOneOf oneOf;
+        readonly object value;
+        readonly Type valueTn;
         object result;
 
-        internal OneOfMatcher(IOneOf oneOf) : this(oneOf, null) { }
+        internal OneOfMatcher(object value, Type valueTn) : this(value, valueTn, null) { }
 
-        internal OneOfMatcher(IOneOf oneOf, object result)
+        internal OneOfMatcher(object value, Type valueTn, object result)
         {
-            this.oneOf = oneOf;
+            this.value = value;
+            this.valueTn = valueTn;
             this.result = result;
         }
 
         public OneOfMatcher<T2, TResult> Match(Func<T1, TResult> createResult)
         {
             MatchImpl<T1>(null, createResult);
-            return new OneOfMatcher<T2, TResult>(oneOf, result);
+            return new OneOfMatcher<T2, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, TResult> Match(Func<T2, TResult> createResult)
         {
             MatchImpl<T2>(null, createResult);
-            return new OneOfMatcher<T1, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, TResult> MatchWhen(Predicate<T1> condition, Func<T1, TResult> createResult)
@@ -1316,13 +1330,13 @@ namespace OneOf
 
         public TResult Else(Func<object, TResult> createResult)
         {
-            if (result == null) result = createResult(oneOf.Value);
+            if (result == null) result = createResult(value);
             return (TResult)result;
         }
 
         public TResult ElseThrow(Func<object, Exception> createException)
         {
-            if (result == null) throw createException(oneOf.Value);
+            if (result == null) throw createException(value);
             return (TResult)result;
         }
 
@@ -1330,42 +1344,44 @@ namespace OneOf
         {
             if (result != null) return;              // already matched
 
-            if (oneOf.OrigType != typeof(T)) return; // not correct type
-            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
+            if (valueTn != typeof(T)) return;        // not correct type
+            if (condition != null && !condition((T)value)) return;  // failed condition
 
-            result = createResult((T)oneOf.Value);   // yes!
+            result = createResult((T)value);         // yes!
         }
     }
 
     public struct OneOfMatcher<T1, T2, T3, TResult>
     {
-        readonly IOneOf oneOf;
+        readonly object value;
+        readonly Type valueTn;
         object result;
 
-        internal OneOfMatcher(IOneOf oneOf) : this(oneOf, null) { }
+        internal OneOfMatcher(object value, Type valueTn) : this(value, valueTn, null) { }
 
-        internal OneOfMatcher(IOneOf oneOf, object result)
+        internal OneOfMatcher(object value, Type valueTn, object result)
         {
-            this.oneOf = oneOf;
+            this.value = value;
+            this.valueTn = valueTn;
             this.result = result;
         }
 
         public OneOfMatcher<T2, T3, TResult> Match(Func<T1, TResult> createResult)
         {
             MatchImpl<T1>(null, createResult);
-            return new OneOfMatcher<T2, T3, TResult>(oneOf, result);
+            return new OneOfMatcher<T2, T3, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T3, TResult> Match(Func<T2, TResult> createResult)
         {
             MatchImpl<T2>(null, createResult);
-            return new OneOfMatcher<T1, T3, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T3, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, TResult> Match(Func<T3, TResult> createResult)
         {
             MatchImpl<T3>(null, createResult);
-            return new OneOfMatcher<T1, T2, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T2, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, T3, TResult> MatchWhen(Predicate<T1> condition, Func<T1, TResult> createResult)
@@ -1394,13 +1410,13 @@ namespace OneOf
 
         public TResult Else(Func<object, TResult> createResult)
         {
-            if (result == null) result = createResult(oneOf.Value);
+            if (result == null) result = createResult(value);
             return (TResult)result;
         }
 
         public TResult ElseThrow(Func<object, Exception> createException)
         {
-            if (result == null) throw createException(oneOf.Value);
+            if (result == null) throw createException(value);
             return (TResult)result;
         }
 
@@ -1408,48 +1424,50 @@ namespace OneOf
         {
             if (result != null) return;              // already matched
 
-            if (oneOf.OrigType != typeof(T)) return; // not correct type
-            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
+            if (valueTn != typeof(T)) return;        // not correct type
+            if (condition != null && !condition((T)value)) return;  // failed condition
 
-            result = createResult((T)oneOf.Value);   // yes!
+            result = createResult((T)value);         // yes!
         }
     }
 
     public struct OneOfMatcher<T1, T2, T3, T4, TResult>
     {
-        readonly IOneOf oneOf;
+        readonly object value;
+        readonly Type valueTn;
         object result;
 
-        internal OneOfMatcher(IOneOf oneOf) : this(oneOf, null) { }
+        internal OneOfMatcher(object value, Type valueTn) : this(value, valueTn, null) { }
 
-        internal OneOfMatcher(IOneOf oneOf, object result)
+        internal OneOfMatcher(object value, Type valueTn, object result)
         {
-            this.oneOf = oneOf;
+            this.value = value;
+            this.valueTn = valueTn;
             this.result = result;
         }
 
         public OneOfMatcher<T2, T3, T4, TResult> Match(Func<T1, TResult> createResult)
         {
             MatchImpl<T1>(null, createResult);
-            return new OneOfMatcher<T2, T3, T4, TResult>(oneOf, result);
+            return new OneOfMatcher<T2, T3, T4, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T3, T4, TResult> Match(Func<T2, TResult> createResult)
         {
             MatchImpl<T2>(null, createResult);
-            return new OneOfMatcher<T1, T3, T4, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T3, T4, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, T4, TResult> Match(Func<T3, TResult> createResult)
         {
             MatchImpl<T3>(null, createResult);
-            return new OneOfMatcher<T1, T2, T4, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T2, T4, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, T3, TResult> Match(Func<T4, TResult> createResult)
         {
             MatchImpl<T4>(null, createResult);
-            return new OneOfMatcher<T1, T2, T3, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T2, T3, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, T3, T4, TResult> MatchWhen(Predicate<T1> condition, Func<T1, TResult> createResult)
@@ -1484,13 +1502,13 @@ namespace OneOf
 
         public TResult Else(Func<object, TResult> createResult)
         {
-            if (result == null) result = createResult(oneOf.Value);
+            if (result == null) result = createResult(value);
             return (TResult)result;
         }
 
         public TResult ElseThrow(Func<object, Exception> createException)
         {
-            if (result == null) throw createException(oneOf.Value);
+            if (result == null) throw createException(value);
             return (TResult)result;
         }
 
@@ -1498,54 +1516,56 @@ namespace OneOf
         {
             if (result != null) return;              // already matched
 
-            if (oneOf.OrigType != typeof(T)) return; // not correct type
-            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
+            if (valueTn != typeof(T)) return;        // not correct type
+            if (condition != null && !condition((T)value)) return;  // failed condition
 
-            result = createResult((T)oneOf.Value);   // yes!
+            result = createResult((T)value);         // yes!
         }
     }
 
     public struct OneOfMatcher<T1, T2, T3, T4, T5, TResult>
     {
-        readonly IOneOf oneOf;
+        readonly object value;
+        readonly Type valueTn;
         object result;
 
-        internal OneOfMatcher(IOneOf oneOf) : this(oneOf, null) { }
+        internal OneOfMatcher(object value, Type valueTn) : this(value, valueTn, null) { }
 
-        internal OneOfMatcher(IOneOf oneOf, object result)
+        internal OneOfMatcher(object value, Type valueTn, object result)
         {
-            this.oneOf = oneOf;
+            this.value = value;
+            this.valueTn = valueTn;
             this.result = result;
         }
 
         public OneOfMatcher<T2, T3, T4, T5, TResult> Match(Func<T1, TResult> createResult)
         {
             MatchImpl<T1>(null, createResult);
-            return new OneOfMatcher<T2, T3, T4, T5, TResult>(oneOf, result);
+            return new OneOfMatcher<T2, T3, T4, T5, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T3, T4, T5, TResult> Match(Func<T2, TResult> createResult)
         {
             MatchImpl<T2>(null, createResult);
-            return new OneOfMatcher<T1, T3, T4, T5, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T3, T4, T5, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, T4, T5, TResult> Match(Func<T3, TResult> createResult)
         {
             MatchImpl<T3>(null, createResult);
-            return new OneOfMatcher<T1, T2, T4, T5, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T2, T4, T5, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, T3, T5, TResult> Match(Func<T4, TResult> createResult)
         {
             MatchImpl<T4>(null, createResult);
-            return new OneOfMatcher<T1, T2, T3, T5, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T2, T3, T5, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, T3, T4, TResult> Match(Func<T5, TResult> createResult)
         {
             MatchImpl<T5>(null, createResult);
-            return new OneOfMatcher<T1, T2, T3, T4, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T2, T3, T4, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, T3, T4, T5, TResult> MatchWhen(Predicate<T1> condition, Func<T1, TResult> createResult)
@@ -1586,13 +1606,13 @@ namespace OneOf
 
         public TResult Else(Func<object, TResult> createResult)
         {
-            if (result == null) result = createResult(oneOf.Value);
+            if (result == null) result = createResult(value);
             return (TResult)result;
         }
 
         public TResult ElseThrow(Func<object, Exception> createException)
         {
-            if (result == null) throw createException(oneOf.Value);
+            if (result == null) throw createException(value);
             return (TResult)result;
         }
 
@@ -1600,60 +1620,62 @@ namespace OneOf
         {
             if (result != null) return;              // already matched
 
-            if (oneOf.OrigType != typeof(T)) return; // not correct type
-            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
+            if (valueTn != typeof(T)) return;        // not correct type
+            if (condition != null && !condition((T)value)) return;  // failed condition
 
-            result = createResult((T)oneOf.Value);   // yes!
+            result = createResult((T)value);         // yes!
         }
     }
 
     public struct OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>
     {
-        readonly IOneOf oneOf;
+        readonly object value;
+        readonly Type valueTn;
         object result;
 
-        internal OneOfMatcher(IOneOf oneOf) : this(oneOf, null) { }
+        internal OneOfMatcher(object value, Type valueTn) : this(value, valueTn, null) { }
 
-        internal OneOfMatcher(IOneOf oneOf, object result)
+        internal OneOfMatcher(object value, Type valueTn, object result)
         {
-            this.oneOf = oneOf;
+            this.value = value;
+            this.valueTn = valueTn;
             this.result = result;
         }
 
         public OneOfMatcher<T2, T3, T4, T5, T6, TResult> Match(Func<T1, TResult> createResult)
         {
             MatchImpl<T1>(null, createResult);
-            return new OneOfMatcher<T2, T3, T4, T5, T6, TResult>(oneOf, result);
+            return new OneOfMatcher<T2, T3, T4, T5, T6, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T3, T4, T5, T6, TResult> Match(Func<T2, TResult> createResult)
         {
             MatchImpl<T2>(null, createResult);
-            return new OneOfMatcher<T1, T3, T4, T5, T6, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T3, T4, T5, T6, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, T4, T5, T6, TResult> Match(Func<T3, TResult> createResult)
         {
             MatchImpl<T3>(null, createResult);
-            return new OneOfMatcher<T1, T2, T4, T5, T6, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T2, T4, T5, T6, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, T3, T5, T6, TResult> Match(Func<T4, TResult> createResult)
         {
             MatchImpl<T4>(null, createResult);
-            return new OneOfMatcher<T1, T2, T3, T5, T6, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T2, T3, T5, T6, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, T3, T4, T6, TResult> Match(Func<T5, TResult> createResult)
         {
             MatchImpl<T5>(null, createResult);
-            return new OneOfMatcher<T1, T2, T3, T4, T6, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T2, T3, T4, T6, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, T3, T4, T5, TResult> Match(Func<T6, TResult> createResult)
         {
             MatchImpl<T6>(null, createResult);
-            return new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> MatchWhen(Predicate<T1> condition, Func<T1, TResult> createResult)
@@ -1700,13 +1722,13 @@ namespace OneOf
 
         public TResult Else(Func<object, TResult> createResult)
         {
-            if (result == null) result = createResult(oneOf.Value);
+            if (result == null) result = createResult(value);
             return (TResult)result;
         }
 
         public TResult ElseThrow(Func<object, Exception> createException)
         {
-            if (result == null) throw createException(oneOf.Value);
+            if (result == null) throw createException(value);
             return (TResult)result;
         }
 
@@ -1714,66 +1736,68 @@ namespace OneOf
         {
             if (result != null) return;              // already matched
 
-            if (oneOf.OrigType != typeof(T)) return; // not correct type
-            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
+            if (valueTn != typeof(T)) return;        // not correct type
+            if (condition != null && !condition((T)value)) return;  // failed condition
 
-            result = createResult((T)oneOf.Value);   // yes!
+            result = createResult((T)value);         // yes!
         }
     }
 
     public struct OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>
     {
-        readonly IOneOf oneOf;
+        readonly object value;
+        readonly Type valueTn;
         object result;
 
-        internal OneOfMatcher(IOneOf oneOf) : this(oneOf, null) { }
+        internal OneOfMatcher(object value, Type valueTn) : this(value, valueTn, null) { }
 
-        internal OneOfMatcher(IOneOf oneOf, object result)
+        internal OneOfMatcher(object value, Type valueTn, object result)
         {
-            this.oneOf = oneOf;
+            this.value = value;
+            this.valueTn = valueTn;
             this.result = result;
         }
 
         public OneOfMatcher<T2, T3, T4, T5, T6, T7, TResult> Match(Func<T1, TResult> createResult)
         {
             MatchImpl<T1>(null, createResult);
-            return new OneOfMatcher<T2, T3, T4, T5, T6, T7, TResult>(oneOf, result);
+            return new OneOfMatcher<T2, T3, T4, T5, T6, T7, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T3, T4, T5, T6, T7, TResult> Match(Func<T2, TResult> createResult)
         {
             MatchImpl<T2>(null, createResult);
-            return new OneOfMatcher<T1, T3, T4, T5, T6, T7, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T3, T4, T5, T6, T7, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, T4, T5, T6, T7, TResult> Match(Func<T3, TResult> createResult)
         {
             MatchImpl<T3>(null, createResult);
-            return new OneOfMatcher<T1, T2, T4, T5, T6, T7, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T2, T4, T5, T6, T7, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, T3, T5, T6, T7, TResult> Match(Func<T4, TResult> createResult)
         {
             MatchImpl<T4>(null, createResult);
-            return new OneOfMatcher<T1, T2, T3, T5, T6, T7, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T2, T3, T5, T6, T7, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, T3, T4, T6, T7, TResult> Match(Func<T5, TResult> createResult)
         {
             MatchImpl<T5>(null, createResult);
-            return new OneOfMatcher<T1, T2, T3, T4, T6, T7, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T2, T3, T4, T6, T7, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, T3, T4, T5, T7, TResult> Match(Func<T6, TResult> createResult)
         {
             MatchImpl<T6>(null, createResult);
-            return new OneOfMatcher<T1, T2, T3, T4, T5, T7, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T2, T3, T4, T5, T7, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult> Match(Func<T7, TResult> createResult)
         {
             MatchImpl<T7>(null, createResult);
-            return new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> MatchWhen(Predicate<T1> condition, Func<T1, TResult> createResult)
@@ -1826,13 +1850,13 @@ namespace OneOf
 
         public TResult Else(Func<object, TResult> createResult)
         {
-            if (result == null) result = createResult(oneOf.Value);
+            if (result == null) result = createResult(value);
             return (TResult)result;
         }
 
         public TResult ElseThrow(Func<object, Exception> createException)
         {
-            if (result == null) throw createException(oneOf.Value);
+            if (result == null) throw createException(value);
             return (TResult)result;
         }
 
@@ -1840,72 +1864,74 @@ namespace OneOf
         {
             if (result != null) return;              // already matched
 
-            if (oneOf.OrigType != typeof(T)) return; // not correct type
-            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
+            if (valueTn != typeof(T)) return;        // not correct type
+            if (condition != null && !condition((T)value)) return;  // failed condition
 
-            result = createResult((T)oneOf.Value);   // yes!
+            result = createResult((T)value);         // yes!
         }
     }
 
     public struct OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>
     {
-        readonly IOneOf oneOf;
+        readonly object value;
+        readonly Type valueTn;
         object result;
 
-        internal OneOfMatcher(IOneOf oneOf) : this(oneOf, null) { }
+        internal OneOfMatcher(object value, Type valueTn) : this(value, valueTn, null) { }
 
-        internal OneOfMatcher(IOneOf oneOf, object result)
+        internal OneOfMatcher(object value, Type valueTn, object result)
         {
-            this.oneOf = oneOf;
+            this.value = value;
+            this.valueTn = valueTn;
             this.result = result;
         }
 
         public OneOfMatcher<T2, T3, T4, T5, T6, T7, T8, TResult> Match(Func<T1, TResult> createResult)
         {
             MatchImpl<T1>(null, createResult);
-            return new OneOfMatcher<T2, T3, T4, T5, T6, T7, T8, TResult>(oneOf, result);
+            return new OneOfMatcher<T2, T3, T4, T5, T6, T7, T8, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T3, T4, T5, T6, T7, T8, TResult> Match(Func<T2, TResult> createResult)
         {
             MatchImpl<T2>(null, createResult);
-            return new OneOfMatcher<T1, T3, T4, T5, T6, T7, T8, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T3, T4, T5, T6, T7, T8, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, T4, T5, T6, T7, T8, TResult> Match(Func<T3, TResult> createResult)
         {
             MatchImpl<T3>(null, createResult);
-            return new OneOfMatcher<T1, T2, T4, T5, T6, T7, T8, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T2, T4, T5, T6, T7, T8, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, T3, T5, T6, T7, T8, TResult> Match(Func<T4, TResult> createResult)
         {
             MatchImpl<T4>(null, createResult);
-            return new OneOfMatcher<T1, T2, T3, T5, T6, T7, T8, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T2, T3, T5, T6, T7, T8, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, T3, T4, T6, T7, T8, TResult> Match(Func<T5, TResult> createResult)
         {
             MatchImpl<T5>(null, createResult);
-            return new OneOfMatcher<T1, T2, T3, T4, T6, T7, T8, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T2, T3, T4, T6, T7, T8, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, T3, T4, T5, T7, T8, TResult> Match(Func<T6, TResult> createResult)
         {
             MatchImpl<T6>(null, createResult);
-            return new OneOfMatcher<T1, T2, T3, T4, T5, T7, T8, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T2, T3, T4, T5, T7, T8, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T8, TResult> Match(Func<T7, TResult> createResult)
         {
             MatchImpl<T7>(null, createResult);
-            return new OneOfMatcher<T1, T2, T3, T4, T5, T6, T8, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T2, T3, T4, T5, T6, T8, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult> Match(Func<T8, TResult> createResult)
         {
             MatchImpl<T8>(null, createResult);
-            return new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MatchWhen(Predicate<T1> condition, Func<T1, TResult> createResult)
@@ -1964,13 +1990,13 @@ namespace OneOf
 
         public TResult Else(Func<object, TResult> createResult)
         {
-            if (result == null) result = createResult(oneOf.Value);
+            if (result == null) result = createResult(value);
             return (TResult)result;
         }
 
         public TResult ElseThrow(Func<object, Exception> createException)
         {
-            if (result == null) throw createException(oneOf.Value);
+            if (result == null) throw createException(value);
             return (TResult)result;
         }
 
@@ -1978,78 +2004,80 @@ namespace OneOf
         {
             if (result != null) return;              // already matched
 
-            if (oneOf.OrigType != typeof(T)) return; // not correct type
-            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
+            if (valueTn != typeof(T)) return;        // not correct type
+            if (condition != null && !condition((T)value)) return;  // failed condition
 
-            result = createResult((T)oneOf.Value);   // yes!
+            result = createResult((T)value);         // yes!
         }
     }
 
     public struct OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>
     {
-        readonly IOneOf oneOf;
+        readonly object value;
+        readonly Type valueTn;
         object result;
 
-        internal OneOfMatcher(IOneOf oneOf) : this(oneOf, null) { }
+        internal OneOfMatcher(object value, Type valueTn) : this(value, valueTn, null) { }
 
-        internal OneOfMatcher(IOneOf oneOf, object result)
+        internal OneOfMatcher(object value, Type valueTn, object result)
         {
-            this.oneOf = oneOf;
+            this.value = value;
+            this.valueTn = valueTn;
             this.result = result;
         }
 
         public OneOfMatcher<T2, T3, T4, T5, T6, T7, T8, T9, TResult> Match(Func<T1, TResult> createResult)
         {
             MatchImpl<T1>(null, createResult);
-            return new OneOfMatcher<T2, T3, T4, T5, T6, T7, T8, T9, TResult>(oneOf, result);
+            return new OneOfMatcher<T2, T3, T4, T5, T6, T7, T8, T9, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T3, T4, T5, T6, T7, T8, T9, TResult> Match(Func<T2, TResult> createResult)
         {
             MatchImpl<T2>(null, createResult);
-            return new OneOfMatcher<T1, T3, T4, T5, T6, T7, T8, T9, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T3, T4, T5, T6, T7, T8, T9, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, T4, T5, T6, T7, T8, T9, TResult> Match(Func<T3, TResult> createResult)
         {
             MatchImpl<T3>(null, createResult);
-            return new OneOfMatcher<T1, T2, T4, T5, T6, T7, T8, T9, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T2, T4, T5, T6, T7, T8, T9, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, T3, T5, T6, T7, T8, T9, TResult> Match(Func<T4, TResult> createResult)
         {
             MatchImpl<T4>(null, createResult);
-            return new OneOfMatcher<T1, T2, T3, T5, T6, T7, T8, T9, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T2, T3, T5, T6, T7, T8, T9, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, T3, T4, T6, T7, T8, T9, TResult> Match(Func<T5, TResult> createResult)
         {
             MatchImpl<T5>(null, createResult);
-            return new OneOfMatcher<T1, T2, T3, T4, T6, T7, T8, T9, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T2, T3, T4, T6, T7, T8, T9, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, T3, T4, T5, T7, T8, T9, TResult> Match(Func<T6, TResult> createResult)
         {
             MatchImpl<T6>(null, createResult);
-            return new OneOfMatcher<T1, T2, T3, T4, T5, T7, T8, T9, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T2, T3, T4, T5, T7, T8, T9, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T8, T9, TResult> Match(Func<T7, TResult> createResult)
         {
             MatchImpl<T7>(null, createResult);
-            return new OneOfMatcher<T1, T2, T3, T4, T5, T6, T8, T9, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T2, T3, T4, T5, T6, T8, T9, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T9, TResult> Match(Func<T8, TResult> createResult)
         {
             MatchImpl<T8>(null, createResult);
-            return new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T9, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T9, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult> Match(Func<T9, TResult> createResult)
         {
             MatchImpl<T9>(null, createResult);
-            return new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(oneOf, result);
+            return new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, valueTn, result);
         }
 
         public OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MatchWhen(Predicate<T1> condition, Func<T1, TResult> createResult)
@@ -2114,13 +2142,13 @@ namespace OneOf
 
         public TResult Else(Func<object, TResult> createResult)
         {
-            if (result == null) result = createResult(oneOf.Value);
+            if (result == null) result = createResult(value);
             return (TResult)result;
         }
 
         public TResult ElseThrow(Func<object, Exception> createException)
         {
-            if (result == null) throw createException(oneOf.Value);
+            if (result == null) throw createException(value);
             return (TResult)result;
         }
 
@@ -2128,10 +2156,10 @@ namespace OneOf
         {
             if (result != null) return;              // already matched
 
-            if (oneOf.OrigType != typeof(T)) return; // not correct type
-            if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition
+            if (valueTn != typeof(T)) return;        // not correct type
+            if (condition != null && !condition((T)value)) return;  // failed condition
 
-            result = createResult((T)oneOf.Value);   // yes!
+            result = createResult((T)value);         // yes!
         }
     }
 }

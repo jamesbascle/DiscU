@@ -42,7 +42,6 @@ void WriteOneOf(int countOfgenericParams)
 		// =============== Constructors
 	    
         WriteLine($"public OneOf(object value) : base(value) {{ }}");
-        WriteLine($"public OneOf(IOneOf oo) : base(oo.Value) {{ }}");
 
 	    // =============== implicit conversion to T
 		// While it looks like we could use OneOf ctor directly as we know the value is a Tn, it might be a subclass of tn.
@@ -68,13 +67,13 @@ void WriteOneOf(int countOfgenericParams)
 			var lesserArityOneOf = Enumerable.Range(1, countOfgenericParams).Where(n => n != parmIndex).ToList();
 			var lesserArityGenericArgs = GenerateGenericArgs(lesserArityOneOf);
 
-			WriteLine($"public OneOfSwitcher<{lesserArityGenericArgs}> Switch(Action<T{parmIndex}> action) => new OneOfSwitcher<{genericArgs}>(this).Switch(action);");
+			WriteLine($"public OneOfSwitcher<{lesserArityGenericArgs}> Switch(Action<T{parmIndex}> action) => new OneOfSwitcher<{genericArgs}>(Value, ValueTn).Switch(action);");
 		}
 
 		WriteLine("");
 		for(var parmIndex = 1; parmIndex <= countOfgenericParams; parmIndex ++)
 		{
-			WriteLine($"public OneOfSwitcher<{genericArgs}> SwitchWhen(Predicate<T{parmIndex}> condition, Action<T{parmIndex}> action) => new OneOfSwitcher<{genericArgs}>(this).SwitchWhen(condition, action);");
+			WriteLine($"public OneOfSwitcher<{genericArgs}> SwitchWhen(Predicate<T{parmIndex}> condition, Action<T{parmIndex}> action) => new OneOfSwitcher<{genericArgs}>(Value, ValueTn).SwitchWhen(condition, action);");
 		}
 
 		// =============== Match / MatchWhen
@@ -85,21 +84,21 @@ void WriteOneOf(int countOfgenericParams)
 			var lesserArityOneOf = Enumerable.Range(1, countOfgenericParams).Where(n => n != parmIndex).ToList();
 			var lesserArityGenericArgs = GenerateGenericArgs(lesserArityOneOf);
 
-			WriteLine($"public OneOfMatcher<{lesserArityGenericArgs}, TResult> Match<TResult>(Func<T{parmIndex}, TResult> calcResult) => new OneOfMatcher<{genericArgs}, TResult>(this).Match(calcResult);");
+			WriteLine($"public OneOfMatcher<{lesserArityGenericArgs}, TResult> Match<TResult>(Func<T{parmIndex}, TResult> calcResult) => new OneOfMatcher<{genericArgs}, TResult>(Value, ValueTn).Match(calcResult);");
 		}
 
 		WriteLine("");
 		for(var parmIndex = 1; parmIndex <= countOfgenericParams; parmIndex ++)
 		{
-			WriteLine($"public OneOfMatcher<{genericArgs}, TResult> MatchWhen<TResult>(Predicate<T{parmIndex}> condition, Func<T{parmIndex}, TResult> calcResult) => new OneOfMatcher<{genericArgs}, TResult>(this).MatchWhen(condition, calcResult);");
+			WriteLine($"public OneOfMatcher<{genericArgs}, TResult> MatchWhen<TResult>(Predicate<T{parmIndex}> condition, Func<T{parmIndex}, TResult> calcResult) => new OneOfMatcher<{genericArgs}, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);");
 		}
 
 		// =============== object overrides
 
 		WriteLine("");
-		WriteLine($"public override bool Equals(object obj) => (obj is OneOf<{genericArgs}>) && Equals(this.value, ((OneOf<{genericArgs}>)obj).value);");
-		WriteLine("public override int GetHashCode() => (value?.GetHashCode() ?? 0);");
-		WriteLine("public override string ToString() => (value?.ToString() ?? \"\");");
+		WriteLine($"public override bool Equals(object obj) => (obj is OneOf<{genericArgs}>) && Equals(this.Value, ((OneOf<{genericArgs}>)obj).Value);");
+		WriteLine("public override int GetHashCode() => (this.Value?.GetHashCode() ?? 0);");
+		WriteLine("public override string ToString() => (this.Value?.ToString() ?? \"\");");
 	}
 }
 
@@ -111,23 +110,26 @@ void WriteSwitcher(int countOfgenericParams)
 	WriteLine($"public struct OneOfSwitcher<{genericArgs}>");
 	using(new WriteBraces(this))
 	{
-		WriteLine("readonly IOneOf oneOf;");
+		WriteLine("readonly object value;");
+		WriteLine("readonly Type valueTn;");
 		WriteLine("bool hasSwitched;");
 
 		// =============== Constructors
 	    
 		WriteLine("");
-		WriteLine("internal OneOfSwitcher(IOneOf oneOf) : this(oneOf, false) { }");
+		WriteLine("internal OneOfSwitcher(object value, Type valueTn) : this(value, valueTn, false) { }");
 	    
 		WriteLine("");
-		WriteLine("internal OneOfSwitcher(IOneOf oneOf, bool hasSwitched)");
+		WriteLine("internal OneOfSwitcher(object value, Type valueTn, bool hasSwitched)");
 		using(new WriteBraces(this))
 		{
-			WriteLine($"this.oneOf = oneOf;");
+			WriteLine($"this.value = value;");
+			WriteLine($"this.valueTn = valueTn;");
 			WriteLine($"this.hasSwitched = hasSwitched;");
 		}
 
 		// =============== Switch
+
 		for(var parmIndex = 1; parmIndex <= countOfgenericParams; parmIndex++)
 		{
 			var lesserArityGenericArgNumbers = Enumerable.Range(1, countOfgenericParams).ToList();
@@ -141,7 +143,7 @@ void WriteSwitcher(int countOfgenericParams)
 				using(new WriteBraces(this))
 				{
 					WriteLine($"SwitchImpl<T{parmIndex}>(null, action);");
-					WriteLine($"return new OneOfSwitcher<{lesserArityGenericArgs}>(oneOf, hasSwitched);");
+					WriteLine($"return new OneOfSwitcher<{lesserArityGenericArgs}>(value, valueTn, hasSwitched);");
 				}
 			}
 			else
@@ -174,7 +176,7 @@ void WriteSwitcher(int countOfgenericParams)
 		WriteLine($"public void Else(Action<object> action)");
 		using(new WriteBraces(this))
 		{
-			WriteLine($"if (!hasSwitched) action(oneOf.Value);");
+			WriteLine($"if (!hasSwitched) action(value);");
 		}
 
 		// =============== ElseThrow
@@ -183,7 +185,7 @@ void WriteSwitcher(int countOfgenericParams)
 		WriteLine($"public void ElseThrow(Func<object, Exception> func)");
 		using(new WriteBraces(this))
 		{
-			WriteLine($"if (!hasSwitched) throw func(oneOf.Value);");
+			WriteLine($"if (!hasSwitched) throw func(value);");
 		}
 
 		// =============== SwitchImpl
@@ -195,11 +197,11 @@ void WriteSwitcher(int countOfgenericParams)
 			WriteLine($"if (hasSwitched) return;                 // already switched");
 			WriteLine("");
 
-			WriteLine($"if (oneOf.OrigType != typeof(T)) return; // not correct type");
-			WriteLine($"if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition");
+			WriteLine($"if (valueTn != typeof(T)) return;        // not correct type");
+			WriteLine($"if (condition != null && !condition((T)value)) return;  // failed condition");
 
 			WriteLine("");
-			WriteLine($"action((T)oneOf.Value);                  // yes!");
+			WriteLine($"action((T)value);                        // yes!");
 			WriteLine("hasSwitched = true;");
 		}
 	}
@@ -213,19 +215,21 @@ void WriteMatcher(int countOfgenericParams)
 	WriteLine($"public struct OneOfMatcher<{genericArgs}>" );
 	using(new WriteBraces(this))
 	{
-		WriteLine("readonly IOneOf oneOf;");
+		WriteLine("readonly object value;");
+		WriteLine("readonly Type valueTn;");
 		WriteLine("object result;");
 
 		// =============== Constructors
 	    
 		WriteLine("");
-		WriteLine("internal OneOfMatcher(IOneOf oneOf) : this(oneOf, null) { }");
+		WriteLine("internal OneOfMatcher(object value, Type valueTn) : this(value, valueTn, null) { }");
 	    
 		WriteLine("");
-		WriteLine("internal OneOfMatcher(IOneOf oneOf, object result)");
+		WriteLine("internal OneOfMatcher(object value, Type valueTn, object result)");
 		using(new WriteBraces(this))
 		{
-			WriteLine($"this.oneOf = oneOf;");
+			WriteLine($"this.value = value;");
+			WriteLine($"this.valueTn = valueTn;");
 			WriteLine($"this.result = result;");
 		}
 
@@ -244,7 +248,7 @@ void WriteMatcher(int countOfgenericParams)
 				using(new WriteBraces(this))
 				{
 					WriteLine($"MatchImpl<T{parmIndex}>(null, createResult);");
-					WriteLine($"return new OneOfMatcher<{lesserArityGenericArgs}>(oneOf, result);");
+					WriteLine($"return new OneOfMatcher<{lesserArityGenericArgs}>(value, valueTn, result);");
 				}
 			}
 			else
@@ -288,7 +292,7 @@ void WriteMatcher(int countOfgenericParams)
 		WriteLine($"public TResult Else(Func<object, TResult> createResult)");
 		using(new WriteBraces(this))
 		{
-			WriteLine($"if (result == null) result = createResult(oneOf.Value);");
+			WriteLine($"if (result == null) result = createResult(value);");
 			WriteLine("return (TResult)result;");
 		}
 
@@ -298,7 +302,7 @@ void WriteMatcher(int countOfgenericParams)
 		WriteLine($"public TResult ElseThrow(Func<object, Exception> createException)");
 		using(new WriteBraces(this))
 		{
-			WriteLine($"if (result == null) throw createException(oneOf.Value);");
+			WriteLine($"if (result == null) throw createException(value);");
 			WriteLine("return (TResult)result;");
 		}
 
@@ -311,10 +315,10 @@ void WriteMatcher(int countOfgenericParams)
 			WriteLine($"if (result != null) return;              // already matched");
 			WriteLine("");
 
-			WriteLine($"if (oneOf.OrigType != typeof(T)) return; // not correct type");
-			WriteLine($"if (condition != null && !condition((T)oneOf.Value)) return;  // failed condition");
+			WriteLine($"if (valueTn != typeof(T)) return;        // not correct type");
+			WriteLine($"if (condition != null && !condition((T)value)) return;  // failed condition");
 			WriteLine("");
-			WriteLine($"result = createResult((T)oneOf.Value);   // yes!");
+			WriteLine($"result = createResult((T)value);         // yes!");
 		}
 	}
 

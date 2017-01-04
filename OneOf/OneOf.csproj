@@ -41,7 +41,6 @@
     </Compile>
     <Compile Include="OneOfBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="IOneOf.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="OneOf.tt">
