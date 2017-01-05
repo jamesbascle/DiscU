@@ -7,31 +7,27 @@ namespace OneOf.Tests
     public class MatchWhenTests
     {
         [TestMethod]
-        public void MatchWhenConditionIsTrue()
-        {
-            var oneOf = (OneOf<string, bool>) "apple";
-
-            var success = oneOf
-                .MatchWhen(v => v == "mango", v => false)
+        public void MatchWhenConditionIsTrue() => Assert.IsTrue(
+            new OneOf<string, bool>("apple")
+                .MatchWhen(v => v == "mango", FailIfCalled<string, bool>)
                 .MatchWhen(v => v == "apple", v => true)
-                .MatchWhen(v => v == "pear", v => false)
-                .Else(false);
-
-            Assert.IsTrue(success);
-        }
+                .MatchWhen(v => v == "pear", FailIfCalled<string, bool>)
+                .Else(FailIfCalled<object, bool>)
+            );
 
         [TestMethod]
-        public void DoesntMatchWhenConditionIsFalse()
+        public void DoesntMatchWhenConditionIsFalse() => Assert.IsTrue(
+            new OneOf<string, bool>("monkey")
+                .MatchWhen(v => v == "mango", FailIfCalled<string, bool>)
+                .MatchWhen(v => v == "apple", FailIfCalled<string, bool>)
+                .MatchWhen(v => v == "pear", FailIfCalled<string, bool>)
+                .Else(v => true)
+            );
+
+        TResult FailIfCalled<TValue, TResult>(TValue value)
         {
-            var oneOf = (OneOf<string, bool>)"monkey";
-
-            var success = oneOf
-                .MatchWhen(v => v == "mango", v => false)
-                .MatchWhen(v => v == "apple", v => false)
-                .MatchWhen(v => v == "pear", v => false)
-                .Else(true);
-
-            Assert.IsTrue(success);
+            Assert.Fail();
+            throw new Exception("will never get here");
         }
     }
 }

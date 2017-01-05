@@ -12,16 +12,10 @@ namespace OneOf.Tests
     {
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void NullValueThrowsException()
-        {
-            var x = new OneOf<string, bool>(null);
-        }
+        public void NullValueThrowsException() => new OneOf<string, bool>(null);
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void WrongTypeThrowsException()
-        {
-            var x = new OneOf<int, decimal>("ABC");
-        }
+        public void WrongTypeThrowsException() => new OneOf<int, decimal>("ABC");
     }
 }

@@ -6,14 +6,16 @@ namespace OneOf.Tests
     [TestClass]
     public class SwitchTests
     {
+        void FailIfCalled<T>(T value) => Assert.Fail();
+
         [TestMethod]
-        public void SwitchBool()
+        public void SwitchInt()
         {
             var success = false;
-            var oneOf = (OneOf<string, bool>)true;
 
-            oneOf.Switch((string str) => Assert.Fail())
-                 .Switch((bool bln) => success = (bln == true));
+            new OneOf<string, int>(123)
+                .Switch((string v) => FailIfCalled(v))
+                .Switch((int v) => success = (v == 123));
 
             Assert.IsTrue(success);
         }
@@ -22,10 +24,10 @@ namespace OneOf.Tests
         public void SwitchString()
         {
             var success = false;
-            var oneOf = (OneOf<string, bool>)"xyz";
 
-            oneOf.Switch((string str) => success = (str == "xyz"))
-                 .Switch((bool bln) => Assert.Fail());
+            new OneOf<string, bool>("xyz")
+                .Switch((string v) => success = (v == "xyz"))
+                .Switch((bool v) => FailIfCalled(v));
 
             Assert.IsTrue(success);
         }
@@ -34,10 +36,10 @@ namespace OneOf.Tests
         public void NoSwitchCallsDefault()
         {
             var success = false;
-            var oneOf = (OneOf<string, bool>)"xyz";
 
-            oneOf.Switch((bool bln) => Assert.Fail())
-                 .Else(v => success = v.ToString() == "xyz");
+            new OneOf<string, int>("xyz")
+                .Switch((int v) => FailIfCalled(v))
+                .Else(v => success = v.ToString() == "xyz");
 
             Assert.IsTrue(success);
         }
@@ -46,11 +48,23 @@ namespace OneOf.Tests
         [ExpectedException(typeof(InvalidOperationException))]
         public void NoSwitchThrowsException()
         {
-            var oneOf = (OneOf<string, bool>)"xyz";
-
-            oneOf.Switch((bool bln) => Assert.Fail())
-                 .ElseThrow(obj => new InvalidOperationException());
+            new OneOf<string, int>("xyz")
+                .Switch((int v) => FailIfCalled(v))
+                .ElseThrow(v => new InvalidOperationException());
         }
+
+        [TestMethod]
+        public void SwitchDoesntThrowException()
+        {
+            var success = false;
+
+            new OneOf<string, int>("xyz")
+                .Switch((string v) => success = (v == "xyz"))
+                .ElseThrow(v => new InvalidOperationException());
+
+            Assert.IsTrue(success);
+        }
+
     }
 
 }

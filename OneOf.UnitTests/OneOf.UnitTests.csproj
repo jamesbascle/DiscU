@@ -52,8 +52,8 @@
   <ItemGroup>
     <Compile Include="EqualityOperatorTests.cs" />
     <Compile Include="CtorTests.cs" />
-    <Compile Include="EqualityTests.cs" />
-    <Compile Include="MatcherTests.cs" />
+    <Compile Include="EqualsTests.cs" />
+    <Compile Include="MatchTests.cs" />
     <Compile Include="MatchWhenTests.cs" />
     <Compile Include="PolymorphicTests.cs" />
     <Compile Include="SwitchTests.cs" />

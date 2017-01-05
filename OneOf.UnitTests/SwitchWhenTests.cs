@@ -6,36 +6,34 @@ namespace OneOf.Tests
     [TestClass]
     public class SwitchWhenTests
     {
+        void FailIfCalled<T>(T value) => Assert.Fail();
+
         [TestMethod]
         public void SwitchWhenConditionIsTrue()
         {
             var success = false;
-            var switches = 0;
 
-            var oneOf = (OneOf<string, bool>) "apple";
+            new OneOf<string, int>("apple")
+                .SwitchWhen(v => v == "mango", FailIfCalled)
+                .SwitchWhen(v => v == "apple", v => success = true)
+                .SwitchWhen(v => v == "pear", FailIfCalled)
+                .Else(FailIfCalled);
 
-            oneOf.SwitchWhen(v => v == "mango", v => { switches++; success = false; })
-                 .SwitchWhen(v => v == "apple", v => { switches++; success = true; })
-                 .SwitchWhen(v => v == "pear", v => { switches++; success = false; })
-                 .Else(v => success = false);
-
-            Assert.IsTrue(switches == 1 && success);
+            Assert.IsTrue(success);
         }
 
         [TestMethod]
         public void DoesNotSwitchWhenConditionIsFalse()
         {
             var success = false;
-            var switches = 0;
 
-            var oneOf = (OneOf<string, bool>)"monkey";
+            new OneOf<string, int>("monkey")
+                .SwitchWhen(v => v == "mango", FailIfCalled)
+                .SwitchWhen(v => v == "apple", FailIfCalled)
+                .SwitchWhen(v => v == "pear", FailIfCalled)
+                .Else(v => success = true);
 
-            oneOf.SwitchWhen(v => v == "mango", v => { switches++; success = false; })
-                 .SwitchWhen(v => v == "apple", v => { switches++; success = false; })
-                 .SwitchWhen(v => v == "pear", v => { switches++; success = false; })
-                 .Else(v => success = true);
-
-            Assert.IsTrue(switches == 0 && success);
+            Assert.IsTrue(success);
         }
     }
 }
