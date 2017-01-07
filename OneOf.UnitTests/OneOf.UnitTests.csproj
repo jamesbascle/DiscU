@@ -64,9 +64,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OneOf\OneOf.Portable.csproj">
+    <ProjectReference Include="..\OneOf\OneOf.NetStandard.csproj">
       <Project>{56d67be9-f031-4225-9121-4d550852d1ac}</Project>
-      <Name>OneOf.Portable</Name>
+      <Name>OneOf.NetStandard</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
