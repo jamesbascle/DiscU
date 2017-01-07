@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneOf", "OneOf\OneOf.csproj", "{56D67BE9-F031-4225-9121-4D550852D1AC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneOf.Portable", "OneOf\OneOf.Portable.csproj", "{56D67BE9-F031-4225-9121-4D550852D1AC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{89D74895-BC8F-413E-99FA-090E7E14A02B}"
 	ProjectSection(SolutionItems) = preProject
@@ -13,6 +13,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneOf.PerfTests", "OneOf.PerfTests\OneOf.PerfTests.csproj", "{65759A8D-D368-4E2E-A92F-85600E83AB55}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneOf.UnitTests", "OneOf.UnitTests\OneOf.UnitTests.csproj", "{4B1FE406-8216-45AC-B391-6808BB243942}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneOf.Net40", "OneOf\OneOf.Net40.csproj", "{93694025-F279-4903-9F81-E3F59F341B85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +34,10 @@ Global
 		{4B1FE406-8216-45AC-B391-6808BB243942}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B1FE406-8216-45AC-B391-6808BB243942}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B1FE406-8216-45AC-B391-6808BB243942}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93694025-F279-4903-9F81-E3F59F341B85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93694025-F279-4903-9F81-E3F59F341B85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93694025-F279-4903-9F81-E3F59F341B85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93694025-F279-4903-9F81-E3F59F341B85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

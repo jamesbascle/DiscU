@@ -16,14 +16,8 @@ namespace OneOf
         /// <summary>The matching OneOf's Tn type that the value is, or is derived from.</summary>
         internal readonly Type ValueTn;
 
-        /// <summary>The OneOf's type</summary>
-        static readonly TypeInfo oneOfType = typeof(TOneOf).GetTypeInfo();
-
-        /// <summary>The OneOf's Tn types</summary>
-        static readonly TypeInfo[] oneOfTnTypes = oneOfType.GenericTypeArguments.Select(x => x.GetTypeInfo()).ToArray();
-
         /// <summary>Function to quickly determine if type equals Tn</summary>
-        static readonly Func<TypeInfo, Boolean> equalsTn = GetEqualsTnFunc();
+        static readonly Func<Type, Boolean> equalsTn = GetEqualsTnFunc();
 
         /// <summary>Ctor</summary>
         protected OneOfBase(object value)
@@ -31,25 +25,25 @@ namespace OneOf
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
 
-            var valueType = value.GetType().GetTypeInfo();
+            var valueType = value.GetType();
             var matchingType = GetBestMatchingTn(valueType);
 
             if (matchingType == null)
             {
-                var oneOfTnCsv = string.Join(", ", oneOfTnTypes.Select(type => type.Name));
+                var oneOfTnCsv = string.Join(", ", typeof(TOneOf).GetGenericArguments().Select(type => type.Name));
                 throw new ArgumentException($"Value of type {valueType.Name} is not compatible with OneOf<{oneOfTnCsv}>", nameof(value));
             }
 
             this.Value = value;
-            this.ValueTn = matchingType.AsType();
+            this.ValueTn = matchingType;
         }
 
         /// <summary>
         /// Get the OneOf's Tn that best matches the value, or null.
         /// </summary>
-        static TypeInfo GetBestMatchingTn(TypeInfo valueType)
+        static Type GetBestMatchingTn(Type valueType)
         {
-            TypeInfo bestType = null;
+            Type bestType = null;
 
             // fastest case: the type equals Tn?
 
@@ -58,7 +52,7 @@ namespace OneOf
 
             // slowest case: find the best matching Tn, if subclass
 
-            foreach (var permittedType in oneOfTnTypes)
+            foreach (var permittedType in typeof(TOneOf).GetGenericArguments())
             {
                 // does the value match this Tn?
                 if (permittedType.IsAssignableFrom(valueType))
@@ -78,23 +72,23 @@ namespace OneOf
         /// <summary>
         /// Create a Func that quickly determines if the ValueType equals Tn
         /// </summary>
-        static Func<TypeInfo, Boolean> GetEqualsTnFunc()
+        static Func<Type, Boolean> GetEqualsTnFunc()
         {
-            var typeInfoParm = Expression.Parameter(typeof(Type), "typeInfo");
+            var typeParm = Expression.Parameter(typeof(Type), "type");
             var labelReturn = Expression.Label(typeof(Boolean));
             var body = new List<Expression>();
 
-            foreach (var tn in oneOfTnTypes)
+            foreach (var tn in typeof(TOneOf).GetGenericArguments())
             {
                 // return true if typeInfo == Tn
-                var expr = Expression.IfThen(Expression.Equal(typeInfoParm, Expression.Constant(tn)), Expression.Return(labelReturn, Expression.Constant(true)));
+                var expr = Expression.IfThen(Expression.Equal(typeParm, Expression.Constant(tn)), Expression.Return(labelReturn, Expression.Constant(true)));
                 body.Add(expr);
             }
 
             // otherwise default is false
             body.Add(Expression.Label(labelReturn, Expression.Constant(false)));
 
-            var lambdaExpr = Expression.Lambda<Func<TypeInfo, Boolean>>(Expression.Block(body.ToArray()), typeInfoParm);
+            var lambdaExpr = Expression.Lambda<Func<Type, Boolean>>(Expression.Block(body.ToArray()), typeParm);
             var func = lambdaExpr.Compile();
             return func;
         }
