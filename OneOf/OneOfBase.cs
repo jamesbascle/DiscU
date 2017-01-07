@@ -16,8 +16,8 @@ namespace OneOf
         /// <summary>The matching OneOf's Tn type that the value is, or is derived from.</summary>
         internal readonly Type ValueTn;
 
-        /// <summary>Function to quickly determine if type equals Tn</summary>
-        static readonly Func<Type, Boolean> equalsTn = GetEqualsTnFunc();
+        /// <summary>Cache the list of Tns for the OneOf as calling GetGenericArguments is SLOW.</summary>
+        static readonly Type[] OneOfTns = typeof(TOneOf).GetGenericArguments();
 
         /// <summary>Ctor</summary>
         protected OneOfBase(object value)
@@ -26,42 +26,77 @@ namespace OneOf
                 throw new ArgumentNullException(nameof(value));
 
             var valueType = value.GetType();
-            var matchingType = GetBestMatchingTn(valueType);
+            var valueTn = MatchExactTn(valueType) ?? MatchClosestTn(valueType);
 
-            if (matchingType == null)
+            if (valueTn == null)
             {
-                var oneOfTnCsv = string.Join(", ", typeof(TOneOf).GetGenericArguments().Select(type => type.Name));
+                var oneOfTnCsv = string.Join(", ", OneOfBase<TOneOf>.OneOfTns.Select(type => type.Name));
                 throw new ArgumentException($"Value of type {valueType.Name} is not compatible with OneOf<{oneOfTnCsv}>", nameof(value));
             }
 
             this.Value = value;
-            this.ValueTn = matchingType;
+            this.ValueTn = valueTn;
         }
 
         /// <summary>
-        /// Get the OneOf's Tn that best matches the value, or null.
+        /// Find the exact matching Tn, or null.
         /// </summary>
-        static Type GetBestMatchingTn(Type valueType)
+        static Type MatchExactTn(Type valueType)
+        {
+            // it's nearly 2x faster if we use a local variable than access the static OneOfTns repeatedly.
+            var oneOfTns = OneOfBase<TOneOf>.OneOfTns;
+
+            switch (oneOfTns.Length)
+            {
+                case 9:
+                    if (oneOfTns[8] == valueType) return valueType;
+                    goto case 8;
+                case 8:
+                    if (oneOfTns[7] == valueType) return valueType;
+                    goto case 7;
+                case 7:
+                    if (oneOfTns[6] == valueType) return valueType;
+                    goto case 6;
+                case 6:
+                    if (oneOfTns[5] == valueType) return valueType;
+                    goto case 5;
+                case 5:
+                    if (oneOfTns[4] == valueType) return valueType;
+                    goto case 4;
+                case 4:
+                    if (oneOfTns[3] == valueType) return valueType;
+                    goto case 3;
+                case 3:
+                    if (oneOfTns[2] == valueType) return valueType;
+                    goto case 2;
+                case 2:
+                    if (oneOfTns[1] == valueType) return valueType;
+                    goto case 1;
+                case 1:
+                    if (oneOfTns[0] == valueType) return valueType;
+                    break;
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// find the best matching Tn that value is a subclass of, otherwise null.
+        /// </summary>
+        static Type MatchClosestTn(Type valueType)
         {
             Type bestType = null;
 
-            // fastest case: the type equals Tn?
-
-            if (equalsTn(valueType))
-                return valueType;
-
-            // slowest case: find the best matching Tn, if subclass
-
-            foreach (var permittedType in typeof(TOneOf).GetGenericArguments())
+            foreach (var tn in OneOfBase<TOneOf>.OneOfTns)
             {
                 // does the value match this Tn?
-                if (permittedType.IsAssignableFrom(valueType))
+                if (tn.IsAssignableFrom(valueType))
                 {
                     // is this Tn a better match than seen previously?
                     if (bestType == null ||
-                        bestType.IsAssignableFrom(permittedType) && !permittedType.IsAssignableFrom(bestType))
+                        bestType.IsAssignableFrom(tn) && !tn.IsAssignableFrom(bestType))
                     {
-                        bestType = permittedType;
+                        bestType = tn;
                     }
                 }
             }
@@ -69,28 +104,5 @@ namespace OneOf
             return bestType;
         }
 
-        /// <summary>
-        /// Create a Func that quickly determines if the ValueType equals Tn
-        /// </summary>
-        static Func<Type, Boolean> GetEqualsTnFunc()
-        {
-            var typeParm = Expression.Parameter(typeof(Type), "type");
-            var labelReturn = Expression.Label(typeof(Boolean));
-            var body = new List<Expression>();
-
-            foreach (var tn in typeof(TOneOf).GetGenericArguments())
-            {
-                // return true if typeInfo == Tn
-                var expr = Expression.IfThen(Expression.Equal(typeParm, Expression.Constant(tn)), Expression.Return(labelReturn, Expression.Constant(true)));
-                body.Add(expr);
-            }
-
-            // otherwise default is false
-            body.Add(Expression.Label(labelReturn, Expression.Constant(false)));
-
-            var lambdaExpr = Expression.Lambda<Func<Type, Boolean>>(Expression.Block(body.ToArray()), typeParm);
-            var func = lambdaExpr.Compile();
-            return func;
-        }
     }
 }
