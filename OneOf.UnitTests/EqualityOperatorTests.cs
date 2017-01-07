@@ -29,5 +29,18 @@ namespace OneOf.Tests
 
         [TestMethod]
         public void InequalityOperatorReturnsTrueWhenNullValue() => Assert.IsTrue(CreateOneOf("A") != null);
+
+
+        [TestMethod]
+        public void EqualityOperatorReturnsTrueWhenSameValue2() => Assert.IsTrue(CreateOneOf("A") == "A");
+
+        [TestMethod]
+        public void EqualityOperatorReturnsFalseWhenDifferingValue2() => Assert.IsFalse(CreateOneOf("A") == "B");
+
+        [TestMethod]
+        public void InequalityOperatorReturnsFalseWhenSameValue2() => Assert.IsFalse(CreateOneOf("A") == "B");
+
+        [TestMethod]
+        public void InequalityOperatorReturnsTrueWhenDifferingValue2() => Assert.IsTrue(CreateOneOf("A") != "B");
     }
 }
