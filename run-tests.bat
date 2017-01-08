@@ -6,12 +6,12 @@ if not exist "%PF%" (
 	set PF=C:\Program Files\
 )
 
-set MSTEST=%PF%\Microsoft Visual Studio 14.0\Common7\IDE\mstest.exe
+set NUNIT=packages\NUnit.ConsoleRunner.3.5.0\tools\nunit3-console.exe
 
 set CONFIG=%1
 if "%CONFIG%" == "" set CONFIG=Debug
 
-"%MSTEST%" /testcontainer:"OneOf.UnitTests\bin\%CONFIG%\OneOf.UnitTests.dll" /noresults /nologo
+"%NUNIT%" "OneOf.UnitTests\bin\%CONFIG%\OneOf.UnitTests.dll"
 if errorlevel 1 goto :fail
 echo.
 

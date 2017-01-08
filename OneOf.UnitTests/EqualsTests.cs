@@ -3,28 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace OneOf.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class EqualsTests
     {
         OneOf<string, int> CreateOneOf(object val) => new OneOf<string, int>(val);
 
-        [TestMethod]
+        [Test]
         public void EqualsReturnsTrueWhenSameValue() => Assert.IsTrue(CreateOneOf(123).Equals(CreateOneOf(123)));
 
-        [TestMethod]
+        [Test]
         public void EqualsReturnsFalseWhenDifferingValue() => Assert.IsFalse(CreateOneOf(123).Equals(CreateOneOf(456)));
 
-        [TestMethod]
+        [Test]
         public void EqualsReturnsFalseWhenDifferingValueType() => Assert.IsFalse(CreateOneOf(123).Equals(CreateOneOf("A")));
 
-        [TestMethod]
+        [Test]
         public void EqualsReturnsFalseWhenNotOneOf() => Assert.IsFalse(CreateOneOf(123).Equals(123));
 
-        [TestMethod]
+        [Test]
         public void EqualsReturnsFalseWhenNullValue() => Assert.IsFalse(CreateOneOf(123).Equals(null));
     }
 }

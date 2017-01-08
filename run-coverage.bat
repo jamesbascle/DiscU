@@ -13,7 +13,7 @@ rem ========================
 echo Checking coverage
 echo.
 
-packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -target:run-mstest.bat -register:user -filter:+[OneOf*]*  -filter:-[OneOf.Tests*]*
+packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -target:run-tests.bat -register:user -filter:+[OneOf*]*  -filter:-[OneOf.Tests*]*
 if errorlevel 1 goto :fail
 echo.
 

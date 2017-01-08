@@ -1,50 +1,44 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace OneOf.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class MatchTests
     {
-        [TestMethod]
-        public void MatchesOnIntType() => Assert.IsTrue(
-            new OneOf<string, int>(123)
-                .Match((string v) => false)
-                .Match((int v) => v == 123)
-            );
+        OneOf<string, int> CreateOneOf(object val) => new OneOf<string, int>(val);
 
-        [TestMethod]
-        public void MatchesOnStringType() => Assert.IsTrue(
-            new OneOf<string, int>("xyz")
+        [Test]
+        public void MatchesOnType() => Assert.IsTrue(
+            CreateOneOf("xyz")
                 .Match((string v) => v == "xyz")
                 .Match((int v) => false)
             );
 
-        [TestMethod]
-        public void ReturnsDefaultWhenMoMatch() => Assert.IsTrue(
-            new OneOf<string, int>("xyz")
+        [Test]
+        public void ReturnsDefaultWhenNoMatch() => Assert.IsTrue(
+            CreateOneOf("xyz")
                 .Match((int v) => false)
                 .Else(v => v.ToString() == "xyz")
             );
 
-        [TestMethod]
-        public void NoMatchReturnsDefault() => Assert.IsTrue(
-            new OneOf<string, int>("xyz")
+        [Test]
+        public void ReturnsDefaultWhenMoMatch2() => Assert.IsTrue(
+            CreateOneOf("xyz")
                 .Match((int v) => false)
                 .Else(true)
             );
 
-        [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void NoMatchThrowsException() => Assert.IsTrue(
-            new OneOf<string, int>("xyz")
+        [Test]
+        public void ThrowsExceptionWhenNoMatch() => Assert.Throws<InvalidOperationException>(() =>
+            CreateOneOf("xyz")
                 .Match((int v) => false)
                 .ElseThrow(v => new InvalidOperationException())
             );
 
-        [TestMethod]
-        public void MatchDoesntThrowException() => Assert.IsTrue(
-            new OneOf<string, int>("xyz")
+        [Test]
+        public void DoesntThrowExceptionWhenNoMatch() => Assert.IsTrue(
+            CreateOneOf("xyz")
                 .Match((string v) => true)
                 .ElseThrow(v => new InvalidOperationException("should not be thrown"))
             );

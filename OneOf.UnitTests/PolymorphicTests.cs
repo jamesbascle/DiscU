@@ -1,13 +1,13 @@
 ﻿using System;
 //using System.Security.Cryptography.X509Certificates;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace OneOf.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class PolymorphicTests
     {
-        [TestMethod]
+        [Test]
         public void MatcherMatchesOnlyOnceWhenParentClassAndSubClassesAreInOneof()
         {
             OneOf<Fake, Fake.One, Fake.Two> one = new Fake.One();
@@ -28,7 +28,7 @@ namespace OneOf.Tests
             Assert.AreEqual(3, testerFunc(three));
         }
 
-        [TestMethod]
+        [Test]
         public void MatcherMatchesOnlyOnceWhenParentClassAndSubClassesAreInOneofAndCreationReferenceIsOfTypeParentButInstanceIsReallyChild()
         {
             OneOf<Fake, Fake.One, Fake.Two> hiddenOne = (Fake)new Fake.One();
@@ -45,7 +45,7 @@ namespace OneOf.Tests
             Assert.AreEqual(1, testerFunc(hiddenOne));
         }
 
-        [TestMethod]
+        [Test]
         public void SwitchProperlyHandlesSubclassAndMatchesOnce()
         {
             var origOne = new Fake.One();
@@ -73,7 +73,7 @@ namespace OneOf.Tests
             Assert.AreEqual(1, testerFunc(three));
         }
 
-        [TestMethod]
+        [Test]
         public void OneOfProperlyHandlesHierarchies()
         {
             var origFour = new Fake.Four();

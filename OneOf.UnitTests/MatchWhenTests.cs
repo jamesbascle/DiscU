@@ -1,23 +1,25 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace OneOf.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class MatchWhenTests
     {
-        [TestMethod]
+        OneOf<string, int> CreateOneOf(object val) => new OneOf<string, int>(val);
+
+        [Test]
         public void MatchWhenConditionIsTrue() => Assert.IsTrue(
-            new OneOf<string, bool>("apple")
+            CreateOneOf("apple")
                 .MatchWhen(v => v == "mango", FailIfCalled<string, bool>)
                 .MatchWhen(v => v == "apple", v => true)
                 .MatchWhen(v => v == "pear", FailIfCalled<string, bool>)
                 .Else(FailIfCalled<object, bool>)
             );
 
-        [TestMethod]
+        [Test]
         public void DoesntMatchWhenConditionIsFalse() => Assert.IsTrue(
-            new OneOf<string, bool>("monkey")
+            CreateOneOf("monkey")
                 .MatchWhen(v => v == "mango", FailIfCalled<string, bool>)
                 .MatchWhen(v => v == "apple", FailIfCalled<string, bool>)
                 .MatchWhen(v => v == "pear", FailIfCalled<string, bool>)
@@ -27,7 +29,7 @@ namespace OneOf.Tests
         TResult FailIfCalled<TValue, TResult>(TValue value)
         {
             Assert.Fail();
-            throw new Exception("will never get here");
+            throw new Exception("will never get here");  // needed so will compile
         }
     }
 }

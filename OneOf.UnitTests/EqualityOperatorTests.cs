@@ -3,44 +3,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace OneOf.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class EqualityOperatorTests
     {
         OneOf<string, int> CreateOneOf(object val) => new OneOf<string, int>(val);
 
-        [TestMethod]
+        [Test]
         public void EqualityOperatorReturnsTrueWhenSameValue() => Assert.IsTrue(CreateOneOf("A") == CreateOneOf("A"));
 
-        [TestMethod]
+        [Test]
         public void EqualityOperatorReturnsFalseWhenDifferingValue() => Assert.IsFalse(CreateOneOf("A") == CreateOneOf("B"));
 
-        [TestMethod]
+        [Test]
         public void EqualityOperatorReturnsFalseWhenNullValue() => Assert.IsFalse(CreateOneOf("A") == null);
 
-        [TestMethod]
+        [Test]
         public void InequalityOperatorReturnsFalseWhenSameValue() => Assert.IsFalse(CreateOneOf("A") != CreateOneOf("A"));
 
-        [TestMethod]
+        [Test]
         public void InequalityOperatorReturnsTrueWhenDifferingValue() => Assert.IsTrue(CreateOneOf("A") != CreateOneOf("B"));
 
-        [TestMethod]
+        [Test]
         public void InequalityOperatorReturnsTrueWhenNullValue() => Assert.IsTrue(CreateOneOf("A") != null);
 
 
-        [TestMethod]
+        [Test]
         public void EqualityOperatorReturnsTrueWhenSameValue2() => Assert.IsTrue(CreateOneOf("A") == "A");
 
-        [TestMethod]
+        [Test]
         public void EqualityOperatorReturnsFalseWhenDifferingValue2() => Assert.IsFalse(CreateOneOf("A") == "B");
 
-        [TestMethod]
+        [Test]
         public void InequalityOperatorReturnsFalseWhenSameValue2() => Assert.IsFalse(CreateOneOf("A") == "B");
 
-        [TestMethod]
+        [Test]
         public void InequalityOperatorReturnsTrueWhenDifferingValue2() => Assert.IsTrue(CreateOneOf("A") != "B");
     }
 }

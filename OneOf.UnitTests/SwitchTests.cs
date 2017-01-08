@@ -1,69 +1,58 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace OneOf.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class SwitchTests
     {
-        void FailIfCalled<T>(T value) => Assert.Fail();
+        void FailIfCalled() => Assert.Fail();
+        void FailIf(bool cond) { if (cond) Assert.Fail(); }
 
-        [TestMethod]
-        public void SwitchInt()
+        OneOf<string, int> CreateOneOf(object val) => new OneOf<string, int>(val);
+
+        [Test]
+        public void SwitchesWhenInt()
         {
-            var success = false;
+            var called = false;
 
-            new OneOf<string, int>(123)
-                .Switch((string v) => FailIfCalled(v))
-                .Switch((int v) => success = (v == 123));
+            CreateOneOf(123).Switch((string v) => FailIfCalled())
+                            .Switch((int v) => { FailIf(v != 123); called = true; });
 
-            Assert.IsTrue(success);
+            Assert.IsTrue(called);
         }
 
-        [TestMethod]
-        public void SwitchString()
+        [Test]
+        public void CallsDefaultActionWhenNoMatch()
         {
-            var success = false;
+            var called = false;
 
-            new OneOf<string, bool>("xyz")
-                .Switch((string v) => success = (v == "xyz"))
-                .Switch((bool v) => FailIfCalled(v));
+            CreateOneOf("xyz").Switch((int v) => FailIfCalled())
+                              .Else(v => { FailIf(v.ToString() != "xyz"); called = true; });
 
-            Assert.IsTrue(success);
+            Assert.IsTrue(called);
         }
 
-        [TestMethod]
-        public void NoSwitchCallsDefault()
+        [Test]
+        public void DoesntThrowExceptionWhenMatch()
         {
-            var success = false;
+            var called = false;
 
-            new OneOf<string, int>("xyz")
-                .Switch((int v) => FailIfCalled(v))
-                .Else(v => success = v.ToString() == "xyz");
+            CreateOneOf("xyz").Switch((string v) => { FailIf(v.ToString() != "xyz"); called = true; })
+                              .ElseThrow(v => new InvalidOperationException());
 
-            Assert.IsTrue(success);
+            Assert.IsTrue(called);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void NoSwitchThrowsException()
+        [Test]
+        public void ThrowsExceptionWhenNoMatch()
         {
-            new OneOf<string, int>("xyz")
-                .Switch((int v) => FailIfCalled(v))
-                .ElseThrow(v => new InvalidOperationException());
+            Assert.Throws<InvalidOperationException>(() =>
+                CreateOneOf("xyz").Switch((int v) => FailIfCalled())
+                                  .ElseThrow(v => new InvalidOperationException())
+                );
         }
 
-        [TestMethod]
-        public void SwitchDoesntThrowException()
-        {
-            var success = false;
-
-            new OneOf<string, int>("xyz")
-                .Switch((string v) => success = (v == "xyz"))
-                .ElseThrow(v => new InvalidOperationException());
-
-            Assert.IsTrue(success);
-        }
 
     }
 

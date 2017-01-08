@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace OneOf.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class CtorTests
     {
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void NullValueThrowsException() => new OneOf<string, bool>(null);
+        OneOf<string, int> CreateOneOf(object val) => new OneOf<string, int>(val);
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void WrongTypeThrowsException() => new OneOf<int, decimal>("ABC");
+        [Test]
+        public void NullValueThrowsException() => Assert.Throws<ArgumentNullException>(() => CreateOneOf(null));
+
+        [Test]
+        public void WrongTypeThrowsException() => Assert.Throws<ArgumentException>(() => CreateOneOf(DateTime.Now));
     }
 }

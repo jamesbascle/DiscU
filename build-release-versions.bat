@@ -13,7 +13,7 @@ rem ========================
 echo Testing all libraries.
 echo.
 
-call run-mstest.bat Release
+call run-tests.bat Release
 if errorlevel 1 goto :fail
 echo.
 

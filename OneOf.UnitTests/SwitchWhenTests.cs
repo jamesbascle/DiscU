@@ -1,19 +1,21 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace OneOf.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class SwitchWhenTests
     {
         void FailIfCalled<T>(T value) => Assert.Fail();
 
-        [TestMethod]
+        OneOf<string, int> CreateOneOf(object val) => new OneOf<string, int>(val);
+
+        [Test]
         public void SwitchWhenConditionIsTrue()
         {
             var success = false;
 
-            new OneOf<string, int>("apple")
+            CreateOneOf("apple")
                 .SwitchWhen(v => v == "mango", FailIfCalled)
                 .SwitchWhen(v => v == "apple", v => success = true)
                 .SwitchWhen(v => v == "pear", FailIfCalled)
@@ -22,12 +24,12 @@ namespace OneOf.Tests
             Assert.IsTrue(success);
         }
 
-        [TestMethod]
+        [Test]
         public void DoesNotSwitchWhenConditionIsFalse()
         {
             var success = false;
 
-            new OneOf<string, int>("monkey")
+            CreateOneOf("monkey")
                 .SwitchWhen(v => v == "mango", FailIfCalled)
                 .SwitchWhen(v => v == "apple", FailIfCalled)
                 .SwitchWhen(v => v == "pear", FailIfCalled)
