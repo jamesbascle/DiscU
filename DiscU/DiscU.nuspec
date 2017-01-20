@@ -10,9 +10,13 @@
     <projectUrl>https://github.com/jamesbascle/OneOf/tree/DiscU</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>
-      Portable library for easy to use F#-like Discriminated Unions in C#. Implicitly casts objects into OneOf instances, then use .Match extension to do pattern matching.  Designed as a drop in replacement for OneOf.
+      Portable library for easy to use F#-like Discriminated Unions in C#. Implicitly casts objects into OneOf instances, then use .Match extension to do pattern matching.  Designed as an partial drop in replacement for OneOf - will require some changes to matching syntax.
     </description>
     <copyright>Copyright 2016</copyright>
     <tags>Discriminated Unions, Pattern Matching</tags>
+
   </metadata>
+  <files>
+    <file src=" bin\Release" dest="lib"></file>
+  </files>
 </package>
