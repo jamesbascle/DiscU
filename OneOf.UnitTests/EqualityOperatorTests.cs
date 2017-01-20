@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using OneOf;
 
 namespace OneOf.Tests
 {
     [TestFixture]
     public class EqualityOperatorTests
     {
-        OneOf<string, int> CreateOneOf(object val) => new OneOf<string, int>(val);
+        OneOf<string, int> CreateOneOf(string val) => new OneOf<string, int>(val);
 
         [Test]
         public void EqualityOperatorReturnsTrueWhenSameValue() => Assert.IsTrue(CreateOneOf("A") == CreateOneOf("A"));

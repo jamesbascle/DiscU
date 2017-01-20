@@ -8,10 +8,13 @@ namespace OneOf
 {
     public class OneOf<T1, T2> : OneOfBase<OneOf<T1, T2>>
     {
-        public OneOf(object value) : base(value) { }
+        internal OneOf(object value, Type matchedType) : base(value, matchedType) { }
+        public OneOf(object value) : base(value, null) { }
 
-        public static implicit operator OneOf<T1, T2>(T1 value) => new OneOf<T1, T2>(value);
-        public static implicit operator OneOf<T1, T2>(T2 value) => new OneOf<T1, T2>(value);
+        public OneOf(T1 value) : this(value, typeof(T1)) { }
+        public static implicit operator OneOf<T1, T2>(T1 value) => new OneOf<T1, T2>(value, typeof(T1));
+        public OneOf(T2 value) : this(value, typeof(T2)) { }
+        public static implicit operator OneOf<T1, T2>(T2 value) => new OneOf<T1, T2>(value, typeof(T2));
 
         public static bool operator ==(OneOf<T1, T2> v1, OneOf<T1, T2> v2) => Equals(v1, v2);
         public static bool operator !=(OneOf<T1, T2> v1, OneOf<T1, T2> v2) => !Equals(v1, v2);
@@ -34,11 +37,15 @@ namespace OneOf
     }
     public class OneOf<T1, T2, T3> : OneOfBase<OneOf<T1, T2, T3>>
     {
-        public OneOf(object value) : base(value) { }
+        internal OneOf(object value, Type matchedType) : base(value, matchedType) { }
+        public OneOf(object value) : base(value, null) { }
 
-        public static implicit operator OneOf<T1, T2, T3>(T1 value) => new OneOf<T1, T2, T3>(value);
-        public static implicit operator OneOf<T1, T2, T3>(T2 value) => new OneOf<T1, T2, T3>(value);
-        public static implicit operator OneOf<T1, T2, T3>(T3 value) => new OneOf<T1, T2, T3>(value);
+        public OneOf(T1 value) : this(value, typeof(T1)) { }
+        public static implicit operator OneOf<T1, T2, T3>(T1 value) => new OneOf<T1, T2, T3>(value, typeof(T1));
+        public OneOf(T2 value) : this(value, typeof(T2)) { }
+        public static implicit operator OneOf<T1, T2, T3>(T2 value) => new OneOf<T1, T2, T3>(value, typeof(T2));
+        public OneOf(T3 value) : this(value, typeof(T3)) { }
+        public static implicit operator OneOf<T1, T2, T3>(T3 value) => new OneOf<T1, T2, T3>(value, typeof(T3));
 
         public static bool operator ==(OneOf<T1, T2, T3> v1, OneOf<T1, T2, T3> v2) => Equals(v1, v2);
         public static bool operator !=(OneOf<T1, T2, T3> v1, OneOf<T1, T2, T3> v2) => !Equals(v1, v2);
@@ -65,12 +72,17 @@ namespace OneOf
     }
     public class OneOf<T1, T2, T3, T4> : OneOfBase<OneOf<T1, T2, T3, T4>>
     {
-        public OneOf(object value) : base(value) { }
+        internal OneOf(object value, Type matchedType) : base(value, matchedType) { }
+        public OneOf(object value) : base(value, null) { }
 
-        public static implicit operator OneOf<T1, T2, T3, T4>(T1 value) => new OneOf<T1, T2, T3, T4>(value);
-        public static implicit operator OneOf<T1, T2, T3, T4>(T2 value) => new OneOf<T1, T2, T3, T4>(value);
-        public static implicit operator OneOf<T1, T2, T3, T4>(T3 value) => new OneOf<T1, T2, T3, T4>(value);
-        public static implicit operator OneOf<T1, T2, T3, T4>(T4 value) => new OneOf<T1, T2, T3, T4>(value);
+        public OneOf(T1 value) : this(value, typeof(T1)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4>(T1 value) => new OneOf<T1, T2, T3, T4>(value, typeof(T1));
+        public OneOf(T2 value) : this(value, typeof(T2)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4>(T2 value) => new OneOf<T1, T2, T3, T4>(value, typeof(T2));
+        public OneOf(T3 value) : this(value, typeof(T3)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4>(T3 value) => new OneOf<T1, T2, T3, T4>(value, typeof(T3));
+        public OneOf(T4 value) : this(value, typeof(T4)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4>(T4 value) => new OneOf<T1, T2, T3, T4>(value, typeof(T4));
 
         public static bool operator ==(OneOf<T1, T2, T3, T4> v1, OneOf<T1, T2, T3, T4> v2) => Equals(v1, v2);
         public static bool operator !=(OneOf<T1, T2, T3, T4> v1, OneOf<T1, T2, T3, T4> v2) => !Equals(v1, v2);
@@ -101,13 +113,19 @@ namespace OneOf
     }
     public class OneOf<T1, T2, T3, T4, T5> : OneOfBase<OneOf<T1, T2, T3, T4, T5>>
     {
-        public OneOf(object value) : base(value) { }
+        internal OneOf(object value, Type matchedType) : base(value, matchedType) { }
+        public OneOf(object value) : base(value, null) { }
 
-        public static implicit operator OneOf<T1, T2, T3, T4, T5>(T1 value) => new OneOf<T1, T2, T3, T4, T5>(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5>(T2 value) => new OneOf<T1, T2, T3, T4, T5>(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5>(T3 value) => new OneOf<T1, T2, T3, T4, T5>(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5>(T4 value) => new OneOf<T1, T2, T3, T4, T5>(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5>(T5 value) => new OneOf<T1, T2, T3, T4, T5>(value);
+        public OneOf(T1 value) : this(value, typeof(T1)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5>(T1 value) => new OneOf<T1, T2, T3, T4, T5>(value, typeof(T1));
+        public OneOf(T2 value) : this(value, typeof(T2)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5>(T2 value) => new OneOf<T1, T2, T3, T4, T5>(value, typeof(T2));
+        public OneOf(T3 value) : this(value, typeof(T3)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5>(T3 value) => new OneOf<T1, T2, T3, T4, T5>(value, typeof(T3));
+        public OneOf(T4 value) : this(value, typeof(T4)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5>(T4 value) => new OneOf<T1, T2, T3, T4, T5>(value, typeof(T4));
+        public OneOf(T5 value) : this(value, typeof(T5)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5>(T5 value) => new OneOf<T1, T2, T3, T4, T5>(value, typeof(T5));
 
         public static bool operator ==(OneOf<T1, T2, T3, T4, T5> v1, OneOf<T1, T2, T3, T4, T5> v2) => Equals(v1, v2);
         public static bool operator !=(OneOf<T1, T2, T3, T4, T5> v1, OneOf<T1, T2, T3, T4, T5> v2) => !Equals(v1, v2);
@@ -142,14 +160,21 @@ namespace OneOf
     }
     public class OneOf<T1, T2, T3, T4, T5, T6> : OneOfBase<OneOf<T1, T2, T3, T4, T5, T6>>
     {
-        public OneOf(object value) : base(value) { }
+        internal OneOf(object value, Type matchedType) : base(value, matchedType) { }
+        public OneOf(object value) : base(value, null) { }
 
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6>(T1 value) => new OneOf<T1, T2, T3, T4, T5, T6>(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6>(T2 value) => new OneOf<T1, T2, T3, T4, T5, T6>(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6>(T3 value) => new OneOf<T1, T2, T3, T4, T5, T6>(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6>(T4 value) => new OneOf<T1, T2, T3, T4, T5, T6>(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6>(T5 value) => new OneOf<T1, T2, T3, T4, T5, T6>(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6>(T6 value) => new OneOf<T1, T2, T3, T4, T5, T6>(value);
+        public OneOf(T1 value) : this(value, typeof(T1)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6>(T1 value) => new OneOf<T1, T2, T3, T4, T5, T6>(value, typeof(T1));
+        public OneOf(T2 value) : this(value, typeof(T2)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6>(T2 value) => new OneOf<T1, T2, T3, T4, T5, T6>(value, typeof(T2));
+        public OneOf(T3 value) : this(value, typeof(T3)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6>(T3 value) => new OneOf<T1, T2, T3, T4, T5, T6>(value, typeof(T3));
+        public OneOf(T4 value) : this(value, typeof(T4)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6>(T4 value) => new OneOf<T1, T2, T3, T4, T5, T6>(value, typeof(T4));
+        public OneOf(T5 value) : this(value, typeof(T5)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6>(T5 value) => new OneOf<T1, T2, T3, T4, T5, T6>(value, typeof(T5));
+        public OneOf(T6 value) : this(value, typeof(T6)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6>(T6 value) => new OneOf<T1, T2, T3, T4, T5, T6>(value, typeof(T6));
 
         public static bool operator ==(OneOf<T1, T2, T3, T4, T5, T6> v1, OneOf<T1, T2, T3, T4, T5, T6> v2) => Equals(v1, v2);
         public static bool operator !=(OneOf<T1, T2, T3, T4, T5, T6> v1, OneOf<T1, T2, T3, T4, T5, T6> v2) => !Equals(v1, v2);
@@ -188,15 +213,23 @@ namespace OneOf
     }
     public class OneOf<T1, T2, T3, T4, T5, T6, T7> : OneOfBase<OneOf<T1, T2, T3, T4, T5, T6, T7>>
     {
-        public OneOf(object value) : base(value) { }
+        internal OneOf(object value, Type matchedType) : base(value, matchedType) { }
+        public OneOf(object value) : base(value, null) { }
 
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T1 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7>(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T2 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7>(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T3 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7>(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T4 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7>(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T5 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7>(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T6 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7>(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T7 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7>(value);
+        public OneOf(T1 value) : this(value, typeof(T1)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T1 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7>(value, typeof(T1));
+        public OneOf(T2 value) : this(value, typeof(T2)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T2 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7>(value, typeof(T2));
+        public OneOf(T3 value) : this(value, typeof(T3)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T3 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7>(value, typeof(T3));
+        public OneOf(T4 value) : this(value, typeof(T4)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T4 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7>(value, typeof(T4));
+        public OneOf(T5 value) : this(value, typeof(T5)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T5 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7>(value, typeof(T5));
+        public OneOf(T6 value) : this(value, typeof(T6)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T6 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7>(value, typeof(T6));
+        public OneOf(T7 value) : this(value, typeof(T7)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7>(T7 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7>(value, typeof(T7));
 
         public static bool operator ==(OneOf<T1, T2, T3, T4, T5, T6, T7> v1, OneOf<T1, T2, T3, T4, T5, T6, T7> v2) => Equals(v1, v2);
         public static bool operator !=(OneOf<T1, T2, T3, T4, T5, T6, T7> v1, OneOf<T1, T2, T3, T4, T5, T6, T7> v2) => !Equals(v1, v2);
@@ -239,16 +272,25 @@ namespace OneOf
     }
     public class OneOf<T1, T2, T3, T4, T5, T6, T7, T8> : OneOfBase<OneOf<T1, T2, T3, T4, T5, T6, T7, T8>>
     {
-        public OneOf(object value) : base(value) { }
+        internal OneOf(object value, Type matchedType) : base(value, matchedType) { }
+        public OneOf(object value) : base(value, null) { }
 
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T1 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T2 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T3 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T4 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T5 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T6 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T7 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T8 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        public OneOf(T1 value) : this(value, typeof(T1)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T1 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T1));
+        public OneOf(T2 value) : this(value, typeof(T2)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T2 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T2));
+        public OneOf(T3 value) : this(value, typeof(T3)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T3 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T3));
+        public OneOf(T4 value) : this(value, typeof(T4)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T4 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T4));
+        public OneOf(T5 value) : this(value, typeof(T5)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T5 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T5));
+        public OneOf(T6 value) : this(value, typeof(T6)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T6 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T6));
+        public OneOf(T7 value) : this(value, typeof(T7)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T7 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T7));
+        public OneOf(T8 value) : this(value, typeof(T8)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(T8 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8>(value, typeof(T8));
 
         public static bool operator ==(OneOf<T1, T2, T3, T4, T5, T6, T7, T8> v1, OneOf<T1, T2, T3, T4, T5, T6, T7, T8> v2) => Equals(v1, v2);
         public static bool operator !=(OneOf<T1, T2, T3, T4, T5, T6, T7, T8> v1, OneOf<T1, T2, T3, T4, T5, T6, T7, T8> v2) => !Equals(v1, v2);
@@ -295,17 +337,27 @@ namespace OneOf
     }
     public class OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9> : OneOfBase<OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>>
     {
-        public OneOf(object value) : base(value) { }
+        internal OneOf(object value, Type matchedType) : base(value, matchedType) { }
+        public OneOf(object value) : base(value, null) { }
 
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T1 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T2 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T3 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T4 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T5 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T6 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T7 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T8 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
-        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T9 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        public OneOf(T1 value) : this(value, typeof(T1)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T1 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value, typeof(T1));
+        public OneOf(T2 value) : this(value, typeof(T2)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T2 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value, typeof(T2));
+        public OneOf(T3 value) : this(value, typeof(T3)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T3 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value, typeof(T3));
+        public OneOf(T4 value) : this(value, typeof(T4)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T4 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value, typeof(T4));
+        public OneOf(T5 value) : this(value, typeof(T5)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T5 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value, typeof(T5));
+        public OneOf(T6 value) : this(value, typeof(T6)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T6 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value, typeof(T6));
+        public OneOf(T7 value) : this(value, typeof(T7)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T7 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value, typeof(T7));
+        public OneOf(T8 value) : this(value, typeof(T8)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T8 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value, typeof(T8));
+        public OneOf(T9 value) : this(value, typeof(T9)) { }
+        public static implicit operator OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T9 value) => new OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value, typeof(T9));
 
         public static bool operator ==(OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9> v1, OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9> v2) => Equals(v1, v2);
         public static bool operator !=(OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9> v1, OneOf<T1, T2, T3, T4, T5, T6, T7, T8, T9> v2) => !Equals(v1, v2);
