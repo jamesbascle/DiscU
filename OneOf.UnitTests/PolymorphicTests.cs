@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Security.Cryptography.X509Certificates;
+//using System.Security.Cryptography.X509Certificates;
 using NUnit.Framework;
 
 namespace OneOf.Tests
 {
     [TestFixture]
-    [Category("Unit")]
     public class PolymorphicTests
     {
         [Test]
@@ -44,26 +43,6 @@ namespace OneOf.Tests
             };
 
             Assert.AreEqual(1, testerFunc(hiddenOne));
-        }
-
-        [Test]
-        public void EqualsOperatorProperlyComparesUnderlyingTypesToOneOfs()
-        {
-            var origOne = new Fake.One();
-            var origTwo = new Fake.Two();
-            var origThree = new Fake.Three();
-            
-            OneOf<Fake, Fake.One, Fake.Two> one = origOne;
-            OneOf<Fake, Fake.One, Fake.Two> two = origTwo;
-            OneOf<Fake, Fake.One, Fake.Two> three = origThree;
-
-            Assert.IsTrue(one == origOne);
-            Assert.IsTrue(two == origTwo);
-            Assert.IsTrue(three == origThree);
-
-            Assert.IsTrue(origOne == one);
-            Assert.IsTrue(origTwo == two);
-            Assert.IsTrue(origThree == three);
         }
 
         [Test]

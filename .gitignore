@@ -16,3 +16,6 @@ _ReSharper.*
 packages/*
 /packages
 /*.user
+/coverage
+/TestResults
+/results.xml
