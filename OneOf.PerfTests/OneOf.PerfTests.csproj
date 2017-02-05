@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OneOf.PerfTests</RootNamespace>
     <AssemblyName>OneOf.PerfTests</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -51,7 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OneOf\OneOf.NetStandard.csproj">
-      <Project>{56d67be9-f031-4225-9121-4d550852d1ac}</Project>
+      <Project>{56D67BE9-F031-4225-9121-4D550852D1AC}</Project>
       <Name>OneOf.NetStandard</Name>
     </ProjectReference>
   </ItemGroup>

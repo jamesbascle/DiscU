@@ -40,9 +40,8 @@ void WriteOneOf(int countOfgenericParams)
 	using(new WriteBraces(this))
 	{
 		// =============== Constructors
-	    
-        WriteLine($"public OneOf(object value) : base(value) {{ }}");
-
+	    WriteLine($"internal OneOf(object value, Type matchedType) : base(value, matchedType) {{ }}");
+        WriteLine($"public OneOf(object value) : base(value, null) {{ }}");
 	    // =============== implicit conversion to T
 		// While it looks like we could use OneOf ctor directly as we know the value is a Tn, it might be a subclass of tn.
 		// So to determine the best Tn to match the value with we need to use the OneOfFactory.
@@ -50,7 +49,8 @@ void WriteOneOf(int countOfgenericParams)
 		WriteLine("");
 		for(var parmIndex = 1; parmIndex <= countOfgenericParams; parmIndex ++)
 		{
-			WriteLine($"public static implicit operator OneOf<{genericArgs}>(T{parmIndex} value) => new OneOf<{genericArgs}>(value);"); 
+            WriteLine($"public OneOf(T{parmIndex} value) : this(value, typeof(T{parmIndex})) {{ }}");
+			WriteLine($"public static implicit operator OneOf<{genericArgs}>(T{parmIndex} value) => new OneOf<{genericArgs}>(value, typeof(T{parmIndex}));"); 
 		}
 
 		// =============== equality operators

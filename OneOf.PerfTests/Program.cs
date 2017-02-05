@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OneOf;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -27,16 +28,33 @@ namespace OneOf.PerfTests
             Console.ReadKey();
         }
 
+        private static Dictionary<string, Func<OneOf<C1, C2, C3, C4, C5, C6, C7, C8, C9>>> TestsToRun = new Dictionary<string, Func<OneOf<C1, C2, C3, C4, C5, C6, C7, C8, C9>>>
+        {
+            { "Ctor1", () => (OneOf<C1, C2, C3, C4, C5, C6, C7, C8, C9>) new C1() },
+            { "Ctor5", () => (OneOf<C1, C2, C3, C4, C5, C6, C7, C8, C9>) new C5() },
+            { "Ctor9", () => (OneOf<C1, C2, C3, C4, C5, C6, C7, C8, C9>) new C9() },
+            { "Ctor11",() => (OneOf<C1, C2, C3, C4, C5, C6, C7, C8, C9>) new C11() },
+            { "Ctor15",() => (OneOf<C1, C2, C3, C4, C5, C6, C7, C8, C9>) new C15() },
+            { "Ctor19",() => (OneOf<C1, C2, C3, C4, C5, C6, C7, C8, C9>) new C19() },
+        };
         private static void TestCtor()
         {
-            var c1 = new C1();
-            RunTest("Ctor1", () => { OneOf<C1, C2, C3, C4, C5, C6, C7, C8, C9> oo = c1; return oo; });
+            foreach (var func in TestsToRun)
+            {
+                Warmup(func.Key, func.Value);
+            }
+            foreach (var func in TestsToRun)
+            {
+                RunTest(func.Key,func.Value);
+            }
+        }
 
-            var c5 = new C5();
-            RunTest("Ctor5", () => { OneOf<C1, C2, C3, C4, C5, C6, C7, C8, C9> oo = c5; return oo; });
-
-            var c9 = new C9();
-            RunTest("Ctor9", () => { OneOf<C1, C2, C3, C4, C5, C6, C7, C8, C9> oo = c9; return oo; });
+        private static void Warmup<T>(string funcKey, Func<T> funcValue)
+        {
+            foreach (var i in Enumerable.Range(0, 1000))
+            {
+                funcValue();
+            }
         }
 
         private static void TestMatch()
@@ -49,6 +67,15 @@ namespace OneOf.PerfTests
 
             OneOf<C1, C2, C3, C4, C5, C6, C7, C8, C9> oo9 = new C9();
             RunTest("Match9", () => oo9.Match((C1 v) => 1).Match((C2 v) => 2).Match((C3 v) => 3).Match((C4 v) => 4).Match((C5 v) => 5).Match((C6 v) => 6).Match((C7 v) => 7).Match((C8 v) => 8).Match((C9 v) => 9));
+
+            OneOf<C1, C2, C3, C4, C5, C6, C7, C8, C9> oo11 = new C11();
+            RunTest("Match11", () => oo9.Match((C1 v) => 1).Match((C2 v) => 2).Match((C3 v) => 3).Match((C4 v) => 4).Match((C5 v) => 5).Match((C6 v) => 6).Match((C7 v) => 7).Match((C8 v) => 8).Match((C9 v) => 9));
+
+            OneOf<C1, C2, C3, C4, C5, C6, C7, C8, C9> oo15 = new C15();
+            RunTest("Match15", () => oo9.Match((C1 v) => 1).Match((C2 v) => 2).Match((C3 v) => 3).Match((C4 v) => 4).Match((C5 v) => 5).Match((C6 v) => 6).Match((C7 v) => 7).Match((C8 v) => 8).Match((C9 v) => 9));
+
+            OneOf<C1, C2, C3, C4, C5, C6, C7, C8, C9> oo19 = new C19();
+            RunTest("Match19", () => oo9.Match((C1 v) => 1).Match((C2 v) => 2).Match((C3 v) => 3).Match((C4 v) => 4).Match((C5 v) => 5).Match((C6 v) => 6).Match((C7 v) => 7).Match((C8 v) => 8).Match((C9 v) => 9));
         }
 
         static void RunTest<T>(string nameOfTest, Func<T> thingToTest)
@@ -57,10 +84,6 @@ namespace OneOf.PerfTests
             GC.WaitForPendingFinalizers();
 
             Console.Write("{0:15} ... ", nameOfTest);
-
-            // warm it up first
-            for (var i = 0; i < 100; i++)
-                thingToTest();
 
             // and then measure it
             var sw = Stopwatch.StartNew();
@@ -100,5 +123,15 @@ namespace OneOf.PerfTests
         class C7 { }
         class C8 { }
         class C9 { }
+
+        class C11 : C1{ }
+        class C12 : C2{ }
+        class C13 : C3{ }
+        class C14 : C4{ }
+        class C15 : C5{ }
+        class C16 : C6{ }
+        class C17 : C7{ }
+        class C18 : C8{ }
+        class C19 : C9{ }
     }
 }

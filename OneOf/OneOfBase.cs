@@ -1,14 +1,12 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace OneOf
 {
-    public abstract class OneOfBase<TOneOf>
+    public abstract class OneOfBase<TOneOf>  where TOneOf : OneOfBase<TOneOf>
     {
         /// <summary>The OneOf's value</summary>
         internal readonly object Value;
@@ -19,16 +17,19 @@ namespace OneOf
         /// <summary>Cache the list of Tns for the OneOf as calling GetGenericArguments is SLOW.</summary>
         static readonly Type[] OneOfTns = typeof(TOneOf).GetGenericArguments();
 
+        private static readonly ConcurrentDictionary<Type,Type> TypeToTypeCache = new ConcurrentDictionary<Type, Type>();
+        
         /// <summary>Ctor</summary>
-        protected OneOfBase(object value)
+        protected OneOfBase(object value, Type matchedType)
         {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
 
             var valueType = value.GetType();
-            var valueTn = MatchExactTn(valueType) ?? MatchClosestTn(valueType);
+            var valueTn = matchedType == valueType ? valueType : GetBestType(valueType);
+            //var valueTn = GetBestType(valueType);
 
-            if (valueTn == null)
+            if (valueTn == null )
             {
                 var oneOfTnCsv = string.Join(", ", OneOfBase<TOneOf>.OneOfTns.Select(type => type.Name));
                 throw new ArgumentException($"Value of type {valueType.Name} is not compatible with OneOf<{oneOfTnCsv}>", nameof(value));
@@ -38,46 +39,14 @@ namespace OneOf
             this.ValueTn = valueTn;
         }
 
-        /// <summary>
-        /// Find the exact matching Tn, or null.
-        /// </summary>
-        static Type MatchExactTn(Type valueType)
+        private static Type GetBestType(Type valueType)
         {
-            // it's nearly 2x faster if we use a local variable than access the static OneOfTns repeatedly.
-            var oneOfTns = OneOfBase<TOneOf>.OneOfTns;
-
-            switch (oneOfTns.Length)
+            Type ret;
+            if (!TypeToTypeCache.TryGetValue(valueType, out ret))
             {
-                case 9:
-                    if (oneOfTns[8] == valueType) return valueType;
-                    goto case 8;
-                case 8:
-                    if (oneOfTns[7] == valueType) return valueType;
-                    goto case 7;
-                case 7:
-                    if (oneOfTns[6] == valueType) return valueType;
-                    goto case 6;
-                case 6:
-                    if (oneOfTns[5] == valueType) return valueType;
-                    goto case 5;
-                case 5:
-                    if (oneOfTns[4] == valueType) return valueType;
-                    goto case 4;
-                case 4:
-                    if (oneOfTns[3] == valueType) return valueType;
-                    goto case 3;
-                case 3:
-                    if (oneOfTns[2] == valueType) return valueType;
-                    goto case 2;
-                case 2:
-                    if (oneOfTns[1] == valueType) return valueType;
-                    goto case 1;
-                case 1:
-                    if (oneOfTns[0] == valueType) return valueType;
-                    break;
+                ret = TypeToTypeCache.GetOrAdd(valueType, MatchClosestTn(valueType));
             }
-
-            return null;
+            return ret;
         }
 
         /// <summary>
@@ -93,8 +62,7 @@ namespace OneOf
                 if (tn.IsAssignableFrom(valueType))
                 {
                     // is this Tn a better match than seen previously?
-                    if (bestType == null ||
-                        bestType.IsAssignableFrom(tn) && !tn.IsAssignableFrom(bestType))
+                    if (bestType == null || bestType.IsAssignableFrom(tn) && !tn.IsAssignableFrom(bestType))
                     {
                         bestType = tn;
                     }
