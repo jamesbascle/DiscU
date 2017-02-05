@@ -11,7 +11,10 @@ set NUNIT=packages\NUnit.ConsoleRunner.3.5.0\tools\nunit3-console.exe
 set CONFIG=%1
 if "%CONFIG%" == "" set CONFIG=Debug
 
-"%NUNIT%" "OneOf.UnitTests\bin\%CONFIG%\OneOf.UnitTests.dll"
+if exist results.xml del results.xml
+if exist TestResult.xml del TestResult.xml
+
+"%NUNIT%" "OneOf.UnitTests\bin\%CONFIG%\OneOf.UnitTests.dll" /config:%CONFIG% --agents=1
 if errorlevel 1 goto :fail
 echo.
 

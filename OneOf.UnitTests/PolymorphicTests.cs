@@ -2,10 +2,10 @@
 //using System.Security.Cryptography.X509Certificates;
 using NUnit.Framework;
 
-namespace OneOf.Tests
+namespace OneOf.UnitTests
 {
     [TestFixture]
-    public class PolymorphicTests
+    public class PolymorphicTests : OneOfTestBase
     {
         [Test]
         public void MatcherMatchesOnlyOnceWhenParentClassAndSubClassesAreInOneof()

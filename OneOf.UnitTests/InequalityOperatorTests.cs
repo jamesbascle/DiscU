@@ -8,37 +8,37 @@ using NUnit.Framework;
 namespace OneOf.UnitTests
 {
     [TestFixture]
-    public class EqualityOperatorTests : OneOfTestBase
+    public class InequalityOperatorTests : OneOfTestBase
     {
         [Test]
-        public void EqualityOperatorReturnsTrueWhenSameValue() => RunTestForAllOneOfTypes(cn =>
+        public void InequalityOperatorReturnsFalseWhenSameValue() => RunTestForAllOneOfTypes(cn =>
         {
             dynamic oo1 = CreateOneOfCn(cn, CreateCn(cn, "A"));
             dynamic oo2 = CreateOneOfCn(cn, CreateCn(cn, "A"));
-            Assert.IsTrue(oo1 == oo2);
+            Assert.IsFalse(oo1 != oo2);
         });
 
         [Test]
-        public void EqualityOperatorReturnsFalseWhenDifferingValue() => RunTestForAllOneOfTypes(cn =>
+        public void InequalityOperatorReturnsTrueWhenDifferingValue() => RunTestForAllOneOfTypes(cn =>
         {
             dynamic oo1 = CreateOneOfCn(cn, CreateCn(cn, "A"));
             dynamic oo2 = CreateOneOfCn(cn, CreateCn(cn, "B"));
-            Assert.IsFalse(oo1 == oo2);
+            Assert.IsTrue(oo1 != oo2);
         });
 
         [Test]
-        public void EqualityOperatorReturnsFalseWhenNullValue() => RunTestForAllOneOfTypes(cn =>
+        public void InequalityOperatorReturnsFalseWhenNullValue() => RunTestForAllOneOfTypes(cn =>
         {
             dynamic oo1 = CreateOneOfCn(cn, CreateCn(cn, "A"));
-            Assert.IsFalse(oo1 == null);
+            Assert.IsTrue(oo1 != null);
         }); 
 
         // These should implicitly cast the string literals into OneOfs before doing the comparison
 
         [Test]
-        public void EqualityOperatorReturnsTrueWhenSameValue2() => Assert.IsTrue(new OneOf<int, string>("A") == "A");
+        public void InequalityOperatorReturnsFalseWhenSameValue2() => Assert.IsFalse(new OneOf<int, string>("A") != "A");
 
         [Test]
-        public void EqualityOperatorReturnsFalseWhenDifferingValue2() => Assert.IsFalse(new OneOf<int, string>("A") == "B");
+        public void InequalityOperatorReturnsTrueWhenDifferingValue2() => Assert.IsTrue(new OneOf<int, string>("A") != "B");
     }
 }

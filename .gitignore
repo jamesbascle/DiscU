@@ -19,3 +19,4 @@ packages/*
 /coverage
 /TestResults
 /results.xml
+/TestResult.xml

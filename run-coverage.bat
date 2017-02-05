@@ -1,6 +1,8 @@
 @echo off
 rem Needs VS2015 installed to build.
 
+if exist coverage rmdir /s /q coverage
+
 rem ========================
 echo Building
 echo.
@@ -13,7 +15,7 @@ rem ========================
 echo Checking coverage
 echo.
 
-packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -target:run-tests.bat -register:user -filter:+[OneOf*]*  -filter:-[OneOf.Tests*]*
+packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -target:run-tests.bat -register:user -filter:+[OneOf*]*  -filter:-[OneOf.UnitTests*]* -mergebyhash -safemode:on
 if errorlevel 1 goto :fail
 echo.
 
