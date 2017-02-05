@@ -1,25 +1,21 @@
 ﻿using System;
 using NUnit.Framework;
 
-namespace OneOf.Tests
+namespace OneOf.UnitTests
 {
     [TestFixture]
-    public class SwitchWhenTests
+    public class SwitchWhenTests : OneOfTestBase
     {
-        void FailIfCalled<T>(T value) => Assert.Fail();
-
-        OneOf<string, int> CreateOneOf(object val) => new OneOf<string, int>(val);
-
         [Test]
         public void SwitchWhenConditionIsTrue()
         {
             var success = false;
 
             CreateOneOf("apple")
-                .SwitchWhen(v => v == "mango", FailIfCalled)
+                .SwitchWhen(v => v == "mango", v => FailIfCalled())
                 .SwitchWhen(v => v == "apple", v => success = true)
-                .SwitchWhen(v => v == "pear", FailIfCalled)
-                .Else(FailIfCalled);
+                .SwitchWhen(v => v == "pear", v => FailIfCalled())
+                .Else(v => FailIfCalled());
 
             Assert.IsTrue(success);
         }
@@ -30,10 +26,10 @@ namespace OneOf.Tests
             var success = false;
 
             CreateOneOf("monkey")
-                .SwitchWhen(v => v == "mango", FailIfCalled)
-                .SwitchWhen(v => v == "apple", FailIfCalled)
-                .SwitchWhen(v => v == "pear", FailIfCalled)
-                .Else(v => success = true);
+                .SwitchWhen(v => v == "mango", v => FailIfCalled())
+                .SwitchWhen(v => v == "apple", v => FailIfCalled())
+                .SwitchWhen(v => v == "pear", v => FailIfCalled())
+                .Else(v => success = v.ToString() == "monkey");
 
             Assert.IsTrue(success);
         }

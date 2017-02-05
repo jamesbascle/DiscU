@@ -1,35 +1,27 @@
 ﻿using System;
 using NUnit.Framework;
 
-namespace OneOf.Tests
+namespace OneOf.UnitTests
 {
     [TestFixture]
-    public class MatchWhenTests
+    public class MatchWhenTests : OneOfTestBase
     {
-        OneOf<string, int> CreateOneOf(object val) => new OneOf<string, int>(val);
-
         [Test]
         public void MatchWhenConditionIsTrue() => Assert.IsTrue(
             CreateOneOf("apple")
-                .MatchWhen(v => v == "mango", FailIfCalled<string, bool>)
+                .MatchWhen(v => v == "mango", v => FailIfCalled<bool>())
                 .MatchWhen(v => v == "apple", v => true)
-                .MatchWhen(v => v == "pear", FailIfCalled<string, bool>)
-                .Else(FailIfCalled<object, bool>)
+                .MatchWhen(v => v == "pear", v => FailIfCalled<bool>())
+                .Else(v => FailIfCalled<bool>())
             );
 
         [Test]
         public void DoesntMatchWhenConditionIsFalse() => Assert.IsTrue(
             CreateOneOf("monkey")
-                .MatchWhen(v => v == "mango", FailIfCalled<string, bool>)
-                .MatchWhen(v => v == "apple", FailIfCalled<string, bool>)
-                .MatchWhen(v => v == "pear", FailIfCalled<string, bool>)
-                .Else(v => true)
+                .MatchWhen(v => v == "mango", v => FailIfCalled<bool>())
+                .MatchWhen(v => v == "apple", v => FailIfCalled<bool>())
+                .MatchWhen(v => v == "pear", v => FailIfCalled<bool>())
+                .Else(v => v.ToString() == "monkey")
             );
-
-        TResult FailIfCalled<TValue, TResult>(TValue value)
-        {
-            Assert.Fail();
-            throw new Exception("will never get here");  // needed so will compile
-        }
     }
 }

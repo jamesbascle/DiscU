@@ -1,16 +1,11 @@
 ﻿using System;
 using NUnit.Framework;
 
-namespace OneOf.Tests
+namespace OneOf.UnitTests
 {
     [TestFixture]
-    public class SwitchTests
+    public class SwitchTests : OneOfTestBase
     {
-        void FailIfCalled() => Assert.Fail();
-        void FailIf(bool cond) { if (cond) Assert.Fail(); }
-
-        OneOf<string, int> CreateOneOf(object val) => new OneOf<string, int>(val);
-
         [Test]
         public void SwitchesWhenInt()
         {

@@ -5,26 +5,47 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 
-namespace OneOf.Tests
+namespace OneOf.UnitTests
 {
     [TestFixture]
-    public class EqualsTests
+    public class EqualsTests : OneOfTestBase
     {
-        OneOf<string, int> CreateOneOf(object val) => new OneOf<string, int>(val);
+        [Test]
+        public void EqualsReturnsTrueWhenSameValue() => RunTestForAllOneOfTypes(cn =>
+        {
+            dynamic oo1 = CreateOneOfCn(cn, CreateCn(cn, "A"));
+            dynamic oo2 = CreateOneOfCn(cn, CreateCn(cn, "A"));
+            Assert.IsTrue(oo1.Equals(oo2));
+        });
 
         [Test]
-        public void EqualsReturnsTrueWhenSameValue() => Assert.IsTrue(CreateOneOf(123).Equals(CreateOneOf(123)));
+        public void EqualsReturnsFalseWhenDifferingValue() => RunTestForAllOneOfTypes(cn =>
+        {
+            dynamic oo1 = CreateOneOfCn(cn, CreateCn(cn, "A"));
+            dynamic oo2 = CreateOneOfCn(cn, CreateCn(cn, "B"));
+            Assert.IsFalse(oo1.Equals(oo2));
+        });
 
         [Test]
-        public void EqualsReturnsFalseWhenDifferingValue() => Assert.IsFalse(CreateOneOf(123).Equals(CreateOneOf(456)));
+        public void EqualsReturnsFalseWhenDifferingValueType() => RunTestForAllOneOfTypes(cn =>
+        {
+            dynamic oo1 = CreateOneOfCn(cn, CreateCn(cn, "A"));
+            dynamic oo2 = new OneOf<int, string>("A");
+            Assert.IsFalse(oo1.Equals(oo2));
+        });
 
         [Test]
-        public void EqualsReturnsFalseWhenDifferingValueType() => Assert.IsFalse(CreateOneOf(123).Equals(CreateOneOf("A")));
+        public void EqualsReturnsFalseWhenNotOneOf() => RunTestForAllOneOfTypes(cn =>
+        {
+            dynamic oo1 = CreateOneOfCn(cn, CreateCn(cn, "A"));
+            Assert.IsFalse(oo1.Equals("A"));
+        });
 
         [Test]
-        public void EqualsReturnsFalseWhenNotOneOf() => Assert.IsFalse(CreateOneOf(123).Equals(123));
-
-        [Test]
-        public void EqualsReturnsFalseWhenNullValue() => Assert.IsFalse(CreateOneOf(123).Equals(null));
+        public void EqualsReturnsFalseWhenNullValue() => RunTestForAllOneOfTypes(cn =>
+        {
+            dynamic oo1 = CreateOneOfCn(cn, CreateCn(cn, "A"));
+            Assert.IsFalse(oo1.Equals(null));
+        });
     }
 }
