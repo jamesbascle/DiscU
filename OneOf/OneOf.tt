@@ -42,14 +42,17 @@ void WriteOneOf(int countOfgenericParams)
 		// =============== Constructors
 	    WriteLine($"internal OneOf(object value, Type matchedType) : base(value, matchedType) {{ }}");
         WriteLine($"public OneOf(object value) : base(value, null) {{ }}");
+
+		for(var parmIndex = 1; parmIndex <= countOfgenericParams; parmIndex ++)
+		{
+            WriteLine($"public OneOf(T{parmIndex} value) : this(value, typeof(T{parmIndex})) {{ }}");
+		}
+
 	    // =============== implicit conversion to T
-		// While it looks like we could use OneOf ctor directly as we know the value is a Tn, it might be a subclass of tn.
-		// So to determine the best Tn to match the value with we need to use the OneOfFactory.
 
 		WriteLine("");
 		for(var parmIndex = 1; parmIndex <= countOfgenericParams; parmIndex ++)
 		{
-            WriteLine($"public OneOf(T{parmIndex} value) : this(value, typeof(T{parmIndex})) {{ }}");
 			WriteLine($"public static implicit operator OneOf<{genericArgs}>(T{parmIndex} value) => new OneOf<{genericArgs}>(value, typeof(T{parmIndex}));"); 
 		}
 
@@ -67,13 +70,13 @@ void WriteOneOf(int countOfgenericParams)
 			var lesserArityOneOf = Enumerable.Range(1, countOfgenericParams).Where(n => n != parmIndex).ToList();
 			var lesserArityGenericArgs = GenerateGenericArgs(lesserArityOneOf);
 
-			WriteLine($"public OneOfSwitcher<{lesserArityGenericArgs}> Switch(Action<T{parmIndex}> action) => new OneOfSwitcher<{genericArgs}>(Value, ValueTn).Switch(action);");
+			WriteLine($"public OneOfSwitcher<{lesserArityGenericArgs}> Switch(Action<T{parmIndex}> action) => new OneOfSwitcher<{genericArgs}>(value, valueTn).Switch(action);");
 		}
 
 		WriteLine("");
 		for(var parmIndex = 1; parmIndex <= countOfgenericParams; parmIndex ++)
 		{
-			WriteLine($"public OneOfSwitcher<{genericArgs}> SwitchWhen(Predicate<T{parmIndex}> condition, Action<T{parmIndex}> action) => new OneOfSwitcher<{genericArgs}>(Value, ValueTn).SwitchWhen(condition, action);");
+			WriteLine($"public OneOfSwitcher<{genericArgs}> SwitchWhen(Predicate<T{parmIndex}> condition, Action<T{parmIndex}> action) => new OneOfSwitcher<{genericArgs}>(value, valueTn).SwitchWhen(condition, action);");
 		}
 
 		// =============== Match / MatchWhen
@@ -84,21 +87,21 @@ void WriteOneOf(int countOfgenericParams)
 			var lesserArityOneOf = Enumerable.Range(1, countOfgenericParams).Where(n => n != parmIndex).ToList();
 			var lesserArityGenericArgs = GenerateGenericArgs(lesserArityOneOf);
 
-			WriteLine($"public OneOfMatcher<{lesserArityGenericArgs}, TResult> Match<TResult>(Func<T{parmIndex}, TResult> calcResult) => new OneOfMatcher<{genericArgs}, TResult>(Value, ValueTn).Match(calcResult);");
+			WriteLine($"public OneOfMatcher<{lesserArityGenericArgs}, TResult> Match<TResult>(Func<T{parmIndex}, TResult> calcResult) => new OneOfMatcher<{genericArgs}, TResult>(value, valueTn).Match(calcResult);");
 		}
 
 		WriteLine("");
 		for(var parmIndex = 1; parmIndex <= countOfgenericParams; parmIndex ++)
 		{
-			WriteLine($"public OneOfMatcher<{genericArgs}, TResult> MatchWhen<TResult>(Predicate<T{parmIndex}> condition, Func<T{parmIndex}, TResult> calcResult) => new OneOfMatcher<{genericArgs}, TResult>(Value, ValueTn).MatchWhen(condition, calcResult);");
+			WriteLine($"public OneOfMatcher<{genericArgs}, TResult> MatchWhen<TResult>(Predicate<T{parmIndex}> condition, Func<T{parmIndex}, TResult> calcResult) => new OneOfMatcher<{genericArgs}, TResult>(value, valueTn).MatchWhen(condition, calcResult);");
 		}
 
 		// =============== object overrides
 
 		WriteLine("");
-		WriteLine($"public override bool Equals(object obj) => (obj is OneOf<{genericArgs}>) && Equals(this.Value, ((OneOf<{genericArgs}>)obj).Value);");
-		WriteLine("public override int GetHashCode() => (this.Value?.GetHashCode() ?? 0);");
-		WriteLine("public override string ToString() => (this.Value?.ToString() ?? \"\");");
+		WriteLine($"public override bool Equals(object obj) => (obj is OneOf<{genericArgs}>) && Equals(value, ((OneOf<{genericArgs}>)obj).value);");
+		WriteLine("public override int GetHashCode() => (value?.GetHashCode() ?? 0);");
+		WriteLine("public override string ToString() => (value?.ToString() ?? \"\");");
 	}
 }
 
@@ -348,5 +351,4 @@ class WriteBraces: IDisposable
 		textTransformation.WriteLine("}");
 	}
 }
-
 #>
