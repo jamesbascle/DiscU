@@ -5,8 +5,8 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
 <#@ output extension=".cs" #>
-<# 
-GenerateClasses(); 
+<#
+GenerateClasses();
 #>
 <#+
 void GenerateClasses()
@@ -135,28 +135,37 @@ void WriteSwitcher(int countOfgenericParams)
 
 		for(var parmIndex = 1; parmIndex <= countOfgenericParams; parmIndex++)
 		{
-			var lesserArityGenericArgNumbers = Enumerable.Range(1, countOfgenericParams).ToList();
-			if(lesserArityGenericArgNumbers.Count > 1)
+			string returnType;
+			string returnExpr;
+
+			var lesserArityGenericArgNumbers = Enumerable.Range(1, countOfgenericParams).Where(n => n != parmIndex).ToList();
+			if(lesserArityGenericArgNumbers.Count > 0)
 			{
 				lesserArityGenericArgNumbers.Remove(parmIndex);
 				var lesserArityGenericArgs = GenerateGenericArgs(lesserArityGenericArgNumbers);
 
-				WriteLine("");
-				WriteLine($"public OneOfSwitcher<{lesserArityGenericArgs}> Switch(Action<T{parmIndex}> action)");
-				using(new WriteBraces(this))
-				{
-					WriteLine($"SwitchImpl<T{parmIndex}>(null, action);");
-					WriteLine($"return new OneOfSwitcher<{lesserArityGenericArgs}>(value, valueTn, hasSwitched);");
-				}
+				returnType = $"OneOfSwitcher<{lesserArityGenericArgs}>";
+				returnExpr = $"new OneOfSwitcher<{lesserArityGenericArgs}>(value, valueTn, hasSwitched)";
 			}
 			else
 			{
-				WriteLine("");
-				WriteLine($"public void Switch(Action<T{parmIndex}> action)");
+				returnType = $"void";
+				returnExpr = $"";
+			}
+
+			WriteLine("");
+			WriteLine($"public {returnType} Switch(Action<T{parmIndex}> action)");
+			using(new WriteBraces(this))
+			{
+				WriteLine($"if (!hasSwitched && valueTn == typeof(T{parmIndex}))");
 				using(new WriteBraces(this))
 				{
-					WriteLine($"SwitchImpl<T{parmIndex}>(null, action);");
+					WriteLine($"action((T{parmIndex})value);");
+					WriteLine("hasSwitched = true;");
 				}
+
+				if (returnExpr != "")
+					WriteLine($"return {returnExpr};");
 			}
 		}
 
@@ -168,7 +177,13 @@ void WriteSwitcher(int countOfgenericParams)
 			WriteLine($"public OneOfSwitcher<{genericArgs}> SwitchWhen(Predicate<T{parmIndex}> condition, Action<T{parmIndex}> action)");
 			using(new WriteBraces(this))
 			{
-				WriteLine($"SwitchImpl<T{parmIndex}>(condition, action);");
+				WriteLine($"if (!hasSwitched && valueTn == typeof(T{parmIndex}) && condition((T{parmIndex})value))");
+				using(new WriteBraces(this))
+				{
+					WriteLine($"action((T{parmIndex})value);");
+					WriteLine("hasSwitched = true;");
+				}
+
 				WriteLine($"return this;");
 			}
 		}
@@ -190,29 +205,12 @@ void WriteSwitcher(int countOfgenericParams)
 		{
 			WriteLine($"if (!hasSwitched) throw func(value);");
 		}
-
-		// =============== SwitchImpl
-		
-		WriteLine("");
-		WriteLine($"void SwitchImpl<T>(Predicate<T> condition, Action<T> action)");
-		using(new WriteBraces(this))
-		{
-			WriteLine($"if (hasSwitched) return;                 // already switched");
-			WriteLine("");
-
-			WriteLine($"if (valueTn != typeof(T)) return;        // not correct type");
-			WriteLine($"if (condition != null && !condition((T)value)) return;  // failed condition");
-
-			WriteLine("");
-			WriteLine($"action((T)value);                        // yes!");
-			WriteLine("hasSwitched = true;");
-		}
 	}
 }
 
 void WriteMatcher(int countOfgenericParams) 
 {
-	var genericArgs = GenerateGenericArgs(Enumerable.Range(1, countOfgenericParams), withResult: "TResult");
+	var genericArgs = GenerateGenericArgs(Enumerable.Range(1, countOfgenericParams)) + ", TResult";
 
 	WriteLine("");
 	WriteLine($"public struct OneOfMatcher<{genericArgs}>" );
@@ -240,30 +238,34 @@ void WriteMatcher(int countOfgenericParams)
 
 		for(var parmIndex = 1; parmIndex <= countOfgenericParams; parmIndex++)
 		{
-			var lesserArityGenericArgNumbers = Enumerable.Range(1, countOfgenericParams).ToList();
-			if(lesserArityGenericArgNumbers.Count > 1)
-			{
-				lesserArityGenericArgNumbers.Remove(parmIndex);
-				var lesserArityGenericArgs = GenerateGenericArgs(lesserArityGenericArgNumbers, withResult: "TResult");
+			string returnType;
+			string returnExpr;
 
-				WriteLine("");
-				WriteLine($"public OneOfMatcher<{lesserArityGenericArgs}> Match(Func<T{parmIndex}, TResult> createResult)");
-				using(new WriteBraces(this))
-				{
-					WriteLine($"MatchImpl<T{parmIndex}>(null, createResult);");
-					WriteLine($"return new OneOfMatcher<{lesserArityGenericArgs}>(value, valueTn, result);");
-				}
+			var lesserArityGenericArgNumbers = Enumerable.Range(1, countOfgenericParams).Where(n => n != parmIndex).ToList();
+			if(lesserArityGenericArgNumbers.Count > 0)
+			{
+				var lesserArityGenericArgs = GenerateGenericArgs(lesserArityGenericArgNumbers) + ", TResult";
+
+				returnType = $"OneOfMatcher<{lesserArityGenericArgs}>";
+				returnExpr = $"new OneOfMatcher<{lesserArityGenericArgs}>(value, valueTn, result)";
 			}
 			else
-            {
-				WriteLine("");
-				WriteLine($"public TResult Match(Func<T{parmIndex}, TResult> createResult)");
+			{
+				returnType = $"TResult";
+				returnExpr = $"(TResult)result";
+			}
+
+			WriteLine("");
+			WriteLine($"public {returnType} Match(Func<T{parmIndex}, TResult> createResult)");
+			using(new WriteBraces(this))
+			{
+				WriteLine($"if (result == null && valueTn == typeof(T{parmIndex}))");
 				using(new WriteBraces(this))
 				{
-					WriteLine($"MatchImpl<T{parmIndex}>(null, createResult);");
-					WriteLine($"return (TResult)result;");
+					WriteLine($"result = createResult((T{parmIndex})value);");
 				}
-            }
+				WriteLine($"return {returnExpr};");
+			}
 		}
 
 		// =============== MatchWhen
@@ -274,7 +276,11 @@ void WriteMatcher(int countOfgenericParams)
 			WriteLine($"public OneOfMatcher<{genericArgs}> MatchWhen(Predicate<T{parmIndex}> condition, Func<T{parmIndex}, TResult> createResult)");
 			using(new WriteBraces(this))
 			{
-				WriteLine($"MatchImpl<T{parmIndex}>(condition, createResult);");
+				WriteLine($"if (result == null && valueTn == typeof(T{parmIndex}) && condition((T{parmIndex})value))");
+				using(new WriteBraces(this))
+				{
+					WriteLine($"result = createResult((T{parmIndex})value);");
+				}
 				WriteLine($"return this;");
 			}
 		}
@@ -308,29 +314,13 @@ void WriteMatcher(int countOfgenericParams)
 			WriteLine($"if (result == null) throw createException(value);");
 			WriteLine("return (TResult)result;");
 		}
-
-		// =============== MatchImpl
-		
-		WriteLine("");
-		WriteLine($"void MatchImpl<T>(Predicate<T> condition, Func<T, TResult> createResult)");
-		using(new WriteBraces(this))
-		{
-			WriteLine($"if (result != null) return;              // already matched");
-			WriteLine("");
-
-			WriteLine($"if (valueTn != typeof(T)) return;        // not correct type");
-			WriteLine($"if (condition != null && !condition((T)value)) return;  // failed condition");
-			WriteLine("");
-			WriteLine($"result = createResult((T)value);         // yes!");
-		}
 	}
 
 }
 
-string GenerateGenericArgs(IEnumerable<int> argNumbers, string typePrefix = "T", string withResult = null)
+string GenerateGenericArgs(IEnumerable<int> argNumbers)
 {
-	return string.Join(", ", argNumbers.Select(n => typePrefix + n))
-		+ (withResult != null ? ", " + withResult : "");
+	return string.Join(", ", argNumbers.Select(n => "T" + n));
 }
 
 class WriteBraces: IDisposable
