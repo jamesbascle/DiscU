@@ -1,5 +1,4 @@
 {
-  "locked": false,
   "version": 2,
   "targets": {
     ".NETFramework,Version=v4.0": {},
@@ -10,6 +9,24 @@
     "": [],
     ".NETFramework,Version=v4.0": []
   },
-  "tools": {},
-  "projectFileToolGroups": {}
+  "packageFolders": {
+    "C:\\Users\\Will\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "restore": {
+      "projectUniqueName": "C:\\Users\\Will\\Google Drive\\Prog - Projects\\Jagged\\OneOf\\OneOf\\OneOf.Net40.csproj",
+      "projectName": "OneOf.Net40",
+      "projectPath": "C:\\Users\\Will\\Google Drive\\Prog - Projects\\Jagged\\OneOf\\OneOf\\OneOf.Net40.csproj",
+      "projectJsonPath": "C:\\Users\\Will\\Google Drive\\Prog - Projects\\Jagged\\OneOf\\OneOf\\OneOf.Net40.project.json",
+      "projectStyle": "ProjectJson"
+    },
+    "frameworks": {
+      "net40": {}
+    },
+    "runtimes": {
+      "win": {
+        "#import": []
+      }
+    }
+  }
 }
