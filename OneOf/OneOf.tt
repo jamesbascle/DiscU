@@ -26,9 +26,8 @@ void GenerateClasses()
 
 		for (var i = 1; i <= 9; i++)
 			WriteSwitcher(i);
-
-		for (var i = 1; i <= 9; i++)
-			WriteMatcher(i);
+        for (var i = 1; i <= 9; i++)
+		    WriteMatcher(i);
 	}
 }
 
@@ -81,13 +80,16 @@ void WriteOneOf(int countOfgenericParams)
 
 		// =============== Match / MatchWhen
 
+        WriteLine($"public IOneOfMatcher{CreateInterfaceDisambiguator(Enumerable.Range(1,countOfgenericParams))}<{genericArgs}, TResult> MakeMatcher<TResult>() => new OneOfMatcher<{genericArgs}, TResult>(value, valueTn);");
 		WriteLine("");
+        var matcherDisambiguator = CreateInterfaceDisambiguator(Enumerable.Range(1, countOfgenericParams)); 
 		for(var parmIndex = 1; parmIndex <= countOfgenericParams; parmIndex ++)
 		{
 			var lesserArityOneOf = Enumerable.Range(1, countOfgenericParams).Where(n => n != parmIndex).ToList();
 			var lesserArityGenericArgs = GenerateGenericArgs(lesserArityOneOf);
+            var lesserArityDisambiguator = CreateInterfaceDisambiguator(lesserArityOneOf);
 
-			WriteLine($"public OneOfMatcher<{lesserArityGenericArgs}, TResult> Match<TResult>(Func<T{parmIndex}, TResult> calcResult) => new OneOfMatcher<{genericArgs}, TResult>(value, valueTn).Match(calcResult);");
+            WriteLine($"public IOneOfMatcher{lesserArityDisambiguator}<{lesserArityGenericArgs}, TResult> Match<TResult>(Func<T{parmIndex}, TResult> calcResult) => MakeMatcher<TResult>().Match(calcResult);");
 		}
 
 		WriteLine("");
@@ -210,63 +212,67 @@ void WriteSwitcher(int countOfgenericParams)
 
 void WriteMatcher(int countOfgenericParams) 
 {
+    var combos = CombinationsOfLength1ThroughN(Enumerable.Range(1, countOfgenericParams), countOfgenericParams).Select(c=>c.ToList()).ToList();
+    
 	var genericArgs = GenerateGenericArgs(Enumerable.Range(1, countOfgenericParams)) + ", TResult";
 
 	WriteLine("");
-	WriteLine($"public struct OneOfMatcher<{genericArgs}>" );
+	WriteLine($"public class OneOfMatcher<{genericArgs}> : ");
+    var interfaces = new List<string>();
+    foreach(var combo in combos)//1
+    {   
+        var arityArgs = GenerateGenericArgs(combo) + ", TResult";
+        var arityDisambiguator= CreateInterfaceDisambiguator(combo);
+        interfaces.Add($"IOneOfMatcher{arityDisambiguator}<{arityArgs}>");
+    }
+    WriteLine(interfaces[0]);
+    foreach(var interf in interfaces.Skip(1))
+    {
+        Write(",");
+        WriteLine(interf);
+    }
+    
 	using(new WriteBraces(this))
 	{
 		WriteLine("readonly object value;");
 		WriteLine("readonly Type valueTn;");
 		WriteLine("object result;");
-
 		// =============== Constructors
 	    
+			    
 		WriteLine("");
-		WriteLine("internal OneOfMatcher(object value, Type valueTn) : this(value, valueTn, null) { }");
-	    
-		WriteLine("");
-		WriteLine("internal OneOfMatcher(object value, Type valueTn, object result)");
+		WriteLine("internal OneOfMatcher(object value, Type valueTn)");
 		using(new WriteBraces(this))
 		{
 			WriteLine($"this.value = value;");
 			WriteLine($"this.valueTn = valueTn;");
-			WriteLine($"this.result = result;");
 		}
 
 		// =============== Match
-
-		for(var parmIndex = 1; parmIndex <= countOfgenericParams; parmIndex++)
-		{
-			string returnType;
-			string returnExpr;
-
-			var lesserArityGenericArgNumbers = Enumerable.Range(1, countOfgenericParams).Where(n => n != parmIndex).ToList();
-			if(lesserArityGenericArgNumbers.Count > 0)
-			{
-				var lesserArityGenericArgs = GenerateGenericArgs(lesserArityGenericArgNumbers) + ", TResult";
-
-				returnType = $"OneOfMatcher<{lesserArityGenericArgs}>";
-				returnExpr = $"new OneOfMatcher<{lesserArityGenericArgs}>(value, valueTn, result)";
-			}
-			else
-			{
-				returnType = $"TResult";
-				returnExpr = $"(TResult)result";
-			}
-
-			WriteLine("");
-			WriteLine($"public {returnType} Match(Func<T{parmIndex}, TResult> createResult)");
-			using(new WriteBraces(this))
-			{
-				WriteLine($"if (result == null && valueTn == typeof(T{parmIndex}))");
-				using(new WriteBraces(this))
-				{
-					WriteLine($"result = createResult((T{parmIndex})value);");
-				}
-				WriteLine($"return {returnExpr};");
-			}
-		}
+        foreach(var combo in combos)//1
+        {
+            var methodDisambiguator =  CreateInterfaceDisambiguator(combo);
+            var methodGenericArgs = GenerateGenericArgs(combo)  + ", TResult";
+            foreach(var num in combo)
+            {
+                var lesserArityGenericArgNumbers = combo.Except(new[]{num}).ToList();
+                var lesserArityGenericArg = GenerateGenericArgs(lesserArityGenericArgNumbers)  + ", TResult";
+                var arityDisambiguator = CreateInterfaceDisambiguator(lesserArityGenericArgNumbers);
+                var returnType = lesserArityGenericArgNumbers.Count > 0 ? $"IOneOfMatcher{arityDisambiguator}<{lesserArityGenericArg}>" : "TResult";
+			    var returnExpr = lesserArityGenericArgNumbers.Count > 0 ?"this" : "(TResult)result";	   
+                
+                WriteLine($"{returnType} IOneOfMatcher{methodDisambiguator}<{methodGenericArgs}>.Match(Func<T{num}, TResult> createResult)");
+			    using(new WriteBraces(this))
+			    {
+				    WriteLine($"if (result == null && valueTn == typeof(T{num}))");
+				    using(new WriteBraces(this))
+				    {
+					    WriteLine($"result = createResult((T{num})value);");
+				    }
+				    WriteLine($"return {returnExpr};");
+			    }
+            }
+        }
 
 		// =============== MatchWhen
 
@@ -318,10 +324,12 @@ void WriteMatcher(int countOfgenericParams)
 
 }
 
-string GenerateGenericArgs(IEnumerable<int> argNumbers)
+      string GenerateGenericArgs(IEnumerable<int> argNumbers)
 {
 	return string.Join(", ", argNumbers.Select(n => "T" + n));
 }
+
+    string CreateInterfaceDisambiguator(IEnumerable<int> ints){return string.Join("_", ints.Select(i=>i.ToString()));}
 
 class WriteBraces: IDisposable
 {
@@ -341,4 +349,27 @@ class WriteBraces: IDisposable
 		textTransformation.WriteLine("}");
 	}
 }
+
+        static IEnumerable<IEnumerable<int>> CombinationsOfLengthN(IEnumerable<int> elementsToCombine, int n)
+        {
+              var elementsToCombineList = elementsToCombine.ToList();
+              return n == 0 ? new[] { new int[0] } :
+                elementsToCombineList.SelectMany((e, i) =>
+                  CombinationsOfLengthN(elementsToCombineList.Skip(i + 1),n - 1)
+                  .Select(c => (new[] { e })
+                  .Concat(c)));
+        }
+
+        static IEnumerable<IEnumerable<int>> CombinationsOfLength1ThroughN(IEnumerable<int> elementsToCombine, int n)
+        {
+            var accumulatedResult = new List<List<IEnumerable<int>>>();
+            var listOfElementsToCombine = elementsToCombine.ToList();
+
+            for( var i = 1; i <= n + 1; i++)
+            {
+                accumulatedResult.Add(CombinationsOfLengthN(listOfElementsToCombine,i).ToList());
+            }
+
+            return accumulatedResult.SelectMany(i => i);
+        }
 #>

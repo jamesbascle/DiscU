@@ -36,12 +36,22 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="IOneOfMatcher.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IOneOfMatcher.cs</LastGenOutput>
+    </Content>
     <Content Include="OneOf.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>OneOf.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IOneOfMatcher.cs">
+      <DependentUpon>IOneOfMatcher.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="IOneOfMatcherTerminator.cs" />
     <Compile Include="OneOf.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
