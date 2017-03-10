@@ -22,6 +22,7 @@ void GenerateClasses()
 	
 	WriteLine("");
 	WriteLine("namespace OneOf");
+	//todo: Move this to only ever need a single matcher via some sentinal sealed class like Null/None or similar
 	using(new WriteBraces(this))
 	{
         for (var i = 1; i <= Constants.MaxAritySupported; i++)
