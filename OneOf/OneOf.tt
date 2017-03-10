@@ -1,9 +1,12 @@
 ﻿<#@ template debug="true" hostspecific="true" language="C#" #>
 <#@ assembly name="System.Core" #>
 <#@ assembly name="Microsoft.CSharp" #>
+<#@ assembly name="System.Runtime" #>
+<#@ assembly name="$(SolutionDir)OneOf.TemplatingModels\bin\Release\OneOf.TemplatingModels.dll" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
+<#@ import namespace="OneOf.TemplatingModels" #>
 <#@ output extension=".cs" #>
 <#
 GenerateClasses();
@@ -21,317 +24,85 @@ void GenerateClasses()
 	WriteLine("namespace OneOf");
 	using(new WriteBraces(this))
 	{
-		for (var i = 2; i <= 9; i++)
-			WriteOneOf(i);
-
-		for (var i = 1; i <= 9; i++)
-			WriteSwitcher(i);
-        for (var i = 1; i <= 9; i++)
-		    WriteMatcher(i);
+		for (var i = 2; i <= Constants.MaxAritySupported; i++)
+        {
+            var template = new OneOfModel(i);
+            WriteOneOf(template);
+        }
 	}
 }
 
-void WriteOneOf(int countOfgenericParams) 
-{
-	var genericArgs = GenerateGenericArgs(Enumerable.Range(1, countOfgenericParams));
-
-	WriteLine($"public class OneOf<{genericArgs}> : OneOfBase<OneOf<{genericArgs}>>");
+void WriteOneOf(OneOfModel model) 
+{       
+	WriteLine($"public class OneOf<{model.GenericArgs}> : OneOfBase<OneOf<{model.GenericArgs}>>");
 	using(new WriteBraces(this))
 	{
 		// =============== Constructors
-	    WriteLine($"internal OneOf(object value, Type matchedType) : base(value, matchedType) {{ }}");
-        WriteLine($"public OneOf(object value) : base(value, null) {{ }}");
+	    WriteLine($"public OneOf(object value) : base(value, null) {{ }}");
+        WriteLine($"internal OneOf(object value, Type matchedType) : base(value, matchedType) {{ }}");
 
-		for(var parmIndex = 1; parmIndex <= countOfgenericParams; parmIndex ++)
+		foreach(var param in model.GenericParameters)
 		{
-            WriteLine($"public OneOf(T{parmIndex} value) : this(value, typeof(T{parmIndex})) {{ }}");
+            WriteLine($"public OneOf({param} value) : this(value, typeof({param})) {{ }}");
 		}
 
 	    // =============== implicit conversion to T
-
 		WriteLine("");
-		for(var parmIndex = 1; parmIndex <= countOfgenericParams; parmIndex ++)
+		foreach(var param in model.GenericParameters)
 		{
-			WriteLine($"public static implicit operator OneOf<{genericArgs}>(T{parmIndex} value) => new OneOf<{genericArgs}>(value, typeof(T{parmIndex}));"); 
+            WriteLine($"public static implicit operator {model.FullTypeName}({param} value) => new {model.FullTypeName}(value, typeof({param}));"); 
 		}
 
 		// =============== equality operators
 
 		WriteLine("");
-		WriteLine($"public static bool operator ==(OneOf<{genericArgs}> v1, OneOf<{genericArgs}> v2) => Equals(v1, v2);"); 
-		WriteLine($"public static bool operator !=(OneOf<{genericArgs}> v1, OneOf<{genericArgs}> v2) => !Equals(v1, v2);");
+        WriteLine($"public static bool operator ==({model.FullTypeName} v1, {model.FullTypeName} v2) => Equals(v1, v2);"); 
+		WriteLine($"public static bool operator !=({model.FullTypeName} v1, {model.FullTypeName}  v2) => !Equals(v1, v2);");
 
 		// =============== Switch / SwitchWhen
 
 		WriteLine("");
-		for(var parmIndex = 1; parmIndex <= countOfgenericParams; parmIndex ++)
+		foreach(var sm in model.SwitchMethods)
 		{
-			var lesserArityOneOf = Enumerable.Range(1, countOfgenericParams).Where(n => n != parmIndex).ToList();
-			var lesserArityGenericArgs = GenerateGenericArgs(lesserArityOneOf);
-
-			WriteLine($"public OneOfSwitcher<{lesserArityGenericArgs}> Switch(Action<T{parmIndex}> action) => new OneOfSwitcher<{genericArgs}>(value, valueTn).Switch(action);");
+		    WriteLine($"public {sm.LesserAritySwitcherResultTypeName} Switch(Action<{sm.GenericArg}> action)");
+			WriteLine($" => new {sm.SwitcherTypeName}(value, valueTn).Switch(action);");
 		}
 
 		WriteLine("");
-		for(var parmIndex = 1; parmIndex <= countOfgenericParams; parmIndex ++)
+		foreach(var sm in model.SwitchMethods)
 		{
-			WriteLine($"public OneOfSwitcher<{genericArgs}> SwitchWhen(Predicate<T{parmIndex}> condition, Action<T{parmIndex}> action) => new OneOfSwitcher<{genericArgs}>(value, valueTn).SwitchWhen(condition, action);");
+		    WriteLine($"public {sm.SwitcherTypeName} SwitchWhen(Predicate<{sm.GenericArg}> condition, Action<{sm.GenericArg}> action)");
+			WriteLine($" => new {sm.SwitcherTypeName}(value, valueTn).SwitchWhen(condition, action);");
 		}
 
 		// =============== Match / MatchWhen
 
-        WriteLine($"public IOneOfMatcher{CreateInterfaceDisambiguator(Enumerable.Range(1,countOfgenericParams))}<{genericArgs}, TResult> MakeMatcher<TResult>() => new OneOfMatcher<{genericArgs}, TResult>(value, valueTn);");
+        WriteLine($"public {model.IOneOfMatcherTypeName} MakeMatcher<TResult>() => new OneOfMatcher<{model.GenericArgs}, TResult>(value, valueTn);");
 		WriteLine("");
-        var matcherDisambiguator = CreateInterfaceDisambiguator(Enumerable.Range(1, countOfgenericParams)); 
-		for(var parmIndex = 1; parmIndex <= countOfgenericParams; parmIndex ++)
+		foreach(var mm in model.MatchMethods)
 		{
-			var lesserArityOneOf = Enumerable.Range(1, countOfgenericParams).Where(n => n != parmIndex).ToList();
-			var lesserArityGenericArgs = GenerateGenericArgs(lesserArityOneOf);
-            var lesserArityDisambiguator = CreateInterfaceDisambiguator(lesserArityOneOf);
-
-            WriteLine($"public IOneOfMatcher{lesserArityDisambiguator}<{lesserArityGenericArgs}, TResult> Match<TResult>(Func<T{parmIndex}, TResult> calcResult) => MakeMatcher<TResult>().Match(calcResult);");
+		    WriteLine($"public {mm.LesserArityMatcherResultTypeName} Match<TResult>(Func<T{mm.ParameterNumber}, TResult> calcResult)");
+			WriteLine($" => MakeMatcher<TResult>().Match(calcResult);");
 		}
 
+		WriteLine($"public {model.OneOfMatcherTypeName} MakeMatchWhener<TResult>() => new OneOfMatcher<{model.GenericArgs}, TResult>(value, valueTn);");
 		WriteLine("");
-		for(var parmIndex = 1; parmIndex <= countOfgenericParams; parmIndex ++)
+		foreach(var mm in model.MatchMethods)
 		{
-			WriteLine($"public OneOfMatcher<{genericArgs}, TResult> MatchWhen<TResult>(Predicate<T{parmIndex}> condition, Func<T{parmIndex}, TResult> calcResult) => new OneOfMatcher<{genericArgs}, TResult>(value, valueTn).MatchWhen(condition, calcResult);");
+		    WriteLine($"public {model.OneOfMatcherTypeName} MatchWhen<TResult>(Predicate<T{mm.ParameterNumber}> condition, Func<T{mm.ParameterNumber}, TResult> calcResult)");
+			WriteLine($" => MakeMatchWhener<TResult>().MatchWhen(condition,calcResult);");
 		}
 
 		// =============== object overrides
 
 		WriteLine("");
-		WriteLine($"public override bool Equals(object obj) => (obj is OneOf<{genericArgs}>) && Equals(value, ((OneOf<{genericArgs}>)obj).value);");
+		WriteLine($"public override bool Equals(object obj) => (obj is OneOf<{model.GenericArgs}>) && Equals(value, ((OneOf<{model.GenericArgs}>)obj).value);");
 		WriteLine("public override int GetHashCode() => (value?.GetHashCode() ?? 0);");
 		WriteLine("public override string ToString() => (value?.ToString() ?? \"\");");
 	}
 }
-
-void WriteSwitcher(int countOfgenericParams) 
-{
-	var genericArgs = GenerateGenericArgs(Enumerable.Range(1, countOfgenericParams));
-
-	WriteLine("");
-	WriteLine($"public struct OneOfSwitcher<{genericArgs}>");
-	using(new WriteBraces(this))
-	{
-		WriteLine("readonly object value;");
-		WriteLine("readonly Type valueTn;");
-		WriteLine("bool hasSwitched;");
-
-		// =============== Constructors
-	    
-		WriteLine("");
-		WriteLine("internal OneOfSwitcher(object value, Type valueTn) : this(value, valueTn, false) { }");
-	    
-		WriteLine("");
-		WriteLine("internal OneOfSwitcher(object value, Type valueTn, bool hasSwitched)");
-		using(new WriteBraces(this))
-		{
-			WriteLine($"this.value = value;");
-			WriteLine($"this.valueTn = valueTn;");
-			WriteLine($"this.hasSwitched = hasSwitched;");
-		}
-
-		// =============== Switch
-
-		for(var parmIndex = 1; parmIndex <= countOfgenericParams; parmIndex++)
-		{
-			string returnType;
-			string returnExpr;
-
-			var lesserArityGenericArgNumbers = Enumerable.Range(1, countOfgenericParams).Where(n => n != parmIndex).ToList();
-			if(lesserArityGenericArgNumbers.Count > 0)
-			{
-				lesserArityGenericArgNumbers.Remove(parmIndex);
-				var lesserArityGenericArgs = GenerateGenericArgs(lesserArityGenericArgNumbers);
-
-				returnType = $"OneOfSwitcher<{lesserArityGenericArgs}>";
-				returnExpr = $"new OneOfSwitcher<{lesserArityGenericArgs}>(value, valueTn, hasSwitched)";
-			}
-			else
-			{
-				returnType = $"void";
-				returnExpr = $"";
-			}
-
-			WriteLine("");
-			WriteLine($"public {returnType} Switch(Action<T{parmIndex}> action)");
-			using(new WriteBraces(this))
-			{
-				WriteLine($"if (!hasSwitched && valueTn == typeof(T{parmIndex}))");
-				using(new WriteBraces(this))
-				{
-					WriteLine($"action((T{parmIndex})value);");
-					WriteLine("hasSwitched = true;");
-				}
-
-				if (returnExpr != "")
-					WriteLine($"return {returnExpr};");
-			}
-		}
-
-		// =============== SwitchWhen
-
-		for(var parmIndex = 1; parmIndex <= countOfgenericParams; parmIndex++)
-		{
-			WriteLine("");
-			WriteLine($"public OneOfSwitcher<{genericArgs}> SwitchWhen(Predicate<T{parmIndex}> condition, Action<T{parmIndex}> action)");
-			using(new WriteBraces(this))
-			{
-				WriteLine($"if (!hasSwitched && valueTn == typeof(T{parmIndex}) && condition((T{parmIndex})value))");
-				using(new WriteBraces(this))
-				{
-					WriteLine($"action((T{parmIndex})value);");
-					WriteLine("hasSwitched = true;");
-				}
-
-				WriteLine($"return this;");
-			}
-		}
-
-		// =============== Else
-
-		WriteLine("");
-		WriteLine($"public void Else(Action<object> action)");
-		using(new WriteBraces(this))
-		{
-			WriteLine($"if (!hasSwitched) action(value);");
-		}
-
-		// =============== ElseThrow
-
-		WriteLine("");
-		WriteLine($"public void ElseThrow(Func<object, Exception> func)");
-		using(new WriteBraces(this))
-		{
-			WriteLine($"if (!hasSwitched) throw func(value);");
-		}
-	}
-}
-
-void WriteMatcher(int countOfgenericParams) 
-{
-    var combos = CombinationsOfLength1ThroughN(Enumerable.Range(1, countOfgenericParams), countOfgenericParams).Select(c=>c.ToList()).ToList();
-    
-	var genericArgs = GenerateGenericArgs(Enumerable.Range(1, countOfgenericParams)) + ", TResult";
-
-	WriteLine("");
-	WriteLine($"public class OneOfMatcher<{genericArgs}> : ");
-    var interfaces = new List<string>();
-    foreach(var combo in combos)//1
-    {   
-        var arityArgs = GenerateGenericArgs(combo) + ", TResult";
-        var arityDisambiguator= CreateInterfaceDisambiguator(combo);
-        interfaces.Add($"IOneOfMatcher{arityDisambiguator}<{arityArgs}>");
-    }
-    WriteLine(interfaces[0]);
-    foreach(var interf in interfaces.Skip(1))
-    {
-        Write(",");
-        WriteLine(interf);
-    }
-    
-	using(new WriteBraces(this))
-	{
-		WriteLine("readonly object value;");
-		WriteLine("readonly Type valueTn;");
-		WriteLine("object result;");
-		// =============== Constructors
-	    
-			    
-		WriteLine("");
-		WriteLine("internal OneOfMatcher(object value, Type valueTn)");
-		using(new WriteBraces(this))
-		{
-			WriteLine($"this.value = value;");
-			WriteLine($"this.valueTn = valueTn;");
-		}
-
-		// =============== Match
-        foreach(var combo in combos)//1
-        {
-            var methodDisambiguator =  CreateInterfaceDisambiguator(combo);
-            var methodGenericArgs = GenerateGenericArgs(combo)  + ", TResult";
-            foreach(var num in combo)
-            {
-                var lesserArityGenericArgNumbers = combo.Except(new[]{num}).ToList();
-                var lesserArityGenericArg = GenerateGenericArgs(lesserArityGenericArgNumbers)  + ", TResult";
-                var arityDisambiguator = CreateInterfaceDisambiguator(lesserArityGenericArgNumbers);
-                var returnType = lesserArityGenericArgNumbers.Count > 0 ? $"IOneOfMatcher{arityDisambiguator}<{lesserArityGenericArg}>" : "TResult";
-			    var returnExpr = lesserArityGenericArgNumbers.Count > 0 ?"this" : "(TResult)result";	   
-                
-                WriteLine($"{returnType} IOneOfMatcher{methodDisambiguator}<{methodGenericArgs}>.Match(Func<T{num}, TResult> createResult)");
-			    using(new WriteBraces(this))
-			    {
-				    WriteLine($"if (result == null && valueTn == typeof(T{num}))");
-				    using(new WriteBraces(this))
-				    {
-					    WriteLine($"result = createResult((T{num})value);");
-				    }
-				    WriteLine($"return {returnExpr};");
-			    }
-            }
-        }
-
-		// =============== MatchWhen
-
-		for(var parmIndex = 1; parmIndex <= countOfgenericParams; parmIndex++)
-		{
-			WriteLine("");
-			WriteLine($"public OneOfMatcher<{genericArgs}> MatchWhen(Predicate<T{parmIndex}> condition, Func<T{parmIndex}, TResult> createResult)");
-			using(new WriteBraces(this))
-			{
-				WriteLine($"if (result == null && valueTn == typeof(T{parmIndex}) && condition((T{parmIndex})value))");
-				using(new WriteBraces(this))
-				{
-					WriteLine($"result = createResult((T{parmIndex})value);");
-				}
-				WriteLine($"return this;");
-			}
-		}
-
-		// =============== Else(default)
-
-		WriteLine("");
-		WriteLine($"public TResult Else(TResult defaultValue)");
-		using(new WriteBraces(this))
-		{
-			WriteLine($"if (result == null) result = defaultValue;");
-			WriteLine("return (TResult)result;");
-		}
-
-		// =============== Else(func)
-
-		WriteLine("");
-		WriteLine($"public TResult Else(Func<object, TResult> createResult)");
-		using(new WriteBraces(this))
-		{
-			WriteLine($"if (result == null) result = createResult(value);");
-			WriteLine("return (TResult)result;");
-		}
-
-		// =============== ElseThrow
-
-		WriteLine("");
-		WriteLine($"public TResult ElseThrow(Func<object, Exception> createException)");
-		using(new WriteBraces(this))
-		{
-			WriteLine($"if (result == null) throw createException(value);");
-			WriteLine("return (TResult)result;");
-		}
-	}
-
-}
-
-      string GenerateGenericArgs(IEnumerable<int> argNumbers)
-{
-	return string.Join(", ", argNumbers.Select(n => "T" + n));
-}
-
-    string CreateInterfaceDisambiguator(IEnumerable<int> ints){return string.Join("_", ints.Select(i=>i.ToString()));}
-
-class WriteBraces: IDisposable
+             
+class WriteBraces : IDisposable
 {
 	TextTransformation textTransformation;
 
@@ -349,27 +120,4 @@ class WriteBraces: IDisposable
 		textTransformation.WriteLine("}");
 	}
 }
-
-        static IEnumerable<IEnumerable<int>> CombinationsOfLengthN(IEnumerable<int> elementsToCombine, int n)
-        {
-              var elementsToCombineList = elementsToCombine.ToList();
-              return n == 0 ? new[] { new int[0] } :
-                elementsToCombineList.SelectMany((e, i) =>
-                  CombinationsOfLengthN(elementsToCombineList.Skip(i + 1),n - 1)
-                  .Select(c => (new[] { e })
-                  .Concat(c)));
-        }
-
-        static IEnumerable<IEnumerable<int>> CombinationsOfLength1ThroughN(IEnumerable<int> elementsToCombine, int n)
-        {
-            var accumulatedResult = new List<List<IEnumerable<int>>>();
-            var listOfElementsToCombine = elementsToCombine.ToList();
-
-            for( var i = 1; i <= n + 1; i++)
-            {
-                accumulatedResult.Add(CombinationsOfLengthN(listOfElementsToCombine,i).ToList());
-            }
-
-            return accumulatedResult.SelectMany(i => i);
-        }
 #>

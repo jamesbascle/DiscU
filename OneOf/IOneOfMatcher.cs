@@ -5,6 +5,7 @@
 using System;
 
 namespace OneOf
+// ReSharper disable InconsistentNaming - The underscores allow us to easily see what type of matcher we're using.
 {
 
     public interface IOneOfMatcher1<T1, TResult> : IOneOfMatcherTerminator<TResult>
@@ -42,6 +43,10 @@ namespace OneOf
     public interface IOneOfMatcher9<T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         TResult Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher10<T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        TResult Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_2<T1, T2, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -83,6 +88,11 @@ namespace OneOf
         IOneOfMatcher9<T9, TResult> Match(Func<T1,TResult> matchFunc);
         IOneOfMatcher1<T1, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_10<T1, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher10<T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1<T1, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_3<T2, T3, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3<T3, TResult> Match(Func<T2,TResult> matchFunc);
@@ -118,6 +128,11 @@ namespace OneOf
         IOneOfMatcher9<T9, TResult> Match(Func<T2,TResult> matchFunc);
         IOneOfMatcher2<T2, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_10<T2, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher10<T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2<T2, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher3_4<T3, T4, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher4<T4, TResult> Match(Func<T3,TResult> matchFunc);
@@ -148,6 +163,11 @@ namespace OneOf
         IOneOfMatcher9<T9, TResult> Match(Func<T3,TResult> matchFunc);
         IOneOfMatcher3<T3, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher3_10<T3, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher10<T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3<T3, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher4_5<T4, T5, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher5<T5, TResult> Match(Func<T4,TResult> matchFunc);
@@ -173,6 +193,11 @@ namespace OneOf
         IOneOfMatcher9<T9, TResult> Match(Func<T4,TResult> matchFunc);
         IOneOfMatcher4<T4, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher4_10<T4, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher10<T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher4<T4, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher5_6<T5, T6, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher6<T6, TResult> Match(Func<T5,TResult> matchFunc);
@@ -193,6 +218,11 @@ namespace OneOf
         IOneOfMatcher9<T9, TResult> Match(Func<T5,TResult> matchFunc);
         IOneOfMatcher5<T5, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher5_10<T5, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher10<T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher5<T5, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher6_7<T6, T7, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher7<T7, TResult> Match(Func<T6,TResult> matchFunc);
@@ -208,6 +238,11 @@ namespace OneOf
         IOneOfMatcher9<T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher6<T6, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher6_10<T6, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher10<T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher6<T6, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher7_8<T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher8<T8, TResult> Match(Func<T7,TResult> matchFunc);
@@ -218,10 +253,25 @@ namespace OneOf
         IOneOfMatcher9<T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher7<T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher7_10<T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher10<T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher7<T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher8_9<T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher9<T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher8<T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher8_10<T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher10<T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher8<T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher9_10<T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher10<T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher9<T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_2_3<T1, T2, T3, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -265,6 +315,12 @@ namespace OneOf
         IOneOfMatcher1_9<T1, T9, TResult> Match(Func<T2,TResult> matchFunc);
         IOneOfMatcher1_2<T1, T2, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_10<T1, T2, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_10<T2, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_10<T1, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2<T1, T2, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_3_4<T1, T3, T4, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_4<T3, T4, TResult> Match(Func<T1,TResult> matchFunc);
@@ -301,6 +357,12 @@ namespace OneOf
         IOneOfMatcher1_9<T1, T9, TResult> Match(Func<T3,TResult> matchFunc);
         IOneOfMatcher1_3<T1, T3, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_3_10<T1, T3, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_10<T3, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_10<T1, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3<T1, T3, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_4_5<T1, T4, T5, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher4_5<T4, T5, TResult> Match(Func<T1,TResult> matchFunc);
@@ -331,6 +393,12 @@ namespace OneOf
         IOneOfMatcher1_9<T1, T9, TResult> Match(Func<T4,TResult> matchFunc);
         IOneOfMatcher1_4<T1, T4, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_4_10<T1, T4, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_10<T4, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_10<T1, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_4<T1, T4, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_5_6<T1, T5, T6, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher5_6<T5, T6, TResult> Match(Func<T1,TResult> matchFunc);
@@ -355,6 +423,12 @@ namespace OneOf
         IOneOfMatcher1_9<T1, T9, TResult> Match(Func<T5,TResult> matchFunc);
         IOneOfMatcher1_5<T1, T5, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_5_10<T1, T5, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_10<T5, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_10<T1, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_5<T1, T5, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_6_7<T1, T6, T7, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher6_7<T6, T7, TResult> Match(Func<T1,TResult> matchFunc);
@@ -373,6 +447,12 @@ namespace OneOf
         IOneOfMatcher1_9<T1, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher1_6<T1, T6, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_6_10<T1, T6, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_10<T6, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_10<T1, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_6<T1, T6, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_7_8<T1, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher7_8<T7, T8, TResult> Match(Func<T1,TResult> matchFunc);
@@ -385,11 +465,29 @@ namespace OneOf
         IOneOfMatcher1_9<T1, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_7<T1, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_7_10<T1, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher7_10<T7, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_10<T1, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_7<T1, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_8_9<T1, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher8_9<T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
         IOneOfMatcher1_9<T1, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_8<T1, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_8_10<T1, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher8_10<T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_10<T1, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_8<T1, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_9_10<T1, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher9_10<T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_10<T1, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_9<T1, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher2_3_4<T2, T3, T4, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -427,6 +525,12 @@ namespace OneOf
         IOneOfMatcher2_9<T2, T9, TResult> Match(Func<T3,TResult> matchFunc);
         IOneOfMatcher2_3<T2, T3, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_3_10<T2, T3, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_10<T3, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_10<T2, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3<T2, T3, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_4_5<T2, T4, T5, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher4_5<T4, T5, TResult> Match(Func<T2,TResult> matchFunc);
@@ -457,6 +561,12 @@ namespace OneOf
         IOneOfMatcher2_9<T2, T9, TResult> Match(Func<T4,TResult> matchFunc);
         IOneOfMatcher2_4<T2, T4, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_4_10<T2, T4, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_10<T4, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_10<T2, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_4<T2, T4, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_5_6<T2, T5, T6, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher5_6<T5, T6, TResult> Match(Func<T2,TResult> matchFunc);
@@ -481,6 +591,12 @@ namespace OneOf
         IOneOfMatcher2_9<T2, T9, TResult> Match(Func<T5,TResult> matchFunc);
         IOneOfMatcher2_5<T2, T5, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_5_10<T2, T5, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_10<T5, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_10<T2, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_5<T2, T5, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_6_7<T2, T6, T7, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher6_7<T6, T7, TResult> Match(Func<T2,TResult> matchFunc);
@@ -499,6 +615,12 @@ namespace OneOf
         IOneOfMatcher2_9<T2, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher2_6<T2, T6, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_6_10<T2, T6, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_10<T6, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_10<T2, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_6<T2, T6, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_7_8<T2, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher7_8<T7, T8, TResult> Match(Func<T2,TResult> matchFunc);
@@ -511,11 +633,29 @@ namespace OneOf
         IOneOfMatcher2_9<T2, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher2_7<T2, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_7_10<T2, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher7_10<T7, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_10<T2, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_7<T2, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_8_9<T2, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher8_9<T8, T9, TResult> Match(Func<T2,TResult> matchFunc);
         IOneOfMatcher2_9<T2, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher2_8<T2, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_8_10<T2, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher8_10<T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_10<T2, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_8<T2, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_9_10<T2, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher9_10<T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_10<T2, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_9<T2, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher3_4_5<T3, T4, T5, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -547,6 +687,12 @@ namespace OneOf
         IOneOfMatcher3_9<T3, T9, TResult> Match(Func<T4,TResult> matchFunc);
         IOneOfMatcher3_4<T3, T4, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher3_4_10<T3, T4, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_10<T4, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_10<T3, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher3_4<T3, T4, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher3_5_6<T3, T5, T6, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher5_6<T5, T6, TResult> Match(Func<T3,TResult> matchFunc);
@@ -571,6 +717,12 @@ namespace OneOf
         IOneOfMatcher3_9<T3, T9, TResult> Match(Func<T5,TResult> matchFunc);
         IOneOfMatcher3_5<T3, T5, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher3_5_10<T3, T5, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_10<T5, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_10<T3, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher3_5<T3, T5, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher3_6_7<T3, T6, T7, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher6_7<T6, T7, TResult> Match(Func<T3,TResult> matchFunc);
@@ -589,6 +741,12 @@ namespace OneOf
         IOneOfMatcher3_9<T3, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher3_6<T3, T6, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher3_6_10<T3, T6, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_10<T6, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_10<T3, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher3_6<T3, T6, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher3_7_8<T3, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher7_8<T7, T8, TResult> Match(Func<T3,TResult> matchFunc);
@@ -601,11 +759,29 @@ namespace OneOf
         IOneOfMatcher3_9<T3, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher3_7<T3, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher3_7_10<T3, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher7_10<T7, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_10<T3, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher3_7<T3, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher3_8_9<T3, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher8_9<T8, T9, TResult> Match(Func<T3,TResult> matchFunc);
         IOneOfMatcher3_9<T3, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher3_8<T3, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_8_10<T3, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher8_10<T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_10<T3, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher3_8<T3, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_9_10<T3, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher9_10<T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_10<T3, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher3_9<T3, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher4_5_6<T4, T5, T6, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -631,6 +807,12 @@ namespace OneOf
         IOneOfMatcher4_9<T4, T9, TResult> Match(Func<T5,TResult> matchFunc);
         IOneOfMatcher4_5<T4, T5, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher4_5_10<T4, T5, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_10<T5, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher4_10<T4, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher4_5<T4, T5, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher4_6_7<T4, T6, T7, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher6_7<T6, T7, TResult> Match(Func<T4,TResult> matchFunc);
@@ -649,6 +831,12 @@ namespace OneOf
         IOneOfMatcher4_9<T4, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher4_6<T4, T6, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher4_6_10<T4, T6, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_10<T6, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher4_10<T4, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher4_6<T4, T6, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher4_7_8<T4, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher7_8<T7, T8, TResult> Match(Func<T4,TResult> matchFunc);
@@ -661,11 +849,29 @@ namespace OneOf
         IOneOfMatcher4_9<T4, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher4_7<T4, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher4_7_10<T4, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher7_10<T7, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher4_10<T4, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher4_7<T4, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher4_8_9<T4, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher8_9<T8, T9, TResult> Match(Func<T4,TResult> matchFunc);
         IOneOfMatcher4_9<T4, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher4_8<T4, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher4_8_10<T4, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher8_10<T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher4_10<T4, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher4_8<T4, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher4_9_10<T4, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher9_10<T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher4_10<T4, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher4_9<T4, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher5_6_7<T5, T6, T7, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -685,6 +891,12 @@ namespace OneOf
         IOneOfMatcher5_9<T5, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher5_6<T5, T6, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher5_6_10<T5, T6, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_10<T6, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher5_10<T5, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher5_6<T5, T6, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher5_7_8<T5, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher7_8<T7, T8, TResult> Match(Func<T5,TResult> matchFunc);
@@ -697,11 +909,29 @@ namespace OneOf
         IOneOfMatcher5_9<T5, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher5_7<T5, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher5_7_10<T5, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher7_10<T7, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher5_10<T5, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher5_7<T5, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher5_8_9<T5, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher8_9<T8, T9, TResult> Match(Func<T5,TResult> matchFunc);
         IOneOfMatcher5_9<T5, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher5_8<T5, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher5_8_10<T5, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher8_10<T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher5_10<T5, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher5_8<T5, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher5_9_10<T5, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher9_10<T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher5_10<T5, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher5_9<T5, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher6_7_8<T6, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -715,17 +945,53 @@ namespace OneOf
         IOneOfMatcher6_9<T6, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher6_7<T6, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher6_7_10<T6, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher7_10<T7, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher6_10<T6, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher6_7<T6, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher6_8_9<T6, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher8_9<T8, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher6_9<T6, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher6_8<T6, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher6_8_10<T6, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher8_10<T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher6_10<T6, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher6_8<T6, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher6_9_10<T6, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher9_10<T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher6_10<T6, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher6_9<T6, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher7_8_9<T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher8_9<T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher7_9<T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher7_8<T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher7_8_10<T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher8_10<T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher7_10<T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher7_8<T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher7_9_10<T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher9_10<T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher7_10<T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher7_9<T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher8_9_10<T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher9_10<T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher8_10<T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher8_9<T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_2_3_4<T1, T2, T3, T4, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -769,6 +1035,13 @@ namespace OneOf
         IOneOfMatcher1_2_9<T1, T2, T9, TResult> Match(Func<T3,TResult> matchFunc);
         IOneOfMatcher1_2_3<T1, T2, T3, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_3_10<T1, T2, T3, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_10<T2, T3, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_10<T1, T3, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_10<T1, T2, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3<T1, T2, T3, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_4_5<T1, T2, T4, T5, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_4_5<T2, T4, T5, TResult> Match(Func<T1,TResult> matchFunc);
@@ -804,6 +1077,13 @@ namespace OneOf
         IOneOfMatcher1_2_9<T1, T2, T9, TResult> Match(Func<T4,TResult> matchFunc);
         IOneOfMatcher1_2_4<T1, T2, T4, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_4_10<T1, T2, T4, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_4_10<T2, T4, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_10<T1, T4, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_10<T1, T2, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_4<T1, T2, T4, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_5_6<T1, T2, T5, T6, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_5_6<T2, T5, T6, TResult> Match(Func<T1,TResult> matchFunc);
@@ -832,6 +1112,13 @@ namespace OneOf
         IOneOfMatcher1_2_9<T1, T2, T9, TResult> Match(Func<T5,TResult> matchFunc);
         IOneOfMatcher1_2_5<T1, T2, T5, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_5_10<T1, T2, T5, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_5_10<T2, T5, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_10<T1, T5, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_10<T1, T2, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_5<T1, T2, T5, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_6_7<T1, T2, T6, T7, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_6_7<T2, T6, T7, TResult> Match(Func<T1,TResult> matchFunc);
@@ -853,6 +1140,13 @@ namespace OneOf
         IOneOfMatcher1_2_9<T1, T2, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher1_2_6<T1, T2, T6, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_6_10<T1, T2, T6, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_6_10<T2, T6, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_6_10<T1, T6, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_10<T1, T2, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_6<T1, T2, T6, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_7_8<T1, T2, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_7_8<T2, T7, T8, TResult> Match(Func<T1,TResult> matchFunc);
@@ -867,12 +1161,33 @@ namespace OneOf
         IOneOfMatcher1_2_9<T1, T2, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_2_7<T1, T2, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_7_10<T1, T2, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_7_10<T2, T7, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_7_10<T1, T7, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_10<T1, T2, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_7<T1, T2, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_8_9<T1, T2, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_8_9<T2, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
         IOneOfMatcher1_8_9<T1, T8, T9, TResult> Match(Func<T2,TResult> matchFunc);
         IOneOfMatcher1_2_9<T1, T2, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_2_8<T1, T2, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_8_10<T1, T2, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_8_10<T2, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_8_10<T1, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_10<T1, T2, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_8<T1, T2, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_9_10<T1, T2, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_9_10<T2, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_9_10<T1, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_10<T1, T2, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_9<T1, T2, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_3_4_5<T1, T3, T4, T5, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -909,6 +1224,13 @@ namespace OneOf
         IOneOfMatcher1_3_9<T1, T3, T9, TResult> Match(Func<T4,TResult> matchFunc);
         IOneOfMatcher1_3_4<T1, T3, T4, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_3_4_10<T1, T3, T4, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_10<T3, T4, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_10<T1, T4, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_10<T1, T3, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_3_4<T1, T3, T4, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_3_5_6<T1, T3, T5, T6, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_5_6<T3, T5, T6, TResult> Match(Func<T1,TResult> matchFunc);
@@ -937,6 +1259,13 @@ namespace OneOf
         IOneOfMatcher1_3_9<T1, T3, T9, TResult> Match(Func<T5,TResult> matchFunc);
         IOneOfMatcher1_3_5<T1, T3, T5, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_3_5_10<T1, T3, T5, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_5_10<T3, T5, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_10<T1, T5, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_10<T1, T3, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_3_5<T1, T3, T5, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_3_6_7<T1, T3, T6, T7, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_6_7<T3, T6, T7, TResult> Match(Func<T1,TResult> matchFunc);
@@ -958,6 +1287,13 @@ namespace OneOf
         IOneOfMatcher1_3_9<T1, T3, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher1_3_6<T1, T3, T6, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_3_6_10<T1, T3, T6, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_6_10<T3, T6, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_6_10<T1, T6, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_10<T1, T3, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_3_6<T1, T3, T6, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_3_7_8<T1, T3, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_7_8<T3, T7, T8, TResult> Match(Func<T1,TResult> matchFunc);
@@ -972,12 +1308,33 @@ namespace OneOf
         IOneOfMatcher1_3_9<T1, T3, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_3_7<T1, T3, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_3_7_10<T1, T3, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_7_10<T3, T7, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_7_10<T1, T7, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_10<T1, T3, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_3_7<T1, T3, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_3_8_9<T1, T3, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_8_9<T3, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
         IOneOfMatcher1_8_9<T1, T8, T9, TResult> Match(Func<T3,TResult> matchFunc);
         IOneOfMatcher1_3_9<T1, T3, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_3_8<T1, T3, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_8_10<T1, T3, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_8_10<T3, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_8_10<T1, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_10<T1, T3, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_3_8<T1, T3, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_9_10<T1, T3, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_9_10<T3, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_9_10<T1, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_10<T1, T3, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_3_9<T1, T3, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_4_5_6<T1, T4, T5, T6, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -1007,6 +1364,13 @@ namespace OneOf
         IOneOfMatcher1_4_9<T1, T4, T9, TResult> Match(Func<T5,TResult> matchFunc);
         IOneOfMatcher1_4_5<T1, T4, T5, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_4_5_10<T1, T4, T5, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_10<T4, T5, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_10<T1, T5, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_4_10<T1, T4, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_4_5<T1, T4, T5, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_4_6_7<T1, T4, T6, T7, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher4_6_7<T4, T6, T7, TResult> Match(Func<T1,TResult> matchFunc);
@@ -1028,6 +1392,13 @@ namespace OneOf
         IOneOfMatcher1_4_9<T1, T4, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher1_4_6<T1, T4, T6, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_4_6_10<T1, T4, T6, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_6_10<T4, T6, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_6_10<T1, T6, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_4_10<T1, T4, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_4_6<T1, T4, T6, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_4_7_8<T1, T4, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher4_7_8<T4, T7, T8, TResult> Match(Func<T1,TResult> matchFunc);
@@ -1042,12 +1413,33 @@ namespace OneOf
         IOneOfMatcher1_4_9<T1, T4, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_4_7<T1, T4, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_4_7_10<T1, T4, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_7_10<T4, T7, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_7_10<T1, T7, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_4_10<T1, T4, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_4_7<T1, T4, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_4_8_9<T1, T4, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher4_8_9<T4, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
         IOneOfMatcher1_8_9<T1, T8, T9, TResult> Match(Func<T4,TResult> matchFunc);
         IOneOfMatcher1_4_9<T1, T4, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_4_8<T1, T4, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_4_8_10<T1, T4, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_8_10<T4, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_8_10<T1, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_4_10<T1, T4, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_4_8<T1, T4, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_4_9_10<T1, T4, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_9_10<T4, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_9_10<T1, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_4_10<T1, T4, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_4_9<T1, T4, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_5_6_7<T1, T5, T6, T7, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -1070,6 +1462,13 @@ namespace OneOf
         IOneOfMatcher1_5_9<T1, T5, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher1_5_6<T1, T5, T6, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_5_6_10<T1, T5, T6, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_6_10<T5, T6, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_6_10<T1, T6, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_5_10<T1, T5, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_5_6<T1, T5, T6, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_5_7_8<T1, T5, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher5_7_8<T5, T7, T8, TResult> Match(Func<T1,TResult> matchFunc);
@@ -1084,12 +1483,33 @@ namespace OneOf
         IOneOfMatcher1_5_9<T1, T5, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_5_7<T1, T5, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_5_7_10<T1, T5, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_7_10<T5, T7, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_7_10<T1, T7, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_5_10<T1, T5, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_5_7<T1, T5, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_5_8_9<T1, T5, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher5_8_9<T5, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
         IOneOfMatcher1_8_9<T1, T8, T9, TResult> Match(Func<T5,TResult> matchFunc);
         IOneOfMatcher1_5_9<T1, T5, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_5_8<T1, T5, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_5_8_10<T1, T5, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_8_10<T5, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_8_10<T1, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_5_10<T1, T5, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_5_8<T1, T5, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_5_9_10<T1, T5, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_9_10<T5, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_9_10<T1, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_5_10<T1, T5, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_5_9<T1, T5, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_6_7_8<T1, T6, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -1105,6 +1525,13 @@ namespace OneOf
         IOneOfMatcher1_6_9<T1, T6, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_6_7<T1, T6, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_6_7_10<T1, T6, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_7_10<T6, T7, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_7_10<T1, T7, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_6_10<T1, T6, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_6_7<T1, T6, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_6_8_9<T1, T6, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher6_8_9<T6, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -1112,12 +1539,47 @@ namespace OneOf
         IOneOfMatcher1_6_9<T1, T6, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_6_8<T1, T6, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_6_8_10<T1, T6, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_8_10<T6, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_8_10<T1, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_6_10<T1, T6, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_6_8<T1, T6, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_6_9_10<T1, T6, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_9_10<T6, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_9_10<T1, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_6_10<T1, T6, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_6_9<T1, T6, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_7_8_9<T1, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher7_8_9<T7, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
         IOneOfMatcher1_8_9<T1, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_7_9<T1, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_7_8<T1, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_7_8_10<T1, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher7_8_10<T7, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_8_10<T1, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_7_10<T1, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_7_8<T1, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_7_9_10<T1, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher7_9_10<T7, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_9_10<T1, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_7_10<T1, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_7_9<T1, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_8_9_10<T1, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher8_9_10<T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_9_10<T1, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_8_10<T1, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_8_9<T1, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher2_3_4_5<T2, T3, T4, T5, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -1154,6 +1616,13 @@ namespace OneOf
         IOneOfMatcher2_3_9<T2, T3, T9, TResult> Match(Func<T4,TResult> matchFunc);
         IOneOfMatcher2_3_4<T2, T3, T4, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_3_4_10<T2, T3, T4, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_10<T3, T4, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_4_10<T2, T4, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_10<T2, T3, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_3_4<T2, T3, T4, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_3_5_6<T2, T3, T5, T6, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_5_6<T3, T5, T6, TResult> Match(Func<T2,TResult> matchFunc);
@@ -1182,6 +1651,13 @@ namespace OneOf
         IOneOfMatcher2_3_9<T2, T3, T9, TResult> Match(Func<T5,TResult> matchFunc);
         IOneOfMatcher2_3_5<T2, T3, T5, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_3_5_10<T2, T3, T5, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_5_10<T3, T5, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_5_10<T2, T5, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_10<T2, T3, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_3_5<T2, T3, T5, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_3_6_7<T2, T3, T6, T7, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_6_7<T3, T6, T7, TResult> Match(Func<T2,TResult> matchFunc);
@@ -1203,6 +1679,13 @@ namespace OneOf
         IOneOfMatcher2_3_9<T2, T3, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher2_3_6<T2, T3, T6, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_3_6_10<T2, T3, T6, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_6_10<T3, T6, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_6_10<T2, T6, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_10<T2, T3, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_3_6<T2, T3, T6, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_3_7_8<T2, T3, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_7_8<T3, T7, T8, TResult> Match(Func<T2,TResult> matchFunc);
@@ -1217,12 +1700,33 @@ namespace OneOf
         IOneOfMatcher2_3_9<T2, T3, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher2_3_7<T2, T3, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_3_7_10<T2, T3, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_7_10<T3, T7, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_7_10<T2, T7, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_10<T2, T3, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_3_7<T2, T3, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_3_8_9<T2, T3, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_8_9<T3, T8, T9, TResult> Match(Func<T2,TResult> matchFunc);
         IOneOfMatcher2_8_9<T2, T8, T9, TResult> Match(Func<T3,TResult> matchFunc);
         IOneOfMatcher2_3_9<T2, T3, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher2_3_8<T2, T3, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_8_10<T2, T3, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_8_10<T3, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_8_10<T2, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_10<T2, T3, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_3_8<T2, T3, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_9_10<T2, T3, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_9_10<T3, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_9_10<T2, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_10<T2, T3, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_3_9<T2, T3, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher2_4_5_6<T2, T4, T5, T6, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -1252,6 +1756,13 @@ namespace OneOf
         IOneOfMatcher2_4_9<T2, T4, T9, TResult> Match(Func<T5,TResult> matchFunc);
         IOneOfMatcher2_4_5<T2, T4, T5, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_4_5_10<T2, T4, T5, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_10<T4, T5, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_5_10<T2, T5, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_4_10<T2, T4, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_4_5<T2, T4, T5, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_4_6_7<T2, T4, T6, T7, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher4_6_7<T4, T6, T7, TResult> Match(Func<T2,TResult> matchFunc);
@@ -1273,6 +1784,13 @@ namespace OneOf
         IOneOfMatcher2_4_9<T2, T4, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher2_4_6<T2, T4, T6, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_4_6_10<T2, T4, T6, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_6_10<T4, T6, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_6_10<T2, T6, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_4_10<T2, T4, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_4_6<T2, T4, T6, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_4_7_8<T2, T4, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher4_7_8<T4, T7, T8, TResult> Match(Func<T2,TResult> matchFunc);
@@ -1287,12 +1805,33 @@ namespace OneOf
         IOneOfMatcher2_4_9<T2, T4, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher2_4_7<T2, T4, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_4_7_10<T2, T4, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_7_10<T4, T7, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_7_10<T2, T7, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_4_10<T2, T4, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_4_7<T2, T4, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_4_8_9<T2, T4, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher4_8_9<T4, T8, T9, TResult> Match(Func<T2,TResult> matchFunc);
         IOneOfMatcher2_8_9<T2, T8, T9, TResult> Match(Func<T4,TResult> matchFunc);
         IOneOfMatcher2_4_9<T2, T4, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher2_4_8<T2, T4, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_4_8_10<T2, T4, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_8_10<T4, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_8_10<T2, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_4_10<T2, T4, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_4_8<T2, T4, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_4_9_10<T2, T4, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_9_10<T4, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_9_10<T2, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_4_10<T2, T4, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_4_9<T2, T4, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher2_5_6_7<T2, T5, T6, T7, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -1315,6 +1854,13 @@ namespace OneOf
         IOneOfMatcher2_5_9<T2, T5, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher2_5_6<T2, T5, T6, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_5_6_10<T2, T5, T6, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_6_10<T5, T6, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_6_10<T2, T6, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_5_10<T2, T5, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_5_6<T2, T5, T6, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_5_7_8<T2, T5, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher5_7_8<T5, T7, T8, TResult> Match(Func<T2,TResult> matchFunc);
@@ -1329,12 +1875,33 @@ namespace OneOf
         IOneOfMatcher2_5_9<T2, T5, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher2_5_7<T2, T5, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_5_7_10<T2, T5, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_7_10<T5, T7, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_7_10<T2, T7, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_5_10<T2, T5, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_5_7<T2, T5, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_5_8_9<T2, T5, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher5_8_9<T5, T8, T9, TResult> Match(Func<T2,TResult> matchFunc);
         IOneOfMatcher2_8_9<T2, T8, T9, TResult> Match(Func<T5,TResult> matchFunc);
         IOneOfMatcher2_5_9<T2, T5, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher2_5_8<T2, T5, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_5_8_10<T2, T5, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_8_10<T5, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_8_10<T2, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_5_10<T2, T5, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_5_8<T2, T5, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_5_9_10<T2, T5, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_9_10<T5, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_9_10<T2, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_5_10<T2, T5, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_5_9<T2, T5, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher2_6_7_8<T2, T6, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -1350,6 +1917,13 @@ namespace OneOf
         IOneOfMatcher2_6_9<T2, T6, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher2_6_7<T2, T6, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_6_7_10<T2, T6, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_7_10<T6, T7, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_7_10<T2, T7, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_6_10<T2, T6, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_6_7<T2, T6, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_6_8_9<T2, T6, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher6_8_9<T6, T8, T9, TResult> Match(Func<T2,TResult> matchFunc);
@@ -1357,12 +1931,47 @@ namespace OneOf
         IOneOfMatcher2_6_9<T2, T6, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher2_6_8<T2, T6, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_6_8_10<T2, T6, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_8_10<T6, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_8_10<T2, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_6_10<T2, T6, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_6_8<T2, T6, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_6_9_10<T2, T6, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_9_10<T6, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_9_10<T2, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_6_10<T2, T6, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_6_9<T2, T6, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_7_8_9<T2, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher7_8_9<T7, T8, T9, TResult> Match(Func<T2,TResult> matchFunc);
         IOneOfMatcher2_8_9<T2, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher2_7_9<T2, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher2_7_8<T2, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_7_8_10<T2, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher7_8_10<T7, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_8_10<T2, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_7_10<T2, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_7_8<T2, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_7_9_10<T2, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher7_9_10<T7, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_9_10<T2, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_7_10<T2, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_7_9<T2, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_8_9_10<T2, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher8_9_10<T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_9_10<T2, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_8_10<T2, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_8_9<T2, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher3_4_5_6<T3, T4, T5, T6, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -1392,6 +2001,13 @@ namespace OneOf
         IOneOfMatcher3_4_9<T3, T4, T9, TResult> Match(Func<T5,TResult> matchFunc);
         IOneOfMatcher3_4_5<T3, T4, T5, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher3_4_5_10<T3, T4, T5, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_10<T4, T5, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_5_10<T3, T5, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher3_4_10<T3, T4, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher3_4_5<T3, T4, T5, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher3_4_6_7<T3, T4, T6, T7, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher4_6_7<T4, T6, T7, TResult> Match(Func<T3,TResult> matchFunc);
@@ -1413,6 +2029,13 @@ namespace OneOf
         IOneOfMatcher3_4_9<T3, T4, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher3_4_6<T3, T4, T6, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher3_4_6_10<T3, T4, T6, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_6_10<T4, T6, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_6_10<T3, T6, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher3_4_10<T3, T4, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher3_4_6<T3, T4, T6, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher3_4_7_8<T3, T4, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher4_7_8<T4, T7, T8, TResult> Match(Func<T3,TResult> matchFunc);
@@ -1427,12 +2050,33 @@ namespace OneOf
         IOneOfMatcher3_4_9<T3, T4, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher3_4_7<T3, T4, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher3_4_7_10<T3, T4, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_7_10<T4, T7, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_7_10<T3, T7, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher3_4_10<T3, T4, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher3_4_7<T3, T4, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher3_4_8_9<T3, T4, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher4_8_9<T4, T8, T9, TResult> Match(Func<T3,TResult> matchFunc);
         IOneOfMatcher3_8_9<T3, T8, T9, TResult> Match(Func<T4,TResult> matchFunc);
         IOneOfMatcher3_4_9<T3, T4, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher3_4_8<T3, T4, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_4_8_10<T3, T4, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_8_10<T4, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_8_10<T3, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher3_4_10<T3, T4, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher3_4_8<T3, T4, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_4_9_10<T3, T4, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_9_10<T4, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_9_10<T3, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher3_4_10<T3, T4, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher3_4_9<T3, T4, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher3_5_6_7<T3, T5, T6, T7, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -1455,6 +2099,13 @@ namespace OneOf
         IOneOfMatcher3_5_9<T3, T5, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher3_5_6<T3, T5, T6, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher3_5_6_10<T3, T5, T6, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_6_10<T5, T6, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_6_10<T3, T6, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher3_5_10<T3, T5, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher3_5_6<T3, T5, T6, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher3_5_7_8<T3, T5, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher5_7_8<T5, T7, T8, TResult> Match(Func<T3,TResult> matchFunc);
@@ -1469,12 +2120,33 @@ namespace OneOf
         IOneOfMatcher3_5_9<T3, T5, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher3_5_7<T3, T5, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher3_5_7_10<T3, T5, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_7_10<T5, T7, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_7_10<T3, T7, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher3_5_10<T3, T5, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher3_5_7<T3, T5, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher3_5_8_9<T3, T5, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher5_8_9<T5, T8, T9, TResult> Match(Func<T3,TResult> matchFunc);
         IOneOfMatcher3_8_9<T3, T8, T9, TResult> Match(Func<T5,TResult> matchFunc);
         IOneOfMatcher3_5_9<T3, T5, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher3_5_8<T3, T5, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_5_8_10<T3, T5, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_8_10<T5, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_8_10<T3, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher3_5_10<T3, T5, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher3_5_8<T3, T5, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_5_9_10<T3, T5, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_9_10<T5, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_9_10<T3, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher3_5_10<T3, T5, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher3_5_9<T3, T5, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher3_6_7_8<T3, T6, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -1490,6 +2162,13 @@ namespace OneOf
         IOneOfMatcher3_6_9<T3, T6, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher3_6_7<T3, T6, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher3_6_7_10<T3, T6, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_7_10<T6, T7, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_7_10<T3, T7, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher3_6_10<T3, T6, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher3_6_7<T3, T6, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher3_6_8_9<T3, T6, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher6_8_9<T6, T8, T9, TResult> Match(Func<T3,TResult> matchFunc);
@@ -1497,12 +2176,47 @@ namespace OneOf
         IOneOfMatcher3_6_9<T3, T6, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher3_6_8<T3, T6, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher3_6_8_10<T3, T6, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_8_10<T6, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_8_10<T3, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher3_6_10<T3, T6, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher3_6_8<T3, T6, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_6_9_10<T3, T6, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_9_10<T6, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_9_10<T3, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher3_6_10<T3, T6, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher3_6_9<T3, T6, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher3_7_8_9<T3, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher7_8_9<T7, T8, T9, TResult> Match(Func<T3,TResult> matchFunc);
         IOneOfMatcher3_8_9<T3, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher3_7_9<T3, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher3_7_8<T3, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_7_8_10<T3, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher7_8_10<T7, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_8_10<T3, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher3_7_10<T3, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher3_7_8<T3, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_7_9_10<T3, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher7_9_10<T7, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_9_10<T3, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher3_7_10<T3, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher3_7_9<T3, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_8_9_10<T3, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher8_9_10<T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_9_10<T3, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher3_8_10<T3, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher3_8_9<T3, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher4_5_6_7<T4, T5, T6, T7, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -1525,6 +2239,13 @@ namespace OneOf
         IOneOfMatcher4_5_9<T4, T5, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher4_5_6<T4, T5, T6, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher4_5_6_10<T4, T5, T6, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_6_10<T5, T6, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher4_6_10<T4, T6, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher4_5_10<T4, T5, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher4_5_6<T4, T5, T6, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher4_5_7_8<T4, T5, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher5_7_8<T5, T7, T8, TResult> Match(Func<T4,TResult> matchFunc);
@@ -1539,12 +2260,33 @@ namespace OneOf
         IOneOfMatcher4_5_9<T4, T5, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher4_5_7<T4, T5, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher4_5_7_10<T4, T5, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_7_10<T5, T7, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher4_7_10<T4, T7, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher4_5_10<T4, T5, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher4_5_7<T4, T5, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher4_5_8_9<T4, T5, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher5_8_9<T5, T8, T9, TResult> Match(Func<T4,TResult> matchFunc);
         IOneOfMatcher4_8_9<T4, T8, T9, TResult> Match(Func<T5,TResult> matchFunc);
         IOneOfMatcher4_5_9<T4, T5, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher4_5_8<T4, T5, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher4_5_8_10<T4, T5, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_8_10<T5, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher4_8_10<T4, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher4_5_10<T4, T5, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher4_5_8<T4, T5, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher4_5_9_10<T4, T5, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_9_10<T5, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher4_9_10<T4, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher4_5_10<T4, T5, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher4_5_9<T4, T5, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher4_6_7_8<T4, T6, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -1560,6 +2302,13 @@ namespace OneOf
         IOneOfMatcher4_6_9<T4, T6, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher4_6_7<T4, T6, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher4_6_7_10<T4, T6, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_7_10<T6, T7, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher4_7_10<T4, T7, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher4_6_10<T4, T6, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher4_6_7<T4, T6, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher4_6_8_9<T4, T6, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher6_8_9<T6, T8, T9, TResult> Match(Func<T4,TResult> matchFunc);
@@ -1567,12 +2316,47 @@ namespace OneOf
         IOneOfMatcher4_6_9<T4, T6, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher4_6_8<T4, T6, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher4_6_8_10<T4, T6, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_8_10<T6, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher4_8_10<T4, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher4_6_10<T4, T6, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher4_6_8<T4, T6, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher4_6_9_10<T4, T6, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_9_10<T6, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher4_9_10<T4, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher4_6_10<T4, T6, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher4_6_9<T4, T6, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher4_7_8_9<T4, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher7_8_9<T7, T8, T9, TResult> Match(Func<T4,TResult> matchFunc);
         IOneOfMatcher4_8_9<T4, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher4_7_9<T4, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher4_7_8<T4, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher4_7_8_10<T4, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher7_8_10<T7, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher4_8_10<T4, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher4_7_10<T4, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher4_7_8<T4, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher4_7_9_10<T4, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher7_9_10<T7, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher4_9_10<T4, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher4_7_10<T4, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher4_7_9<T4, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher4_8_9_10<T4, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher8_9_10<T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher4_9_10<T4, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher4_8_10<T4, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher4_8_9<T4, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher5_6_7_8<T5, T6, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -1588,12 +2372,33 @@ namespace OneOf
         IOneOfMatcher5_6_9<T5, T6, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher5_6_7<T5, T6, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher5_6_7_10<T5, T6, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_7_10<T6, T7, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher5_7_10<T5, T7, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher5_6_10<T5, T6, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher5_6_7<T5, T6, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher5_6_8_9<T5, T6, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher6_8_9<T6, T8, T9, TResult> Match(Func<T5,TResult> matchFunc);
         IOneOfMatcher5_8_9<T5, T8, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher5_6_9<T5, T6, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher5_6_8<T5, T6, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher5_6_8_10<T5, T6, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_8_10<T6, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher5_8_10<T5, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher5_6_10<T5, T6, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher5_6_8<T5, T6, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher5_6_9_10<T5, T6, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_9_10<T6, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher5_9_10<T5, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher5_6_10<T5, T6, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher5_6_9<T5, T6, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher5_7_8_9<T5, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -1602,12 +2407,61 @@ namespace OneOf
         IOneOfMatcher5_7_9<T5, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher5_7_8<T5, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher5_7_8_10<T5, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher7_8_10<T7, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher5_8_10<T5, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher5_7_10<T5, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher5_7_8<T5, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher5_7_9_10<T5, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher7_9_10<T7, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher5_9_10<T5, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher5_7_10<T5, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher5_7_9<T5, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher5_8_9_10<T5, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher8_9_10<T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher5_9_10<T5, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher5_8_10<T5, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher5_8_9<T5, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher6_7_8_9<T6, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher7_8_9<T7, T8, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher6_8_9<T6, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher6_7_9<T6, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher6_7_8<T6, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher6_7_8_10<T6, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher7_8_10<T7, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher6_8_10<T6, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher6_7_10<T6, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher6_7_8<T6, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher6_7_9_10<T6, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher7_9_10<T7, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher6_9_10<T6, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher6_7_10<T6, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher6_7_9<T6, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher6_8_9_10<T6, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher8_9_10<T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher6_9_10<T6, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher6_8_10<T6, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher6_8_9<T6, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher7_8_9_10<T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher8_9_10<T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher7_9_10<T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher7_8_10<T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher7_8_9<T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_2_3_4_5<T1, T2, T3, T4, T5, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -1649,6 +2503,14 @@ namespace OneOf
         IOneOfMatcher1_2_3_9<T1, T2, T3, T9, TResult> Match(Func<T4,TResult> matchFunc);
         IOneOfMatcher1_2_3_4<T1, T2, T3, T4, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_3_4_10<T1, T2, T3, T4, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_4_10<T2, T3, T4, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_4_10<T1, T3, T4, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_4_10<T1, T2, T4, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_10<T1, T2, T3, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4<T1, T2, T3, T4, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_3_5_6<T1, T2, T3, T5, T6, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_3_5_6<T2, T3, T5, T6, TResult> Match(Func<T1,TResult> matchFunc);
@@ -1681,6 +2543,14 @@ namespace OneOf
         IOneOfMatcher1_2_3_9<T1, T2, T3, T9, TResult> Match(Func<T5,TResult> matchFunc);
         IOneOfMatcher1_2_3_5<T1, T2, T3, T5, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_3_5_10<T1, T2, T3, T5, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_5_10<T2, T3, T5, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_5_10<T1, T3, T5, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_5_10<T1, T2, T5, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_10<T1, T2, T3, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5<T1, T2, T3, T5, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_3_6_7<T1, T2, T3, T6, T7, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_3_6_7<T2, T3, T6, T7, TResult> Match(Func<T1,TResult> matchFunc);
@@ -1705,6 +2575,14 @@ namespace OneOf
         IOneOfMatcher1_2_3_9<T1, T2, T3, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher1_2_3_6<T1, T2, T3, T6, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_3_6_10<T1, T2, T3, T6, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_6_10<T2, T3, T6, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_6_10<T1, T3, T6, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_6_10<T1, T2, T6, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_10<T1, T2, T3, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6<T1, T2, T3, T6, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_3_7_8<T1, T2, T3, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_3_7_8<T2, T3, T7, T8, TResult> Match(Func<T1,TResult> matchFunc);
@@ -1721,6 +2599,14 @@ namespace OneOf
         IOneOfMatcher1_2_3_9<T1, T2, T3, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_2_3_7<T1, T2, T3, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_3_7_10<T1, T2, T3, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_7_10<T2, T3, T7, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_7_10<T1, T3, T7, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_7_10<T1, T2, T7, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_10<T1, T2, T3, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_3_7<T1, T2, T3, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_3_8_9<T1, T2, T3, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_3_8_9<T2, T3, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -1728,6 +2614,22 @@ namespace OneOf
         IOneOfMatcher1_2_8_9<T1, T2, T8, T9, TResult> Match(Func<T3,TResult> matchFunc);
         IOneOfMatcher1_2_3_9<T1, T2, T3, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_2_3_8<T1, T2, T3, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_8_10<T1, T2, T3, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_8_10<T2, T3, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_8_10<T1, T3, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_8_10<T1, T2, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_10<T1, T2, T3, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_3_8<T1, T2, T3, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_9_10<T1, T2, T3, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_9_10<T2, T3, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_9_10<T1, T3, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_9_10<T1, T2, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_10<T1, T2, T3, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_3_9<T1, T2, T3, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_2_4_5_6<T1, T2, T4, T5, T6, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -1761,6 +2663,14 @@ namespace OneOf
         IOneOfMatcher1_2_4_9<T1, T2, T4, T9, TResult> Match(Func<T5,TResult> matchFunc);
         IOneOfMatcher1_2_4_5<T1, T2, T4, T5, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_4_5_10<T1, T2, T4, T5, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_4_5_10<T2, T4, T5, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_5_10<T1, T4, T5, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_5_10<T1, T2, T5, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_4_10<T1, T2, T4, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5<T1, T2, T4, T5, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_4_6_7<T1, T2, T4, T6, T7, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_4_6_7<T2, T4, T6, T7, TResult> Match(Func<T1,TResult> matchFunc);
@@ -1785,6 +2695,14 @@ namespace OneOf
         IOneOfMatcher1_2_4_9<T1, T2, T4, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher1_2_4_6<T1, T2, T4, T6, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_4_6_10<T1, T2, T4, T6, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_4_6_10<T2, T4, T6, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_6_10<T1, T4, T6, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_6_10<T1, T2, T6, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_4_10<T1, T2, T4, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6<T1, T2, T4, T6, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_4_7_8<T1, T2, T4, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_4_7_8<T2, T4, T7, T8, TResult> Match(Func<T1,TResult> matchFunc);
@@ -1801,6 +2719,14 @@ namespace OneOf
         IOneOfMatcher1_2_4_9<T1, T2, T4, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_2_4_7<T1, T2, T4, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_4_7_10<T1, T2, T4, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_4_7_10<T2, T4, T7, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_7_10<T1, T4, T7, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_7_10<T1, T2, T7, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_4_10<T1, T2, T4, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_4_7<T1, T2, T4, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_4_8_9<T1, T2, T4, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_4_8_9<T2, T4, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -1808,6 +2734,22 @@ namespace OneOf
         IOneOfMatcher1_2_8_9<T1, T2, T8, T9, TResult> Match(Func<T4,TResult> matchFunc);
         IOneOfMatcher1_2_4_9<T1, T2, T4, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_2_4_8<T1, T2, T4, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_4_8_10<T1, T2, T4, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_4_8_10<T2, T4, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_8_10<T1, T4, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_8_10<T1, T2, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_4_10<T1, T2, T4, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_4_8<T1, T2, T4, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_4_9_10<T1, T2, T4, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_4_9_10<T2, T4, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_9_10<T1, T4, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_9_10<T1, T2, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_4_10<T1, T2, T4, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_4_9<T1, T2, T4, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_2_5_6_7<T1, T2, T5, T6, T7, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -1833,6 +2775,14 @@ namespace OneOf
         IOneOfMatcher1_2_5_9<T1, T2, T5, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher1_2_5_6<T1, T2, T5, T6, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_5_6_10<T1, T2, T5, T6, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_5_6_10<T2, T5, T6, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_6_10<T1, T5, T6, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_6_10<T1, T2, T6, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_5_10<T1, T2, T5, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6<T1, T2, T5, T6, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_5_7_8<T1, T2, T5, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_5_7_8<T2, T5, T7, T8, TResult> Match(Func<T1,TResult> matchFunc);
@@ -1849,6 +2799,14 @@ namespace OneOf
         IOneOfMatcher1_2_5_9<T1, T2, T5, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_2_5_7<T1, T2, T5, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_5_7_10<T1, T2, T5, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_5_7_10<T2, T5, T7, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_7_10<T1, T5, T7, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_7_10<T1, T2, T7, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_5_10<T1, T2, T5, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_5_7<T1, T2, T5, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_5_8_9<T1, T2, T5, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_5_8_9<T2, T5, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -1856,6 +2814,22 @@ namespace OneOf
         IOneOfMatcher1_2_8_9<T1, T2, T8, T9, TResult> Match(Func<T5,TResult> matchFunc);
         IOneOfMatcher1_2_5_9<T1, T2, T5, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_2_5_8<T1, T2, T5, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_5_8_10<T1, T2, T5, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_5_8_10<T2, T5, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_8_10<T1, T5, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_8_10<T1, T2, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_5_10<T1, T2, T5, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_5_8<T1, T2, T5, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_5_9_10<T1, T2, T5, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_5_9_10<T2, T5, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_9_10<T1, T5, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_9_10<T1, T2, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_5_10<T1, T2, T5, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_5_9<T1, T2, T5, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_2_6_7_8<T1, T2, T6, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -1873,6 +2847,14 @@ namespace OneOf
         IOneOfMatcher1_2_6_9<T1, T2, T6, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_2_6_7<T1, T2, T6, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_6_7_10<T1, T2, T6, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_6_7_10<T2, T6, T7, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_6_7_10<T1, T6, T7, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_7_10<T1, T2, T7, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_6_10<T1, T2, T6, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_6_7<T1, T2, T6, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_6_8_9<T1, T2, T6, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_6_8_9<T2, T6, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -1881,6 +2863,22 @@ namespace OneOf
         IOneOfMatcher1_2_6_9<T1, T2, T6, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_2_6_8<T1, T2, T6, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_6_8_10<T1, T2, T6, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_6_8_10<T2, T6, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_6_8_10<T1, T6, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_8_10<T1, T2, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_6_10<T1, T2, T6, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_6_8<T1, T2, T6, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_6_9_10<T1, T2, T6, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_6_9_10<T2, T6, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_6_9_10<T1, T6, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_9_10<T1, T2, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_6_10<T1, T2, T6, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_6_9<T1, T2, T6, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_7_8_9<T1, T2, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_7_8_9<T2, T7, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -1888,6 +2886,30 @@ namespace OneOf
         IOneOfMatcher1_2_8_9<T1, T2, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_2_7_9<T1, T2, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_2_7_8<T1, T2, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_7_8_10<T1, T2, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_7_8_10<T2, T7, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_7_8_10<T1, T7, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_8_10<T1, T2, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_7_10<T1, T2, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_7_8<T1, T2, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_7_9_10<T1, T2, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_7_9_10<T2, T7, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_7_9_10<T1, T7, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_9_10<T1, T2, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_7_10<T1, T2, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_7_9<T1, T2, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_8_9_10<T1, T2, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_8_9_10<T2, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_8_9_10<T1, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_9_10<T1, T2, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_8_10<T1, T2, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_8_9<T1, T2, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_3_4_5_6<T1, T3, T4, T5, T6, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -1921,6 +2943,14 @@ namespace OneOf
         IOneOfMatcher1_3_4_9<T1, T3, T4, T9, TResult> Match(Func<T5,TResult> matchFunc);
         IOneOfMatcher1_3_4_5<T1, T3, T4, T5, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_3_4_5_10<T1, T3, T4, T5, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_5_10<T3, T4, T5, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_5_10<T1, T4, T5, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_5_10<T1, T3, T5, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_3_4_10<T1, T3, T4, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5<T1, T3, T4, T5, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_3_4_6_7<T1, T3, T4, T6, T7, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_4_6_7<T3, T4, T6, T7, TResult> Match(Func<T1,TResult> matchFunc);
@@ -1945,6 +2975,14 @@ namespace OneOf
         IOneOfMatcher1_3_4_9<T1, T3, T4, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher1_3_4_6<T1, T3, T4, T6, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_3_4_6_10<T1, T3, T4, T6, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_6_10<T3, T4, T6, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_6_10<T1, T4, T6, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_6_10<T1, T3, T6, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_3_4_10<T1, T3, T4, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6<T1, T3, T4, T6, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_3_4_7_8<T1, T3, T4, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_4_7_8<T3, T4, T7, T8, TResult> Match(Func<T1,TResult> matchFunc);
@@ -1961,6 +2999,14 @@ namespace OneOf
         IOneOfMatcher1_3_4_9<T1, T3, T4, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_3_4_7<T1, T3, T4, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_3_4_7_10<T1, T3, T4, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_7_10<T3, T4, T7, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_7_10<T1, T4, T7, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_7_10<T1, T3, T7, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_3_4_10<T1, T3, T4, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_3_4_7<T1, T3, T4, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_3_4_8_9<T1, T3, T4, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_4_8_9<T3, T4, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -1968,6 +3014,22 @@ namespace OneOf
         IOneOfMatcher1_3_8_9<T1, T3, T8, T9, TResult> Match(Func<T4,TResult> matchFunc);
         IOneOfMatcher1_3_4_9<T1, T3, T4, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_3_4_8<T1, T3, T4, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_4_8_10<T1, T3, T4, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_8_10<T3, T4, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_8_10<T1, T4, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_8_10<T1, T3, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_3_4_10<T1, T3, T4, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_3_4_8<T1, T3, T4, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_4_9_10<T1, T3, T4, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_9_10<T3, T4, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_9_10<T1, T4, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_9_10<T1, T3, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_3_4_10<T1, T3, T4, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_3_4_9<T1, T3, T4, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_3_5_6_7<T1, T3, T5, T6, T7, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -1993,6 +3055,14 @@ namespace OneOf
         IOneOfMatcher1_3_5_9<T1, T3, T5, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher1_3_5_6<T1, T3, T5, T6, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_3_5_6_10<T1, T3, T5, T6, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_5_6_10<T3, T5, T6, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_6_10<T1, T5, T6, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_6_10<T1, T3, T6, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_3_5_10<T1, T3, T5, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6<T1, T3, T5, T6, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_3_5_7_8<T1, T3, T5, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_5_7_8<T3, T5, T7, T8, TResult> Match(Func<T1,TResult> matchFunc);
@@ -2009,6 +3079,14 @@ namespace OneOf
         IOneOfMatcher1_3_5_9<T1, T3, T5, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_3_5_7<T1, T3, T5, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_3_5_7_10<T1, T3, T5, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_5_7_10<T3, T5, T7, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_7_10<T1, T5, T7, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_7_10<T1, T3, T7, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_3_5_10<T1, T3, T5, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_3_5_7<T1, T3, T5, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_3_5_8_9<T1, T3, T5, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_5_8_9<T3, T5, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -2016,6 +3094,22 @@ namespace OneOf
         IOneOfMatcher1_3_8_9<T1, T3, T8, T9, TResult> Match(Func<T5,TResult> matchFunc);
         IOneOfMatcher1_3_5_9<T1, T3, T5, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_3_5_8<T1, T3, T5, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_5_8_10<T1, T3, T5, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_5_8_10<T3, T5, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_8_10<T1, T5, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_8_10<T1, T3, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_3_5_10<T1, T3, T5, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_3_5_8<T1, T3, T5, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_5_9_10<T1, T3, T5, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_5_9_10<T3, T5, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_9_10<T1, T5, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_9_10<T1, T3, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_3_5_10<T1, T3, T5, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_3_5_9<T1, T3, T5, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_3_6_7_8<T1, T3, T6, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -2033,6 +3127,14 @@ namespace OneOf
         IOneOfMatcher1_3_6_9<T1, T3, T6, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_3_6_7<T1, T3, T6, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_3_6_7_10<T1, T3, T6, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_6_7_10<T3, T6, T7, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_6_7_10<T1, T6, T7, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_7_10<T1, T3, T7, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_3_6_10<T1, T3, T6, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_3_6_7<T1, T3, T6, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_3_6_8_9<T1, T3, T6, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_6_8_9<T3, T6, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -2041,6 +3143,22 @@ namespace OneOf
         IOneOfMatcher1_3_6_9<T1, T3, T6, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_3_6_8<T1, T3, T6, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_3_6_8_10<T1, T3, T6, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_6_8_10<T3, T6, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_6_8_10<T1, T6, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_8_10<T1, T3, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_3_6_10<T1, T3, T6, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_3_6_8<T1, T3, T6, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_6_9_10<T1, T3, T6, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_6_9_10<T3, T6, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_6_9_10<T1, T6, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_9_10<T1, T3, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_3_6_10<T1, T3, T6, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_3_6_9<T1, T3, T6, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_3_7_8_9<T1, T3, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_7_8_9<T3, T7, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -2048,6 +3166,30 @@ namespace OneOf
         IOneOfMatcher1_3_8_9<T1, T3, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_3_7_9<T1, T3, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_3_7_8<T1, T3, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_7_8_10<T1, T3, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_7_8_10<T3, T7, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_7_8_10<T1, T7, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_8_10<T1, T3, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_3_7_10<T1, T3, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_3_7_8<T1, T3, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_7_9_10<T1, T3, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_7_9_10<T3, T7, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_7_9_10<T1, T7, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_9_10<T1, T3, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_3_7_10<T1, T3, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_3_7_9<T1, T3, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_8_9_10<T1, T3, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_8_9_10<T3, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_8_9_10<T1, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_9_10<T1, T3, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_3_8_10<T1, T3, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_3_8_9<T1, T3, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_4_5_6_7<T1, T4, T5, T6, T7, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -2073,6 +3215,14 @@ namespace OneOf
         IOneOfMatcher1_4_5_9<T1, T4, T5, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher1_4_5_6<T1, T4, T5, T6, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_4_5_6_10<T1, T4, T5, T6, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_6_10<T4, T5, T6, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_6_10<T1, T5, T6, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_4_6_10<T1, T4, T6, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_4_5_10<T1, T4, T5, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6<T1, T4, T5, T6, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_4_5_7_8<T1, T4, T5, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher4_5_7_8<T4, T5, T7, T8, TResult> Match(Func<T1,TResult> matchFunc);
@@ -2089,6 +3239,14 @@ namespace OneOf
         IOneOfMatcher1_4_5_9<T1, T4, T5, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_4_5_7<T1, T4, T5, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_4_5_7_10<T1, T4, T5, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_7_10<T4, T5, T7, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_7_10<T1, T5, T7, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_4_7_10<T1, T4, T7, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_4_5_10<T1, T4, T5, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_4_5_7<T1, T4, T5, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_4_5_8_9<T1, T4, T5, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher4_5_8_9<T4, T5, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -2096,6 +3254,22 @@ namespace OneOf
         IOneOfMatcher1_4_8_9<T1, T4, T8, T9, TResult> Match(Func<T5,TResult> matchFunc);
         IOneOfMatcher1_4_5_9<T1, T4, T5, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_4_5_8<T1, T4, T5, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_4_5_8_10<T1, T4, T5, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_8_10<T4, T5, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_8_10<T1, T5, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_4_8_10<T1, T4, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_4_5_10<T1, T4, T5, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_4_5_8<T1, T4, T5, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_4_5_9_10<T1, T4, T5, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_9_10<T4, T5, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_9_10<T1, T5, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_4_9_10<T1, T4, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_4_5_10<T1, T4, T5, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_4_5_9<T1, T4, T5, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_4_6_7_8<T1, T4, T6, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -2113,6 +3287,14 @@ namespace OneOf
         IOneOfMatcher1_4_6_9<T1, T4, T6, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_4_6_7<T1, T4, T6, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_4_6_7_10<T1, T4, T6, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_6_7_10<T4, T6, T7, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_6_7_10<T1, T6, T7, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_4_7_10<T1, T4, T7, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_4_6_10<T1, T4, T6, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_4_6_7<T1, T4, T6, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_4_6_8_9<T1, T4, T6, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher4_6_8_9<T4, T6, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -2121,6 +3303,22 @@ namespace OneOf
         IOneOfMatcher1_4_6_9<T1, T4, T6, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_4_6_8<T1, T4, T6, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_4_6_8_10<T1, T4, T6, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_6_8_10<T4, T6, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_6_8_10<T1, T6, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_4_8_10<T1, T4, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_4_6_10<T1, T4, T6, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_4_6_8<T1, T4, T6, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_4_6_9_10<T1, T4, T6, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_6_9_10<T4, T6, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_6_9_10<T1, T6, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_4_9_10<T1, T4, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_4_6_10<T1, T4, T6, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_4_6_9<T1, T4, T6, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_4_7_8_9<T1, T4, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher4_7_8_9<T4, T7, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -2128,6 +3326,30 @@ namespace OneOf
         IOneOfMatcher1_4_8_9<T1, T4, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_4_7_9<T1, T4, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_4_7_8<T1, T4, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_4_7_8_10<T1, T4, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_7_8_10<T4, T7, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_7_8_10<T1, T7, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_4_8_10<T1, T4, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_4_7_10<T1, T4, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_4_7_8<T1, T4, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_4_7_9_10<T1, T4, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_7_9_10<T4, T7, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_7_9_10<T1, T7, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_4_9_10<T1, T4, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_4_7_10<T1, T4, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_4_7_9<T1, T4, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_4_8_9_10<T1, T4, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_8_9_10<T4, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_8_9_10<T1, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_4_9_10<T1, T4, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_4_8_10<T1, T4, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_4_8_9<T1, T4, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_5_6_7_8<T1, T5, T6, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -2145,6 +3367,14 @@ namespace OneOf
         IOneOfMatcher1_5_6_9<T1, T5, T6, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_5_6_7<T1, T5, T6, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_5_6_7_10<T1, T5, T6, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_6_7_10<T5, T6, T7, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_6_7_10<T1, T6, T7, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_5_7_10<T1, T5, T7, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_5_6_10<T1, T5, T6, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_5_6_7<T1, T5, T6, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_5_6_8_9<T1, T5, T6, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher5_6_8_9<T5, T6, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -2152,6 +3382,22 @@ namespace OneOf
         IOneOfMatcher1_5_8_9<T1, T5, T8, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher1_5_6_9<T1, T5, T6, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_5_6_8<T1, T5, T6, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_5_6_8_10<T1, T5, T6, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_6_8_10<T5, T6, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_6_8_10<T1, T6, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_5_8_10<T1, T5, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_5_6_10<T1, T5, T6, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_5_6_8<T1, T5, T6, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_5_6_9_10<T1, T5, T6, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_6_9_10<T5, T6, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_6_9_10<T1, T6, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_5_9_10<T1, T5, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_5_6_10<T1, T5, T6, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_5_6_9<T1, T5, T6, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_5_7_8_9<T1, T5, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -2161,6 +3407,30 @@ namespace OneOf
         IOneOfMatcher1_5_7_9<T1, T5, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_5_7_8<T1, T5, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_5_7_8_10<T1, T5, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_7_8_10<T5, T7, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_7_8_10<T1, T7, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_5_8_10<T1, T5, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_5_7_10<T1, T5, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_5_7_8<T1, T5, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_5_7_9_10<T1, T5, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_7_9_10<T5, T7, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_7_9_10<T1, T7, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_5_9_10<T1, T5, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_5_7_10<T1, T5, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_5_7_9<T1, T5, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_5_8_9_10<T1, T5, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_8_9_10<T5, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_8_9_10<T1, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_5_9_10<T1, T5, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_5_8_10<T1, T5, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_5_8_9<T1, T5, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_6_7_8_9<T1, T6, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher6_7_8_9<T6, T7, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -2168,6 +3438,38 @@ namespace OneOf
         IOneOfMatcher1_6_8_9<T1, T6, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_6_7_9<T1, T6, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_6_7_8<T1, T6, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_6_7_8_10<T1, T6, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_7_8_10<T6, T7, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_7_8_10<T1, T7, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_6_8_10<T1, T6, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_6_7_10<T1, T6, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_6_7_8<T1, T6, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_6_7_9_10<T1, T6, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_7_9_10<T6, T7, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_7_9_10<T1, T7, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_6_9_10<T1, T6, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_6_7_10<T1, T6, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_6_7_9<T1, T6, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_6_8_9_10<T1, T6, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_8_9_10<T6, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_8_9_10<T1, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_6_9_10<T1, T6, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_6_8_10<T1, T6, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_6_8_9<T1, T6, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_7_8_9_10<T1, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher7_8_9_10<T7, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_8_9_10<T1, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_7_9_10<T1, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_7_8_10<T1, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_7_8_9<T1, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher2_3_4_5_6<T2, T3, T4, T5, T6, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -2201,6 +3503,14 @@ namespace OneOf
         IOneOfMatcher2_3_4_9<T2, T3, T4, T9, TResult> Match(Func<T5,TResult> matchFunc);
         IOneOfMatcher2_3_4_5<T2, T3, T4, T5, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_3_4_5_10<T2, T3, T4, T5, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_5_10<T3, T4, T5, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_4_5_10<T2, T4, T5, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_5_10<T2, T3, T5, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_3_4_10<T2, T3, T4, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5<T2, T3, T4, T5, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_3_4_6_7<T2, T3, T4, T6, T7, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_4_6_7<T3, T4, T6, T7, TResult> Match(Func<T2,TResult> matchFunc);
@@ -2225,6 +3535,14 @@ namespace OneOf
         IOneOfMatcher2_3_4_9<T2, T3, T4, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher2_3_4_6<T2, T3, T4, T6, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_3_4_6_10<T2, T3, T4, T6, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_6_10<T3, T4, T6, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_4_6_10<T2, T4, T6, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_6_10<T2, T3, T6, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_3_4_10<T2, T3, T4, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_3_4_6<T2, T3, T4, T6, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_3_4_7_8<T2, T3, T4, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_4_7_8<T3, T4, T7, T8, TResult> Match(Func<T2,TResult> matchFunc);
@@ -2241,6 +3559,14 @@ namespace OneOf
         IOneOfMatcher2_3_4_9<T2, T3, T4, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher2_3_4_7<T2, T3, T4, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_3_4_7_10<T2, T3, T4, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_7_10<T3, T4, T7, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_4_7_10<T2, T4, T7, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_7_10<T2, T3, T7, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_3_4_10<T2, T3, T4, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_3_4_7<T2, T3, T4, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_3_4_8_9<T2, T3, T4, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_4_8_9<T3, T4, T8, T9, TResult> Match(Func<T2,TResult> matchFunc);
@@ -2248,6 +3574,22 @@ namespace OneOf
         IOneOfMatcher2_3_8_9<T2, T3, T8, T9, TResult> Match(Func<T4,TResult> matchFunc);
         IOneOfMatcher2_3_4_9<T2, T3, T4, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher2_3_4_8<T2, T3, T4, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_4_8_10<T2, T3, T4, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_8_10<T3, T4, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_4_8_10<T2, T4, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_8_10<T2, T3, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_3_4_10<T2, T3, T4, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_3_4_8<T2, T3, T4, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_4_9_10<T2, T3, T4, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_9_10<T3, T4, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_4_9_10<T2, T4, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_9_10<T2, T3, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_3_4_10<T2, T3, T4, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_3_4_9<T2, T3, T4, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher2_3_5_6_7<T2, T3, T5, T6, T7, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -2273,6 +3615,14 @@ namespace OneOf
         IOneOfMatcher2_3_5_9<T2, T3, T5, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher2_3_5_6<T2, T3, T5, T6, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_3_5_6_10<T2, T3, T5, T6, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_5_6_10<T3, T5, T6, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_5_6_10<T2, T5, T6, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_6_10<T2, T3, T6, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_3_5_10<T2, T3, T5, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_3_5_6<T2, T3, T5, T6, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_3_5_7_8<T2, T3, T5, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_5_7_8<T3, T5, T7, T8, TResult> Match(Func<T2,TResult> matchFunc);
@@ -2289,6 +3639,14 @@ namespace OneOf
         IOneOfMatcher2_3_5_9<T2, T3, T5, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher2_3_5_7<T2, T3, T5, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_3_5_7_10<T2, T3, T5, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_5_7_10<T3, T5, T7, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_5_7_10<T2, T5, T7, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_7_10<T2, T3, T7, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_3_5_10<T2, T3, T5, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_3_5_7<T2, T3, T5, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_3_5_8_9<T2, T3, T5, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_5_8_9<T3, T5, T8, T9, TResult> Match(Func<T2,TResult> matchFunc);
@@ -2296,6 +3654,22 @@ namespace OneOf
         IOneOfMatcher2_3_8_9<T2, T3, T8, T9, TResult> Match(Func<T5,TResult> matchFunc);
         IOneOfMatcher2_3_5_9<T2, T3, T5, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher2_3_5_8<T2, T3, T5, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_5_8_10<T2, T3, T5, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_5_8_10<T3, T5, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_5_8_10<T2, T5, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_8_10<T2, T3, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_3_5_10<T2, T3, T5, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_3_5_8<T2, T3, T5, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_5_9_10<T2, T3, T5, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_5_9_10<T3, T5, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_5_9_10<T2, T5, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_9_10<T2, T3, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_3_5_10<T2, T3, T5, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_3_5_9<T2, T3, T5, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher2_3_6_7_8<T2, T3, T6, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -2313,6 +3687,14 @@ namespace OneOf
         IOneOfMatcher2_3_6_9<T2, T3, T6, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher2_3_6_7<T2, T3, T6, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_3_6_7_10<T2, T3, T6, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_6_7_10<T3, T6, T7, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_6_7_10<T2, T6, T7, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_7_10<T2, T3, T7, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_3_6_10<T2, T3, T6, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_3_6_7<T2, T3, T6, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_3_6_8_9<T2, T3, T6, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_6_8_9<T3, T6, T8, T9, TResult> Match(Func<T2,TResult> matchFunc);
@@ -2321,6 +3703,22 @@ namespace OneOf
         IOneOfMatcher2_3_6_9<T2, T3, T6, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher2_3_6_8<T2, T3, T6, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_3_6_8_10<T2, T3, T6, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_6_8_10<T3, T6, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_6_8_10<T2, T6, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_8_10<T2, T3, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_3_6_10<T2, T3, T6, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_3_6_8<T2, T3, T6, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_6_9_10<T2, T3, T6, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_6_9_10<T3, T6, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_6_9_10<T2, T6, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_9_10<T2, T3, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_3_6_10<T2, T3, T6, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_3_6_9<T2, T3, T6, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_3_7_8_9<T2, T3, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_7_8_9<T3, T7, T8, T9, TResult> Match(Func<T2,TResult> matchFunc);
@@ -2328,6 +3726,30 @@ namespace OneOf
         IOneOfMatcher2_3_8_9<T2, T3, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher2_3_7_9<T2, T3, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher2_3_7_8<T2, T3, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_7_8_10<T2, T3, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_7_8_10<T3, T7, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_7_8_10<T2, T7, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_8_10<T2, T3, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_3_7_10<T2, T3, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_3_7_8<T2, T3, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_7_9_10<T2, T3, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_7_9_10<T3, T7, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_7_9_10<T2, T7, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_9_10<T2, T3, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_3_7_10<T2, T3, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_3_7_9<T2, T3, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_8_9_10<T2, T3, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_8_9_10<T3, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_8_9_10<T2, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_9_10<T2, T3, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_3_8_10<T2, T3, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_3_8_9<T2, T3, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher2_4_5_6_7<T2, T4, T5, T6, T7, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -2353,6 +3775,14 @@ namespace OneOf
         IOneOfMatcher2_4_5_9<T2, T4, T5, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher2_4_5_6<T2, T4, T5, T6, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_4_5_6_10<T2, T4, T5, T6, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_6_10<T4, T5, T6, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_5_6_10<T2, T5, T6, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_4_6_10<T2, T4, T6, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_4_5_10<T2, T4, T5, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_4_5_6<T2, T4, T5, T6, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_4_5_7_8<T2, T4, T5, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher4_5_7_8<T4, T5, T7, T8, TResult> Match(Func<T2,TResult> matchFunc);
@@ -2369,6 +3799,14 @@ namespace OneOf
         IOneOfMatcher2_4_5_9<T2, T4, T5, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher2_4_5_7<T2, T4, T5, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_4_5_7_10<T2, T4, T5, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_7_10<T4, T5, T7, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_5_7_10<T2, T5, T7, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_4_7_10<T2, T4, T7, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_4_5_10<T2, T4, T5, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_4_5_7<T2, T4, T5, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_4_5_8_9<T2, T4, T5, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher4_5_8_9<T4, T5, T8, T9, TResult> Match(Func<T2,TResult> matchFunc);
@@ -2376,6 +3814,22 @@ namespace OneOf
         IOneOfMatcher2_4_8_9<T2, T4, T8, T9, TResult> Match(Func<T5,TResult> matchFunc);
         IOneOfMatcher2_4_5_9<T2, T4, T5, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher2_4_5_8<T2, T4, T5, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_4_5_8_10<T2, T4, T5, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_8_10<T4, T5, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_5_8_10<T2, T5, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_4_8_10<T2, T4, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_4_5_10<T2, T4, T5, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_4_5_8<T2, T4, T5, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_4_5_9_10<T2, T4, T5, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_9_10<T4, T5, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_5_9_10<T2, T5, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_4_9_10<T2, T4, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_4_5_10<T2, T4, T5, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_4_5_9<T2, T4, T5, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher2_4_6_7_8<T2, T4, T6, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -2393,6 +3847,14 @@ namespace OneOf
         IOneOfMatcher2_4_6_9<T2, T4, T6, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher2_4_6_7<T2, T4, T6, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_4_6_7_10<T2, T4, T6, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_6_7_10<T4, T6, T7, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_6_7_10<T2, T6, T7, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_4_7_10<T2, T4, T7, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_4_6_10<T2, T4, T6, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_4_6_7<T2, T4, T6, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_4_6_8_9<T2, T4, T6, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher4_6_8_9<T4, T6, T8, T9, TResult> Match(Func<T2,TResult> matchFunc);
@@ -2401,6 +3863,22 @@ namespace OneOf
         IOneOfMatcher2_4_6_9<T2, T4, T6, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher2_4_6_8<T2, T4, T6, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_4_6_8_10<T2, T4, T6, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_6_8_10<T4, T6, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_6_8_10<T2, T6, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_4_8_10<T2, T4, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_4_6_10<T2, T4, T6, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_4_6_8<T2, T4, T6, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_4_6_9_10<T2, T4, T6, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_6_9_10<T4, T6, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_6_9_10<T2, T6, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_4_9_10<T2, T4, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_4_6_10<T2, T4, T6, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_4_6_9<T2, T4, T6, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_4_7_8_9<T2, T4, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher4_7_8_9<T4, T7, T8, T9, TResult> Match(Func<T2,TResult> matchFunc);
@@ -2408,6 +3886,30 @@ namespace OneOf
         IOneOfMatcher2_4_8_9<T2, T4, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher2_4_7_9<T2, T4, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher2_4_7_8<T2, T4, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_4_7_8_10<T2, T4, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_7_8_10<T4, T7, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_7_8_10<T2, T7, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_4_8_10<T2, T4, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_4_7_10<T2, T4, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_4_7_8<T2, T4, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_4_7_9_10<T2, T4, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_7_9_10<T4, T7, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_7_9_10<T2, T7, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_4_9_10<T2, T4, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_4_7_10<T2, T4, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_4_7_9<T2, T4, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_4_8_9_10<T2, T4, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_8_9_10<T4, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_8_9_10<T2, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_4_9_10<T2, T4, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_4_8_10<T2, T4, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_4_8_9<T2, T4, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher2_5_6_7_8<T2, T5, T6, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -2425,6 +3927,14 @@ namespace OneOf
         IOneOfMatcher2_5_6_9<T2, T5, T6, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher2_5_6_7<T2, T5, T6, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_5_6_7_10<T2, T5, T6, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_6_7_10<T5, T6, T7, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_6_7_10<T2, T6, T7, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_5_7_10<T2, T5, T7, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_5_6_10<T2, T5, T6, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_5_6_7<T2, T5, T6, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_5_6_8_9<T2, T5, T6, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher5_6_8_9<T5, T6, T8, T9, TResult> Match(Func<T2,TResult> matchFunc);
@@ -2432,6 +3942,22 @@ namespace OneOf
         IOneOfMatcher2_5_8_9<T2, T5, T8, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher2_5_6_9<T2, T5, T6, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher2_5_6_8<T2, T5, T6, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_5_6_8_10<T2, T5, T6, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_6_8_10<T5, T6, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_6_8_10<T2, T6, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_5_8_10<T2, T5, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_5_6_10<T2, T5, T6, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_5_6_8<T2, T5, T6, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_5_6_9_10<T2, T5, T6, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_6_9_10<T5, T6, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_6_9_10<T2, T6, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_5_9_10<T2, T5, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_5_6_10<T2, T5, T6, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_5_6_9<T2, T5, T6, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher2_5_7_8_9<T2, T5, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -2441,6 +3967,30 @@ namespace OneOf
         IOneOfMatcher2_5_7_9<T2, T5, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher2_5_7_8<T2, T5, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_5_7_8_10<T2, T5, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_7_8_10<T5, T7, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_7_8_10<T2, T7, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_5_8_10<T2, T5, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_5_7_10<T2, T5, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_5_7_8<T2, T5, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_5_7_9_10<T2, T5, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_7_9_10<T5, T7, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_7_9_10<T2, T7, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_5_9_10<T2, T5, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_5_7_10<T2, T5, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_5_7_9<T2, T5, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_5_8_9_10<T2, T5, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_8_9_10<T5, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_8_9_10<T2, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_5_9_10<T2, T5, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_5_8_10<T2, T5, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_5_8_9<T2, T5, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_6_7_8_9<T2, T6, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher6_7_8_9<T6, T7, T8, T9, TResult> Match(Func<T2,TResult> matchFunc);
@@ -2448,6 +3998,38 @@ namespace OneOf
         IOneOfMatcher2_6_8_9<T2, T6, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher2_6_7_9<T2, T6, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher2_6_7_8<T2, T6, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_6_7_8_10<T2, T6, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_7_8_10<T6, T7, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_7_8_10<T2, T7, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_6_8_10<T2, T6, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_6_7_10<T2, T6, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_6_7_8<T2, T6, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_6_7_9_10<T2, T6, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_7_9_10<T6, T7, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_7_9_10<T2, T7, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_6_9_10<T2, T6, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_6_7_10<T2, T6, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_6_7_9<T2, T6, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_6_8_9_10<T2, T6, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_8_9_10<T6, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_8_9_10<T2, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_6_9_10<T2, T6, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_6_8_10<T2, T6, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_6_8_9<T2, T6, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_7_8_9_10<T2, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher7_8_9_10<T7, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_8_9_10<T2, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_7_9_10<T2, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_7_8_10<T2, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_7_8_9<T2, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher3_4_5_6_7<T3, T4, T5, T6, T7, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -2473,6 +4055,14 @@ namespace OneOf
         IOneOfMatcher3_4_5_9<T3, T4, T5, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher3_4_5_6<T3, T4, T5, T6, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher3_4_5_6_10<T3, T4, T5, T6, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_6_10<T4, T5, T6, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_5_6_10<T3, T5, T6, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher3_4_6_10<T3, T4, T6, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher3_4_5_10<T3, T4, T5, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher3_4_5_6<T3, T4, T5, T6, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher3_4_5_7_8<T3, T4, T5, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher4_5_7_8<T4, T5, T7, T8, TResult> Match(Func<T3,TResult> matchFunc);
@@ -2489,6 +4079,14 @@ namespace OneOf
         IOneOfMatcher3_4_5_9<T3, T4, T5, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher3_4_5_7<T3, T4, T5, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher3_4_5_7_10<T3, T4, T5, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_7_10<T4, T5, T7, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_5_7_10<T3, T5, T7, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher3_4_7_10<T3, T4, T7, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher3_4_5_10<T3, T4, T5, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher3_4_5_7<T3, T4, T5, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher3_4_5_8_9<T3, T4, T5, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher4_5_8_9<T4, T5, T8, T9, TResult> Match(Func<T3,TResult> matchFunc);
@@ -2496,6 +4094,22 @@ namespace OneOf
         IOneOfMatcher3_4_8_9<T3, T4, T8, T9, TResult> Match(Func<T5,TResult> matchFunc);
         IOneOfMatcher3_4_5_9<T3, T4, T5, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher3_4_5_8<T3, T4, T5, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_4_5_8_10<T3, T4, T5, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_8_10<T4, T5, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_5_8_10<T3, T5, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher3_4_8_10<T3, T4, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher3_4_5_10<T3, T4, T5, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher3_4_5_8<T3, T4, T5, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_4_5_9_10<T3, T4, T5, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_9_10<T4, T5, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_5_9_10<T3, T5, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher3_4_9_10<T3, T4, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher3_4_5_10<T3, T4, T5, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher3_4_5_9<T3, T4, T5, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher3_4_6_7_8<T3, T4, T6, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -2513,6 +4127,14 @@ namespace OneOf
         IOneOfMatcher3_4_6_9<T3, T4, T6, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher3_4_6_7<T3, T4, T6, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher3_4_6_7_10<T3, T4, T6, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_6_7_10<T4, T6, T7, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_6_7_10<T3, T6, T7, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher3_4_7_10<T3, T4, T7, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher3_4_6_10<T3, T4, T6, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher3_4_6_7<T3, T4, T6, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher3_4_6_8_9<T3, T4, T6, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher4_6_8_9<T4, T6, T8, T9, TResult> Match(Func<T3,TResult> matchFunc);
@@ -2521,6 +4143,22 @@ namespace OneOf
         IOneOfMatcher3_4_6_9<T3, T4, T6, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher3_4_6_8<T3, T4, T6, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher3_4_6_8_10<T3, T4, T6, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_6_8_10<T4, T6, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_6_8_10<T3, T6, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher3_4_8_10<T3, T4, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher3_4_6_10<T3, T4, T6, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher3_4_6_8<T3, T4, T6, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_4_6_9_10<T3, T4, T6, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_6_9_10<T4, T6, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_6_9_10<T3, T6, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher3_4_9_10<T3, T4, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher3_4_6_10<T3, T4, T6, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher3_4_6_9<T3, T4, T6, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher3_4_7_8_9<T3, T4, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher4_7_8_9<T4, T7, T8, T9, TResult> Match(Func<T3,TResult> matchFunc);
@@ -2528,6 +4166,30 @@ namespace OneOf
         IOneOfMatcher3_4_8_9<T3, T4, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher3_4_7_9<T3, T4, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher3_4_7_8<T3, T4, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_4_7_8_10<T3, T4, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_7_8_10<T4, T7, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_7_8_10<T3, T7, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher3_4_8_10<T3, T4, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher3_4_7_10<T3, T4, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher3_4_7_8<T3, T4, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_4_7_9_10<T3, T4, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_7_9_10<T4, T7, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_7_9_10<T3, T7, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher3_4_9_10<T3, T4, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher3_4_7_10<T3, T4, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher3_4_7_9<T3, T4, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_4_8_9_10<T3, T4, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_8_9_10<T4, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_8_9_10<T3, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher3_4_9_10<T3, T4, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher3_4_8_10<T3, T4, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher3_4_8_9<T3, T4, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher3_5_6_7_8<T3, T5, T6, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -2545,6 +4207,14 @@ namespace OneOf
         IOneOfMatcher3_5_6_9<T3, T5, T6, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher3_5_6_7<T3, T5, T6, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher3_5_6_7_10<T3, T5, T6, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_6_7_10<T5, T6, T7, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_6_7_10<T3, T6, T7, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher3_5_7_10<T3, T5, T7, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher3_5_6_10<T3, T5, T6, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher3_5_6_7<T3, T5, T6, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher3_5_6_8_9<T3, T5, T6, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher5_6_8_9<T5, T6, T8, T9, TResult> Match(Func<T3,TResult> matchFunc);
@@ -2552,6 +4222,22 @@ namespace OneOf
         IOneOfMatcher3_5_8_9<T3, T5, T8, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher3_5_6_9<T3, T5, T6, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher3_5_6_8<T3, T5, T6, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_5_6_8_10<T3, T5, T6, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_6_8_10<T5, T6, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_6_8_10<T3, T6, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher3_5_8_10<T3, T5, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher3_5_6_10<T3, T5, T6, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher3_5_6_8<T3, T5, T6, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_5_6_9_10<T3, T5, T6, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_6_9_10<T5, T6, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_6_9_10<T3, T6, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher3_5_9_10<T3, T5, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher3_5_6_10<T3, T5, T6, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher3_5_6_9<T3, T5, T6, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher3_5_7_8_9<T3, T5, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -2561,6 +4247,30 @@ namespace OneOf
         IOneOfMatcher3_5_7_9<T3, T5, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher3_5_7_8<T3, T5, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher3_5_7_8_10<T3, T5, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_7_8_10<T5, T7, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_7_8_10<T3, T7, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher3_5_8_10<T3, T5, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher3_5_7_10<T3, T5, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher3_5_7_8<T3, T5, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_5_7_9_10<T3, T5, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_7_9_10<T5, T7, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_7_9_10<T3, T7, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher3_5_9_10<T3, T5, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher3_5_7_10<T3, T5, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher3_5_7_9<T3, T5, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_5_8_9_10<T3, T5, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_8_9_10<T5, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_8_9_10<T3, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher3_5_9_10<T3, T5, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher3_5_8_10<T3, T5, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher3_5_8_9<T3, T5, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher3_6_7_8_9<T3, T6, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher6_7_8_9<T6, T7, T8, T9, TResult> Match(Func<T3,TResult> matchFunc);
@@ -2568,6 +4278,38 @@ namespace OneOf
         IOneOfMatcher3_6_8_9<T3, T6, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher3_6_7_9<T3, T6, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher3_6_7_8<T3, T6, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_6_7_8_10<T3, T6, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_7_8_10<T6, T7, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_7_8_10<T3, T7, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher3_6_8_10<T3, T6, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher3_6_7_10<T3, T6, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher3_6_7_8<T3, T6, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_6_7_9_10<T3, T6, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_7_9_10<T6, T7, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_7_9_10<T3, T7, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher3_6_9_10<T3, T6, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher3_6_7_10<T3, T6, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher3_6_7_9<T3, T6, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_6_8_9_10<T3, T6, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_8_9_10<T6, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_8_9_10<T3, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher3_6_9_10<T3, T6, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher3_6_8_10<T3, T6, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher3_6_8_9<T3, T6, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_7_8_9_10<T3, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher7_8_9_10<T7, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_8_9_10<T3, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher3_7_9_10<T3, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher3_7_8_10<T3, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher3_7_8_9<T3, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher4_5_6_7_8<T4, T5, T6, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -2585,6 +4327,14 @@ namespace OneOf
         IOneOfMatcher4_5_6_9<T4, T5, T6, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher4_5_6_7<T4, T5, T6, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher4_5_6_7_10<T4, T5, T6, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_6_7_10<T5, T6, T7, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher4_6_7_10<T4, T6, T7, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher4_5_7_10<T4, T5, T7, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher4_5_6_10<T4, T5, T6, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher4_5_6_7<T4, T5, T6, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher4_5_6_8_9<T4, T5, T6, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher5_6_8_9<T5, T6, T8, T9, TResult> Match(Func<T4,TResult> matchFunc);
@@ -2592,6 +4342,22 @@ namespace OneOf
         IOneOfMatcher4_5_8_9<T4, T5, T8, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher4_5_6_9<T4, T5, T6, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher4_5_6_8<T4, T5, T6, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher4_5_6_8_10<T4, T5, T6, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_6_8_10<T5, T6, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher4_6_8_10<T4, T6, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher4_5_8_10<T4, T5, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher4_5_6_10<T4, T5, T6, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher4_5_6_8<T4, T5, T6, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher4_5_6_9_10<T4, T5, T6, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_6_9_10<T5, T6, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher4_6_9_10<T4, T6, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher4_5_9_10<T4, T5, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher4_5_6_10<T4, T5, T6, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher4_5_6_9<T4, T5, T6, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher4_5_7_8_9<T4, T5, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -2601,6 +4367,30 @@ namespace OneOf
         IOneOfMatcher4_5_7_9<T4, T5, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher4_5_7_8<T4, T5, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher4_5_7_8_10<T4, T5, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_7_8_10<T5, T7, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher4_7_8_10<T4, T7, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher4_5_8_10<T4, T5, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher4_5_7_10<T4, T5, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher4_5_7_8<T4, T5, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher4_5_7_9_10<T4, T5, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_7_9_10<T5, T7, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher4_7_9_10<T4, T7, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher4_5_9_10<T4, T5, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher4_5_7_10<T4, T5, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher4_5_7_9<T4, T5, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher4_5_8_9_10<T4, T5, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_8_9_10<T5, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher4_8_9_10<T4, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher4_5_9_10<T4, T5, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher4_5_8_10<T4, T5, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher4_5_8_9<T4, T5, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher4_6_7_8_9<T4, T6, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher6_7_8_9<T6, T7, T8, T9, TResult> Match(Func<T4,TResult> matchFunc);
@@ -2609,6 +4399,38 @@ namespace OneOf
         IOneOfMatcher4_6_7_9<T4, T6, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher4_6_7_8<T4, T6, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher4_6_7_8_10<T4, T6, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_7_8_10<T6, T7, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher4_7_8_10<T4, T7, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher4_6_8_10<T4, T6, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher4_6_7_10<T4, T6, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher4_6_7_8<T4, T6, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher4_6_7_9_10<T4, T6, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_7_9_10<T6, T7, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher4_7_9_10<T4, T7, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher4_6_9_10<T4, T6, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher4_6_7_10<T4, T6, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher4_6_7_9<T4, T6, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher4_6_8_9_10<T4, T6, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_8_9_10<T6, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher4_8_9_10<T4, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher4_6_9_10<T4, T6, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher4_6_8_10<T4, T6, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher4_6_8_9<T4, T6, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher4_7_8_9_10<T4, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher7_8_9_10<T7, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher4_8_9_10<T4, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher4_7_9_10<T4, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher4_7_8_10<T4, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher4_7_8_9<T4, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher5_6_7_8_9<T5, T6, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher6_7_8_9<T6, T7, T8, T9, TResult> Match(Func<T5,TResult> matchFunc);
@@ -2616,6 +4438,46 @@ namespace OneOf
         IOneOfMatcher5_6_8_9<T5, T6, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher5_6_7_9<T5, T6, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher5_6_7_8<T5, T6, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher5_6_7_8_10<T5, T6, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_7_8_10<T6, T7, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher5_7_8_10<T5, T7, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher5_6_8_10<T5, T6, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher5_6_7_10<T5, T6, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher5_6_7_8<T5, T6, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher5_6_7_9_10<T5, T6, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_7_9_10<T6, T7, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher5_7_9_10<T5, T7, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher5_6_9_10<T5, T6, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher5_6_7_10<T5, T6, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher5_6_7_9<T5, T6, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher5_6_8_9_10<T5, T6, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_8_9_10<T6, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher5_8_9_10<T5, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher5_6_9_10<T5, T6, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher5_6_8_10<T5, T6, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher5_6_8_9<T5, T6, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher5_7_8_9_10<T5, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher7_8_9_10<T7, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher5_8_9_10<T5, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher5_7_9_10<T5, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher5_7_8_10<T5, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher5_7_8_9<T5, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher6_7_8_9_10<T6, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher7_8_9_10<T7, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher6_8_9_10<T6, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher6_7_9_10<T6, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher6_7_8_10<T6, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher6_7_8_9<T6, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_2_3_4_5_6<T1, T2, T3, T4, T5, T6, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -2653,6 +4515,15 @@ namespace OneOf
         IOneOfMatcher1_2_3_4_9<T1, T2, T3, T4, T9, TResult> Match(Func<T5,TResult> matchFunc);
         IOneOfMatcher1_2_3_4_5<T1, T2, T3, T4, T5, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_3_4_5_10<T1, T2, T3, T4, T5, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_4_5_10<T2, T3, T4, T5, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_10<T1, T3, T4, T5, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_10<T1, T2, T4, T5, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_10<T1, T2, T3, T5, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_10<T1, T2, T3, T4, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5<T1, T2, T3, T4, T5, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_3_4_6_7<T1, T2, T3, T4, T6, T7, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_3_4_6_7<T2, T3, T4, T6, T7, TResult> Match(Func<T1,TResult> matchFunc);
@@ -2680,6 +4551,15 @@ namespace OneOf
         IOneOfMatcher1_2_3_4_9<T1, T2, T3, T4, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher1_2_3_4_6<T1, T2, T3, T4, T6, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_3_4_6_10<T1, T2, T3, T4, T6, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_4_6_10<T2, T3, T4, T6, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_10<T1, T3, T4, T6, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_10<T1, T2, T4, T6, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_10<T1, T2, T3, T6, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_10<T1, T2, T3, T4, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_6<T1, T2, T3, T4, T6, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_3_4_7_8<T1, T2, T3, T4, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_3_4_7_8<T2, T3, T4, T7, T8, TResult> Match(Func<T1,TResult> matchFunc);
@@ -2698,6 +4578,15 @@ namespace OneOf
         IOneOfMatcher1_2_3_4_9<T1, T2, T3, T4, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_2_3_4_7<T1, T2, T3, T4, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_3_4_7_10<T1, T2, T3, T4, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_4_7_10<T2, T3, T4, T7, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_4_7_10<T1, T3, T4, T7, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_4_7_10<T1, T2, T4, T7, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_7_10<T1, T2, T3, T7, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_10<T1, T2, T3, T4, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_7<T1, T2, T3, T4, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_3_4_8_9<T1, T2, T3, T4, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_3_4_8_9<T2, T3, T4, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -2706,6 +4595,24 @@ namespace OneOf
         IOneOfMatcher1_2_3_8_9<T1, T2, T3, T8, T9, TResult> Match(Func<T4,TResult> matchFunc);
         IOneOfMatcher1_2_3_4_9<T1, T2, T3, T4, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_2_3_4_8<T1, T2, T3, T4, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_4_8_10<T1, T2, T3, T4, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_4_8_10<T2, T3, T4, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_4_8_10<T1, T3, T4, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_4_8_10<T1, T2, T4, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_8_10<T1, T2, T3, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_10<T1, T2, T3, T4, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_8<T1, T2, T3, T4, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_4_9_10<T1, T2, T3, T4, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_4_9_10<T2, T3, T4, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_4_9_10<T1, T3, T4, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_4_9_10<T1, T2, T4, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_9_10<T1, T2, T3, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_10<T1, T2, T3, T4, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_9<T1, T2, T3, T4, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_2_3_5_6_7<T1, T2, T3, T5, T6, T7, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -2734,6 +4641,15 @@ namespace OneOf
         IOneOfMatcher1_2_3_5_9<T1, T2, T3, T5, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher1_2_3_5_6<T1, T2, T3, T5, T6, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_3_5_6_10<T1, T2, T3, T5, T6, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_5_6_10<T2, T3, T5, T6, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_10<T1, T3, T5, T6, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_10<T1, T2, T5, T6, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_10<T1, T2, T3, T6, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_10<T1, T2, T3, T5, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_6<T1, T2, T3, T5, T6, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_3_5_7_8<T1, T2, T3, T5, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_3_5_7_8<T2, T3, T5, T7, T8, TResult> Match(Func<T1,TResult> matchFunc);
@@ -2752,6 +4668,15 @@ namespace OneOf
         IOneOfMatcher1_2_3_5_9<T1, T2, T3, T5, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_2_3_5_7<T1, T2, T3, T5, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_3_5_7_10<T1, T2, T3, T5, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_5_7_10<T2, T3, T5, T7, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_5_7_10<T1, T3, T5, T7, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_5_7_10<T1, T2, T5, T7, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_7_10<T1, T2, T3, T7, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_10<T1, T2, T3, T5, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_7<T1, T2, T3, T5, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_3_5_8_9<T1, T2, T3, T5, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_3_5_8_9<T2, T3, T5, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -2760,6 +4685,24 @@ namespace OneOf
         IOneOfMatcher1_2_3_8_9<T1, T2, T3, T8, T9, TResult> Match(Func<T5,TResult> matchFunc);
         IOneOfMatcher1_2_3_5_9<T1, T2, T3, T5, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_2_3_5_8<T1, T2, T3, T5, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_5_8_10<T1, T2, T3, T5, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_5_8_10<T2, T3, T5, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_5_8_10<T1, T3, T5, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_5_8_10<T1, T2, T5, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_8_10<T1, T2, T3, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_10<T1, T2, T3, T5, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_8<T1, T2, T3, T5, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_5_9_10<T1, T2, T3, T5, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_5_9_10<T2, T3, T5, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_5_9_10<T1, T3, T5, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_5_9_10<T1, T2, T5, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_9_10<T1, T2, T3, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_10<T1, T2, T3, T5, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_9<T1, T2, T3, T5, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_2_3_6_7_8<T1, T2, T3, T6, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -2779,6 +4722,15 @@ namespace OneOf
         IOneOfMatcher1_2_3_6_9<T1, T2, T3, T6, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_2_3_6_7<T1, T2, T3, T6, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_3_6_7_10<T1, T2, T3, T6, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_6_7_10<T2, T3, T6, T7, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_6_7_10<T1, T3, T6, T7, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_6_7_10<T1, T2, T6, T7, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_7_10<T1, T2, T3, T7, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_10<T1, T2, T3, T6, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_7<T1, T2, T3, T6, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_3_6_8_9<T1, T2, T3, T6, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_3_6_8_9<T2, T3, T6, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -2788,6 +4740,24 @@ namespace OneOf
         IOneOfMatcher1_2_3_6_9<T1, T2, T3, T6, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_2_3_6_8<T1, T2, T3, T6, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_3_6_8_10<T1, T2, T3, T6, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_6_8_10<T2, T3, T6, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_6_8_10<T1, T3, T6, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_6_8_10<T1, T2, T6, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_8_10<T1, T2, T3, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_10<T1, T2, T3, T6, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_8<T1, T2, T3, T6, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_6_9_10<T1, T2, T3, T6, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_6_9_10<T2, T3, T6, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_6_9_10<T1, T3, T6, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_6_9_10<T1, T2, T6, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_9_10<T1, T2, T3, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_10<T1, T2, T3, T6, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_9<T1, T2, T3, T6, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_3_7_8_9<T1, T2, T3, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_3_7_8_9<T2, T3, T7, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -2796,6 +4766,33 @@ namespace OneOf
         IOneOfMatcher1_2_3_8_9<T1, T2, T3, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_2_3_7_9<T1, T2, T3, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_2_3_7_8<T1, T2, T3, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_7_8_10<T1, T2, T3, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_7_8_10<T2, T3, T7, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_7_8_10<T1, T3, T7, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_7_8_10<T1, T2, T7, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_8_10<T1, T2, T3, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_3_7_10<T1, T2, T3, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_3_7_8<T1, T2, T3, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_7_9_10<T1, T2, T3, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_7_9_10<T2, T3, T7, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_7_9_10<T1, T3, T7, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_7_9_10<T1, T2, T7, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_9_10<T1, T2, T3, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_3_7_10<T1, T2, T3, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_3_7_9<T1, T2, T3, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_8_9_10<T1, T2, T3, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_8_9_10<T2, T3, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_8_9_10<T1, T3, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_8_9_10<T1, T2, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_9_10<T1, T2, T3, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_3_8_10<T1, T2, T3, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_3_8_9<T1, T2, T3, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_2_4_5_6_7<T1, T2, T4, T5, T6, T7, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -2824,6 +4821,15 @@ namespace OneOf
         IOneOfMatcher1_2_4_5_9<T1, T2, T4, T5, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher1_2_4_5_6<T1, T2, T4, T5, T6, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_4_5_6_10<T1, T2, T4, T5, T6, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_4_5_6_10<T2, T4, T5, T6, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_10<T1, T4, T5, T6, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_10<T1, T2, T5, T6, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_10<T1, T2, T4, T6, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_10<T1, T2, T4, T5, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_6<T1, T2, T4, T5, T6, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_4_5_7_8<T1, T2, T4, T5, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_4_5_7_8<T2, T4, T5, T7, T8, TResult> Match(Func<T1,TResult> matchFunc);
@@ -2842,6 +4848,15 @@ namespace OneOf
         IOneOfMatcher1_2_4_5_9<T1, T2, T4, T5, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_2_4_5_7<T1, T2, T4, T5, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_4_5_7_10<T1, T2, T4, T5, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_4_5_7_10<T2, T4, T5, T7, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_5_7_10<T1, T4, T5, T7, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_5_7_10<T1, T2, T5, T7, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_4_7_10<T1, T2, T4, T7, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_10<T1, T2, T4, T5, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_7<T1, T2, T4, T5, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_4_5_8_9<T1, T2, T4, T5, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_4_5_8_9<T2, T4, T5, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -2850,6 +4865,24 @@ namespace OneOf
         IOneOfMatcher1_2_4_8_9<T1, T2, T4, T8, T9, TResult> Match(Func<T5,TResult> matchFunc);
         IOneOfMatcher1_2_4_5_9<T1, T2, T4, T5, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_2_4_5_8<T1, T2, T4, T5, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_4_5_8_10<T1, T2, T4, T5, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_4_5_8_10<T2, T4, T5, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_5_8_10<T1, T4, T5, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_5_8_10<T1, T2, T5, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_4_8_10<T1, T2, T4, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_10<T1, T2, T4, T5, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_8<T1, T2, T4, T5, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_4_5_9_10<T1, T2, T4, T5, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_4_5_9_10<T2, T4, T5, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_5_9_10<T1, T4, T5, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_5_9_10<T1, T2, T5, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_4_9_10<T1, T2, T4, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_10<T1, T2, T4, T5, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_9<T1, T2, T4, T5, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_2_4_6_7_8<T1, T2, T4, T6, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -2869,6 +4902,15 @@ namespace OneOf
         IOneOfMatcher1_2_4_6_9<T1, T2, T4, T6, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_2_4_6_7<T1, T2, T4, T6, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_4_6_7_10<T1, T2, T4, T6, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_4_6_7_10<T2, T4, T6, T7, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_6_7_10<T1, T4, T6, T7, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_6_7_10<T1, T2, T6, T7, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_4_7_10<T1, T2, T4, T7, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_10<T1, T2, T4, T6, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_7<T1, T2, T4, T6, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_4_6_8_9<T1, T2, T4, T6, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_4_6_8_9<T2, T4, T6, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -2878,6 +4920,24 @@ namespace OneOf
         IOneOfMatcher1_2_4_6_9<T1, T2, T4, T6, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_2_4_6_8<T1, T2, T4, T6, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_4_6_8_10<T1, T2, T4, T6, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_4_6_8_10<T2, T4, T6, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_6_8_10<T1, T4, T6, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_6_8_10<T1, T2, T6, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_4_8_10<T1, T2, T4, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_10<T1, T2, T4, T6, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_8<T1, T2, T4, T6, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_4_6_9_10<T1, T2, T4, T6, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_4_6_9_10<T2, T4, T6, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_6_9_10<T1, T4, T6, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_6_9_10<T1, T2, T6, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_4_9_10<T1, T2, T4, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_10<T1, T2, T4, T6, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_9<T1, T2, T4, T6, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_4_7_8_9<T1, T2, T4, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_4_7_8_9<T2, T4, T7, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -2886,6 +4946,33 @@ namespace OneOf
         IOneOfMatcher1_2_4_8_9<T1, T2, T4, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_2_4_7_9<T1, T2, T4, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_2_4_7_8<T1, T2, T4, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_4_7_8_10<T1, T2, T4, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_4_7_8_10<T2, T4, T7, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_7_8_10<T1, T4, T7, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_7_8_10<T1, T2, T7, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_4_8_10<T1, T2, T4, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_4_7_10<T1, T2, T4, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_4_7_8<T1, T2, T4, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_4_7_9_10<T1, T2, T4, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_4_7_9_10<T2, T4, T7, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_7_9_10<T1, T4, T7, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_7_9_10<T1, T2, T7, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_4_9_10<T1, T2, T4, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_4_7_10<T1, T2, T4, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_4_7_9<T1, T2, T4, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_4_8_9_10<T1, T2, T4, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_4_8_9_10<T2, T4, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_8_9_10<T1, T4, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_8_9_10<T1, T2, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_4_9_10<T1, T2, T4, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_4_8_10<T1, T2, T4, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_4_8_9<T1, T2, T4, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_2_5_6_7_8<T1, T2, T5, T6, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -2905,6 +4992,15 @@ namespace OneOf
         IOneOfMatcher1_2_5_6_9<T1, T2, T5, T6, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_2_5_6_7<T1, T2, T5, T6, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_5_6_7_10<T1, T2, T5, T6, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_5_6_7_10<T2, T5, T6, T7, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_6_7_10<T1, T5, T6, T7, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_6_7_10<T1, T2, T6, T7, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_5_7_10<T1, T2, T5, T7, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_10<T1, T2, T5, T6, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_7<T1, T2, T5, T6, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_5_6_8_9<T1, T2, T5, T6, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_5_6_8_9<T2, T5, T6, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -2913,6 +5009,24 @@ namespace OneOf
         IOneOfMatcher1_2_5_8_9<T1, T2, T5, T8, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher1_2_5_6_9<T1, T2, T5, T6, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_2_5_6_8<T1, T2, T5, T6, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_5_6_8_10<T1, T2, T5, T6, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_5_6_8_10<T2, T5, T6, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_6_8_10<T1, T5, T6, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_6_8_10<T1, T2, T6, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_5_8_10<T1, T2, T5, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_10<T1, T2, T5, T6, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_8<T1, T2, T5, T6, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_5_6_9_10<T1, T2, T5, T6, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_5_6_9_10<T2, T5, T6, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_6_9_10<T1, T5, T6, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_6_9_10<T1, T2, T6, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_5_9_10<T1, T2, T5, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_10<T1, T2, T5, T6, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_9<T1, T2, T5, T6, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_2_5_7_8_9<T1, T2, T5, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -2923,6 +5037,33 @@ namespace OneOf
         IOneOfMatcher1_2_5_7_9<T1, T2, T5, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_2_5_7_8<T1, T2, T5, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_5_7_8_10<T1, T2, T5, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_5_7_8_10<T2, T5, T7, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_7_8_10<T1, T5, T7, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_7_8_10<T1, T2, T7, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_5_8_10<T1, T2, T5, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_5_7_10<T1, T2, T5, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_5_7_8<T1, T2, T5, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_5_7_9_10<T1, T2, T5, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_5_7_9_10<T2, T5, T7, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_7_9_10<T1, T5, T7, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_7_9_10<T1, T2, T7, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_5_9_10<T1, T2, T5, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_5_7_10<T1, T2, T5, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_5_7_9<T1, T2, T5, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_5_8_9_10<T1, T2, T5, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_5_8_9_10<T2, T5, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_8_9_10<T1, T5, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_8_9_10<T1, T2, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_5_9_10<T1, T2, T5, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_5_8_10<T1, T2, T5, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_5_8_9<T1, T2, T5, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_6_7_8_9<T1, T2, T6, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_6_7_8_9<T2, T6, T7, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -2931,6 +5072,42 @@ namespace OneOf
         IOneOfMatcher1_2_6_8_9<T1, T2, T6, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_2_6_7_9<T1, T2, T6, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_2_6_7_8<T1, T2, T6, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_6_7_8_10<T1, T2, T6, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_6_7_8_10<T2, T6, T7, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_6_7_8_10<T1, T6, T7, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_7_8_10<T1, T2, T7, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_6_8_10<T1, T2, T6, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_6_7_10<T1, T2, T6, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_6_7_8<T1, T2, T6, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_6_7_9_10<T1, T2, T6, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_6_7_9_10<T2, T6, T7, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_6_7_9_10<T1, T6, T7, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_7_9_10<T1, T2, T7, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_6_9_10<T1, T2, T6, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_6_7_10<T1, T2, T6, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_6_7_9<T1, T2, T6, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_6_8_9_10<T1, T2, T6, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_6_8_9_10<T2, T6, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_6_8_9_10<T1, T6, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_8_9_10<T1, T2, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_6_9_10<T1, T2, T6, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_6_8_10<T1, T2, T6, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_6_8_9<T1, T2, T6, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_7_8_9_10<T1, T2, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_7_8_9_10<T2, T7, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_7_8_9_10<T1, T7, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_8_9_10<T1, T2, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_7_9_10<T1, T2, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_7_8_10<T1, T2, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_7_8_9<T1, T2, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_3_4_5_6_7<T1, T3, T4, T5, T6, T7, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -2959,6 +5136,15 @@ namespace OneOf
         IOneOfMatcher1_3_4_5_9<T1, T3, T4, T5, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher1_3_4_5_6<T1, T3, T4, T5, T6, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_3_4_5_6_10<T1, T3, T4, T5, T6, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_5_6_10<T3, T4, T5, T6, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_10<T1, T4, T5, T6, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_10<T1, T3, T5, T6, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_10<T1, T3, T4, T6, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_10<T1, T3, T4, T5, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_6<T1, T3, T4, T5, T6, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_3_4_5_7_8<T1, T3, T4, T5, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_4_5_7_8<T3, T4, T5, T7, T8, TResult> Match(Func<T1,TResult> matchFunc);
@@ -2977,6 +5163,15 @@ namespace OneOf
         IOneOfMatcher1_3_4_5_9<T1, T3, T4, T5, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_3_4_5_7<T1, T3, T4, T5, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_3_4_5_7_10<T1, T3, T4, T5, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_5_7_10<T3, T4, T5, T7, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_5_7_10<T1, T4, T5, T7, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_5_7_10<T1, T3, T5, T7, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_3_4_7_10<T1, T3, T4, T7, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_10<T1, T3, T4, T5, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_7<T1, T3, T4, T5, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_3_4_5_8_9<T1, T3, T4, T5, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_4_5_8_9<T3, T4, T5, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -2985,6 +5180,24 @@ namespace OneOf
         IOneOfMatcher1_3_4_8_9<T1, T3, T4, T8, T9, TResult> Match(Func<T5,TResult> matchFunc);
         IOneOfMatcher1_3_4_5_9<T1, T3, T4, T5, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_3_4_5_8<T1, T3, T4, T5, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_4_5_8_10<T1, T3, T4, T5, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_5_8_10<T3, T4, T5, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_5_8_10<T1, T4, T5, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_5_8_10<T1, T3, T5, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_3_4_8_10<T1, T3, T4, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_10<T1, T3, T4, T5, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_8<T1, T3, T4, T5, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_4_5_9_10<T1, T3, T4, T5, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_5_9_10<T3, T4, T5, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_5_9_10<T1, T4, T5, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_5_9_10<T1, T3, T5, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_3_4_9_10<T1, T3, T4, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_10<T1, T3, T4, T5, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_9<T1, T3, T4, T5, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_3_4_6_7_8<T1, T3, T4, T6, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -3004,6 +5217,15 @@ namespace OneOf
         IOneOfMatcher1_3_4_6_9<T1, T3, T4, T6, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_3_4_6_7<T1, T3, T4, T6, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_3_4_6_7_10<T1, T3, T4, T6, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_6_7_10<T3, T4, T6, T7, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_6_7_10<T1, T4, T6, T7, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_6_7_10<T1, T3, T6, T7, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_3_4_7_10<T1, T3, T4, T7, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_10<T1, T3, T4, T6, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_7<T1, T3, T4, T6, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_3_4_6_8_9<T1, T3, T4, T6, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_4_6_8_9<T3, T4, T6, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -3013,6 +5235,24 @@ namespace OneOf
         IOneOfMatcher1_3_4_6_9<T1, T3, T4, T6, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_3_4_6_8<T1, T3, T4, T6, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_3_4_6_8_10<T1, T3, T4, T6, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_6_8_10<T3, T4, T6, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_6_8_10<T1, T4, T6, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_6_8_10<T1, T3, T6, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_3_4_8_10<T1, T3, T4, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_10<T1, T3, T4, T6, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_8<T1, T3, T4, T6, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_4_6_9_10<T1, T3, T4, T6, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_6_9_10<T3, T4, T6, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_6_9_10<T1, T4, T6, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_6_9_10<T1, T3, T6, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_3_4_9_10<T1, T3, T4, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_10<T1, T3, T4, T6, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_9<T1, T3, T4, T6, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_3_4_7_8_9<T1, T3, T4, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_4_7_8_9<T3, T4, T7, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -3021,6 +5261,33 @@ namespace OneOf
         IOneOfMatcher1_3_4_8_9<T1, T3, T4, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_3_4_7_9<T1, T3, T4, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_3_4_7_8<T1, T3, T4, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_4_7_8_10<T1, T3, T4, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_7_8_10<T3, T4, T7, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_7_8_10<T1, T4, T7, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_7_8_10<T1, T3, T7, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_3_4_8_10<T1, T3, T4, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_3_4_7_10<T1, T3, T4, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_3_4_7_8<T1, T3, T4, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_4_7_9_10<T1, T3, T4, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_7_9_10<T3, T4, T7, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_7_9_10<T1, T4, T7, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_7_9_10<T1, T3, T7, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_3_4_9_10<T1, T3, T4, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_3_4_7_10<T1, T3, T4, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_3_4_7_9<T1, T3, T4, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_4_8_9_10<T1, T3, T4, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_8_9_10<T3, T4, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_8_9_10<T1, T4, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_8_9_10<T1, T3, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_3_4_9_10<T1, T3, T4, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_3_4_8_10<T1, T3, T4, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_3_4_8_9<T1, T3, T4, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_3_5_6_7_8<T1, T3, T5, T6, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -3040,6 +5307,15 @@ namespace OneOf
         IOneOfMatcher1_3_5_6_9<T1, T3, T5, T6, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_3_5_6_7<T1, T3, T5, T6, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_3_5_6_7_10<T1, T3, T5, T6, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_5_6_7_10<T3, T5, T6, T7, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_6_7_10<T1, T5, T6, T7, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_6_7_10<T1, T3, T6, T7, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_3_5_7_10<T1, T3, T5, T7, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_10<T1, T3, T5, T6, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_7<T1, T3, T5, T6, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_3_5_6_8_9<T1, T3, T5, T6, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_5_6_8_9<T3, T5, T6, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -3048,6 +5324,24 @@ namespace OneOf
         IOneOfMatcher1_3_5_8_9<T1, T3, T5, T8, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher1_3_5_6_9<T1, T3, T5, T6, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_3_5_6_8<T1, T3, T5, T6, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_5_6_8_10<T1, T3, T5, T6, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_5_6_8_10<T3, T5, T6, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_6_8_10<T1, T5, T6, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_6_8_10<T1, T3, T6, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_3_5_8_10<T1, T3, T5, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_10<T1, T3, T5, T6, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_8<T1, T3, T5, T6, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_5_6_9_10<T1, T3, T5, T6, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_5_6_9_10<T3, T5, T6, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_6_9_10<T1, T5, T6, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_6_9_10<T1, T3, T6, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_3_5_9_10<T1, T3, T5, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_10<T1, T3, T5, T6, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_9<T1, T3, T5, T6, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_3_5_7_8_9<T1, T3, T5, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -3058,6 +5352,33 @@ namespace OneOf
         IOneOfMatcher1_3_5_7_9<T1, T3, T5, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_3_5_7_8<T1, T3, T5, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_3_5_7_8_10<T1, T3, T5, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_5_7_8_10<T3, T5, T7, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_7_8_10<T1, T5, T7, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_7_8_10<T1, T3, T7, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_3_5_8_10<T1, T3, T5, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_3_5_7_10<T1, T3, T5, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_3_5_7_8<T1, T3, T5, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_5_7_9_10<T1, T3, T5, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_5_7_9_10<T3, T5, T7, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_7_9_10<T1, T5, T7, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_7_9_10<T1, T3, T7, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_3_5_9_10<T1, T3, T5, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_3_5_7_10<T1, T3, T5, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_3_5_7_9<T1, T3, T5, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_5_8_9_10<T1, T3, T5, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_5_8_9_10<T3, T5, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_8_9_10<T1, T5, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_8_9_10<T1, T3, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_3_5_9_10<T1, T3, T5, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_3_5_8_10<T1, T3, T5, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_3_5_8_9<T1, T3, T5, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_3_6_7_8_9<T1, T3, T6, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_6_7_8_9<T3, T6, T7, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -3066,6 +5387,42 @@ namespace OneOf
         IOneOfMatcher1_3_6_8_9<T1, T3, T6, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_3_6_7_9<T1, T3, T6, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_3_6_7_8<T1, T3, T6, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_6_7_8_10<T1, T3, T6, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_6_7_8_10<T3, T6, T7, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_6_7_8_10<T1, T6, T7, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_7_8_10<T1, T3, T7, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_3_6_8_10<T1, T3, T6, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_3_6_7_10<T1, T3, T6, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_3_6_7_8<T1, T3, T6, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_6_7_9_10<T1, T3, T6, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_6_7_9_10<T3, T6, T7, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_6_7_9_10<T1, T6, T7, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_7_9_10<T1, T3, T7, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_3_6_9_10<T1, T3, T6, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_3_6_7_10<T1, T3, T6, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_3_6_7_9<T1, T3, T6, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_6_8_9_10<T1, T3, T6, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_6_8_9_10<T3, T6, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_6_8_9_10<T1, T6, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_8_9_10<T1, T3, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_3_6_9_10<T1, T3, T6, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_3_6_8_10<T1, T3, T6, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_3_6_8_9<T1, T3, T6, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_7_8_9_10<T1, T3, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_7_8_9_10<T3, T7, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_7_8_9_10<T1, T7, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_8_9_10<T1, T3, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_3_7_9_10<T1, T3, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_3_7_8_10<T1, T3, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_3_7_8_9<T1, T3, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_4_5_6_7_8<T1, T4, T5, T6, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -3085,6 +5442,15 @@ namespace OneOf
         IOneOfMatcher1_4_5_6_9<T1, T4, T5, T6, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_4_5_6_7<T1, T4, T5, T6, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_4_5_6_7_10<T1, T4, T5, T6, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_6_7_10<T4, T5, T6, T7, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_6_7_10<T1, T5, T6, T7, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_4_6_7_10<T1, T4, T6, T7, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_4_5_7_10<T1, T4, T5, T7, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_10<T1, T4, T5, T6, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_7<T1, T4, T5, T6, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_4_5_6_8_9<T1, T4, T5, T6, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher4_5_6_8_9<T4, T5, T6, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -3093,6 +5459,24 @@ namespace OneOf
         IOneOfMatcher1_4_5_8_9<T1, T4, T5, T8, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher1_4_5_6_9<T1, T4, T5, T6, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_4_5_6_8<T1, T4, T5, T6, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_4_5_6_8_10<T1, T4, T5, T6, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_6_8_10<T4, T5, T6, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_6_8_10<T1, T5, T6, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_4_6_8_10<T1, T4, T6, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_4_5_8_10<T1, T4, T5, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_10<T1, T4, T5, T6, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_8<T1, T4, T5, T6, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_4_5_6_9_10<T1, T4, T5, T6, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_6_9_10<T4, T5, T6, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_6_9_10<T1, T5, T6, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_4_6_9_10<T1, T4, T6, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_4_5_9_10<T1, T4, T5, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_10<T1, T4, T5, T6, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_9<T1, T4, T5, T6, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_4_5_7_8_9<T1, T4, T5, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -3103,6 +5487,33 @@ namespace OneOf
         IOneOfMatcher1_4_5_7_9<T1, T4, T5, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_4_5_7_8<T1, T4, T5, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_4_5_7_8_10<T1, T4, T5, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_7_8_10<T4, T5, T7, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_7_8_10<T1, T5, T7, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_4_7_8_10<T1, T4, T7, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_4_5_8_10<T1, T4, T5, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_4_5_7_10<T1, T4, T5, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_4_5_7_8<T1, T4, T5, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_4_5_7_9_10<T1, T4, T5, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_7_9_10<T4, T5, T7, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_7_9_10<T1, T5, T7, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_4_7_9_10<T1, T4, T7, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_4_5_9_10<T1, T4, T5, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_4_5_7_10<T1, T4, T5, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_4_5_7_9<T1, T4, T5, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_4_5_8_9_10<T1, T4, T5, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_8_9_10<T4, T5, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_8_9_10<T1, T5, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_4_8_9_10<T1, T4, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_4_5_9_10<T1, T4, T5, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_4_5_8_10<T1, T4, T5, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_4_5_8_9<T1, T4, T5, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_4_6_7_8_9<T1, T4, T6, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher4_6_7_8_9<T4, T6, T7, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -3112,6 +5523,42 @@ namespace OneOf
         IOneOfMatcher1_4_6_7_9<T1, T4, T6, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_4_6_7_8<T1, T4, T6, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_4_6_7_8_10<T1, T4, T6, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_6_7_8_10<T4, T6, T7, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_6_7_8_10<T1, T6, T7, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_4_7_8_10<T1, T4, T7, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_4_6_8_10<T1, T4, T6, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_4_6_7_10<T1, T4, T6, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_4_6_7_8<T1, T4, T6, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_4_6_7_9_10<T1, T4, T6, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_6_7_9_10<T4, T6, T7, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_6_7_9_10<T1, T6, T7, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_4_7_9_10<T1, T4, T7, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_4_6_9_10<T1, T4, T6, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_4_6_7_10<T1, T4, T6, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_4_6_7_9<T1, T4, T6, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_4_6_8_9_10<T1, T4, T6, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_6_8_9_10<T4, T6, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_6_8_9_10<T1, T6, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_4_8_9_10<T1, T4, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_4_6_9_10<T1, T4, T6, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_4_6_8_10<T1, T4, T6, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_4_6_8_9<T1, T4, T6, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_4_7_8_9_10<T1, T4, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_7_8_9_10<T4, T7, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_7_8_9_10<T1, T7, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_4_8_9_10<T1, T4, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_4_7_9_10<T1, T4, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_4_7_8_10<T1, T4, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_4_7_8_9<T1, T4, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_5_6_7_8_9<T1, T5, T6, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher5_6_7_8_9<T5, T6, T7, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -3120,6 +5567,51 @@ namespace OneOf
         IOneOfMatcher1_5_6_8_9<T1, T5, T6, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_5_6_7_9<T1, T5, T6, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_5_6_7_8<T1, T5, T6, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_5_6_7_8_10<T1, T5, T6, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_6_7_8_10<T5, T6, T7, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_6_7_8_10<T1, T6, T7, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_5_7_8_10<T1, T5, T7, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_5_6_8_10<T1, T5, T6, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_5_6_7_10<T1, T5, T6, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_5_6_7_8<T1, T5, T6, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_5_6_7_9_10<T1, T5, T6, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_6_7_9_10<T5, T6, T7, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_6_7_9_10<T1, T6, T7, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_5_7_9_10<T1, T5, T7, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_5_6_9_10<T1, T5, T6, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_5_6_7_10<T1, T5, T6, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_5_6_7_9<T1, T5, T6, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_5_6_8_9_10<T1, T5, T6, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_6_8_9_10<T5, T6, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_6_8_9_10<T1, T6, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_5_8_9_10<T1, T5, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_5_6_9_10<T1, T5, T6, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_5_6_8_10<T1, T5, T6, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_5_6_8_9<T1, T5, T6, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_5_7_8_9_10<T1, T5, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_7_8_9_10<T5, T7, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_7_8_9_10<T1, T7, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_5_8_9_10<T1, T5, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_5_7_9_10<T1, T5, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_5_7_8_10<T1, T5, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_5_7_8_9<T1, T5, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_6_7_8_9_10<T1, T6, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_7_8_9_10<T6, T7, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_7_8_9_10<T1, T7, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_6_8_9_10<T1, T6, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_6_7_9_10<T1, T6, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_6_7_8_10<T1, T6, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_6_7_8_9<T1, T6, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher2_3_4_5_6_7<T2, T3, T4, T5, T6, T7, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -3148,6 +5640,15 @@ namespace OneOf
         IOneOfMatcher2_3_4_5_9<T2, T3, T4, T5, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher2_3_4_5_6<T2, T3, T4, T5, T6, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_3_4_5_6_10<T2, T3, T4, T5, T6, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_5_6_10<T3, T4, T5, T6, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_4_5_6_10<T2, T4, T5, T6, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_5_6_10<T2, T3, T5, T6, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_3_4_6_10<T2, T3, T4, T6, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_10<T2, T3, T4, T5, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_6<T2, T3, T4, T5, T6, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_3_4_5_7_8<T2, T3, T4, T5, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_4_5_7_8<T3, T4, T5, T7, T8, TResult> Match(Func<T2,TResult> matchFunc);
@@ -3166,6 +5667,15 @@ namespace OneOf
         IOneOfMatcher2_3_4_5_9<T2, T3, T4, T5, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher2_3_4_5_7<T2, T3, T4, T5, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_3_4_5_7_10<T2, T3, T4, T5, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_5_7_10<T3, T4, T5, T7, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_4_5_7_10<T2, T4, T5, T7, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_5_7_10<T2, T3, T5, T7, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_3_4_7_10<T2, T3, T4, T7, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_10<T2, T3, T4, T5, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_7<T2, T3, T4, T5, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_3_4_5_8_9<T2, T3, T4, T5, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_4_5_8_9<T3, T4, T5, T8, T9, TResult> Match(Func<T2,TResult> matchFunc);
@@ -3174,6 +5684,24 @@ namespace OneOf
         IOneOfMatcher2_3_4_8_9<T2, T3, T4, T8, T9, TResult> Match(Func<T5,TResult> matchFunc);
         IOneOfMatcher2_3_4_5_9<T2, T3, T4, T5, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher2_3_4_5_8<T2, T3, T4, T5, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_4_5_8_10<T2, T3, T4, T5, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_5_8_10<T3, T4, T5, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_4_5_8_10<T2, T4, T5, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_5_8_10<T2, T3, T5, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_3_4_8_10<T2, T3, T4, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_10<T2, T3, T4, T5, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_8<T2, T3, T4, T5, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_4_5_9_10<T2, T3, T4, T5, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_5_9_10<T3, T4, T5, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_4_5_9_10<T2, T4, T5, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_5_9_10<T2, T3, T5, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_3_4_9_10<T2, T3, T4, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_10<T2, T3, T4, T5, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_9<T2, T3, T4, T5, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher2_3_4_6_7_8<T2, T3, T4, T6, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -3193,6 +5721,15 @@ namespace OneOf
         IOneOfMatcher2_3_4_6_9<T2, T3, T4, T6, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher2_3_4_6_7<T2, T3, T4, T6, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_3_4_6_7_10<T2, T3, T4, T6, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_6_7_10<T3, T4, T6, T7, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_4_6_7_10<T2, T4, T6, T7, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_6_7_10<T2, T3, T6, T7, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_3_4_7_10<T2, T3, T4, T7, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_3_4_6_10<T2, T3, T4, T6, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_3_4_6_7<T2, T3, T4, T6, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_3_4_6_8_9<T2, T3, T4, T6, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_4_6_8_9<T3, T4, T6, T8, T9, TResult> Match(Func<T2,TResult> matchFunc);
@@ -3202,6 +5739,24 @@ namespace OneOf
         IOneOfMatcher2_3_4_6_9<T2, T3, T4, T6, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher2_3_4_6_8<T2, T3, T4, T6, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_3_4_6_8_10<T2, T3, T4, T6, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_6_8_10<T3, T4, T6, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_4_6_8_10<T2, T4, T6, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_6_8_10<T2, T3, T6, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_3_4_8_10<T2, T3, T4, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_3_4_6_10<T2, T3, T4, T6, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_3_4_6_8<T2, T3, T4, T6, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_4_6_9_10<T2, T3, T4, T6, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_6_9_10<T3, T4, T6, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_4_6_9_10<T2, T4, T6, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_6_9_10<T2, T3, T6, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_3_4_9_10<T2, T3, T4, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_3_4_6_10<T2, T3, T4, T6, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_3_4_6_9<T2, T3, T4, T6, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_3_4_7_8_9<T2, T3, T4, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_4_7_8_9<T3, T4, T7, T8, T9, TResult> Match(Func<T2,TResult> matchFunc);
@@ -3210,6 +5765,33 @@ namespace OneOf
         IOneOfMatcher2_3_4_8_9<T2, T3, T4, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher2_3_4_7_9<T2, T3, T4, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher2_3_4_7_8<T2, T3, T4, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_4_7_8_10<T2, T3, T4, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_7_8_10<T3, T4, T7, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_4_7_8_10<T2, T4, T7, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_7_8_10<T2, T3, T7, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_3_4_8_10<T2, T3, T4, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_3_4_7_10<T2, T3, T4, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_3_4_7_8<T2, T3, T4, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_4_7_9_10<T2, T3, T4, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_7_9_10<T3, T4, T7, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_4_7_9_10<T2, T4, T7, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_7_9_10<T2, T3, T7, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_3_4_9_10<T2, T3, T4, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_3_4_7_10<T2, T3, T4, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_3_4_7_9<T2, T3, T4, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_4_8_9_10<T2, T3, T4, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_8_9_10<T3, T4, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_4_8_9_10<T2, T4, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_8_9_10<T2, T3, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_3_4_9_10<T2, T3, T4, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_3_4_8_10<T2, T3, T4, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_3_4_8_9<T2, T3, T4, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher2_3_5_6_7_8<T2, T3, T5, T6, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -3229,6 +5811,15 @@ namespace OneOf
         IOneOfMatcher2_3_5_6_9<T2, T3, T5, T6, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher2_3_5_6_7<T2, T3, T5, T6, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_3_5_6_7_10<T2, T3, T5, T6, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_5_6_7_10<T3, T5, T6, T7, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_5_6_7_10<T2, T5, T6, T7, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_6_7_10<T2, T3, T6, T7, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_3_5_7_10<T2, T3, T5, T7, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_3_5_6_10<T2, T3, T5, T6, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_3_5_6_7<T2, T3, T5, T6, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_3_5_6_8_9<T2, T3, T5, T6, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_5_6_8_9<T3, T5, T6, T8, T9, TResult> Match(Func<T2,TResult> matchFunc);
@@ -3237,6 +5828,24 @@ namespace OneOf
         IOneOfMatcher2_3_5_8_9<T2, T3, T5, T8, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher2_3_5_6_9<T2, T3, T5, T6, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher2_3_5_6_8<T2, T3, T5, T6, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_5_6_8_10<T2, T3, T5, T6, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_5_6_8_10<T3, T5, T6, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_5_6_8_10<T2, T5, T6, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_6_8_10<T2, T3, T6, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_3_5_8_10<T2, T3, T5, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_3_5_6_10<T2, T3, T5, T6, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_3_5_6_8<T2, T3, T5, T6, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_5_6_9_10<T2, T3, T5, T6, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_5_6_9_10<T3, T5, T6, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_5_6_9_10<T2, T5, T6, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_6_9_10<T2, T3, T6, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_3_5_9_10<T2, T3, T5, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_3_5_6_10<T2, T3, T5, T6, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_3_5_6_9<T2, T3, T5, T6, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher2_3_5_7_8_9<T2, T3, T5, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -3247,6 +5856,33 @@ namespace OneOf
         IOneOfMatcher2_3_5_7_9<T2, T3, T5, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher2_3_5_7_8<T2, T3, T5, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_3_5_7_8_10<T2, T3, T5, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_5_7_8_10<T3, T5, T7, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_5_7_8_10<T2, T5, T7, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_7_8_10<T2, T3, T7, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_3_5_8_10<T2, T3, T5, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_3_5_7_10<T2, T3, T5, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_3_5_7_8<T2, T3, T5, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_5_7_9_10<T2, T3, T5, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_5_7_9_10<T3, T5, T7, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_5_7_9_10<T2, T5, T7, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_7_9_10<T2, T3, T7, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_3_5_9_10<T2, T3, T5, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_3_5_7_10<T2, T3, T5, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_3_5_7_9<T2, T3, T5, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_5_8_9_10<T2, T3, T5, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_5_8_9_10<T3, T5, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_5_8_9_10<T2, T5, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_8_9_10<T2, T3, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_3_5_9_10<T2, T3, T5, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_3_5_8_10<T2, T3, T5, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_3_5_8_9<T2, T3, T5, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_3_6_7_8_9<T2, T3, T6, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_6_7_8_9<T3, T6, T7, T8, T9, TResult> Match(Func<T2,TResult> matchFunc);
@@ -3255,6 +5891,42 @@ namespace OneOf
         IOneOfMatcher2_3_6_8_9<T2, T3, T6, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher2_3_6_7_9<T2, T3, T6, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher2_3_6_7_8<T2, T3, T6, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_6_7_8_10<T2, T3, T6, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_6_7_8_10<T3, T6, T7, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_6_7_8_10<T2, T6, T7, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_7_8_10<T2, T3, T7, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_3_6_8_10<T2, T3, T6, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_3_6_7_10<T2, T3, T6, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_3_6_7_8<T2, T3, T6, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_6_7_9_10<T2, T3, T6, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_6_7_9_10<T3, T6, T7, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_6_7_9_10<T2, T6, T7, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_7_9_10<T2, T3, T7, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_3_6_9_10<T2, T3, T6, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_3_6_7_10<T2, T3, T6, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_3_6_7_9<T2, T3, T6, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_6_8_9_10<T2, T3, T6, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_6_8_9_10<T3, T6, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_6_8_9_10<T2, T6, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_8_9_10<T2, T3, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_3_6_9_10<T2, T3, T6, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_3_6_8_10<T2, T3, T6, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_3_6_8_9<T2, T3, T6, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_7_8_9_10<T2, T3, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_7_8_9_10<T3, T7, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_7_8_9_10<T2, T7, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_8_9_10<T2, T3, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_3_7_9_10<T2, T3, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_3_7_8_10<T2, T3, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_3_7_8_9<T2, T3, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher2_4_5_6_7_8<T2, T4, T5, T6, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -3274,6 +5946,15 @@ namespace OneOf
         IOneOfMatcher2_4_5_6_9<T2, T4, T5, T6, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher2_4_5_6_7<T2, T4, T5, T6, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_4_5_6_7_10<T2, T4, T5, T6, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_6_7_10<T4, T5, T6, T7, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_5_6_7_10<T2, T5, T6, T7, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_4_6_7_10<T2, T4, T6, T7, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_4_5_7_10<T2, T4, T5, T7, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_4_5_6_10<T2, T4, T5, T6, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_4_5_6_7<T2, T4, T5, T6, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_4_5_6_8_9<T2, T4, T5, T6, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher4_5_6_8_9<T4, T5, T6, T8, T9, TResult> Match(Func<T2,TResult> matchFunc);
@@ -3282,6 +5963,24 @@ namespace OneOf
         IOneOfMatcher2_4_5_8_9<T2, T4, T5, T8, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher2_4_5_6_9<T2, T4, T5, T6, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher2_4_5_6_8<T2, T4, T5, T6, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_4_5_6_8_10<T2, T4, T5, T6, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_6_8_10<T4, T5, T6, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_5_6_8_10<T2, T5, T6, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_4_6_8_10<T2, T4, T6, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_4_5_8_10<T2, T4, T5, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_4_5_6_10<T2, T4, T5, T6, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_4_5_6_8<T2, T4, T5, T6, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_4_5_6_9_10<T2, T4, T5, T6, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_6_9_10<T4, T5, T6, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_5_6_9_10<T2, T5, T6, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_4_6_9_10<T2, T4, T6, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_4_5_9_10<T2, T4, T5, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_4_5_6_10<T2, T4, T5, T6, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_4_5_6_9<T2, T4, T5, T6, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher2_4_5_7_8_9<T2, T4, T5, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -3292,6 +5991,33 @@ namespace OneOf
         IOneOfMatcher2_4_5_7_9<T2, T4, T5, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher2_4_5_7_8<T2, T4, T5, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_4_5_7_8_10<T2, T4, T5, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_7_8_10<T4, T5, T7, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_5_7_8_10<T2, T5, T7, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_4_7_8_10<T2, T4, T7, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_4_5_8_10<T2, T4, T5, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_4_5_7_10<T2, T4, T5, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_4_5_7_8<T2, T4, T5, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_4_5_7_9_10<T2, T4, T5, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_7_9_10<T4, T5, T7, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_5_7_9_10<T2, T5, T7, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_4_7_9_10<T2, T4, T7, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_4_5_9_10<T2, T4, T5, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_4_5_7_10<T2, T4, T5, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_4_5_7_9<T2, T4, T5, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_4_5_8_9_10<T2, T4, T5, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_8_9_10<T4, T5, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_5_8_9_10<T2, T5, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_4_8_9_10<T2, T4, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_4_5_9_10<T2, T4, T5, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_4_5_8_10<T2, T4, T5, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_4_5_8_9<T2, T4, T5, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_4_6_7_8_9<T2, T4, T6, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher4_6_7_8_9<T4, T6, T7, T8, T9, TResult> Match(Func<T2,TResult> matchFunc);
@@ -3301,6 +6027,42 @@ namespace OneOf
         IOneOfMatcher2_4_6_7_9<T2, T4, T6, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher2_4_6_7_8<T2, T4, T6, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_4_6_7_8_10<T2, T4, T6, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_6_7_8_10<T4, T6, T7, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_6_7_8_10<T2, T6, T7, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_4_7_8_10<T2, T4, T7, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_4_6_8_10<T2, T4, T6, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_4_6_7_10<T2, T4, T6, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_4_6_7_8<T2, T4, T6, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_4_6_7_9_10<T2, T4, T6, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_6_7_9_10<T4, T6, T7, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_6_7_9_10<T2, T6, T7, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_4_7_9_10<T2, T4, T7, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_4_6_9_10<T2, T4, T6, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_4_6_7_10<T2, T4, T6, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_4_6_7_9<T2, T4, T6, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_4_6_8_9_10<T2, T4, T6, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_6_8_9_10<T4, T6, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_6_8_9_10<T2, T6, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_4_8_9_10<T2, T4, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_4_6_9_10<T2, T4, T6, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_4_6_8_10<T2, T4, T6, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_4_6_8_9<T2, T4, T6, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_4_7_8_9_10<T2, T4, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_7_8_9_10<T4, T7, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_7_8_9_10<T2, T7, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_4_8_9_10<T2, T4, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_4_7_9_10<T2, T4, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_4_7_8_10<T2, T4, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_4_7_8_9<T2, T4, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_5_6_7_8_9<T2, T5, T6, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher5_6_7_8_9<T5, T6, T7, T8, T9, TResult> Match(Func<T2,TResult> matchFunc);
@@ -3309,6 +6071,51 @@ namespace OneOf
         IOneOfMatcher2_5_6_8_9<T2, T5, T6, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher2_5_6_7_9<T2, T5, T6, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher2_5_6_7_8<T2, T5, T6, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_5_6_7_8_10<T2, T5, T6, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_6_7_8_10<T5, T6, T7, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_6_7_8_10<T2, T6, T7, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_5_7_8_10<T2, T5, T7, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_5_6_8_10<T2, T5, T6, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_5_6_7_10<T2, T5, T6, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_5_6_7_8<T2, T5, T6, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_5_6_7_9_10<T2, T5, T6, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_6_7_9_10<T5, T6, T7, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_6_7_9_10<T2, T6, T7, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_5_7_9_10<T2, T5, T7, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_5_6_9_10<T2, T5, T6, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_5_6_7_10<T2, T5, T6, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_5_6_7_9<T2, T5, T6, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_5_6_8_9_10<T2, T5, T6, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_6_8_9_10<T5, T6, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_6_8_9_10<T2, T6, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_5_8_9_10<T2, T5, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_5_6_9_10<T2, T5, T6, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_5_6_8_10<T2, T5, T6, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_5_6_8_9<T2, T5, T6, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_5_7_8_9_10<T2, T5, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_7_8_9_10<T5, T7, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_7_8_9_10<T2, T7, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_5_8_9_10<T2, T5, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_5_7_9_10<T2, T5, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_5_7_8_10<T2, T5, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_5_7_8_9<T2, T5, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_6_7_8_9_10<T2, T6, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_7_8_9_10<T6, T7, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_7_8_9_10<T2, T7, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_6_8_9_10<T2, T6, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_6_7_9_10<T2, T6, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_6_7_8_10<T2, T6, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_6_7_8_9<T2, T6, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher3_4_5_6_7_8<T3, T4, T5, T6, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -3328,6 +6135,15 @@ namespace OneOf
         IOneOfMatcher3_4_5_6_9<T3, T4, T5, T6, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher3_4_5_6_7<T3, T4, T5, T6, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher3_4_5_6_7_10<T3, T4, T5, T6, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_6_7_10<T4, T5, T6, T7, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_5_6_7_10<T3, T5, T6, T7, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher3_4_6_7_10<T3, T4, T6, T7, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher3_4_5_7_10<T3, T4, T5, T7, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher3_4_5_6_10<T3, T4, T5, T6, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher3_4_5_6_7<T3, T4, T5, T6, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher3_4_5_6_8_9<T3, T4, T5, T6, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher4_5_6_8_9<T4, T5, T6, T8, T9, TResult> Match(Func<T3,TResult> matchFunc);
@@ -3336,6 +6152,24 @@ namespace OneOf
         IOneOfMatcher3_4_5_8_9<T3, T4, T5, T8, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher3_4_5_6_9<T3, T4, T5, T6, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher3_4_5_6_8<T3, T4, T5, T6, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_4_5_6_8_10<T3, T4, T5, T6, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_6_8_10<T4, T5, T6, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_5_6_8_10<T3, T5, T6, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher3_4_6_8_10<T3, T4, T6, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher3_4_5_8_10<T3, T4, T5, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher3_4_5_6_10<T3, T4, T5, T6, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher3_4_5_6_8<T3, T4, T5, T6, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_4_5_6_9_10<T3, T4, T5, T6, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_6_9_10<T4, T5, T6, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_5_6_9_10<T3, T5, T6, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher3_4_6_9_10<T3, T4, T6, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher3_4_5_9_10<T3, T4, T5, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher3_4_5_6_10<T3, T4, T5, T6, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher3_4_5_6_9<T3, T4, T5, T6, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher3_4_5_7_8_9<T3, T4, T5, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -3346,6 +6180,33 @@ namespace OneOf
         IOneOfMatcher3_4_5_7_9<T3, T4, T5, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher3_4_5_7_8<T3, T4, T5, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher3_4_5_7_8_10<T3, T4, T5, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_7_8_10<T4, T5, T7, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_5_7_8_10<T3, T5, T7, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher3_4_7_8_10<T3, T4, T7, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher3_4_5_8_10<T3, T4, T5, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher3_4_5_7_10<T3, T4, T5, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher3_4_5_7_8<T3, T4, T5, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_4_5_7_9_10<T3, T4, T5, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_7_9_10<T4, T5, T7, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_5_7_9_10<T3, T5, T7, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher3_4_7_9_10<T3, T4, T7, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher3_4_5_9_10<T3, T4, T5, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher3_4_5_7_10<T3, T4, T5, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher3_4_5_7_9<T3, T4, T5, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_4_5_8_9_10<T3, T4, T5, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_8_9_10<T4, T5, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_5_8_9_10<T3, T5, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher3_4_8_9_10<T3, T4, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher3_4_5_9_10<T3, T4, T5, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher3_4_5_8_10<T3, T4, T5, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher3_4_5_8_9<T3, T4, T5, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher3_4_6_7_8_9<T3, T4, T6, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher4_6_7_8_9<T4, T6, T7, T8, T9, TResult> Match(Func<T3,TResult> matchFunc);
@@ -3354,6 +6215,42 @@ namespace OneOf
         IOneOfMatcher3_4_6_8_9<T3, T4, T6, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher3_4_6_7_9<T3, T4, T6, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher3_4_6_7_8<T3, T4, T6, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_4_6_7_8_10<T3, T4, T6, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_6_7_8_10<T4, T6, T7, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_6_7_8_10<T3, T6, T7, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher3_4_7_8_10<T3, T4, T7, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher3_4_6_8_10<T3, T4, T6, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher3_4_6_7_10<T3, T4, T6, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher3_4_6_7_8<T3, T4, T6, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_4_6_7_9_10<T3, T4, T6, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_6_7_9_10<T4, T6, T7, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_6_7_9_10<T3, T6, T7, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher3_4_7_9_10<T3, T4, T7, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher3_4_6_9_10<T3, T4, T6, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher3_4_6_7_10<T3, T4, T6, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher3_4_6_7_9<T3, T4, T6, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_4_6_8_9_10<T3, T4, T6, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_6_8_9_10<T4, T6, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_6_8_9_10<T3, T6, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher3_4_8_9_10<T3, T4, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher3_4_6_9_10<T3, T4, T6, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher3_4_6_8_10<T3, T4, T6, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher3_4_6_8_9<T3, T4, T6, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_4_7_8_9_10<T3, T4, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_7_8_9_10<T4, T7, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_7_8_9_10<T3, T7, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher3_4_8_9_10<T3, T4, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher3_4_7_9_10<T3, T4, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher3_4_7_8_10<T3, T4, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher3_4_7_8_9<T3, T4, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher3_5_6_7_8_9<T3, T5, T6, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -3364,6 +6261,51 @@ namespace OneOf
         IOneOfMatcher3_5_6_7_9<T3, T5, T6, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher3_5_6_7_8<T3, T5, T6, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher3_5_6_7_8_10<T3, T5, T6, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_6_7_8_10<T5, T6, T7, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_6_7_8_10<T3, T6, T7, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher3_5_7_8_10<T3, T5, T7, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher3_5_6_8_10<T3, T5, T6, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher3_5_6_7_10<T3, T5, T6, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher3_5_6_7_8<T3, T5, T6, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_5_6_7_9_10<T3, T5, T6, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_6_7_9_10<T5, T6, T7, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_6_7_9_10<T3, T6, T7, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher3_5_7_9_10<T3, T5, T7, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher3_5_6_9_10<T3, T5, T6, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher3_5_6_7_10<T3, T5, T6, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher3_5_6_7_9<T3, T5, T6, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_5_6_8_9_10<T3, T5, T6, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_6_8_9_10<T5, T6, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_6_8_9_10<T3, T6, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher3_5_8_9_10<T3, T5, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher3_5_6_9_10<T3, T5, T6, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher3_5_6_8_10<T3, T5, T6, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher3_5_6_8_9<T3, T5, T6, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_5_7_8_9_10<T3, T5, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_7_8_9_10<T5, T7, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_7_8_9_10<T3, T7, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher3_5_8_9_10<T3, T5, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher3_5_7_9_10<T3, T5, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher3_5_7_8_10<T3, T5, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher3_5_7_8_9<T3, T5, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_6_7_8_9_10<T3, T6, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_7_8_9_10<T6, T7, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_7_8_9_10<T3, T7, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher3_6_8_9_10<T3, T6, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher3_6_7_9_10<T3, T6, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher3_6_7_8_10<T3, T6, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher3_6_7_8_9<T3, T6, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher4_5_6_7_8_9<T4, T5, T6, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher5_6_7_8_9<T5, T6, T7, T8, T9, TResult> Match(Func<T4,TResult> matchFunc);
@@ -3372,6 +6314,60 @@ namespace OneOf
         IOneOfMatcher4_5_6_8_9<T4, T5, T6, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher4_5_6_7_9<T4, T5, T6, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher4_5_6_7_8<T4, T5, T6, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher4_5_6_7_8_10<T4, T5, T6, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_6_7_8_10<T5, T6, T7, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher4_6_7_8_10<T4, T6, T7, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher4_5_7_8_10<T4, T5, T7, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher4_5_6_8_10<T4, T5, T6, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher4_5_6_7_10<T4, T5, T6, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher4_5_6_7_8<T4, T5, T6, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher4_5_6_7_9_10<T4, T5, T6, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_6_7_9_10<T5, T6, T7, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher4_6_7_9_10<T4, T6, T7, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher4_5_7_9_10<T4, T5, T7, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher4_5_6_9_10<T4, T5, T6, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher4_5_6_7_10<T4, T5, T6, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher4_5_6_7_9<T4, T5, T6, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher4_5_6_8_9_10<T4, T5, T6, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_6_8_9_10<T5, T6, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher4_6_8_9_10<T4, T6, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher4_5_8_9_10<T4, T5, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher4_5_6_9_10<T4, T5, T6, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher4_5_6_8_10<T4, T5, T6, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher4_5_6_8_9<T4, T5, T6, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher4_5_7_8_9_10<T4, T5, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_7_8_9_10<T5, T7, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher4_7_8_9_10<T4, T7, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher4_5_8_9_10<T4, T5, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher4_5_7_9_10<T4, T5, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher4_5_7_8_10<T4, T5, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher4_5_7_8_9<T4, T5, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher4_6_7_8_9_10<T4, T6, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_7_8_9_10<T6, T7, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher4_7_8_9_10<T4, T7, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher4_6_8_9_10<T4, T6, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher4_6_7_9_10<T4, T6, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher4_6_7_8_10<T4, T6, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher4_6_7_8_9<T4, T6, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher5_6_7_8_9_10<T5, T6, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher6_7_8_9_10<T6, T7, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher5_7_8_9_10<T5, T7, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher5_6_8_9_10<T5, T6, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher5_6_7_9_10<T5, T6, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher5_6_7_8_10<T5, T6, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher5_6_7_8_9<T5, T6, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_2_3_4_5_6_7<T1, T2, T3, T4, T5, T6, T7, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -3403,6 +6399,16 @@ namespace OneOf
         IOneOfMatcher1_2_3_4_5_9<T1, T2, T3, T4, T5, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher1_2_3_4_5_6<T1, T2, T3, T4, T5, T6, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_3_4_5_6_10<T1, T2, T3, T4, T5, T6, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_4_5_6_10<T2, T3, T4, T5, T6, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_6_10<T1, T3, T4, T5, T6, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_6_10<T1, T2, T4, T5, T6, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_6_10<T1, T2, T3, T5, T6, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_6_10<T1, T2, T3, T4, T6, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_10<T1, T2, T3, T4, T5, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_6<T1, T2, T3, T4, T5, T6, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_3_4_5_7_8<T1, T2, T3, T4, T5, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_3_4_5_7_8<T2, T3, T4, T5, T7, T8, TResult> Match(Func<T1,TResult> matchFunc);
@@ -3423,6 +6429,16 @@ namespace OneOf
         IOneOfMatcher1_2_3_4_5_9<T1, T2, T3, T4, T5, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_2_3_4_5_7<T1, T2, T3, T4, T5, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_3_4_5_7_10<T1, T2, T3, T4, T5, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_4_5_7_10<T2, T3, T4, T5, T7, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_7_10<T1, T3, T4, T5, T7, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_7_10<T1, T2, T4, T5, T7, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_7_10<T1, T2, T3, T5, T7, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_7_10<T1, T2, T3, T4, T7, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_10<T1, T2, T3, T4, T5, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_7<T1, T2, T3, T4, T5, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_3_4_5_8_9<T1, T2, T3, T4, T5, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_3_4_5_8_9<T2, T3, T4, T5, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -3432,6 +6448,26 @@ namespace OneOf
         IOneOfMatcher1_2_3_4_8_9<T1, T2, T3, T4, T8, T9, TResult> Match(Func<T5,TResult> matchFunc);
         IOneOfMatcher1_2_3_4_5_9<T1, T2, T3, T4, T5, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_2_3_4_5_8<T1, T2, T3, T4, T5, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_4_5_8_10<T1, T2, T3, T4, T5, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_4_5_8_10<T2, T3, T4, T5, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_8_10<T1, T3, T4, T5, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_8_10<T1, T2, T4, T5, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_8_10<T1, T2, T3, T5, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_8_10<T1, T2, T3, T4, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_10<T1, T2, T3, T4, T5, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_8<T1, T2, T3, T4, T5, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_4_5_9_10<T1, T2, T3, T4, T5, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_4_5_9_10<T2, T3, T4, T5, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_9_10<T1, T3, T4, T5, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_9_10<T1, T2, T4, T5, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_9_10<T1, T2, T3, T5, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_9_10<T1, T2, T3, T4, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_10<T1, T2, T3, T4, T5, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_9<T1, T2, T3, T4, T5, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_2_3_4_6_7_8<T1, T2, T3, T4, T6, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -3453,6 +6489,16 @@ namespace OneOf
         IOneOfMatcher1_2_3_4_6_9<T1, T2, T3, T4, T6, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_2_3_4_6_7<T1, T2, T3, T4, T6, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_3_4_6_7_10<T1, T2, T3, T4, T6, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_4_6_7_10<T2, T3, T4, T6, T7, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_7_10<T1, T3, T4, T6, T7, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_7_10<T1, T2, T4, T6, T7, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_7_10<T1, T2, T3, T6, T7, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_7_10<T1, T2, T3, T4, T7, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_6_10<T1, T2, T3, T4, T6, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_6_7<T1, T2, T3, T4, T6, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_3_4_6_8_9<T1, T2, T3, T4, T6, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_3_4_6_8_9<T2, T3, T4, T6, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -3463,6 +6509,26 @@ namespace OneOf
         IOneOfMatcher1_2_3_4_6_9<T1, T2, T3, T4, T6, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_2_3_4_6_8<T1, T2, T3, T4, T6, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_3_4_6_8_10<T1, T2, T3, T4, T6, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_4_6_8_10<T2, T3, T4, T6, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_8_10<T1, T3, T4, T6, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_8_10<T1, T2, T4, T6, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_8_10<T1, T2, T3, T6, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_8_10<T1, T2, T3, T4, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_6_10<T1, T2, T3, T4, T6, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_6_8<T1, T2, T3, T4, T6, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_4_6_9_10<T1, T2, T3, T4, T6, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_4_6_9_10<T2, T3, T4, T6, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_9_10<T1, T3, T4, T6, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_9_10<T1, T2, T4, T6, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_9_10<T1, T2, T3, T6, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_9_10<T1, T2, T3, T4, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_6_10<T1, T2, T3, T4, T6, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_6_9<T1, T2, T3, T4, T6, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_3_4_7_8_9<T1, T2, T3, T4, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_3_4_7_8_9<T2, T3, T4, T7, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -3472,6 +6538,36 @@ namespace OneOf
         IOneOfMatcher1_2_3_4_8_9<T1, T2, T3, T4, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_2_3_4_7_9<T1, T2, T3, T4, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_2_3_4_7_8<T1, T2, T3, T4, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_4_7_8_10<T1, T2, T3, T4, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_4_7_8_10<T2, T3, T4, T7, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_4_7_8_10<T1, T3, T4, T7, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_4_7_8_10<T1, T2, T4, T7, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_7_8_10<T1, T2, T3, T7, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_8_10<T1, T2, T3, T4, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_7_10<T1, T2, T3, T4, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_7_8<T1, T2, T3, T4, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_4_7_9_10<T1, T2, T3, T4, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_4_7_9_10<T2, T3, T4, T7, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_4_7_9_10<T1, T3, T4, T7, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_4_7_9_10<T1, T2, T4, T7, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_7_9_10<T1, T2, T3, T7, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_9_10<T1, T2, T3, T4, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_7_10<T1, T2, T3, T4, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_7_9<T1, T2, T3, T4, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_4_8_9_10<T1, T2, T3, T4, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_4_8_9_10<T2, T3, T4, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_4_8_9_10<T1, T3, T4, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_4_8_9_10<T1, T2, T4, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_8_9_10<T1, T2, T3, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_9_10<T1, T2, T3, T4, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_8_10<T1, T2, T3, T4, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_8_9<T1, T2, T3, T4, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_2_3_5_6_7_8<T1, T2, T3, T5, T6, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -3493,6 +6589,16 @@ namespace OneOf
         IOneOfMatcher1_2_3_5_6_9<T1, T2, T3, T5, T6, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_2_3_5_6_7<T1, T2, T3, T5, T6, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_3_5_6_7_10<T1, T2, T3, T5, T6, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_5_6_7_10<T2, T3, T5, T6, T7, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_7_10<T1, T3, T5, T6, T7, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_7_10<T1, T2, T5, T6, T7, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_7_10<T1, T2, T3, T6, T7, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_7_10<T1, T2, T3, T5, T7, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_6_10<T1, T2, T3, T5, T6, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_6_7<T1, T2, T3, T5, T6, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_3_5_6_8_9<T1, T2, T3, T5, T6, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_3_5_6_8_9<T2, T3, T5, T6, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -3502,6 +6608,26 @@ namespace OneOf
         IOneOfMatcher1_2_3_5_8_9<T1, T2, T3, T5, T8, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher1_2_3_5_6_9<T1, T2, T3, T5, T6, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_2_3_5_6_8<T1, T2, T3, T5, T6, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_5_6_8_10<T1, T2, T3, T5, T6, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_5_6_8_10<T2, T3, T5, T6, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_8_10<T1, T3, T5, T6, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_8_10<T1, T2, T5, T6, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_8_10<T1, T2, T3, T6, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_8_10<T1, T2, T3, T5, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_6_10<T1, T2, T3, T5, T6, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_6_8<T1, T2, T3, T5, T6, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_5_6_9_10<T1, T2, T3, T5, T6, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_5_6_9_10<T2, T3, T5, T6, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_9_10<T1, T3, T5, T6, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_9_10<T1, T2, T5, T6, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_9_10<T1, T2, T3, T6, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_9_10<T1, T2, T3, T5, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_6_10<T1, T2, T3, T5, T6, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_6_9<T1, T2, T3, T5, T6, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_2_3_5_7_8_9<T1, T2, T3, T5, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -3513,6 +6639,36 @@ namespace OneOf
         IOneOfMatcher1_2_3_5_7_9<T1, T2, T3, T5, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_2_3_5_7_8<T1, T2, T3, T5, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_3_5_7_8_10<T1, T2, T3, T5, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_5_7_8_10<T2, T3, T5, T7, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_5_7_8_10<T1, T3, T5, T7, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_5_7_8_10<T1, T2, T5, T7, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_7_8_10<T1, T2, T3, T7, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_8_10<T1, T2, T3, T5, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_7_10<T1, T2, T3, T5, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_7_8<T1, T2, T3, T5, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_5_7_9_10<T1, T2, T3, T5, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_5_7_9_10<T2, T3, T5, T7, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_5_7_9_10<T1, T3, T5, T7, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_5_7_9_10<T1, T2, T5, T7, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_7_9_10<T1, T2, T3, T7, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_9_10<T1, T2, T3, T5, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_7_10<T1, T2, T3, T5, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_7_9<T1, T2, T3, T5, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_5_8_9_10<T1, T2, T3, T5, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_5_8_9_10<T2, T3, T5, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_5_8_9_10<T1, T3, T5, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_5_8_9_10<T1, T2, T5, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_8_9_10<T1, T2, T3, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_9_10<T1, T2, T3, T5, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_8_10<T1, T2, T3, T5, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_8_9<T1, T2, T3, T5, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_3_6_7_8_9<T1, T2, T3, T6, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_3_6_7_8_9<T2, T3, T6, T7, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -3522,6 +6678,46 @@ namespace OneOf
         IOneOfMatcher1_2_3_6_8_9<T1, T2, T3, T6, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_2_3_6_7_9<T1, T2, T3, T6, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_2_3_6_7_8<T1, T2, T3, T6, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_6_7_8_10<T1, T2, T3, T6, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_6_7_8_10<T2, T3, T6, T7, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_6_7_8_10<T1, T3, T6, T7, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_6_7_8_10<T1, T2, T6, T7, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_7_8_10<T1, T2, T3, T7, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_8_10<T1, T2, T3, T6, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_7_10<T1, T2, T3, T6, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_7_8<T1, T2, T3, T6, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_6_7_9_10<T1, T2, T3, T6, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_6_7_9_10<T2, T3, T6, T7, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_6_7_9_10<T1, T3, T6, T7, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_6_7_9_10<T1, T2, T6, T7, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_7_9_10<T1, T2, T3, T7, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_9_10<T1, T2, T3, T6, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_7_10<T1, T2, T3, T6, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_7_9<T1, T2, T3, T6, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_6_8_9_10<T1, T2, T3, T6, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_6_8_9_10<T2, T3, T6, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_6_8_9_10<T1, T3, T6, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_6_8_9_10<T1, T2, T6, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_8_9_10<T1, T2, T3, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_9_10<T1, T2, T3, T6, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_8_10<T1, T2, T3, T6, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_8_9<T1, T2, T3, T6, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_7_8_9_10<T1, T2, T3, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_7_8_9_10<T2, T3, T7, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_7_8_9_10<T1, T3, T7, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_7_8_9_10<T1, T2, T7, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_8_9_10<T1, T2, T3, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_3_7_9_10<T1, T2, T3, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_3_7_8_10<T1, T2, T3, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_3_7_8_9<T1, T2, T3, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_2_4_5_6_7_8<T1, T2, T4, T5, T6, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -3543,6 +6739,16 @@ namespace OneOf
         IOneOfMatcher1_2_4_5_6_9<T1, T2, T4, T5, T6, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_2_4_5_6_7<T1, T2, T4, T5, T6, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_4_5_6_7_10<T1, T2, T4, T5, T6, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_4_5_6_7_10<T2, T4, T5, T6, T7, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_7_10<T1, T4, T5, T6, T7, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_7_10<T1, T2, T5, T6, T7, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_7_10<T1, T2, T4, T6, T7, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_7_10<T1, T2, T4, T5, T7, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_6_10<T1, T2, T4, T5, T6, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_6_7<T1, T2, T4, T5, T6, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_4_5_6_8_9<T1, T2, T4, T5, T6, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_4_5_6_8_9<T2, T4, T5, T6, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -3552,6 +6758,26 @@ namespace OneOf
         IOneOfMatcher1_2_4_5_8_9<T1, T2, T4, T5, T8, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher1_2_4_5_6_9<T1, T2, T4, T5, T6, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_2_4_5_6_8<T1, T2, T4, T5, T6, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_4_5_6_8_10<T1, T2, T4, T5, T6, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_4_5_6_8_10<T2, T4, T5, T6, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_8_10<T1, T4, T5, T6, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_8_10<T1, T2, T5, T6, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_8_10<T1, T2, T4, T6, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_8_10<T1, T2, T4, T5, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_6_10<T1, T2, T4, T5, T6, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_6_8<T1, T2, T4, T5, T6, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_4_5_6_9_10<T1, T2, T4, T5, T6, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_4_5_6_9_10<T2, T4, T5, T6, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_9_10<T1, T4, T5, T6, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_9_10<T1, T2, T5, T6, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_9_10<T1, T2, T4, T6, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_9_10<T1, T2, T4, T5, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_6_10<T1, T2, T4, T5, T6, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_6_9<T1, T2, T4, T5, T6, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_2_4_5_7_8_9<T1, T2, T4, T5, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -3563,6 +6789,36 @@ namespace OneOf
         IOneOfMatcher1_2_4_5_7_9<T1, T2, T4, T5, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_2_4_5_7_8<T1, T2, T4, T5, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_4_5_7_8_10<T1, T2, T4, T5, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_4_5_7_8_10<T2, T4, T5, T7, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_5_7_8_10<T1, T4, T5, T7, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_5_7_8_10<T1, T2, T5, T7, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_4_7_8_10<T1, T2, T4, T7, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_8_10<T1, T2, T4, T5, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_7_10<T1, T2, T4, T5, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_7_8<T1, T2, T4, T5, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_4_5_7_9_10<T1, T2, T4, T5, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_4_5_7_9_10<T2, T4, T5, T7, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_5_7_9_10<T1, T4, T5, T7, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_5_7_9_10<T1, T2, T5, T7, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_4_7_9_10<T1, T2, T4, T7, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_9_10<T1, T2, T4, T5, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_7_10<T1, T2, T4, T5, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_7_9<T1, T2, T4, T5, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_4_5_8_9_10<T1, T2, T4, T5, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_4_5_8_9_10<T2, T4, T5, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_5_8_9_10<T1, T4, T5, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_5_8_9_10<T1, T2, T5, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_4_8_9_10<T1, T2, T4, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_9_10<T1, T2, T4, T5, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_8_10<T1, T2, T4, T5, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_8_9<T1, T2, T4, T5, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_4_6_7_8_9<T1, T2, T4, T6, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_4_6_7_8_9<T2, T4, T6, T7, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -3573,6 +6829,46 @@ namespace OneOf
         IOneOfMatcher1_2_4_6_7_9<T1, T2, T4, T6, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_2_4_6_7_8<T1, T2, T4, T6, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_4_6_7_8_10<T1, T2, T4, T6, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_4_6_7_8_10<T2, T4, T6, T7, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_6_7_8_10<T1, T4, T6, T7, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_6_7_8_10<T1, T2, T6, T7, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_4_7_8_10<T1, T2, T4, T7, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_8_10<T1, T2, T4, T6, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_7_10<T1, T2, T4, T6, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_7_8<T1, T2, T4, T6, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_4_6_7_9_10<T1, T2, T4, T6, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_4_6_7_9_10<T2, T4, T6, T7, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_6_7_9_10<T1, T4, T6, T7, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_6_7_9_10<T1, T2, T6, T7, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_4_7_9_10<T1, T2, T4, T7, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_9_10<T1, T2, T4, T6, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_7_10<T1, T2, T4, T6, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_7_9<T1, T2, T4, T6, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_4_6_8_9_10<T1, T2, T4, T6, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_4_6_8_9_10<T2, T4, T6, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_6_8_9_10<T1, T4, T6, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_6_8_9_10<T1, T2, T6, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_4_8_9_10<T1, T2, T4, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_9_10<T1, T2, T4, T6, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_8_10<T1, T2, T4, T6, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_8_9<T1, T2, T4, T6, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_4_7_8_9_10<T1, T2, T4, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_4_7_8_9_10<T2, T4, T7, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_7_8_9_10<T1, T4, T7, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_7_8_9_10<T1, T2, T7, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_4_8_9_10<T1, T2, T4, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_4_7_9_10<T1, T2, T4, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_4_7_8_10<T1, T2, T4, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_4_7_8_9<T1, T2, T4, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_5_6_7_8_9<T1, T2, T5, T6, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_5_6_7_8_9<T2, T5, T6, T7, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -3582,6 +6878,56 @@ namespace OneOf
         IOneOfMatcher1_2_5_6_8_9<T1, T2, T5, T6, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_2_5_6_7_9<T1, T2, T5, T6, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_2_5_6_7_8<T1, T2, T5, T6, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_5_6_7_8_10<T1, T2, T5, T6, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_5_6_7_8_10<T2, T5, T6, T7, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_6_7_8_10<T1, T5, T6, T7, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_6_7_8_10<T1, T2, T6, T7, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_5_7_8_10<T1, T2, T5, T7, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_8_10<T1, T2, T5, T6, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_7_10<T1, T2, T5, T6, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_7_8<T1, T2, T5, T6, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_5_6_7_9_10<T1, T2, T5, T6, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_5_6_7_9_10<T2, T5, T6, T7, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_6_7_9_10<T1, T5, T6, T7, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_6_7_9_10<T1, T2, T6, T7, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_5_7_9_10<T1, T2, T5, T7, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_9_10<T1, T2, T5, T6, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_7_10<T1, T2, T5, T6, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_7_9<T1, T2, T5, T6, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_5_6_8_9_10<T1, T2, T5, T6, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_5_6_8_9_10<T2, T5, T6, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_6_8_9_10<T1, T5, T6, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_6_8_9_10<T1, T2, T6, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_5_8_9_10<T1, T2, T5, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_9_10<T1, T2, T5, T6, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_8_10<T1, T2, T5, T6, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_8_9<T1, T2, T5, T6, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_5_7_8_9_10<T1, T2, T5, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_5_7_8_9_10<T2, T5, T7, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_7_8_9_10<T1, T5, T7, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_7_8_9_10<T1, T2, T7, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_5_8_9_10<T1, T2, T5, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_5_7_9_10<T1, T2, T5, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_5_7_8_10<T1, T2, T5, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_5_7_8_9<T1, T2, T5, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_6_7_8_9_10<T1, T2, T6, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_6_7_8_9_10<T2, T6, T7, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_6_7_8_9_10<T1, T6, T7, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_7_8_9_10<T1, T2, T7, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_6_8_9_10<T1, T2, T6, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_6_7_9_10<T1, T2, T6, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_6_7_8_10<T1, T2, T6, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_6_7_8_9<T1, T2, T6, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_3_4_5_6_7_8<T1, T3, T4, T5, T6, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -3603,6 +6949,16 @@ namespace OneOf
         IOneOfMatcher1_3_4_5_6_9<T1, T3, T4, T5, T6, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_3_4_5_6_7<T1, T3, T4, T5, T6, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_3_4_5_6_7_10<T1, T3, T4, T5, T6, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_5_6_7_10<T3, T4, T5, T6, T7, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_7_10<T1, T4, T5, T6, T7, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_7_10<T1, T3, T5, T6, T7, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_7_10<T1, T3, T4, T6, T7, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_7_10<T1, T3, T4, T5, T7, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_6_10<T1, T3, T4, T5, T6, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_6_7<T1, T3, T4, T5, T6, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_3_4_5_6_8_9<T1, T3, T4, T5, T6, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_4_5_6_8_9<T3, T4, T5, T6, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -3612,6 +6968,26 @@ namespace OneOf
         IOneOfMatcher1_3_4_5_8_9<T1, T3, T4, T5, T8, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher1_3_4_5_6_9<T1, T3, T4, T5, T6, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_3_4_5_6_8<T1, T3, T4, T5, T6, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_4_5_6_8_10<T1, T3, T4, T5, T6, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_5_6_8_10<T3, T4, T5, T6, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_8_10<T1, T4, T5, T6, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_8_10<T1, T3, T5, T6, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_8_10<T1, T3, T4, T6, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_8_10<T1, T3, T4, T5, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_6_10<T1, T3, T4, T5, T6, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_6_8<T1, T3, T4, T5, T6, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_4_5_6_9_10<T1, T3, T4, T5, T6, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_5_6_9_10<T3, T4, T5, T6, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_9_10<T1, T4, T5, T6, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_9_10<T1, T3, T5, T6, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_9_10<T1, T3, T4, T6, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_9_10<T1, T3, T4, T5, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_6_10<T1, T3, T4, T5, T6, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_6_9<T1, T3, T4, T5, T6, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_3_4_5_7_8_9<T1, T3, T4, T5, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -3623,6 +6999,36 @@ namespace OneOf
         IOneOfMatcher1_3_4_5_7_9<T1, T3, T4, T5, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_3_4_5_7_8<T1, T3, T4, T5, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_3_4_5_7_8_10<T1, T3, T4, T5, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_5_7_8_10<T3, T4, T5, T7, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_5_7_8_10<T1, T4, T5, T7, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_5_7_8_10<T1, T3, T5, T7, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_3_4_7_8_10<T1, T3, T4, T7, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_8_10<T1, T3, T4, T5, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_7_10<T1, T3, T4, T5, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_7_8<T1, T3, T4, T5, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_4_5_7_9_10<T1, T3, T4, T5, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_5_7_9_10<T3, T4, T5, T7, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_5_7_9_10<T1, T4, T5, T7, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_5_7_9_10<T1, T3, T5, T7, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_3_4_7_9_10<T1, T3, T4, T7, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_9_10<T1, T3, T4, T5, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_7_10<T1, T3, T4, T5, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_7_9<T1, T3, T4, T5, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_4_5_8_9_10<T1, T3, T4, T5, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_5_8_9_10<T3, T4, T5, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_5_8_9_10<T1, T4, T5, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_5_8_9_10<T1, T3, T5, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_3_4_8_9_10<T1, T3, T4, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_9_10<T1, T3, T4, T5, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_8_10<T1, T3, T4, T5, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_8_9<T1, T3, T4, T5, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_3_4_6_7_8_9<T1, T3, T4, T6, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_4_6_7_8_9<T3, T4, T6, T7, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -3632,6 +7038,46 @@ namespace OneOf
         IOneOfMatcher1_3_4_6_8_9<T1, T3, T4, T6, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_3_4_6_7_9<T1, T3, T4, T6, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_3_4_6_7_8<T1, T3, T4, T6, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_4_6_7_8_10<T1, T3, T4, T6, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_6_7_8_10<T3, T4, T6, T7, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_6_7_8_10<T1, T4, T6, T7, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_6_7_8_10<T1, T3, T6, T7, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_3_4_7_8_10<T1, T3, T4, T7, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_8_10<T1, T3, T4, T6, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_7_10<T1, T3, T4, T6, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_7_8<T1, T3, T4, T6, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_4_6_7_9_10<T1, T3, T4, T6, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_6_7_9_10<T3, T4, T6, T7, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_6_7_9_10<T1, T4, T6, T7, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_6_7_9_10<T1, T3, T6, T7, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_3_4_7_9_10<T1, T3, T4, T7, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_9_10<T1, T3, T4, T6, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_7_10<T1, T3, T4, T6, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_7_9<T1, T3, T4, T6, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_4_6_8_9_10<T1, T3, T4, T6, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_6_8_9_10<T3, T4, T6, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_6_8_9_10<T1, T4, T6, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_6_8_9_10<T1, T3, T6, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_3_4_8_9_10<T1, T3, T4, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_9_10<T1, T3, T4, T6, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_8_10<T1, T3, T4, T6, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_8_9<T1, T3, T4, T6, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_4_7_8_9_10<T1, T3, T4, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_7_8_9_10<T3, T4, T7, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_7_8_9_10<T1, T4, T7, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_7_8_9_10<T1, T3, T7, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_3_4_8_9_10<T1, T3, T4, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_3_4_7_9_10<T1, T3, T4, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_3_4_7_8_10<T1, T3, T4, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_3_4_7_8_9<T1, T3, T4, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_3_5_6_7_8_9<T1, T3, T5, T6, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -3643,6 +7089,56 @@ namespace OneOf
         IOneOfMatcher1_3_5_6_7_9<T1, T3, T5, T6, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_3_5_6_7_8<T1, T3, T5, T6, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_3_5_6_7_8_10<T1, T3, T5, T6, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_5_6_7_8_10<T3, T5, T6, T7, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_6_7_8_10<T1, T5, T6, T7, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_6_7_8_10<T1, T3, T6, T7, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_3_5_7_8_10<T1, T3, T5, T7, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_8_10<T1, T3, T5, T6, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_7_10<T1, T3, T5, T6, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_7_8<T1, T3, T5, T6, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_5_6_7_9_10<T1, T3, T5, T6, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_5_6_7_9_10<T3, T5, T6, T7, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_6_7_9_10<T1, T5, T6, T7, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_6_7_9_10<T1, T3, T6, T7, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_3_5_7_9_10<T1, T3, T5, T7, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_9_10<T1, T3, T5, T6, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_7_10<T1, T3, T5, T6, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_7_9<T1, T3, T5, T6, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_5_6_8_9_10<T1, T3, T5, T6, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_5_6_8_9_10<T3, T5, T6, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_6_8_9_10<T1, T5, T6, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_6_8_9_10<T1, T3, T6, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_3_5_8_9_10<T1, T3, T5, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_9_10<T1, T3, T5, T6, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_8_10<T1, T3, T5, T6, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_8_9<T1, T3, T5, T6, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_5_7_8_9_10<T1, T3, T5, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_5_7_8_9_10<T3, T5, T7, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_7_8_9_10<T1, T5, T7, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_7_8_9_10<T1, T3, T7, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_3_5_8_9_10<T1, T3, T5, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_3_5_7_9_10<T1, T3, T5, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_3_5_7_8_10<T1, T3, T5, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_3_5_7_8_9<T1, T3, T5, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_6_7_8_9_10<T1, T3, T6, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_6_7_8_9_10<T3, T6, T7, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_6_7_8_9_10<T1, T6, T7, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_7_8_9_10<T1, T3, T7, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_3_6_8_9_10<T1, T3, T6, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_3_6_7_9_10<T1, T3, T6, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_3_6_7_8_10<T1, T3, T6, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_3_6_7_8_9<T1, T3, T6, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_4_5_6_7_8_9<T1, T4, T5, T6, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher4_5_6_7_8_9<T4, T5, T6, T7, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -3652,6 +7148,66 @@ namespace OneOf
         IOneOfMatcher1_4_5_6_8_9<T1, T4, T5, T6, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_4_5_6_7_9<T1, T4, T5, T6, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_4_5_6_7_8<T1, T4, T5, T6, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_4_5_6_7_8_10<T1, T4, T5, T6, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_6_7_8_10<T4, T5, T6, T7, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_6_7_8_10<T1, T5, T6, T7, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_4_6_7_8_10<T1, T4, T6, T7, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_4_5_7_8_10<T1, T4, T5, T7, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_8_10<T1, T4, T5, T6, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_7_10<T1, T4, T5, T6, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_7_8<T1, T4, T5, T6, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_4_5_6_7_9_10<T1, T4, T5, T6, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_6_7_9_10<T4, T5, T6, T7, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_6_7_9_10<T1, T5, T6, T7, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_4_6_7_9_10<T1, T4, T6, T7, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_4_5_7_9_10<T1, T4, T5, T7, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_9_10<T1, T4, T5, T6, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_7_10<T1, T4, T5, T6, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_7_9<T1, T4, T5, T6, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_4_5_6_8_9_10<T1, T4, T5, T6, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_6_8_9_10<T4, T5, T6, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_6_8_9_10<T1, T5, T6, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_4_6_8_9_10<T1, T4, T6, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_4_5_8_9_10<T1, T4, T5, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_9_10<T1, T4, T5, T6, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_8_10<T1, T4, T5, T6, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_8_9<T1, T4, T5, T6, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_4_5_7_8_9_10<T1, T4, T5, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_7_8_9_10<T4, T5, T7, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_7_8_9_10<T1, T5, T7, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_4_7_8_9_10<T1, T4, T7, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_4_5_8_9_10<T1, T4, T5, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_4_5_7_9_10<T1, T4, T5, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_4_5_7_8_10<T1, T4, T5, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_4_5_7_8_9<T1, T4, T5, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_4_6_7_8_9_10<T1, T4, T6, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_6_7_8_9_10<T4, T6, T7, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_6_7_8_9_10<T1, T6, T7, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_4_7_8_9_10<T1, T4, T7, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_4_6_8_9_10<T1, T4, T6, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_4_6_7_9_10<T1, T4, T6, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_4_6_7_8_10<T1, T4, T6, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_4_6_7_8_9<T1, T4, T6, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_5_6_7_8_9_10<T1, T5, T6, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_6_7_8_9_10<T5, T6, T7, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_6_7_8_9_10<T1, T6, T7, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_5_7_8_9_10<T1, T5, T7, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_5_6_8_9_10<T1, T5, T6, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_5_6_7_9_10<T1, T5, T6, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_5_6_7_8_10<T1, T5, T6, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_5_6_7_8_9<T1, T5, T6, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher2_3_4_5_6_7_8<T2, T3, T4, T5, T6, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -3673,6 +7229,16 @@ namespace OneOf
         IOneOfMatcher2_3_4_5_6_9<T2, T3, T4, T5, T6, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher2_3_4_5_6_7<T2, T3, T4, T5, T6, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_3_4_5_6_7_10<T2, T3, T4, T5, T6, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_5_6_7_10<T3, T4, T5, T6, T7, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_4_5_6_7_10<T2, T4, T5, T6, T7, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_5_6_7_10<T2, T3, T5, T6, T7, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_3_4_6_7_10<T2, T3, T4, T6, T7, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_7_10<T2, T3, T4, T5, T7, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_6_10<T2, T3, T4, T5, T6, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_6_7<T2, T3, T4, T5, T6, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_3_4_5_6_8_9<T2, T3, T4, T5, T6, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_4_5_6_8_9<T3, T4, T5, T6, T8, T9, TResult> Match(Func<T2,TResult> matchFunc);
@@ -3682,6 +7248,26 @@ namespace OneOf
         IOneOfMatcher2_3_4_5_8_9<T2, T3, T4, T5, T8, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher2_3_4_5_6_9<T2, T3, T4, T5, T6, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher2_3_4_5_6_8<T2, T3, T4, T5, T6, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_4_5_6_8_10<T2, T3, T4, T5, T6, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_5_6_8_10<T3, T4, T5, T6, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_4_5_6_8_10<T2, T4, T5, T6, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_5_6_8_10<T2, T3, T5, T6, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_3_4_6_8_10<T2, T3, T4, T6, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_8_10<T2, T3, T4, T5, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_6_10<T2, T3, T4, T5, T6, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_6_8<T2, T3, T4, T5, T6, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_4_5_6_9_10<T2, T3, T4, T5, T6, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_5_6_9_10<T3, T4, T5, T6, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_4_5_6_9_10<T2, T4, T5, T6, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_5_6_9_10<T2, T3, T5, T6, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_3_4_6_9_10<T2, T3, T4, T6, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_9_10<T2, T3, T4, T5, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_6_10<T2, T3, T4, T5, T6, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_6_9<T2, T3, T4, T5, T6, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher2_3_4_5_7_8_9<T2, T3, T4, T5, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -3693,6 +7279,36 @@ namespace OneOf
         IOneOfMatcher2_3_4_5_7_9<T2, T3, T4, T5, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher2_3_4_5_7_8<T2, T3, T4, T5, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_3_4_5_7_8_10<T2, T3, T4, T5, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_5_7_8_10<T3, T4, T5, T7, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_4_5_7_8_10<T2, T4, T5, T7, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_5_7_8_10<T2, T3, T5, T7, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_3_4_7_8_10<T2, T3, T4, T7, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_8_10<T2, T3, T4, T5, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_7_10<T2, T3, T4, T5, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_7_8<T2, T3, T4, T5, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_4_5_7_9_10<T2, T3, T4, T5, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_5_7_9_10<T3, T4, T5, T7, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_4_5_7_9_10<T2, T4, T5, T7, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_5_7_9_10<T2, T3, T5, T7, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_3_4_7_9_10<T2, T3, T4, T7, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_9_10<T2, T3, T4, T5, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_7_10<T2, T3, T4, T5, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_7_9<T2, T3, T4, T5, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_4_5_8_9_10<T2, T3, T4, T5, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_5_8_9_10<T3, T4, T5, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_4_5_8_9_10<T2, T4, T5, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_5_8_9_10<T2, T3, T5, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_3_4_8_9_10<T2, T3, T4, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_9_10<T2, T3, T4, T5, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_8_10<T2, T3, T4, T5, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_8_9<T2, T3, T4, T5, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_3_4_6_7_8_9<T2, T3, T4, T6, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_4_6_7_8_9<T3, T4, T6, T7, T8, T9, TResult> Match(Func<T2,TResult> matchFunc);
@@ -3702,6 +7318,46 @@ namespace OneOf
         IOneOfMatcher2_3_4_6_8_9<T2, T3, T4, T6, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher2_3_4_6_7_9<T2, T3, T4, T6, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher2_3_4_6_7_8<T2, T3, T4, T6, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_4_6_7_8_10<T2, T3, T4, T6, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_6_7_8_10<T3, T4, T6, T7, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_4_6_7_8_10<T2, T4, T6, T7, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_6_7_8_10<T2, T3, T6, T7, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_3_4_7_8_10<T2, T3, T4, T7, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_3_4_6_8_10<T2, T3, T4, T6, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_3_4_6_7_10<T2, T3, T4, T6, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_3_4_6_7_8<T2, T3, T4, T6, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_4_6_7_9_10<T2, T3, T4, T6, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_6_7_9_10<T3, T4, T6, T7, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_4_6_7_9_10<T2, T4, T6, T7, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_6_7_9_10<T2, T3, T6, T7, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_3_4_7_9_10<T2, T3, T4, T7, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_3_4_6_9_10<T2, T3, T4, T6, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_3_4_6_7_10<T2, T3, T4, T6, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_3_4_6_7_9<T2, T3, T4, T6, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_4_6_8_9_10<T2, T3, T4, T6, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_6_8_9_10<T3, T4, T6, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_4_6_8_9_10<T2, T4, T6, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_6_8_9_10<T2, T3, T6, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_3_4_8_9_10<T2, T3, T4, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_3_4_6_9_10<T2, T3, T4, T6, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_3_4_6_8_10<T2, T3, T4, T6, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_3_4_6_8_9<T2, T3, T4, T6, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_4_7_8_9_10<T2, T3, T4, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_7_8_9_10<T3, T4, T7, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_4_7_8_9_10<T2, T4, T7, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_7_8_9_10<T2, T3, T7, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_3_4_8_9_10<T2, T3, T4, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_3_4_7_9_10<T2, T3, T4, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_3_4_7_8_10<T2, T3, T4, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_3_4_7_8_9<T2, T3, T4, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher2_3_5_6_7_8_9<T2, T3, T5, T6, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -3713,6 +7369,56 @@ namespace OneOf
         IOneOfMatcher2_3_5_6_7_9<T2, T3, T5, T6, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher2_3_5_6_7_8<T2, T3, T5, T6, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_3_5_6_7_8_10<T2, T3, T5, T6, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_5_6_7_8_10<T3, T5, T6, T7, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_5_6_7_8_10<T2, T5, T6, T7, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_6_7_8_10<T2, T3, T6, T7, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_3_5_7_8_10<T2, T3, T5, T7, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_3_5_6_8_10<T2, T3, T5, T6, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_3_5_6_7_10<T2, T3, T5, T6, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_3_5_6_7_8<T2, T3, T5, T6, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_5_6_7_9_10<T2, T3, T5, T6, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_5_6_7_9_10<T3, T5, T6, T7, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_5_6_7_9_10<T2, T5, T6, T7, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_6_7_9_10<T2, T3, T6, T7, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_3_5_7_9_10<T2, T3, T5, T7, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_3_5_6_9_10<T2, T3, T5, T6, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_3_5_6_7_10<T2, T3, T5, T6, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_3_5_6_7_9<T2, T3, T5, T6, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_5_6_8_9_10<T2, T3, T5, T6, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_5_6_8_9_10<T3, T5, T6, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_5_6_8_9_10<T2, T5, T6, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_6_8_9_10<T2, T3, T6, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_3_5_8_9_10<T2, T3, T5, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_3_5_6_9_10<T2, T3, T5, T6, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_3_5_6_8_10<T2, T3, T5, T6, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_3_5_6_8_9<T2, T3, T5, T6, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_5_7_8_9_10<T2, T3, T5, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_5_7_8_9_10<T3, T5, T7, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_5_7_8_9_10<T2, T5, T7, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_7_8_9_10<T2, T3, T7, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_3_5_8_9_10<T2, T3, T5, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_3_5_7_9_10<T2, T3, T5, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_3_5_7_8_10<T2, T3, T5, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_3_5_7_8_9<T2, T3, T5, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_6_7_8_9_10<T2, T3, T6, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_6_7_8_9_10<T3, T6, T7, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_6_7_8_9_10<T2, T6, T7, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_7_8_9_10<T2, T3, T7, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_3_6_8_9_10<T2, T3, T6, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_3_6_7_9_10<T2, T3, T6, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_3_6_7_8_10<T2, T3, T6, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_3_6_7_8_9<T2, T3, T6, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_4_5_6_7_8_9<T2, T4, T5, T6, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher4_5_6_7_8_9<T4, T5, T6, T7, T8, T9, TResult> Match(Func<T2,TResult> matchFunc);
@@ -3723,6 +7429,66 @@ namespace OneOf
         IOneOfMatcher2_4_5_6_7_9<T2, T4, T5, T6, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher2_4_5_6_7_8<T2, T4, T5, T6, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher2_4_5_6_7_8_10<T2, T4, T5, T6, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_6_7_8_10<T4, T5, T6, T7, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_5_6_7_8_10<T2, T5, T6, T7, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_4_6_7_8_10<T2, T4, T6, T7, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_4_5_7_8_10<T2, T4, T5, T7, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_4_5_6_8_10<T2, T4, T5, T6, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_4_5_6_7_10<T2, T4, T5, T6, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_4_5_6_7_8<T2, T4, T5, T6, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_4_5_6_7_9_10<T2, T4, T5, T6, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_6_7_9_10<T4, T5, T6, T7, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_5_6_7_9_10<T2, T5, T6, T7, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_4_6_7_9_10<T2, T4, T6, T7, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_4_5_7_9_10<T2, T4, T5, T7, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_4_5_6_9_10<T2, T4, T5, T6, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_4_5_6_7_10<T2, T4, T5, T6, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_4_5_6_7_9<T2, T4, T5, T6, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_4_5_6_8_9_10<T2, T4, T5, T6, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_6_8_9_10<T4, T5, T6, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_5_6_8_9_10<T2, T5, T6, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_4_6_8_9_10<T2, T4, T6, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_4_5_8_9_10<T2, T4, T5, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_4_5_6_9_10<T2, T4, T5, T6, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_4_5_6_8_10<T2, T4, T5, T6, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_4_5_6_8_9<T2, T4, T5, T6, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_4_5_7_8_9_10<T2, T4, T5, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_7_8_9_10<T4, T5, T7, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_5_7_8_9_10<T2, T5, T7, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_4_7_8_9_10<T2, T4, T7, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_4_5_8_9_10<T2, T4, T5, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_4_5_7_9_10<T2, T4, T5, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_4_5_7_8_10<T2, T4, T5, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_4_5_7_8_9<T2, T4, T5, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_4_6_7_8_9_10<T2, T4, T6, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_6_7_8_9_10<T4, T6, T7, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_6_7_8_9_10<T2, T6, T7, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_4_7_8_9_10<T2, T4, T7, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_4_6_8_9_10<T2, T4, T6, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_4_6_7_9_10<T2, T4, T6, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_4_6_7_8_10<T2, T4, T6, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_4_6_7_8_9<T2, T4, T6, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_5_6_7_8_9_10<T2, T5, T6, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_6_7_8_9_10<T5, T6, T7, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_6_7_8_9_10<T2, T6, T7, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_5_7_8_9_10<T2, T5, T7, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_5_6_8_9_10<T2, T5, T6, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_5_6_7_9_10<T2, T5, T6, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_5_6_7_8_10<T2, T5, T6, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_5_6_7_8_9<T2, T5, T6, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher3_4_5_6_7_8_9<T3, T4, T5, T6, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher4_5_6_7_8_9<T4, T5, T6, T7, T8, T9, TResult> Match(Func<T3,TResult> matchFunc);
@@ -3732,6 +7498,76 @@ namespace OneOf
         IOneOfMatcher3_4_5_6_8_9<T3, T4, T5, T6, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher3_4_5_6_7_9<T3, T4, T5, T6, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher3_4_5_6_7_8<T3, T4, T5, T6, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_4_5_6_7_8_10<T3, T4, T5, T6, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_6_7_8_10<T4, T5, T6, T7, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_5_6_7_8_10<T3, T5, T6, T7, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher3_4_6_7_8_10<T3, T4, T6, T7, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher3_4_5_7_8_10<T3, T4, T5, T7, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher3_4_5_6_8_10<T3, T4, T5, T6, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher3_4_5_6_7_10<T3, T4, T5, T6, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher3_4_5_6_7_8<T3, T4, T5, T6, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_4_5_6_7_9_10<T3, T4, T5, T6, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_6_7_9_10<T4, T5, T6, T7, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_5_6_7_9_10<T3, T5, T6, T7, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher3_4_6_7_9_10<T3, T4, T6, T7, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher3_4_5_7_9_10<T3, T4, T5, T7, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher3_4_5_6_9_10<T3, T4, T5, T6, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher3_4_5_6_7_10<T3, T4, T5, T6, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher3_4_5_6_7_9<T3, T4, T5, T6, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_4_5_6_8_9_10<T3, T4, T5, T6, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_6_8_9_10<T4, T5, T6, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_5_6_8_9_10<T3, T5, T6, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher3_4_6_8_9_10<T3, T4, T6, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher3_4_5_8_9_10<T3, T4, T5, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher3_4_5_6_9_10<T3, T4, T5, T6, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher3_4_5_6_8_10<T3, T4, T5, T6, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher3_4_5_6_8_9<T3, T4, T5, T6, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_4_5_7_8_9_10<T3, T4, T5, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_7_8_9_10<T4, T5, T7, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_5_7_8_9_10<T3, T5, T7, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher3_4_7_8_9_10<T3, T4, T7, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher3_4_5_8_9_10<T3, T4, T5, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher3_4_5_7_9_10<T3, T4, T5, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher3_4_5_7_8_10<T3, T4, T5, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher3_4_5_7_8_9<T3, T4, T5, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_4_6_7_8_9_10<T3, T4, T6, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_6_7_8_9_10<T4, T6, T7, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_6_7_8_9_10<T3, T6, T7, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher3_4_7_8_9_10<T3, T4, T7, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher3_4_6_8_9_10<T3, T4, T6, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher3_4_6_7_9_10<T3, T4, T6, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher3_4_6_7_8_10<T3, T4, T6, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher3_4_6_7_8_9<T3, T4, T6, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_5_6_7_8_9_10<T3, T5, T6, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_6_7_8_9_10<T5, T6, T7, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_6_7_8_9_10<T3, T6, T7, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher3_5_7_8_9_10<T3, T5, T7, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher3_5_6_8_9_10<T3, T5, T6, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher3_5_6_7_9_10<T3, T5, T6, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher3_5_6_7_8_10<T3, T5, T6, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher3_5_6_7_8_9<T3, T5, T6, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher4_5_6_7_8_9_10<T4, T5, T6, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher5_6_7_8_9_10<T5, T6, T7, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher4_6_7_8_9_10<T4, T6, T7, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher4_5_7_8_9_10<T4, T5, T7, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher4_5_6_8_9_10<T4, T5, T6, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher4_5_6_7_9_10<T4, T5, T6, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher4_5_6_7_8_10<T4, T5, T6, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher4_5_6_7_8_9<T4, T5, T6, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_2_3_4_5_6_7_8<T1, T2, T3, T4, T5, T6, T7, T8, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -3755,6 +7591,17 @@ namespace OneOf
         IOneOfMatcher1_2_3_4_5_6_9<T1, T2, T3, T4, T5, T6, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_2_3_4_5_6_7<T1, T2, T3, T4, T5, T6, T7, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_3_4_5_6_7_10<T1, T2, T3, T4, T5, T6, T7, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_4_5_6_7_10<T2, T3, T4, T5, T6, T7, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_6_7_10<T1, T3, T4, T5, T6, T7, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_6_7_10<T1, T2, T4, T5, T6, T7, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_6_7_10<T1, T2, T3, T5, T6, T7, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_6_7_10<T1, T2, T3, T4, T6, T7, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_7_10<T1, T2, T3, T4, T5, T7, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_6_10<T1, T2, T3, T4, T5, T6, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_6_7<T1, T2, T3, T4, T5, T6, T7, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_3_4_5_6_8_9<T1, T2, T3, T4, T5, T6, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_3_4_5_6_8_9<T2, T3, T4, T5, T6, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -3765,6 +7612,28 @@ namespace OneOf
         IOneOfMatcher1_2_3_4_5_8_9<T1, T2, T3, T4, T5, T8, T9, TResult> Match(Func<T6,TResult> matchFunc);
         IOneOfMatcher1_2_3_4_5_6_9<T1, T2, T3, T4, T5, T6, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_2_3_4_5_6_8<T1, T2, T3, T4, T5, T6, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_4_5_6_8_10<T1, T2, T3, T4, T5, T6, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_4_5_6_8_10<T2, T3, T4, T5, T6, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_6_8_10<T1, T3, T4, T5, T6, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_6_8_10<T1, T2, T4, T5, T6, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_6_8_10<T1, T2, T3, T5, T6, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_6_8_10<T1, T2, T3, T4, T6, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_8_10<T1, T2, T3, T4, T5, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_6_10<T1, T2, T3, T4, T5, T6, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_6_8<T1, T2, T3, T4, T5, T6, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_4_5_6_9_10<T1, T2, T3, T4, T5, T6, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_4_5_6_9_10<T2, T3, T4, T5, T6, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_6_9_10<T1, T3, T4, T5, T6, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_6_9_10<T1, T2, T4, T5, T6, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_6_9_10<T1, T2, T3, T5, T6, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_6_9_10<T1, T2, T3, T4, T6, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_9_10<T1, T2, T3, T4, T5, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_6_10<T1, T2, T3, T4, T5, T6, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_6_9<T1, T2, T3, T4, T5, T6, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_2_3_4_5_7_8_9<T1, T2, T3, T4, T5, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -3777,6 +7646,39 @@ namespace OneOf
         IOneOfMatcher1_2_3_4_5_7_9<T1, T2, T3, T4, T5, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_2_3_4_5_7_8<T1, T2, T3, T4, T5, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_3_4_5_7_8_10<T1, T2, T3, T4, T5, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_4_5_7_8_10<T2, T3, T4, T5, T7, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_7_8_10<T1, T3, T4, T5, T7, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_7_8_10<T1, T2, T4, T5, T7, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_7_8_10<T1, T2, T3, T5, T7, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_7_8_10<T1, T2, T3, T4, T7, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_8_10<T1, T2, T3, T4, T5, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_7_10<T1, T2, T3, T4, T5, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_7_8<T1, T2, T3, T4, T5, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_4_5_7_9_10<T1, T2, T3, T4, T5, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_4_5_7_9_10<T2, T3, T4, T5, T7, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_7_9_10<T1, T3, T4, T5, T7, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_7_9_10<T1, T2, T4, T5, T7, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_7_9_10<T1, T2, T3, T5, T7, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_7_9_10<T1, T2, T3, T4, T7, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_9_10<T1, T2, T3, T4, T5, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_7_10<T1, T2, T3, T4, T5, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_7_9<T1, T2, T3, T4, T5, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_4_5_8_9_10<T1, T2, T3, T4, T5, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_4_5_8_9_10<T2, T3, T4, T5, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_8_9_10<T1, T3, T4, T5, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_8_9_10<T1, T2, T4, T5, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_8_9_10<T1, T2, T3, T5, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_8_9_10<T1, T2, T3, T4, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_9_10<T1, T2, T3, T4, T5, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_8_10<T1, T2, T3, T4, T5, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_8_9<T1, T2, T3, T4, T5, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_3_4_6_7_8_9<T1, T2, T3, T4, T6, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_3_4_6_7_8_9<T2, T3, T4, T6, T7, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -3787,6 +7689,50 @@ namespace OneOf
         IOneOfMatcher1_2_3_4_6_8_9<T1, T2, T3, T4, T6, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_2_3_4_6_7_9<T1, T2, T3, T4, T6, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_2_3_4_6_7_8<T1, T2, T3, T4, T6, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_4_6_7_8_10<T1, T2, T3, T4, T6, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_4_6_7_8_10<T2, T3, T4, T6, T7, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_7_8_10<T1, T3, T4, T6, T7, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_7_8_10<T1, T2, T4, T6, T7, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_7_8_10<T1, T2, T3, T6, T7, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_7_8_10<T1, T2, T3, T4, T7, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_6_8_10<T1, T2, T3, T4, T6, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_6_7_10<T1, T2, T3, T4, T6, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_6_7_8<T1, T2, T3, T4, T6, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_4_6_7_9_10<T1, T2, T3, T4, T6, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_4_6_7_9_10<T2, T3, T4, T6, T7, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_7_9_10<T1, T3, T4, T6, T7, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_7_9_10<T1, T2, T4, T6, T7, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_7_9_10<T1, T2, T3, T6, T7, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_7_9_10<T1, T2, T3, T4, T7, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_6_9_10<T1, T2, T3, T4, T6, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_6_7_10<T1, T2, T3, T4, T6, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_6_7_9<T1, T2, T3, T4, T6, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_4_6_8_9_10<T1, T2, T3, T4, T6, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_4_6_8_9_10<T2, T3, T4, T6, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_8_9_10<T1, T3, T4, T6, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_8_9_10<T1, T2, T4, T6, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_8_9_10<T1, T2, T3, T6, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_8_9_10<T1, T2, T3, T4, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_6_9_10<T1, T2, T3, T4, T6, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_6_8_10<T1, T2, T3, T4, T6, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_6_8_9<T1, T2, T3, T4, T6, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_4_7_8_9_10<T1, T2, T3, T4, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_4_7_8_9_10<T2, T3, T4, T7, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_4_7_8_9_10<T1, T3, T4, T7, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_4_7_8_9_10<T1, T2, T4, T7, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_7_8_9_10<T1, T2, T3, T7, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_8_9_10<T1, T2, T3, T4, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_7_9_10<T1, T2, T3, T4, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_7_8_10<T1, T2, T3, T4, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_7_8_9<T1, T2, T3, T4, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_2_3_5_6_7_8_9<T1, T2, T3, T5, T6, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -3799,6 +7745,61 @@ namespace OneOf
         IOneOfMatcher1_2_3_5_6_7_9<T1, T2, T3, T5, T6, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_2_3_5_6_7_8<T1, T2, T3, T5, T6, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_2_3_5_6_7_8_10<T1, T2, T3, T5, T6, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_5_6_7_8_10<T2, T3, T5, T6, T7, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_7_8_10<T1, T3, T5, T6, T7, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_7_8_10<T1, T2, T5, T6, T7, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_7_8_10<T1, T2, T3, T6, T7, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_7_8_10<T1, T2, T3, T5, T7, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_6_8_10<T1, T2, T3, T5, T6, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_6_7_10<T1, T2, T3, T5, T6, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_6_7_8<T1, T2, T3, T5, T6, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_5_6_7_9_10<T1, T2, T3, T5, T6, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_5_6_7_9_10<T2, T3, T5, T6, T7, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_7_9_10<T1, T3, T5, T6, T7, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_7_9_10<T1, T2, T5, T6, T7, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_7_9_10<T1, T2, T3, T6, T7, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_7_9_10<T1, T2, T3, T5, T7, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_6_9_10<T1, T2, T3, T5, T6, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_6_7_10<T1, T2, T3, T5, T6, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_6_7_9<T1, T2, T3, T5, T6, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_5_6_8_9_10<T1, T2, T3, T5, T6, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_5_6_8_9_10<T2, T3, T5, T6, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_8_9_10<T1, T3, T5, T6, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_8_9_10<T1, T2, T5, T6, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_8_9_10<T1, T2, T3, T6, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_8_9_10<T1, T2, T3, T5, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_6_9_10<T1, T2, T3, T5, T6, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_6_8_10<T1, T2, T3, T5, T6, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_6_8_9<T1, T2, T3, T5, T6, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_5_7_8_9_10<T1, T2, T3, T5, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_5_7_8_9_10<T2, T3, T5, T7, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_5_7_8_9_10<T1, T3, T5, T7, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_5_7_8_9_10<T1, T2, T5, T7, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_7_8_9_10<T1, T2, T3, T7, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_8_9_10<T1, T2, T3, T5, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_7_9_10<T1, T2, T3, T5, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_7_8_10<T1, T2, T3, T5, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_7_8_9<T1, T2, T3, T5, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_6_7_8_9_10<T1, T2, T3, T6, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_6_7_8_9_10<T2, T3, T6, T7, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_6_7_8_9_10<T1, T3, T6, T7, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_6_7_8_9_10<T1, T2, T6, T7, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_7_8_9_10<T1, T2, T3, T7, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_8_9_10<T1, T2, T3, T6, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_7_9_10<T1, T2, T3, T6, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_7_8_10<T1, T2, T3, T6, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_7_8_9<T1, T2, T3, T6, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher1_2_4_5_6_7_8_9<T1, T2, T4, T5, T6, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher2_4_5_6_7_8_9<T2, T4, T5, T6, T7, T8, T9, TResult> Match(Func<T1,TResult> matchFunc);
@@ -3809,6 +7810,72 @@ namespace OneOf
         IOneOfMatcher1_2_4_5_6_8_9<T1, T2, T4, T5, T6, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_2_4_5_6_7_9<T1, T2, T4, T5, T6, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_2_4_5_6_7_8<T1, T2, T4, T5, T6, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_4_5_6_7_8_10<T1, T2, T4, T5, T6, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_4_5_6_7_8_10<T2, T4, T5, T6, T7, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_7_8_10<T1, T4, T5, T6, T7, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_7_8_10<T1, T2, T5, T6, T7, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_7_8_10<T1, T2, T4, T6, T7, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_7_8_10<T1, T2, T4, T5, T7, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_6_8_10<T1, T2, T4, T5, T6, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_6_7_10<T1, T2, T4, T5, T6, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_6_7_8<T1, T2, T4, T5, T6, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_4_5_6_7_9_10<T1, T2, T4, T5, T6, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_4_5_6_7_9_10<T2, T4, T5, T6, T7, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_7_9_10<T1, T4, T5, T6, T7, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_7_9_10<T1, T2, T5, T6, T7, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_7_9_10<T1, T2, T4, T6, T7, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_7_9_10<T1, T2, T4, T5, T7, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_6_9_10<T1, T2, T4, T5, T6, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_6_7_10<T1, T2, T4, T5, T6, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_6_7_9<T1, T2, T4, T5, T6, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_4_5_6_8_9_10<T1, T2, T4, T5, T6, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_4_5_6_8_9_10<T2, T4, T5, T6, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_8_9_10<T1, T4, T5, T6, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_8_9_10<T1, T2, T5, T6, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_8_9_10<T1, T2, T4, T6, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_8_9_10<T1, T2, T4, T5, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_6_9_10<T1, T2, T4, T5, T6, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_6_8_10<T1, T2, T4, T5, T6, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_6_8_9<T1, T2, T4, T5, T6, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_4_5_7_8_9_10<T1, T2, T4, T5, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_4_5_7_8_9_10<T2, T4, T5, T7, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_5_7_8_9_10<T1, T4, T5, T7, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_5_7_8_9_10<T1, T2, T5, T7, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_4_7_8_9_10<T1, T2, T4, T7, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_8_9_10<T1, T2, T4, T5, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_7_9_10<T1, T2, T4, T5, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_7_8_10<T1, T2, T4, T5, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_7_8_9<T1, T2, T4, T5, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_4_6_7_8_9_10<T1, T2, T4, T6, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_4_6_7_8_9_10<T2, T4, T6, T7, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_6_7_8_9_10<T1, T4, T6, T7, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_6_7_8_9_10<T1, T2, T6, T7, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_4_7_8_9_10<T1, T2, T4, T7, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_8_9_10<T1, T2, T4, T6, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_7_9_10<T1, T2, T4, T6, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_7_8_10<T1, T2, T4, T6, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_7_8_9<T1, T2, T4, T6, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_5_6_7_8_9_10<T1, T2, T5, T6, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_5_6_7_8_9_10<T2, T5, T6, T7, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_6_7_8_9_10<T1, T5, T6, T7, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_6_7_8_9_10<T1, T2, T6, T7, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_5_7_8_9_10<T1, T2, T5, T7, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_8_9_10<T1, T2, T5, T6, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_7_9_10<T1, T2, T5, T6, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_7_8_10<T1, T2, T5, T6, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_7_8_9<T1, T2, T5, T6, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_3_4_5_6_7_8_9<T1, T3, T4, T5, T6, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -3821,6 +7888,83 @@ namespace OneOf
         IOneOfMatcher1_3_4_5_6_7_9<T1, T3, T4, T5, T6, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_3_4_5_6_7_8<T1, T3, T4, T5, T6, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
     }
+    public interface IOneOfMatcher1_3_4_5_6_7_8_10<T1, T3, T4, T5, T6, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_5_6_7_8_10<T3, T4, T5, T6, T7, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_7_8_10<T1, T4, T5, T6, T7, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_7_8_10<T1, T3, T5, T6, T7, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_7_8_10<T1, T3, T4, T6, T7, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_7_8_10<T1, T3, T4, T5, T7, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_6_8_10<T1, T3, T4, T5, T6, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_6_7_10<T1, T3, T4, T5, T6, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_6_7_8<T1, T3, T4, T5, T6, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_4_5_6_7_9_10<T1, T3, T4, T5, T6, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_5_6_7_9_10<T3, T4, T5, T6, T7, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_7_9_10<T1, T4, T5, T6, T7, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_7_9_10<T1, T3, T5, T6, T7, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_7_9_10<T1, T3, T4, T6, T7, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_7_9_10<T1, T3, T4, T5, T7, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_6_9_10<T1, T3, T4, T5, T6, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_6_7_10<T1, T3, T4, T5, T6, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_6_7_9<T1, T3, T4, T5, T6, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_4_5_6_8_9_10<T1, T3, T4, T5, T6, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_5_6_8_9_10<T3, T4, T5, T6, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_8_9_10<T1, T4, T5, T6, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_8_9_10<T1, T3, T5, T6, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_8_9_10<T1, T3, T4, T6, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_8_9_10<T1, T3, T4, T5, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_6_9_10<T1, T3, T4, T5, T6, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_6_8_10<T1, T3, T4, T5, T6, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_6_8_9<T1, T3, T4, T5, T6, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_4_5_7_8_9_10<T1, T3, T4, T5, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_5_7_8_9_10<T3, T4, T5, T7, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_5_7_8_9_10<T1, T4, T5, T7, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_5_7_8_9_10<T1, T3, T5, T7, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_3_4_7_8_9_10<T1, T3, T4, T7, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_8_9_10<T1, T3, T4, T5, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_7_9_10<T1, T3, T4, T5, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_7_8_10<T1, T3, T4, T5, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_7_8_9<T1, T3, T4, T5, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_4_6_7_8_9_10<T1, T3, T4, T6, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_6_7_8_9_10<T3, T4, T6, T7, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_6_7_8_9_10<T1, T4, T6, T7, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_6_7_8_9_10<T1, T3, T6, T7, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_3_4_7_8_9_10<T1, T3, T4, T7, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_8_9_10<T1, T3, T4, T6, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_7_9_10<T1, T3, T4, T6, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_7_8_10<T1, T3, T4, T6, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_7_8_9<T1, T3, T4, T6, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_5_6_7_8_9_10<T1, T3, T5, T6, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_5_6_7_8_9_10<T3, T5, T6, T7, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_6_7_8_9_10<T1, T5, T6, T7, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_6_7_8_9_10<T1, T3, T6, T7, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_3_5_7_8_9_10<T1, T3, T5, T7, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_8_9_10<T1, T3, T5, T6, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_7_9_10<T1, T3, T5, T6, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_7_8_10<T1, T3, T5, T6, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_7_8_9<T1, T3, T5, T6, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_4_5_6_7_8_9_10<T1, T4, T5, T6, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_6_7_8_9_10<T4, T5, T6, T7, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_5_6_7_8_9_10<T1, T5, T6, T7, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_4_6_7_8_9_10<T1, T4, T6, T7, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_4_5_7_8_9_10<T1, T4, T5, T7, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_8_9_10<T1, T4, T5, T6, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_7_9_10<T1, T4, T5, T6, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_7_8_10<T1, T4, T5, T6, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_7_8_9<T1, T4, T5, T6, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
     public interface IOneOfMatcher2_3_4_5_6_7_8_9<T2, T3, T4, T5, T6, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
         IOneOfMatcher3_4_5_6_7_8_9<T3, T4, T5, T6, T7, T8, T9, TResult> Match(Func<T2,TResult> matchFunc);
@@ -3831,6 +7975,94 @@ namespace OneOf
         IOneOfMatcher2_3_4_5_6_8_9<T2, T3, T4, T5, T6, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher2_3_4_5_6_7_9<T2, T3, T4, T5, T6, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher2_3_4_5_6_7_8<T2, T3, T4, T5, T6, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_4_5_6_7_8_10<T2, T3, T4, T5, T6, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_5_6_7_8_10<T3, T4, T5, T6, T7, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_4_5_6_7_8_10<T2, T4, T5, T6, T7, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_5_6_7_8_10<T2, T3, T5, T6, T7, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_3_4_6_7_8_10<T2, T3, T4, T6, T7, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_7_8_10<T2, T3, T4, T5, T7, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_6_8_10<T2, T3, T4, T5, T6, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_6_7_10<T2, T3, T4, T5, T6, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_6_7_8<T2, T3, T4, T5, T6, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_4_5_6_7_9_10<T2, T3, T4, T5, T6, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_5_6_7_9_10<T3, T4, T5, T6, T7, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_4_5_6_7_9_10<T2, T4, T5, T6, T7, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_5_6_7_9_10<T2, T3, T5, T6, T7, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_3_4_6_7_9_10<T2, T3, T4, T6, T7, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_7_9_10<T2, T3, T4, T5, T7, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_6_9_10<T2, T3, T4, T5, T6, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_6_7_10<T2, T3, T4, T5, T6, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_6_7_9<T2, T3, T4, T5, T6, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_4_5_6_8_9_10<T2, T3, T4, T5, T6, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_5_6_8_9_10<T3, T4, T5, T6, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_4_5_6_8_9_10<T2, T4, T5, T6, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_5_6_8_9_10<T2, T3, T5, T6, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_3_4_6_8_9_10<T2, T3, T4, T6, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_8_9_10<T2, T3, T4, T5, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_6_9_10<T2, T3, T4, T5, T6, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_6_8_10<T2, T3, T4, T5, T6, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_6_8_9<T2, T3, T4, T5, T6, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_4_5_7_8_9_10<T2, T3, T4, T5, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_5_7_8_9_10<T3, T4, T5, T7, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_4_5_7_8_9_10<T2, T4, T5, T7, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_5_7_8_9_10<T2, T3, T5, T7, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_3_4_7_8_9_10<T2, T3, T4, T7, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_8_9_10<T2, T3, T4, T5, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_7_9_10<T2, T3, T4, T5, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_7_8_10<T2, T3, T4, T5, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_7_8_9<T2, T3, T4, T5, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_4_6_7_8_9_10<T2, T3, T4, T6, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_6_7_8_9_10<T3, T4, T6, T7, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_4_6_7_8_9_10<T2, T4, T6, T7, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_6_7_8_9_10<T2, T3, T6, T7, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_3_4_7_8_9_10<T2, T3, T4, T7, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_3_4_6_8_9_10<T2, T3, T4, T6, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_3_4_6_7_9_10<T2, T3, T4, T6, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_3_4_6_7_8_10<T2, T3, T4, T6, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_3_4_6_7_8_9<T2, T3, T4, T6, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_5_6_7_8_9_10<T2, T3, T5, T6, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_5_6_7_8_9_10<T3, T5, T6, T7, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_5_6_7_8_9_10<T2, T5, T6, T7, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_6_7_8_9_10<T2, T3, T6, T7, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_3_5_7_8_9_10<T2, T3, T5, T7, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_3_5_6_8_9_10<T2, T3, T5, T6, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_3_5_6_7_9_10<T2, T3, T5, T6, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_3_5_6_7_8_10<T2, T3, T5, T6, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_3_5_6_7_8_9<T2, T3, T5, T6, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_4_5_6_7_8_9_10<T2, T4, T5, T6, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_6_7_8_9_10<T4, T5, T6, T7, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_5_6_7_8_9_10<T2, T5, T6, T7, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_4_6_7_8_9_10<T2, T4, T6, T7, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_4_5_7_8_9_10<T2, T4, T5, T7, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_4_5_6_8_9_10<T2, T4, T5, T6, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_4_5_6_7_9_10<T2, T4, T5, T6, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_4_5_6_7_8_10<T2, T4, T5, T6, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_4_5_6_7_8_9<T2, T4, T5, T6, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher3_4_5_6_7_8_9_10<T3, T4, T5, T6, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher4_5_6_7_8_9_10<T4, T5, T6, T7, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher3_5_6_7_8_9_10<T3, T5, T6, T7, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher3_4_6_7_8_9_10<T3, T4, T6, T7, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher3_4_5_7_8_9_10<T3, T4, T5, T7, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher3_4_5_6_8_9_10<T3, T4, T5, T6, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher3_4_5_6_7_9_10<T3, T4, T5, T6, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher3_4_5_6_7_8_10<T3, T4, T5, T6, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher3_4_5_6_7_8_9<T3, T4, T5, T6, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
     public interface IOneOfMatcher1_2_3_4_5_6_7_8_9<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> : IOneOfMatcherTerminator<TResult>
     {
@@ -3843,5 +8075,126 @@ namespace OneOf
         IOneOfMatcher1_2_3_4_5_6_8_9<T1, T2, T3, T4, T5, T6, T8, T9, TResult> Match(Func<T7,TResult> matchFunc);
         IOneOfMatcher1_2_3_4_5_6_7_9<T1, T2, T3, T4, T5, T6, T7, T9, TResult> Match(Func<T8,TResult> matchFunc);
         IOneOfMatcher1_2_3_4_5_6_7_8<T1, T2, T3, T4, T5, T6, T7, T8, TResult> Match(Func<T9,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_4_5_6_7_8_10<T1, T2, T3, T4, T5, T6, T7, T8, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_4_5_6_7_8_10<T2, T3, T4, T5, T6, T7, T8, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_6_7_8_10<T1, T3, T4, T5, T6, T7, T8, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_6_7_8_10<T1, T2, T4, T5, T6, T7, T8, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_6_7_8_10<T1, T2, T3, T5, T6, T7, T8, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_6_7_8_10<T1, T2, T3, T4, T6, T7, T8, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_7_8_10<T1, T2, T3, T4, T5, T7, T8, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_6_8_10<T1, T2, T3, T4, T5, T6, T8, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_6_7_10<T1, T2, T3, T4, T5, T6, T7, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_6_7_8<T1, T2, T3, T4, T5, T6, T7, T8, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_4_5_6_7_9_10<T1, T2, T3, T4, T5, T6, T7, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_4_5_6_7_9_10<T2, T3, T4, T5, T6, T7, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_6_7_9_10<T1, T3, T4, T5, T6, T7, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_6_7_9_10<T1, T2, T4, T5, T6, T7, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_6_7_9_10<T1, T2, T3, T5, T6, T7, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_6_7_9_10<T1, T2, T3, T4, T6, T7, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_7_9_10<T1, T2, T3, T4, T5, T7, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_6_9_10<T1, T2, T3, T4, T5, T6, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_6_7_10<T1, T2, T3, T4, T5, T6, T7, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_6_7_9<T1, T2, T3, T4, T5, T6, T7, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_4_5_6_8_9_10<T1, T2, T3, T4, T5, T6, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_4_5_6_8_9_10<T2, T3, T4, T5, T6, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_6_8_9_10<T1, T3, T4, T5, T6, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_6_8_9_10<T1, T2, T4, T5, T6, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_6_8_9_10<T1, T2, T3, T5, T6, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_6_8_9_10<T1, T2, T3, T4, T6, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_8_9_10<T1, T2, T3, T4, T5, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_6_9_10<T1, T2, T3, T4, T5, T6, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_6_8_10<T1, T2, T3, T4, T5, T6, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_6_8_9<T1, T2, T3, T4, T5, T6, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_4_5_7_8_9_10<T1, T2, T3, T4, T5, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_4_5_7_8_9_10<T2, T3, T4, T5, T7, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_7_8_9_10<T1, T3, T4, T5, T7, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_7_8_9_10<T1, T2, T4, T5, T7, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_7_8_9_10<T1, T2, T3, T5, T7, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_7_8_9_10<T1, T2, T3, T4, T7, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_8_9_10<T1, T2, T3, T4, T5, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_7_9_10<T1, T2, T3, T4, T5, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_7_8_10<T1, T2, T3, T4, T5, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_7_8_9<T1, T2, T3, T4, T5, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_4_6_7_8_9_10<T1, T2, T3, T4, T6, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_4_6_7_8_9_10<T2, T3, T4, T6, T7, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_7_8_9_10<T1, T3, T4, T6, T7, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_7_8_9_10<T1, T2, T4, T6, T7, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_7_8_9_10<T1, T2, T3, T6, T7, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_7_8_9_10<T1, T2, T3, T4, T7, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_6_8_9_10<T1, T2, T3, T4, T6, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_6_7_9_10<T1, T2, T3, T4, T6, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_6_7_8_10<T1, T2, T3, T4, T6, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_6_7_8_9<T1, T2, T3, T4, T6, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_5_6_7_8_9_10<T1, T2, T3, T5, T6, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_5_6_7_8_9_10<T2, T3, T5, T6, T7, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_7_8_9_10<T1, T3, T5, T6, T7, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_7_8_9_10<T1, T2, T5, T6, T7, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_6_7_8_9_10<T1, T2, T3, T6, T7, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_7_8_9_10<T1, T2, T3, T5, T7, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_6_8_9_10<T1, T2, T3, T5, T6, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_6_7_9_10<T1, T2, T3, T5, T6, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_6_7_8_10<T1, T2, T3, T5, T6, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_6_7_8_9<T1, T2, T3, T5, T6, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_4_5_6_7_8_9_10<T1, T2, T4, T5, T6, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_4_5_6_7_8_9_10<T2, T4, T5, T6, T7, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_7_8_9_10<T1, T4, T5, T6, T7, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_5_6_7_8_9_10<T1, T2, T5, T6, T7, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_4_6_7_8_9_10<T1, T2, T4, T6, T7, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_7_8_9_10<T1, T2, T4, T5, T7, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_6_8_9_10<T1, T2, T4, T5, T6, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_6_7_9_10<T1, T2, T4, T5, T6, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_6_7_8_10<T1, T2, T4, T5, T6, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_6_7_8_9<T1, T2, T4, T5, T6, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_3_4_5_6_7_8_9_10<T1, T3, T4, T5, T6, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_5_6_7_8_9_10<T3, T4, T5, T6, T7, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_4_5_6_7_8_9_10<T1, T4, T5, T6, T7, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_3_5_6_7_8_9_10<T1, T3, T5, T6, T7, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_3_4_6_7_8_9_10<T1, T3, T4, T6, T7, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_7_8_9_10<T1, T3, T4, T5, T7, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_6_8_9_10<T1, T3, T4, T5, T6, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_6_7_9_10<T1, T3, T4, T5, T6, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_6_7_8_10<T1, T3, T4, T5, T6, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_6_7_8_9<T1, T3, T4, T5, T6, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher2_3_4_5_6_7_8_9_10<T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher3_4_5_6_7_8_9_10<T3, T4, T5, T6, T7, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher2_4_5_6_7_8_9_10<T2, T4, T5, T6, T7, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher2_3_5_6_7_8_9_10<T2, T3, T5, T6, T7, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher2_3_4_6_7_8_9_10<T2, T3, T4, T6, T7, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_7_8_9_10<T2, T3, T4, T5, T7, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_6_8_9_10<T2, T3, T4, T5, T6, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_6_7_9_10<T2, T3, T4, T5, T6, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_6_7_8_10<T2, T3, T4, T5, T6, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher2_3_4_5_6_7_8_9<T2, T3, T4, T5, T6, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
+    }
+    public interface IOneOfMatcher1_2_3_4_5_6_7_8_9_10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> : IOneOfMatcherTerminator<TResult>
+    {
+        IOneOfMatcher2_3_4_5_6_7_8_9_10<T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> Match(Func<T1,TResult> matchFunc);
+        IOneOfMatcher1_3_4_5_6_7_8_9_10<T1, T3, T4, T5, T6, T7, T8, T9, T10, TResult> Match(Func<T2,TResult> matchFunc);
+        IOneOfMatcher1_2_4_5_6_7_8_9_10<T1, T2, T4, T5, T6, T7, T8, T9, T10, TResult> Match(Func<T3,TResult> matchFunc);
+        IOneOfMatcher1_2_3_5_6_7_8_9_10<T1, T2, T3, T5, T6, T7, T8, T9, T10, TResult> Match(Func<T4,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_6_7_8_9_10<T1, T2, T3, T4, T6, T7, T8, T9, T10, TResult> Match(Func<T5,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_7_8_9_10<T1, T2, T3, T4, T5, T7, T8, T9, T10, TResult> Match(Func<T6,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_6_8_9_10<T1, T2, T3, T4, T5, T6, T8, T9, T10, TResult> Match(Func<T7,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_6_7_9_10<T1, T2, T3, T4, T5, T6, T7, T9, T10, TResult> Match(Func<T8,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_6_7_8_10<T1, T2, T3, T4, T5, T6, T7, T8, T10, TResult> Match(Func<T9,TResult> matchFunc);
+        IOneOfMatcher1_2_3_4_5_6_7_8_9<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> Match(Func<T10,TResult> matchFunc);
     }
 }
