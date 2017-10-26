@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace OneOf.TemplatingModels
@@ -7,10 +8,10 @@ namespace OneOf.TemplatingModels
     {
         public static string GenerateGenericArgs(IEnumerable<int> argNumbers)
         {
-            return string.Join(", ", argNumbers.Select(n => "T" + n));
+            return String.Join(", ", argNumbers.Select(n => "T" + n));
         }
 
-        public static string CreateInterfaceDisambiguator(IEnumerable<int> ints) { return string.Join("_", ints.Select(i => i.ToString())); }
+        public static string CreateInterfaceDisambiguator(IEnumerable<int> ints) { return String.Join("_", ints.Select(i => i.ToString())); }
 
 
         public static IEnumerable<IEnumerable<int>> CombinationsOfLengthN(IEnumerable<int> elementsToCombine, int n)
@@ -34,6 +35,13 @@ namespace OneOf.TemplatingModels
             }
 
             return accumulatedResult.SelectMany(i => i);
+        }
+
+        public static string MakeDummyClassParamList(int arity)
+        {
+            var dummyNums = Enumerable.Range(arity, Constants.MaxAritySupported - arity).ToArray();
+            var dummyParams = string.Join(",", dummyNums.Select(i => "DummyClass")) + (dummyNums.Any() ? ", ":"");
+            return dummyParams;
         }
     }
 }

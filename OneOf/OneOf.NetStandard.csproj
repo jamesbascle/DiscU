@@ -38,6 +38,7 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DummyClass.cs" />
     <Compile Include="IOneOfMatcher.cs">
       <DependentUpon>IOneOfMatcher.tt</DependentUpon>
       <AutoGen>True</AutoGen>

@@ -28,7 +28,7 @@ namespace OneOf
          => new OneOfSwitcher<T1, T2>(value, valueTn).SwitchWhen(condition, action);
         public OneOfSwitcher<T1, T2> SwitchWhen(Predicate<T2> condition, Action<T2> action)
          => new OneOfSwitcher<T1, T2>(value, valueTn).SwitchWhen(condition, action);
-        public IOneOfMatcher1_2<T1, T2, TResult> MakeMatcher<TResult>() => new OneOfMatcher<T1, T2, TResult>(value, valueTn);
+        public IOneOfMatcher1_2<T1, T2, TResult> MakeMatcher<TResult>() => new OneOfMatcher<T1, T2, DummyClass,DummyClass,DummyClass,DummyClass,DummyClass,DummyClass,DummyClass,DummyClass, TResult>(value, valueTn);
 
         public IOneOfMatcher2<T2, TResult> Match<TResult>(Func<T1, TResult> calcResult)
          => MakeMatcher<TResult>().Match(calcResult);
@@ -73,7 +73,7 @@ namespace OneOf
          => new OneOfSwitcher<T1, T2, T3>(value, valueTn).SwitchWhen(condition, action);
         public OneOfSwitcher<T1, T2, T3> SwitchWhen(Predicate<T3> condition, Action<T3> action)
          => new OneOfSwitcher<T1, T2, T3>(value, valueTn).SwitchWhen(condition, action);
-        public IOneOfMatcher1_2_3<T1, T2, T3, TResult> MakeMatcher<TResult>() => new OneOfMatcher<T1, T2, T3, TResult>(value, valueTn);
+        public IOneOfMatcher1_2_3<T1, T2, T3, TResult> MakeMatcher<TResult>() => new OneOfMatcher<T1, T2, T3, DummyClass,DummyClass,DummyClass,DummyClass,DummyClass,DummyClass,DummyClass, TResult>(value, valueTn);
 
         public IOneOfMatcher2_3<T2, T3, TResult> Match<TResult>(Func<T1, TResult> calcResult)
          => MakeMatcher<TResult>().Match(calcResult);
@@ -128,7 +128,7 @@ namespace OneOf
          => new OneOfSwitcher<T1, T2, T3, T4>(value, valueTn).SwitchWhen(condition, action);
         public OneOfSwitcher<T1, T2, T3, T4> SwitchWhen(Predicate<T4> condition, Action<T4> action)
          => new OneOfSwitcher<T1, T2, T3, T4>(value, valueTn).SwitchWhen(condition, action);
-        public IOneOfMatcher1_2_3_4<T1, T2, T3, T4, TResult> MakeMatcher<TResult>() => new OneOfMatcher<T1, T2, T3, T4, TResult>(value, valueTn);
+        public IOneOfMatcher1_2_3_4<T1, T2, T3, T4, TResult> MakeMatcher<TResult>() => new OneOfMatcher<T1, T2, T3, T4, DummyClass,DummyClass,DummyClass,DummyClass,DummyClass,DummyClass, TResult>(value, valueTn);
 
         public IOneOfMatcher2_3_4<T2, T3, T4, TResult> Match<TResult>(Func<T1, TResult> calcResult)
          => MakeMatcher<TResult>().Match(calcResult);
@@ -193,7 +193,7 @@ namespace OneOf
          => new OneOfSwitcher<T1, T2, T3, T4, T5>(value, valueTn).SwitchWhen(condition, action);
         public OneOfSwitcher<T1, T2, T3, T4, T5> SwitchWhen(Predicate<T5> condition, Action<T5> action)
          => new OneOfSwitcher<T1, T2, T3, T4, T5>(value, valueTn).SwitchWhen(condition, action);
-        public IOneOfMatcher1_2_3_4_5<T1, T2, T3, T4, T5, TResult> MakeMatcher<TResult>() => new OneOfMatcher<T1, T2, T3, T4, T5, TResult>(value, valueTn);
+        public IOneOfMatcher1_2_3_4_5<T1, T2, T3, T4, T5, TResult> MakeMatcher<TResult>() => new OneOfMatcher<T1, T2, T3, T4, T5, DummyClass,DummyClass,DummyClass,DummyClass,DummyClass, TResult>(value, valueTn);
 
         public IOneOfMatcher2_3_4_5<T2, T3, T4, T5, TResult> Match<TResult>(Func<T1, TResult> calcResult)
          => MakeMatcher<TResult>().Match(calcResult);
@@ -268,7 +268,7 @@ namespace OneOf
          => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(value, valueTn).SwitchWhen(condition, action);
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6> SwitchWhen(Predicate<T6> condition, Action<T6> action)
          => new OneOfSwitcher<T1, T2, T3, T4, T5, T6>(value, valueTn).SwitchWhen(condition, action);
-        public IOneOfMatcher1_2_3_4_5_6<T1, T2, T3, T4, T5, T6, TResult> MakeMatcher<TResult>() => new OneOfMatcher<T1, T2, T3, T4, T5, T6, TResult>(value, valueTn);
+        public IOneOfMatcher1_2_3_4_5_6<T1, T2, T3, T4, T5, T6, TResult> MakeMatcher<TResult>() => new OneOfMatcher<T1, T2, T3, T4, T5, T6, DummyClass,DummyClass,DummyClass,DummyClass, TResult>(value, valueTn);
 
         public IOneOfMatcher2_3_4_5_6<T2, T3, T4, T5, T6, TResult> Match<TResult>(Func<T1, TResult> calcResult)
          => MakeMatcher<TResult>().Match(calcResult);
@@ -353,7 +353,7 @@ namespace OneOf
          => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(value, valueTn).SwitchWhen(condition, action);
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7> SwitchWhen(Predicate<T7> condition, Action<T7> action)
          => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7>(value, valueTn).SwitchWhen(condition, action);
-        public IOneOfMatcher1_2_3_4_5_6_7<T1, T2, T3, T4, T5, T6, T7, TResult> MakeMatcher<TResult>() => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, TResult>(value, valueTn);
+        public IOneOfMatcher1_2_3_4_5_6_7<T1, T2, T3, T4, T5, T6, T7, TResult> MakeMatcher<TResult>() => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, DummyClass,DummyClass,DummyClass, TResult>(value, valueTn);
 
         public IOneOfMatcher2_3_4_5_6_7<T2, T3, T4, T5, T6, T7, TResult> Match<TResult>(Func<T1, TResult> calcResult)
          => MakeMatcher<TResult>().Match(calcResult);
@@ -448,7 +448,7 @@ namespace OneOf
          => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(value, valueTn).SwitchWhen(condition, action);
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8> SwitchWhen(Predicate<T8> condition, Action<T8> action)
          => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8>(value, valueTn).SwitchWhen(condition, action);
-        public IOneOfMatcher1_2_3_4_5_6_7_8<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MakeMatcher<TResult>() => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(value, valueTn);
+        public IOneOfMatcher1_2_3_4_5_6_7_8<T1, T2, T3, T4, T5, T6, T7, T8, TResult> MakeMatcher<TResult>() => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, DummyClass,DummyClass, TResult>(value, valueTn);
 
         public IOneOfMatcher2_3_4_5_6_7_8<T2, T3, T4, T5, T6, T7, T8, TResult> Match<TResult>(Func<T1, TResult> calcResult)
          => MakeMatcher<TResult>().Match(calcResult);
@@ -553,7 +553,7 @@ namespace OneOf
          => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value, valueTn).SwitchWhen(condition, action);
         public OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9> SwitchWhen(Predicate<T9> condition, Action<T9> action)
          => new OneOfSwitcher<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value, valueTn).SwitchWhen(condition, action);
-        public IOneOfMatcher1_2_3_4_5_6_7_8_9<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MakeMatcher<TResult>() => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(value, valueTn);
+        public IOneOfMatcher1_2_3_4_5_6_7_8_9<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> MakeMatcher<TResult>() => new OneOfMatcher<T1, T2, T3, T4, T5, T6, T7, T8, T9, DummyClass, TResult>(value, valueTn);
 
         public IOneOfMatcher2_3_4_5_6_7_8_9<T2, T3, T4, T5, T6, T7, T8, T9, TResult> Match<TResult>(Func<T1, TResult> calcResult)
          => MakeMatcher<TResult>().Match(calcResult);
