@@ -12,13 +12,15 @@ namespace OneOf.UnitTests
     public class CtorTests : OneOfTestBase
     {
         [Test]
-        public void NullValueThrowsException() => RunTestForAllOneOfTypes(cn => 
-            Assert.Throws<ArgumentNullException>(() => CreateOneOfCn(cn, null))
-            );
+        public void NullValueThrowsException()
+        {
+            Assert.Throws<ArgumentNullException>(() => CreateOneOf(null));
+        }
 
         [Test]
-        public void WrongTypeThrowsException() => RunTestForAllOneOfTypes(cn =>
-            Assert.Throws<ArgumentException>(() => CreateOneOfCn(cn, "this string should cause ctor to fail as it only supports C1..C9"))
-            );
+        public void WrongTypeThrowsException()
+        {
+            Assert.Throws<ArgumentException>(() => new OneOf<int, string>(123.456));
+        }
     }
 }
