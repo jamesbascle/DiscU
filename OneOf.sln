@@ -16,6 +16,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneOf.UnitTests", "OneOf.Un
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneOf.Net40", "OneOf\OneOf.Net40.csproj", "{93694025-F279-4903-9F81-E3F59F341B85}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneOf.TemplatingModels", "OneOf.TemplatingModels\OneOf.TemplatingModels.csproj", "{80685305-4C00-42D6-988C-7C47B60E1491}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{93694025-F279-4903-9F81-E3F59F341B85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93694025-F279-4903-9F81-E3F59F341B85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93694025-F279-4903-9F81-E3F59F341B85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80685305-4C00-42D6-988C-7C47B60E1491}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80685305-4C00-42D6-988C-7C47B60E1491}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80685305-4C00-42D6-988C-7C47B60E1491}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80685305-4C00-42D6-988C-7C47B60E1491}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

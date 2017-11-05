@@ -84,7 +84,7 @@ namespace OneOf.PerfTests
             GC.WaitForPendingFinalizers();
 
             Console.Write("{0:15} ... ", nameOfTest);
-
+            thingToTest();
             // and then measure it
             var sw = Stopwatch.StartNew();
 
