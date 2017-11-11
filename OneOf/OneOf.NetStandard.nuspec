@@ -12,7 +12,7 @@
     <description>
       Portable library for easy to use F#-like Discriminated Unions in C#. Implicitly casts objects into OneOf instances, then use .Match extension to do pattern matching.  Designed as a partial drop in replacement for OneOf.
     </description>
-    <copyright>Copyright 2016</copyright>
+    <copyright>Copyright 2016-2017</copyright>
     <tags>Discriminated Union, Discriminated Unions, Pattern Matching, OneOf, Tagged Union, Sum Type, Tagged Unions, Sum Types</tags>
   </metadata>
 </package>
