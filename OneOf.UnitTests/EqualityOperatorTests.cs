@@ -24,7 +24,7 @@ namespace OneOf.UnitTests
         {
             var oo1 = CreateOneOf("A");
             var oo2 = CreateOneOf("B");
-            Assert.IsTrue(oo1 == oo2);
+            Assert.IsFalse(oo1 == oo2);
         }
 
         [Test]
