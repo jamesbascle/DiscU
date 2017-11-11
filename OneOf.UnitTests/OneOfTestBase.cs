@@ -14,61 +14,6 @@ namespace OneOf.UnitTests
         protected void FailIfCalled() { Assert.Fail(); }
         protected void FailIf(bool cond) { if (cond) Assert.Fail(); }
 
-        /// <summary>Run a test against each of the OneOf(Of C1..Cn) types</summary>
-        protected void RunTestForAllOneOfTypes(Action<int> test)
-        {
-            for (var cn = 2; cn <= 9; cn++)  // OneOf's have a min of 2 generic arguments
-            {
-                test(cn);
-            }
-        }
-
-        /// <summary>Create an instance of OneOf(Of C1..Cn)</summary>
-        protected object CreateOneOfCn(int cn, object value)
-        {
-            var type = GetOneOfCnType(cn);
-            var ctor = type.GetConstructor(new[] { typeof(object) });
-
-            try
-            {
-                var oo = ctor.Invoke(new[] { value });
-                return oo;
-            }
-            catch (TargetInvocationException ex)
-            {
-                throw ex.GetBaseException();
-            }
-        }
-
-        /// <summary>Get OneOf(Of C1..Cn) type</summary>
-        protected Type GetOneOfCnType(int cn)
-        {
-            var cnAssembly = typeof(C1).Assembly;
-            var cnNamespace = typeof(C1).Namespace;
-            var cnTypes = Enumerable.Range(1, cn).Select(n => cnAssembly.GetType($"{cnNamespace}.OneOfTestBase+C{n}")).ToArray();
-
-            var ooAssembly = typeof(OneOf<,>).Assembly;
-            var ooNamespace = typeof(OneOf<,>).Namespace;
-            var ooGenericTypes = ooAssembly.GetTypes().Where(t => t.FullName.StartsWith($"{ooNamespace}.OneOf`")).ToArray();
-            var ooGenericType = ooGenericTypes.Where(t => t.GetGenericArguments().Length == cn).FirstOrDefault();
-            var ooConcreteType = ooGenericType.MakeGenericType(cnTypes);
-
-            return ooConcreteType;
-        }
-
-        /// <summary>Create instance of Cn</summary>
-        protected CBase CreateCn(int cn, object val)
-        {
-            var cnAssembly = typeof(C1).Assembly;
-            var cnNamespace = typeof(C1).Namespace;
-            var cnType = cnAssembly.GetType($"{cnNamespace}.OneOfTestBase+C{cn}");
-            var cnCtor = cnType.GetConstructor(new[] { typeof(string) });
-            var cnInstance = (CBase)cnCtor.Invoke(new[] { val });
-
-            return cnInstance;
-        }
-
-        [Obsolete("Can be removed once all tests are switched to use RunTestForAllOneOfTypes")]
         protected OneOf<string, int> CreateOneOf(object val) => new OneOf<string, int>(val);
 
         public class CBase

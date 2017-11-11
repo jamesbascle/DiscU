@@ -11,41 +11,41 @@ namespace OneOf.UnitTests
     public class EqualsTests : OneOfTestBase
     {
         [Test]
-        public void EqualsReturnsTrueWhenSameValue() => RunTestForAllOneOfTypes(cn =>
+        public void EqualsReturnsTrueWhenSameValue() 
         {
-            dynamic oo1 = CreateOneOfCn(cn, CreateCn(cn, "A"));
-            dynamic oo2 = CreateOneOfCn(cn, CreateCn(cn, "A"));
+            var oo1 = CreateOneOf("A");
+            var oo2 = CreateOneOf("A");
             Assert.IsTrue(oo1.Equals(oo2));
-        });
+        }
 
         [Test]
-        public void EqualsReturnsFalseWhenDifferingValue() => RunTestForAllOneOfTypes(cn =>
+        public void EqualsReturnsFalseWhenDifferingValue() 
         {
-            dynamic oo1 = CreateOneOfCn(cn, CreateCn(cn, "A"));
-            dynamic oo2 = CreateOneOfCn(cn, CreateCn(cn, "B"));
+            var oo1 = CreateOneOf("A");
+            var oo2 = CreateOneOf("B");
             Assert.IsFalse(oo1.Equals(oo2));
-        });
+        }
 
         [Test]
-        public void EqualsReturnsFalseWhenDifferingValueType() => RunTestForAllOneOfTypes(cn =>
+        public void EqualsReturnsFalseWhenDifferingValueType()
         {
-            dynamic oo1 = CreateOneOfCn(cn, CreateCn(cn, "A"));
-            dynamic oo2 = new OneOf<int, string>("A");
+            var oo1 = CreateOneOf("1");
+            var oo2 = CreateOneOf(1);
             Assert.IsFalse(oo1.Equals(oo2));
-        });
+        }
 
         [Test]
-        public void EqualsReturnsFalseWhenNotOneOf() => RunTestForAllOneOfTypes(cn =>
+        public void EqualsReturnsFalseWhenNotOneOf()
         {
-            dynamic oo1 = CreateOneOfCn(cn, CreateCn(cn, "A"));
+            var oo1 = CreateOneOf("A");
             Assert.IsFalse(oo1.Equals("A"));
-        });
+        }
 
         [Test]
-        public void EqualsReturnsFalseWhenNullValue() => RunTestForAllOneOfTypes(cn =>
+        public void EqualsReturnsFalseWhenNullValue()
         {
-            dynamic oo1 = CreateOneOfCn(cn, CreateCn(cn, "A"));
+            var oo1 = CreateOneOf("A");
             Assert.IsFalse(oo1.Equals(null));
-        });
+        }
     }
 }

@@ -38,6 +38,22 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DummyClass.cs" />
+    <Compile Include="IOneOfMatcher.cs">
+      <DependentUpon>IOneOfMatcher.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="OneOfSwitcher.cs">
+      <DependentUpon>OneOfSwitcher.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="OneOfMatcher.cs">
+      <DependentUpon>OneOfMatcher.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="OneOf.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -45,9 +61,22 @@
     </Compile>
     <Compile Include="OneOfBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="IOneOfMatcherTerminator.cs" />
     <Compile Include="TypeExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="IOneOfMatcher.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IOneOfMatcher.cs</LastGenOutput>
+    </Content>
+    <Content Include="OneOfSwitcher.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>OneOfSwitcher.cs</LastGenOutput>
+    </Content>
+    <Content Include="OneOfMatcher.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>OneOfMatcher.cs</LastGenOutput>
+    </Content>
     <Content Include="OneOf.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>OneOf.cs</LastGenOutput>

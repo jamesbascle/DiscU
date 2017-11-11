@@ -20,3 +20,4 @@ packages/*
 /TestResults
 /results.xml
 /TestResult.xml
+/.vs/OneOf/v15/Server/sqlite3

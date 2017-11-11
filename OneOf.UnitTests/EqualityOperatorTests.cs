@@ -12,27 +12,27 @@ namespace OneOf.UnitTests
     public class EqualityOperatorTests : OneOfTestBase
     {
         [Test]
-        public void EqualityOperatorReturnsTrueWhenSameValue() => RunTestForAllOneOfTypes(cn =>
+        public void EqualityOperatorReturnsTrueWhenSameValue()
         {
-            dynamic oo1 = CreateOneOfCn(cn, CreateCn(cn, "A"));
-            dynamic oo2 = CreateOneOfCn(cn, CreateCn(cn, "A"));
+            var oo1 = CreateOneOf("A");
+            var oo2 = CreateOneOf("A");
             Assert.IsTrue(oo1 == oo2);
-        });
+        }
 
         [Test]
-        public void EqualityOperatorReturnsFalseWhenDifferingValue() => RunTestForAllOneOfTypes(cn =>
+        public void EqualityOperatorReturnsFalseWhenDifferingValue()
         {
-            dynamic oo1 = CreateOneOfCn(cn, CreateCn(cn, "A"));
-            dynamic oo2 = CreateOneOfCn(cn, CreateCn(cn, "B"));
-            Assert.IsFalse(oo1 == oo2);
-        });
+            var oo1 = CreateOneOf("A");
+            var oo2 = CreateOneOf("B");
+            Assert.IsTrue(oo1 == oo2);
+        }
 
         [Test]
-        public void EqualityOperatorReturnsFalseWhenNullValue() => RunTestForAllOneOfTypes(cn =>
+        public void EqualityOperatorReturnsFalseWhenNullValue()
         {
-            dynamic oo1 = CreateOneOfCn(cn, CreateCn(cn, "A"));
+            var oo1 = CreateOneOf("A");
             Assert.IsFalse(oo1 == null);
-        }); 
+        }
 
         // These should implicitly cast the string literals into OneOfs before doing the comparison
 
