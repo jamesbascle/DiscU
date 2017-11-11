@@ -5,11 +5,6 @@ VisualStudioVersion = 15.0.27004.2008
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneOf.NetStandard", "OneOf\OneOf.NetStandard.csproj", "{56D67BE9-F031-4225-9121-4D550852D1AC}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{89D74895-BC8F-413E-99FA-090E7E14A02B}"
-	ProjectSection(SolutionItems) = preProject
-		OneOf\OneOf.nuspec = OneOf\OneOf.nuspec
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneOf.PerfTests", "OneOf.PerfTests\OneOf.PerfTests.csproj", "{65759A8D-D368-4E2E-A92F-85600E83AB55}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneOf.UnitTests", "OneOf.UnitTests\OneOf.UnitTests.csproj", "{4B1FE406-8216-45AC-B391-6808BB243942}"

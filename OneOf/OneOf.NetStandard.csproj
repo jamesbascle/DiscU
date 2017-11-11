@@ -55,6 +55,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="OneOf.NetStandard.nuspec" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
