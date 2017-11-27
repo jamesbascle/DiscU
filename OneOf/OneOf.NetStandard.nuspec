@@ -16,4 +16,7 @@
     <tags>Discriminated Union, Discriminated Unions, Pattern Matching, OneOf, Tagged Union, Sum Type, Tagged Unions, Sum Types</tags>
     <file>OneOf.NetStandard/bin/release/*.dll</file>
   </metadata>
+  <files>
+    <file src="bin\release\*.dll" target="lib" />
+  </files>
 </package>
